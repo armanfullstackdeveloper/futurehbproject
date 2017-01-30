@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="OrderStatus" table="OrderStatus" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Comments">
+      <column name="Comments" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<bag name="Order">
+      <key column="OrderStatusCode" />
+      <one-to-many class="Order" />
+    </bag>
+    <bag name="OrderHistory">
+      <key column="OrderStatusCode" />
+      <one-to-many class="OrderHistory" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

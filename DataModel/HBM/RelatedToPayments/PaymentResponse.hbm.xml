@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToPayments" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="PaymentResponse" table="PaymentResponse" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="PaymentRequestCode">
+      <column name="PaymentRequestCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="PaymentResponseStatusCode">
+      <column name="PaymentResponseStatusCode" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="TrackingCode">
+      <column name="TrackingCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="VerifyDate">
+      <column name="VerifyDate" sql-type="int" not-null="true" />
+    </property>
+    <property name="VerifyTime">
+      <column name="VerifyTime" sql-type="smallint" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

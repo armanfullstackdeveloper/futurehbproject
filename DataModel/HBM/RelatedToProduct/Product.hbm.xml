@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Product" table="Product" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="CategoryCode">
+      <column name="CategoryCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="StoreCode">
+      <column name="StoreCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="BrandCode">
+      <column name="BrandCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="Warranty">
+      <column name="Warranty" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="DiscountedPrice">
+      <column name="DiscountedPrice" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Price">
+      <column name="Price" sql-type="int" not-null="true" />
+    </property>
+    <property name="RegisterDate">
+      <column name="RegisterDate" sql-type="int" not-null="false" />
+    </property>
+    <property name="CanSend">
+      <column name="CanSend" sql-type="bit" not-null="true" />
+    </property>
+    <property name="Changeability">
+      <column name="Changeability" sql-type="bit" not-null="true" />
+    </property>
+    <property name="CanGiveBack">
+      <column name="CanGiveBack" sql-type="bit" not-null="true" />
+    </property>
+    <property name="IsExist">
+      <column name="IsExist" sql-type="bit" not-null="true" />
+    </property>
+    <property name="MadeIn">
+      <column name="MadeIn" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="ImgAddress">
+      <column name="ImgAddress" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Status">
+      <column name="Status" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="PostalCostInCountry">
+      <column name="PostalCostInCountry" sql-type="int" not-null="false" />
+    </property>
+      <property name="PostalCostInTown">
+      <column name="PostalCostInTown" sql-type="int" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

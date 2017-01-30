@@ -1,0 +1,232 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+#storeInformation {
+    width: 100%;
+    float: right;
+}
+
+#coverAndLogo {
+    width: 100%;
+    height: 300px;
+    float: right;
+    margin-bottom: 70px;
+}
+
+#storeCover {
+    width: 100%;
+    height: 380px;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+}
+
+#storeLogoInCover {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: absolute;
+    bottom: -50px;
+}
+
+#logInCoverImage {
+    width: 130px;
+    height: 130px;
+    background-size: cover;
+    margin: 0 auto;
+    border-radius: 100%;
+    border: solid 3px #92cff6;
+    box-shadow: 0 10px 10px #2E2E2E;
+}
+
+#nameAndAddress {
+    width: 100%;
+    text-align: center;
+    float: right;
+    font-size: 15px;
+    margin: 65px 0 0 0;
+}
+
+#nameStore {
+    margin-bottom: 20px;
+}
+
+#addressStore {
+    padding-top: 20px;
+    background: url(../Img/StoreInfo/gradiantBorder.png) no-repeat top center;
+}
+
+#productsBox {
+    float: right;
+    width: 80%;
+    margin: 30px 5%;
+    padding: 5%;
+    background: #d7e8f3;
+}
+
+#miniFilters, #allProductBoxes, #pagesOfProducts {
+    width: 100%;
+    float: right;
+    margin: 5px 0;
+}
+
+.miniFilterText {
+    float: left;
+    padding: 8.5px 2%;
+    width: 79%;
+    border: none;
+    text-align: right;
+    direction: rtl;
+    font-family: 'Hind', 'iransfm';
+}
+
+.miniFilterButton {
+    float: left;
+    padding: 11px 2%;
+    width: 16.25%;
+    border: none;
+    background: #fff url(../Img/MainPage/Search.png) no-repeat center;
+    background-size: 35px;
+}
+
+#miniSearch, #miniOrgenizing, #miniViewNumber {
+    width: 100%;
+    float: right;
+    margin: 5px 0;
+    text-align: right;
+    direction: rtl;
+}
+
+#miniFilters select {
+    border: none;
+    font-family: 'iransfm';
+    padding: 5px 2% 5px 8%;
+    background: #fff url(../Img/MainPage/selectDownCategory.png) 5px center no-repeat;
+    background-size: 10px;
+    -moz-appearance: none;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.productListInner {
+    width: 90%;
+    margin: 2.5%;
+    padding: 30px 2.5%;
+    background: #fff;
+    text-align: center;
+    color: #474747;
+    transition: 0.5s ease-in-out;
+}
+
+.PLIimage {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 100%;
+    box-shadow: 0 5px 10px #727272;
+}
+
+.PLIname {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.PLIrec {
+    width: 2px;
+    height: 30px;
+    background: #92cff6;
+    margin: 10px auto 5px auto;
+}
+
+.PLIseeDetail {
+    color: #000;
+    font-size: 15px;
+}
+
+.pagesOfProducts {
+    float: left;
+}
+
+    .pagesOfProducts li {
+        display: inline;
+        font-size: 14px;
+        margin: 2px 5px;
+    }
+
+.nextStore {
+    background: url(../Img/StoreInfo/nextStore.png) no-repeat center;
+    padding: 20px;
+}
+
+.prevStore {
+    background: url(../Img/StoreInfo/prevStore.png) no-repeat center;
+    padding: 20px;
+}
+    #miniOrgenizing {
+        width: 70%;
+        float: right;
+    }
+
+    #miniViewNumber {
+        width: 24%;
+        float: left;
+    }
+
+    .productListInner {
+        width: 40%;
+        margin: 2.5%;
+        padding: 2.5%;
+        float: right;
+    }
+    #middle {
+        width: 100%;
+        max-width: 1360px;
+        float: none;
+        clear: both;
+        font-family: 'iransfm';
+        margin: 0 auto;
+        position: relative;
+        top: 18px;
+    }
+
+    #nameStore {
+        font-size: 19px;
+    }
+
+    #miniSearch {
+        width: 50%;
+        float: right;
+    }
+
+    #miniOrgenizing {
+        width: 29%;
+        float: left;
+        position: relative;
+        bottom: 5px;
+    }
+
+    #miniViewNumber {
+        width: 14%;
+        float: left;
+        text-align: left;
+        position: relative;
+        bottom: 5px;
+    }
+
+    .productListInner {
+        width: 18%;
+        margin: 1%;
+        padding: 80px 2.5%;
+        float: right;
+    }
+
+    #productsBox {
+        float: right;
+        width: 96%;
+        margin: 30px 0;
+        padding: 2%;
+        background: #d7e8f3;
+    }
+}

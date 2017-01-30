@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "اطلاعات ارسال سفارش";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <h1>مرحله ۲ : اطلاعات ارسال سفارش</h1>
+
+    <div ng-app="ShopApp" ng-controller="ShoppingInfoController">
+
+        <h3 style="margin-bottom:1em;">
+            مشخصات شما :
+        </h3>
+
+        <div id="showInfo" ng-hide="EditBox">
+            <div class="form-group orgenizer">
+                <label>نام و نام خانوادگی : </label>
+                <span ng-bind="Data.Name"></span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>تلفن ثابت : </label>
+                <span ng-bind="Data.PhoneNumber"></span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>تلفن همراه : </label>
+                <span ng-bind="Data.MobileNumber"></span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>کد پستی : </label>
+                <span ng-bind="Data.PostalCode"></span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>شهر : </label>
+                <span ng-bind="Data.City"></span>
+            </div>
+
+
+            <div class="form-group orgenizer">
+                <label>آدرس : </label>
+                <span ng-bind="Data.Place"></span>
+            </div>
+        </div>
+        <div id="editInfo" ng-show="EditBox ">
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>نام و نام خانوادگی </label></div>
+                <div class="forInput"><input type="text" ng-model="Data.Name" /></div>
+            </div>
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>تلفن ثابت</label></div>
+                <div class="forInput"><input type="text" ng-model="Data.PhoneNumber" /></div>
+            </div>
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>تلفن همراه</label></div>
+                <div class="forInput"><input type="text" ng-model="Data.MobileNumber" /></div>
+            </div>
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>کد پستی</label></div>
+                <div class="forInput"><input type="text" ng-model="Data.PostalCode" /></div>
+            </div>
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>استان</label></div>
+                <div class="forInput"><select ng-model="StateId" ng-change="AllCities=item.Cities" ng-options="item.Id as item.Name for item in State"></select></div>
+            </div>
+
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>شهر</label></div>
+                <div class="forInput" ng-repeat="item in State ">
+                    <select id="cityId" ng-if="item.Id==StateId" ng-change="changeCity()" ng-model="Data.CityCode" ng-options="item2.Id as item2.Name for item2 in item.Cities"></select>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="form-group orgenizer">
+                <div class="forlable"><label>آدرس</label></div>
+                <div class="forInput"><input type="text" ng-model="Data.Place" /></div>
+            </div>
+            <input type="button" class="btn btn-default inputRight" ng-click="EditBox=false;sava()" value="ذخیره">
+        </div>
+
+
+
+        <input type="button" value="تغییر مشخصات" ng-click="EditBox=true" ng-hide="EditBox" class="btn btn-default" />
+        <a class="btn btn-success" href="/Order/BagReview"> تکمیل خرید</a>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+@section Script{
+
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script>
+        angular.module('ShopApp', [])
+        .controller('ShoppingInfoController', ['$scope', function ($scope) {
+            $scope.Data = @Html.Raw(Json.Encode(Model));
+            $scope.State = @Html.Raw(Json.Encode(ViewBag.States));
+
+            $scope.StateId=false;
+            $.each($scope.State , function(index , value){
+                if($scope.StateId!=false)return;
+                $.each(value.Cities ,function(index2 , value2){
+                    if($scope.StateId!=false)return;
+                    if(value2.Id==$scope.Data.CityCode){
+                        $scope.StateId=value.Id
+                        $scope.AllCities=value.Cities;
+                        return;
+                    }
+
+                })
+
+            })
+ 
+
+            $scope.changeCity=function(){ 
+                 $scope.Data.City= $("#cityId option:selected").text();
+                 
+            }
+            $scope.sava=function(){
+                console.log($scope.Data)
+                $.ajax({
+                    url: '/Member/panel/UpdateProfile',
+                    type: 'POST',
+                    dataType: "json",
+                    data:$scope.Data,
+                    success: function (result) {
+                        $scope.data = result;
+                    },
+                    error: function () {
+                        console.log('عملیات با خطا مواجه شد ')
+                    }
+
+                });
+            }
+
+
+        }]);
+
+    </script>
+
+
+
+
+}

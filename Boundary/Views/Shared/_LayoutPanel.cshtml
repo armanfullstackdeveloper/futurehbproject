@@ -1,0 +1,154 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/fonts/Font.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Css/boilerplate.css">
+    <link href="~/Css/Common.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="~/Css/ProductRegister/ProductRegister.css">
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+    @RenderSection("Style", false)
+
+
+
+
+</head>
+
+
+<body>
+    <div class="gridContainer clearfix">
+        <div id="Middle">
+
+            @*<div id="ManageShower"></div>
+                <div id="ManagerNavigation">
+                    <div id="First_Tab">
+                        <div id="Subject_First">
+                            <div id="Subject_Pointer_First">صفحه اول</div>
+                            <div id="Subject_Inner_First"></div>
+                        </div>
+                        <div id="Sub_Categories_Holder">
+                            <div id="First_Sub_First">
+                                <div id="First_Sub_First_Inner">اسلایدر</div>
+                            </div>
+                            <div id="InsideHolder_First">
+                                <div class="First_Inside_First_Inner">ویرایش</div>
+                                <div class="Seconde_Inside_First_Inner">مدیریت</div>
+                            </div>
+                            <div id="Seconde_Sub_First">
+                                <div id="Seconde_Sub_First_Inner">تبلیغات</div>
+                            </div>
+                            <div id="InsideHolder_Seconde">
+                                <div class="First_Inside_First_Inner">ویرایش</div>
+                                <div class="Seconde_Inside_First_Inner">مدیریت</div>
+                            </div>
+                            <div id="Third_Sub_First">
+                                <div id="Third_Sub_First_Inner">محصولات ویژه</div>
+                            </div>
+                            <div id="InsideHolder_Third">
+                                <div class="First_Inside_First_Inner">ویرایش</div>
+                                <div class="Seconde_Inside_First_Inner">مدیریت</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div id="Menu">
+                <div id='cssmenu'>
+                    <ul>
+                        <li>
+                            @*<a href='#'>*@
+                            <a href="~/Seller/StoreManagment/SellerPanel" style="padding: 22px !important;">پنل مدیریت</a>
+                            @*</a>*@
+                        </li>
+                        @*<li class='active has-sub'>*@
+                        <li class=' has-sub'>
+                            <a href='#' style="padding: 22px !important;"> محصولات</a>
+                            <ul>
+                                <li>
+                                    @*<a href='#'>*@
+                                    <a href="~/Seller/ProductManagment/AddProduct"> افزودن محصول جدید</a>
+                                    @*</a>*@
+                                    @*<ul>
+                                            <li><a href='#'>Sub Product</a></li>
+                                            <li><a href='#'>Sub Product</a></li>
+                                        </ul>*@
+                                </li>
+                                @*<li class='has-sub'>*@
+                                <li>
+                                    @*<a href='#'>*@
+                                    @using Microsoft.AspNet.Identity
+                                    @using Boundary.Controllers.Ordinary
+                                    @{
+                                        string userId = User.Identity.GetUserId();
+                                        MainSession mainSession = (MainSession)Session[userId];
+                                        long storeCode = mainSession.Store.StoreCode;
+                                    }
+                                    <a href="~/shop/@User.Identity.GetUserName()">
+                                        مشاهد محصولات قدیمی
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="~/Seller/ProductManagment/ProductList/@storeCode"> ویرایش و حذف محصولات </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            @*<a href='#'>*@
+                            <a href="~/Seller/ProductManagment/OrdersList" style="padding: 22px !important;"> مدیریت سفارشات</a>
+                            @*</a>*@
+                        </li>
+                        <li class=' has-sub'>
+                            <a href='#' style="padding: 22px !important;"> تصاویر فروشگاه</a>
+                            <ul>
+                                <li>
+                                    <a href="~/Seller/StoreManagment/EditStorePhoto/"> ویرایش تصویر فروشگاه </a>
+                                </li>
+                                <li>
+                                    <a href="~/Seller/StoreManagment/EditStoreLogo/"> ویرایش لوگو فروشگاه </a>
+                                </li>
+                                <li>
+                                    <a href="~/Seller/StoreManagment/EditSallerPhoto/"> ویرایش تصویر فروشنده </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            @*<a href='#'>*@
+                            <a href="~/Seller/DiscountCode/GetAll" style="padding: 22px !important;">کد تخفیف</a>
+                            @*</a>*@
+                        </li>
+                        <li><a href='~/Home/AboutUs' style="padding: 22px !important;"> درباره ما</a></li>
+                        <li><a href='~/Home/ContactUs' style="padding: 22px !important;"> ارتباط با ما</a></li>
+                        <li><a href="~/Account/LogOff" style="padding: 22px !important;">خروج</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div id="Bottom_Navigation">
+                <a href="~/"><div id="Sub_BNavigation_First"> <p>صفحه اصلی</p></div></a>
+                <a href="~/Home/UserGuid"><div id="Sub_BNavigation_Seconde"><p>سوالات متداول</p></div></a>
+                <a href="~/Home/ContactUs"><div id="Sub_BNavigation_Third"><p>ارتباط با مدیریت</p></div></a>
+                <a href="~/Account/LogOff"><div id="Sub_BNavigation_Forth"><p>خروج</p></div></a>
+                <div id="Holder_BNavigation"></div>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+
+
+
+
+
+
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Js/PanelPage.js"></script>
+
+    @RenderSection("Script", false)
+
+
+</body>
+</html>

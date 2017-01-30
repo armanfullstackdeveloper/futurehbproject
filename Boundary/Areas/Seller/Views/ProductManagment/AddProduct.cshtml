@@ -1,0 +1,864 @@
+﻿@model IEnumerable<DataModel.Entities.RelatedToProduct.Category>
+
+@{
+    ViewBag.Title = "افزودن محصول";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@section Style{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Cropper Upload Avatar/cropper.min.css" rel="stylesheet" />
+    <link href="~/Content/Cropper Upload Avatar/main.css" rel="stylesheet" />
+    <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInAddProduct.css" rel="stylesheet" />
+    <link href="~/Content/Fine_Uploader/fine-uploader-new.css" rel="stylesheet" />
+}
+
+<div id="AddProduct">
+    <div id="Holder1" class="RegisterHolder">
+
+
+        <div id="SubReg">
+            محصول خود را ثبت کنید
+            <p>مشخصات کالای مورد نظر خود را وارد کنید</p>
+        </div>
+        <div id="FirstStep">
+
+            <div class="orgenizer">
+                <p>نام کالا :</p>
+                <input class="ForTextBox" placeholder="نام کالا" type="text" id="Name">
+                <p class="Info">نام کالای مورد نظر خود را لطفا با دقت وارد نمایید</p>
+
+                <div id="NameError" class="ErrorHolder">
+                    <div class="Error">لطفا این فیلد را خالی نگذارید</div>
+                    <div class="ErrorClose"></div>
+                </div>
+            </div>
+
+
+            <div class="orgenizer">
+                <p>نوع محصول :</p>
+                <select class="ForSelect" id="CategoryCode">
+                    <option selected disabled value="">انتخاب نمایید</option>
+                </select>
+                <p class="Info">لطفا نوع کالای خود را مشخص نمایید</p>
+                <div id="CategoryCodeError" class="ErrorHolder">
+                    <div class="Error">لطفا این فیلد را خالی نگذارید</div>
+                    <div class="ErrorClose"></div>
+                </div>
+            </div>
+
+            <div id="Div_Sub1CategoryCode">
+                <div class="orgenizer">
+                    <p>دسته بندی اصلی :</p>
+                    <select class="ForSelect" id="Sub1CategoryCode">
+                        <option selected disabled value="">انتخاب نمایید</option>
+                    </select>
+                    <p class="Info">لطفا دسته بندی اصلی کالای خود را مشخص نمایید</p>
+                    <div id="Sub1CategoryCodeError" class="ErrorHolder">
+                        <div class="Error">لطفا این فیلد را خالی نگذارید</div>
+                        <div class="ErrorClose"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Div_Sub2CategoryCode">
+                <div class="orgenizer">
+                    <p>دسته بندی فرعی :</p>
+                    <select class="ForSelect" id="Sub2CategoryCode">
+                        <option selected disabled value="">انتخاب نمایید</option>
+                    </select>
+                    <p class="Info">لطفا دسته بندی فرعی کالای خود را مشخص نمایید</p>
+                    <div id="Sub2CategoryCodeError" class="ErrorHolder">
+                        <div class="Error">لطفا این فیلد را خالی نگذارید</div>
+                        <div class="ErrorClose"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="orgenizer">
+                <p>قیمت : (تومان)</p>
+                <input class="ForTextBox" placeholder="  قیمت  " type="text" id="Price">
+                <p class="Info">قیمت  کالای خود را وارد نمایید</p>
+                <div id="PriceError" class="ErrorHolder">
+                    <div class="Error">لطفا این فیلد را خالی نگذارید</div>
+                    <div class="ErrorClose"></div>
+                </div>
+            </div>
+
+
+            <input type="button" id="GoToHolder2" class="NextStep" value="مرحله بعد">
+
+        </div>
+
+    </div>
+
+
+    <div id="Holder2" class="RegisterHolder" style="display:none;">
+        <div id="FirstStep">
+
+
+            <div class="orgenizer">
+                <p>تخفیف دارد :</p>
+                <select class="ForSelect" id="haveDiscountPrice">
+                    <option value="false">خیر</option>
+                    <option value="true">بله</option>
+                </select>
+                <p class="Info">آیا این محصول را میتوانید با تخفیف عرضه کنید ؟</p>
+            </div>
+
+            <div class="orgenizer" id="DiscountedPriceBox" style="display:none;">
+                <p> قیمت با تخفیف : (تومان)</p>
+                <input class="ForTextBox" placeholder="قیمت با تخفیف" type="text" id="DiscountedPrice">
+                <p class="Info">قیمت با تخفیف کالای خود را وارد نمایید</p>
+            </div>
+
+            <div class="orgenizer">
+                <p>قابلیت ارسال :</p>
+                <select class="ForSelect" id="CanSend">
+                    <option value="false">خیر</option>
+                    <option value="true">بله</option>
+                </select>
+                <p class="Info">آیا شما می توانید این محصولات را برای مشتری ارسال نمایید؟</p>
+            </div>
+
+            <div class="orgenizer" id="PostalCostBox" style="display:none">
+                <p>هزینه ارسال درون شهری : (تومان)</p>
+                <input class="ForTextBox" placeholder="هزینه ارسال درون شهری" type="text" id="PostalCostInTown">
+                <p class="Info">لطفا هزینه ارسال این کالا درون شهر خودتان را وارد نمایید</p>
+            </div>
+
+            <div class="orgenizer" id="PostalCostBox2" style="display:none">
+                <p>هزینه ارسال به کل کشور : (تومان)</p>
+                <input class="ForTextBox" placeholder="هزینه ارسال به کل کشور" type="text" id="PostalCostInCountry">
+                <p class="Info">لطفا هزینه ارسال این کالا  به هر نقطه از کشور را وارد نمایید</p>
+            </div>
+
+            <div class="orgenizer">
+                <p>قابلیت تعویض :</p>
+                <select class="ForSelect" id="Changeability">
+                    <option value="false">خیر</option>
+                    <option value="true">بله</option>
+                </select>
+                <p class="Info">آیا حاضرید این محصول را پس از فروش تعویض نمایید؟</p>
+            </div>
+
+            <div class="orgenizer">
+                <p>قابلیت پس دادن :</p>
+                <select class="ForSelect" id="CanGiveBack">
+                    <option value="false">خیر</option>
+                    <option value="true">بله</option>
+                </select>
+                <p class="Info">آیاحاضرید این محصول را پس از فروش پس بگیرید؟</p>
+            </div>
+
+            <div id="AttributeDiv">
+            </div>
+
+            <div class="orgenizer">
+
+                <p>سایر ویژگی ها  :</p>
+
+                <div id="unLimitedBox" style="direction: rtl;">
+
+                    <div class="onePack">
+                        <input class="ForTextBox" placeholder="نام ویژگی" type="text" id="moreAttrName">
+                        <input class="ForTextBox" style="margin-right:10px;" placeholder="مقدار " type="text" id="moreAttrValue">
+                    </div>
+                    <input type="button" class="addAnotherFilter" onclick="addOnePack(this)" />
+                </div>
+                <p class="Info" style="width:57% !important">اگر ویژگی های دیگری دارد محصول شما ، نام ویژگی و مقدار آن را وارد نمایید</p>
+
+            </div>
+
+
+            <input type="button" id="SaveProduct" class="NextStep" value="ثبت محصول">
+
+            <div id="EnterLogIn" style="display:none">
+                <span> لطفا کمی صبر کنید</span><input style="margin: 20px 50px 0px 14px !important" type="button" id="Loading">
+            </div>
+
+            <p style="margin:23px 10px 0px 0px; width:40%; font-size: 15px;  " id="SavaeError">
+            </p>
+        </div>
+    </div>
+
+
+    <div id="Holder3" class="RegisterHolder" style="display:none;">
+
+
+        <div style="width:65%;float: right;">
+            <h2 style="color: rgb(208, 65, 109);">
+                محصول شما با موفقیت ثبت شد  <br />
+                حال میتوانید تصاویر محصول خود را اضافه نمایید
+            </h2><br />
+
+
+            <p class="Info" style="width: 100% !important;margin: 30px 0px 9px -20px;">تصویر اصلی محصول خود را انتخاب کنید</p>
+            <div class="RegisterHolder" id="Holder2">
+                <div class="container" id="crop-avatar">
+
+                    <div class="avatar-view" title="Change the avatar">
+                        <img src="~/Img/ProductRegister/addFilter.png" alt="Avatar">
+                    </div>
+                    <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-lg" style="width:710px;">
+                            <div class="modal-content">
+                                <form class="avatar-form" id="oneImageUpload" enctype="multipart/form-data" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title" id="avatar-modal-label">بارگذاری تصویر</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="avatar-body">
+                                            <label for="avatarInput">انتخاب تصویر</label>
+
+                                            <div class="avatar-upload">
+                                                <input type="hidden" class="avatar-src" name="avatar_src">
+                                                <input type="hidden" class="avatar-data" name="avatar_data">
+                                                <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4" style="display: none;">
+                                                    <div class="avatar-preview preview-lg"></div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="avatar-wrapper"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row avatar-btns">
+                                                <div class="col-md-9">
+                                                    <div class="col-md-3">
+                                                        <button type="submit" class="btn btn-primary btn-block avatar-save">ارسال</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                </div>
+            </div>
+
+
+
+            @*<p class="Info">تصویر اصلی محصول خود را آپلود کنید.لطفا از عکس های با کیفیت استفاده نمایید.تصاویر خلاف شئون اسلامی بدون اخطار حذف خواهند شد</p>*@
+            @*<p class="Info" style="width: 100% !important;margin: 0px 0px 9px -20px;">تصویر اصلی محصول خود را انتخاب کنید  </p>
+                <div id="fine-uploader-manual-trigger-mainPic"></div>
+
+                <br />
+                <br />*@
+            <div>
+                <p class="Info" style="width: 100% !important;margin: 30px 0px 9px -20px;">تصاویر جزییات محصول خود را انتخاب کنید</p>
+                <div id="fine-uploader-manual-trigger"></div>
+
+            </div>
+        </div>
+
+        <a href="~/Seller/StoreManagment/SellerPanel"> <input type="button" style="float:right;margin: 31px 47px 45px 0px !important;" class="NextNextStep" value=" بازگشت"></a>
+        <a href="~/Seller/ProductManagment/AddProduct"> <input type="button" style="margin: 30px 2% 0px 28%" class="NextNextStep" value="افزودن محصول جدید"></a>
+
+        <input type="button" style="display:none;" id="trigger-upload">
+    </div>
+
+</div>
+@section Script{
+    <!-- Fine Uploader
+        ====================================================================== -->
+    <link href="~/Content/Fine_Uploader/fine-uploader-new.css" rel="stylesheet" />
+    <style>
+        #trigger-upload {
+            color: white;
+            background-color: #00ABC7;
+            font-size: 14px;
+            padding: 7px 20px;
+            background-image: none;
+        }
+
+        #fine-uploader-manual-trigger .qq-upload-button {
+            margin-right: 15px;
+        }
+
+        #fine-uploader-manual-trigger .buttons {
+            width: 36%;
+        }
+
+        #fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
+            width: 60%;
+        }
+
+        .qq-uploader-selector {
+            width: 93%;
+        }
+    </style>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Cropper Upload Avatar/main.js"></script>
+    <script src="~/Content/Cropper Upload Avatar/cropper.min.js"></script>
+    <script src="~/Content/Fine_Uploader/jquery.fine-uploader.min.js"></script>
+    @*<script src="~/Content/Fine_Uploader/fine-uploader.js"></script>*@
+    <script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
+
+    <script type="text/template" id="qq-template-manual-trigger">
+        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="تصویر را بکشید و اینجا رها کنید">
+            <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+                <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+            </div>
+            <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+                <span class="qq-upload-drop-area-text-selector"></span>
+            </div>
+            <div class="buttons">
+                <div class="qq-upload-button-selector qq-upload-button">
+                    <div>انتخاب تصاویر</div>
+                </div>
+                @*<button type="button" id="trigger-upload" class="btn btn-primary">
+                        <i class="icon-upload icon-white"></i> ارسال
+                    </button>*@
+            </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>درحال پردازش </span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+            <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
+                <li>
+                    <div class="qq-progress-bar-container-selector">
+                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                    </div>
+                    <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                    <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale style="width: 15%;">
+                    <span class="qq-upload-file-selector qq-upload-file"></span>
+                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
+                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                    <span class="qq-upload-size-selector qq-upload-size"></span>
+                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">لغو</button>
+                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">تلاش مجدد</button>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">حذف</button>
+                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text" style="margin: 20px 36px 0 0 !important"></span>
+                </li>
+            </ul>
+
+            <dialog class="qq-alert-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">خروج</button>
+                </div>
+            </dialog>
+
+            <dialog class="qq-confirm-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">خیر</button>
+                    <button type="button" class="qq-ok-button-selector">بله</button>
+                </div>
+            </dialog>
+
+            <dialog class="qq-prompt-dialog-selector">
+                <div class="qq-dialog-message-selector"></div>
+                <input type="text">
+                <div class="qq-dialog-buttons">
+                    <button type="button" class="qq-cancel-button-selector">لغو</button>
+                    <button type="button" class="qq-ok-button-selector">تایید</button>
+                </div>
+            </dialog>
+        </div>
+    </script>
+
+    <script>
+
+        var tableCode;
+        var Sub2CatCode;
+        var attrebiut = [''];
+        var ProductAttribute;
+        var productId = 0;
+
+        var ProductAttributeWithoutItemsTemp = [];
+        var ProductMultiSelectAttributeWithItemsTemp = [];
+        var ProductSelectAttributeWithItemsTemp = [];
+
+        @*var ajaxCategory = $.parseJSON('@Html.Raw(Json.Encode(Model))');*@
+        var a = '@Html.Raw(Json.Encode(Model))';
+        var ajaxCategory = JSON.parse(a.replace(/\\/g, "/\/"));
+
+
+        //When page Load , Category Load
+        $(document).ready(function () {
+            $('#SaveProduct').prop('disabled', false);
+
+            //set category
+            $("#CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            if (ajaxCategory != null) {
+                $.each(ajaxCategory, function (index, value) {
+                    $("#CategoryCode").append($('<option>').text(value.Name).attr('value', value.Id));
+                });
+            }
+            $("#Sub1CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            $("#Sub2CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+
+        });
+
+        //fill the Sub2Category drop down list
+        $("#CategoryCode").on("change", function () {
+            $('#CategoryCodeError').fadeOut();
+            $('#Div_Sub1CategoryCode').fadeIn(500);
+            $("#Sub1CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            $("#Sub2CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            $.each(ajaxCategory, function (index, value) {
+                if (value.Id == $("#CategoryCode option:selected").val()) {
+                    if (value.SubCategories != null) {
+                        $.each(value.SubCategories, function (index2, value2) {
+                            $("#Sub1CategoryCode").append($('<option>').text(value2.Name).attr('value', value2.Id));
+                        });
+                    }
+                }
+            });
+        });
+
+        //fill the Sub2Category drop down list
+        $("#Sub1CategoryCode").on("change", function () {
+            $('#Sub1CategoryCodeError').fadeOut();
+            $('#Div_Sub2CategoryCode').fadeIn(500);
+            $("#Sub2CategoryCode").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            $.each(ajaxCategory, function (index, value) {
+                if (value.Id == $("#CategoryCode option:selected").val()) {
+                    if (value.SubCategories != null) {
+                        $.each(value.SubCategories, function (index2, value2) {
+                            if (value2.Id == $("#Sub1CategoryCode option:selected").val()) {
+                                if (value2.SubCategories != null) {
+                                    $.each(value2.SubCategories, function (index3, value3) {
+                                        $("#Sub2CategoryCode").append($('<option>').text(value3.Name).attr('value', value3.Id));
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $('#haveDiscountPrice').on('change', function () {
+            if ($("#haveDiscountPrice option:selected").val() == 'true') {
+                $('#DiscountedPriceBox').show();
+            }
+            else {
+                $('#DiscountedPriceBox').hide();
+                $('#DiscountedPrice').val('');
+
+            }
+        })
+
+        $('#CanSend').on('change', function () {
+            if ($("#CanSend option:selected").val() == 'true') {
+                $('#PostalCostBox').show();
+                $('#PostalCostBox2').show();
+            }
+            else {
+                $('#PostalCostBox').hide();
+                $('#PostalCostBox2').hide();
+                $('#PostalCostInTown').val('');
+                $('#PostalCostInCountry').val('');
+            }
+        })
+
+        $("#Sub2CategoryCode").on("change", function () {
+            $('#Sub2CategoryCodeError').fadeOut();
+
+
+            var numericProperty = '';
+
+            $("#AttributeDiv").html('');
+            $.ajax({
+                type: "GET",
+                url: "/api/store/productmanagment/getRequiredItemsForNewProduct",
+                data: {
+                    catCode: $("#Sub2CategoryCode option:selected").val()
+                },
+                success: function (result) {
+                    result = result.Response;
+
+                    if ((result != null && result != '' && result != [])) {
+                        $.each(result, function (index, value) {
+
+                            var txt = "";
+
+                            if (index == 'Colors') {
+                                txt = " <div class='orgenizer'>"
+                                   + "<p>رنگ :</p>"
+                                   + "<div class='fotAllSelectBoxes' ><select  multiple = 'multiple'  class='ForSelect'  id='Colors'>"
+                                   + "<option selected disabled value=''>انتخاب نمایید</option>";
+                                $.each(value, function (index2, value2) {
+                                    txt += "<option value='" + value2.Value + "'>" + value2.Text + "</option> ";
+                                });
+
+                                txt += "</select>"
+                                    + "</div></div></br>";
+                                $("#AttributeDiv").append(txt);
+                                $('#Colors').SumoSelect({
+                                    csvDispCount: 2,
+                                    captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                                    okCancelInMulti: false
+                                });
+                                attrebiut.push('Colors');
+                            }
+
+                            else if (index == 'Brands') {
+                                txt = " <div class='orgenizer'>"
+                                   + "<p>برند :</p>"
+                                   + "<div ><select  class='ForSelect'  id='Brands'>"
+                                   + "<option selected disabled value=''>انتخاب نمایید</option>";
+                                $.each(value, function (index2, value2) {
+                                    txt += "<option value='" + value2.Value + "'>" + value2.Text + "</option> ";
+                                });
+
+                                txt += "</select>"
+                                    + "</div></div></br>";
+                                $("#AttributeDiv").append(txt);
+                                attrebiut.push('Brands');
+                            }
+
+                            else if (index == 'ProductAttributeWithoutItems') {
+                                $.each(value, function (index2, value2) {
+                                    txt = "<div class='orgenizer'>"
+                                         + "<p>" + value2.AttributeName + " :</p>"
+                                         + "<input class='ForTextBox IsNumber' placeholder='" + value2.AttributeName + "' type='text' id='" + value2.AttributeCode + "'>"
+                                         + "</div></br>";
+                                    $("#AttributeDiv").append(txt);
+                                    ProductAttributeWithoutItemsTemp.push(value2.AttributeCode);
+                                });
+
+                            }
+
+                            else if (index == 'ProductMultiSelectAttributeWithItems') {
+                                $.each(value, function (index2, value2) {
+
+                                    txt = " <div class='orgenizer'>"
+                                       + "<p>" + value2.AttributeName + " :</p>"
+                                       + "<div class='fotAllSelectBoxes' ><select  multiple = 'multiple'  class='ForSelect'  id='" + value2.AttributeCode + "'>"
+                                       + "<option selected disabled value=''>انتخاب نمایید</option>";
+                                    $.each(value2.AttributeItems, function (index3, value3) {
+                                        txt += "<option value='" + value3.Value + "'>" + value3.Text + "</option> ";
+                                    });
+
+                                    txt += "</select>"
+                                        + "</div></div></br>";
+                                    $("#AttributeDiv").append(txt);
+                                    $('#' + value2.AttributeCode).SumoSelect({
+                                        csvDispCount: 2,
+                                        captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                                        okCancelInMulti: false
+                                    });
+                                    ProductMultiSelectAttributeWithItemsTemp.push(value2.AttributeCode);
+
+                                });
+
+                            }
+
+                            else if (index == 'ProductSelectAttributeWithItems') {
+                                $.each(value, function (index2, value2) {
+
+                                    txt = " <div class='orgenizer'>"
+                                       + "<p>" + value2.AttributeName + " :</p>"
+                                       + "<div ><select   class='ForSelect'  id='" + value2.AttributeCode + "'>"
+                                       + "<option selected  value=''>انتخاب نمایید</option>";
+                                    $.each(value2.AttributeItems, function (index3, value3) {
+                                        txt += "<option value='" + value3.Value + "'>" + value3.Text + "</option> ";
+                                    });
+
+                                    txt += "</select>"
+                                        + "</div></div></br>";
+                                    $("#AttributeDiv").append(txt);
+                                    ProductSelectAttributeWithItemsTemp.push(value2.AttributeCode);
+
+                                });
+
+                            }
+
+                        });
+
+
+                        $('#Holder2').on('keydown', '.IsNumber', function (e) {
+                            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+                        });
+                    }
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+
+
+        });
+
+        $('#GoToHolder2').on('click', function () {
+
+            var RequiredError = 0;
+            if ($('#Name').val() == '') { $('#NameError').fadeIn(); RequiredError++; } else { $('#NameError').fadeOut(); }
+            if ($("#CategoryCode option:selected").val() == '') { $('#CategoryCodeError').fadeIn(); RequiredError++ } else { $('#CategoryCodeError').fadeOut(); }
+            if ($("#Sub1CategoryCode option:selected").val() == '' || !$("#Sub1CategoryCode option:selected").val()) { $('#Sub1CategoryCodeError').fadeIn(); RequiredError++ } else { $('#Sub1CategoryCodeError').fadeOut(); }
+            if ($("#Sub2CategoryCode option:selected").val() == '' || !$("#Sub2CategoryCode option:selected").val()) { $('#Sub2CategoryCodeError').fadeIn(); RequiredError++ } else { $('#Sub2CategoryCodeError').fadeOut(); }
+            if ($('#Price').val() == '') { $('#PriceError').fadeIn(); RequiredError++ } else { $('#PriceError').fadeOut(); }
+
+            if (RequiredError == 0) {
+
+                $('#Holder2').slideDown(100, function () {
+                    $('#GoToHolder2').slideUp(2000);
+
+                    $('html, body').animate({
+                        scrollTop: $("#Holder2").offset().top - 65
+                    }, 2000, function () {
+                    });
+
+                });
+            }
+
+
+
+        });
+
+        $('#SaveProduct').on('click', function () {
+
+            var RequiredError = 0;
+            if ($('#Name').val() == '') { $('#NameError').fadeIn(); RequiredError++; } else { $('#NameError').fadeOut(); }
+            if ($("#CategoryCode option:selected").val() == '') { $('#CategoryCodeError').fadeIn(); RequiredError++ } else { $('#CategoryCodeError').fadeOut(); }
+            if ($("#Sub1CategoryCode option:selected").val() == '' || !$("#Sub1CategoryCode option:selected").val()) { $('#Sub1CategoryCodeError').fadeIn(); RequiredError++ } else { $('#Sub1CategoryCodeError').fadeOut(); }
+            if ($("#Sub2CategoryCode option:selected").val() == '' || !$("#Sub2CategoryCode option:selected").val()) { $('#Sub2CategoryCodeError').fadeIn(); RequiredError++ } else { $('#Sub2CategoryCodeError').fadeOut(); }
+            if ($('#Price').val() == '') { $('#PriceError').fadeIn(); RequiredError++ } else { $('#PriceError').fadeOut(); }
+
+            if (RequiredError == 0) {
+
+
+                $('#SavaeError').html('');
+                $('#SaveProduct').prop('disabled', true);
+                $('#SaveProduct').hide(1, function () {
+                    $('#Loading').addClass('GoLogIn');
+                    $('#EnterLogIn').show();
+                })
+
+
+
+
+                var data = {};
+                data.ProductMainAttributeDataModels = {};
+                data.ProductAttributeWithoutItemsDataModels = [];
+                data.ProductAttributeWithItemsDataModels = [];
+                data.ProductAdditionalAttrbiutes = [];
+
+                data.ProductMainAttributeDataModels['Name'] = $('#Name').val();
+                data.ProductMainAttributeDataModels['Price'] = $('#Price').val().replace(/,/g, '');
+                data.ProductMainAttributeDataModels['DiscountedPrice'] = ($('#DiscountedPrice').val().replace(/,/g, '') == '' ? 0 : $('#DiscountedPrice').val().replace(/,/g, ''));
+                data.ProductMainAttributeDataModels['CanSend'] = ($('#CanSend').val() == null ? "false" : $('#CanSend').val());
+                data.ProductMainAttributeDataModels['IsExist'] = 'true';
+                data.ProductMainAttributeDataModels['PostalCostInTown'] = ($('#PostalCostInTown').val().replace(/,/g, '') == '' ? 0 : $('#PostalCostInTown').val().replace(/,/g, ''));
+                data.ProductMainAttributeDataModels['PostalCostInCountry'] = ($('#PostalCostInCountry').val().replace(/,/g, '') == '' ? 0 : $('#PostalCostInCountry').val().replace(/,/g, ''));
+                data.ProductMainAttributeDataModels['Changeability'] = ($('#Changeability').val() == null ? "false" : $('#Changeability').val());
+                data.ProductMainAttributeDataModels['CanGiveBack'] = ($('#CanGiveBack').val() == null ? "false" : $('#CanGiveBack').val());
+                data.ProductMainAttributeDataModels['CategoryCode'] = $("#Sub2CategoryCode option:selected").val();
+                data.ProductMainAttributeDataModels['BrandCode'] = $("#Brands option:selected").val();
+
+
+                $.each($('.onePack'), function (index, value) {
+                    if (value) {
+                        if ($(value).children('#moreAttrName').val() != '' && $(value).children('#moreAttrValue').val() != '')
+                            data.ProductAdditionalAttrbiutes.push({
+                                "Title": $(value).children('#moreAttrName').val(),
+                                "Value": $(value).children('#moreAttrValue').val()
+                            });
+                    }
+                })
+
+                var selectedColor = $('#Colors')[0].sumo.getSelStr().split(',');
+                data.ProductMainAttributeDataModels['Colors'] = [];
+                for (var j = 0; j < selectedColor.length; j++) {
+                    if (selectedColor[j] != '') {
+                        data.ProductMainAttributeDataModels['Colors'].push(selectedColor[j]);
+                    }
+                }
+
+
+                for (var i = 0; i < ProductAttributeWithoutItemsTemp.length; i++) {
+
+                    data.ProductAttributeWithoutItemsDataModels.push({ 'AttributeCode': ProductAttributeWithoutItemsTemp[i], 'Value': $("#" + ProductAttributeWithoutItemsTemp[i]).val() })
+                }
+
+                for (var i = 0; i < ProductMultiSelectAttributeWithItemsTemp.length; i++) {
+                    var selectedAttribute = $('#' + ProductMultiSelectAttributeWithItemsTemp[i])[0].sumo.getSelStr().split(',');
+                    selectedAttribute = selectedAttribute.filter(function (n) { return n != '' });
+
+                    data.ProductAttributeWithItemsDataModels.push({ 'Code': ProductMultiSelectAttributeWithItemsTemp[i], 'Values': selectedAttribute });
+                }
+
+                for (var i = 0; i < ProductSelectAttributeWithItemsTemp.length; i++) {
+                    if ($("#" + ProductSelectAttributeWithItemsTemp[i] + " option:selected").val() != '') {
+                        arrayTemp = [];
+                        arrayTemp.push($("#" + ProductSelectAttributeWithItemsTemp[i] + " option:selected").val());
+                        data.ProductAttributeWithItemsDataModels.push({ 'Code': ProductSelectAttributeWithItemsTemp[i], 'Values': arrayTemp });
+                    }
+                }
+
+
+                $.ajax({
+                    url: '/api/store/productmanagment/save',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json",
+                    traditional: true,
+                    data: JSON.stringify(data),
+                    success: function (result) {
+
+                        if (result.Success == true) {
+
+
+                            $('#EnterLogIn').hide(1, function () {
+                                // $('#SaveProduct').val("محصول شما با موفقیت ثبث شد ");
+                                //$('#SaveProduct').fadeIn(100);
+                                $('#Holder3').show(1000, function () {
+                                    $('html, body').animate({
+                                        scrollTop: $("#Holder3").offset().top
+                                    }, 2000, function () {
+
+                                    });
+                                });
+                            })
+                            productId = result.Response;
+                            $("#oneImageUpload").attr('action', '/api/store/productmanagment/uploadimage?productId=' + productId + '&isMainImg=true&');
+                            Upload();
+
+                            //  UploadMain();
+
+                        } else {
+                            $('#SavaeError').html("عملیات با خطا مواجه شد");
+
+
+                            $('#SaveProduct').prop('disabled', false);
+                            $('#EnterLogIn').hide(1, function () {
+                                $('#SaveProduct').show();
+                            })
+
+                        }
+                    },
+                    error: function () {
+                        $('#SavaeError').html("ارتباط با سرور برقرار نشد");
+
+                        $('#SaveProduct').prop('disabled', false);
+                        $('#EnterLogIn').hide(1, function () {
+                            $('#SaveProduct').show();
+                        })
+                    }
+                });
+
+            }
+        });
+
+
+        function addOnePack(element) {
+            var onePack =
+                    ' <div class="onePack">' +
+                    '  <input class="ForTextBox" placeholder="نام ویژگی" type="text" id="moreAttrName">' +
+                    '   <input class="ForTextBox" style="margin-right:10px;" placeholder="مقدار " type="text" id="moreAttrValue">' +
+                    '   <input class="deleteAPack" type="button"  onclick="removeOnePack(this)" />' +
+                    ' </div>';
+            $('#unLimitedBox').append(onePack)
+        }
+
+        function removeOnePack(element) {
+            $(element).parent().remove();
+        }
+
+
+        //upload picture
+        function Upload() {
+            var manualUploader = new qq.FineUploader({
+                element: document.getElementById('fine-uploader-manual-trigger'),
+                template: 'qq-template-manual-trigger',
+                request: {
+                    endpoint: '/api/store/productmanagment/uploadimage?productId=' + productId + '&isMainImg=false'
+                },
+                thumbnails: {
+                    placeholders: {
+                        waitingPath: '/Content/Fine_Uploader/waiting-generic.png',
+                        notAvailablePath: '/Content/Fine_Uploader/not_available-generic.png'
+                    }
+                },
+                validation: {
+                    //FORMAT
+                    allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+                    //cOUN
+                    itemLimit: 4
+                    // sizeLimit: 51200 // 50 kB = 50 * 1024 bytes
+                },
+
+                retry: {
+                    //Try To Upload
+                    enableAuto: true
+                },
+
+                scaling: {
+                    sendOriginal: false,
+                    sizes: [
+                        { maxSize: 600 }
+                    ]
+                },
+                autoUpload: true,
+                debug: true
+            });
+
+            qq(document.getElementById("trigger-upload")).attach("click", function () {
+                manualUploader.uploadStoredFiles();
+                // console.log('محصول شما با موفقیت ثبت شد');
+            });
+        };
+
+        $('#AddProduct').on('keydown', '#Price , #PostalCostInCountry ,#PostalCostInTown , #DiscountedPrice', function (e) {
+            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+        });
+
+        $('#Price').on('keyup', function () {
+            var temp = $('#Price').val().replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            $('#Price').val(temp);
+        })
+
+        $('#DiscountedPrice').on('keyup', function () {
+            var temp = $('#DiscountedPrice').val().replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            $('#DiscountedPrice').val(temp);
+        })
+
+        $('#PostalCostInCountry').on('keyup', function () {
+            var temp = $('#PostalCostInCountry').val().replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            $('#PostalCostInCountry').val(temp);
+        })
+
+        $('#PostalCostInTown').on('keyup', function () {
+            var temp = $('#PostalCostInTown').val().replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            $('#PostalCostInTown').val(temp);
+        })
+
+
+        //chnage all persian number to en number
+        String.prototype.toEnDigit = function () {
+            return this.replace(/[\u06F0-\u06F9]+/g, function (digit) {
+                var ret = '';
+                for (var i = 0, len = digit.length; i < len; i++) {
+                    ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
+                }
+                return ret;
+            });
+        };
+
+        //chnage all persian number to en number call function
+        $("#DiscountedPrice ,#Price, #PostalCostInTown , #PostalCostInCountry ").on('input', function () {
+            var value = $(this).val();
+             $(this).val(value.toEnDigit())
+        });
+
+
+    </script>
+}
+
+
+
+
+

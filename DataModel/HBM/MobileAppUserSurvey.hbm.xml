@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="MobileAppUserSurvey" table="MobileAppUserSurvey" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="ScoreCode">
+      <column name="ScoreCode" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="Date">
+      <column name="Date" sql-type="decimal" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

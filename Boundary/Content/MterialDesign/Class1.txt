@@ -1,0 +1,33 @@
+﻿        <div class="tabs">
+            <div class="tabs-header">
+                <div class="border"></div>
+                <ul style="margin-top:0;">
+                    <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات کلی</a></li>
+                    <li><a href="#tab-2" tab-id="2" ripple="ripple" ripple-color="#FFF">پردازنده</a></li>
+                    <li><a href="#tab-3" tab-id="3" ripple="ripple" ripple-color="#FFF">صفحه نمایش</a></li>
+                    <li><a href="#tab-4" tab-id="4" ripple="ripple" ripple-color="#FFF">حافظه</a></li>
+                    <li><a href="#tab-5" tab-id="5" ripple="ripple" ripple-color="#FFF">ارتباطات</a></li>
+                </ul>
+                <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
+            </div>
+            <div class="tabs-content">
+                <div tab-id="1" class="tab active">
+                    <div class="rightSide">
+                        <div class="TabHolder">
+                            <div class="HeaderTabInner">تعداد سیم کارت</div>
+                            <div class="ContentTabInner">یک سیم کارته</div>
+                        </div>
+                    </div>
+                    <div class="LeftSide">
+                        <div class="TabHolder">
+                            <div class="HeaderTabInner">تعداد سیم کارت</div>
+                            <div class="ContentTabInner">یک سیم کارته</div>
+                        </div>
+                    </div>
+                </div>
+                <div tab-id="2" class="tab"></div>
+                <div tab-id="3" class="tab"></div>
+                <div tab-id="4" class="tab"></div>
+                <div tab-id="5" class="tab"></div>
+            </div>
+        </div>

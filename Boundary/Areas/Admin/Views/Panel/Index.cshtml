@@ -1,0 +1,72 @@
+﻿@using Boundary.Helper.StaticValue
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>صفحه مدیریت</title>
+</head>
+
+<body>
+    <div>
+        @if (Request.IsAuthenticated && User.IsInRole(StaticString.Role_SuperAdmin))
+        {
+            <h2>
+                @Html.ActionLink("مدیریت ادمین ها", "Index", "AdminManagement", new { area = StaticString.Role_SuperAdmin }, null)
+            </h2>
+        }
+        <h2>
+            @Html.ActionLink("سفارشات", "Index", "OrderManagement")
+        </h2>
+        <h2>
+            @Html.ActionLink("سفارشات در انتظار بررسی", "GetAdminReviewPendingOrders", "OrderManagement")
+        </h2>
+        <h2>
+            @Html.ActionLink("پرداخت به فروشگاهها", "Index", "PaymentToStore")
+        </h2>
+        <h2>
+            @Html.ActionLink("پرداخت به اعضاء", "Index", "PaymentToMember")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت خطاها", "Index", "ErroHandling")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت اسلایدر ها", "Index", "MainSlider")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت باکس های تبلیغاتی", "Index", "Advertise")
+        </h2>
+        <h2>
+            @Html.ActionLink("ویرایش پروفایل", "EditProfile", "Panel")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت کتگوری ها", "Index", "CategoryManagement", new { level = 1 }, null)
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت ویژگی های محصولات", "Index", "AttributeManagement")
+        </h2>
+        @if (Request.IsAuthenticated && User.IsInRole(StaticString.Role_SuperAdmin))
+        {
+            <h2>
+                @Html.ActionLink("مدیریت حساب های کاربری", "Index", "UserManagement", new { area = StaticString.Role_SuperAdmin }, null)
+            </h2>
+        }
+        @if (Request.IsAuthenticated && User.IsInRole(StaticString.Role_Admin))
+        {
+            <h2>
+                @Html.ActionLink("مدیریت حساب های کاربری", "Index", "UserManagement")
+            </h2>
+        }
+        <h2>
+            @Html.ActionLink("مدیریت اعضاء", "Index", "MemberManagement")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت محصولات", "Index", "ProductManagement")
+        </h2>
+        <h2>
+            @Html.ActionLink("مدیریت فروشگاهها", "Index", "StoreManagement")
+        </h2>
+    </div>
+</body>
+</html>

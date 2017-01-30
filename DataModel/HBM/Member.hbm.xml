@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Member" table="Member" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="CityCode">
+      <column name="CityCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="Balance">
+      <column name="Balance" sql-type="int" not-null="true" />
+    </property>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="UserCode">
+      <column name="UserCode" sql-type="nvarchar" not-null="true" />
+    </property>
+    <property name="PicAddress">
+      <column name="PicAddress" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Place">
+      <column name="Place" sql-type="nvarchar" not-null="false" />
+    </property> 
+    <property name="PostalCode">
+      <column name="PostalCode" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="MobileNumber">
+      <column name="MobileNumber" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="PhoneNumber">
+      <column name="PhoneNumber" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Latitude">
+      <column name="Latitude" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Longitude">
+      <column name="Longitude" sql-type="decimal" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

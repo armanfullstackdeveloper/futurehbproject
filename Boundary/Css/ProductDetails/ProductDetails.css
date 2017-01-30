@@ -1,0 +1,475 @@
+﻿@charset "utf-8";
+/* Simple fluid media
+   Note: Fluid media requires that you remove the media's height and width attributes from the HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width: 100%;
+}
+.color_1 {
+	background:#fff;
+}
+.color_2 {
+	background:#000;
+}
+.color_3 {
+	background:#A33A3C;
+}
+.color_4 {
+	background:#1E9463;
+}
+.color_5 {
+	background:#D3CE59;
+}
+#Middle {
+	width: 100%;
+	max-width: 1360px;
+	float: none;
+	clear: both;
+	font-family: 'iransfm';
+	margin: 0 auto;
+	position: relative;
+	top: 18px;
+}
+#GalleryAndInfes {
+	width:100%;
+	float:left;
+	margin-bottom:18px;
+}
+#DetailTabs {
+	width:100%;
+	float:right;
+	margin-top:18px;
+	color:#6C6C6C;
+}
+#GalleryHolder {
+	width:100%;
+	float:left;
+}
+#InfoHolder {
+	width:90%;
+	float:left;
+	background:#F5F5F5;
+	font-family:'iransfm';
+	padding:5%;
+	color:#fff;
+	direction:rtl;
+}
+#MapAndSellerInfoes {
+	width:100%;
+	float:left;
+	margin:8px 0 0 0;
+}
+
+#ProductAndPriceInfoes {
+	width:100%;
+	float:left;
+	margin:10px 0 0 0a;
+}
+#MoreInfoes {
+	width:98%;
+	float:left;
+	margin:18px 1% 18px 1%;
+	font-family:'Hind','iransfm';
+	text-align:right;
+}
+#MiniMapHolder {
+	width:100%;
+	height:250px;
+	float:left;
+	background:#F0F0F0;
+}
+#SellerInfoHolder {
+	width:100%;
+	float:left;
+	text-align:center;
+	margin-top:5px;
+}
+#OtherProducts:hover {
+	background:#f0f0f0 url(../../Img/ProductDetails/darkthemePink.png) no-repeat center;
+	background-size:150%;
+	color:#fff;
+}
+#SellerDetails:hover {
+	background:#f0f0f0 url(../../Img/ProductDetails/darkthemePink.png) no-repeat center;
+	background-size:150%;
+	color:#fff;
+}
+#OtherProducts {
+	float:left;
+	width:49.5%;
+	margin-right:0.5%;
+	padding:20px 0;
+	background:#f0f0f0 url(../../Img/ProductDetails/darkthemePink.png) no-repeat center;
+	background-size:0;
+	transition:cubic-bezier(.67,.09,0,1) 0.3s;
+	color:#6A6A6A;
+	cursor:pointer;
+}
+#SellerDetails {
+	float:left;
+	width:49.5%;
+	margin-left:0.5%;
+	padding:20px 0;
+	background:#f0f0f0 url(../../Img/ProductDetails/darkthemePink.png) no-repeat center;
+	background-size:0;
+	transition:cubic-bezier(.67,.09,0,1) 0.3s;
+	color:#6A6A6A;
+	cursor:pointer;
+}
+#ProductName {
+	width:100%;
+	float:left;
+	margin-top:30px;
+}
+#AddressTags {
+	width:100%;
+	float:left;
+	margin-top:30px;
+}
+#AddToBestAndCompare {
+	width:100%;
+	float:left;
+	margin-top:30px;
+}
+#NameOfTheProductHolder {
+	width:100%;
+	float:right;
+}
+#NameOfTheProduct {
+	width:90%;
+	float:right;
+	padding:15px 0 10px 0;
+	color:#37373a;
+	text-align:right;
+	font-family:'Hind','iransfm';
+	font-size:18px;
+}
+#PriceOfTheProduct {
+	width:auto;
+	float:right;
+	color:#6A6A6A;
+	text-align:right;
+	font-size:16px;
+	margin-top:8px;
+	clear:both;
+}
+#ColorsOfTheProducts {
+	width:auto;
+	float:right;
+	color:#6A6A6A;
+	text-align:right;
+	font-size:16px;
+	margin-top:8px;
+	clear:both;
+}
+#BrandHolder {
+	width:10%;
+	float:right;
+	text-align:center;
+	padding:12px 0 10px 0;
+}
+#BrandHolder img{
+	width:25px;
+}
+
+#PriceSubject {
+	float:right;
+	padding:5px 0;
+	color:#6A6A6A;
+	margin-left:8px;
+}
+#OriginalPrice {
+	float:right;
+	padding:5px 8px;
+	margin-left:0;
+	text-decoration:line-through;
+	background:#d3ccc2; 
+	color:#000;
+}
+#OffPrice {
+	float:right;
+	padding:5px 8px;
+	margin-left:0;
+	background:url(../../Img/ProductDetails/PriceSeperater.png) no-repeat right center ;
+	background-size:0.5px;
+	background:#d0416d;
+	color:#fff;
+}#OffPrice2 {
+	float:right;
+	padding:5px 8px;
+	margin-left:0;
+	background:url(../../Img/ProductDetails/PriceSeperater.png) no-repeat right center ;
+	background-size:0.5px;
+	background:#d0416d;
+	color:#fff;
+}
+#ColorSubject {
+	width:48px;
+	float:right;
+	padding:2.5px 0;
+	color:#6A6A6A;
+}
+.ColoSeperator {
+	width:20px;
+	height:20px;
+	float:right;
+	margin:0 0 0 4px;
+	border-radius:50%;
+}
+#CityAndStateTags {
+	width:100%;
+	float:left;
+	margin-bottom:8px;
+}
+.Tag {
+	height:auto;
+	float:right;
+	padding:5px 7.5px;
+	border-radius:3px;
+	margin-left:4px;
+	text-align:center;
+	background:#d0416d;
+	color:#fff;
+}
+.Outer {
+	width:auto;
+	float:right;
+	color:#6A6A6A;
+	text-align:right;
+	font-size:14px;
+	margin-top:5px;
+	clear:both;
+}
+.InnerSubject {
+	float:right;
+	padding:2.5px 0;
+	color:#6A6A6A;
+	margin-left:8px;
+}
+.InnerInformation {
+	float:right;
+	padding:2.5px 0;
+	margin-left:2px;
+}
+#SpecialAbilities {
+	width:100%;
+	float:right;
+	color:#6A6A6A;
+	text-align:right;
+	font-size:13px;
+	margin-top:10px;
+	clear:both;
+}
+.giveBack, .Send, .Switch, .SpecialProduct {
+	text-align:left;
+	padding:15px 5%;
+	color:#fff;
+	float:right;
+	width:90%;
+	cursor:pointer;
+}
+.giveBack {
+	background:#d0416d url(../../Img/ProductDetails/giveBack.png) no-repeat right center;
+	background-size:40px;
+}
+.Send {
+	background:#3c97b2 url(../../Img/ProductDetails/Send.png) no-repeat right center;
+	background-size:40px;
+}
+.Switch {
+	background:#32a071 url(../../Img/ProductDetails/Switch.png) no-repeat right center;
+	background-size:40px;
+}
+.SpecialProduct {
+	background:#81d041 url(../../Img/ProductDetails/Special.png) no-repeat right center;
+	background-size:40px;
+}
+.rightSide {
+	width:95%;
+	padding:0 2.5%;
+}
+.LeftSide {
+	width:95%;
+	padding:0 2.5%;
+}
+.HeaderTabInner {
+	width:36%;
+	text-align:right;
+	padding:2%;
+	background:#e1e1e1;
+	float:right;
+	margin-left:2%;
+}
+.ContentTabInner {
+	width:54%;
+	text-align:right;
+	padding:2%;
+	background:#e1e1e1;
+	float:right;
+}
+.TabHolder {
+	margin-top:5px;
+	float:right;
+	width:100%;
+}
+#addToBascketButton {
+    text-align: right;
+    float: right;
+    width: 100%;
+    margin: 10px 0;
+
+}
+#addToBascketButton button {
+    width: 100%;
+    font-size: 15px;
+    color: #fffbfb;
+    background: #b06fcc;
+    border-radius: 5px;
+    border: none;
+    padding: 9px 0;
+    max-width:260px;
+}
+#MapAndSellerInfoes {
+	width:49%;
+	float:left;
+	margin:10px 0 0 0;
+}
+#ProductAndPriceInfoes {
+	width:50%;
+	float:right;
+	margin:10px 0 0 0;
+}
+#ProductName {
+	margin-top:0;
+}
+#InfoHolder {
+	padding:2%;
+	width:96%;
+}
+.rightSide {
+	width:45%;
+	padding:5px 2.5%;
+	float:right;
+	height:190px;
+}
+.LeftSide {
+	width:45%;
+	padding:5px 2.5%;
+	float:right;
+	background-size:2px;
+	height:190px;
+}
+
+ .giveBack, .Send, .Switch, .SpecialProduct {
+     width:15%;
+ }
+#InfoHolder {
+	width:48%;
+	float:right;
+	padding:2%;
+	margin-top:18px;
+	margin-right:1.5%;
+}
+#GalleryHolder {
+	width:44%;
+	float:left;
+	margin-top:18px;
+	margin-left:1.5%;
+}
+#MoreInfoes {
+	width:50%;
+	float:right;
+	
+}
+#MiniMapHolder {
+	width:100%;
+	height:280px;
+	float:left;
+	background:#E7E7E7;
+}
+#SellerInfoHolder {
+	width:100%;
+	float:left;
+	text-align:center;
+	margin-top:5px;
+}
+#OtherProducts {
+	float:left;
+	width:39.5%;
+	margin-right:0.5%;
+	padding:20px 10% 20px 0;
+	background:#D4D4D4 url(../../Img/ProductDetails/OtherProductsIcon.png) no-repeat right center;
+	background-size:40px;
+	font-size:10px;
+}
+#SellerDetails {
+	float:left;
+	width:39.5%;
+	margin-left:0.5%;
+	padding:20px 10% 20px 0;
+	background:#D4D4D4 url(../../Img/ProductDetails/SellerDetailsIcon.png) no-repeat right center;
+	background-size:40px;
+	font-size:10px;
+}
+#MapAndSellerInfoes {
+	width:48%;
+	float:left;
+	margin:0px 0 0 0;
+}
+#ProductAndPriceInfoes {
+	width:48%;
+	float:right;
+	margin:0px 0 0 0;
+}
+#DetailTabs {
+	width:52%;
+	float:right;
+	margin-top:18px;
+	margin-right:1.5%;
+}
+#ProductName {
+}
+#AddressTags {
+}
+#AddToBestAndCompare {
+}
+#NameOfTheProductHolder {
+}
+#NameOfTheProduct {
+}
+#PriceOfTheProduct {
+}
+#ColorsOfTheProducts {
+}
+#BrandHolder {
+}
+#BrandHolder img{
+}
+
+#PriceSubject {
+}
+#OriginalPrice {
+}
+#OffPrice {
+}
+#ColorSubject {
+}
+.ColoSeperator {
+}
+#CityAndStateTags {
+	width:100%;
+	float:left;
+}
+.Tag {
+	height:auto;
+	float:right;
+	padding:10px 15px;
+	margin-left:4px;
+	text-align:center;
+}
+

@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8DA98C40-6C9F-4618-A5D3-83123B303EAE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Boundary</RootNamespace>
+    <AssemblyName>Boundary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianDateTime">
+      <HintPath>..\packages\PersianDateTime.1.1.5082.36395\lib\net40\PersianDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Member\Models\" />
+    <Folder Include="Areas\Member\Views\Shared\" />
+    <Folder Include="Areas\Seller\Views\Shared\" />
+    <Folder Include="Areas\SuperAdmin\Views\Shared\" />
+    <Folder Include="Content\Images\" />
+    <Folder Include="Img\StoreInfo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AttributeManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MemberManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StoreManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Seller\Controllers\OrderManagementController.cs" />
+    <Compile Include="Areas\SuperAdmin\Controllers\AdminManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ErroHandlingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdvertiseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PanelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaymentToMemberController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaymentToStoreController.cs" />
+    <Compile Include="Areas\Admin\Models\HBPaymentToMemberViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\HBPaymentToStoreViewModel.cs" />
+    <Compile Include="Areas\Member\Controllers\OrderManagementController.cs" />
+    <Compile Include="Areas\Member\Controllers\PanelController.cs" />
+    <Compile Include="Areas\Member\Controllers\Api\UploadController.cs" />
+    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
+    <Compile Include="Areas\Seller\Controllers\DiscountCodeController.cs" />
+    <Compile Include="Areas\Seller\Models\StoreDiscountRegisterDataModel.cs" />
+    <Compile Include="Areas\Seller\SellerAreaRegistration.cs" />
+    <Compile Include="Areas\SuperAdmin\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\SuperAdmin\Models\AdminRegisterDataModel.cs" />
+    <Compile Include="Areas\SuperAdmin\Models\AdminViewModel.cs" />
+    <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
+    <Compile Include="Controllers\Api\ApplicationController.cs" />
+    <Compile Include="Controllers\Api\FirstPageController.cs" />
+    <Compile Include="Controllers\Api\OrderController.cs" />
+    <Compile Include="Areas\Seller\Controllers\Api\OrderManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MainSliderController.cs" />
+    <Compile Include="Areas\Seller\Controllers\ProductManagmentController.cs" />
+    <Compile Include="Areas\Seller\Controllers\StoreManagmentController.cs" />
+    <Compile Include="Areas\SuperAdmin\Controllers\AppManagmentController.cs" />
+    <Compile Include="Controllers\Ordinary\OrderController.cs" />
+    <Compile Include="Helper\HelperFunction.cs" />
+    <Compile Include="Helper\JsonResultHelper.cs" />
+    <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
+    <Compile Include="Helper\StaticValue\StaticRole.cs" />
+    <Compile Include="Helper\StaticValue\StaticString.cs" />
+    <Compile Include="Web References\com.arianpal.sandbox\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Content Include="App_Data\XmlDocument.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\Cropper Upload Avatar\canvas-toBlob.js" />
+    <Content Include="Content\Cropper Upload Avatar\cropper.min.css" />
+    <Content Include="Content\Cropper Upload Avatar\cropper.min.js" />
+    <Content Include="Content\Cropper Upload Avatar\css\main.css" />
+    <Content Include="Content\Cropper Upload Avatar\dist\cropper.css" />
+    <Content Include="Content\Cropper Upload Avatar\dist\cropper.js" />
+    <Content Include="Content\Cropper Upload Avatar\dist\cropper.min.css" />
+    <Content Include="Content\Cropper Upload Avatar\dist\cropper.min.js" />
+    <Content Include="Content\Cropper Upload Avatar\img\loading.gif" />
+    <Content Include="Content\Cropper Upload Avatar\img\picture.jpg" />
+    <Content Include="Content\Cropper Upload Avatar\index.html" />
+    <Content Include="Content\Cropper Upload Avatar\js\main.js" />
+    <Content Include="Content\Cropper Upload Avatar\main4.js" />
+    <Content Include="Content\Cropper Upload Avatar\main3.js" />
+    <Content Include="Content\Cropper Upload Avatar\main.css" />
+    <Content Include="Content\Cropper Upload Avatar\main.js" />
+    <Content Include="Content\Cropper Upload Avatar\main2.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\sumoselectInAddProduct.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\sumoselectInSearch.css" />
+    <Content Include="Content\ImageGallery\Class1.txt" />
+    <Content Include="Content\ImageMagnifier\Class1.txt" />
+    <Compile Include="Controllers\Api\AccountController.cs" />
+    <Compile Include="Controllers\Api\ProductController.cs" />
+    <Compile Include="Areas\Seller\Controllers\Api\ProductManagmentController.cs" />
+    <Compile Include="Areas\Seller\Controllers\Api\StoreManagmentController.cs" />
+    <Compile Include="Controllers\Api\StoreController.cs" />
+    <Compile Include="Controllers\Ordinary\BaseController.cs" />
+    <Compile Include="Controllers\Ordinary\HomeController.cs" />
+    <Compile Include="Controllers\Ordinary\SearchController.cs" />
+    <Compile Include="Controllers\Ordinary\StoreController.cs" />
+    <Compile Include="Controllers\ShopFinderUserManager.cs" />
+    <Compile Include="Controllers\Ordinary\AccountController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\ProductAttrbiuteReference.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Date_Piker\images\calendar.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_highlight-soft_33_003147_1x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_highlight-soft_35_222222_1x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_highlight-soft_44_444444_1x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Content\Date_Piker\images\ui-bg_loop_25_000000_21x21.png" />
+    <Content Include="Content\Date_Piker\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Date_Piker\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Content\Date_Piker\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Content\Date_Piker\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Content\Date_Piker\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Date_Piker\jquery-1.6.2.min.js" />
+    <Content Include="Content\Date_Piker\jquery.ui.datepicker-cc.all.min.js" />
+    <Content Include="Content\Date_Piker_Better\css\persian-datepicker-0.4.5.css" />
+    <Content Include="Content\Date_Piker_Better\css\persian-datepicker-0.4.5.min.css" />
+    <Content Include="Content\Date_Piker_Better\css\theme\persian-datepicker-blue.css" />
+    <Content Include="Content\Date_Piker_Better\css\theme\persian-datepicker-cheerup.css" />
+    <Content Include="Content\Date_Piker_Better\css\theme\persian-datepicker-dark.css" />
+    <Content Include="Content\Date_Piker_Better\css\theme\persian-datepicker-redblack.css" />
+    <Content Include="Content\Date_Piker_Better\index.html" />
+    <Content Include="Content\Date_Piker_Better\js\persian-datepicker-0.4.5.js" />
+    <Content Include="Content\Date_Piker_Better\js\persian-datepicker-0.4.5.min.js" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\js\npm.js" />
+    <Content Include="Content\Date_Piker_Better\lib\jquery.js" />
+    <Content Include="Content\Date_Piker_Better\lib\persian-date.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi.html" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\adsbygoogle.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\analytics.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\ca-pub-5563919384579550.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\jquery.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\jquery_002.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\print.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\pygment_trac.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\stylesheet.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Jquery.sumoselect - Demo by Hemant Negi_files\sumoselect.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\jquery.sumoselect.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\jquery.sumoselect.min.js" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\select_responsive.html" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\sumoselect.css" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\sumoselect_Orginal.css" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.css" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.jquery.js" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.jquery.min.js" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.min.css" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.proto.js" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\chosen.proto.min.js" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\index.html" />
+    <Content Include="Content\DropdownMultiSelect_Chosen\options.html" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\fastselect.css" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect.htm" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\fastselect.min.css" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\fastselect.standalone.js" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\fastselect.standalone.min.js" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\analytics.js" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\build.css" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\build.js" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\css.css" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\fastselect.css" />
+    <Content Include="Content\DropdownMultiSelect_Fastselect\Fastselect_files\fastselect.js" />
+    <Content Include="Content\Fine_Uploader\fine-uploader-new.css" />
+    <Content Include="Content\Fine_Uploader\fine-uploader-new.min.css" />
+    <Content Include="Content\Fine_Uploader\continue.gif" />
+    <Content Include="Content\Fine_Uploader\edit.gif" />
+    <Content Include="Content\Date_Piker\jquery-ui-1.8.14.css" />
+    <Content Include="Content\Fine_Uploader\loading.gif" />
+    <Content Include="Content\Fine_Uploader\not_available-generic.png" />
+    <Content Include="Content\Fine_Uploader\pause.gif" />
+    <Content Include="Content\Fine_Uploader\processing.gif" />
+    <Content Include="Content\Fine_Uploader\retry.gif" />
+    <Content Include="Content\Fine_Uploader\trash.gif" />
+    <Content Include="Content\Fine_Uploader\waiting-generic.png" />
+    <Content Include="Content\ImageGallery\Hammer.min.js" />
+    <Content Include="Content\MterialDesign\Material_Tab.js" />
+    <Content Include="Content\MterialDesign\Material_Tab.css" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.css" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.js" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.min.css" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.min.js" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.pips.css" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\nouislider.tooltips.css" />
+    <Content Include="Css\boilerplate.css" />
+    <Content Include="Css\bootstrap.min.css" />
+    <Content Include="Css\Common.css" />
+    <Content Include="Css\MainPage\MainPage.css" />
+    <Content Include="Css\MainPage\owl.carousel.css" />
+    <Content Include="Css\MainPage\owl.theme.css" />
+    <Content Include="Css\MainPage\slider.css" />
+    <Content Include="Css\ManagePannel\ManagePannel.css" />
+    <Content Include="Css\MiddlePage\MiddlePage.css" />
+    <Content Include="Content\ImageGallery\gallery.css" />
+    <Content Include="Content\ImageMagnifier\jQuery.MagnifierRentgen.min.css" />
+    <Content Include="Css\ProductDetails\ProductDetails.css" />
+    <Content Include="Css\ProductRegister\ProductRegister.css" />
+    <Content Include="Css\StoreInfo.css" />
+    <Content Include="Css\StoreRegister\StoreRegister.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\Font.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Img\ad_Big_1.jpg" />
+    <Content Include="Img\ad_Big_2.jpg" />
+    <Content Include="Img\Catalog1.jpg" />
+    <Content Include="Img\Catalog2.jpg" />
+    <Content Include="Img\contactUs.jpg" />
+    <Content Include="Img\MainPage\ad_Big_1.jpg" />
+    <Content Include="Img\MainPage\ad_Big_2.jpg" />
+    <Content Include="Img\MainPage\AppDownloadAppStore.png" />
+    <Content Include="Img\MainPage\AppDownloadGoogle.png" />
+    <Content Include="Img\MainPage\BestSellsIcon.png" />
+    <Content Include="Img\MainPage\BestSellThumbs\BestSellThumb_1.jpg" />
+    <Content Include="Img\MainPage\BestSellThumbs\BestSellThumb_2.jpg" />
+    <Content Include="Img\MainPage\BestSellThumbs\BestSellThumb_3.jpg" />
+    <Content Include="Img\MainPage\BestSellThumbs\BestSellThumb_4.jpg" />
+    <Content Include="Img\MainPage\BestSellThumbs\BestSellThumb_5.jpg" />
+    <Content Include="Img\MainPage\CategoriesIcons\baby.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\babyBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\Consol.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\ConsolBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\female.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\femaleBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\glass.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\GlassBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\gold.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\goldBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\Laptop.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\LaptopBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\man.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\manBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\perfume.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\perfumeBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\Phone.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\PhoneBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\Tablet.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\TabletBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\TV.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\TVBack.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\watch.png" />
+    <Content Include="Img\MainPage\CategoriesIcons\watchBack.png" />
+    <Content Include="Img\MainPage\Cloth.png" />
+    <Content Include="Img\MainPage\Corner.png" />
+    <Content Include="Img\MainPage\Cornerblue.png" />
+    <Content Include="Img\MainPage\darktheme.png" />
+    <Content Include="Img\MainPage\darkthemePink.png" />
+    <Content Include="Img\MainPage\Digital.png" />
+    <Content Include="Img\MainPage\Favorites.png" />
+    <Content Include="Img\MainPage\Fb.png" />
+    <Content Include="Img\MainPage\Feed.png" />
+    <Content Include="Img\MainPage\GooglePlus.png" />
+    <Content Include="Img\MainPage\Health.png" />
+    <Content Include="Img\MainPage\HomeAccesories.png" />
+    <Content Include="Img\MainPage\LoadLogIn.png" />
+    <Content Include="Img\MainPage\LogIn.png" />
+    <Content Include="Img\MainPage\LogInBack.png" />
+    <Content Include="Img\MainPage\LogInClose.png" />
+    <Content Include="Img\MainPage\LogInCloseAll.png" />
+    <Content Include="Img\MainPage\LogInFailed.png" />
+    <Content Include="Img\MainPage\LogInSucseed.png" />
+    <Content Include="Img\MainPage\Logo.png" />
+    <Content Include="Img\MainPage\LogOut.png" />
+    <Content Include="Img\MainPage\MostSellIcon.png" />
+    <Content Include="Img\MainPage\MostSellThumbs\BestSellThumb_1.jpg" />
+    <Content Include="Img\MainPage\MostSellThumbs\BestSellThumb_2.jpg" />
+    <Content Include="Img\MainPage\MostSellThumbs\BestSellThumb_3.jpg" />
+    <Content Include="Img\MainPage\MostSellThumbs\BestSellThumb_4.jpg" />
+    <Content Include="Img\MainPage\MostSellThumbs\BestSellThumb_5.jpg" />
+    <Content Include="Img\MainPage\NewsThumbs\NewsThumb_1.jpg" />
+    <Content Include="Img\MainPage\NewsThumbs\NewsThumb_2.jpg" />
+    <Content Include="Img\MainPage\NewsThumbs\NewsThumb_3.jpg" />
+    <Content Include="Img\MainPage\NewsThumbs\NewsThumb_4.jpg" />
+    <Content Include="Img\MainPage\NextWhite.png" />
+    <Content Include="Img\MainPage\NoProduct.png" />
+    <Content Include="Img\MainPage\NoProductPic.png" />
+    <Content Include="Img\MainPage\NoStore.png" />
+    <Content Include="Img\MainPage\NoStorePic.png" />
+    <Content Include="Img\MainPage\OffPriceIcon.png" />
+    <Content Include="Img\MainPage\OffSellThumbs\OffSellThumb_1.jpg" />
+    <Content Include="Img\MainPage\OffSellThumbs\OffSellThumb_2.jpg" />
+    <Content Include="Img\MainPage\OffSellThumbs\OffSellThumb_3.jpg" />
+    <Content Include="Img\MainPage\OffSellThumbs\OffSellThumb_4.jpg" />
+    <Content Include="Img\MainPage\Password.png" />
+    <Content Include="Img\MainPage\PrevWhite.png" />
+    <Content Include="Img\MainPage\Search.png" />
+    <Content Include="Img\MainPage\SearchGo.png" />
+    <Content Include="Img\MainPage\SearchPointer.png" />
+    <Content Include="Img\MainPage\selectDown.png" />
+    <Content Include="Img\MainPage\selectDownCategory.png" />
+    <Content Include="Img\MainPage\ShadowSearch.png" />
+    <Content Include="Img\MainPage\SignUp.png" />
+    <Content Include="Img\MainPage\SlideNext.png" />
+    <Content Include="Img\MainPage\SlidePrev.png" />
+    <Content Include="Img\MainPage\Slides\Slider_1.jpg" />
+    <Content Include="Img\MainPage\Slides\Slider_2.jpg" />
+    <Content Include="Img\MainPage\Slides\slider_3.jpg" />
+    <Content Include="Img\MainPage\Slides\slider_4.jpg" />
+    <Content Include="Img\MainPage\SpecialIconPointer.png" />
+    <Content Include="Img\MainPage\Specials\CameraIcon.png" />
+    <Content Include="Img\MainPage\Specials\MountPrice.png" />
+    <Content Include="Img\MainPage\Specials\Poly.png" />
+    <Content Include="Img\MainPage\Specials\SdCartIcon.png" />
+    <Content Include="Img\MainPage\Specials\Special_1.jpg" />
+    <Content Include="Img\MainPage\Specials\Special_2.jpg" />
+    <Content Include="Img\MainPage\Specials\Special_3.jpg" />
+    <Content Include="Img\MainPage\Specials\Special_4.jpg" />
+    <Content Include="Img\MainPage\Specials\Thumb_1.png" />
+    <Content Include="Img\MainPage\TransparentBackPink.png" />
+    <Content Include="Img\MainPage\Twitter.png" />
+    <Content Include="Img\MainPage\UserName.png" />
+    <Content Include="Img\MiddlePage\AddCompare.png" />
+    <Content Include="Img\MiddlePage\AddFavorite.png" />
+    <Content Include="Img\MiddlePage\Block.png" />
+    <Content Include="Img\MiddlePage\Brand_1.png" />
+    <Content Include="Img\MiddlePage\CheckBox.png" />
+    <Content Include="Img\MiddlePage\CheckBoxAfter.png" />
+    <Content Include="Img\MiddlePage\CheckBoxBefore.png" />
+    <Content Include="Img\MiddlePage\LineSeperate.png" />
+    <Content Include="Img\MiddlePage\LineSeperateh.png" />
+    <Content Include="Img\MiddlePage\NextBrown.png" />
+    <Content Include="Img\MiddlePage\NoProduct.png" />
+    <Content Include="Img\MiddlePage\PervBrown.png" />
+    <Content Include="Img\MiddlePage\SearchInner.png" />
+    <Content Include="Img\MiddlePage\SearchLoader.png" />
+    <Content Include="Img\MiddlePage\Thumb_1.jpg" />
+    <Content Include="Img\MiddlePage\Thumb_2.jpg" />
+    <Content Include="Img\MiddlePage\Thumb_3.jpg" />
+    <Content Include="Img\MiddlePage\Thumb_4.jpg" />
+    <Content Include="Img\MiddlePage\Thumb_5.jpg" />
+    <Content Include="Img\MiddlePage\vetical.png" />
+    <Content Include="Img\MiddlePage\WorldSearch.png" />
+    <Content Include="Img\PannelPage\Add.png" />
+    <Content Include="Img\PannelPage\ErrorCloseAll.png" />
+    <Content Include="Img\PannelPage\Holder_Bn.png" />
+    <Content Include="Img\PannelPage\information-icon.png" />
+    <Content Include="Img\PannelPage\LoadLogIn.png" />
+    <Content Include="Img\PannelPage\LogInBack.png" />
+    <Content Include="Img\PannelPage\Manage.png" />
+    <Content Include="Img\PannelPage\order.png" />
+    <Content Include="Img\PannelPage\RightWhite.png" />
+    <Content Include="Img\PannelPage\Slider.png" />
+    <Content Include="Img\PannelPage\StraghitDown.png" />
+    <Content Include="Img\PannelPage\StraghitUp.png" />
+    <Content Include="Img\PannelPage\Sub_1.png" />
+    <Content Include="Img\PannelPage\Sub_2.png" />
+    <Content Include="Img\PannelPage\Sub_3.png" />
+    <Content Include="Img\PannelPage\Sub_4.png" />
+    <Content Include="Img\ProductDetails\BrandImages\Brand_1.png" />
+    <Content Include="Img\ProductDetails\darkthemePink.png" />
+    <Content Include="Img\ProductDetails\GalleryImages\PhoneIcon.png" />
+    <Content Include="Img\ProductDetails\GalleryImages\Pic_1.jpg" />
+    <Content Include="Img\ProductDetails\GalleryImages\Pic_2.jpg" />
+    <Content Include="Img\ProductDetails\GalleryImages\Pic_3.jpg" />
+    <Content Include="Img\ProductDetails\GalleryImages\Pic_4.jpg" />
+    <Content Include="Img\ProductDetails\giveBack.png" />
+    <Content Include="Img\ProductDetails\LineSeperate.png" />
+    <Content Include="Img\ProductDetails\OtherProductsIcon.png" />
+    <Content Include="Img\ProductDetails\PriceSeperater.png" />
+    <Content Include="Img\ProductDetails\SellerDetailsIcon.png" />
+    <Content Include="Img\ProductDetails\Send.png" />
+    <Content Include="Img\ProductDetails\Special.png" />
+    <Content Include="Img\ProductDetails\Switch.png" />
+    <Content Include="Img\ProductRegister\Add.png" />
+    <Content Include="Img\ProductRegister\addProduct.png" />
+    <Content Include="Img\ProductRegister\Comment.png" />
+    <Content Include="Img\ProductRegister\Comment2.png" />
+    <Content Include="Img\ProductRegister\Comment3.png" />
+    <Content Include="Img\ProductRegister\darkthemePink.png" />
+    <Content Include="Img\ProductRegister\editProduct.png" />
+    <Content Include="Img\ProductRegister\ErrorCloseAll.png" />
+    <Content Include="Img\ProductRegister\Holder_Bn.png" />
+    <Content Include="Img\ProductRegister\information-icon.png" />
+    <Content Include="Img\ProductRegister\Manage.png" />
+    <Content Include="Img\ProductRegister\order.png" />
+    <Content Include="Img\ProductRegister\RightWhite.png" />
+    <Content Include="Img\ProductRegister\RobotFlying.png" />
+    <Content Include="Img\ProductRegister\ropeLeft.png" />
+    <Content Include="Img\ProductRegister\seeProduct.png" />
+    <Content Include="Img\ProductRegister\Slider.png" />
+    <Content Include="Img\ProductRegister\storeAdmin.png" />
+    <Content Include="Img\ProductRegister\StraghitDown.png" />
+    <Content Include="Img\ProductRegister\StraghitUp.png" />
+    <Content Include="Img\ProductRegister\Sub_1.png" />
+    <Content Include="Img\ProductRegister\Sub_2.png" />
+    <Content Include="Img\ProductRegister\Sub_3.png" />
+    <Content Include="Img\ProductRegister\Sub_4.png" />
+    <Content Include="Img\slide_1.jpg" />
+    <Content Include="Img\slide_2.jpg" />
+    <Content Include="Img\slide_3.jpg" />
+    <Content Include="Img\slide_4.jpg" />
+    <Content Include="Img\StoreRegister\back.png" />
+    <Content Include="Img\StoreRegister\backbody.png" />
+    <Content Include="Img\StoreRegister\cityback.png" />
+    <Content Include="Img\StoreRegister\cityicon.png" />
+    <Content Include="Img\StoreRegister\darktheme.png" />
+    <Content Include="Img\StoreRegister\Forward.png" />
+    <Content Include="Img\StoreRegister\hommyback.png" />
+    <Content Include="Img\StoreRegister\hommyicon.png" />
+    <Content Include="Img\StoreRegister\LoadLogIn.png" />
+    <Content Include="Img\StoreRegister\onlineback.png" />
+    <Content Include="Img\StoreRegister\onlineicon.png" />
+    <Content Include="Img\StoreRegister\Password.png" />
+    <Content Include="Img\StoreRegister\pointer.png" />
+    <Content Include="Img\StoreRegister\ProductRegisterSucseed.png" />
+    <Content Include="Img\StoreRegister\StoreName.png" />
+    <Content Include="Img\StoreRegister\TransparentBack.png" />
+    <Content Include="Img\StoreRegister\TypeName.png" />
+    <Content Include="Img\StoreRegister\UserName.png" />
+    <Content Include="Img\MainPage\TransparentBack.png" />
+    <Content Include="Img\MainPage\yourStore.png" />
+    <Content Include="Js\AllPageNeeded.js" />
+    <Content Include="Js\FirstPage.js" />
+    <Content Include="Js\OLD\Common.js" />
+    <Content Include="Content\ImageGallery\gallery.js" />
+    <Content Include="Js\jquery-2.1.3.min.js" />
+    <Content Include="Content\ImageMagnifier\jQuery.MagnifierRentgen.min.js" />
+    <Content Include="Js\OLD\owl.carousel.js" />
+    <Content Include="Js\OLD\Panel.js" />
+    <Content Include="Js\OLD\slider.js" />
+    <Content Include="Js\PanelPage.js" />
+    <Content Include="Js\SearchPage.js" />
+    <Content Include="Js\ShowProductPage.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Img\MainPage\HomeAccesories_tmp7608" />
+    <Content Include="Img\MainPage\ps626B.tmp" />
+    <Content Include="Img\MainPage\ps8B9.tmp" />
+    <Content Include="Img\MainPage\psA20F.tmp" />
+    <Content Include="Img\MainPage\psB8DB.tmp" />
+    <Content Include="Img\MainPage\psE925.tmp" />
+    <Content Include="Img\MainPage\psF1D2.tmp" />
+    <Content Include="fonts\Yekan.eot" />
+    <Content Include="fonts\Yekan.ttf" />
+    <Content Include="fonts\Yekan.woff" />
+    <Content Include="Content\Date_Piker\test2.txt" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Date_Piker_Better\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Date_Piker_Better\test2.txt" />
+    <Content Include="Img\MainPage\Specials\SdCartIcon_tmp17013" />
+    <Content Include="Content\MterialDesign\Class1.txt" />
+    <Content Include="Img\MainPage\CategoriesIcons\glass_tmp14992" />
+    <Content Include="fonts\iransfm.eot" />
+    <Content Include="fonts\iransfm.ttf" />
+    <Content Include="fonts\iransfm.woff" />
+    <Content Include="Content\AndroidAPK\1.1.apk" />
+    <Content Include="packages.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Panel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ErroHandling\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ErroHandling\Details.cshtml" />
+    <Content Include="Areas\Member\Views\web.config" />
+    <Content Include="Areas\Seller\Views\web.config" />
+    <Content Include="Areas\Admin\Views\PaymentToStore\SimpleCreate.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToStore\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToStore\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToStore\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToStore\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToMember\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToMember\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToMember\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentToMember\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\GetAdminReviewPendingOrders.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_OrderList.cshtml" />
+    <Content Include="Areas\Admin\Views\MainSlider\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MainSlider\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MainSlider\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MainSlider\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Advertise\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Advertise\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Advertise\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Advertise\Delete.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\web.config" />
+    <Content Include="Areas\SuperAdmin\Views\AdminManagement\Index.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\AdminManagement\Create.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\AdminManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Panel\EditProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManagement\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManagement\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\AddValue.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeManagement\EditValue.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\_UserViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberManagement\_MemberViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MemberManagement\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductManagement\_ProductSummery.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductManagement\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\_StoreViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\SellerDetailes.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\Delete.cshtml" />
+    <Content Include="Areas\Seller\Views\OrderManagement\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Areas\Member\Views\Panel\Index.cshtml" />
+    <Content Include="Areas\Member\Views\OrderManagement\Index.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\UserManagement\_UserViewModel.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\UserManagement\Delete.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\UserManagement\Edit.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\StoreManagment\EditStore.cshtml" />
+    <None Include="Properties\PublishProfiles\ShoFinderPublish.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Content\Fine_Uploader\fine-uploader.js" />
+    <Content Include="Scripts\cloud-zoom1.0.2.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Content\Fine_Uploader\jquery.fine-uploader.min.js" />
+    <Content Include="Content\Pagination\jquery.simplePagination.js" />
+    <Content Include="Content\MD5_encriptin\MD5.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\angular_paging.js" />
+    <Content Include="Scripts\angular_paging_Mjh.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Content\Fine_Uploader\UploadPicture.Txt" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Store\AddStore.cshtml" />
+    <Content Include="Content\DropdownMultiSelect-sumoselect\Test - Copy.txt" />
+    <Content Include="Content\noUiSlider%28Price_Picker%29\test2 - Copy.cshtml" />
+    <Content Include="Views\Shared\_LayoutPanel.cshtml" />
+    <Content Include="Areas\Seller\Views\StoreManagment\SellerPanel.cshtml" />
+    <Content Include="Areas\Seller\Views\ProductManagment\EditProduct.cshtml" />
+    <Content Include="Areas\Seller\Views\ProductManagment\ProductList.cshtml" />
+    <Content Include="Areas\Seller\Views\ProductManagment\DeleteProduct.cshtml" />
+    <Content Include="Views\Store\ShopPage.cshtml" />
+    <Content Include="Areas\Seller\Views\ProductManagment\AddProduct.cshtml" />
+    <Content Include="Views\Search\GetProduct.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Web References\com.arianpal.sandbox\PaymentRequestResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.arianpal.sandbox\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\com.arianpal.sandbox\VerifyPaymentResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\Order\PaymentDetails.cshtml" />
+    <Content Include="Views\Home\UserGuid.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\StoreManagment\EditSallerPhoto.cshtml" />
+    <Content Include="Areas\Seller\Views\StoreManagment\EditStoreLogo.cshtml" />
+    <Content Include="Areas\Seller\Views\StoreManagment\EditStorePhoto.cshtml" />
+    <Content Include="Areas\Seller\Views\ProductManagment\OrdersList.cshtml" />
+    <Content Include="Areas\Seller\Views\DiscountCode\GetAll.cshtml" />
+    <Content Include="Views\Account\RegisterMember.cshtml" />
+    <Content Include="Views\Order\MemberLogin.cshtml" />
+    <Content Include="Views\Order\MemberInfo.cshtml" />
+    <Content Include="Views\Order\BagReview.cshtml" />
+    <Content Include="Views\Shared\_LayoutPanelForUser.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\Low.cshtml" />
+    <Content Include="Views\Home\Complaints.cshtml" />
+    <Content Include="Views\Store\AddShop.cshtml" />
+    <Content Include="Scripts\jquery1.8.3.js" />
+    <None Include="Web References\com.arianpal.sandbox\WebService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{4cb3a8ec-c42e-4fda-bbe3-bbfd8c6e6f56}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{81bd236c-2fd7-43e3-b0fb-5d357b79034d}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://sandbox.arianpal.com/WebService.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\com.arianpal.sandbox\</RelPath>
+      <UpdateFromURL>http://sandbox.arianpal.com/WebService.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Boundary_com_arianpal_sandbox_WebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5320</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5330/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

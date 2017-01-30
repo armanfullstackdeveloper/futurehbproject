@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="RequestPayment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Paymenter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReturnPath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestPaymentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RequestPaymentResult" type="tns:PaymentRequestResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PaymentRequestResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentPath" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultStatus" type="tns:ResultValues" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResultValues">
+        <s:restriction base="s:string">
+          <s:enumeration value="Ready" />
+          <s:enumeration value="GatewayUnverify" />
+          <s:enumeration value="GatewayIsExpired" />
+          <s:enumeration value="GatewayIsBlocked" />
+          <s:enumeration value="GatewayInvalidInfo" />
+          <s:enumeration value="UserNotActive" />
+          <s:enumeration value="InvalidServerIP" />
+          <s:enumeration value="Succeed" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="verifyPayment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="RefNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verifyPaymentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verifyPaymentResult" type="tns:VerifyPaymentResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="VerifyPaymentResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultStatus" type="tns:VerifyResult" />
+          <s:element minOccurs="1" maxOccurs="1" name="PayementedPrice" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="VerifyResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="Ready" />
+          <s:enumeration value="NotMatchMoney" />
+          <s:enumeration value="Verifyed" />
+          <s:enumeration value="InvalidRef" />
+          <s:enumeration value="GatewayInvalidInfo" />
+          <s:enumeration value="Success" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RequestPaymentSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestPayment" />
+  </wsdl:message>
+  <wsdl:message name="RequestPaymentSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="verifyPaymentSoapIn">
+    <wsdl:part name="parameters" element="tns:verifyPayment" />
+  </wsdl:message>
+  <wsdl:message name="verifyPaymentSoapOut">
+    <wsdl:part name="parameters" element="tns:verifyPaymentResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="RequestPayment">
+      <wsdl:input message="tns:RequestPaymentSoapIn" />
+      <wsdl:output message="tns:RequestPaymentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="verifyPayment">
+      <wsdl:input message="tns:verifyPaymentSoapIn" />
+      <wsdl:output message="tns:verifyPaymentSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestPayment">
+      <soap:operation soapAction="http://tempuri.org/RequestPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifyPayment">
+      <soap:operation soapAction="http://tempuri.org/verifyPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestPayment">
+      <soap12:operation soapAction="http://tempuri.org/RequestPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifyPayment">
+      <soap12:operation soapAction="http://tempuri.org/verifyPayment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://sandbox.arianpal.com/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://sandbox.arianpal.com/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

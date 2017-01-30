@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Category" table="Category" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+        <property name="ImgAddress">
+      <column name="ImgAddress" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="BaseCategoryCode">
+      <column name="BaseCategoryCode" sql-type="bigint" not-null="false" />
+    </property>
+    <!--<bag name="CatsOfStore">
+      <key column="CatCode" />
+      <one-to-many class="CatsOfStore" />
+    </bag>
+    <bag name="SubCat">
+      <key column="CatCode" />
+      <one-to-many class="SubCat" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

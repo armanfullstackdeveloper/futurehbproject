@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Order" table="[Order]" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="OrderType">
+      <column name="OrderType" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="MemberCode">
+      <column name="MemberCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="PaymentRequestCode">
+      <column name="PaymentRequestCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="OverallPayment">
+      <column name="OverallPayment" sql-type="int" not-null="true" />
+    </property>
+    <property name="SendingCost">
+      <column name="SendingCost" sql-type="int" not-null="true" />
+    </property>
+    <property name="StoreDiscountCode">
+      <column name="StoreDiscountCode" sql-type="bigint" not-null="false" />
+    </property>
+        <property name="OrderSendingTypeCode">
+      <column name="OrderSendingTypeCode" sql-type="tinyint" not-null="false" />
+    </property>
+        <property name="TrackingCode">
+      <column name="TrackingCode" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<bag name="OrderHistory">
+      <key column="OrderCode" />
+      <one-to-many class="OrderHistory" />
+    </bag>
+    <bag name="ProductsOrder">
+      <key column="OrderCode" />
+      <one-to-many class="ProductsOrder" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

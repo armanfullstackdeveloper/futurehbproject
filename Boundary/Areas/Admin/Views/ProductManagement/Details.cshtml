@@ -1,0 +1,167 @@
+﻿@using DataModel.Entities.RelatedToProduct
+@model Product
+
+@{
+    Layout = null;
+    List<ProductImage> lstImages = (List<ProductImage>)ViewBag.OtherImages;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StoreCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StoreCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountedPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiscountedPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RegisterDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CanSend)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CanSend)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PostalCostInCountry)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PostalCostInCountry)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.PostalCostInTown)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PostalCostInTown)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Changeability)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Changeability)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CanGiveBack)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CanGiveBack)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsExist)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsExist)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BrandCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BrandCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Warranty)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MadeIn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MadeIn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                عکس اصلی
+            </dt>
+
+            <dd>
+                <img src="~/@Model.ImgAddress" height="100" width="125" alt="">
+            </dd>
+
+            <dt>
+                سایر عکس ها
+            </dt>
+
+            <dd>
+                @{
+                    foreach (ProductImage image in lstImages)
+                    {
+                        <img src="~/@image.ImgAddress" height="100" width="125" alt="">
+                    }
+                }
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

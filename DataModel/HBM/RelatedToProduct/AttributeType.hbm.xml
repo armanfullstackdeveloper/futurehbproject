@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="AttributeType" table="AttributeType" lazy="true" >
+    <id name="Id" column="Id" />
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<bag name="Attribute">
+      <key column="AttributeTypeCode" />
+      <one-to-many class="Attribute" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

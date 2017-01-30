@@ -1,0 +1,312 @@
+﻿
+@*@model IEnumerable<DataModel.Models.ViewModel.OrderViewModelForMembers>
+
+@{
+    ViewBag.Title = "مشاهده سفارشات";
+    Layout = "~/Views/Shared/_LayoutPanelForUser.cshtml";
+}
+
+<div style=" width: 75%; text-align: right;padding: 0 2.5%;font-family: 'iransfm'; float: left;">
+
+    <h2 style="direction:rtl"> مشاهده سفارشات </h2>
+
+    <table class="table table-bordered table-hover table-striped table-responsive" style=" float:right; direction:rtl">
+        <tr>
+            <th>
+                شماره سفارش
+            </th>
+            <th>
+                تاریخ
+            </th>
+            <th>
+                زمان
+            </th>
+            <th>
+                کد پستی
+            </th>
+            <th>
+                نوع ارسال کالا
+            </th>
+            <th>
+                کد رهگیری
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                نوع پرداخت وجه
+            </th>
+            <th>
+                نام فروشگاه
+            </th>
+            <th>
+                مبلغ کل
+            </th>
+            <th>
+                مبلغ تخفیف
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderSendingTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShopName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverallPayment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverallDiscount)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</div>*@
+
+
+@{
+    ViewBag.Title = "مدیریت سفارشات";
+    Layout = "~/Views/Shared/_LayoutPanelForUser.cshtml";
+}
+
+
+
+
+<div ng-app="ShopApp" id="AddDiscount" ng-controller="ShowOrderController" style=" width: 75%; text-align: right;direction: rtl;padding: 0 2.5%;font-family: 'iransfm'; float: left;">
+
+
+    <div ng-hide="loadingHide">
+        لطفا تا بارگذاری لیست سفارشات شکیبا باشید...
+    </div>
+
+
+    <table ng-show="Data.Response.length!=0" class="table table-bordered table-hover table-striped table-responsive">
+        <tr>
+            <th>
+                ردیف
+            </th>
+            <th>
+                کد سفارش
+            </th>
+            <th>
+                تاریخ
+            </th>
+            <th>
+                نام مشتری
+            </th>
+            <th>
+                مجموع درآمد
+            </th>
+            <th>
+                شیوه پرداخت
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                جزییات
+            </th>
+            <th>
+                تغییر وضعیت
+            </th>
+          
+        </tr>
+        <tbody ng-repeat="item in Data.Response">
+            <tr ng-init="item.showDetailes=false">
+                <td ng-bind="$index+1"></td>
+                <td ng-bind="item.OrderCode"></td>
+                <td ng-bind="item.Date"></td>
+                <td ng-bind="item.MemberName"> </td>
+                <td ng-bind="item.OverallIncome"> </td>
+                <td ng-bind="item.OrderTypeName"> </td>
+                <td ng-bind="item.StatusName"> </td>
+                <td><div ng-click="item.showDetailes=!item.showDetailes;item.changeStaus=false" class="btn btn-warning">جزییات</div></td>
+                <td><div ng-click="item.changeStaus=!item.changeStaus;item.showDetailes=false" class="btn btn-success">تغییر وضعیت</div></td>
+             </tr>
+            <tr ng-show="item.showDetailes ||item.changeStaus ">
+                <td colspan=10>
+                    <div ng-show="item.showDetailes">
+                        <table ng-show="item.ProductDetailes.length!=0" class="table table-bordered table-hover table-striped table-responsive">
+
+                            <tr>
+                                <td>ردیف</td>
+                                <td>شرح کالا</td>
+                                <td>تعداد</td>
+                                <td>قیمت واحد</td>
+                                <td>قیمت کل</td>
+
+                            </tr>
+                            <tr ng-repeat="item2 in item.ProductDetailes">
+                                <td ng-bind="$index+1"></td>
+                                <td ng-bind="item2.ProductSummery"></td>
+                                <td ng-bind="item2.Count"></td>
+                                <td ng-bind="item2.UnitPrice"></td>
+                                <td ng-bind="item2.OverallPrice"></td>
+                            </tr>
+                        </table>
+                        <div class="col-md-3">
+                            هزینه پستی:{{item.PostalCost}}
+                        </div>
+                        <div class="col-md-4">
+                            نحوه ارسال:{{item.OrderSendingTypeName}}
+                        </div>
+                        <div class="col-md-3">
+                            کد رهگیری:{{item.TrackingCode}}
+                        </div>
+                    </div>
+                    <div ng-show="item.changeStaus && item.EditableStatus!=null">
+                        <div class="col-sx-12 col-md-6" style="padding: 0;">
+                            برای تغییر وضعیت سفارش ، از لیست روبه رو استفاده نمایید .
+
+                        </div>
+                        <div class="col-sx-12 col-md-6" ng-init="item.selectedStatus=''" style="padding: 0;">
+                            <select ng-model="item.selectedStatus" ng-options="item3.Value as item3.Text for item3 in item.EditableStatus"></select>
+                        </div>
+
+                        <div class="col-md-12" ng-show="item.selectedStatus!=''">
+                            آیا از این تغییر مطمئین هستید ؟
+                            <button ng-click="saveNewStatus(item.selectedStatus,item.OrderCode);item.changeStaus=false;"> بله </button>
+                            <button ng-click="item.changeStaus=false;item.selectedStatus=''"> خیر </button>
+                        </div>
+
+                    </div>
+         
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div>
+        <p ng-show="Data.Response.length==0" style="text-align: center; margin-top: 68px; font-size: 24px;">
+            <br />
+            سفارشی برای نمایش وجود ندارد
+            <br />
+
+        </p>
+    </div>
+
+
+
+</div>
+@section Script{
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+
+        var madule = angular.module('ShopApp', [])
+
+        madule.controller('ShowOrderController', ['$scope', function ($scope) {
+            $scope.Data = [];
+
+
+            $scope.loadData = function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Member/OrderManagement/GetAll",
+                    success: function (result) {
+                        $scope.Data = result;
+                        $scope.loadingHide = true;
+                        $scope.$apply();
+                     },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+
+            $scope.loadData();
+
+            $scope.saveNewStatus = function (statusCode, orderCode) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Member/OrderManagement/UpdateStatus?orderCode=" + orderCode + "&newStatusCode=" + statusCode,
+                    success: function (result) {
+                        $scope.loadData();
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+
+       
+
+
+        }]);
+        madule.filter('translate', function () {
+            return function (x) {
+
+                if (x == true)
+                    return "بله";
+                else
+                    return "خیر";
+            };
+        });
+
+        $('#AddDiscount').on('keydown', '#DiscountPercent', function (e) {
+            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

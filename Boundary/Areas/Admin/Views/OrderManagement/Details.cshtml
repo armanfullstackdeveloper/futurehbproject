@@ -1,0 +1,231 @@
+﻿@model DataModel.Models.ViewModel.OrderViewModelForAdmins
+
+@{
+    ViewBag.Title = "OrderDetailes";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>جزئیات سفارش</h1>
+<div>
+    <h2>اطلاعات کلی</h2>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                کد سفارش
+            </th>
+            <th>
+                تاریخ
+            </th>
+            <th>
+                زمان
+            </th>
+            <th>
+                شیوه پرداخت
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                نام فروشگاه
+            </th>
+            <th>
+                نام مشتری
+            </th>
+            <th>
+                هزینه سفارش
+            </th>
+            <th>
+                مبلغ پرداختی
+            </th>
+            <th>
+                مبلغ مورد استفاده از موجودی قبلی
+            </th>
+            <th>
+                تسویه حساب با فروشنده
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderStatus.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.ShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OverallOrderCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OverallPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MemberUsedBalance)
+            </td>
+            @{
+                if (Model.IsPony)
+                {
+                    <td>
+                        @Html.Label("بله")
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.Label("خیر")
+                    </td>
+                }
+            }
+        </tr>
+
+    </table>
+
+    <br />
+    <h2>شرح محصولات</h2>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                کد کالا
+            </th>
+            <th>
+                شرح محصول
+            </th>
+            <th>
+                قیمت واحد
+            </th>
+            <th>
+                تعداد
+            </th>
+            <th>
+                قیمت کل
+            </th>
+        </tr>
+
+        @foreach (var item in Model.ProductDetailes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductSummery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverallPrice)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <br />
+    <h2>اطلاعات دیگر</h2>
+    <dl class="dl-horizontal">
+        
+        <dt>کد تخفیف</dt>
+        <dd>@Html.DisplayFor(model => model.StoreDiscount.Code)</dd>
+        
+        <dt>درصد تخفیف</dt>
+        <dd>@Html.DisplayFor(model => model.StoreDiscount.DiscountPercent)</dd>
+
+        <dt>مجموع هزینه کالاها در سفارش</dt>
+        <dd>@Html.DisplayFor(model => model.OverallProductCostWithoutConsideringDiscount)</dd>
+
+        <dt>مجموع هزینه کالاها در سفارش با تخفیف</dt>
+        <dd>@Html.DisplayFor(model => model.OverallProductCostWithConsideringDiscount)</dd>
+        
+        <dt>هزینه پستی</dt>
+        <dd>@Html.DisplayFor(model => model.PostalCost)</dd>
+        
+        <dt>نوع ارسال</dt>
+        <dd>@Html.DisplayFor(model => model.OrderSendingTypeName)</dd>
+        
+        <dt>کد رهگیری</dt>
+        <dd>@Html.DisplayFor(model => model.TrackingCode)</dd>
+
+        <dt>مجموع هزینه سفارش</dt>
+        <dd>@Html.DisplayFor(model => model.OverallOrderCostWithoutConsideringDiscount)</dd>
+
+        <dt>مجموع هزینه سفارش با تخفیف</dt>
+        <dd>@Html.DisplayFor(model => model.OverallOrderCostWithConsideringDiscount)</dd>        
+        
+        <dt>تخفیف بدست آمده از کد تخفیف</dt>
+        <dd>@Html.DisplayFor(model => model.DiscountOfStoreDiscountCode)</dd>
+        
+        <dt>تخفیف بدست آمده از موجودی قبلی کاربر</dt>
+        <dd>@Html.DisplayFor(model => model.DiscountOfMemberUsedBalance)</dd>
+
+        <dt>تخفیف کل</dt>
+        <dd>@Html.DisplayFor(model => model.OverallDiscount)</dd>
+
+    </dl>
+    
+    <br />
+    <h2>تاریخچه سفارش</h2>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                تاریخ
+            </th>
+            <th>
+                زمان
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                کد کاربر
+            </th>
+            <th>
+                سطح کاربری
+            </th>
+        </tr>
+
+        @foreach (var item in Model.OrderHistories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserRoleName)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { orderCode = Model.OrderCode }) |
+    @Html.ActionLink("Delete", "Delete", new { orderCode = Model.OrderCode }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

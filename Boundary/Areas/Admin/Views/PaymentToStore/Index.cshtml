@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Boundary.Areas.Admin.Models.HBPaymentToStoreViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table" border="1">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AdminName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrackingCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Money)
+                </th>
+                <th></th>
+            </tr>
+    
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AdminName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Money)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.OrderCode  }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OrderCode })
+                    </td>
+                </tr>
+            }
+    
+        </table>
+        <div>
+            @Html.ActionLink("صفحه بعدی", "Index", new { pageNumber = (int)ViewBag.PageNumber + 1 })
+            @Html.ActionLink("صفحه قبلی", "Index", new { pageNumber = (int)ViewBag.PageNumber - 1 })
+        </div>
+        <br/>
+        @Html.ActionLink("سفارشات", "Index", "OrderManagement", new { /* id=item.PrimaryKey */ },null)
+    </body>
+</html>

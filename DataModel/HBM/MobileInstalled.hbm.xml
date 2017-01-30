@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="MobileInstalled" table="MobileInstalled" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+
+    <property name="UniqKey">
+      <column name="UniqKey" sql-type="nvarchar" not-null="false" />
+    </property>
+
+    <property name="Latitude">
+      <column name="Latitude" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Longitude">
+      <column name="Longitude" sql-type="decimal" not-null="false" />
+    </property>
+
+  </class>
+</hibernate-mapping>

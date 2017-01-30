@@ -1,0 +1,1626 @@
+﻿@charset "utf-8";
+.active {
+	background-color: #deb7b7  !important;
+}
+.disabled {
+}
+.PriceStick {
+	width:100%;
+	margin:10px 0;
+	height:auto;
+	float:left;
+}
+.insidePrice {
+	width:80%; 
+	margin:15px auto;
+}
+.seePriceNumbers {
+	width:80%; 
+	margin:0 auto;
+}
+.downPrice {
+	width:50%; 
+	float:right;
+	text-align:right;
+}
+.upPrice {
+	width:50%; 
+	float:right;
+	text-align:left;
+}
+#DetailAndAdvance select {
+	-moz-appearance: none !important;
+	-o-appearance: none !important;
+	-webkit-appearance: none !important;
+	-ms-appearance: none !important;
+	appearance: none !important;
+	background: #e6e6e6 url(../../Img/MainPage/selectDown.png) no-repeat 6% center !important;
+	background-size: 10px !important;
+	padding-left: 15%;
+	direction: rtl;
+}
+.moreFilter {
+	font-size:12px;
+	padding:5px 12px 20px 0;
+	cursor:pointer;
+}
+#Middle {
+	width: 100%;
+	max-width: 1360px;
+	float: none;
+	clear: both;
+	font-family: 'iransfm';
+	margin: 0 auto;
+	position: relative;
+	top: 18px;
+}
+#TagsAndResearch {
+	width: 90%;
+	float: left;
+	background-color: #f1f1f1;
+	padding: 0 5% 15px 5%;
+}
+.TagInside {
+	width: 100%;
+	float: left;
+	text-align: center;
+	margin-top: 15px;
+}
+.TagInside select {
+	width:96% !important ;
+	-moz-appearance: none !important;
+	-o-appearance: none !important;
+	-webkit-appearance: none !important;
+	-ms-appearance: none !important;
+	appearance: none !important;
+	background: #e2e1e1 url(../../Img/MainPage/selectDownCategory.png) no-repeat 4% center !important;
+	background-size: 10px !important;
+	padding-right: 4% !important;
+	text-align: right !important;
+	color: #414141 !important;
+}
+#NoProduct {
+	width: 95%;
+	margin: 30px 0 10px 2.5%;
+	height: 200px;
+	background: #fff url(../../Img/MiddlePage/NoProduct.png) no-repeat center;
+	background-size: contain;
+	float: left;
+	padding: 20px 0;
+	display: none;
+}
+#BrandHolder {
+	width: 100%;
+	float: left;
+	text-align: right;
+	direction: rtl;
+	background: #f9f9f9;
+	margin-left: 2%;
+	margin-bottom: 18px;
+	display: none;
+	height:270px;
+	overflow:hidden;
+}
+#colorHolder {
+	width: 100%;
+	float: left;
+	text-align: right;
+	direction: rtl;
+	background: #f9f9f9;
+	margin-left: 2%;
+	margin-bottom: 18px;
+	display: none;
+	height:270px;
+	overflow:hidden;
+}
+#PriceRangeHolder {
+	width: 100%;
+	float: left;
+	text-align: right;
+	direction: rtl;
+	background: #f9f9f9;
+	margin-left: 2%;
+	margin-bottom: 18px;
+	display: none;
+	padding-bottom:15px;
+	overflow:hidden;
+	color:#333;
+}
+#DisplayProductsHolder {
+	width: 100%;
+	float: right;
+	background: #f9f9f9;
+	border-radius: 5px;
+	padding-bottom: 30px;
+	margin-bottom:18px;
+}
+#DetailAndAdvance {
+	width: 95%;
+	float: right;
+	background: none;
+	height: auto;
+	margin-right: 2.5%;
+	margin-top: 20px;
+}
+#FirstColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+}
+#SmallSearch {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 34.333px;
+	margin-top: 10px;
+}
+.SmallSearch {
+	width: 80%;
+	float: right;
+	padding: 5px 0;
+	border: none;
+	text-align: right;
+	background: #dbdbdb;
+	font-family: 'iransfm';
+}
+.GoSmallSearch {
+	width: 20%;
+	float: right;
+	padding: 7.5px 0;
+	margin: 0;
+	border: none;
+	background: #dbdbdb url(../../Img/MiddlePage/SearchInner.png) no-repeat center;
+	background-size: 18px;
+}
+select {
+	text-align: center;
+	border: none;
+	width: 98%;
+	font-family: 'iransfm';
+	border-radius: 5px;
+	background: #999;
+	color: #353535;
+    min-height:29px;
+}
+option {
+	text-align: center;
+	padding: 4px 0;
+	border: none;
+}
+#Orgnizer {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 34.300px;
+	text-align: center;
+	margin-top: 20px;
+}
+#OrgnizerLabel {
+	float: right;
+	width: 100%;
+	padding: 6px 0;
+	text-align: center;
+}
+#CategoryOrgenize {
+	float: right;
+	width: 100%;
+	margin-top: 10px;
+}
+#Diagrame {
+	float: right;
+	width: 100%;
+	margin-top: 10px;
+}
+#Nearest {
+	width: 80%;
+	height: auto;
+	float: left;
+	text-align: center;
+	padding: 7px 0px 7px 25px;
+	margin-top: 10px;
+	margin-right: 5%;
+	background: #deb7b7 url(../../Img/MiddlePage/WorldSearch.png) no-repeat 40px center;
+	background-size: 20px;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#SecondeColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+	text-align: center;
+}
+#Amount {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+}
+#AmountLabel {
+	width: 100%;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryAmount {
+	width: 100%;
+	float: right;
+}
+#Condition {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+	display: none;
+}
+#InlineView {
+	display: none;
+}
+#Condition input {
+	border: none;
+}
+#ConditionLabel {
+	width: 100%;
+	float: right;
+	padding: 6px 0;
+}
+#ChoosePlace {
+	width: 80px;
+	margin: 0 auto;
+}
+#Block {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/Block.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+	border: none;
+}
+#Inline {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/vetical.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+#State {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+}
+#StateLabel {
+	width: 100%;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryState {
+	width: 100%;
+	float: right;
+}
+#City {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-left: 18.1px;
+	margin-top: 10px;
+}
+#CityLabel {
+	width: 100%;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryCity {
+	width: 100%;
+	float: right;
+}
+#Pager {
+	width: 100%;
+	height: auto;
+	float: right;
+	margin-top: 5px;
+}
+#Pager_Bottom {
+	position: relative;
+	top: 10px;
+}
+#Perv {
+	width: 10%;
+	height: 30px;
+	float: right;
+	background: url(../../Img/MiddlePage/PervBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#pageCounter, #pageCounter_Bottom {
+	width: 100%;
+	height: auto;
+	float: right;
+}
+#pageCounter ul, #pageCounter_Bottom ul {
+	width: 80%;
+	float: right;
+	margin-top: 0;
+	padding: 0;
+}
+#pageCounter ul li, #pageCounter_Bottom ul li {
+	list-style: none;
+	float: right;
+	margin-right: 1%;
+	padding: 7px 3.5%;
+	background: #999;
+	border-radius: 5px;
+	color: #fff;
+	margin-top: 5px;
+	cursor: pointer;
+}
+#Next {
+	width: 10%;
+	height: 30px;
+	float: right;
+	background: url(../../Img/MiddlePage/NextBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#DisplayProductsHolder {
+	width: 98%;
+	float: left;
+	background: #f9f9f9;
+	border-radius: 5px;
+}
+#BrandHolder {
+}
+#BrandHolder ul li {
+	list-style: none;
+}
+#colorHolder ul li {
+	list-style: none;
+}
+#PriceRangeHolder ul li {
+	list-style: none;
+}
+#ProductShelfs {
+	width: 95%;
+	float: right;
+	height: auto;
+	margin: 0 2.5% 0 0%;
+}
+.ShelfInner {
+	width: 100%;
+	float: right;
+	background: #c8d5dd ;
+	border-radius: 5px;
+	margin-left: 18px;
+	margin-top: 18px;
+}
+.ShelfExplains {
+	width: 100%;
+	float: left;
+	color: #fff;
+	margin-top: 5px;
+}
+.ProductName {
+	width: 100%;
+	text-align: center;
+	margin-top: -8px;
+	height: 40px;
+}
+.Brand {
+	font-size: 17px;
+	font-family: 'Hind';
+}
+.Model {
+	font-family: 'Hind';
+}
+.PriceAndStore {
+	direction: rtl;
+	text-align: right;
+}
+#Price {
+	width: 100%;
+	margin-top: 10px;
+	float: left;
+	text-align: center;
+	font-size: 17px;
+}
+#Store {
+	width: 90%;
+	margin-top: 15px;
+	margin-right: 5%;
+	text-align: center;
+	float: right;
+	background: #fff;
+	padding: 10px 0;
+	color: #c8d5dd ;
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+.PictureAndAdd {
+	width: 200px;
+	margin: 15px auto;
+}
+.PictureProduct {
+	width: 160px;
+	margin: 0 auto;
+	height:160px;
+	border-radius: 50%;
+	background: #fff;
+	text-align: center;
+	overflow:hidden;
+	position:realtive;
+}
+.PictureProduct img {
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	object-fit:contain;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
+.AddFavor {
+	position: relative;
+	top: 50px;
+	left: 20px;
+}
+.AddCompare {
+	float: right;
+	position: relative;
+	right: 20px;
+	bottom: 50px;
+}
+#BrandTitles {
+	width: 90%;
+	float: right;
+	margin-top: 20px;
+	color: #333;
+	font-size: 20px;
+	padding-right: 10%;
+}
+#colorTitles {
+	width: 90%;
+	float: right;
+	margin-top: 20px;
+	color: #333;
+	font-size: 20px;
+	padding-right: 10%;
+}
+#PriceTitles {
+	width: 90%;
+	float: right;
+	margin-top: 20px;
+	color: #333;
+	font-size: 20px;
+	padding-right: 10%;
+}
+
+#AllBrandsR {
+	width: 90%;
+	float: right;
+	margin-top: 20px;
+	color: #333;
+	font-size: 15px;
+	padding-right: 10%;
+	margin-bottom: 20px;
+}
+#AllcolorsR {
+	width: 90%;
+	float: right;
+	margin-top: 20px;
+	color: #333;
+	font-size: 15px;
+	padding-right: 10%;
+	margin-bottom: 20px;
+}
+#AllBrandsR ul li {
+	margin-top: 10px;
+}
+#AllcolorsR ul li {
+	margin-top: 10px;
+}
+.colors {
+	display: inline-block;
+	width:15px; 
+	height:15px;
+	border-radius:50%;
+	position:relative;
+	left:6px;
+	top:3px;
+}
+.black {
+	background:#000;
+}
+.white {
+	background:#fff;
+}
+.red {
+	background:#E93235;
+}
+.blue {
+	background:#2159DC;
+}
+.yellow {
+	background:#F1F716;
+}
+.green {
+	background:#21C934;
+}
+.pink {
+	background:#FB9999;
+}
+.violet {
+	background:#8716DC;
+}
+.darkblue {
+	background:#232356;
+}
+.gray {
+	background:#767676;
+}
+.silver {
+	background:#B9B9B9;
+}
+.darkgray {
+	background:#333333;
+}
+.brown {
+	background:#72472D;
+}
+.gold {
+	background:#DAD933;
+}
+.purple {
+	background:#B82364;
+}
+.orange {
+	background:#ECB62E;
+}
+.Cyan {
+	background:#18CED1;
+}
+.Chartreuse {
+	background:#27D385;
+}
+.Jade {
+	background:#16723D;
+}
+.Olivaceous {
+	background:Olive;
+}
+.GoldenRod {
+	background:GoldenRod;
+}
+.Thistle {
+	background:Thistle;
+}
+.MistyRose {
+	background:MistyRose;
+}
+.Turquoise {
+	background:Turquoise;
+}
+.LightYellow {
+	background:LightYellow;
+}
+.Tan {
+	background:Tan;
+}
+.Beige {
+	background:Beige;
+}
+.IndianRed {
+	background:IndianRed;
+}
+.IndianRed {
+	background:IndianRed;
+}
+.multi {
+	background:url(../../Img/MiddlePage/multi.png) no-repeat center;
+}
+.nocolor {
+	background:#FFFFFF;
+}
+.nocolormate {
+	background:#FFFFFF;
+}
+.LightGray {
+	background:LightGray;
+}
+.Indigo {
+	background:Indigo;
+}
+.DarkerBlue {
+	background:DarkBlue;
+}
+.LightBlue{
+	background:LightBlue;
+}
+.LimeGreen{
+	background:LimeGreen;
+}
+.SeaGreen{
+	background:SeaGreen;
+}
+.Magenta{
+	background:Magenta;
+}
+.HotPink{
+	background:HotPink;
+}
+.Brown{
+	background:Brown;
+}
+.Sienna{
+	background:Sienna;
+}
+#forKeepItRight {
+	float:right;
+	width:17%;
+	margin-right:1.3%;
+}
+#CloseNearest {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: url(../../Img/MainPage/LogInCloseAll.png), auto;
+}
+#SubjectNear {
+	color: #fff;
+	float: right;
+	text-align: right;
+	width: 78%;
+	padding: 20px 2%;
+	font-size: 14px;
+}
+#CloseNear {
+	width: 14%;
+	float: left;
+	background: url(../../Img/MainPage/LogInClose.png) no-repeat center;
+	background-size: 30px;
+	padding: 30px 2%;
+	cursor: pointer;
+}
+#MapNear {
+	color: #fff;
+	float: left;
+	text-align: right;
+	position: absolute;
+	width: 100%;
+	height: 80%;
+	top: 11%;
+}
+#chooseMapMark {
+	width: 100%;
+	float: left;
+	position: absolute;
+	top: 91%;
+}
+#chooseMapMark input {
+	width: 100%;
+	padding: 10px 0;
+	text-align: center;
+	font-family: 'iransfm';
+	border: none;
+	background:#C7C7C7;
+	transition:linear 0.25s;
+}
+#chooseMapMark input:hover {
+	background:#676767;
+	color:#fff;
+}
+#NearestContainer {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 17;
+	background: url(../../Img/MainPage/TransparentBack.png) no-repeat center;
+	display: none;
+}
+#NearestHolder {
+	width: 80%;
+	height: 40%;
+	min-height: 450px;
+	position: absolute;
+	left: 10%;
+	top: 10%;
+	background: #deb7b7;
+	box-shadow: #808080 0 0 100px;
+	display: none;
+}
+#TagsAndResearch {
+	width: 95%;
+	float: left;
+	background-color: #f1f1f1;
+	padding-right: 2.5%;
+	padding-left: 2.5%;
+}
+.TagInside {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+#BrandHolder {
+}
+#DisplayProductsHolder {
+	width: 100%;
+	float: left;
+	background: #f9f9f9;
+	border-radius: 5px;
+}
+#DetailAndAdvance {
+	width: 95%;
+	float: right;
+	background: none;
+	height: auto;
+	margin-right: 2.5%;
+	margin-top: 20px;
+}
+#FirstColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+}
+#SmallSearch {
+	width: 400px;
+	height: auto;
+	float: right;
+	margin-left: 34.333px;
+	margin-top: 10px;
+}
+.SmallSearch {
+	width: 348px;
+	float: right;
+	padding: 5px 6px;
+	border: none;
+	text-align: right;
+	background: #dbdbdb;
+	font-family: 'iransfm';
+}
+.GoSmallSearch {
+	width: 36px;
+	float: right;
+	padding: 7.5px 2px;
+	margin: 0;
+	border: none;
+	background: #dbdbdb url(../../Img/MiddlePage/SearchInner.png) no-repeat center;
+	background-size: 18px;
+}
+select {
+	text-align: center;
+	border: none;
+	width: 98%;
+	font-family: 'iransfm';
+	border-radius: 5px;
+	background: #999;
+	color: #464646;
+	text-overflow: ellipsis;
+}
+option {
+	text-align: center;
+	padding: 4px 0;
+	border: none;
+}
+#Orgnizer {
+	width: 300px;
+	height: auto;
+	float: right;
+	margin-left: 34.300px;
+	text-align: center;
+	margin-top: 10px;
+}
+#OrgnizerLabel {
+	float: right;
+	width: 110px;
+	padding: 6px 0;
+	text-align: center;
+}
+#CategoryOrgenize {
+	float: right;
+	width: 85px;
+	margin-left: 10px;
+	margin-top: 0;
+}
+#Diagrame {
+	float: right;
+	width: 85px;
+	margin-top: 0;
+}
+#Nearest {
+	width: 175px;
+	height: auto;
+	float: right;
+	text-align: center;
+	padding: 7px 0px 7px 25px;
+	margin-right: 0;
+	margin-top: 10px;
+	background: #deb7b7 url(../../Img/MiddlePage/WorldSearch.png) no-repeat 50px center;
+	background-size: 20px;
+	color: #fff;
+	border-radius: 5px;
+}
+#SecondeColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+	text-align: center;
+}
+#Amount {
+	width: 110px;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+}
+#AmountLabel {
+	width: 60px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryAmount {
+	width: 50px;
+	float: right;
+}
+#Condition {
+	width: 150px;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+}
+#ConditionLabel {
+	width: 75px;
+	float: right;
+	padding: 6px 0;
+}
+#ChoosePlace {
+	width: 80px;
+	float: right;
+}
+#Block {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/Block.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+}
+#Inline {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/vetical.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+#State {
+	width: 140px;
+	height: auto;
+	float: right;
+	margin-left: 7.1px;
+	margin-top: 10px;
+}
+#StateLabel {
+	width: 50px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryState {
+	width: 90px;
+	float: right;
+}
+#City {
+	width: 140px;
+	height: auto;
+	float: right;
+	margin-left: 18.1px;
+}
+#CityLabel {
+	width: 50px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryCity {
+	width: 90px;
+	float: right;
+}
+#Pager {
+	width: auto;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-top: 5px;
+	position: relative;
+	top: 15px;
+}
+#Pager_Bottom {
+	width: auto;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-top: 10px;
+	margin-left: 2%;
+}
+#Perv {
+	width: 30px;
+	height: 30px;
+	float: right;
+	background: url(../../Img/MiddlePage/PervBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#pageCounter, #pageCounter_Bottom {
+	width: 390px;
+	height: auto;
+	float: right;
+}
+#pageCounter ul, #pageCounter_Bottom ul {
+	width: 330px;
+	float: right;
+	margin-top: 0;
+}
+#pageCounter ul li, #pageCounter_Bottom ul li {
+	list-style: none;
+	float: right;
+	margin-right: 6.5px;
+	padding: 7px 13px;
+	background: #999;
+	border-radius: 5px;
+	color: #fff;
+	margin-top: 5px;
+	cursor: pointer;
+}
+#Next {
+	width: 30px;
+	height: 30px;
+	float: right;
+	background: url(../../Img/MiddlePage/NextBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#ProductShelfs {
+	width: 95%;
+	float: right;
+	margin: 0 2.5% 0 0%;
+}
+.ShelfInner {
+	width: 306px;
+	float: right;
+	background: #c8d5dd ;
+	border-radius: 5px;
+	height: 180px;
+	margin-left: 8px;
+	margin-right: 8px;
+	margin-top: 18px;
+}
+.ShelfExplains {
+	width: 60%;
+	float: left;
+	color: #fff;
+	margin-top: 5px;
+}
+.PictureAndAdd {
+	width: 40%;
+	float: right;
+	position: relative;
+}
+.ProductName {
+	width: 100%;
+	float: left;
+	text-align: left;
+	margin-top: 15px;
+}
+.Brand {
+	font-size: 17px;
+	font-family: 'iransfm', 'Hind';
+	margin-left: 15px;
+}
+.Model {
+	font-family: 'Hind';
+	margin-left: 15px;
+	width: 80%;
+}
+.PriceAndStore {
+	direction: rtl;
+	text-align: right;
+	margin-right: 30px;
+}
+#Price {
+	width: 100%;
+	margin-top: 25px;
+	float: right;
+	font-size: 17px;
+	text-align: right;
+	position: relative;
+	top: 10px;
+}
+#Store {
+	width: 90%;
+	margin-top: 15px;
+	text-align: center;
+	float: right;
+	background: #fff;
+	padding: 6px 0;
+	color: #c8d5dd ;
+	font-size: 14px;
+	margin-right: 0;
+	border-radius: 5px;
+}
+.PictureProduct {
+	width: 130px;
+	height:130px;
+	border-radius: 50%;
+	background: #fff;
+	text-align: center;
+	float: right;
+    position:relative;
+    overflow:hidden;
+	margin-right: 10px;
+}
+.AddFavor {
+	float: right;
+	position: relative;
+	top: 35px;
+	right: 15px;
+	left: -13px;
+}
+.AddCompare {
+	float: right;
+	position: relative;
+	bottom: 35px;
+	right: 15px;
+}
+#NearestHolder {
+	width: 60%;
+	height: 50%;
+	position: absolute;
+	left: 20%;
+	top: 15%;
+	background: #deb7b7;
+}
+#TagsAndResearch {
+	width: 95%;
+	float: left;
+	background-color: #f1f1f1;
+	padding-right: 2.5%;
+	padding-left: 2.5%;
+}
+.TagInside {
+	width: 15.6%;
+	margin-left: 1%;
+	float: right;
+	text-align: center;
+}
+#BrandHolder {
+	width: 100%;
+	display: block;
+	margin-right: 1.5%;
+	margin-left: 0;
+	float: right;
+	transition:ease-in-out 1s;
+	box-shadow: 0px 5px 6px #E9E9E9;
+}
+#PriceRangeHolder {
+	width: 100%;
+	display: block;
+	margin-right: 1.5%;
+	margin-left: 0;
+	float: right;
+	transition:ease-in-out 1s;
+	box-shadow: 0px 5px 6px #E9E9E9;
+}
+#colorHolder {
+	width: 100%;
+	display: block;
+	margin-right: 1.5%;
+	margin-left: 0;
+	float: right;
+	transition:ease-in-out 1s;
+	box-shadow: 0px 5px 6px #E9E9E9;
+}
+#DisplayProductsHolder {
+	width: 78.5%;
+	float: left;
+	background: #f9f9f9;
+	border-radius: 0;
+	margin-left: 1.5%;
+}
+#DetailAndAdvance {
+	width: 95%;
+	float: right;
+	background: none;
+	height: auto;
+	margin-right: 2.5%;
+	margin-top: 20px;
+}
+.instoreInside #DetailAndAdvance {
+    width:83.5%;
+    margin-right:8%;
+    padding:2%;
+    box-sizing:border-box;
+    background-color:#f6f6f6;
+    box-shadow: 0 0 41px #BDBDBD;
+    margin-bottom:30px;
+}
+#FirstColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+}
+#SmallSearch {
+	width: 437px;
+	height: auto;
+	float: right;
+	margin-left: 34.333px;
+	margin-top: 10px;
+}
+.SmallSearch {
+	width: 388px;
+	float: right;
+	height: 35px;
+	border: none;
+	text-align: right;
+	background: #dbdbdb;
+	font-family: 'iransfm';
+}
+.GoSmallSearch {
+	width: 36px;
+	float: right;
+	height: 35px;
+	margin: 0;
+	border: none;
+	background: #dbdbdb url(../../Img/MiddlePage/SearchInner.png) no-repeat center;
+	background-size: 18px;
+}
+select {
+	text-align: center;
+	border: none;
+	width: 100%;
+	font-family: 'iransfm';
+	border-radius: 5px;
+	background: #999;
+	color: #464646;
+}
+option {
+	text-align: center;
+	padding: 4px 0;
+	border: none;
+}
+#Orgnizer {
+	width: 300px;
+	height: auto;
+	float: right;
+	margin-left: 29px;
+	text-align: center;
+	margin-top: 10px;
+}
+#OrgnizerLabel {
+	float: right;
+	width: 110px;
+	padding: 6px 0;
+	text-align: center;
+}
+#CategoryOrgenize {
+	float: right;
+	width: 90px;
+	margin-left: 10px;
+}
+#Diagrame {
+	float: right;
+	width: 85px;
+	margin-top: 0;
+}
+#Nearest {
+	width: 175px;
+	height: auto;
+	float: right;
+	text-align: center;
+	padding: 7px 0px 7px 25px;
+	margin-top: 10px;
+	background: #deb7b7 url(../../Img/MiddlePage/WorldSearch.png) no-repeat 40px center;
+	background-size: 20px;
+	color: #fff;
+	border-radius: 5px;
+}
+#SecondeColumn {
+	width: 100%;
+	float: right;
+	height: auto;
+	text-align: center;
+}
+#Amount {
+	width: 130px;
+	height: auto;
+	float: right;
+	margin-left: 0;
+	margin-top: 10px;
+}
+#AmountLabel {
+	width: 75px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryAmount {
+	width: 50px;
+	float: right;
+}
+#Condition {
+	width: 150px;
+	height: auto;
+	float: right;
+	margin-left: 0;
+	margin-top: 10px;
+	display: block;
+}
+#ConditionLabel {
+	width: 75px;
+	float: right;
+	padding: 6px 0;
+}
+#ChoosePlace {
+	width: 75px;
+	float: right;
+}
+#Block {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/Block.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+	border: none;
+}
+#Inline {
+	width: 30px;
+	padding: 15px 0;
+	float: right;
+	background: #999 url(../../Img/MiddlePage/vetical.png) no-repeat center;
+	background-size: 20px;
+	border-radius: 5px;
+	margin-right: 5px;
+	border: none;
+}
+#State {
+	width: 130px;
+	height: auto;
+	float: right;
+	margin-left: 0;
+	margin-top: 10px;
+}
+#StateLabel {
+	width: 40px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryState {
+	width: 90px;
+	float: right;
+}
+#City {
+	width: 130px;
+	height: auto;
+	float: right;
+	margin-left: 0;
+}
+#CityLabel {
+	width: 40px;
+	float: right;
+	padding: 6px 0;
+}
+#CategoryCity {
+	width: 90px;
+	float: right;
+}
+#Pager {
+	width: 430px;
+	height: auto;
+	clear: none;
+	float: left;
+	margin-top: 5px;
+	position: relative;
+	top: 0;
+}
+#Pager_Bottom {
+	width: 430px;
+	height: auto;
+	clear: none;
+	float: left;
+	margin-top: 10px;
+	margin-left: 2.5%;
+}
+#Perv {
+	width: auto;
+	height: 15px;
+	min-width: 30px;
+	padding: 6px 0;
+	float: right;
+	background: url(../../Img/MiddlePage/PervBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#pageCounter, #pageCounter_Bottom {
+	width: auto;
+	height: auto;
+	float: left;
+}
+#pageCounter ul, #pageCounter_Bottom ul {
+	width: auto;
+	float: right;
+	margin-top: 0;
+	margin-left: 0;
+}
+#pageCounter ul li, #pageCounter_Bottom ul li {
+	list-style: none;
+	float: right;
+	margin-right: 4px;
+	padding: 7.5px 7px;
+	background: #e6e6e6;
+	border-radius: 5px;
+	color: #363636;
+	margin-top: 5px;
+	cursor: pointer;
+}
+#Next {
+	width: auto;
+	min-width: 30px;
+	height: 15px;
+	padding: 6px 0;
+	float: right;
+	background: url(../../Img/MiddlePage/NextBrown.png) no-repeat center;
+	border-radius: 5px;
+}
+#ProductShelfs {
+	width: 95%;
+	float: right;
+	margin: 0 2.5% 0 0%;
+}
+.ShelfInner {
+	width: 317px;
+	float: right;
+	background: #c8d5dd ;
+	border-radius: 0;
+	height: 180px;
+	margin-right: 8px;
+	margin-left: 8px;
+	margin-top: 18px;
+}
+.ShelfExplains {
+	width: 60%;
+	float: left;
+	color: #fff;
+	margin-top: 5px;
+}
+.PictureAndAdd {
+	width: 40%;
+	float: right;
+	position: relative;
+}
+.ProductName {
+	width: 100%;
+	float: left;
+	text-align: left;
+	margin-top: 15px;
+}
+.Brand {
+	font-size: 17px;
+	font-family: 'Hind';
+	margin-left: 15px;
+}
+.Model {
+	font-family: 'Hind';
+	margin-left: 15px;
+}
+.PriceAndStore {
+	direction: rtl;
+	text-align: right;
+	margin-right: 30px;
+}
+#Price {
+	width: 100%;
+	margin-top: 25px;
+	float: right;
+	font-size: 17px;
+	text-align: right;
+}
+#Store {
+	width: 90%;
+	margin-top: 15px;
+	text-align: center;
+	float: right;
+	background: #fff;
+	padding: 6px 0;
+	color: #c8d5dd ;
+	font-size: 14px;
+	margin-right: 0;
+	border-radius: 5px;
+}
+.PictureProduct {
+	width: 130px;
+	height:130px;
+	border-radius: 50%;
+	background: #fff;
+	text-align: center;
+	float: right;
+	margin-right: 10px;
+}
+.AddFavor {
+	float: right;
+	position: relative;
+	top: 35px;
+	right: 15px;
+	left: -13px;
+}
+.AddCompare {
+	float: right;
+	position: relative;
+	bottom: 35px;
+	right: 15px;
+}
+.Inline_Shelf {
+	width: 90%;
+	padding: 2.5%;
+	margin-left: 2.5%;
+	float: left;
+	background: #e8e8e8;
+	font-family: 'Hind';
+	border-radius: 0;
+	height: auto;
+	margin-top: 25px;
+}
+.Name_Inline {
+	width: 30%;
+	float: left;
+	text-align: right;
+	padding: 0 0 2.5% 0;
+	height: auto;
+}
+.Brand_Logo_Inline {
+	float: right;
+	width: 10%;
+	height: 30px;
+	background: url(../../Img/MiddlePage/Brand_1.png) no-repeat center;
+	background-size: contain;
+}
+.Brand_Name_Inline {
+	padding-top: 5px;
+	position: relative;
+	right: 10px;
+	font-size: 20px;
+}
+.Middle_Inline {
+	width: 100%;
+	float: left;
+}
+.Details_Inline {
+	width: 100%;
+	float: left;
+}
+.PictureandPrice_Inline {
+	width: 100%;
+	float: right;
+}
+.Picture_Inline {width: 28%;
+float: right;
+text-align: right;
+overflow: hidden;
+	border-radius: 10px;
+}
+.Picture_Inline img {
+	width: 100%;
+}
+.Price_Inline {
+	width: 235px;
+	text-align: center;
+	float: right;
+	margin-top: 20px;
+}
+.Price_Subject_Inline {
+	width: 20%;
+	float: right;
+	padding: 15px 0;
+	font-family: 'iransfm';
+}
+.Original_Price_Inline {
+	width: 40%;
+	float: right;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding: 15px 0;
+	text-decoration: line-through;
+	color: #000;
+	background:#fff;
+}
+.Off_Price_Inline {
+	width: 40%;
+	float: right;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	padding: 15px 0;
+	color: #fff;
+	background-color:#deb7b7 ;
+}
+.List_Category_Inline {
+	width: 70%;
+	float: left;
+	height: 300px;
+	direction: rtl;
+	text-align: right;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background: url(../../Img/MiddlePage/LineSeperateH.png) repeat-y center right;
+}
+.List_Category_Inline ul {
+	width: 95%;
+	margin-right: 2.5%;
+	height: auto;
+}
+.List_Category_Inline ul li {
+	width: 50%;
+	float: right;
+	list-style: none;
+	margin-bottom: 15px;
+	font-family: 'Hind', 'iransfm';
+}
+.HeaderSection {
+	border-radius: 5px;
+	color: #fff;
+}
+section {
+	float: right;
+	padding: 2px 5px;
+	margin-bottom: 10px;
+}
+.Details_Inline {
+	font-family: 'iransfm';
+	float: left;
+	width: 130px;
+	text-align: right;
+	padding: 15px 30px 15px 0;
+	background: #deb7b7 url(../../Img/MainPage/PrevWhite.png) 20px center no-repeat;
+	color: #fff;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	background-size: 15px;
+	margin-top: 20px;
+}
+.Store_Inline {
+	width: auto;
+	padding: 15px 10px;
+	text-align: center;
+	float: left;
+	margin-top: 20px;
+	font-family: 'iransfm';
+	color: #000;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background:#fff;
+}
+#CloseNear {
+	width: 12%;
+	float: left;
+	background: url(../../Img/MainPage/LogInClose.png) no-repeat center;
+	background-size: 30px;
+	padding: 30px 1%;
+}
+#NearestHolder {
+	width: 40%;
+	height: 70%;
+	max-width: 500px;
+	max-height: 500px;
+	position: absolute;
+	left: 30%;
+	top: 15%;
+	overflow: hidden;
+}
+#chooseMapMark input {
+	padding: 12px;
+}
+#InlineView {
+	display: block;
+}
+}

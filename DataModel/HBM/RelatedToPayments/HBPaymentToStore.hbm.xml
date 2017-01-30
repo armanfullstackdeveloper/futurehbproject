@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToPayments" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="HBPaymentToStore" table="HBPaymentToStore" lazy="false" >
+    <id name="OrderCode" column="OrderCode" />
+    <property name="OrderCode">
+      <column name="OrderCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="AdminCode">
+      <column name="AdminCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Date">
+      <column name="Date" sql-type="int" not-null="true" />
+    </property>
+    <property name="TrackingCode">
+      <column name="TrackingCode" sql-type="nvarchar" not-null="true" />
+    </property>
+    <property name="Money">
+      <column name="Money" sql-type="int" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

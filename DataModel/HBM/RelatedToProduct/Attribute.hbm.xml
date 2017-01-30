@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Attribute" table="Attribute" lazy="true" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="CategoryCode">
+      <column name="CategoryCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="AttributeTypeCode">
+      <column name="AttributeTypeCode" sql-type="bigint" not-null="true" />
+    </property>
+    <!--<bag name="AttributeValue">
+      <key column="AttributeCode" />
+      <one-to-many class="AttributeValue" />
+    </bag>
+    <bag name="ProductNonSearchableAttributeValue">
+      <key column="AttributeCode" />
+      <one-to-many class="ProductNonSearchableAttributeValue" />
+    </bag>
+    <bag name="ProductSearchableAttributeValue">
+      <key column="AttributeCode" />
+      <one-to-many class="ProductSearchableAttributeValue" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

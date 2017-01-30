@@ -1,0 +1,86 @@
+﻿@using System.Security.Cryptography
+@model Boundary.Areas.SuperAdmin.Models.AdminRegisterDataModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Create</title>
+    </head>
+    <body>
+        @using (Html.BeginForm("PostCreate", "AdminManagement", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+        {
+            @Html.AntiForgeryToken()
+        
+            <div class="form-horizontal">
+                <h4>AdminRegisterDataModel</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+            
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RegisterMemberDataModel.UserName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RegisterMemberDataModel.UserName)
+                        @Html.ValidationMessageFor(model => model.RegisterMemberDataModel.UserName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RegisterMemberDataModel.Password, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.RegisterMemberDataModel.Password)
+                        @Html.ValidationMessageFor(model => model.RegisterMemberDataModel.Password)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RegisterMemberDataModel.ConfirmPassword, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RegisterMemberDataModel.ConfirmPassword)
+                        @Html.ValidationMessageFor(model => model.RegisterMemberDataModel.ConfirmPassword)
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HbAdmin.Name, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HbAdmin.Name)
+                        @Html.ValidationMessageFor(model => model.HbAdmin.Name)
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsSuperAdmin, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsSuperAdmin)
+                        @Html.ValidationMessageFor(model => model.IsSuperAdmin)
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    @Html.Label("Choose a pictiure", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="file" />
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>
+</html>
+
+

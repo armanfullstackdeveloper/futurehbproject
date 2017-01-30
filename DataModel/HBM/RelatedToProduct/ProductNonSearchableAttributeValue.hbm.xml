@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ProductNonSearchableAttributeValue" table="ProductNonSearchableAttributeValue" lazy="true" >
+    <composite-id>
+      <key-property name="ProductCode" column="ProductCode" />
+      <key-property name="AttributeCode" column="AttributeCode" />
+    </composite-id>
+    <property name="ProductCode">
+      <column name="ProductCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="AttributeCode">
+      <column name="AttributeCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Value">
+      <column name="Value" sql-type="nvarchar" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

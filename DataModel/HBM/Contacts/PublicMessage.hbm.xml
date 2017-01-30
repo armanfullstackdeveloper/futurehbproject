@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.Contacts" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="PublicMessage" table="PublicMessage" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Text">
+      <column name="Text" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Link">
+      <column name="Link" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Date">
+      <column name="Date" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Time">
+      <column name="Time" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="IsForStore">
+      <column name="IsForStore" sql-type="bit" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

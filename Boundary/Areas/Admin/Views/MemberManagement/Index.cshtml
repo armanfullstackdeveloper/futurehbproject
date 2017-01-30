@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DataModel.Models.ViewModel.MemberViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <script src="~/Js/jquery-2.1.3.min.js"></script>
+    </head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <p>
+            جستجو با کد کاربری یا آی دی
+            @Html.TextBox("txtSearch")
+        </p>
+        <div id="members">
+            @Html.Partial("_MemberViewModel", Model)
+        </div>
+        <div>
+            @Html.ActionLink("صفحه بعدی", "Index", new { pageNumber = (int)ViewBag.PageNumber + 1 })
+            @Html.ActionLink("صفحه قبلی", "Index", new { pageNumber = (int)ViewBag.PageNumber - 1 })
+        </div>
+    </body>
+</html>
+<script>
+    $('#txtSearch').on("keyup", function () {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SearchMemberByAjax")',
+            dataType: 'html',
+            data: { userCodeOrId: $("#txtSearch").val() },
+            success: function (result) {
+                $("#members").empty();
+                $("#members").html(result);
+            },
+            error: function (ex) {
+                alert('Failed to retrieve items.');
+            }
+        });
+    });
+</script>

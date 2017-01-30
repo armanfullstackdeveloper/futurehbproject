@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ErrorLog" table="ErrorLog" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="ErrorLogCode">
+      <column name="ErrorLogCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="UserCode" type="StringClob">
+      <column name="UserCode" sql-type="nvarchar(MAX)" not-null="false" />
+    </property>
+    <property name="Message" type="StringClob">
+      <column name="Message" sql-type="nvarchar(MAX)" not-null="false" />
+    </property>
+    <property name="StackTrace" type="StringClob">
+      <column name="StackTrace" sql-type="nvarchar(MAX)" not-null="false" />
+    </property>
+    <property name="Input">
+      <column name="Input" sql-type="nvarchar" not-null="false" />
+    </property>
+       <property name="Date">
+      <column name="Date" sql-type="int" not-null="false" />
+    </property>
+    <property name="Time">
+      <column name="Time" sql-type="smallint" not-null="false" />
+    </property>
+    <!--<bag name="ExceptionHandler">
+      <key column="ExceptionHandlerCode" />
+      <one-to-many class="ExceptionHandler" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

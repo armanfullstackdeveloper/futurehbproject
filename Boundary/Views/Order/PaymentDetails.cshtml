@@ -1,0 +1,89 @@
+﻿@model DataModel.Models.ViewModel.PaymentResultViewModel
+
+@{
+    ViewBag.Title = "اطلاعات ارسال سفارش";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <h1>خرید شما به پایان رسید</h1>
+
+    <div ng-app="ShopApp" ng-controller="ShoppingInfoController">
+
+
+
+        <div id="showInfo"  >
+
+            <div class="form-group orgenizer">
+                <label>نتیجه عملیات </label>
+                <span>@Model.Message</span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>کد رهگیری </label>
+                <span>@Model.TrackingCode</span>
+            </div>
+
+            <div class="form-group orgenizer">
+                <label>سود شما از این خرید </label>
+                @if (Model.IsProfitAddedToBalance != null)
+                {
+                    <h2>@Model.MemberProfit</h2>
+                    if ((bool)Model.IsProfitAddedToBalance)
+                    {
+                        <span>که به حساب شما در هوجی بوجی افزوده شده</span>
+
+                    }
+                    else
+                    {
+                        <span>که بعد از اتمام فرایند خرید به حساب شما در هوجی بوجی افزوده خواهد شد</span>
+
+                    }
+                }
+            </div>
+          
+        </div>
+ 
+
+
+         <a class="btn btn-success" href="/"> صفحه اصلی</a>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+@*<div>
+
+        <h1>نوع عملیات</h1>
+        <h2>@Model.IsSuccess</h2>
+        <h1>پیام کاربر</h1>
+        <h2>@Model.Message</h2>
+        <h1>کد رهگیری</h1>
+        <h2>@Model.TrackingCode</h2>
+        <h1>سود شما از این خرید</h1>
+        @{
+            if (Model.IsProfitAddedToBalance != null)
+            {
+                <h2>@Model.MemberProfit</h2>
+                if ((bool)Model.IsProfitAddedToBalance)
+                {
+                    <h3>که به حساب شما در هوجی بوجی افزوده شده</h3>
+                }
+                else
+                {
+
+                    <h3>که بعد از اتمام فرایند خرید به حساب شما در هوجی بوجی افزوده خواهد شد</h3>
+                }
+            }
+        }
+
+
+    </div>*@
+

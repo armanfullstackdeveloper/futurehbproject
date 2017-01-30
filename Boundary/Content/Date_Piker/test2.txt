@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "نمایش";
+    Layout = "~/Views/Shared/_LayoutBasic.cshtml";
+}
+
+تقویم
+
+<input type="text" id="datepicker1" />
+<br/>
+<input type="text" id="alternate2" />
+
+
+@section Script{
+
+    <link href="~/Content/Date_Piker/jquery-ui-1.8.14.css" rel="stylesheet" />
+    <script src="~/Content/Date_Piker/jquery-1.6.2.min.js"></script>
+    <script src="~/Content/Date_Piker/jquery.ui.datepicker-cc.all.min.js"></script>
+    <script>
+        $('#datepicker1').datepicker({
+            dateFormat: 'yy/mm/dd',
+            altField: '#alternate2',
+            altFormat: 'DD، d MM yy',
+            showButtonPanel: true
+        });
+
+    </script>
+
+}
+
+

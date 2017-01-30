@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Serach";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Content/DropdownMultiSelect-HemantNegi/jquery.sumoselect.min.js"></script>
+    <link href="~/Content/DropdownMultiSelect-HemantNegi/sumoselect.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <select multiple="multiple" placeholder="نوع محصولات فروشگاه را انتخاب نمایید" class="SlectBox">
+        <option value="1">لوازم دیجیتال</option>
+        <option value="2">آرایشی و بهداشتی</option>
+        <option value="3">لباس و پوشاک</option>
+        <option value="4">لوازم خانگی</option>
+        <option value="5">صنایع دستی و خانگی</option>
+        <option value="6">سایر موارد</option>
+
+<input type="button" value="njm" id="mjh"/>
+    
+    <script>
+        var MySelect = "";
+
+        $(document).ready(function () {
+            MySelect = $('.SlectBox').SumoSelect({ csvDispCount: 2, okCancelInMulti: false ,selectAll: true});
+        });
+
+        $('#mjh').on("click", function () {
+            //$('#SlectBox')[0].sumo.selectItem(1);
+            alert("mjh");
+
+
+            var MySelect = $('select.SlectBox')[0].sumo.getSelStr();
+            alert(MySelect);
+
+			//
+            //alert($('#SlectBox option:selected').val());
+            // alert($('#SlectBox').selectedOptions.val());
+
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+{
+    placeholder: 'Select Here',
+    csvDispCount: 3,
+    captionFormat: '{0} Selected',
+    floatWidth: 400,
+    forceCustomRendering: false,
+    nativeOnDevice: ['Android', 'BlackBerry', 'iPhone', 'iPad', 'iPod', 'Opera Mini', 'IEMobile', 'Silk'],
+    outputAsCSV : false,
+    csvSepChar : ',', 
+    okCancelInMulti: false, 
+    triggerChangeCombined : true,
+    selectAll: false,
+    selectAlltext: 'Select All'
+
+}

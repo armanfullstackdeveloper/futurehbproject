@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "پنل مدیریت";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+
+
+
+
+
+
+
+<div id="firstPageNavigator">
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+        <div id="welcomeMessageInPanel">
+
+            <span>@User.Identity.GetUserName()</span> عزیز، به پنل مدیریت محصولات خوش آمدی.
+        </div>
+
+
+         <div> آدرس مستقیم وبسایت شما : <a href="httP://www.hoojibooji.com/shop/@User.Identity.GetUserName()">www.hoojibooji.com/shop/@User.Identity.GetUserName()</a></div>
+
+
+    }
+
+
+    <div id="allProductCubes">
+        <a href="~/Seller/ProductManagment/AddProduct">
+            <div id="addNewGuide" class="bigCube">
+                <div id="ANGicon" class="cubeIcon"></div>
+                <div id="ANGexplain" class="cubeExplain">
+                    <div id="ANGheader" class="cubeHeader">افزودن محصول جدید</div>
+                    <div id="ANGrec" class="cubeRec">
+                        <div class="insideRec"></div>
+                    </div>
+                    <div id="ANGtext" class="cubeText">
+                        در قسمت افزودن محصول جدید شما می توانید با پر کردن
+                        مشخصات محصولات خود به صورت مرحله به مرحله آن ها
+                        را ثبت و در فروشگاه و ویترین خود نمایش دهید
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        @using Microsoft.AspNet.Identity
+        @using Boundary.Controllers.Ordinary
+        @{
+            string userId = User.Identity.GetUserId();
+            MainSession mainSession = (MainSession)Session[userId];
+            long storeCode = mainSession.Store.StoreCode;
+        }
+        <a href="~/shop/@User.Identity.GetUserName()">
+
+            <div id="oldsGuide" class="bigCube">
+                <div id="OGicon" class="cubeIcon"></div>
+                <div id="OGexplain" class="cubeExplain">
+                    <div id="OGheader" class="cubeHeader">مشاهده محصولات قدیمی</div>
+                    <div id="OGrec" class="cubeRec">
+                        <div class="insideRec"></div>
+                    </div>
+                    <div id="OGtext" class="cubeText">
+                        با کلیک بر روی مشاهده محصولات قدیمی شما می توانید
+                        محصولاتی که قبلا ثبت کرده اید را مشاهده و رصد نمایید
+                        و ارشیو خود را همیشه داشته باشید.
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="~/Seller/ProductManagment/ProductList/@storeCode">
+            <div id="editGuide" class="bigCube">
+                <div id="EGicon" class="cubeIcon"></div>
+                <div id="EGexplain" class="cubeExplain">
+                    <div id="EGheader" class="cubeHeader">ویرایش و حذف محصولات</div>
+                    <div id="EGrec" class="cubeRec">
+                        <div class="insideRec"></div>
+                    </div>
+                    <div id="EGtext" class="cubeText">
+                        از طریق ویرایش و حذف محصولات می توانید جدول تمامی
+                        محصولاتی که تا به حال ثبت کرده اید را مشاهده و آن را
+                        حذف یا ویرایش کنید.
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div id="yourStoreManager">
+        <div id="YSMicon"></div>
+        <div id="YSMexplain">
+            <div id="YSMheader">صفحه مدیریت فروشگاه شما</div>
+            <div id="YSMtext">
+                از طریق صفحه مدیریت فروشگاه شما سریعا میتوانید محصولات خود را در قالب سایت مشاهده و آن ها را بهینه یا مرتب نمایید
+                تا استفاده برای کاربران آسان تر شود.به خاطر داشته باشید استفاده از عکس های زیباو با کیفیت مناسب مشتریان شما را به خود
+                جذب می کند و باعث محبوبیتتان میشود
+            </div>
+        </div>
+    </div>
+</div>

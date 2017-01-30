@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "پنل کاربری";
+    Layout = "~/Views/Shared/_LayoutPanelForUser.cshtml";
+}
+
+
+
+<div id="firstPageNavigator">
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+    
+    <div id="welcomeMessageInPanel">
+
+        <span>@User.Identity.GetUserName()</span> عزیز، به پنل مدیریت محصولات خوش آمدی.
+    </div>
+
+
+ 
+
+    }
+
+
+    <div id="allProductCubes">
+        <a href="~/Member/OrderManagement/GetAll">
+            <div id="addNewGuide" class="bigCube">
+                <div id="ANGicon" class="cubeIcon"></div>
+                <div id="ANGexplain" class="cubeExplain">
+                    <div id="ANGheader" class="cubeHeader">مشاهده سفارشات </div>
+                    <div id="ANGrec" class="cubeRec">
+                        <div class="insideRec"></div>
+                    </div>
+                    <div id="ANGtext" class="cubeText">
+                       شما از طریق این بخش می توانید سوابق خرید هایی که انجام داده اید را با جزییات کامل مشاهده نمایید 
+                    </div>
+                </div>
+            </div>
+        </a>
+ 
+ 
+     </div>
+ </div>
+
+ 
+
+     

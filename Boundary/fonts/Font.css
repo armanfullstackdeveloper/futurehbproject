@@ -1,0 +1,11 @@
+﻿/*@font-face {
+            font-family: 'Yekan';
+            src: url("../fonts/Yekan.eot?#") format('eot'), 
+             url("../fonts/Yekan.woff") format('woff'),  
+             url("../fonts/Yekan.ttf") format('truetype');  
+        }*/
+
+@font-face {
+    font-family: 'iransfm';
+    src: url('/fonts/iransfm.eot?#') format('eot'), /* IE6–8 */ url('/fonts/iransfm.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('/fonts/iransfm.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}

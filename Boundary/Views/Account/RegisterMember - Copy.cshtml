@@ -1,0 +1,708 @@
+﻿@{
+    ViewBag.Title = "ثبت نام ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+
+
+
+@section Style{
+
+    <link href="~/Css/StoreRegister/StoreRegister.css" rel="stylesheet" type="text/css">
+}
+
+<div id="LogInOpen">
+    <div id="LogInFaild"></div>
+    <div id="LogInSucseed"></div>
+    <div id="LogInLoadingHolder">
+        <div id="LogInLoading"></div><p class="laoder">لطفا صبر کنید</p>
+    </div>
+</div>
+<div class="orgenizer" style="height:800px;float:right;width:100%;">
+    <div id="form_element" class="orgenizer">
+
+        <div id="firstBox" class="TestInnerNextNext">
+            <div id="Store_information">
+                <div id="StoreSubject" class="question">اطلاعات پایه </div>
+                <div class="Input_In_Box" id="FullName">
+                    <span class="Header">  :نام و نام خانوادگی</span>
+                    <p>
+                        <input type="text" id="FullNameTxt" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                    </p>
+                    <div class="Alert" id="Alert_FullName">لطفا نام و نام خانوادگی خود را وارد نمایید</div>
+                </div>
+                <div class="Input_In_Box" id="Email">
+                    <span class="Header">  :ایمیل (اختیاری) </span>
+                    <p>
+                        <input type="text" id="EmailTxt" placeholder="لطفا ایمیلغ خود را وارد کنید">
+                    </p>
+                </div>
+                <div id="Back_Question" class="Back">مرحله قبل</div>
+                <div id="Next_TestInnerNext" class="Forward">مرحله بعد</div>
+            </div>
+        </div>
+
+
+        <div id="secondBox" class="TestInnerNext">
+            <div id="Register_information">
+                <div id="RegisterSubject" class="question">مشخصات کاربری</div>
+                <div class="Input_In_Box" id="RegisterName">
+                    <span class="Header">: نام کاربری </span>
+                    <p>
+                        <input type="text" id="UserNameTxt" placeholder="نام کاربری خود را وارد کنید">
+                    </p>
+                    <div class="Alert" id="Alert_UserName">لطفا نام کاربری خود را بیش از 6 حرف انتخاب نمایید</div>
+                    <div class="Alert" id="Alert_UserName_Exist"> لطفا  نام کاربری دیگری انتخاب نمایید</div>
+                    <div class="Alert" id="Alert_UserName_Exist_Wait">لطفا صبر کنید</div>
+
+                </div>
+                <div class="Input_In_Box" id="RegisterTypeName">
+                    <span class="Header">: رمز عبور </span>
+                    <p>
+                        <input type="password" id="PasswordTxt" class="DropMenu" placeholder="رمز عبور خود را وارد کنید">
+                    </p>
+                    <div class="Alert" id="Alert_Password">لطفا رمز عبور خود را بیش از 6 حرف انتخاب نمایید</div>
+
+                </div>
+                <div id="Back_UserInfo" class="Back">مرحله قبل</div>
+                <div id="Next_communicationInfo" class="Forward ">مرحله بعد</div>
+
+            </div>
+        </div>
+
+        <div id="ThiredBox" class="TestInner">
+            <div id="communication_information">
+                @*<div id="communicationSubject" class="question">اطلاعات تماس</div>*@
+                <div id="communication_Holder">
+
+
+                    <div class="Input_In_Box" id="PhoneNumber">
+                        <span class="Header">  :اطلاعات تماس </span>
+                        <p>
+                            <input type="text" maxlength="11" id="PhoneNumberTxt" style=" width: 112px; float: right;" placeholder="شماره تلفن ثابت">
+
+                            <input type="text" maxlength="11" id="MobileNumberTxt" style=" width: 112px; float: left;" placeholder="شماره تلفن همراه">
+                        </p>
+                        <div class="Alert" id="Alert_PhoneNumberTxt">لطفا هر دو شماره تماس  خود را وارد نمایید</div>
+                    </div>
+
+                    <div class="Input_In_Box" id="CityAndState">
+                        <span class="Header">  :استان و شهرستان </span>
+                        <p>
+                            <select placeholder="استان" class="ForDistance" id="State"></select>
+                        </p>
+                        <p>
+                            <select placeholder="شهرستان" class="ForDistance_2" id="City">
+                                <option selected disabled value="">شهرستان</option>
+                            </select>
+                        </p>
+                        <div class="Alert" id="Alert_CityAndStateTxt">ابتدا استان و سپس شهرستان خود را انتخاب نمایید</div>
+                    </div>
+
+                    <div class="Input_In_Box" id="PostalCode">
+                        <p>
+                            <input type="text" id="PostalCodeTxt" maxlength="10" placeholder="کد پستی">
+                            <span class="Header">  :کد پستی </span>
+                        </p>
+                    </div>
+
+                    <div class="Input_In_Box" id="Addresss">
+                        <span class="Header">  :آدرس کامل </span>
+                        <p>
+                            <textarea class="WidthMore" id="AddresssTxt" placeholder="آدرس کامل خود را وارد کنید"></textarea>
+                        </p>
+                        <div class="Alert" id="Alert_AddresssTxt">لطفا آدرس کامل خود را وارد نمایید</div>
+                    </div>
+                </div>
+
+                <div id="Back_Register_info" class="Back">مرحله قبل</div>
+                <div id="Next_Finish" class="Forward ">ثبت</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Script{
+
+
+
+    <script>
+
+        var selectCategori = "";
+        var IsUsernameExsisted = "";
+        var WhantGoPage3 = "";
+        var send = "";
+        var TempData = "";
+        var ajaxresult = "";
+        var latlngJson = "";
+
+        $(document).ready(function () {
+
+
+            //get Citys & States
+            $.ajax({
+                type: "GET",
+                url: "/Account/GetStates/",
+                success: function (result) {
+
+                    if (result.Success == true) {
+                        ajaxresult = result.Response;
+                    } else {
+                        console.log("خطا در دریافت اطلاعات ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+
+            //disable page 2 element
+            document.getElementById('UserNameTxt').disabled = true;
+            document.getElementById('PasswordTxt').disabled = true;
+            $('#Next_communicationInfo').unbind('click');
+        });
+
+        //fill the Citys drop down list
+        $("#State").on("change", function () {
+            $("#City").html("<option selected disabled value='' >انتخاب نمایید</option>");
+            $.each(ajaxresult, function (index, value) {
+                if (value.Id == $("#State option:selected").val()) {
+                    $.each(value.Cities, function (index2, value2) {
+                        $("#City").append($('<option>').text(value2.Name).attr('value', value2.Id));
+                    });
+                };
+            });
+        });
+
+        setTimeout(function () {
+            $('#form_element').addClass("JumpRight");
+            $('#form_element').show();
+        }, 200);
+
+        //click Next Page Button  - Page 1 => 2
+        $('#Next_TestInnerNext').on("click", function () {
+            next1();
+        });
+
+        //click Next Page   - Page 1 => 2 || 3 => 2
+        $('#secondBox').on("click", function (evt) {
+
+            if (evt.target.id == "#Back_UserInfo")
+                return;
+
+            else if ($(evt.target).closest('#Back_UserInfo').length)
+                return;
+
+            if (evt.target.id == "#Next_communicationInfo")
+                return;
+
+            else if ($(evt.target).closest('#Next_communicationInfo').length)
+                return;
+
+            else if ($(evt.target).closest('#UserNameTxt').length)
+                return;
+
+            else if ($(evt.target).closest('#PasswordTxt').length)
+                return;
+
+            else
+                next1();
+        });
+
+        //click on Back Page Button  - Page 2 => 1
+        $('#Back_UserInfo').on("click", function () {
+            back1();
+        });
+
+        //click on Back Page   - Page 2 => 1
+        $('#firstBox').on("click", function (evt) {
+            if (evt.target.id == "#Next_TestInnerNext")
+                return;
+
+            else if ($(evt.target).closest('#Next_TestInnerNext').length)
+                return;
+
+            else if ($(evt.target).closest('#FullNameTxt').length)
+                return;
+
+            else if ($(evt.target).closest('#EmailTxt').length)
+                return;
+
+            else
+                back1();
+        });
+
+        //Next Page click - Page 2 => 3  ++  also in the next1 & back2 are crated
+        $('#Next_communicationInfo').on("click", function () {
+            WhantGoPage3 = "1";
+            next2();
+        });
+
+        //click Next Page   - Page 2 => 3
+        $('#ThiredBox').on("click", function (evt) {
+
+            if (evt.target.id == "#Back_Register_info")
+                return;
+
+            else if ($(evt.target).closest('#Back_Register_info').length)
+                return;
+
+            else if (evt.target.id == "#Next_Finish")
+                return;
+
+            else if ($(evt.target).closest('#Next_Finish').length)
+                return;
+
+            else if ($(evt.target).closest('#PhoneNumberTxt').length)
+                return;
+
+            else if ($(evt.target).closest('#MobileNumberTxt').length)
+                return;
+
+            else if ($(evt.target).closest('#PostalCodeTxt').length)
+                return;
+
+            else if ($(evt.target).closest('#State').length)
+                return;
+
+            else if ($(evt.target).closest('#City').length)
+                return;
+
+            else if ($(evt.target).closest('#AddresssTxt').length)
+                return;
+
+            else {
+                WhantGoPage3 = "1";
+                next2();
+            }
+
+
+        });
+
+        
+        //check username exist or not
+        $('#UserNameTxt').blur(function () {
+            checkUsernameExist();
+
+        });
+
+        function checkUsernameExist() {
+            if ($('#UserNameTxt').val().length >= 6 && $('#UserNameTxt').val().length <= 100) {
+                IsUsernameExsisted = "";
+                $.ajax({
+                    type: "GET",
+                    url: "/Account/IsUsernameExsisted/",
+                    data: { username: $('#UserNameTxt').val() },
+                    success: function (result) {
+
+                        if (result.Response == true) {
+                            IsUsernameExsisted = 'True';
+                            $('#Alert_UserName_Exist').show();
+                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+
+
+                        }
+                        else {
+                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+                            IsUsernameExsisted = 'False';
+
+                            if (WhantGoPage3 == "1") {
+                                WhantGoPage3 = "";
+                                next2();
+                            }
+
+                        }
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+        };
+
+        function next1() {
+            if ($('#FullNameTxt').val().length <= 0) {
+
+                $('#Alert_FullName').css("display", "block");
+
+            } else {
+                if (ajaxresult != "") {
+                    //disable page 1 element
+                    document.getElementById('FullNameTxt').disabled = true;
+                    document.getElementById('EmailTxt').disabled = true;
+
+                    //enable Page 2 element
+                    document.getElementById('UserNameTxt').disabled = false;
+                    document.getElementById('PasswordTxt').disabled = false;
+                    $('#Next_communicationInfo').bind('click', function () {
+                        WhantGoPage3 = "1";
+                        next2();
+                    });
+
+
+                    //disable page 3 element
+                    document.getElementById('PhoneNumberTxt').disabled = true;
+                    document.getElementById('MobileNumberTxt').disabled = true;
+                    document.getElementById('PostalCodeTxt').disabled = true;
+                    document.getElementById('AddresssTxt').disabled = true;
+                    document.getElementById('State').disabled = true;
+                    document.getElementById('City').disabled = true;
+
+                    //fill the State drop down list
+                    $("#State").html("<option selected disabled value='' >استان</option>");
+                    $.each(ajaxresult, function (index, value) {
+                        $("#State").append($('<option>').text(value.Name).attr('value', value.Id));
+                    });
+
+
+                    $('#Back_Register_info').unbind('click');
+
+                    $('#Next_Finish').unbind('click');
+
+
+
+                    $('.TestInner').addClass('transfare_2');
+                    $('.TestInner').removeClass('transfare_3');
+                    $('.TestInner').removeClass('transfare');
+                    $('.TestInnerNext').addClass('transfare_3');
+                    $('.TestInnerNext').removeClass('transfare_5');
+                    $('.TestInnerNext').removeClass('transfare_2');
+                    $('.TestInnerNextNext').addClass('transfare_5');
+                    $('.TestInnerNextNext').removeClass('transfare_4');
+                    $('.TestInnerNextNext').removeClass('transfare_3');
+
+                } else {
+                    console.log("لطفا کمی صبر کنید");
+                }
+            }
+        };
+
+        function back1() {
+            //enable page 1 element
+            document.getElementById('FullNameTxt').disabled = false;
+            document.getElementById('EmailTxt').disabled = false;
+
+            //disable page 2 element
+            document.getElementById('UserNameTxt').disabled = true;
+            document.getElementById('PasswordTxt').disabled = true;
+            $('#Next_communicationInfo').unbind('click');
+
+            $('.TestInner').addClass('transfare');
+            $('.TestInner').removeClass('transfare_2');
+            $('.TestInnerNext').addClass('transfare_2');
+            $('.TestInnerNext').removeClass('transfare_3');
+            $('.TestInnerNextNext').addClass('transfare_3');
+            $('.TestInnerNextNext').removeClass('transfare_5');
+            $('.TestInnerNextNext').removeClass('transfare_4');
+        };
+
+        function next2() {
+
+            if ($('#UserNameTxt').val().length <= 5) {
+
+                $('#Alert_UserName').css("display", "block");
+
+                if ($('#PasswordTxt').val().length <= 5) {
+                    $('#Alert_Password').css("display", "block");
+                }
+            } else if ($('#PasswordTxt').val().length <= 5) {
+
+                $('#Alert_Password').css("display", "block");
+            } else {
+
+                ValidationPage3();
+                if (IsUsernameExsisted == 'False') {
+                    //disable Page 2 element
+                    document.getElementById('UserNameTxt').disabled = true;
+                    document.getElementById('PasswordTxt').disabled = true;
+                    $('#Next_communicationInfo').unbind('click');
+                    $('#Next_communicationInfo').unbind('click');
+
+
+                    //enable page 3 element
+
+                    document.getElementById('PhoneNumberTxt').disabled = false;
+                    document.getElementById('MobileNumberTxt').disabled = false;
+                    document.getElementById('PostalCodeTxt').disabled = false;
+                    document.getElementById('AddresssTxt').disabled = false;
+                    document.getElementById('State').disabled = false;
+                    document.getElementById('City').disabled = false;
+
+                    $('#Next_Finish').bind('click', function () {
+
+                        if ($('#PhoneNumberTxt').val().length == "" || $('#MobileNumberTxt').val().length == "") {
+
+                            $('#Alert_PhoneNumberTxt').css("display", "block");
+                            if ($('#AddresssTxt').val().length == "") {
+
+                                $('#Alert_AddresssTxt').css("display", "block");
+                                if ($("#City option:selected").val() == "") {
+
+                                    $('#Alert_CityAndStateTxt').css("display", "block");
+                                }
+
+                            }
+                        } else if ($('#AddresssTxt').val().length == "") {
+
+                            $('#Alert_AddresssTxt').css("display", "block");
+                            if ($("#City option:selected").val() == "") {
+
+                                $('#Alert_CityAndStateTxt').css("display", "block");
+                            }
+
+                        } else if ($("#City option:selected").val() == "") {
+
+                            $('#Alert_CityAndStateTxt').css("display", "block");
+                        } else {          
+                               save();
+                        }
+
+
+
+                    });
+                    $('#Back_Register_info').bind('click', function () {
+                        back2();
+                    });
+
+
+                    $('.TestInner').addClass('transfare_3');
+                    $('.TestInner').removeClass('transfare_2');
+                    $('.TestInner').removeClass('transfare');
+                    $('.TestInnerNext').addClass('transfare_5');
+                    $('.TestInnerNext').removeClass('transfare_3');
+                    $('.TestInnerNextNext').addClass('transfare_4');
+                    $('.TestInnerNextNext').removeClass('transfare_5');
+
+
+                } else if (IsUsernameExsisted == "") {
+                    $('#Alert_UserName_Exist_Wait').show();
+                    checkUsernameExist();
+                }
+            };
+        };
+
+        function back2() {
+
+            //disable page 1 element
+            document.getElementById('FullNameTxt').disabled = true;
+            document.getElementById('EmailTxt').disabled = true;
+
+            //enable Page 2 element
+            document.getElementById('UserNameTxt').disabled = false;
+            document.getElementById('PasswordTxt').disabled = false;
+            $('#Next_communicationInfo').bind('click', function () {
+                WhantGoPage3 = "1";
+                next2();
+            });
+
+            //disable page 3 element
+            document.getElementById('PhoneNumberTxt').disabled = true;
+            document.getElementById('MobileNumberTxt').disabled = true;
+            document.getElementById('PostalCodeTxt').disabled = true;
+            document.getElementById('AddresssTxt').disabled = true;
+            document.getElementById('State').disabled = true;
+            document.getElementById('City').disabled = true;
+
+            $('#Back_Register_info').unbind('click');
+            $('#Next_Finish').unbind('click');
+
+
+            $('.TestInner').addClass('transfare_2');
+            $('.TestInner').removeClass('transfare_3');
+            $('.TestInnerNext').addClass('transfare_3');
+            $('.TestInnerNext').removeClass('transfare_5');
+            $('.TestInnerNextNext').addClass('transfare_5');
+            $('.TestInnerNextNext').removeClass('transfare_3');
+            $('.TestInnerNextNext').removeClass('transfare_4');
+        };
+
+
+        function save() {
+
+            var form = $('#__AjaxAntiForgeryForm');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+            TempData = {
+                "__RequestVerificationToken": token,
+                "UserName": $('#UserNameTxt').val(),
+                "Password": $.md5($('#PasswordTxt').val()),
+                "ConfirmPassword": $.md5($('#PasswordTxt').val()),
+                "MemberInfo": {
+                "Name": $('#FullNameTxt').val(),
+                "PhoneNumber": $('#PhoneNumberTxt').val(),
+                "MobileNumber": $("#MobileNumberTxt").val(),
+                "Email": $('#EmailTxt').val(),
+                "PostalCode": $('#PostalCodeTxt').val(),
+                "CityCode": $("#City option:selected").val(),
+                "Place": $('#AddresssTxt').val() 
+                }
+            };
+           
+            if (send == "") {
+                send = "1";
+
+                 $('#LogInOpen').css("z-index", 1).fadeIn(1000);
+
+                $.ajax({
+                    url: '/Account/RegisterMember',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    data: $.param(TempData),
+                    success: function (result) {
+                        if (result.Success == true) {
+
+                            $('#LogInLoadingHolder').hide();
+                            $('#LogInSucseed').fadeIn(500);
+
+
+                            //return to root
+                            window.location = "/Member/Panel";
+                        } else {
+                            $('#LogInLoadingHolder').hide();
+                            $('#LogInFaild').fadeIn(500);
+                            location.reload();
+                            console.log("خطا در ارسال اطلاعات");
+                            send = "";
+                        }
+                        //console.log("فروشگاه شما با موفقیت ثبت شد");
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                        send = "";
+                    }
+                });
+            }
+        };
+
+
+        //Validation Error hide - Page 1
+        $('#FullNameTxt').focus(function () {
+            $('#Alert_FullName').css("display", "none");
+        });
+
+        //Validation Error hide - Page 2
+        $('#UserNameTxt').focus(function () {
+            $('#Alert_UserName').css("display", "none");
+            $('#Alert_UserName_Exist').css("display", "none");
+            $('#Alert_UserName_Exist_Wait').css("display", "none");
+
+        });
+        $('#PasswordTxt').focus(function () {
+            $('#Alert_Password').css("display", "none");
+        });
+
+        //Validation Error hide - Page 3
+        function ValidationPage3() {
+            $('#PhoneNumberTxt').focus(function () {
+                $('#Alert_PhoneNumberTxt').css("display", "none");
+            });
+            $('#AddresssTxt').focus(function () {
+                $('#Alert_AddresssTxt').css("display", "none");
+            });
+            $('#City').on("change", function () {
+                $('#Alert_CityAndStateTxt').css("display", "none");
+            });
+
+        }
+
+        // Validation for Just Number Allow
+        $('#communication_Holder').on('keydown', '#PhoneNumberTxt', '#MobileNumberTxt', '#PostalCodeTxt', function (e) {
+            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+        });
+
+
+
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@*<script>
+
+        //Register
+        $('#RegisterBtn').on("click", function () {
+
+            if ($('#UserName').val() == '') {
+                return
+            }
+            if ($('#Password').val() == '') {
+                return
+            }
+
+            $('#RegisterBtn').prop('disabled', true);
+             var form = $('#__AjaxAntiForgeryForm');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+            $.ajax({
+                url: '/Account/RegisterMember',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: token,
+                    UserName: $('#UserName').val(),
+                    Password: $.md5($('#Password').val()),
+                    ConfirmPassword: $.md5($('#Password').val())
+                },
+                success: function (result) {
+
+                    if (result.Success == true) {
+
+                        $('#RegisterSucseed').fadeIn(1000).fadeTo(100, 1.0, function () {
+
+                            if (returnUrl == "") {
+                                //return to root
+                                window.location = "/";
+
+                            } else {
+                                //return to returnUrl
+                                window.location = returnUrl;
+                            }
+                        });
+
+                    } else {
+                        $('#RegisterFaild').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
+                        $('#RegisterBtn').removeClass('GoRegister');
+                        $('#RegisterBtn').prop('disabled', false);
+                        $('#EnterBtn').prop('disabled', false);
+
+                    }
+                },
+                error: function () {
+                    $('#RegisterFaild').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
+                    $('#RegisterBtn').removeClass('GoRegister');
+                    $('#RegisterBtn').prop('disabled', false);
+                    $('#EnterBtn').prop('disabled', false);
+
+                }
+
+            });
+
+
+        });
+
+    </script>*@

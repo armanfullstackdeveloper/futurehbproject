@@ -1,0 +1,277 @@
+﻿@using DataModel.Entities.RelatedToProduct
+@model IEnumerable<DataModel.Models.ViewModel.AttributeViewModel>
+
+@{
+    Layout = null;
+    List<Category> lstCategories = (List<Category>)ViewBag.Categories;
+    lstCategories.Insert(0, new Category()
+    {
+        Id = 0,
+        Name = "انتخاب کنید"
+    });
+    SelectList selectList = new SelectList(lstCategories, "Id", "Name");
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <script src="~/Js/jquery-2.1.3.min.js"></script>
+    </head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <br/>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("دسته بندی شاخه اول", new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("mainCategory", selectList)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("دسته بندی شاخه دوم", new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("subCategory", new SelectList(new List<string>(), "Id", "Name"))
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.Label("دسته بندی شاخه سوم", new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownList("subsubCategory", new SelectList(new List<string>(), "Id", "Name"))
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <table class="table" border="1" id="attributeTable">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    AttributeType
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AttributeTypeName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </body>
+</html>
+
+<script>
+    var ajaxCategory = $.parseJSON('@Html.Raw(Json.Encode((List<Category>)ViewBag.Categories))');
+
+    $("#mainCategory").on("change", function () {
+        $("#subCategory").html("<option selected disabled value=''>انتخاب نمایید</option>");
+        $("#subsubCategory").html("<option selected disabled value='' >انتخاب نمایید</option>");
+
+        $.each(ajaxCategory, function (index, value) {
+            if (value.Id == $("#mainCategory option:selected").val()) {
+                if (value.SubCategories != null) {
+                    $.each(value.SubCategories, function (index2, value2) {
+                        $("#subCategory").append($('<option>').text(value2.Name).attr('value', value2.Id));
+                    });
+                }
+
+                //now ajax
+                $("#attributeTable").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetAttributesByAjax")',
+                    dataType: 'json',
+                    data: { catCode: $("#mainCategory").val() },
+                    success: function (result) {
+                        $("#attributeTable").append(
+              '<tr>' +
+                '<th>' +
+                    '@Html.DisplayNameFor(model => model.Id)' +
+                '</th>' +
+                '<th>' +
+                    '@Html.DisplayNameFor(model => model.Name)' +
+                '</th>' +
+                '<th>' +
+                    '@Html.DisplayNameFor(model => model.CategoryName)' +
+                '</th>' +
+                '<th>' +
+                    'AttributeType' +
+                '</th>' +
+                '<th></th>' +
+            '</tr>');
+                        $.each(result.Response, function (i, item) {
+                            $("#attributeTable").append('<tr>' +
+                    '<td>' + item.Id + '</td>' +
+                    '<td>' + item.Name + '</td>' +
+                    '<td>' + item.CategoryName + '</td>' +
+                    '<td>' + item.AttributeTypeName + '</td>' +
+                    '<td>' +
+                        '<a href="Edit/' + item.Id + '">Edit</a> | ' +
+                        '<a href="Details/' + item.Id + '">Details</a> | ' +
+                        '<a href="Delete/' + item.Id + '">Delete</a>' +
+                    '</td>' +
+                '</tr>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve items.');
+                    }
+                });
+                //
+            }
+        });
+
+
+    });
+
+
+    $("#subCategory").on("change", function () {
+
+        $("#subsubCategory").html("<option selected disabled value='' >انتخاب نمایید</option>");
+        $.each(ajaxCategory, function (index, value) {
+            if (value.Id == $("#mainCategory option:selected").val()) {
+                if (value.SubCategories != null) {
+                    $.each(value.SubCategories, function (index2, value2) {
+                        if (value2.Id == $("#subCategory option:selected").val()) {
+                            if (value2.SubCategories != null) {
+                                $.each(value2.SubCategories, function (index3, value3) {
+                                    $("#subsubCategory").append($('<option>').text(value3.Name).attr('value', value3.Id));
+                                });
+                            }
+
+                            //now ajax
+                            $("#attributeTable").empty();
+                            $.ajax({
+                                type: 'POST',
+                                url: '@Url.Action("GetAttributesByAjax")',
+                                dataType: 'json',
+                                data: { catCode: $("#subCategory").val() },
+                                success: function (result) {
+                                    $("#attributeTable").append(
+                          '<tr>' +
+                            '<th>' +
+                                '@Html.DisplayNameFor(model => model.Id)' +
+                            '</th>' +
+                            '<th>' +
+                                '@Html.DisplayNameFor(model => model.Name)' +
+                            '</th>' +
+                            '<th>' +
+                                '@Html.DisplayNameFor(model => model.CategoryName)' +
+                            '</th>' +
+                            '<th>' +
+                                'AttributeType' +
+                            '</th>' +
+                            '<th></th>' +
+                        '</tr>');
+                                    $.each(result.Response, function (i, item) {
+                                        $("#attributeTable").append('<tr>' +
+                                '<td>' + item.Id + '</td>' +
+                                '<td>' + item.Name + '</td>' +
+                                '<td>' + item.CategoryName + '</td>' +
+                                '<td>' + item.AttributeTypeName + '</td>' +
+                                '<td>' +
+                        '<a href="Edit/' + item.Id + '">Edit</a> | ' +
+                        '<a href="Details/' + item.Id + '">Details</a> | ' +
+                        '<a href="Delete/' + item.Id + '">Delete</a>' +
+                                '</td>' +
+                            '</tr>');
+                                    });
+                                },
+                                error: function (ex) {
+                                    alert('Failed to retrieve items.');
+                                }
+                            });
+                            //
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+
+
+    $("#subsubCategory").on("change", function () {
+
+        //now ajax
+        $("#attributeTable").empty();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetAttributesByAjax")',
+            dataType: 'json',
+            data: { catCode: $("#subsubCategory").val() },
+            success: function (result) {
+                $("#attributeTable").append(
+      '<tr>' +
+        '<th>' +
+            '@Html.DisplayNameFor(model => model.Id)' +
+        '</th>' +
+        '<th>' +
+            '@Html.DisplayNameFor(model => model.Name)' +
+        '</th>' +
+        '<th>' +
+            '@Html.DisplayNameFor(model => model.CategoryName)' +
+        '</th>' +
+        '<th>' +
+            'AttributeType' +
+                '</th>' +
+                '<th></th>' +
+            '</tr>');
+                $.each(result.Response, function (i, item) {
+                    $("#attributeTable").append('<tr>' +
+            '<td>' + item.Id + '</td>' +
+            '<td>' + item.Name + '</td>' +
+            '<td>' + item.CategoryName + '</td>' +
+            '<td>' + item.AttributeTypeName + '</td>' +
+            '<td>' +
+                '<a href="Edit/' + item.Id + '">Edit</a> | ' +
+                '<a href="Details/' + item.Id + '">Details</a> | ' +
+                '<a href="Delete/' + item.Id + '">Delete</a>' +
+        '</td>' +
+    '</tr>');
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retrieve items.');
+            }
+        });
+        //
+    });
+</script>

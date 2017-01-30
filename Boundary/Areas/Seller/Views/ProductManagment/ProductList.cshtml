@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "لیست محصولات";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+@section Style{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+}
+
+
+
+<div class="container">
+    <div class="row" style="direction:rtl;">
+        <div id="AddProduct" class="col-md-10 col-md-offset-2 pull-right">
+
+            <p>لیست محصولات فروشگاه شما :</p>
+            <table class="table table-bordered table-hover table-striped table-responsive" id="tableContainer">
+                <thead>
+                    <tr>
+                        <td>شماره</td>
+                        <td>نام محصول</td>
+                        <td>قیمت </td>
+                        <td>قیمت با تخفیف</td>
+                        <td>موجود</td>
+                        <td>ویرایش </td>
+                        <td>حذف</td>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Script{
+
+    <script>
+
+        var url = window.location.pathname.split('/');
+        var storeCode = url[4];
+
+        var currentData =
+                "&sortBy=" + '1' +
+                "&ascending=" + 'false' +
+                "&rowsPage=" + '99999' +
+                 "&storeCode=" + storeCode;
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/product/search/",
+            data: currentData,
+            success: function (result) {
+                console.log(result)
+                result = result.Response;
+                var txt = '<tbody>'
+                if (result.ProductsSummery != '') {
+                    $.each(result.ProductsSummery, function (index, value) {
+
+                        var counter = 1 + parseInt(index)
+
+                        txt +=
+                        '<tr><td>' + counter + '</td>' +
+                        '<td>' + value.Name + '</td>' +
+                        '<td>' + value.Price + ' </td>' +
+                        '<td>' + value.DiscountedPrice + '</td>';
+                        if (value.IsExist == true) {
+                            txt += '<td>بله</td>';
+                        }
+                        else {
+                            txt += '<td>خیر</td>';
+                        }
+
+                        txt += '<td><a href="/Seller/ProductManagment/EditProduct/' + value.Id + '"> ویراش   </a></td>' +
+                        '<td><a href="/Seller/ProductManagment/DeleteProduct/' + value.Id + '"> حذف   </a></td> </tr>';
+
+                    })
+                }
+                txt += '</tbody>';
+                $('#tableContainer').append(txt);
+
+            },
+            error: function () {
+                console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+            }
+        });
+
+
+    </script>
+
+
+}

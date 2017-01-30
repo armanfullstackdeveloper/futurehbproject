@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ProductColor" table="ProductColor" lazy="true" >
+    <composite-id>
+      <key-property name="ProductCode" column="ProductCode" />
+      <key-property name="ColorCode" column="ColorCode" />
+    </composite-id>
+    <property name="ProductCode">
+      <column name="ProductCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="ColorCode">
+      <column name="ColorCode" sql-type="bigint" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="OrderProducts" table="OrderProducts" lazy="false" >
+    <composite-id>
+      <key-property name="OrderCode" column="OrderCode" />
+      <key-property name="ProductCode" column="ProductCode" />
+    </composite-id>
+    <property name="OrderCode">
+      <column name="OrderCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="ProductCode">
+      <column name="ProductCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Count">
+      <column name="Count" sql-type="smallint" not-null="true" />
+    </property>
+    <property name="CurrentPrice">
+      <column name="CurrentPrice" sql-type="int" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

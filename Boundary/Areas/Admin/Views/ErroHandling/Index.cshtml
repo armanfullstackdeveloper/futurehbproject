@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DataModel.Entities.ErrorLog>
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+</h2>
+<h2>Error Handling</h2>
+
+<table class="table" border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @{
+        if (item.ErrorLogCode == null)
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

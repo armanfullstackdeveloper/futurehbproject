@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToStore" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Plan" table="Plan" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Period">
+      <column name="Period" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="FreeProductNumber">
+      <column name="FreeProductNumber" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="FreeMonthNumber">
+      <column name="FreeMonthNumber" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="ProductNumber">
+      <column name="ProductNumber" sql-type="int" not-null="false" />
+    </property>
+    <property name="MonthNumber">
+      <column name="MonthNumber" sql-type="smallint" not-null="false" />
+    </property>
+    <property name="HaveWebsite">
+      <column name="HaveWebsite" sql-type="bit" not-null="false" />
+    </property>
+    <property name="Cost">
+      <column name="Cost" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="DiscountedCost">
+      <column name="DiscountedCost" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Comments">
+      <column name="Comments" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<bag name="SalesPlan">
+      <key column="PlanCode" />
+      <one-to-many class="SalesPlan" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

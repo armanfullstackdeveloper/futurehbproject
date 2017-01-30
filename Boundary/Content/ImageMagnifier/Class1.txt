@@ -1,0 +1,4 @@
+﻿                    <div class="image active">
+                        <div data-image="../../Img/ProductDetails/GalleryImages/Pic_1.jpg" data-image-zoom="../../Img/ProductDetails/GalleryImages/Pic_1.jpg"
+                             data-size="150" class="content magnifier" style="background-image:url(../../Img/ProductDetails/GalleryImages/Pic_1.jpg)"></div>
+                    </div>

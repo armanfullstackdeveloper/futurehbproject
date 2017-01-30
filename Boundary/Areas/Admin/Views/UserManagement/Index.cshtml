@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DataModel.Entities.User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Js/jquery-2.1.3.min.js"></script>
+</head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <p>
+            جستجو با نام کاربری یا آی دی
+            @Html.TextBox("txtSearch")
+        </p>
+        <p>
+            @Html.ActionLink("نمایش کاربران فعال", "Index", new { active = true, pageNumer = 1, rowsPage = 12 })
+        </p>
+        <p>
+            @Html.ActionLink("نمایش کاربران غیر فعال", "Index", new { active = false, pageNumer = 1, rowsPage = 12 })
+        </p>
+        <p>
+            @Html.ActionLink("نمایش تمام کاربران", "Index", new { pageNumer = 1, rowsPage = 12 })
+        </p>
+        <div id="users">
+            @Html.Partial("_UserViewModel", Model)
+        </div>
+        <div>
+            @Html.ActionLink("صفحه بعدی", "Index", new { pageNumber = (int)ViewBag.PageNumber + 1 })
+            @Html.ActionLink("صفحه قبلی", "Index", new { pageNumber = (int)ViewBag.PageNumber - 1 })
+        </div>
+    </body>
+</html>
+<script>
+    $('#txtSearch').on("keyup", function () {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SearchUserByAjax")',
+            dataType: 'html',
+            data: { usernameOrId: $("#txtSearch").val() },
+            success: function (result) {
+                $("#users").empty();
+                $("#users").html(result);
+            },
+            error: function (ex) {
+                alert('Failed to retrieve items.');
+            }
+        });
+    });
+</script>

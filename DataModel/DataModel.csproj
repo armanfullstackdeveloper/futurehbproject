@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81BD236C-2FD7-43E3-B0FB-5D357B79034D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataModel</RootNamespace>
+    <AssemblyName>DataModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\HBAdmin.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Contacts\ContactWithUs.cs" />
+    <Compile Include="Entities\Contacts\PublicMessage.cs" />
+    <Compile Include="Entities\ErrorLog.cs" />
+    <Compile Include="Entities\Member.cs" />
+    <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\FirstPage\FirstPage_Advertise.cs" />
+    <Compile Include="Entities\FirstPage\FirstPage_Slider.cs" />
+    <Compile Include="Entities\RelatedToOrder\OrderSendingType.cs" />
+    <Compile Include="Entities\RelatedToPayments\HBPaymentToMember.cs" />
+    <Compile Include="Entities\RelatedToPayments\HBPaymentToStore.cs" />
+    <Compile Include="Entities\RelatedToPayments\PaymentRequest.cs" />
+    <Compile Include="Entities\RelatedToPayments\PaymentRequestStatus.cs" />
+    <Compile Include="Entities\RelatedToPayments\PaymentResponse.cs" />
+    <Compile Include="Entities\MobileAppUserSurvey.cs" />
+    <Compile Include="Entities\MobileInstalled.cs" />
+    <Compile Include="Entities\RelatedToOrder\Order.cs" />
+    <Compile Include="Entities\RelatedToOrder\OrderHistory.cs" />
+    <Compile Include="Entities\RelatedToOrder\OrderStatus.cs" />
+    <Compile Include="Entities\RelatedToOrder\OrderProducts.cs" />
+    <Compile Include="Entities\RelatedToOrder\StoreDiscount.cs" />
+    <Compile Include="Entities\RelatedToPayments\PaymentResponseStatus.cs" />
+    <Compile Include="Entities\RelatedToProduct\Attribute.cs" />
+    <Compile Include="Entities\RelatedToProduct\AttributeType.cs" />
+    <Compile Include="Entities\RelatedToProduct\AttributeValue.cs" />
+    <Compile Include="Entities\RelatedToProduct\Brand.cs" />
+    <Compile Include="Entities\RelatedToProduct\Category.cs" />
+    <Compile Include="Entities\RelatedToProduct\Color.cs" />
+    <Compile Include="Entities\RelatedToProduct\Product.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductAdditionalAttrbiute.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductColor.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductComment.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductImage.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductLike.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductLog.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductNonSearchableAttributeValue.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductSearchableAttributeValue.cs" />
+    <Compile Include="Entities\RelatedToProduct\ProductVote.cs" />
+    <Compile Include="Entities\RelatedToProduct\UserProductReport.cs" />
+    <Compile Include="Entities\RelatedToStore\CatsOfStore.cs" />
+    <Compile Include="Entities\RelatedToStore\Plan.cs" />
+    <Compile Include="Entities\RelatedToStore\SalesPlan.cs" />
+    <Compile Include="Entities\RelatedToStore\Seller.cs" />
+    <Compile Include="Entities\RelatedToStore\Store.cs" />
+    <Compile Include="Entities\RelatedToStore\StoreCustomer.cs" />
+    <Compile Include="Entities\RelatedToStore\StoreImage.cs" />
+    <Compile Include="Entities\RelatedToStore\StoreTell.cs" />
+    <Compile Include="Entities\RelatedToStore\Transaction.cs" />
+    <Compile Include="Entities\RelatedToStore\UserStoreReport.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\State.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Enums\EAttributeValueStatus.cs" />
+    <Compile Include="Enums\EClientType.cs" />
+    <Compile Include="Enums\EOrderStatus.cs" />
+    <Compile Include="Enums\EOrderType.cs" />
+    <Compile Include="Enums\EPaymentRequestResultValues.cs" />
+    <Compile Include="Enums\EPaymentResponseResultValues.cs" />
+    <Compile Include="Enums\ERole.cs" />
+    <Compile Include="Enums\EProductStatus.cs" />
+    <Compile Include="Enums\EStoreStatus.cs" />
+    <Compile Include="Enums\EStoreType.cs" />
+    <Compile Include="Models\DataModel\ErrorLogVM.cs" />
+    <Compile Include="Models\DataModel\RegisterMemberDataModel.cs" />
+    <Compile Include="Models\DataModel\EditMemberDataModel.cs" />
+    <Compile Include="Models\DataModel\ProductEditDataModel.cs" />
+    <Compile Include="Models\DataModel\ProductToShoppingBagDataModel.cs" />
+    <Compile Include="Models\DataModel\StoreRemovingResultDataModel.cs" />
+    <Compile Include="Models\DataModel\StoreShopingBagDataModel.cs" />
+    <Compile Include="Models\ViewModel\ActionInputViewModel.cs" />
+    <Compile Include="Models\ViewModel\AttributeViewModel.cs" />
+    <Compile Include="Models\ViewModel\ColorViewModel.cs" />
+    <Compile Include="Models\DataModel\NameValueDataModel.cs" />
+    <Compile Include="Models\ViewModel\ErrorViewModel.cs" />
+    <Compile Include="Models\ViewModel\FirstPage_AdvertiseViewModel.cs" />
+    <Compile Include="Models\ViewModel\JsonResultViewModel.cs" />
+    <Compile Include="Models\ViewModel\MemberViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderHistoryViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderProductsViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\PaymentResultViewModel.cs" />
+    <Compile Include="Models\ViewModel\ShoppingBagViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductDetailsViewModel.cs" />
+    <Compile Include="Models\DataModel\ProductRegisterDataModel.cs" />
+    <Compile Include="Models\ViewModel\ProductRegisterRequireItemsViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductSearchRequireItemsViewModel.cs" />
+    <Compile Include="Models\DataModel\SearchParametersDataModel.cs" />
+    <Compile Include="Models\DataModel\ContactUs.cs" />
+    <Compile Include="Models\ViewModel\DropDownItemsModel.cs" />
+    <Compile Include="Models\ViewModel\OveralSearchResult.cs" />
+    <Compile Include="Models\ViewModel\AuthenticationViewModel.cs" />
+    <Compile Include="Models\ViewModel\CompleteProduct.cs" />
+    <Compile Include="Models\ViewModel\ProductSummary.cs" />
+    <Compile Include="Models\ViewModel\StateViewModel.cs" />
+    <Compile Include="Models\ViewModel\StoreDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModel\StoreProfileViewModel.cs" />
+    <Compile Include="Models\DataModel\StoreRegisterDataModel.cs" />
+    <Compile Include="Models\DataModel\StoreSessionDataModel.cs" />
+    <Compile Include="Models\ViewModel\StoreSummery.cs" />
+    <Compile Include="Models\ViewModel\ProductAttrbiutesViewModel.cs" />
+    <Compile Include="Models\ViewModel\StoreViewModel.cs" />
+    <Compile Include="Models\ViewModel\UpdateOrderStatusResultViewModel.cs" />
+    <Compile Include="Models\ViewModel\VerifyDiscountedCodeAndUsingBalanceViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\City.hbm.xml" />
+    <EmbeddedResource Include="HBM\Contacts\ContactWithUs.hbm.xml" />
+    <EmbeddedResource Include="HBM\Contacts\PublicMessage.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\Category.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\Product.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductComment.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductImage.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductLog.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\Brand.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\CatsOfStore.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\Plan.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\SalesPlan.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\Seller.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\Store.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\StoreImage.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\Transaction.hbm.xml" />
+    <EmbeddedResource Include="HBM\State.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductVote.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductLike.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\FirstPage\FirstPage_Advertise.hbm.xml" />
+    <EmbeddedResource Include="HBM\FirstPage\FirstPage_Slider.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\Color.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductAdditionalAttrbiute.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\MobileInstalled.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\UserProductReport.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToStore\UserStoreReport.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\MobileAppUserSurvey.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\Attribute.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\AttributeValue.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductNonSearchableAttributeValue.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductSearchableAttributeValue.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\ProductColor.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToProduct\AttributeType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToOrder\Order.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HBM\RelatedToOrder\OrderHistory.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToOrder\OrderStatus.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToOrder\OrderProducts.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToOrder\StoreDiscount.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\Role.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\Member.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToPayments\PaymentRequest.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToPayments\PaymentRequestStatus.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToPayments\PaymentResponse.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToPayments\PaymentResponseStatus.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\ErrorLog.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToPayments\HBPaymentToMember.hbm.xml" />
+    <EmbeddedResource Include="HBM\RelatedToPayments\HBPaymentToStore.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\HBAdmin.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToOrder\OrderSendingType.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

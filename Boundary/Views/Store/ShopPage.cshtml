@@ -1,0 +1,617 @@
+﻿@model DataModel.Models.ViewModel.StoreViewModel
+
+@{
+    ViewBag.Title = "فروشگاه";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+
+    <link href="~/Css/StoreInfo.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Css/MiddlePage/MiddlePage.css">
+    <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInSearch.css" rel="stylesheet">
+
+}
+
+
+<div id="middle" ng-app="ShopApp" ng-controller="StoreController">
+    <div id="storeInformation">
+        <div id="coverAndLogo">
+            <div id="storeCover" ng-style="{'background-image':'url(/'+Data.StoreDetailes.ImgAddress+')'}">
+                <div id="storeLogoInCover" ng-show="Data.StoreDetailes.LogoAddress">
+                    <div id="logInCoverImage" ng-style="{'background-image':'url(/'+Data.StoreDetailes.LogoAddress+')'}"></div>
+                </div>
+            </div>
+        </div>
+        <div id="nameAndAddress">
+            <div id="nameStore" ng-bind="Data.StoreDetailes.Name"></div>
+            <div id="addressStore" ng-if="Data.StoreDetailes.CityName" ng-bind="'آدرس فروشگاه : '+Data.StoreDetailes.CityName+' - '+Data.StoreDetailes.Place"></div>
+        </div>
+        <div class="instoreInside">
+            <div id="DetailAndAdvance">
+
+                <div id="FirstColumn">
+                    <div id="SmallSearch">
+                        <input name="SearchTxt" id="SearchTxt" class="SmallSearch" placeholder="جست و جو" type="text">
+                        <input name="" ng-click="changeSearchTextBox();" id="SearchBtn" class="GoSmallSearch" type="button">
+                    </div>
+                    <div id="Orgnizer">
+                        <div id="OrgnizerLabel">مرتب سازی بر اساس </div>
+                        <div id="CategoryOrgenize">
+                            <select name="sortBy" id="sortBy">
+                                <option value="1">جدیدترین </option>
+                                <option value="2">قیمت</option>
+                                <option value="3">پربازدید ترین </option>
+                                <option value="4">پرامتیازترین</option>
+                                <option value="5">محبوب ترین </option>
+                            </select>
+                        </div>
+                        <div id="Diagrame">
+                            <select name="ascending" id="ascending">
+                                <option value="false">نزولی</option>
+                                <option value="true">صعودی</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="Amount">
+                        <div id="AmountLabel">تعداد نمایش </div>
+                        <div id="CategoryAmount">
+                            <select name="rowsPage" id="rowsPage">
+                                <option value="24">24</option>
+                                <option value="36">36</option>
+                                <option value="48">48</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="Condition">
+                        <div id="ConditionLabel">حالت نمایش</div>
+                        <div id="ChoosePlace">
+                            <button type="button" id="Block" value="false"></button>
+                            <button type="button" id="Inline" value="true"></button>
+                        </div>
+                    </div>
+                    <div id="SecondeColumn">
+
+                    </div><div class="pagesOfProducts">
+                        <div id="Pager">
+                            <div id="pageCounter">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="allProductBoxes">
+                    @*<div class="productListInner">
+                        <div class="PLIimage"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>
+                        <div class="PLIname">نام کالا</div>
+                        <div class="PLIprice">قیمت : <span>100.000.000</span> ریال</div>
+                        <div class="PLIrec"></div>
+                        <div class="PLIseeDetail">مشاهده جزئیات محصول</div>
+                    </div>
+                    <div class="productListInner">
+                        <div class="PLIimage"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>
+                        <div class="PLIname">نام کالا</div>
+                        <div class="PLIprice">قیمت : <span>100.000.000</span> ریال</div>
+                        <div class="PLIrec"></div>
+                        <div class="PLIseeDetail">مشاهده جزئیات محصول</div>
+                    </div>
+                    <div class="productListInner">
+                        <div class="PLIimage"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>
+                        <div class="PLIname">نام کالا</div>
+                        <div class="PLIprice">قیمت : <span>100.000.000</span> ریال</div>
+                        <div class="PLIrec"></div>
+                        <div class="PLIseeDetail">مشاهده جزئیات محصول</div>
+                    </div>
+                    <div class="productListInner">
+                        <div class="PLIimage"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>
+                        <div class="PLIname">نام کالا</div>
+                        <div class="PLIprice">قیمت : <span>100.000.000</span> ریال</div>
+                        <div class="PLIrec"></div>
+                        <div class="PLIseeDetail">مشاهده جزئیات محصول</div>
+                    </div>*@
+                    <div id="NoProduct"></div>
+
+                    <div id="Load" class="Load">
+                        <div class="LoadMiddleHolder">
+                            <div class="LoadHolder">
+                                <div class="LoadinIcon"></div>
+                                <div class="LoadinIconSeconde"></div>
+                                <div class="LoadinIconThird"></div>
+                            </div>
+                            <div class="LogoLoading"></div>
+                            <div class="TextLoad">لطفا صبر کنید</div>
+                        </div>
+                    </div>
+                    <div id="BlockView">
+                        <div id="ProductShelfs">
+
+                        </div>
+                    </div>
+
+                    <div id="InlineView">
+
+                    </div>
+                    <div id="Pager_Bottom">
+                        <div id="pageCounter_Bottom">
+                        </div>
+                    </div>
+
+                </div>
+                @*<div class="pagesOfProducts">
+                    <div id="Pager_Bottom">
+                        <div id="pageCounter_Bottom">
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Script{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Content/Pagination/jquery.simplePagination.js"></script>
+
+    <script>
+        angular.module('ShopApp', [])
+    .controller('StoreController', ['$scope', function ($scope) {
+
+        $scope.Data = @Html.Raw(Json.Encode(Model));
+        if($scope.Data.StoreDetailes.ImgAddress){
+            $scope.Data.StoreDetailes.ImgAddress=($scope.Data.StoreDetailes.ImgAddress+'').replace(/\\/g,'/')
+        }else{
+            $scope.Data.StoreDetailes.ImgAddress='Img/StoreInfo/backgroundCover.jpg';
+        }
+
+        if($scope.Data.StoreDetailes.LogoAddress){
+            $scope.Data.StoreDetailes.LogoAddress=($scope.Data.StoreDetailes.LogoAddress+'').replace(/\\/g,'/')
+        }
+
+        console.log($scope.Data)
+        var sortBy,
+           ascending,
+           rowsPage,
+           TileShow,
+           pageNumber,
+           name,
+           changeCounter = 0,
+           StoreCode='',
+           currentData = {};
+
+
+        if($scope.Data&&$scope.Data.Products &&$scope.Data.Products.ProductsSummery!=''){
+            StoreCode=$scope.Data.Products.ProductsSummery[0].StoreCode;
+        }
+
+
+        var noProductPic = "Img/MainPage/NoProductPic.png",
+             root = "@Url.Content("~/")";
+
+        $('#Load').css("display", "none");
+        $('#SearchTxt').val('');
+
+        $('#Block').addClass('active');
+        $('#Block').prop('disabled', true);
+        $('#Inline').prop('disabled', false);
+        $('#Inline').prop('value', true);
+        $('#NoProduct').css("display", "none");
+
+
+        if ($scope.Data.Products.ProductsCount > 0) {
+            Paging($scope.Data.Products.ProductsCount);
+            showProduct($scope.Data.Products);
+        } else {
+            $('#NoProduct').css("display", "block");
+        }
+
+        //Paging Function
+        function Paging(productsCount) {
+
+            $('#pageCounter, #pageCounter_Bottom').pagination({
+                items: productsCount,
+                itemsOnPage: $("#rowsPage option:selected").val(),
+                cssStyle: 'pageCounter',
+                prevText: 'صفحه قبل',
+                nextText: 'صفحه بعد',
+                onPageClick: function (pageNumber, event) {
+                    PageingLoadProduct(pageNumber);
+                }
+            });
+
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', pageNumber);
+
+        };
+
+        //Change Page
+        function PageingLoadProduct(page) {
+            pageNumber = page;
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        }
+
+        //Show Product Function
+        function showProduct(result) {
+
+            var text = "";
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+
+            if ($("#Inline").val() == "false") {
+
+                $('#NoProduct').css("display", "block");
+
+                $.each(result.ProductsSummery, function (index, value) {
+                    $('#NoProduct').css("display", "none");
+
+                    text += "<div class='Inline_Shelf'>"
+                        + "   <div class='List_Category_Inline'>"
+                        + "  <ul>";
+
+                    if (value.ProductAttrbiutesViewModels && value.ProductAttrbiutesViewModels!='') {
+
+                        $.each(value.ProductAttrbiutesViewModels, function (index2, value2) {
+
+                            if (value2 != "") {
+
+                                text += "  <li>"
+                                    + "  <section class='HeaderSection DarkRed'>" + value2.AttributeName + " : </section> <section>";
+                                var textTempForShow = '';
+                                $.each(value2.AttributeValues, function (index3, value3) {
+                                    if (value3 != '') {
+                                        if (textTempForShow == '') { textTempForShow += value3; }
+                                        else { textTempForShow += " - " + value3 }
+                                    }
+                                });
+
+                                text += textTempForShow + " </section> </li>";
+                            }
+                        });
+                    }
+
+                    var PriceTemp = value.Price + '';
+                    var PriceTemp2 = value.DiscountedPrice + '';
+                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                    PriceTemp2 = PriceTemp2.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
+                    text += "  </ul>"
+                        + "  </div>"
+                        + " <div class='Name_Inline'>"
+                        //+ "   <div class='Brand_Logo_Inline'> </div>"
+                        + "  <div class='Brand_Name_Inline'>" + value.Name + "</div>"
+                        + "  </div>"
+                        + "  <div class='Picture_Inline'> <img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /> </div>"
+                        + "  <div class='Middle_Inline'>"
+                        + "   <div class='PictureandPrice_Inline'>"
+                        + "    <div class='Price_Inline'>"
+                        + "      <div class='Price_Subject_Inline'> : قیمت </div>"
+                        + "     <div class='Original_Price_Inline' class='Brown'> " + PriceTemp + "</div>"
+                        + "    <div class='Off_Price_Inline' class='DarkRed'>" + PriceTemp2 + " </div>"
+                        + "  </div>"
+                        + "   <div class='Details_Inline'>جزئیات محصول </div>"
+                        + "    <div class='Store_Inline' class='Brown'>" + value.StoreName + " , " + value.CityName + "</div>"
+                        + "   </div>"
+                        + "   </div>"
+                        + " </div> </div>";
+                });
+
+                $("#InlineView").append(text);
+            }
+            else {
+
+                $('#NoProduct').css("display", "block");
+
+                $.each(result.ProductsSummery, function (index, value) {
+                    $('#NoProduct').css("display", "none");
+
+                    var PriceTemp = value.Price + '';
+                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
+
+                    text += " <div class='ShelfInner'>"
+                        + "  <div class='PictureAndAdd'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        //+ " <div class='AddFavor'><img src='" + root + "Img/MiddlePage/AddFavorite.png'></div>"
+                        + " <div class='PictureProduct'><img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /></div>"
+                        //+ " <div class='AddCompare'><img src='" + root + "Img/MiddlePage/AddCompare.png'></div>"
+                        + " </a>"
+                        + " </div>"
+                        + " <div class='ShelfExplains'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        + "  <div class='ProductName'>"
+                        + " <div class='Brand'>" + value.Name + "</div>"
+                        //+ " <div class='Model'>" + value.Name + "</div>"
+                        + " </div>"
+                        + " </a>"
+                        + " <div class='PriceAndStore'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        + "<div id='Price'> <span>قیمت :</span><span>" + PriceTemp + "</span> </div>"
+                        + " </a>"
+                        + "<div id='Store'><span>فروشگاه :</span><span> " + value.StoreName + " </span></div>"
+                        + " </div>"
+                        + " </div>"
+                        + "</div>";
+
+                });
+                $("#ProductShelfs").append(text);
+
+            }
+
+        };
+
+        //Inline Press , Product Load
+        $("#Inline").on("click", function () {
+            $('#Inline').prop('disabled', true);
+            $('#Inline').prop('value', false);
+            $('#Inline').addClass('active');
+            $('#Block').removeClass('active');
+            TileShow = $("#Inline").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    $('#Block').prop('disabled', false);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Block Press , Product Load
+        $("#Block").on("click", function () {
+
+            $('#Block').prop('disabled', true);
+            $('#Inline').prop('value', true);
+            $('#Block').addClass('active');
+            $('#Inline').removeClass('active');
+            TileShow = $("#Inline").val();
+            updateData();
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    $('#Inline').prop('disabled', false);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Sort By Change , Product Load
+        $("#sortBy").on("change", function () {
+
+            pageNumber = 1;
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', 1);
+            sortBy = $("#sortBy option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Ascending Change , Product Load
+        $("#ascending").on("change", function () {
+
+            pageNumber = 1;
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', 1);
+            ascending = $("#ascending option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Rows Of Page Change , Product Load
+        $("#rowsPage").on("change", function () {
+
+            pageNumber = 1;
+            rowsPage = $("#rowsPage option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+                    Paging(result.ProductsCount);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+    
+        //changeSearchTextBox
+        $scope.changeSearchTextBox=function() {
+
+            if (changeCounter == 0) {
+                changeCounter = 1;
+
+                var nameTemp = $('#SearchTxt').val().replace(/[&\/\\#~;_,+()$~%.!|=+'":*?<>{}-]/g, '');
+                if (nameTemp != '') {
+                    name = nameTemp + '';
+                }
+
+                updateData();
+                reLoadProduct();
+                changeCounter = 0;
+            }
+        }
+
+        //reLoad Product
+        function reLoadProduct() {
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response; 
+                    $('#Load').css("display", "none");
+                    Paging(result.ProductsCount);
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        }
+
+        //get element data and Update currentData
+        function updateData() {
+            currentData = {};
+
+            if (sortBy == '' || sortBy == undefined) {
+                sortBy = '';
+            }
+            if (ascending == '' || ascending == undefined) {
+                ascending = '';
+            }
+            if (rowsPage == '' || rowsPage == undefined) {
+                rowsPage = '';
+            }
+            if (TileShow == '' || TileShow == undefined) {
+                TileShow = '';
+            }
+            if (pageNumber == '' || pageNumber == undefined) {
+                pageNumber = '';
+            }
+            if (name == '' || name == undefined) {
+                name = '';
+            }
+
+            if (sortBy)
+            {
+                currentData["sortBy"] = sortBy;
+            }
+            if (ascending)
+            {
+                currentData["ascending"] = ascending;
+            }
+            if (rowsPage)
+            {
+                currentData["rowsPage"] = rowsPage;
+            }
+            if (TileShow)
+            {
+                currentData["TileShow"] = TileShow;
+            }
+            if (pageNumber)
+            {
+                currentData["pageNumber"] = pageNumber;
+            }
+            if (name)
+            {
+                currentData["Name"] = name;
+            }
+
+            currentData["StoreCode"]=StoreCode;
+
+        };
+
+
+
+    }]);
+    </script>
+
+}

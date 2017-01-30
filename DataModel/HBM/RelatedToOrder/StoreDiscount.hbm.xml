@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="StoreDiscount" table="StoreDiscount" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="StoreCode">
+      <column name="StoreCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="DiscountPercent">
+      <column name="DiscountPercent" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="Code">
+      <column name="Code" sql-type="nvarchar" not-null="true" />
+    </property>
+    <property name="IsDisposable">
+      <column name="IsDisposable" sql-type="bit" not-null="true" />
+    </property>
+    <property name="IsActive">
+      <column name="IsActive" sql-type="bit" not-null="true" />
+    </property>
+    <!--<bag name="Order">
+      <key column="StoreDiscountCode" />
+      <one-to-many class="Order" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

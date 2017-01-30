@@ -1,0 +1,42 @@
+﻿@using AttributeValue = DataModel.Entities.RelatedToProduct.AttributeValue
+@model IEnumerable<AttributeValue>
+
+@{
+    Layout = null;
+    long attrCode = (long)ViewBag.AttrCode;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Add New Value", "AddValue", new { attrCode })
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditValue", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteValue", new { id = item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

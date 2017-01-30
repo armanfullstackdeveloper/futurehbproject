@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewBag.Title = "بازبینی سفارش";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
+@section Style{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="container insideFormBascket">
+    <h1>مرحله ۳ : بازبینی سفارش</h1>
+
+    <div ng-app="ShopApp" ng-controller="ShowOrderController">
+
+        <div class="container" ng-init="getBalance()">
+            <div ng-if="Product.length!=0" class="Row">
+                <p style="float: right;direction: rtl;font-size: 23px; margin: 19px;">
+                    مشخصات محصولات:
+                </p>
+
+                <table style="float:right;direction: rtl; margin:30px auto;" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
+                    <tr>
+                        <th style=" text-align: center;"></th>
+                        <th style=" text-align: center;">نام محصول</th>
+                        <th style=" text-align: center;">نام فروشگاه</th>
+                        <th style=" text-align: center;">تعداد</th>
+                        @*<th style=" text-align: center;">هزینه پستی</th>*@
+                        <th style=" text-align: center;">قیمت واحد</th>
+                        <th style=" text-align: center;">قیمت کل</th>
+                    </tr>
+                    <tr ng-repeat=" item in Product">
+                        <td style=" text-align: center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
+                        <td style=" text-align: center;" ng-bind="item.ProductName"></td>
+                        <td style=" text-align: center;" ng-bind="item.StoreName"></td>
+                        <td style=" text-align: center;" ng-bind="item.Count"></td>
+                        @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
+                        <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
+                        <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
+                        <td style=" text-align: center;">
+                            <i style="cursor:pointer" ng-click="RemoveProduct(item.ProductCode)">X</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style=" text-align: center;">مجموع خرید</td>
+                        <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
+                    </tr>
+                    <tr>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style=" text-align: center;">مجموع هزینه پستی</td>
+                        <td style=" text-align: center;" ng-bind="AllPostalCost"></td>
+                    </tr>
+                    <tr>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style=" text-align: center;">موجودی قبلی حساب شما </td>
+                        <td style=" text-align: center;" ng-bind="Balance"></td>
+                    </tr>
+                    <tr>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style=" text-align: center;">مبلغ قابل پرداخت  </td>
+                        <td style=" text-align: center;" ng-bind="PayPrice"></td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="Row">
+                <h3 style="margin-bottom:1em;">
+                    مشخصات تحویل گیرنده:
+                </h3>            
+                <div id="showInfo" ng-hide="EditBox">
+                    <div class="form-group">
+                        <label class="forLable">نام و نام خانوادگی : </label>
+                        <span ng-bind="Member.Name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تلفن ثابت : </label>
+                        <span ng-bind="Member.PhoneNumber"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تلفن همراه : </label>
+                        <span ng-bind="Member.MobileNumber"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>کد پستی : </label>
+                        <span ng-bind="Member.PostalCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>شهر : </label>
+                        <span ng-bind="Member.City"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>آدرس : </label>
+                        <span ng-bind="Member.Place"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="orgenizer" style="font-size:1.3em; margin-bottom:1em; border-top:solid #e1e1e1 1px; margin-top:1em; padding-top:1em;">
+                    اگر کد تخفیف دارید ، وارد و سپس دکمه  تایید را بفشارید
+                </div>
+                <div class="NLinputs">
+                    <div class="GoEmailNl DarkRed">
+                        <input name="" class="DarkRed" type="button"  ng-click="checkDiscount()" value="تایید">
+                    </div>
+                    <div class="WriteEmailNl">
+                        <input name="" type="text" ng-model="DiscountCode" placeholder="کد تخفیف">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="orgenizer FromTop">
+                    <div class="forLable" style="margin-top:5px;">نوع پرداخت</div>
+
+                    <div class="forInput">
+                        <select ng-model="orderType" ng-init="orderType='1'">
+                            <option value="1">پرداخت آزاد</option>
+                            <option value="2">پرداخت امن</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="orgenizer FromTop">
+                    <span>پرداخت آزاد : </span>
+                    مبلق واریزی بلافاصله پس از پرداخت  به حساب فروشنده واریز می شود.
+                </div>
+                <div class="orgenizer FromTop">
+                    <span>پرداخت امن : </span>
+                    در این روش، بعد از پرداخت  ، وجه به امانت نزد هوجی بوجی می ماند. و بعد از تحویل کالا به شما ، انتقال وجه انجام می شود.
+                </div>
+
+
+
+                <input class="fromTop btn btn-default inputRight" type="button" ng-click="Payment()" value="پرداخت" />
+               <div ng-show="showLoading" class="orgenizer FromTop">
+                   لطفا کمی صبر کنید
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Script{
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script>
+        angular.module('ShopApp', [])
+      .controller('ShowOrderController', ['$scope', function ($scope) {
+
+
+          $scope.Product = @Html.Raw(Json.Encode(Model));
+          $scope.Member = @Html.Raw(Json.Encode(ViewBag.MemberInfo));
+          var postalCost={};
+
+          $scope.AllTotalPrice=0;
+          $.each($scope.Product , function(index , value){
+
+              if(value.StoreCityCode==$scope.Member.CityCode){
+                  //PostalCostInTown
+                  if(postalCost[value.StoreName]&&postalCost[value.StoreName].price){
+                      if(postalCost[value.StoreName].price<value.PostalCostInTown){
+                          postalCost[value.StoreName].price=value.PostalCostInTown;
+                      }
+                  }
+                  else{
+                      postalCost[value.StoreName]={'price':value.PostalCostInTown};
+                  }
+              }else{
+                  //PostalCostInCountry
+                  if(postalCost[value.StoreName]&&postalCost[value.StoreName].price){
+                      if(postalCost[value.StoreName].price<value.PostalCostInCountry){
+                          postalCost[value.StoreName].price=value.PostalCostInCountry;
+                      }
+                  }
+                  else{
+                      postalCost[value.StoreName]={'price':value.PostalCostInCountry};
+                  }
+              }
+
+
+              var totalTemp=parseInt(value.RealPrice)*parseInt(value.Count);
+              $scope.AllTotalPrice+=totalTemp;
+              $scope.Product[index].TotalPrice=(totalTemp +'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+              $scope.Product[index].RealPrice=(value.RealPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+          })
+
+          var  postalTemp=0;
+
+          $.each(postalCost , function(index , value){
+              postalTemp+=value.price;
+          })
+          $scope.Balance=0;
+          $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+
+          $scope.AllPostalCost=(postalTemp+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+          $scope.AllTotalPrice=($scope.AllTotalPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+          parseInt
+          $scope.PayPrice=(parseInt($scope.AllTotalPrice.replace(/,/g, ''))+parseInt($scope.AllPostalCost.replace(/,/g, '')))-parseInt($scope.Balance.replace(/,/g, ''));
+
+
+          $scope.getBalance=function(id){
+              $.ajax({
+                  type: "GET",
+                  url: "/Member/panel/GetActiveBalance",
+                  success: function (result) {
+                      console.log(result)
+                      $scope.Balance=result;
+                      $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+                  }
+              });
+          }
+          $scope.checkDiscount=function(){
+              // console.log(JSON.stringify($scope.Product))
+
+              var checkProduct=[];
+              $.each($scope.Product,function(index,value){
+                  checkProduct.push({Count:value.Count , ProductCode:value.ProductCode});
+              })
+              console.log(checkProduct)
+              if(!$scope.DiscountCode)return;
+              $.ajax({
+                  type: "POST",
+                  contentType: "application/json",
+                  url: "/api/order/VerifyDiscountCode?discountCode="+$scope.DiscountCode,
+                  data: JSON.stringify($scope.Product) ,
+                  success: function (result) {
+                      console.log(result)
+                      // $scope.Balance=result;
+                      // $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+                  }
+              });
+          }
+          $scope.Payment=function(){
+              $scope.showLoading=true;
+              var url="/api/order/pay?orderType="+$scope.orderType;
+              if($scope.DiscountCode){
+                  url+="&discountCode="+$scope.DiscountCode
+              }
+
+              $.ajax({
+                  type: "POST",
+                  contentType: "application/json",
+                  url: url,
+                  data: JSON.stringify($scope.Product) ,
+                  success: function (result) {
+                      console.log(result)
+                      if(result.Success==true){
+                          window.location.href =  result.Response;
+                      }
+
+                      // $scope.Balance=result;
+                      // $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+                  }
+              });
+          }
+
+      }]);
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

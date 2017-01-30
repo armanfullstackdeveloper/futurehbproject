@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DataModel.Entities.RelatedToOrder.StoreDiscount>
+
+@{
+    ViewBag.Title = "کد تخفیف";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+
+<div id="Holder1" class="RegisterHolder">
+    <div id="FirstStep">
+        <div ng-app="ShopApp" id="AddDiscount" ng-controller="ShowOrderController">
+
+            <div class="col-md-12 form-group">
+                <div class="col-md-4 form-group orgenizer">
+                    <span>
+                        کد تخفیف جدید
+                    </span>
+                    <input type="text" id="Code" class="form-control ForTextBox" />
+                </div>
+                <div class="col-md-3 form-group orgenizer">
+                    <span>
+                        درصد تخفیف
+                    </span>
+                    <input type="text" id="DiscountPercent" class="form-control ForTextBox" />
+                </div>
+                <div class="col-md-4 form-group orgenizer" style="padding:0;margin: 33px 0  0 0;">
+                    <span>
+                        یک بار مصرف است
+                    </span>
+                    <input type="checkbox" maxlength="2" id="IsDisposable" style="display:inline-block;" />
+                </div>
+            </div>
+            <div class="col-md-12 orgenizer" style="margin-bottom: 20px;">
+
+
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-3 orgenizer">
+                    <div class="col-md-12">
+                        <input type="button" class="form-control NextStep" value="ارسال" ng-click="AddDiscountCode();" />
+                        <div id="errorHolder" style="text-align:center; font-size:16px; color:#ff6a00;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-responsive table-condensed table-striped"  style="direction:rtl;" ng-show="Data.length>0">
+                <tr style="font-size: 14px;">
+                    <th style="text-align: center;">
+                        ردیف
+                    </th>
+                    <th style="text-align: center;">
+                        کد تخفیف
+                    </th>
+                    <th style="text-align: center;">
+                        درصد تخفیف
+                    </th>
+                    <th style="text-align: center;">
+                        یک بار مصرف است
+                    </th>
+                    @*<th>
+                            فعال است
+                        </th>*@
+                    <th style="text-align: center;">
+                        حذف کردن
+                    </th>
+                </tr>
+
+                <tr ng-repeat="item in Data" style="text-align: center;">
+                    <td ng-bind="$index+1"></td>
+                    <td ng-bind="item.Code"></td>
+                    <td ng-bind="item.DiscountPercent"></td>
+                    <td ng-bind="item.IsDisposable |translate"></td>
+                    @*<td ng-bind="item.IsActive |translate"></td>*@
+                    <td><div ng-click="Deactive(item.Id)" class="btn btn-info">حذف کردن</div></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+@section Script{
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+
+        var madule=  angular.module('ShopApp', [])
+
+        madule.controller('ShowOrderController', ['$scope', function ($scope) {
+            $scope.Data=[];
+            $scope.Data = @Html.Raw(Json.Encode(Model));
+            console.log($scope.Data)
+
+
+            $scope.AddDiscountCode = function () {
+
+                if($("#Code").val()==''){
+                    $('#errorHolder').html("لطفا یک کد تخفیف وارد کنید")
+                    return
+                }
+                if($("#DiscountPercent").val()==''){
+                    $('#errorHolder').html("لطفادرصد تخفیف  را وارد کنید")
+                    return
+                }
+
+
+                var duplicate=false;
+                $.each($scope.Data , function(index ,value){
+                    if(value.Code==$("#Code").val()){
+                        duplicate=true;
+                    }
+                })
+                if(duplicate){
+                    $('#errorHolder').html("این کد تخفیف از قبل وجود دارد")
+                    return;
+                }
+                $('#errorHolder').html("لطفا صبر کنید")
+
+                $.ajax({
+                    type: "POST",
+                    url: "/DiscountCode/CreateDiscountCode",
+                    data: {
+                        Code: $("#Code").val(),
+                        DiscountPercent: $("#DiscountPercent").val(),
+                        IsDisposable: document.getElementById("IsDisposable").checked
+                    },
+                    success: function (result) {
+                        $('#errorHolder').html("ثبت شد ")
+
+                        location.reload();
+                    },
+                    error: function () {
+                        $('#errorHolder').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید")
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+
+            };
+
+            $scope.Deactive=function(id){
+                $('#errorHolder').html("لطفا صبر کنید")
+
+                $.ajax({
+                    type: "POST",
+                    url: "/DiscountCode/InactiveDiscountCode",
+                    data: {
+                        id: id
+                    },
+                    success: function (result) {
+                        $('#errorHolder').html("حذف شد ")
+
+                        location.reload();
+                    },
+                    error: function () {
+                        $('#errorHolder').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید")
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+        }]);
+        madule.filter('translate', function() {
+            return function(x) {
+
+                if(x==true)
+                    return "بله";
+                else
+                    return "خیر";
+            };
+        });
+
+        $('#AddDiscount').on('keydown', '#DiscountPercent', function (e) {
+            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+        });
+    </script>
+}

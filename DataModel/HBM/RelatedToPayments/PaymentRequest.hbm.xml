@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToPayments" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="PaymentRequest" table="PaymentRequest" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="PaymentRequestStatusCode">
+      <column name="PaymentRequestStatusCode" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="Description">
+      <column name="Description" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<bag name="PaymentResponse">
+      <key column="PaymentRequestCode" />
+      <one-to-many class="PaymentResponse" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

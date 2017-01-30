@@ -1,0 +1,496 @@
+﻿@model DataModel.Models.ViewModel.CompleteProductForOne
+
+@{
+    ViewBag.Title = "نمایش محصول";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+
+    <link href="~/Css/ProductDetails/ProductDetails.css" rel="stylesheet" />
+    @*<link href="~/Content/ImageGallery/gallery.css" rel="stylesheet" />
+        <link href="~/Content/ImageMagnifier/jQuery.MagnifierRentgen.min.css" rel="stylesheet" />*@
+    <link href="~/Content/MterialDesign/Material_Tab.css" rel="stylesheet" />
+
+ 
+
+}
+
+
+<div id="Middle" ng-app="ShopApp" ng-controller="ShowProductController">
+    <div id="GalleryAndInfes">
+        <div id="GalleryHolder">
+            <div class="gallery">
+                <div class="images">
+                    @*<img ng-src="~/{{Data.Product.ImgAddress}}" />*@
+
+                    <div ng-controller="MainCtrl">
+                        <div zoom2 big="SelectedItem.src" tiny="SelectedItem.src" small="SelectedItem.src" alt="" title="SelectedItem.alt"></div>
+                        <div ng-repeat="item in items" style="display:block; width: 100px; float: left;">
+                            <img src="{{item.src}}"  alt="{{item.alt}}" style="width: 100px;" ng-click="ThumbnailClicked(item)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            @*<div class="gallery" ng-if="Data.Product.OtherImagesAddress">
+                    <div class="images">
+                        <div ng-if="Data.Product.OtherImagesAddress" ng-repeat="item in Data.Product.OtherImagesAddress">
+                            <div ng-show="item.ImgAddres" ng-if="item.ImgAddress" class="image active">
+                                <div ng-if="$index==0 &&item.ImgAddress"  data-image="http://hoojibooji.com/{{item.ImgAddress}}.jpeg" data-image-zoom="http://hoojibooji.com/{{item.ImgAddress}}.jpeg"
+                                     data-size="150" class="content magnifier" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+
+                                <div ng-if="$index!=0 && $index<4 && item.ImgAddress" class="content" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumbs">
+                        <div ng-repeat="Data.Product.OtherImagesAddress">
+                            <div ng-show="item.ImgAddres" ng-if="item.ImgAddress && $index<4" class="thumb active" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if=" Data.Product.ImgAddress">
+                    <img ng-src="http://hoojibooji.com/{{Data.Product.ImgAddress}}" />
+                </div>*@
+        </div>
+        <div id="InfoHolder">
+            <div id="MapAndSellerInfoes">
+                <div id="MiniMapHolder" ng-show="Data.StoreSummery.Latitude!=null"></div>
+                <div id="SellerInfoHolder">
+                    <div id="addToBascketButton" style="text-align:center">
+                        <a class="btn btn-switch" style="background-color: #b9b9b9;padding: 5px;" href="~/shop/code/{{Data.StoreSummery.Id}}"> سایر محصولات فروشنده </a>
+                    </div>
+                    @*<div id="SellerDetails"><a href="shop/code/{{Data.StoreSummery.Id}}">مشاهده مشخصات فروشنده</a></div>*@
+                </div>
+            </div>
+            <div id="ProductAndPriceInfoes">
+                <div id="ProductName">
+                    <div id="NameOfTheProductHolder">
+                        @*<div id="BrandHolder"><img src="../Img/ProductDetails/BrandImages/Brand_1.png" alt="" /></div>*@
+
+                        <div id="NameOfTheProduct" ng-bind="Data.Product.Name"></div>
+                    </div>
+                    <div id="PriceOfTheProduct">
+
+                        <div ng-show="Data.Product.DiscountedPrice">
+                            <div id="PriceSubject">قیمت :</div>
+                            <div id="OriginalPrice" ng-bind="Data.Product.Price+' تومان '"></div>
+                            <div id="OffPrice2" ng-bind="Data.Product.DiscountedPrice+' تومان '"></div>
+                        </div>
+                        <div ng-hide="Data.Product.DiscountedPrice">
+                            <div id="PriceSubject">قیمت :</div>
+                            <div id="OffPrice2" ng-bind="Data.Product.Price +' تومان '"></div>
+                        </div>
+
+                    </div>
+
+                    <div ng-show="Data.Colors.length!=0" id="ColorsOfTheProducts">
+                        <div id="ColorSubject" style="width: 71px;">رنگ ها :</div>
+                        <div ng-repeat="color in Data.Colors" class="ColoSeperator" style="background-color:{{color.ColorHex}} "></div>
+                    </div>
+                </div>
+                <div class="Outer" ng-show="Data.Product.MadeIn">
+                    <div class="InnerSubject">کشور سازنده :</div>
+                    <div class="InnerInformation" ng-bind="Data.Product.MadeIn"></div>
+                </div>
+
+                <div id="AddressTags">
+                    <div ng-show="Data.StoreSummery.CityName && Data.StoreSummery.CityName!='-'" id="CityAndStateTags">
+                        <div ng-bind="Data.StoreSummery.CityName" class="Tag"></div>
+                    </div>
+                    <div ng-show="Data.StoreSummery.Name" class="Outer">
+                        <div class="InnerSubject">نام فروشگاه :</div>
+                        <div class="InnerInformation" ng-bind="Data.StoreSummery.Name"></div>
+                    </div>
+                    <div ng-show="Data.Product.Brand" class="Outer">
+                        <div class="InnerSubject">برند :</div>
+                        <div class="InnerInformation" ng-bind="Data.Product.Brand"></div>
+                    </div>
+                    @*<div class="Outer">
+                            <div class="InnerSubject">نام فروشنده :</div>
+                            <div class="InnerInformation">محمد جواد حیدری</div>
+                        </div>*@
+                    <div ng-show="Data.StoreSummery.Place" class="Outer">
+                        <div class="InnerSubject">آدرس :</div>
+                        <div class="InnerInformation" ng-bind="Data.StoreSummery.Place"></div>
+                    </div>
+
+                    <div ng-show="Data.StoreSummery.PhoneNumber" class="Outer">
+                        <div class="InnerSubject">تلفن تماس :</div>
+                        <div ng-bind="Data.StoreSummery.PhoneNumber" class="InnerInformation"></div>
+                    </div>
+
+                </div>
+                @*<div id="addToBascketButton" ng-show="Data.Product.CanSend">
+                        <button ng-click="AddToBasket()">افزودن به سبد خرید </button>
+                    </div>*@
+                <div id="SellerInfoHolder">
+                    <div id="OtherProducts" ng-show="Data.Product.CanSend && Data.Product.CanSend" style="width: 90%;background-color: rgba(109, 216, 23, 0.55);font-size: 17px;"><a ng-click="AddToBasket()">افزودن به سبد خرید</a></div>
+
+                    @*<div id="SellerDetails"><a href="shop/code/{{Data.StoreSummery.Id}}">مشاهده مشخصات فروشنده</a></div>*@
+                </div>
+
+            </div>
+            <div id="SpecialAbilities">
+                <div ng-show="Data.Product.CanGiveBack" class="giveBack" ripple="ripple" ripple-color="#FFF">قابل پس دادن</div>
+                <div ng-show="Data.Product.CanSend" class="Send" ripple="ripple" ripple-color="#FFF">قابل ارسال</div>
+                <div ng-show="Data.Product.Changeability" class="Switch" ripple="ripple" ripple-color="#FFF">قابل تعویض</div>
+                <div ng-show="Data.Product.IsExist" class="SpecialProduct" ripple="ripple" ripple-color="#FFF">موجود</div>
+            </div>
+        </div>
+        <div id="DetailTabs" ng-show="Data.ProductAttrbiutesViewModels!=null ">
+
+            <div class="tabs">
+                <div class="tabs-header">
+                    <div class="border"></div>
+                    <ul style="margin-top:0;">
+                        <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات محصول</a></li>
+                        @*<li><a href="#tab-2" tab-id="2" ripple="ripple" ripple-color="#FFF">مشخصات فرعی</a></li>
+                            <li><a href="#tab-2" tab-id="2" ripple="ripple" ripple-color="#FFF">برا بعدا</a></li>*@
+                    </ul>
+                    <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
+                </div>
+                <div class="tabs-content">
+                    <div tab-id="1" id="TabOneDetailes" class="tab active">
+
+                        <div ng-show="Data.ProductAttrbiutesViewModels" ng-repeat="item in Data.ProductAttrbiutesViewModels">
+                            <div ng-if="$index %2 == 0">
+                                <div class="rightSide" style="height:30px;">
+                                    <div class="TabHolder">
+                                        <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
+                                        <div class="ContentTabInner" ng-bind="item.Value"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="$index %2 !=0">
+                                <div class="LeftSide" style="height:30px;">
+                                    <div class="TabHolder">
+                                        <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
+                                        <div class="ContentTabInner" ng-bind="item.Value"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #my-container {
+        width: 270px;
+        height: 170px;
+        border: solid 1px black;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #thumbnails {
+        padding-left: 1px;
+        list-style-type: none;
+    }
+
+        #thumbnails li {
+            float: left;
+            margin-right: 5px;
+        }
+
+        #thumbnails img {
+            width: 50px;
+            height: 50px;
+        }
+        
+/* This is the moving lens square underneath the mouse pointer. */
+.cloud-zoom-lens {
+	border: 4px solid #888;
+	margin:-4px;	/* Set this to minus the border thickness. */
+	background-color:#fff;	
+	cursor:move;		
+}
+
+/* This is for the title text. */
+.cloud-zoom-title {
+	font-family:Arial, Helvetica, sans-serif;
+	position:absolute !important;
+	background-color:#000;
+	color:#fff;
+	padding:3px;
+	width:100%;
+	text-align:center;	
+	font-weight:bold;
+	font-size:10px;
+	top:0px;
+}
+
+/* This is the zoom window. */
+.cloud-zoom-big {
+	border:4px solid #ccc;
+	overflow:hidden;
+}
+
+/* This is the loading message. */
+.cloud-zoom-loading {
+	color:white;	
+	background:#222;
+	padding:3px;
+	border:1px solid #000;
+}
+
+
+
+</style>
+
+@section Script{
+<script src="~/Scripts/jquery1.8.3.js"></script>
+  <script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/cloud-zoom1.0.2.js"></script>
+
+     @* <script src="~/Content/ImageMagnifier/jQuery.MagnifierRentgen.min.js"></script>
+        <script src="~/Content/ImageGallery/gallery.js"></script>
+         <script src="~/Content/ImageGallery/Hammer.min.js"></script>*@
+    <script src="~/Content/MterialDesign/Material_Tab.js"></script>
+
+    <script>
+        var app = angular.module('ShopApp', []);
+        app.controller('ShowProductController', ['$scope', function ($scope) {
+
+            $scope.Data = @Html.Raw(Json.Encode(Model));
+            console.log($scope.Data)
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.ImgAddress && $scope.Data.Product.ImgAddress!=null) {
+                var temp = $scope.Data.Product.ImgAddress + '';
+                $scope.Data.Product.ImgAddress = temp.replace(/\\/g, '/');
+            }else{
+                $scope.Data.Product.ImgAddress = "Img/MainPage/NoProductPic.png"
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.OtherImagesAddress) {
+                $.each($scope.Data.Product.OtherImagesAddress , function(index,value){
+                    var temp = $scope.Data.Product.OtherImagesAddress[index].ImgAddress + '';
+                    $scope.Data.Product.OtherImagesAddress[index].ImgAddress = temp.replace(/\\/g, '/');
+                })
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.DiscountedPrice) {
+                var temp = $scope.Data.Product.DiscountedPrice + '';
+                $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.Price) {
+                var temp = $scope.Data.Product.Price + '';
+                $scope.Data.Product.Price = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            }
+
+            if($scope.Data&&$scope.Data.ProductAttrbiutesViewModels&&$scope.Data.ProductAttrbiutesViewModels!='')
+            {
+                $.each($scope.Data.ProductAttrbiutesViewModels, function (index, value) {
+                    if (value) {
+                        value.Value = '';
+                        $.each(value.AttributeValues, function (index2, value2) {
+                            if (value2) {
+                                if (value.Value) {
+                                    value.Value += ' , ' + value2;
+                                } else {
+                                    value.Value += value2;
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+            ////set Gallery and magnifier photo
+            //$('.gallery').gallery();
+            //$(".magnifier").magnifierRentgen();
+
+            $scope.AddToBasket=function(){
+
+                var realPrice='';
+                if($scope.Data.Product && $scope.Data.Product.DiscountedPrice && $scope.Data.Product.DiscountedPrice!=0){
+                    realPrice=$scope.Data.Product.DiscountedPrice;
+                }
+                else if($scope.Data.Product && $scope.Data.Product.Price && $scope.Data.Product.Price!=0){
+                    realPrice=$scope.Data.Product.Price;
+                }
+                else{
+                    realPrice=0;
+                }
+
+                if(realPrice && realPrice!=0){
+                    realPrice= realPrice.replace(/,/g,'');
+                }
+
+                var ProductToShoppingBagDataModel ={
+                    ProductCode:$scope.Data.Product.Id,
+                    ProductName:$scope.Data.Product.Name,
+                    RealPrice:realPrice,
+                    StoreName:$scope.Data.StoreSummery.Name,
+                    ImgAddress:$scope.Data.Product.ImgAddress,
+                    PostalCostInCountry:$scope.Data.Product.PostalCostInCountry,
+                    PostalCostInTown:$scope.Data.Product.PostalCostInTown
+                };
+
+                console.log(ProductToShoppingBagDataModel)
+
+                $.ajax({
+                    type: "GET",
+                    url: "/order/AddToBag/",
+                    data: ProductToShoppingBagDataModel,
+                    success: function (result) {
+                        window.location.href='/order' ;
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            };
+
+            var lat = $scope.Data.StoreSummery.Latitude;
+            var longi = $scope.Data.StoreSummery.Longitude;
+
+            //Google map Api
+            $(function () {
+                var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(longi));
+                var options = {
+                    zoom: 13,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("MiniMapHolder"), options);
+                new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+
+            });
+
+
+        }]);
+
+
+        app.controller('MainCtrl', function($scope) {
+            $scope.name = 'World';
+
+            $scope.items = [{
+                "src": $scope.Data.Product.ImgAddress,
+                "alt": "تصویر اصلی"
+            }];
+            
+            if($scope.Data.Product.OtherImagesAddress.length!=0)
+            {
+                $.each($scope.Data.Product.OtherImagesAddress , function(index,value){
+                
+                    $scope.items.push({"src":  $scope.Data.Product[index].ImgAddress , "alt":"سایر تصاویر"})
+
+                })
+            }
+               
+            console.log($scope.items)
+            //$scope.ZoomItems = [];
+            //$scope.ZoomItems.push({
+            //    id: 0,
+            //    big: "http://www.professorcloud.com/images/zoomengine/bigimage00.jpg",
+            //    tiny: "http://www.professorcloud.com/images/zoomengine/tinyimage.jpg",
+            //    small: "http://www.professorcloud.com/images/zoomengine/smallimage.jpg",
+            //    title: "display title",
+            //});
+            //$scope.ZoomItems.push({
+            //    id: 1,
+            //    big: "http://www.professorcloud.com/images/zoomengine/bigimage01.jpg",
+            //    tiny: "http://www.professorcloud.com/images/zoomengine/tinyimage-1.jpg",
+            //    small: "http://www.professorcloud.com/images/zoomengine/smallimage-1.jpg",
+            //    title: "display title",
+            //});
+            //$scope.ZoomItems.push({
+            //    id: 2,
+            //    big: "http://www.professorcloud.com/images/zoomengine/bigimage02.jpg",
+            //    tiny: "http://www.professorcloud.com/images/zoomengine/tinyimage-2.jpg",
+            //    small: "http://www.professorcloud.com/images/zoomengine/smallimage-2.jpg",
+            //    title: "display title",
+            //});
+
+            $scope.SelectedItem = $scope.items[0];
+
+            $scope.ThumbnailClicked = function(Item) {
+                $scope.SelectedItem = Item;
+            };
+
+
+        });
+
+        
+      
+ 
+
+
+
+        app.directive('zoom2', ['$compile',
+          function($compile) {
+              return {
+                  restrict: 'AC',
+                  scope: {
+                      tiny: "=",
+                      small: "=",
+                      big: "=",
+                      title: "="
+                  },
+                  //Template doesn't seem work correctly, leaves a loading message.
+                  //template: '<a href="{{big}}" class="cloud-zoom" rel="adjustX: 10, adjustY:-4"><img src="{{small}}"/></a>',
+                  //replace: true,
+                  controller: ["$scope", "$attrs", "$element", "$compile",
+                    function($scope, $attrs, $element, $compile) {
+
+                        $scope.init = function() {
+
+
+
+                            //Create a watch to know when to open the PopOver Text
+                            $scope.$watch('tiny + small + big + title', function(newValue, oldValue) {
+                                console.log("in watch.");
+
+
+                                var str = $scope.small + ' <a href="' + $scope.big + '" class="cloud-zoom" rel="adjustX: 10, adjustY:-4">' +
+                                  '<img src="' + $scope.small + '"/></a>';
+                                var e = $compile(str)($scope);
+
+                                $element.html(e);
+
+                                ///$(".cloud-zoom, .cloud-zoom-gallery").CloudZoom();
+
+                            }, true);
+
+                        }; // end init
+
+                        //set the popover properties
+                        $scope.init();
+
+                    }
+                  ]
+
+              };
+          }
+        ]);
+
+
+
+
+
+    </script>
+
+
+
+    @*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js? sensor=false"></script>*@
+
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
+
+
+
+}

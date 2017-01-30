@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4CB3A8EC-C42E-4FDA-BBE3-BBFD8C6E6F56}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLogic</RootNamespace>
+    <AssemblyName>BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="PersianDateTime, Version=1.1.5082.36395, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PersianDateTime.1.1.5082.36395\lib\net40\PersianDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BussinesLogics\HBAdminBL.cs" />
+    <Compile Include="BussinesLogics\ErrorLogBL.cs" />
+    <Compile Include="BussinesLogics\MemberBL.cs" />
+    <Compile Include="BussinesLogics\CityBL.cs" />
+    <Compile Include="BussinesLogics\ContactsBL\ContactWithUsBL.cs" />
+    <Compile Include="BussinesLogics\ContactsBL\PublicMessageBL.cs" />
+    <Compile Include="BussinesLogics\FirstPageBL\FirstPage_AdvertiseBL.cs" />
+    <Compile Include="BussinesLogics\FirstPageBL\FirstPage_SliderBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderSendingTypeBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\HBPaymentToMemberBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\HBPaymentToStoreBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\PaymentRequestBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\PaymentResponseBL.cs" />
+    <Compile Include="BussinesLogics\MobileAppUserSurveyBL.cs" />
+    <Compile Include="BussinesLogics\MobileInstalledBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderHistoryBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderStatusBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderProductsBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\StoreDiscountBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\PaymentRequestStatusBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToPayments\PaymentResponseStatusBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\AttributeBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\AttributeTypeBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\AttributeValueBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\BrandBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\CategoryBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductAdditionalAttrbiuteBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductColorBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductCommentBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductImageBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductLikeBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductLogBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductNonSearchableAttributeValueBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductSearchableAttributeValueBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\ProductVoteBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToProductBL\UserProductReportBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\CatsOfStoreBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\PlanBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\SalesPlanBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\SellerBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\StoreBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\StoreImageBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\StoreCustomerBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\StoreTellBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\TransactionBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToStoreBL\UserStoreReportBL.cs" />
+    <Compile Include="BussinesLogics\RoleBL.cs" />
+    <Compile Include="BussinesLogics\StateBL.cs" />
+    <Compile Include="Components\DbMessage.cs" />
+    <Compile Include="Components\QueryResult.cs" />
+    <Compile Include="Helpers\DapperConfiguration.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\GenericRepository.cs" />
+    <Compile Include="Helpers\HelperFunctionInBL.cs" />
+    <Compile Include="Helpers\MyExceptionHandler.cs" />
+    <Compile Include="Helpers\NHibernateConfiguration.cs" />
+    <Compile Include="Helpers\StaticNembericInBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\IRepository.cs" />
+    <Compile Include="BussinesLogics\UserBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{81bd236c-2fd7-43e3-b0fb-5d357b79034d}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

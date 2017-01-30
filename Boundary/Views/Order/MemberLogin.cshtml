@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "ورود به سایت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>مرحله 1 : ورود به سایت</h1>
+<div style=" width:316px;height:287px; margin:30px auto; background: #d74a68;padding: 5%;border-radius: 15px; ">
+    <div id="SubjectAndClose">
+
+        <div id="SubjectOnly">
+            ورود
+            <p>برای خرید محصول ابتدا باید وارد سایت شوید</p>
+        </div>
+
+    </div>
+    <div id="UserNameLogIn">
+        <input id="UserName2" type="text"  tabindex="1"  placeholder="نام کاربری">
+    </div>
+    <div id="PasswordLogIn">
+        <input id="Password2" type="password"  tabindex="2"   placeholder="رمز عبور">
+    </div>
+    @*<div id="EnterLogIn" style=" margin-top: 26px;">
+            <input id="RegisterBtn" type="button" value="عضویت">
+        </div>*@
+    <div id="MemmoryLogIn">
+        <input type="checkbox" id="c2" name="cc" />
+        <label for="c3"><span></span>رمز عبور را بخاطر بسپار</label>
+    </div>
+ 
+    <div id="EnterLogIn">
+        <input id="EntrBtn2" onclick="login()" type="button" tabindex="3" value="ورود">
+    </div>
+
+
+    <div id="SubjectOnly" style="margin:auto">
+
+        <p>
+            اگر هنوز عضو سایت نشده اید ، <a href="~/Account/RegisterMember">ثبت نام</a> کنید
+        </p>
+        <a href="~/Account/RegisterMember">ثبت نام</a>
+
+    </div>
+</div>
+
+
+<div id="LogInFaild2"></div>
+<div id="LogInSucseed2"></div>
+
+@section Script{
+
+    <script>
+    
+
+        function login() {
+            $('#EntrBtn2').addClass('GoLogIn');
+           $('#EntrBtn2').prop('disabled', true);
+            // $('#RegisterBtn').prop('disabled', true);
+
+            var form = $('#__AjaxAntiForgeryForm');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+            var remember = "";
+            if ($('#c2').val() == "on") remember = "true";
+            else remember = "false";
+
+            $.ajax({
+                url: '/Account/Login',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: token,
+                    UserName: $('#UserName2').val(),
+                    Password: $.md5($('#Password2').val()),
+                    RememberMe: remember
+                },
+                success: function (result) {
+
+                    if (result.Success == true) {
+
+                        $('#LogInSucseed2').fadeIn(1000).fadeTo(100, 1.0, function () {
+
+                            if (returnUrl == "") {
+                                //return to root
+                                window.location = "/Order/MemberInfo";
+
+                            } else {
+                                //return to returnUrl
+                                window.location = returnUrl;
+                            }
+                        });
+
+                    } else {
+                        $('#LogInFaild2').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
+                        $('#EntrBtn2').removeClass('GoLogIn');
+                        $('#EntrBtn2').prop('disabled', false);
+                        // $('#RegisterBtn').prop('disabled', false);
+
+                    }
+                },
+                error: function () {
+                    $('#LogInFaild2').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
+                    $('#EntrBtn2').removeClass('GoLogIn');
+                    $('#EntrBtn2').prop('disabled', false);
+                    // $('#RegisterBtn').prop('disabled', false);
+
+                }
+
+            });
+
+
+        };
+    </script>
+}

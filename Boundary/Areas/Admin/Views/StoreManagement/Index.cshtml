@@ -1,0 +1,84 @@
+﻿@using DataModel.Enums
+@using DataModel.Models.ViewModel
+@model IEnumerable<StoreDetailsViewModel>
+
+@{
+    Layout = null;
+    SelectList storeTypeList = new SelectList(new List<DropDownItemsModel>()
+    {
+        new DropDownItemsModel()
+        {
+            Value = 0,
+            Text = "همه"
+        },new DropDownItemsModel()
+        {
+            Value = (long)EStoreType.Physical,
+            Text = "فیزیکی"
+        },new DropDownItemsModel()
+        {
+            Value = (long)EStoreType.Online,
+            Text = "اینترنتی"
+        },
+        new DropDownItemsModel()
+        {
+            Value = (long)EStoreType.Homemade,
+            Text = "خانگی"
+        },
+    }, "Value", "Text");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Js/jquery-2.1.3.min.js"></script>
+</head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <h3>جدید ترین فروشگاهها</h3>
+        <p>
+            جستجو با نام فروشگاه یا آی دی
+            @Html.TextBox("txtSearch", null, new { onkeyup = "ajaxSearch();" })
+        </p>
+        <p>
+            @Html.Label("براساس وضعیت", new { @class = "control-label col-md-2" })
+            @Html.DropDownList("ddlStoreStatus", new SelectList(Enum.GetValues(typeof(EStoreStatus))), new { onchange = "ajaxSearch();" })
+        </p>
+        <p>
+            @Html.Label("بر اساس نوع فروشگاه", new { @class = "control-label col-md-2" })
+            @Html.DropDownList("ddlStoreType", storeTypeList, new { onchange = "ajaxSearch();" })
+        </p>
+        <div id="stores">
+            @Html.Partial("_StoreViewModel", Model)
+        </div>
+        <div>
+            @Html.ActionLink("صفحه بعدی", "Index", new { pageNumber = (int)ViewBag.PageNumber + 1 })
+            @Html.ActionLink("صفحه قبلی", "Index", new { pageNumber = (int)ViewBag.PageNumber - 1 })
+        </div>
+    </body>
+</html>
+
+<script>
+function ajaxSearch() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SearchStoreByAjax")',
+            dataType: 'html',
+            data: {
+                codeOrName: $("#txtSearch").val(), storeType: $("#ddlStoreType option:selected").val(),
+                status: $("#ddlStoreStatus option:selected").val()
+            },
+            success: function (result) {
+                $("#stores").empty();
+                $("#stores").html(result);
+            },
+            error: function (ex) {
+                alert('Failed to retrieve items.');
+            }
+        });
+    }
+</script>

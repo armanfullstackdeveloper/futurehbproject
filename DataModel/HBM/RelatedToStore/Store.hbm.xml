@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToStore" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Store" table="Store" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="SallerCode">
+      <column name="SallerCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="UserCode">
+      <column name="UserCode" sql-type="nvarchar" not-null="true" />
+    </property>
+    <property name="CityCode">
+      <column name="CityCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Comments">
+      <column name="Comments" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="CommercialCode">
+      <column name="CommercialCode" sql-type="int" not-null="false" />
+    </property>
+    <property name="ReagentPhoneNumber">
+      <column name="ReagentPhoneNumber" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Place">
+      <column name="Place" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Latitude">
+      <column name="Latitude" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Longitude">
+      <column name="Longitude" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="ImgAddress">
+      <column name="ImgAddress" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="LogoAddress">
+      <column name="LogoAddress" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="StoreTypeCode">
+      <column name="StoreTypeCode" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="Website">
+      <column name="Website" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="HomePage">
+      <column name="HomePage" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="RegisterDate">
+      <column name="RegisterDate" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="StoreStatus">
+      <column name="StoreStatus" sql-type="tinyint" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Color" table="Color" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="ColorTitle">
+      <column name="ColorTitle" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="ColorHex">
+      <column name="ColorHex" sql-type="nvarchar" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

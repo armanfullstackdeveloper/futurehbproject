@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToProduct" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="AttributeValue" table="AttributeValue" lazy="true" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="AttributeCode">
+      <column name="AttributeCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Value">
+      <column name="Value" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Status">
+      <column name="Status" sql-type="tinyint" not-null="false" />
+    </property>
+    <!--<bag name="ProductSearchableAttributeValue">
+      <key column="AttributeValueCode" />
+      <one-to-many class="ProductSearchableAttributeValue" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

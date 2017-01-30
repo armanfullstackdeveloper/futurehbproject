@@ -1,0 +1,13 @@
+﻿@model IEnumerable<DataModel.Models.ViewModel.OrderViewModelForAdmins>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>سفارشات در انتظار بررسی</h1>
+
+@Html.Partial("_OrderList",Model)
+<div>
+    @Html.ActionLink("صفحه بعدی", "Index", new { pageNumber = (int)ViewBag.PageNumber + 1 })
+    @Html.ActionLink("صفحه قبلی", "Index", new { pageNumber = (int)ViewBag.PageNumber - 1 })
+</div>

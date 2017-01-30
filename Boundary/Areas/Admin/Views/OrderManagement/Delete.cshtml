@@ -1,0 +1,91 @@
+﻿@model DataModel.Models.ViewModel.OrderViewModelForAdmins
+
+@{
+    ViewBag.Title = "OrderDetailes";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ویرایش سفارش</h1>
+<div>
+    <h2>اطلاعات کلی</h2>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                کد سفارش
+            </th>
+            <th>
+                تاریخ
+            </th>
+            <th>
+                زمان
+            </th>
+            <th>
+                شیوه پرداخت
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                نام فروشگاه
+            </th>
+            <th>
+                نام مشتری
+            </th>
+            <th>
+                هزینه سفارش
+            </th>
+            <th>
+                مبلغ پرداختی
+            </th>
+            <th>
+                مبلغ مورد استفاده از موجودی قبلی
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OrderStatus.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.ShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OverallOrderCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.OverallPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.MemberUsedBalance)
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+<br />
+<div>
+    @using (Html.BeginForm("PostDelete", "OrderManagement", new { orderCode = Model.OrderCode }, FormMethod.Post))
+    {
+        <h3>.آیا مطمعن هستید؟! بعد از حذف امکان بازیابی این سفارش وجود نخواهد داشت</h3>
+        <input type="submit" value="حذف" />
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,155 @@
+﻿@model IEnumerable<DataModel.Models.ViewModel.ShoppingBagViewModel>
+
+
+@{
+    ViewBag.Title = "سبد خرید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+}
+<div class="container" ng-app="ShopApp" ng-controller="ShowOrderController">
+
+    <div class="emptyCartShopNotice" ng-show="Data.length==0">
+        <div class="guideBox">
+            <div class="imagePart"><img src="~/Img/emptyBascket.jpg" class="imageInMiddle" /></div>
+            <div class="textFieldPart">
+                <div class="headerPart">سبد خرید شما خالی است</div>
+                <div class="contentPart">برای خرید انواع البسه و سایر لوازم مورد نیاز خود ابتدا وارد شوید و از امکانات کامل ما
+ استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
+سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید</div>
+            </div>
+            <div class="buttonPart"><a href="/"><button>ورود</button></a></div>
+        </div>
+    </div>
+    <table class="firstHide table  table-borderd table-hover table-stariped" style="float:right;direction: rtl; margin:30px auto;" ng-show="Data.length>0" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
+        <tr>
+            <th style=" text-align: center;"></th>
+            <th style=" text-align: center;">نام محصول</th>
+            <th style=" text-align: center;">نام فروشگاه</th>
+            <th style=" text-align: center;">تعداد</th>
+            @*<th style=" text-align: center;">هزینه پستی</th>*@
+            <th style=" text-align: center;">قیمت واحد</th>
+            <th style=" text-align: center;">قیمت کل</th>
+         </tr>
+        <tr ng-repeat=" item in Data" >
+            <td style=" text-align: center;"><div class="tablePicHandler"><img width="60" ng-src="~/{{item.ImgAddress}}" /></div></td>
+            <td style=" text-align: center;" ng-bind="item.ProductName"></td>
+            <td style=" text-align: center;" ng-bind="item.StoreName"></td>
+            <td style=" text-align: center; font-size: 17px;">
+                <i class="glyphicon glyphicon-plus" style="cursor:pointer" ng-click="CountPlus(item.ProductCode )"></i>
+                <p ng-bind="item.Count"></p>
+                <i class="glyphicon glyphicon-minus"  style="cursor:pointer" ng-click="CountMinus(item.ProductCode)"></i>
+            </td>
+            @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
+            <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
+            <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
+            <td style=" text-align: center;">
+                <div class="removeItem"  ng-click="RemoveProduct(item.ProductCode)"></div>
+            </td>
+        </tr>
+        <tr >
+            <td></td>
+            <td></td>
+            <td></td>
+             <td></td>
+            <td style=" text-align: center;">مجموع خرید</td>
+            <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
+        </tr>
+
+    </table>
+
+    <div ng-show="Data.length>0"  class="firstHide">
+        @using Boundary.Helper.StaticValue
+        @using Microsoft.AspNet.Identity
+
+        @if (Request.IsAuthenticated)
+        {
+            //if (User.IsInRole(StaticString.Role_Member))
+            //{
+                    <a class="btn btn-success" href="~/Order/MemberInfo">تکمیل خرید</a>
+                //}
+        }
+        else
+        {
+            <a class="btn btn-success" href="~/Order/MemberLogin">تکمیل خرید</a>
+        }
+        <a class="btn btn-info" href="/">بازگشت به صفحه اول</a>
+    </div>
+   
+</div>
+
+<style>
+    .firstHide{
+        display:none;
+    }
+</style>
+
+@section Script{
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script>
+        angular.module('ShopApp', [])
+      .controller('ShowOrderController', ['$scope', function ($scope) {
+
+          $('.firstHide').show();
+          $scope.Data = @Html.Raw(Json.Encode(Model));
+          console.log($scope.Data)
+
+          $scope.AllTotalPrice=0;
+          $.each($scope.Data , function(index , value){
+              var totalTemp=parseInt(value.RealPrice)*parseInt(value.Count);
+
+              $scope.AllTotalPrice+=totalTemp;
+              $scope.Data[index].TotalPrice=(totalTemp +'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+              $scope.Data[index].RealPrice=(value.RealPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+              $scope.Data[index].PostalCost=(value.PostalCost+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+          })
+          $scope.AllTotalPrice=($scope.AllTotalPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+          $scope.CountMinus=function(id){
+               $.ajax({
+                   type: "GET",
+                   url: "/order/MinusProductCount?productCode="+id,
+                  data: {
+                      productCode:id
+                  },
+                  success: function (result) {
+                      window.location.reload();
+                  } 
+              });
+          }
+          
+          $scope.CountPlus=function(id){
+              $.ajax({
+                  type: "GET",
+                  url: "/order/AddProductCount?productCode="+id,
+                  success: function (result) {
+                      window.location.reload();
+                  } 
+              });
+          } 
+          $scope.RemoveProduct=function(id){
+              $.ajax({
+                  type: "GET",
+                  url: "/order/RemoveFromBag?productCode="+id,
+                  success: function (result) {
+                      window.location.reload();
+                  } 
+              });
+          }
+
+      }]);
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

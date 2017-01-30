@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="OrderHistory" table="OrderHistory" lazy="false" >
+    <composite-id>
+      <key-property name="OrderCode" column="OrderCode" />
+      <key-property name="OrderStatusCode" column="OrderStatusCode" />
+    </composite-id>
+    <property name="OrderCode">
+      <column name="OrderCode" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="OrderStatusCode">
+      <column name="OrderStatusCode" sql-type="tinyint" not-null="true" />
+    </property>
+    <property name="Date">
+      <column name="Date" sql-type="int" not-null="true" />
+    </property>
+    <property name="Time">
+      <column name="Time" sql-type="int" not-null="true" />
+    </property>
+    <property name="UserCode">
+      <column name="UserCode" sql-type="nvarchar" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

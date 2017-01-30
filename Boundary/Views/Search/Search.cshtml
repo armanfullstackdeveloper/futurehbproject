@@ -1,0 +1,1602 @@
+﻿@{
+    ViewBag.Title = "جستجو پیشرفته";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Style{
+<link rel="stylesheet" type="text/css" href="~/Css/MiddlePage/MiddlePage.css">
+<link href="~/Content/noUiSlider(Price_Picker)/nouislider.min.css" rel="stylesheet" />
+<link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInSearch.css" rel="stylesheet" />
+
+}
+
+<div id="Middle">
+    <div id="DisplayProductsHolder">
+        <div id="TagsAndResearch">
+
+        </div>
+
+        <div id="DetailAndAdvance">
+            <div id="FirstColumn">
+                <div id="SmallSearch">
+                    <input name="SearchTxt" id="SearchTxt" class="SmallSearch" placeholder="جست و جو" type="text">
+                    <input name="" onclick="changeSearchTextBox();" id="SearchBtn" class="GoSmallSearch" type="button">
+                </div>
+                <div id="Orgnizer">
+                    <div id="OrgnizerLabel">مرتب سازی بر اساس</div>
+                    <div id="CategoryOrgenize">
+                        <select name="sortBy" id="sortBy">
+
+                            <option value="1">جدیدترین </option>
+                            <option value="2">قیمت</option>
+                            <option value="3">پربازدید ترین </option>
+                            <option value="4">پرامتیازترین</option>
+                            <option value="5">محبوب ترین </option>
+                            <option value="6">نزدیک ترین ها به من </option>
+
+                        </select>
+                    </div>
+                    <div id="Diagrame">
+                        <select name="ascending" id="ascending">
+                            <option value="false">نزولی</option>
+                            <option value="true">صعودی</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div id="Nearest">نزدیک ترین به من</div>
+                <div id="NearestContainer">
+                    <div id="CloseNearest"></div>
+                    <div id="NearestHolder">
+                        <div id="MapNearest">
+                            <div id="SubjectNear">نزدیک ترین مغازه ها به من</div>
+                            <div id="CloseNear"></div>
+                            <div id="MapNear">
+
+                                <div class="mapLoading" style="color:white" class="TextLoad">لطفا صبر کنید</div>
+
+                            </div>
+
+                            <div id="MapErrorHandler">
+                                لطفا ابتدا مکان مورد نظر خود را انتخاب نمایید
+                            </div>
+                            <div id="chooseMapMark"><input type="button" value="انتخاب"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="SecondeColumn">
+                <div id="Amount">
+                    <div id="AmountLabel">تعداد نمایش</div>
+                    <div id="CategoryAmount">
+                        <select name="rowsPage" id="rowsPage">
+                            <option value="24">24</option>
+                            <option value="36">36</option>
+                            <option value="48">48</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="Condition">
+                    <div id="ConditionLabel">حالت نمایش</div>
+                    <div id="ChoosePlace">
+                        <button type="button" id="Block" value="false"></button>
+                        <button type="button" id="Inline" value="true"></button>
+                    </div>
+                </div>
+                <div id="State">
+                    <div id="StateLabel">استان</div>
+                    <div id="CategoryState">
+                        <select name="stateCode" id="stateCode">
+                            <option selected value="0">  استان </option>
+
+                        </select>
+                    </div>
+                </div>
+                <div id="City">
+                    <div id="CityLabel">شهر</div>
+                    <div id="CategoryCity">
+                        <select name="cityCode" id="cityCode">
+                            <option selected value="0"> شهر </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="Pager">
+                    <div id="pageCounter">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="NoProduct"></div>
+
+        <div id="Load" class="Load">
+            <div class="LoadMiddleHolder">
+                <div class="LoadHolder">
+                    <div class="LoadinIcon"></div>
+                    <div class="LoadinIconSeconde"></div>
+                    <div class="LoadinIconThird"></div>
+                </div>
+                <div class="LogoLoading"></div>
+                <div class="TextLoad">لطفا صبر کنید</div>
+            </div>
+        </div>
+        <div id="BlockView">
+            <div id="ProductShelfs">
+
+            </div>
+        </div>
+
+        <div id="InlineView">
+
+        </div>
+
+        <div id="Pager_Bottom">
+            <div id="pageCounter_Bottom">
+            </div>
+        </div>
+    </div>
+    <div id="forKeepItRight">
+        <div id="PriceRangeHolder">
+            <div id="PriceTitles">رنج قیمت</div>
+            <div class="PriceStick">
+                <div class="insidePrice" id="slider-snap">
+
+                </div>
+                <div class="seePriceNumbers">
+                    <div class="downPrice">  <span id="slider-snap-value-lower"></span> تومان</div>
+                    <div class="upPrice"><span id="slider-snap-value-upper"></span> تومان</div>
+                </div>
+            </div>
+        </div>
+        <div id="BrandHolder">
+            <div id="BrandTitles">برندها</div>
+            <div id="AllBrandsR">
+                <ul id="BrandTable"></ul>
+            </div>
+        </div>
+        <div id="colorHolder">
+            <div id="colorTitles">رنگ ها</div>
+            <div id="AllcolorsR">
+                <ul id="ColorTable"></ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@section Script{
+
+    <script src="~/Js/SearchPage.js"></script>
+    <script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
+    <script src="~/Content/noUiSlider(Price_Picker)/nouislider.min.js"></script>
+
+
+    <script src="~/Content/Pagination/jquery.simplePagination.js"></script>
+ 
+    <script>
+        var sortBy,
+           ascending,
+           rowsPage,
+           stateCode,
+           cityCode,
+           TileShow,
+           categoryCode,
+           pageNumber,
+           minPrice,
+           maxPrice,
+           name,
+           latitude,
+           longitude,
+           Attributes = [],
+           Colors = [],
+           Brands = [];
+
+        var currentData = {},
+            attribute = [],
+            dropVaule = [],
+            RequiredItems,
+            dataBrands = '',
+            dataColors = '',
+            changeCounter = 0,
+            dataStates = '',
+            latlngJson = '',
+            TimeOut = '';
+            minMaxPrice = [];
+
+        var noProductPic = "Img/MainPage/NoProductPic.png",
+            noStorePic = "Img/MainPage/NoStorePic.png",
+            root = "@Url.Content("~/")";
+
+
+
+
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        function moreBrand() {
+            document.getElementById('BrandHolder').style.height = "auto";
+            document.getElementById('showMoreBrand').style.display = "none";
+            document.getElementById('showLessBrand').style.display = "block";
+        };
+
+        function lessBrand() {
+            document.getElementById('BrandHolder').style.height = "270px";
+            document.getElementById('showMoreBrand').style.display = "block";
+            document.getElementById('showLessBrand').style.display = "none";
+        };
+
+        function moreColor() {
+            document.getElementById('colorHolder').style.height = "auto";
+            document.getElementById('showMoreColor').style.display = "none";
+            document.getElementById('showLessColor').style.display = "block";
+        };
+
+        function lessColor() {
+            document.getElementById('colorHolder').style.height = "270px";
+            document.getElementById('showMoreColor').style.display = "block";
+            document.getElementById('showLessColor').style.display = "none";
+        };
+
+        //When page Load , Pageing set , Product Load
+        $(function () {
+
+            $('#SearchTxt').val('');
+
+            $('#Block').addClass('active');
+            $('#Block').prop('disabled', true);
+            $('#Inline').prop('disabled', false);
+            $('#Inline').prop('value', true);
+            $('#NoProduct').css("display", "none");
+
+
+
+            var firstUrl = window.location.hash;
+            var reloadedPage = firstUrl.split("/");
+            firstUrl = firstUrl.replace(/\?/g, '{').replace(/!/g, '}').replace(/\)/g, ']').replace(/\(/g, '[');
+            var firstParams = firstUrl;
+            
+            if (reloadedPage[0] === '#!') {
+
+                firstParams = ("{" + firstUrl + "}").replace(/-/g, ":").replace(/\//g, ",").replace(/#},/g, '');
+
+
+                var addCamma = firstUrl.replace(/-/g, "/").replace(/#}/g, '').replace(/]/g, '').replace(/\[/g, '').replace(/{/g, '').replace(/}/g, '').split('/');
+                $.each(addCamma, function (index, value) {
+                    if (value !== '' && !isNumeric(value)) {
+                        var cammaValue = '"' + value + '"';
+                        var regexValue = new RegExp(value, 'g');
+                        firstParams = firstParams.replace(regexValue, cammaValue).replace(/""/g, '"')
+                    }
+                })
+                firstParams = firstParams.replace('category"Code', 'categoryCode').replace(/,}/g, '}');
+                firstParams = JSON.parse(firstParams)
+            }
+
+            if (firstParams.categoryCode) {
+                categoryCode = firstParams.categoryCode;
+            } else {
+                categoryCode = 23;
+            }
+            if (firstParams.sortBy) {
+                sortBy = firstParams.sortBy;
+                $("#sortBy").val(firstParams.sortBy);
+            } else {
+                //  sortBy = $("#sortBy option:selected").val();
+            }
+            if (firstParams.ascending) {
+                ascending = firstParams.ascending;
+                $("#ascending").val(firstParams.ascending);
+
+            } else {
+                ascending = '';
+            }
+            if (firstParams.rowsPage) {
+                rowsPage = firstParams.rowsPage;
+                $("#rowsPage").val(firstParams.rowsPage);
+
+            } else {
+                rowsPage = '';
+            }
+            if (firstParams.state) {
+                stateCode = firstParams.state;
+                $("#stateCode").val(firstParams.state);
+            } else {
+                stateCode = '';
+            }
+            if (firstParams.city) {
+                cityCode = firstParams.city;
+                $("#cityCode").val(firstParams.city);
+            } else {
+                cityCode = '';
+            }
+            if (firstParams.TileShow) {
+                TileShow = firstParams.TileShow;
+                if (TileShow == "true") {
+                    $('#Block').prop('disabled', true);
+                    $('#Inline').prop('disabled', false);
+                    $('#Block').addClass('active');
+                    $('#Inline').removeClass('active');
+                    $('#Inline').prop('value', true);
+
+                } else {
+                    $('#Block').prop('disabled', false);
+                    $('#Inline').prop('disabled', true);
+                    $('#Inline').addClass('active');
+                    $('#Block').removeClass('active');
+                    $('#Inline').prop('value', false);
+                }
+
+            } else {
+                TileShow = '';
+            }
+            if (firstParams.pageNumber) {
+                pageNumber = firstParams.pageNumber;
+            } else {
+                pageNumber = 1;
+            }
+            if (firstParams.MinPrice) {
+                minPrice = firstParams.MinPrice;
+            } else {
+                minPrice = '';
+            }
+            if (firstParams.MaxPrice) {
+                maxPrice = firstParams.MaxPrice;
+            } else {
+                maxPrice = '';
+            }
+            if (firstParams.Name) {
+                name = firstParams.Name;
+                $('#SearchTxt').val(decodeURIComponent(name));
+            } else {
+                name = '';
+                $('#SearchTxt').val('');
+            }
+            if (firstParams.Latitude) {
+                latitude = firstParams.Latitude;
+            } else {
+                latitude = '';
+            }
+            if (firstParams.Longitude) {
+                longitude = firstParams.Longitude;
+            } else {
+                longitude = '';
+            }
+            if (firstParams.Brands) {
+                Brands = firstParams.Brands;
+            }
+            else {
+                Brands = [];
+            }
+            if (firstParams.Colors) {
+                Colors = firstParams.Colors
+            }
+            else {
+                Colors = [];
+            }
+            if (firstParams.Attributes) {
+                Attributes = firstParams.Attributes;
+            }
+            else {
+                Attributes = [];
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/api/product/getRequiredItemsForSearch",
+                data: {
+                    categoryCode: categoryCode
+                },
+                success: function (result) {
+
+                    RequiredItems = result.Response;
+
+                    if (RequiredItems.MaxPrice == 0) {
+                        RequiredItems.MaxPrice = 5000000;
+                    }
+                    var snapSlider = document.getElementById('slider-snap');
+                    noUiSlider.create(snapSlider, {
+                        start: [parseInt(0), parseInt(RequiredItems.MaxPrice) / 1000],
+                        behaviour: 'drag-tap',
+                        connect: true,
+                        direction: 'rtl',
+                        step: 1,
+                        range: {
+                            'min': parseInt(0),
+                            'max': parseInt(RequiredItems.MaxPrice) / 1000
+                        }
+                    });
+
+                    var snapValues = [
+                        document.getElementById('slider-snap-value-lower'),
+                        document.getElementById('slider-snap-value-upper')
+                    ];
+                    snapSlider.noUiSlider.on('update', function (values, handle) {
+                        minMaxPrice[handle] = values[handle] * 1000;
+                        snapValues[handle].innerHTML = minMaxPrice[handle].toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                    });
+                    snapSlider.noUiSlider.on('end', function () {
+                        minPrice = minMaxPrice[0] + '';
+                        maxPrice = minMaxPrice[1] + '';
+                        updateData();
+                        reLoadProduct();
+                    });
+
+                    if (minPrice != '')
+                    { snapSlider.noUiSlider.set([(minPrice / 1000), null]); }
+                    if (maxPrice != '')
+                    { snapSlider.noUiSlider.set([null, (maxPrice / 1000)]); }
+
+
+
+                    $.each(RequiredItems, function (index, value) {
+
+                        dropVaule = [];
+
+                        if (index == 'Colors') {
+                            dataColors = value;
+
+                            var colorTemp = "";
+                            var haveMoreColor = '';
+                            $.each(dataColors, function (index2, value2) {
+                                if (index2 == 5) {
+
+                                    colorTemp += " <li class='moreFilter' id='showMoreColor' onclick='moreColor();'>+ بیشتر</li> " +
+                                        "<li><input type='checkbox' onclick='changeColorDrop();' id='" + value2.Value + "' name='cc' />" +
+                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:#" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
+                                    haveMoreColor = true;
+                                } else {
+                                    colorTemp += " <li><input onclick='changeColorDrop();' type='checkbox' id='" + value2.Value + "' name='cc' />" +
+                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:#" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
+                                }
+
+                            });
+                            if (haveMoreColor == true) {
+                                colorTemp += "<li class='moreFilter' id='showLessColor' onclick='lessColor();'>- بستن</li>";
+                            }
+
+                            $('#ColorTable').html(colorTemp);
+
+                            $.each(Colors, function (index2, value2) {
+                                $('#' + value2).prop('checked', true);
+                            })
+
+                        }
+                        else if (index == 'Brands') {
+                            dataBrands = value;
+                            var brandTemp = "";
+                            var haveMore = '';
+                            $.each(dataBrands, function (index2, value2) {
+                                if (index2 == 5) {
+                                    brandTemp += " <li class='moreFilter' id='showMoreBrand' onclick='moreBrand();'>+ بیشتر</li> " +
+                                        "<li><input type='checkbox' onclick='changeBrandDrop();' id='" + value2.Value + "' name='cc' />" +
+                                        "<label for='" + value2.Value + "'><span></span>" + value2.Text + "</label> </li>";
+                                    haveMore = true;
+                                } else {
+                                    brandTemp += " <li><input onclick='changeBrandDrop();' type='checkbox' id='" + value2.Value + "' name='cc' />" +
+                                        "<label for='" + value2.Value + "'><span></span>" + value2.Text + "</label> </li>";
+                                }
+
+                            });
+                            if (haveMore == true) {
+                                brandTemp += "<li class='moreFilter' id='showLessBrand' onclick='lessBrand();'>- بستن</li>";
+                            }
+                            $('#BrandTable').html(brandTemp);
+                            $.each(Brands, function (index2, value2) {
+                                $('#' + value2).prop('checked', true);
+                            })
+
+
+                        }
+                        else if (index == 'States') {
+                            dataStates = value;
+
+                            $("#stateCode").html($('<option>').text("استان ").attr('value', 0).attr('selected', true));
+                            $.each(dataStates, function (index2, value2) {
+                                $("#stateCode").append($('<option>').text(value2.Text).attr('value', value2.Value));
+                            });
+                            if (stateCode) {
+                                $("#stateCode").val(stateCode);
+                                // $("#stateCode").trigger('change')
+
+                                $.each(dataStates, function (index, value) {
+                                    if (value.Value == $("#stateCode option:selected").val()) {
+                                        $("#cityCode").html($('<option>').text("شهر").attr('value', 0).attr('selected', true));
+                                        $.each(value.Cities, function (index2, value2) {
+                                            $("#cityCode").append($('<option>').text(value2.Text).attr('value', value2.Value));
+
+                                        });
+                                    }
+                                });
+
+                                $("#cityCode").val(cityCode)
+                            } else {
+                                $("#stateCode").val(0);
+                                $("#cityCode").val(0)
+                            }
+                            cityCode = $("#cityCode option:selected").val();
+                            stateCode = $("#stateCode option:selected").val();
+                        }
+                        else if (index == 'ProductAttributeWithItems') {
+                            dataAttributes = value;
+                            $.each(dataAttributes, function (index3, value3) {
+
+                                if (value3 != null && value3 != '' && value3 != []) {
+
+                                    attribute.push(value3.AttributeCode);
+
+                                    var txt = "<div class='TagInside'>";
+                                    txt += "<select multiple = 'multiple' onchange='changeAttributeDrop();' id='Attributes_" + value3.AttributeCode + "'>";
+                                        //"<option selected disabled value=''>" + value3.AttributeName + "</option>";
+                                    $.each(value3.AttributeItems, function (index2, value2) {
+
+                                        txt += "<option  value='" + value2.Value + "'>" + value2.Text + "</option> ";
+
+                                    });
+                                    txt += "</select>"
+                                        + "</div> ";
+                                    $("#TagsAndResearch").append(txt);
+                                    $('#Attributes_' + value3.AttributeCode).SumoSelect({
+                                        placeholder: value3.AttributeName,
+                                        csvDispCount: 2,
+                                        captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                                        okCancelInMulti: false,
+                                        selectAll: true,
+                                        selectAlltext: 'انتخاب همه'
+                                    });
+
+                                    $.each(Attributes, function (index4, value4) {
+                                        if (value4) {
+                                            if (value4.Code == value3.AttributeCode) {
+                                                $.each(value4.Values, function (index5, value5) {
+                                                    if (value5) {
+                                                        $.each(value3.AttributeItems, function (index6, value6) {
+                                                            if (value5 == value6.Value) {
+                                                                $('#Attributes_' + value3.AttributeCode)[0].sumo.selectItem(index6 + 1);
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+
+                                }
+                            })
+                        }
+                    });
+                    updateData();
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    
+                    window.history.replaceState(JSON.stringify(currentData), "", "/Search/#!/" + CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    //load product first time , when page load
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/product/search",
+                        contentType: "application/json",
+                        data: JSON.stringify(currentData),
+                        success: function (result) {
+                            result = result.Response;
+                            $('#Load').css("display", "none");
+
+                            if (result.ProductsCount > 0) {
+                                Paging(result.ProductsCount);
+                                showProduct(result);
+                            } else {
+                                $('#NoProduct').css("display", "block");
+                            }
+                        },
+                        error: function () {
+                            console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                            $('#Load').css("display", "none");
+                            $('#NoProduct').css("display", "block");
+
+                        }
+                    });
+
+                },
+
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    $('#Load').css("display", "none");
+                    $('#NoProduct').css("display", "block");
+                }
+
+            });
+
+
+        });
+
+        //changeColorDrop
+        function changeColorDrop() {
+            if (changeCounter == 0) {
+                changeCounter = 1;
+
+                Colors = [];
+                $.each(dataColors, function (index, value) {
+
+                    if ($('#' + value.Value).prop('checked')) {
+                        Colors.push(value.Value);
+                    }
+                });
+
+
+                updateData();
+                reLoadProduct();
+                changeCounter = 0;
+            }
+
+        }
+
+        //changeBrandDrop
+        function changeBrandDrop() {
+            if (changeCounter == 0) {
+                changeCounter = 1;
+
+                Brands = [];
+                $.each(dataBrands, function (index, value) {
+
+                    if ($('#' + value.Value).prop('checked')) {
+                        Brands.push(value.Value);
+                    }
+                });
+
+                updateData();
+                reLoadProduct();
+                changeCounter = 0;
+            }
+
+        }
+
+        //changeSearchTextBox
+        function changeSearchTextBox() {
+
+            if (changeCounter == 0) {
+                changeCounter = 1;
+
+                var nameTemp = $('#SearchTxt').val().replace(/[&\/\\#~;_,+()$~%.!|=+'":*?<>{}-]/g, '');
+                if (nameTemp != '') {
+                    name = nameTemp + '';
+                }
+
+                updateData();
+                reLoadProduct();
+                changeCounter = 0;
+            }
+        }
+
+        //changeAttributeDrop
+        function changeAttributeDrop() {
+            if (TimeOut) {
+                clearTimeout(TimeOut)
+            }
+            TimeOut= setTimeout(function(){ 
+            if (changeCounter == 0) {
+                changeCounter = 1;
+                Attributes = [];
+
+                for (var i = 0; i < attribute.length; i++) {
+
+                    if ($('#Attributes_' + attribute[i])[0].sumo.getSelStr() != "") {
+                        var selectedAttribute = $('#Attributes_' + attribute[i])[0].sumo.getSelStr().split(',');
+                        tempAtterValue = [];
+                        for (var j = 0; j < selectedAttribute.length; j++) {
+                            if (selectedAttribute[j] != '') {
+                                tempAtterValue.push(selectedAttribute[j])
+                            }
+                        }
+                        if (tempAtterValue) {
+                            Attributes.push({ 'Code': attribute[i], 'Values': tempAtterValue });
+                        }
+                    }
+                }
+
+                updateData();
+                reLoadProduct();
+                changeCounter = 0;
+            }
+            }, 10);
+        }
+
+        //reLoad Product
+        function reLoadProduct() {
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+                    $('#Load').css("display", "none");
+                    Paging(result.ProductsCount);
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        }
+
+        //Paging Function
+        function Paging(productsCount) {
+
+            $('#pageCounter, #pageCounter_Bottom').pagination({
+                items: productsCount,
+                itemsOnPage: $("#rowsPage option:selected").val(),
+                cssStyle: 'pageCounter',
+                prevText: 'صفحه قبل',
+                nextText: 'صفحه بعد',
+                onPageClick: function (pageNumber, event) {
+                    PageingLoadProduct(pageNumber);
+                }
+            });
+
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', pageNumber);
+
+        };
+
+        //Change Page
+        function PageingLoadProduct(page) {
+            pageNumber = page;
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        }
+
+        //Show Product Function
+        function showProduct(result) {
+
+            var text = "";
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+
+            if ($("#Inline").val() == "false") {
+
+                $('#NoProduct').css("display", "block");
+
+                $.each(result.ProductsSummery, function (index, value) {
+                    $('#NoProduct').css("display", "none");
+
+                    text += "<div class='Inline_Shelf'>"
+                        + "   <div class='List_Category_Inline'>"
+                        + "  <ul>";
+
+                    if (value.ProductAttrbiutesViewModels && value.ProductAttrbiutesViewModels != '') {
+
+                        $.each(value.ProductAttrbiutesViewModels, function (index2, value2) {
+
+                            if (value2 != "") {
+
+                                text += "  <li>"
+                                    + "  <section class='HeaderSection DarkRed'>" + value2.AttributeName + " : </section> <section>";
+                                var textTempForShow = '';
+                                $.each(value2.AttributeValues, function (index3, value3) {
+                                    if (value3 != '') {
+                                        if (textTempForShow == '') { textTempForShow += value3; }
+                                        else { textTempForShow += " - " + value3 }
+                                    }
+                                });
+
+                                text += textTempForShow + " </section> </li>";
+                            }
+                        });
+                    }
+
+                    var PriceTemp = value.Price + '';
+                    var PriceTemp2 = value.DiscountedPrice + '';
+                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                    PriceTemp2 = PriceTemp2.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+
+                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
+                    text += "  </ul>"
+                        + "  </div>"
+                        + " <div class='Name_Inline'>"
+                        //+ "   <div class='Brand_Logo_Inline'> </div>"
+                        + "  <div class='Brand_Name_Inline'>" + value.Name + "</div>"
+                        + "  </div>"
+                        + "  <div class='Picture_Inline'> <img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /> </div>"
+                        + "  <div class='Middle_Inline'>"
+                        + "   <div class='PictureandPrice_Inline'>"
+                        + "    <div class='Price_Inline'>"
+                        + "      <div class='Price_Subject_Inline'> : قیمت </div>"
+                        + "     <div class='Original_Price_Inline' class='Brown'> " + PriceTemp + "</div>"
+                        + "    <div class='Off_Price_Inline' class='DarkRed'>" + PriceTemp2 + " </div>"
+                        + "  </div>"
+                        + "   <div class='Details_Inline'>جزئیات محصول </div>"
+                        + "    <div class='Store_Inline' class='Brown'>" + value.StoreName + " , " + value.CityName + "</div>"
+                        + "   </div>"
+                        + "   </div>"
+                        + " </div> </div>";
+                });
+
+                $("#InlineView").append(text);
+            }
+            else {
+
+                $('#NoProduct').css("display", "block");
+
+                $.each(result.ProductsSummery, function (index, value) {
+                    $('#NoProduct').css("display", "none");
+
+                    var PriceTemp = value.Price + '';
+                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
+
+                    text += " <div class='ShelfInner'>"
+                        + "  <div class='PictureAndAdd'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        //+ " <div class='AddFavor'><img src='" + root + "Img/MiddlePage/AddFavorite.png'></div>"
+                        + " <div class='PictureProduct'><img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /></div>"
+                        //+ " <div class='AddCompare'><img src='" + root + "Img/MiddlePage/AddCompare.png'></div>"
+                        + " </a>"
+                        + " </div>"
+                        + " <div class='ShelfExplains'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        + "  <div class='ProductName'>"
+                        + " <div class='Brand'>" + value.Name + "</div>"
+                        //+ " <div class='Model'>" + value.Name + "</div>"
+                        + " </div>"
+                        + " </a>"
+                        + " <div class='PriceAndStore'>"
+                        + "<a href='" + root + "product/" + value.Id + "'>"
+                        + "<div id='Price'> <span>قیمت :</span><span>" + PriceTemp + "</span> </div>"
+                        + " </a>"
+                        + "<div id='Store'><span>فروشگاه :</span><span> " + value.StoreName + " </span></div>"
+                        + " </div>"
+                        + " </div>"
+                        + "</div>";
+
+                });
+                $("#ProductShelfs").append(text);
+
+            }
+
+        };
+
+        //Inline Press , Product Load
+        $("#Inline").on("click", function () {
+            $('#Inline').prop('disabled', true);
+            $('#Inline').prop('value', false);
+            $('#Inline').addClass('active');
+            $('#Block').removeClass('active');
+            TileShow = $("#Inline").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    $('#Block').prop('disabled', false);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Block Press , Product Load
+        $("#Block").on("click", function () {
+
+            $('#Block').prop('disabled', true);
+            $('#Inline').prop('value', true);
+            $('#Block').addClass('active');
+            $('#Inline').removeClass('active');
+            TileShow = $("#Inline").val();
+            updateData();
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    $('#Inline').prop('disabled', false);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Sort By Change , Product Load
+        $("#sortBy").on("change", function () {
+            
+
+            pageNumber = 1;
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', 1);
+            sortBy = $("#sortBy option:selected").val();
+            updateData();
+
+            if (sortBy == 6) {
+                $('#Nearest').trigger('click');
+            }
+            else {
+                $("#ProductShelfs").html("");
+                $("#InlineView").html("");
+                $('#NoProduct').css("display", "none");
+                $('#Load').css("display", "block");
+                $.ajax({
+                    type: "POST",
+                    url: "/api/product/search",
+                    contentType: "application/json",
+                    data: JSON.stringify(currentData),
+                    success: function (result) {
+                        result = result.Response;
+
+                        var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                        PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                        $('#Load').css("display", "none");
+                        showProduct(result);
+
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+        });
+
+        //Ascending Change , Product Load
+        $("#ascending").on("change", function () {
+
+            pageNumber = 1;
+            $('#pageCounter, #pageCounter_Bottom').pagination('drawPage', 1);
+            ascending = $("#ascending option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //Rows Of Page Change , Product Load
+        $("#rowsPage").on("change", function () {
+
+            pageNumber = 1;
+            rowsPage = $("#rowsPage option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    Paging(result.ProductsCount);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //State Change , City Load , Prouduct Load
+        $("#stateCode").on("change", function () {
+
+            pageNumber = 1;
+            $("#cityCode").val(0);
+            stateCode = $("#stateCode option:selected").val();
+            cityCode = $("#cityCode option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.each(dataStates, function (index, value) {
+                if (value.Value == $("#stateCode option:selected").val()) {
+                    $("#cityCode").html($('<option>').text("شهر").attr('value', 0).attr('selected', true));
+                    $.each(value.Cities, function (index2, value2) {
+                        $("#cityCode").append($('<option>').text(value2.Text).attr('value', value2.Value));
+
+                    });
+                }
+            });
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    Paging(result.ProductsCount);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+
+        });
+
+        //City Change , Prouduct Load
+        $("#cityCode").on("change", function () {
+
+            pageNumber = 1;
+            cityCode = $("#cityCode option:selected").val();
+            updateData();
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    var CurrentTemp = JSON.stringify(currentData).replace(/:/g, "-").replace(/,/g, "/").replace(/"/g, '').replace(/{/g, '?').replace(/}/g, '!').replace(/]/g, ')').replace(/\[/g, '(');
+                    PushState(JSON.stringify(currentData), "", CurrentTemp.substr(0, CurrentTemp.length - 1).substr(1, CurrentTemp.length));
+
+                    Paging(result.ProductsCount);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        });
+
+        //open Map PopUp
+        $('#Nearest').on('click', function () {
+            $.getScript("http://maps.googleapis.com/maps/api/js? sensor=false", function (data, textStatus, jqxhr) {
+                loadMap();
+            });
+        });
+
+        //Map Location Set Click
+        $('#chooseMapMark').on('click', function () {
+
+            if (latlngJson != '') {
+                longitude = latlngJson.lng();
+                latitude = latlngJson.lat();
+
+                document.getElementById('NearestContainer').style.display = "none";
+                document.getElementById('NearestHolder').style.display = "none";
+                $('#NearestContainer').removeClass('animationForLogIn');
+
+                $("#ascending").val('false');
+                ascending = $("#ascending option:selected").val();
+                $("#sortBy").val('6');
+                sortBy = $("#sortBy option:selected").val();
+
+                updateData();
+                reLoadProduct();
+            } else {
+                console.log('لطفا ابتدا یک نقطه را کلیک نمایید');
+                $('#MapErrorHandler').css("z-index", 2001).fadeIn(1000).fadeTo(2000, 1.0).fadeOut(1000);
+            }
+
+
+        });
+
+        //get element data and Update currentData
+        function updateData() {
+            currentData = {};
+
+            if (sortBy == '' || sortBy == undefined) {
+                sortBy = '';
+            }
+            if (ascending == '' || ascending == undefined) {
+                ascending = '';
+            }
+            if (rowsPage == '' || rowsPage == undefined) {
+                rowsPage = '';
+            }
+            if (stateCode == '' || stateCode == undefined) {
+                stateCode = '';
+            }
+            if (cityCode == '' || cityCode == 0 || cityCode == undefined) {
+                cityCode = '';
+                $("#cityCode").val(0);
+            }
+            if (TileShow == '' || TileShow == undefined) {
+                TileShow = '';
+            }
+            if (pageNumber == '' || pageNumber == undefined) {
+                pageNumber = '';
+            }
+            if (categoryCode == '' || categoryCode == undefined) {
+                categoryCode = 23;
+            }
+            if (minPrice == '' || minPrice == undefined) {
+                minPrice = '';
+            }
+            if (maxPrice == '' || maxPrice == undefined) {
+                maxPrice = '';
+            }
+            if (name == '' || name == undefined) {
+                name = '';
+            }
+            if (latitude == '' || latitude == undefined) {
+                latitude = '';
+            }
+            if (longitude == '' || longitude == undefined) {
+                longitude = '';
+            }
+
+            currentData["categoryCode"] = categoryCode;
+            if (sortBy)
+            {
+                currentData["sortBy"] = sortBy;
+            } 
+            if (ascending)
+            {
+                currentData["ascending"] = ascending;
+            } 
+            if (rowsPage)
+            {
+                currentData["rowsPage"] = rowsPage;
+            }
+            if (stateCode)
+            {
+                currentData["state"] = stateCode;
+            } 
+            if (cityCode) {
+                currentData["city"] = cityCode;
+            } 
+            if (TileShow)
+            {
+                currentData["TileShow"] = TileShow;
+            } 
+            if (pageNumber)
+            {
+                currentData["pageNumber"] = pageNumber;
+            } 
+            if (minPrice)
+            {
+                currentData["MinPrice"] = minPrice;
+            }
+            if (maxPrice)
+            {
+                currentData["MaxPrice"] = maxPrice;
+            } 
+            if (name)
+            {
+                currentData["Name"] = name;
+            }
+            if (latitude)
+            {
+                currentData["Latitude"] = latitude;
+            }
+            if (longitude)
+            {
+                currentData["Longitude"] = longitude;
+            }
+            if (Brands != '')
+            {
+                currentData['Brands'] = Brands;
+            }
+            if (Colors != '')
+            {
+                currentData['Colors'] = Colors;
+            }
+            if (Attributes != '')
+            {
+                currentData['Attributes'] = Attributes;
+            }
+
+        };
+
+        //after popState ,Get and load product from server
+        function popStateAjax() {
+
+            $("#ProductShelfs").html("");
+            $("#InlineView").html("");
+            $('#NoProduct').css("display", "none");
+            $('#Load').css("display", "block");
+
+            $.ajax({
+                type: "POST",
+                url: "/api/product/search",
+                contentType: "application/json",
+                data: JSON.stringify(currentData),
+                success: function (result) {
+                    result = result.Response;
+
+                    Paging(result.ProductsCount);
+                    $('#Load').css("display", "none");
+                    showProduct(result);
+
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+        }
+
+        //after popState ,if sort by change
+        function sortByChange(valueSortBy, valuePageNumber) {
+            $("#sortBy").val(valueSortBy);
+            pageNumber = valuePageNumber;
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if ascending change
+        function ascendingChange(valueAscending, valuePageNumber) {
+            $("#ascending").val(valueAscending);
+            pageNumber = valuePageNumber;
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if rowsPage change
+        function rowsPageChange(valueRowsPage, valuePageNumber) {
+            $("#rowsPage").val(valueRowsPage);
+            pageNumber = valuePageNumber;
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if stateCode change
+        function stateCodeChange(valueStateCode, valueCityCode, valuePageNumber) {
+            pageNumber = valuePageNumber;
+            $("#stateCode").val(valueStateCode);
+            $.each(dataStates, function (index, value) {
+                if (value.Value == $("#stateCode option:selected").val()) {
+                    $("#cityCode").html($('<option>').text("شهر").attr('value', 0));
+                    $.each(value.Cities, function (index2, value2) {
+                        $("#cityCode").append($('<option>').text(value2.Text).attr('value', value2.Value));
+                    });
+                }
+            });
+
+            $("#cityCode").val(valueCityCode);
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if cityCode change
+        function cityCodeChange(valueCityCode, valuePageNumber) {
+            $("#cityCode").val(valueCityCode);
+            pageNumber = valuePageNumber;
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if TileShow change
+        function TileShowChange(valueTileShow) {
+            $('#Inline').val(valueTileShow);
+
+            if (valueTileShow == "true") {
+                $('#Block').prop('disabled', true);
+                $('#Inline').prop('disabled', false);
+                $('#Block').addClass('active');
+                $('#Inline').removeClass('active');
+                $('#Inline').prop('value', true);
+
+            } else {
+                $('#Block').prop('disabled', false);
+                $('#Inline').prop('disabled', true);
+                $('#Inline').addClass('active');
+                $('#Block').removeClass('active');
+                $('#Inline').prop('value', false);
+            }
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if pageNumber change
+        function pageNumberChange(valuePageNumber) {
+            pageNumber = valuePageNumber;
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if Brands Change
+        function BrandsChange(newBrands) {
+            $.each(dataBrands, function (index, value) {
+                $('#' + value.Value).prop('checked', false);
+            })
+            Brands = newBrands;
+            $.each(Brands, function (index, value) {
+                $('#' + value).prop('checked', true);
+            })
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if Colors Change
+        function ColorsChange(newColors) {
+            $.each(dataColors, function (index, value) {
+                $('#' + value.Value).prop('checked', false);
+            })
+            Colors = newColors;
+            $.each(Colors, function (index, value) {
+                $('#' + value).prop('checked', true);
+            })
+            updateData();
+            popStateAjax();
+        }
+
+        //after popState ,if Attributes Change
+        function AttributesChange(newAttributes) {
+
+            $.each(dataAttributes, function (index, value) {
+                $('#Attributes_' + value.AttributeCode)[0].sumo.unSelectAll();
+            })
+            Attributes = newAttributes;
+            $.each(dataAttributes, function (index3, value3) {
+
+                $.each(Attributes, function (index4, value4) {
+                    if (value4) {
+                        if (value4.Code == value3.AttributeCode) {
+                            $.each(value4.Values, function (index5, value5) {
+                                if (value5) {
+                                    $.each(value3.AttributeItems, function (index6, value6) {
+                                        if (value5 == value6.Value) {
+                                            $('#Attributes_' + value3.AttributeCode)[0].sumo.selectItem(index6 + 1);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            updateData();
+            popStateAjax();
+        }
+
+        //When State Change(go Back or Next in Browser)
+        window.onpopstate = function (e) {
+
+            var popString = e.state;
+
+            //if click on menu link , reload page
+            if (popString == null) {
+                window.location.reload();
+                return;
+            }
+
+            if (popString) {
+                var popValue = JSON.parse(popString)
+
+                //if categoryCode change , reload page
+                if (categoryCode != popValue.categoryCode) {
+                    window.location.reload();
+                    return;
+                }
+                //if sort by change
+                if (sortBy != popValue.sortBy) {
+                    sortByChange(popValue.sortBy, popValue.pageNumber);
+                }
+                    //if ascending change
+                else if (ascending != popValue.ascending) {
+                    ascendingChange(popValue.ascending, popValue.pageNumber);
+                }
+                    //if rowsPage change
+                else if (rowsPage != popValue.rowsPage) {
+                    rowsPageChange(popValue.rowsPage, popValue.pageNumber);
+                }
+                    //if stateCode change
+                else if (stateCode != popValue.state) {
+                    stateCodeChange(popValue.state, popValue.city, popValue.pageNumber);
+                }
+                    //if cityCode change
+                else if (cityCode != popValue.city) {
+                    cityCodeChange(popValue.city, popValue.pageNumber);
+                }
+                    //if TileShow change
+                else if (TileShow != popValue.TileShow) {
+                    TileShowChange(popValue.TileShow);
+                }
+                    //if page number change
+                else if (pageNumber != popValue.pageNumber) {
+                    pageNumberChange(popValue.pageNumber);
+                }
+                    //if Brand change
+                else if (JSON.stringify(Brands) != JSON.stringify(popValue.Brands)) {
+                    BrandsChange(popValue.Brands);
+                }
+                    //if Color change
+                else if (JSON.stringify(Colors) != JSON.stringify(popValue.Colors)) {
+                    ColorsChange(popValue.Colors);
+                }
+                    //if Attrbutes change
+                else if (JSON.stringify(Attributes) != JSON.stringify(popValue.Attributes)) {
+                    AttributesChange(popValue.Attributes);
+                }
+            }
+
+        };
+
+        //Save State
+        function PushState(state, title, url) {
+            window.history.pushState(state, "title", "/Search/#!/" + url);
+        }
+
+        //Load Map
+        function loadMap() {
+
+            //Google Maps Api
+            var marker;
+            var latlng = new google.maps.LatLng(35.782282, 52.906016);
+            var options = {
+                zoom: 5,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("MapNear"), options);
+            google.maps.event.addListener(map, "click", function (event) {
+                if (!marker) {
+                    marker = new google.maps.Marker({
+                        position: event.latLng,
+                        map: map
+                    });
+                    latlngJson = marker.getPosition();
+                    $('#MapErrorHandler').fadeOut(500);
+
+                }
+
+                else {
+                    // infowindow.open(map, marker);
+                    marker.setMap(null);
+                    marker = new google.maps.Marker({
+                        position: event.latLng,
+                        map: map
+                    });
+                    latlngJson = marker.getPosition();
+                }
+            });
+
+            if (!!navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    options = {
+                        zoom: 13,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("MapNear"), options);
+                    google.maps.event.addListener(map, "click", function (event) {
+                        if (!marker) {
+                            marker = new google.maps.Marker({
+                                position: event.latLng,
+                                map: map
+                            });
+                            latlngJson = marker.getPosition();
+                            $('#MapErrorHandler').fadeOut(500);
+                        }
+                        else {
+                            marker.setMap(null);
+                            marker = new google.maps.Marker({
+                                position: event.latLng,
+                                map: map
+                            });
+                            latlngJson = marker.getPosition();
+
+                        }
+                    });
+
+                });
+            }
+
+        };
+
+    </script>
+    
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
+
+}
+
+

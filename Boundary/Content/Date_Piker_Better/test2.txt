@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "نمایش";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Persian DatePicker</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+
+
+    <link href="~/Content/Date_Piker_Better/css/persian-datepicker-0.4.5.min.css" rel="stylesheet" />
+    <script src="~/Content/Date_Piker_Better/lib/persian-date.js"></script>
+    <script src="~/Content/Date_Piker_Better/js/persian-datepicker-0.4.5.min.js"></script>
+
+</head>
+<body>
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="form-group col-xs-6">
+                <label>انتخاب تاریخ</label>
+                <input id="observer" type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="form-group col-xs-6">
+                <label>انتخاب زمان</label>
+                <input id="timepicker" type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+   
+        $(document).ready(function () {
+    
+            $("#observer").persianDatepicker({
+                observer: true,
+                format: 'YYYY/MM/DD'
+
+            });
+
+         
+            $("#timepicker").persianDatepicker({
+                format: "HH:mm:ss a",
+                onlyTimePicker: true
+
+            });
+         
+        });
+    </script>
+
+</body>
+</html>
+

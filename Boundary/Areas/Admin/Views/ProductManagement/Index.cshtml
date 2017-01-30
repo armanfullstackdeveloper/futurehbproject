@@ -1,0 +1,240 @@
+﻿@using DataModel.Entities.RelatedToProduct
+@using DataModel.Enums
+@using DataModel.Models.ViewModel
+@model IEnumerable<ProductSummary>
+
+@{
+    Layout = null;
+    SelectList sortByList = new SelectList(new List<DropDownItemsModel>()
+    {
+        new DropDownItemsModel()
+        {
+            Value = 1,
+            Text = "جدید ترین"
+        },new DropDownItemsModel()
+        {
+            Value = 2,
+            Text = "قیمت"
+        },new DropDownItemsModel()
+        {
+            Value = 3,
+            Text = "پربازدیدترین"
+        },new DropDownItemsModel()
+        {
+            Value = 4,
+            Text = "پرامتیازترین"
+        },new DropDownItemsModel()
+        {
+            Value = 5,
+            Text = "محبوب ترین"
+        },
+    }, "Value", "Text");
+
+    SelectList sortTypeList = new SelectList(new List<DropDownItemsModel>()
+    {
+        new DropDownItemsModel()
+        {
+            Value = 0,
+            Text = "نزولی"
+        },new DropDownItemsModel()
+        {
+            Value = 1,
+            Text = "صعودی"
+        }
+    }, "Value", "Text");
+
+    SelectList statusList = new SelectList(new List<DropDownItemsModel>()
+    {
+        new DropDownItemsModel()
+        {
+            Value = 0,
+            Text = "همه"
+        },new DropDownItemsModel()
+        {
+            Value = (long) EProductStatus.Active,
+            Text = EProductStatus.Active.ToString()
+        },new DropDownItemsModel()
+        {
+            Value = (long) EProductStatus.Suspended,
+            Text = EProductStatus.Suspended.ToString()
+        },new DropDownItemsModel()
+        {
+            Value = (long) EProductStatus.Inactive,
+            Text = EProductStatus.Inactive.ToString()
+        },
+    }, "Value", "Text");
+    List<Category> lstCategories = (List<Category>)ViewBag.Categories;
+    lstCategories.Insert(0, new Category()
+    {
+        Id = 0,
+        Name = "همه"
+    });
+    SelectList selectList = new SelectList(lstCategories, "Id", "Name");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Js/jquery-2.1.3.min.js"></script>
+</head>
+    <body>
+        <h2>
+            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
+        </h2>
+        <div>
+            <p>
+                کد محصول
+                @Html.TextBox("txtProductCode", null, new { onkeyup = "ajaxSearch();" })
+            </p>
+            <p>
+                کد فروشگاه
+                @Html.TextBox("txtStoreCode", null, new { onkeyup = "ajaxSearch();" })
+            </p>
+            <div class="form-horizontal">
+                <p>
+                    @Html.Label("دسته بندی شاخه اول", new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("mainCategory", selectList)
+                </p>
+                <p>
+                    @Html.Label("دسته بندی شاخه دوم", new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("subCategory", new SelectList(new List<string>(), "Id", "Name"))
+                </p>
+                <p>
+                    @Html.Label("دسته بندی شاخه سوم", new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("subsubCategory", new SelectList(new List<string>(), "Id", "Name"))
+                </p>
+            </div>
+            <p>
+                جستجو براساس
+                @Html.DropDownList("ddlSortBy", sortByList, new { onchange = "ajaxSearch();" })
+            </p>
+            <p>
+                نوع مرتب سازی
+                @Html.DropDownList("ddlSortType", sortTypeList, new { onchange = "ajaxSearch();" })
+            </p>
+            <p>
+                نمایش
+                @Html.DropDownList("ddlStatus", statusList, new { onchange = "ajaxSearch();" })
+            </p>
+        </div>
+        <div>
+            <input type="button" value="صفحه بعدی" onclick="addPage();" />
+            <input type="button" value="صفحه قبلی" onclick="minusPage();" />
+        </div>
+        <div id="products">
+            @Html.Partial("_ProductSummery", Model)
+        </div>
+        <div>
+            <input type="button" value="صفحه بعدی" onclick="addPage();"/>
+            <input type="button"  value="صفحه قبلی" onclick="minusPage();" />
+        </div>
+    </body>
+</html>
+
+<script>
+
+    var ajaxCategory = $.parseJSON('@Html.Raw(Json.Encode((List<Category>)ViewBag.Categories))');    
+
+    $("#mainCategory").on("change", function () {
+        $("#subCategory").html("<option selected disabled value=''>انتخاب نمایید</option>");
+        $("#subsubCategory").html("<option selected disabled value='' >انتخاب نمایید</option>");
+
+        $.each(ajaxCategory, function (index, value) {
+            if (value.Id == $("#mainCategory option:selected").val()) {
+                if (value.SubCategories != null) {
+                    $.each(value.SubCategories, function (index2, value2) {
+                        $("#subCategory").append($('<option>').text(value2.Name).attr('value', value2.Id));
+                    });
+                }
+
+                ajaxSearch();
+            }
+        });
+
+
+    });
+
+
+    $("#subCategory").on("change", function () {
+
+        $("#subsubCategory").html("<option selected disabled value='' >انتخاب نمایید</option>");
+        $.each(ajaxCategory, function (index, value) {
+            if (value.Id == $("#mainCategory option:selected").val()) {
+                if (value.SubCategories != null) {
+                    $.each(value.SubCategories, function (index2, value2) {
+                        if (value2.Id == $("#subCategory option:selected").val()) {
+                            if (value2.SubCategories != null) {
+                                $.each(value2.SubCategories, function (index3, value3) {
+                                    $("#subsubCategory").append($('<option>').text(value3.Name).attr('value', value3.Id));
+                                });
+                            }
+
+                            ajaxSearch();
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+
+
+    $("#subsubCategory").on("change", function () {
+
+        ajaxSearch();
+    });
+
+    function ajaxSearch() {
+
+        var catCode = $("#subsubCategory option:selected").val();
+        if (!catCode)
+            catCode = $("#subCategory option:selected").val();
+        if (!catCode)
+            catCode = $("#mainCategory option:selected").val();
+
+        var sortType = false;
+        if ($("#ddlSortType option:selected").val() == 1)
+            sortType = true;
+
+        var inputs = {
+            CategoryCode: catCode,
+            StoreCode: $("#txtStoreCode").val(),
+            PageNumber: pageNumber,
+            SortBy: $("#ddlSortBy option:selected").val(),
+            Ascending: sortType
+        };
+
+        var newStatus = $("#ddlStatus option:selected").val();
+        if (newStatus==0)
+            newStatus = null;
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SearchProductByAjax")',
+            dataType: 'html',
+            data: { filters: inputs, status: newStatus, productCode: $("#txtProductCode").val() },
+            success: function (result) {
+                $("#products").empty();
+                $("#products").html(result);
+            },
+            error: function (ex) {
+                alert('Failed to retrieve items.');
+            }
+        });
+    }
+
+
+    var pageNumber = 1;
+    function addPage() {
+        pageNumber += 1;
+        ajaxSearch();
+    }
+
+    function minusPage() {
+        pageNumber = (pageNumber - 1 > 0) ? pageNumber - 1 : 1;
+        ajaxSearch();
+    }
+</script>

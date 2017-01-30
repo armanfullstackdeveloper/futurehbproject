@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "نمایش";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Persian DatePicker</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+ 
+
+    <link href="~/Content/noUiSlider(Price_Picker)/nouislider.min.css" rel="stylesheet" />
+    <script src="~/Content/noUiSlider(Price_Picker)/nouislider.min.js"></script>
+</head>
+<body>
+
+    <div  id="slider-snap"></div>
+    حداقل قیمت <span id="slider-snap-value-lower"></span><br/>
+   حداکثر قیمت  <span id="slider-snap-value-upper"></span>
+    
+    
+    <script>
+        
+
+
+
+        var snapSlider = document.getElementById('slider-snap');
+
+
+
+        noUiSlider.create(snapSlider, {
+            start: [100, 3000],
+            behaviour: 'drag-tap',
+            connect: true,
+            step: 1,
+            range: {
+                'min': 00,
+                'max': 5000
+            }
+        });
+
+
+
+        var snapValues = [
+            document.getElementById('slider-snap-value-lower'),
+            document.getElementById('slider-snap-value-upper')
+        ];
+        var a = [];
+        snapSlider.noUiSlider.on('update', function (values, handle) {
+            a[handle] = values[handle] * 1000;
+            snapValues[handle].innerHTML = a[handle].toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        });
+
+    </script>
+     
+
+</body>
+</html>
+

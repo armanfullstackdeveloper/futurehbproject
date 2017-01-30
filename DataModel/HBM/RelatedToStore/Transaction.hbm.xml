@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToStore" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Transaction" table="Transaction" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="StoreCode">
+      <column name="StoreCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="TransactionDate">
+      <column name="TransactionDate" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="TransactionTime">
+      <column name="TransactionTime" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="Cost">
+      <column name="Cost" sql-type="decimal" not-null="false" />
+    </property>
+    <property name="TrackingCode">
+      <column name="TrackingCode" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="IsChecked">
+      <column name="IsChecked" sql-type="bit" not-null="false" />
+    </property>
+    <property name="IsSuccessful">
+      <column name="IsSuccessful" sql-type="bit" not-null="false" />
+    </property>
+    <!--<bag name="SalesPlan">
+      <key column="TransactionCode" />
+      <one-to-many class="SalesPlan" />
+    </bag>-->
+  </class>
+</hibernate-mapping>

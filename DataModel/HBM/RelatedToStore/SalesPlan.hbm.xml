@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToStore" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="SalesPlan" table="SalesPlan" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="PlanCode">
+      <column name="PlanCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="TransactionCode">
+      <column name="TransactionCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="StartDate">
+      <column name="StartDate" sql-type="decimal" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

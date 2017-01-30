@@ -1,0 +1,98 @@
+﻿@model DataModel.Entities.RelatedToProduct.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Category</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseCategoryCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BaseCategoryCode)
+            </dd>
+            <dt>تصویر</dt>
+            <dd><img src="~/@Model.ImgAddress" height="100" width="125" alt=""></dd>
+
+        </dl>
+        <br />
+        @{
+            if (Model.SubCategories.Count > 0)
+            {
+                <h3>زیر شاخه ها</h3>
+                <table class="table" border="1">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BaseCategoryCode)
+                        </th>
+                        <th>تصویر</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.SubCategories)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BaseCategoryCode)
+                            </td>
+                            <td><img src="~/@Model.ImgAddress" height="100" width="125" alt=""></td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id, level = Convert.ToInt32(ViewBag.level) + 1 }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id, level = Convert.ToInt32(ViewBag.level) + 1 }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id, level = Convert.ToInt32(ViewBag.level) + 1 })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        }
+
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index", new { level = Convert.ToInt32(ViewBag.level) })
+    </p>
+</body>
+</html>

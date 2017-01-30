@@ -1,0 +1,75 @@
+﻿@model DataModel.Entities.RelatedToStore.Seller
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SellerDetailes</title>
+</head>
+<body>
+    <div>
+        <h4>Seller</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NationalCode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NationalCode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsMale)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsMale)
+            </dd>
+            
+            <dt>
+                تصویر فروشنده
+            </dt>
+
+            <dd>
+                <img src="~/@Model.PicAddress" height="100" width="125" alt="">
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

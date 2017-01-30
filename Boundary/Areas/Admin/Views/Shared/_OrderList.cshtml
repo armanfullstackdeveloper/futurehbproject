@@ -1,0 +1,114 @@
+﻿@model IEnumerable<DataModel.Models.ViewModel.OrderViewModelForAdmins>
+
+<table class="table" border="1">
+    <tr>
+        <th>
+            کد سفارش
+        </th>
+        <th>
+            تاریخ
+        </th>
+        <th>
+            زمان
+        </th>
+        <th>
+            شیوه پرداخت
+        </th>
+        <th>
+            وضعیت
+        </th>
+        <th>
+            نام فروشگاه
+        </th>
+        <th>
+            نام مشتری
+        </th>
+        <th>
+            هزینه سفارش
+        </th>
+        <th>
+            مبلغ پرداختی
+        </th>
+        <th>
+            مبلغ مورد استفاده از موجودی قبلی
+        </th>
+        <th>
+            تسویه حساب با فروشنده
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverallOrderCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OverallPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberUsedBalance)
+            </td>
+            @{
+        if (item.IsPony)
+        {
+            <td>
+                @Html.Label("بله")
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.Label("خیر")
+            </td>
+        }
+
+        if (item.CanPony == true && item.IsPony == false)
+        {
+            <td>@Html.ActionLink("تسویه حساب", "SimpleCreate", "PaymentToStore", new { orderCode = item.OrderCode, overallCost = item.OverallOrderCost }, null)</td>
+        }
+        else
+        {
+            if (item.IsPony)
+            {
+                <td>@Html.Label("تسویه حساب شده است")</td>
+            }
+            else
+            {
+                <td>@Html.Label("امکان تسویه حساب نیست")</td>
+            }
+        }
+            }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { orderCode = item.OrderCode }) |
+                @Html.ActionLink("Details", "Details", new { orderCode = item.OrderCode }) |
+                @Html.ActionLink("Delete", "Delete", new { orderCode = item.OrderCode })
+            </td>
+        </tr>
+    }
+
+</table>
+

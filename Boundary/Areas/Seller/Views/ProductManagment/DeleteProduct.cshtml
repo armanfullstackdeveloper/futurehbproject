@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "حذف محصول";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+
+@section Style{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+}
+
+@using Microsoft.AspNet.Identity
+@using Boundary.Controllers.Ordinary
+@{
+    string userId = User.Identity.GetUserId();
+    MainSession mainSession = (MainSession)Session[userId];
+    long storeCode = mainSession.Store.StoreCode;
+}
+
+<div class="container">
+    <div class="row" style="direction:rtl;">
+        <div id="AddProduct" class="col-md-10 col-md-offset-2 pull-right">
+
+            <p style="margin: 62px 5px;">
+                مشخصات محصول شما :
+            </p>
+            <table class="table table-bordered table-hover table-striped table-responsive" id="tableContainer">
+                <thead>
+                    <tr>
+                        <td>شماره</td>
+                        <td>نام محصول</td>
+                        <td>قیمت </td>
+                        <td>قیمت با تخفیف</td>
+                        <td>موجود</td>
+
+                    </tr>
+                </thead>
+            </table>
+
+            <p style="margin: 62px 5px;">
+                آیا از حذف محصول خود مطمئین هستین ؟!
+            </p>
+
+            <div style="margin-bottom: 15px;" class="col-md-8 col-md-offset-4 pull-right">
+                <input type="button" class="btn btn-lg btn-success" id="deleteProduct" value="حذف" />
+                <a href="~/Seller/ProductManagment/ProductList/@storeCode"> <input style="margin: 0px 31px 0px 0px;" type="button" class="btn btn-lg btn-info" value="بازگشت" /></a>
+            </div>
+            <div style="color:red;" class="col-md-8 col-md-offset-4 pull-right" id="responseTxt">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Script{
+
+    <script>
+
+        var url = window.location.pathname.split('/');
+        var productCode = url[4];
+
+        $.ajax({
+            type: "GET",
+            url: "/api/product/get?id=" + productCode,
+            success: function (result) {
+                result = result.Response;
+                var txt = '<tbody>'
+
+                txt +=
+               '<tr><td>1</td>' +
+               '<td>' + result.Product.Name + '</td>' +
+               '<td>' + result.Product.Price + ' </td>' +
+               '<td>' + result.Product.DiscountedPrice + '</td>';
+                if (result.Product.IsExist == true) {
+                    txt += '<td>بله</td>';
+                }
+                else {
+                    txt += '<td>خیر</td>';
+                }
+
+                txt += '</tr>';
+
+                txt += '</tbody>';
+                $('#tableContainer').append(txt);
+
+            },
+            error: function () {
+                console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+            }
+        });
+
+
+        $('#deleteProduct').on('click', function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/api/store/productmanagment/remove?productId=" + productCode,
+                success: function (result) {
+                    result = result.Response;
+
+                    $('#responseTxt').html(result.responseText);
+                    setTimeout(function () {
+                        window.location.href = '/Seller/ProductManagment/ProductList/' + @storeCode;
+                    }, 2000);
+                },
+                error: function () {
+                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                }
+            });
+
+
+        });
+
+
+    </script>
+
+
+}
