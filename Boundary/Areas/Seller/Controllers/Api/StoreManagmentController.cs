@@ -4,9 +4,11 @@ using System.IO;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
+using Boundary.Controllers.Api;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
+using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
 using BusinessLogic.Components;
 using BusinessLogic.Helpers;
@@ -62,6 +64,63 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 try
                 {
                     List<ActionInputViewModel> lst = new List<ActionInputViewModel>();
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+        }
+
+        /// <summary>
+        /// دریافت تمامی دسته بندی های سطح اول
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("getCategories")]
+        public IHttpActionResult GetCategories() 
+        {
+            try
+            {
+                return Json(JsonResultHelper.SuccessResult(new StatesAndCategoriesViewModel()
+                {
+                    Categories = new CategoryBL().GetFirstLevel()
+                }));
+            }
+            catch (MyExceptionHandler exp1)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        //new ActionInputViewModel()
+                        //{
+                        //    Name = HelpfulFunction.GetVariableName(() => categoryCode),
+                        //    Value = categoryCode.ToString()
+                        //},
+                    };
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+            catch (Exception exp3)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        //new ActionInputViewModel()
+                        // {
+                        //     Name = HelpfulFunction.GetVariableName(() => categoryCode),
+                        //     Value = categoryCode.ToString()
+                        // },
+                    };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
