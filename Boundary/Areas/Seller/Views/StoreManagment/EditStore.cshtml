@@ -19,6 +19,7 @@
             <div style="width: 150px;float: right;"><input type="text" class="input input-group input-sm"  ng-model="Data.StoreName" /></div>
         </div>
 
+
         <div class="row" style="margin: 20px 10px;">
             <div style="width: 150px;float: right;">لینک صفحه فروشگاه شما در هوجی بوجی</div>
             <div style="width: 150px;float: right;"><input type="text" class="input input-group input-sm" ng-model="Data.HomePage" /></div>
@@ -40,7 +41,8 @@
         </div>*@
        
     <div class="row" style="margin: 10px;">
-        <input type="button" class="btn btn-success" value="ذخیره"  ng-click="saveData()"/>
+        <input type="button" class="btn btn-success" value="ذخیره" style="margin-right: 242px;" ng-click="saveData()"/>
+        <div ng-bind="status" style="width: 550px;text-align: center;font-size: 19px; margin: 10px;"></div>
        </div>
 
 
@@ -111,16 +113,17 @@
 
         madule.controller('EditShopController', ['$scope', function ($scope) {
             $scope.Data = [];
-
+            $scope.status = 'لطفا کمی صبر کنید ';
 
             $scope.loadData = function () {
                 $.ajax({
                     type: "GET",
                     url: "/api/store/storemanagment/editStore",
                     success: function (result) {
-
+                        $scope.status = '';
                         $scope.Data = result.Response;
-                     //   $scope.loadCategory();
+                        //   $scope.loadCategory();
+                        $scope.$apply();
                         console.log($scope.Data)
                     },
                     error: function () {
@@ -162,18 +165,21 @@
 
 
 
-            $scope.saveData = function ( ) {
+            $scope.saveData = function () {
+                $scope.status = 'لطفا کمی صبر کنید ';
+
                 $.ajax({
                     type: "POST",
                     url: "/api/store/storemanagment/editStore",
                     data:{
+                        StoreCode: $scope.Data.StoreCode,
                         StoreName: $scope.Data.StoreName,
                         Place: $scope.Data.Place,
                         StoreComments: $scope.Data.StoreComments,
                         HomePage: $scope.Data.HomePage 
                     },
                     success: function (result) {
-                        $scope.loadData();
+                        $scope.status = 'عملیات با موفقت انجام شد ';
                     },
                     error: function () {
                         console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
