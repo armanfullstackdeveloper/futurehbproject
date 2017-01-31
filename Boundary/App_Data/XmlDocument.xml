@@ -526,6 +526,12 @@
             <param name="right"></param>
             <returns></returns>
         </member>
+        <member name="M:Boundary.Areas.Seller.Controllers.Api.StoreManagmentController.GetCategories">
+            <summary>
+            دریافت تمامی دسته بندی های سطح اول
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Boundary.Areas.Member.Controllers.OrderManagementController">
             <summary>
             use for both api and mvc
