@@ -535,7 +535,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     new ProductSearchableAttributeValueBL().DeleteAllByProductCode_WhitOutCommitTransaction(productEditDataModel.ProductMainAttributeDataModels.Id, session);
                     foreach (ProductAttributeWithItemsForSaveAndUpdate model in productEditDataModel.ProductAttributeWithItemsDataModels)
                     {
-                        if (model.TextValues != null && model.Values.Count > 0)
+                        if (model.Code != 0 && model.Values.Count > 0)
                         {
                             foreach (long attrCode in model.Values)
                             {
