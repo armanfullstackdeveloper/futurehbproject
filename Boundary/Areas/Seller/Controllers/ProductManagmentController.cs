@@ -24,6 +24,9 @@ namespace Boundary.Areas.Seller.Controllers
         {
             try
             {
+
+
+
                 CheckSessionDataModel checkSession = CheckSallerSession();
                 if (!checkSession.IsSuccess)
                 {
