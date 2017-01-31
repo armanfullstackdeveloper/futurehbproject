@@ -246,7 +246,7 @@
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />
-    <Compile Include="Web References\com.arianpal.sandbox\Reference.cs">
+    <Compile Include="Web References\com.arianpal.merchant\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -771,6 +771,17 @@
     <Content Include="Scripts\angular_paging_Mjh.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web References\com.arianpal.merchant\PaymentRequestResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\com.arianpal.merchant\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\com.arianpal.merchant\VerifyPaymentResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\com.arianpal.merchant\WebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -802,16 +813,6 @@
     <Content Include="Areas\Seller\Views\ProductManagment\AddProduct.cshtml" />
     <Content Include="Views\Search\GetProduct.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-    <Content Include="Web References\com.arianpal.sandbox\PaymentRequestResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\com.arianpal.sandbox\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <Content Include="Web References\com.arianpal.sandbox\VerifyPaymentResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
     <Content Include="Views\Order\PaymentDetails.cshtml" />
     <Content Include="Views\Home\UserGuid.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
@@ -831,7 +832,7 @@
     <Content Include="Views\Home\Complaints.cshtml" />
     <Content Include="Views\Store\AddShop.cshtml" />
     <Content Include="Scripts\jquery1.8.3.js" />
-    <None Include="Web References\com.arianpal.sandbox\WebService.wsdl" />
+    <None Include="Web References\com.arianpal.merchant\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
@@ -853,16 +854,16 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://sandbox.arianpal.com/WebService.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://merchant.arianpal.com/WebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\com.arianpal.sandbox\</RelPath>
-      <UpdateFromURL>http://sandbox.arianpal.com/WebService.asmx%3fwsdl</UpdateFromURL>
+      <RelPath>Web References\com.arianpal.merchant\</RelPath>
+      <UpdateFromURL>http://merchant.arianpal.com/WebService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Boundary_com_arianpal_sandbox_WebService</CachedSettingsPropName>
+      <CachedSettingsPropName>Boundary_com_arianpal_merchant_WebService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

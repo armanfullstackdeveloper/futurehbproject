@@ -526,14 +526,6 @@
             <param name="right"></param>
             <returns></returns>
         </member>
-        <member name="M:Boundary.Areas.Seller.Controllers.Api.ProductManagmentController.AddAttributeValue(System.Int64,System.String)">
-            <summary>
-            افزودن مقدار ویژگی توسط فروشنده
-            </summary>
-            <param name="attrCode"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boundary.Areas.Member.Controllers.OrderManagementController">
             <summary>
             use for both api and mvc
@@ -666,124 +658,124 @@
             حداکثر تعداد تصاویر مجاز برای یک محصول
             </summary>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.WebService">
+        <member name="T:Boundary.com.arianpal.merchant.WebService">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.#ctor">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.#ctor">
             <remarks/>
         </member>
-        <member name="E:Boundary.com.arianpal.sandbox.WebService.RequestPaymentCompleted">
+        <member name="E:Boundary.com.arianpal.merchant.WebService.RequestPaymentCompleted">
             <remarks/>
         </member>
-        <member name="E:Boundary.com.arianpal.sandbox.WebService.verifyPaymentCompleted">
+        <member name="E:Boundary.com.arianpal.merchant.WebService.verifyPaymentCompleted">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.RequestPayment(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.RequestPayment(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.RequestPaymentAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.RequestPaymentAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.RequestPaymentAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Object)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.RequestPaymentAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Object)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.verifyPayment(System.String,System.String,System.Decimal,System.String)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.verifyPayment(System.String,System.String,System.Decimal,System.String)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.verifyPaymentAsync(System.String,System.String,System.Decimal,System.String)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.verifyPaymentAsync(System.String,System.String,System.Decimal,System.String)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.verifyPaymentAsync(System.String,System.String,System.Decimal,System.String,System.Object)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.verifyPaymentAsync(System.String,System.String,System.Decimal,System.String,System.Object)">
             <remarks/>
         </member>
-        <member name="M:Boundary.com.arianpal.sandbox.WebService.CancelAsync(System.Object)">
+        <member name="M:Boundary.com.arianpal.merchant.WebService.CancelAsync(System.Object)">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.PaymentRequestResult">
+        <member name="T:Boundary.com.arianpal.merchant.PaymentRequestResult">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.PaymentRequestResult.PaymentPath">
+        <member name="P:Boundary.com.arianpal.merchant.PaymentRequestResult.PaymentPath">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.PaymentRequestResult.ResultStatus">
+        <member name="P:Boundary.com.arianpal.merchant.PaymentRequestResult.ResultStatus">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.ResultValues">
+        <member name="T:Boundary.com.arianpal.merchant.ResultValues">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.Ready">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.Ready">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.GatewayUnverify">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.GatewayUnverify">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.GatewayIsExpired">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.GatewayIsExpired">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.GatewayIsBlocked">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.GatewayIsBlocked">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.GatewayInvalidInfo">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.GatewayInvalidInfo">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.UserNotActive">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.UserNotActive">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.InvalidServerIP">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.InvalidServerIP">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.Succeed">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.Succeed">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.ResultValues.Failed">
+        <member name="F:Boundary.com.arianpal.merchant.ResultValues.Failed">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.VerifyPaymentResult">
+        <member name="T:Boundary.com.arianpal.merchant.VerifyPaymentResult">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.VerifyPaymentResult.ResultStatus">
+        <member name="P:Boundary.com.arianpal.merchant.VerifyPaymentResult.ResultStatus">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.VerifyPaymentResult.PayementedPrice">
+        <member name="P:Boundary.com.arianpal.merchant.VerifyPaymentResult.PayementedPrice">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.VerifyResult">
+        <member name="T:Boundary.com.arianpal.merchant.VerifyResult">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.Ready">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.Ready">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.NotMatchMoney">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.NotMatchMoney">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.Verifyed">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.Verifyed">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.InvalidRef">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.InvalidRef">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.GatewayInvalidInfo">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.GatewayInvalidInfo">
             <remarks/>
         </member>
-        <member name="F:Boundary.com.arianpal.sandbox.VerifyResult.Success">
+        <member name="F:Boundary.com.arianpal.merchant.VerifyResult.Success">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.RequestPaymentCompletedEventHandler">
+        <member name="T:Boundary.com.arianpal.merchant.RequestPaymentCompletedEventHandler">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.RequestPaymentCompletedEventArgs">
+        <member name="T:Boundary.com.arianpal.merchant.RequestPaymentCompletedEventArgs">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.RequestPaymentCompletedEventArgs.Result">
+        <member name="P:Boundary.com.arianpal.merchant.RequestPaymentCompletedEventArgs.Result">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.verifyPaymentCompletedEventHandler">
+        <member name="T:Boundary.com.arianpal.merchant.verifyPaymentCompletedEventHandler">
             <remarks/>
         </member>
-        <member name="T:Boundary.com.arianpal.sandbox.verifyPaymentCompletedEventArgs">
+        <member name="T:Boundary.com.arianpal.merchant.verifyPaymentCompletedEventArgs">
             <remarks/>
         </member>
-        <member name="P:Boundary.com.arianpal.sandbox.verifyPaymentCompletedEventArgs.Result">
+        <member name="P:Boundary.com.arianpal.merchant.verifyPaymentCompletedEventArgs.Result">
             <remarks/>
         </member>
     </members>

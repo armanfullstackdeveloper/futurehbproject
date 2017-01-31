@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
-using Boundary.com.arianpal.sandbox;
+using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;

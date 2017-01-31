@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
-using Boundary.com.arianpal.sandbox;
+using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
@@ -25,7 +25,7 @@ using Newtonsoft.Json.Linq;
 using NHibernate;
 
 namespace Boundary.Controllers.Api
-{    
+{
     [RoutePrefix("api/Order")]
     public class OrderController : ApiController
     {
