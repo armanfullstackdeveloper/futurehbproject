@@ -220,7 +220,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 {
                     foreach (ProductAttributeWithItemsForSaveAndUpdate model in productRegisterDataModel.ProductAttributeWithItemsDataModels)
                     {
-                        if (model.TextValues != null && model.Values.Count > 0)
+                        if (model.Code != 0 && model.Values.Count > 0)
                         {
                             foreach (long attrCode in model.Values)
                             {
