@@ -387,15 +387,17 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 List<CatsOfStore> catsList = new CatsOfStoreBL().GetByStoreCode(storeEditDataModel.StoreCode);
                 foreach (CatsOfStore item in catsList)
                 {
-                    if (!storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
+                    if (storeEditDataModel.ListCategoryCode!=null && !storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
                         new CatsOfStoreBL().DeleteWhitOutCommitTransaction(item, session);
                 }
-                foreach (long item in storeEditDataModel.ListCategoryCode)
+                if (storeEditDataModel.ListCategoryCode != null)
                 {
-                    if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
-                        new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                    foreach (long item in storeEditDataModel.ListCategoryCode)
+                    {
+                        if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
+                            new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                    }
                 }
-
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
                 foreach (decimal item in lstTell)
                 {
