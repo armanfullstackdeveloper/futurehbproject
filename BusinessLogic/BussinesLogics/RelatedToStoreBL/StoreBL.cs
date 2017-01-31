@@ -379,7 +379,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 storedStore.Place = storeEditDataModel.Place;
                 storedStore.Comments = storeEditDataModel.StoreComments;
                 storedStore.Website = storeEditDataModel.Website;
-                storedStore.StoreTypeCode = storeEditDataModel.StoreTypeCode;
+                storedStore.StoreTypeCode = (byte) (storeEditDataModel.StoreTypeCode!=0? storeEditDataModel.StoreTypeCode : storedStore.StoreTypeCode);
                 storedStore.Name = storeEditDataModel.StoreName;
                 storedStore.HomePage = storeEditDataModel.HomePage;
                 new StoreBL().UpdateWhitOutCommitTransaction(storedStore, session);
