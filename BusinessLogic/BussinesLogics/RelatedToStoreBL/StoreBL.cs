@@ -401,15 +401,17 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
                 foreach (decimal item in lstTell)
                 {
-                    if (!storeEditDataModel.PhoneNumbers.Contains(item))
+                    if (storeEditDataModel.PhoneNumbers!=null &&!storeEditDataModel.PhoneNumbers.Contains(item))
                         new StoreTellBL().Delete(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
                 }
-                foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                if (storeEditDataModel.PhoneNumbers != null)
                 {
-                    if (!lstTell.Contains(item))
-                        new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
+                    foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                    {
+                        if (!lstTell.Contains(item))
+                            new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
+                    }
                 }
-
                 session.Transaction.Commit();
                 return true;
             }
