@@ -1,309 +1,200 @@
-﻿
-@{
-    ViewBag.Title = "بازبینی سفارش";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "ویرایش مشخصات فروشگاه";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+
 
 @section Style{
-    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-}
+    <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselect.css" rel="stylesheet" />
 
-<div class="container insideFormBascket">
-    <h1>مرحله ۳ : بازبینی سفارش</h1>
+    }
 
-    <div ng-app="ShopApp" ng-controller="ShowOrderController">
+<div ng-app="ShopApp" id="AddDiscount" ng-controller="EditShopController" style=" width: 75%; text-align: right;direction: rtl;padding: 0 2.5%;font-family: 'iransfm'; float: left;">
 
-        <div class="container" ng-init="getBalance()">
-            <div ng-if="Product.length!=0" class="Row">
-                <p style="float: right;direction: rtl;font-size: 23px; margin: 19px;">
-                    مشخصات محصولات:
-                </p>
 
-                <table style="float:right;direction: rtl; margin:30px auto;" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
-                    <tr>
-                        <th style=" text-align: center;"></th>
-                        <th style=" text-align: center;">نام محصول</th>
-                        <th style=" text-align: center;">نام فروشگاه</th>
-                        <th style=" text-align: center;">تعداد</th>
-                        @*<th style=" text-align: center;">هزینه پستی</th>*@
-                        <th style=" text-align: center;">قیمت واحد</th>
-                        <th style=" text-align: center;">قیمت کل</th>
-                    </tr>
-                    <tr ng-repeat=" item in Product">
-                        <td style=" text-align: center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
-                        <td style=" text-align: center;" ng-bind="item.ProductName"></td>
-                        <td style=" text-align: center;" ng-bind="item.StoreName"></td>
-                        <td style=" text-align: center;" ng-bind="item.Count"></td>
-                        @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
-                        <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
-                        <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
-                        <td style=" text-align: center;">
-                            <i style="cursor:pointer" ng-click="RemoveProduct(item.ProductCode)">X</i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مجموع خرید</td>
-                        <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مجموع هزینه پستی</td>
-                        <td style=" text-align: center;" ng-bind="AllPostalCost"></td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">موجودی قبلی حساب شما </td>
-                        <td style=" text-align: center;" ng-bind="Balance"></td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مبلغ قابل پرداخت  </td>
-                        <td style=" text-align: center;" ng-bind="PayPrice"></td>
-                    </tr>
 
-                </table>
-
-            </div>
-
+    <div>
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">نام فروشگاه</div>
+            <div style="width: 150px;float: right;"><input type="text" class="input input-group input-sm"  ng-model="Data.StoreName" /></div>
         </div>
-
-        <div class="container">
-            <div class="Row">
-                <h3 style="margin-bottom:1em;">
-                    مشخصات تحویل گیرنده:
-                </h3>
-                <div id="showInfo" ng-hide="EditBox">
-                    <div class="form-group">
-                        <label class="forLable">نام و نام خانوادگی : </label>
-                        <span ng-bind="Member.Name"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>تلفن ثابت : </label>
-                        <span ng-bind="Member.PhoneNumber"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>تلفن همراه : </label>
-                        <span ng-bind="Member.MobileNumber"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>کد پستی : </label>
-                        <span ng-bind="Member.PostalCode"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>شهر : </label>
-                        <span ng-bind="Member.City"></span>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label>آدرس : </label>
-                        <span ng-bind="Member.Place"></span>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="row" style="margin: 20px 10px;">
+            <div style="width: 150px;float: right;">لینک صفحه فروشگاه شما در هوجی بوجی</div>
+            <div style="width: 150px;float: right;"><input type="text" class="input input-group input-sm" ng-model="Data.HomePage" /></div>
         </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="orgenizer" style="font-size:1.3em; margin-bottom:1em; border-top:solid #e1e1e1 1px; margin-top:1em; padding-top:1em;">
-                    اگر کد تخفیف دارید ، وارد و سپس دکمه  تایید را بفشارید
-                </div>
-                <div class="NLinputs">
-                    <div class="GoEmailNl DarkRed">
-                        <input name="" class="DarkRed" type="button" ng-click="checkDiscount()" value="تایید">
-                    </div>
-                    <div class="WriteEmailNl">
-                        <input name="" type="text" ng-model="DiscountCode" placeholder="کد تخفیف">
-                    </div>
-                </div>
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">آدرس کامل</div>
+            <div style="width: 150px;float: right;"><textarea rows="5" class="input input-group input-lg"  ng-model="Data.Place"></textarea>
             </div>
+        </div> 
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">توضیحات فروشگاه</div>
+            <div style="width: 150px;float: right;"><textarea rows="5" class="input input-group input-lg"  ng-model="Data.StoreComments"></textarea></div>
         </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="orgenizer FromTop">
-                    <div class="forLable" style="margin-top:5px;">نوع پرداخت</div>
-
-                    <div class="forInput">
-                        <select ng-model="orderType" ng-init="orderType='1'">
-                            <option value="1">پرداخت آزاد</option>
-                            <option value="2">پرداخت امن</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="orgenizer FromTop">
-                    <span>پرداخت آزاد : </span>
-                    مبلق واریزی بلافاصله پس از پرداخت  به حساب فروشنده واریز می شود.
-                </div>
-                <div class="orgenizer FromTop">
-                    <span>پرداخت امن : </span>
-                    در این روش، بعد از پرداخت  ، وجه به امانت نزد هوجی بوجی می ماند. و بعد از تحویل کالا به شما ، انتقال وجه انجام می شود.
-                </div>
+        @*<div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">نوع محصولات فروشگاه</div>
+            <div style="width: 150px;float: right;">
+                <select multiple="multiple" id="SlectBox"></select>
+         
+        </div>*@
+       
+    <div class="row" style="margin: 10px;">
+        <input type="button" class="btn btn-success" value="ذخیره"  ng-click="saveData()"/>
+       </div>
 
 
-
-                <input class="fromTop btn btn-default inputRight" type="button" ng-click="Payment()" value="پرداخت" />
-                <div ng-show="showLoading" class="orgenizer FromTop">
-                    لطفا کمی صبر کنید
-                </div>
-            </div>
-        </div>
 
     </div>
+    @*[StringLength(100)]
+            [Display(Name = "نام فروشگاه")]
+            public string StoreName { get; set; }
+
+            [StringLength(1000)]
+            [Display(Name = "توضیحات فروشگاه")]
+            public string StoreComments { get; set; }
+
+            [StringLength(10, MinimumLength = 10)]
+            [Display(Name = "کد شناسه صنفی")]
+            public int? CommercialCode { get; set; }
+
+            [Display(Name = "شماره تلفن معرف")]
+            public decimal? ReagentPhoneNumber { get; set; }
+
+            [Display(Name = "نام شهر")]
+            public long? CityCode { get; set; }
+
+
+
+            [StringLength(200)]
+            [Display(Name = "آدرس کامل")]
+            public string Place { get; set; }
+
+            public decimal? Latitude { get; set; }
+            public decimal? Longitude { get; set; }
+
+
+            [Display(Name = "شماره تماس")]
+            public List<decimal>
+                PhoneNumbers { get; set; }
+
+                [Display(Name = "نوع محصولات فروشگاه")]
+                public List<long>
+                    ListCategoryCode { get; set; }
+
+                    public byte StoreTypeCode { get; set; }
+
+                    public string Email { get; set; }
+                    public string Website { get; set; }
+
+                    [Display(Name = "صفحه شخصی فروشگاه")]
+                    public string HomePage { get; set; }
+
+                URL: api/store/storemanagment/editStore
+        Parameter: StoreEditDataModel
+
+
+    *@
+
+
+
+
 </div>
-
-
 @section Script{
+
     <script src="~/Scripts/angular.min.js"></script>
+<script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
 
     <script>
-        angular.module('ShopApp', [])
-      .controller('ShowOrderController', ['$scope', function ($scope) {
+
+        var madule = angular.module('ShopApp', [])
+
+        madule.controller('EditShopController', ['$scope', function ($scope) {
+            $scope.Data = [];
 
 
-          $scope.Product = @Html.Raw(Json.Encode(Model));
-          $scope.Member = @Html.Raw(Json.Encode(ViewBag.MemberInfo));
-          var postalCost={};
+            $scope.loadData = function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/api/store/storemanagment/editStore",
+                    success: function (result) {
 
-          $scope.AllTotalPrice=0;
-          $.each($scope.Product , function(index , value){
-
-              if(value.StoreCityCode==$scope.Member.CityCode){
-                  //PostalCostInTown
-                  if(postalCost[value.StoreName]&&postalCost[value.StoreName].price){
-                      if(postalCost[value.StoreName].price<value.PostalCostInTown){
-                          postalCost[value.StoreName].price=value.PostalCostInTown;
-                      }
-                  }
-                  else{
-                      postalCost[value.StoreName]={'price':value.PostalCostInTown};
-                  }
-              }else{
-                  //PostalCostInCountry
-                  if(postalCost[value.StoreName]&&postalCost[value.StoreName].price){
-                      if(postalCost[value.StoreName].price<value.PostalCostInCountry){
-                          postalCost[value.StoreName].price=value.PostalCostInCountry;
-                      }
-                  }
-                  else{
-                      postalCost[value.StoreName]={'price':value.PostalCostInCountry};
-                  }
-              }
+                        $scope.Data = result.Response;
+                     //   $scope.loadCategory();
+                        console.log($scope.Data)
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
 
 
-              var totalTemp=parseInt(value.RealPrice)*parseInt(value.Count);
-              $scope.AllTotalPrice+=totalTemp;
-              $scope.Product[index].TotalPrice=(totalTemp +'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-              $scope.Product[index].RealPrice=(value.RealPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-          })
+            $scope.loadCategory = function () {
 
-          var  postalTemp=0;
+                $.ajax({
+                    type: "GET",
+                    url: "/api/store/storemanagment/editStore",
+                    success: function (result) {
 
-          $.each(postalCost , function(index , value){
-              postalTemp+=value.price;
-          })
-          $scope.Balance=0;
-          $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-
-
-          $scope.AllPostalCost=(postalTemp+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-          $scope.AllTotalPrice=($scope.AllTotalPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-          parseInt
-          $scope.PayPrice=(parseInt($scope.AllTotalPrice.replace(/,/g, ''))+parseInt($scope.AllPostalCost.replace(/,/g, '')))-parseInt($scope.Balance.replace(/,/g, ''));
+                        $scope.Categories = result.Response;
+                    
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
 
 
-          $scope.getBalance=function(id){
-              $.ajax({
-                  type: "GET",
-                  url: "/Member/panel/GetActiveBalance",
-                  success: function (result) {
-                      console.log(result)
-                      $scope.Balance=result;
-                      $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+                //make multi slected list
+                $.each($scope.Categories, function (index, value) {
+                    $("#SlectBox").append($('<option>').text(value.Name).attr('value', value.Id));
+                });
+                $('#SlectBox').SumoSelect({
+                    csvDispCount: 2,
+                    captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                    okCancelInMulti: false
+                });
+            }
+          
 
-                  }
-              });
-          }
-          $scope.checkDiscount=function(){
-              // console.log(JSON.stringify($scope.Product))
+            $scope.loadData();
 
-              var checkProduct=[];
-              $.each($scope.Product,function(index,value){
-                  checkProduct.push({Count:value.Count , ProductCode:value.ProductCode});
-              })
-              console.log(checkProduct)
-              if(!$scope.DiscountCode)return;
-              $.ajax({
-                  type: "POST",
-                  contentType: "application/json",
-                  url: "/api/order/VerifyDiscountCode?discountCode="+$scope.DiscountCode,
-                  data: JSON.stringify($scope.Product) ,
-                  success: function (result) {
-                      console.log(result)
-                      // $scope.Balance=result;
-                      // $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
-                  }
-              });
-          }
-          $scope.Payment=function(){
-              $scope.showLoading=true;
-              var url="/api/order/pay?orderType="+$scope.orderType;
-              if($scope.DiscountCode){
-                  url+="&discountCode="+$scope.DiscountCode
-              }
 
-              $.ajax({
-                  type: "POST",
-                  contentType: "application/json",
-                  url: url,
-                  data: JSON.stringify($scope.Product) ,
-                  success: function (result) {
-                      console.log(result)
-                      if(result.Success==true){
-                          window.location.href =  result.Response;
-                      }
+            $scope.saveData = function ( ) {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/store/storemanagment/editStore",
+                    data:{
+                        StoreName: $scope.Data.StoreName,
+                        Place: $scope.Data.Place,
+                        StoreComments: $scope.Data.StoreComments,
+                        HomePage: $scope.Data.HomePage 
+                    },
+                    success: function (result) {
+                        $scope.loadData();
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
 
-                      // $scope.Balance=result;
-                      // $scope.Balance=($scope.Balance+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
-                  }
-              });
-          }
+        }]);
 
-      }]);
+        madule.filter('translate', function () {
+            return function (x) {
+
+                if (x == true)
+                    return "بله";
+                else
+                    return "خیر";
+            };
+        });
+
+        $('#AddDiscount').on('keydown', '#DiscountPercent', function (e) {
+            -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
+        });
     </script>
 }
-
-
-
-
-
-
-
-
-
-
-
-
