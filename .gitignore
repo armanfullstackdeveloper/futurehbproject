@@ -51,3 +51,4 @@ Ankh.NoLoad
 ThirdParty/
 .vs/config/applicationhost.config
 /Website/Web.config
+Boundary/Web.config
