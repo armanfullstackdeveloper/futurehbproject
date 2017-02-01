@@ -2,6 +2,8 @@
 using Boundary.Controllers.Ordinary;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
+using BusinessLogic.BussinesLogics.RelatedToStoreBL;
+using DataModel.Models.DataModel;
 
 namespace Boundary.Areas.Seller.Controllers
 {
@@ -32,7 +34,13 @@ namespace Boundary.Areas.Seller.Controllers
                     return RedirectToAction(StaticString.Action_Error, StaticString.Controller_ForError, new { area = "" });
                 return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
             }
-            return View();
+
+            StoreEditDataModel storeEditDataModel = new StoreBL().GetStoreForEdit(checkSession.MainSession.Store.StoreCode);
+            if (storeEditDataModel == null || storeEditDataModel.StoreCode == 0)
+            {
+                return Json(JsonResultHelper.FailedResultWithMessage());
+            }
+            return View(storeEditDataModel);
         }
         public ActionResult EditStorePhoto()
         {

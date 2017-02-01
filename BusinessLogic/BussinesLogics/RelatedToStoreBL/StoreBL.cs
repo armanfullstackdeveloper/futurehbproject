@@ -384,20 +384,25 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 storedStore.HomePage = storeEditDataModel.HomePage;
                 new StoreBL().UpdateWhitOutCommitTransaction(storedStore, session);
 
-                List<CatsOfStore> catsList = new CatsOfStoreBL().GetByStoreCode(storeEditDataModel.StoreCode);
-                foreach (CatsOfStore item in catsList)
+                //age category hash khali omad hamon ghabli ro hefz kon
+                if (storeEditDataModel.ListCategoryCode != null && storeEditDataModel.ListCategoryCode.Any())
                 {
-                    if (storeEditDataModel.ListCategoryCode!=null && !storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
-                        new CatsOfStoreBL().DeleteWhitOutCommitTransaction(item, session);
-                }
-                if (storeEditDataModel.ListCategoryCode != null)
-                {
-                    foreach (long item in storeEditDataModel.ListCategoryCode)
+                    List<CatsOfStore> catsList = new CatsOfStoreBL().GetByStoreCode(storeEditDataModel.StoreCode);
+                    foreach (CatsOfStore item in catsList)
                     {
-                        if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
-                            new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                        if (storeEditDataModel.ListCategoryCode != null && !storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
+                            new CatsOfStoreBL().DeleteWhitOutCommitTransaction(item, session);
+                    }
+                    if (storeEditDataModel.ListCategoryCode != null)
+                    {
+                        foreach (long item in storeEditDataModel.ListCategoryCode)
+                        {
+                            if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
+                                new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                        }
                     }
                 }
+
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
                 foreach (decimal item in lstTell)
                 {
