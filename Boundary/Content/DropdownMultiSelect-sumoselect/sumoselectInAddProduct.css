@@ -119,6 +119,7 @@ color: #000 !important;
 	z-index: 1000;
 	color: #3c97b2;
 	margin-left: 0.5%;
+    overflow:auto;
 }
 .SumoSelect > .optWrapper > .options {
 	list-style: none;

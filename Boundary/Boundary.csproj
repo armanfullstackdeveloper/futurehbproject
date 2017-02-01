@@ -412,6 +412,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\Font.css" />
     <Content Include="Global.asax" />
+    <Content Include="Img\Ad\golBano1.jpg" />
+    <Content Include="Img\Ad\golBano2.jpg" />
+    <Content Include="Img\Ad\katoniLand.jpg" />
+    <Content Include="Img\Ad\torkShop.jpg" />
+    <Content Include="Img\Ad\torkShop2.jpg" />
+    <Content Include="Img\Ad\torkShop3.jpg" />
     <Content Include="Img\ad_Big_1.jpg" />
     <Content Include="Img\ad_Big_2.jpg" />
     <Content Include="Img\Catalog1.jpg" />
