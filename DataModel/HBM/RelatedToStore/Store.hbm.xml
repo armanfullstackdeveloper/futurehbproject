@@ -11,7 +11,7 @@
       <column name="UserCode" sql-type="nvarchar" not-null="true" />
     </property>
     <property name="CityCode">
-      <column name="CityCode" sql-type="bigint" not-null="true" />
+      <column name="CityCode" sql-type="bigint" not-null="false" />
     </property>
     <property name="Name">
       <column name="Name" sql-type="nvarchar" not-null="false" />

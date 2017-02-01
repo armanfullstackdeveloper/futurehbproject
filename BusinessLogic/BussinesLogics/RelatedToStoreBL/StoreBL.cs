@@ -379,37 +379,44 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 storedStore.Place = storeEditDataModel.Place;
                 storedStore.Comments = storeEditDataModel.StoreComments;
                 storedStore.Website = storeEditDataModel.Website;
-                storedStore.StoreTypeCode = storeEditDataModel.StoreTypeCode;
+                storedStore.StoreTypeCode = (byte) (storeEditDataModel.StoreTypeCode!=0? storeEditDataModel.StoreTypeCode : storedStore.StoreTypeCode);
                 storedStore.Name = storeEditDataModel.StoreName;
                 storedStore.HomePage = storeEditDataModel.HomePage;
                 new StoreBL().UpdateWhitOutCommitTransaction(storedStore, session);
 
-                List<CatsOfStore> catsList = new CatsOfStoreBL().GetByStoreCode(storeEditDataModel.StoreCode);
-                foreach (CatsOfStore item in catsList)
+                //age category hash khali omad hamon ghabli ro hefz kon
+                if (storeEditDataModel.ListCategoryCode != null && storeEditDataModel.ListCategoryCode.Any())
                 {
-                    if (storeEditDataModel.ListCategoryCode!=null && !storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
-                        new CatsOfStoreBL().DeleteWhitOutCommitTransaction(item, session);
-                }
-                if (storeEditDataModel.ListCategoryCode != null)
-                {
-                    foreach (long item in storeEditDataModel.ListCategoryCode)
+                    List<CatsOfStore> catsList = new CatsOfStoreBL().GetByStoreCode(storeEditDataModel.StoreCode);
+                    foreach (CatsOfStore item in catsList)
                     {
-                        if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
-                            new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                        if (storeEditDataModel.ListCategoryCode != null && !storeEditDataModel.ListCategoryCode.Contains(item.CatCode))
+                            new CatsOfStoreBL().DeleteWhitOutCommitTransaction(item, session);
+                    }
+                    if (storeEditDataModel.ListCategoryCode != null)
+                    {
+                        foreach (long item in storeEditDataModel.ListCategoryCode)
+                        {
+                            if (!catsList.Contains(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }))
+                                new CatsOfStoreBL().SaveWhitOutCommitTransaction(new CatsOfStore() { CatCode = item, StoreCode = storeEditDataModel.StoreCode }, session);
+                        }
                     }
                 }
+
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
                 foreach (decimal item in lstTell)
                 {
-                    if (!storeEditDataModel.PhoneNumbers.Contains(item))
+                    if (storeEditDataModel.PhoneNumbers!=null &&!storeEditDataModel.PhoneNumbers.Contains(item))
                         new StoreTellBL().Delete(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
                 }
-                foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                if (storeEditDataModel.PhoneNumbers != null)
                 {
-                    if (!lstTell.Contains(item))
-                        new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
+                    foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                    {
+                        if (!lstTell.Contains(item))
+                            new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
+                    }
                 }
-
                 session.Transaction.Commit();
                 return true;
             }
