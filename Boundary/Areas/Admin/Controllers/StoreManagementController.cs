@@ -37,7 +37,7 @@ namespace Boundary.Areas.Admin.Controllers
                 pageNumber = (pageNumber > 0) ? pageNumber : 1;
                 ViewBag.PageNumber = pageNumber;
 
-                List<long> lst = new StoreBL().SearchForAdmin(null, null, null, pageNumber);
+                List<long> lst = new StoreBL().SearchForAdmin(null, null, null, null, pageNumber);
                 List<StoreDetailsViewModel> storeDetails = new List<StoreDetailsViewModel>();
                 foreach (long item in lst)
                 {
@@ -87,7 +87,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public PartialViewResult SearchStoreByAjax(string codeOrName,byte? storeType=null,EStoreStatus? status=null)  
+        public PartialViewResult SearchStoreByAjax(string codeOrName,byte? storeType=null,EStoreStatus? status=null, string username ="")  
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Boundary.Areas.Admin.Controllers
 
                 if (storeType == 0)
                     storeType = null;
-                List<long> lst = new StoreBL().SearchForAdmin(codeOrName, storeType, status);
+                List<long> lst = new StoreBL().SearchForAdmin(codeOrName, username, storeType, status);
                 List<StoreDetailsViewModel> storeDetails = new List<StoreDetailsViewModel>();
                 foreach (long item in lst)
                 {

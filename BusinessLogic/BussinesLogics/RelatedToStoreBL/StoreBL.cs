@@ -481,7 +481,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<long> SearchForAdmin(string codeOrName, byte? storeType, EStoreStatus? status, 
+        public List<long> SearchForAdmin(string codeOrName, string username, byte? storeType, EStoreStatus? status, 
             int? pageNumber=null, int? rowspPage=null)
         {
             try
@@ -489,12 +489,14 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 IDbConnection db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
                 parameters.Add("@codeOrName", string.IsNullOrEmpty(codeOrName)?null:codeOrName);
+                parameters.Add("@username", string.IsNullOrEmpty(username) ? null : username);
                 parameters.Add("@storeType", storeType);
                 parameters.Add("@status", status);
                 parameters.Add("@pageNumber", (pageNumber != 0 && pageNumber > 0) ? pageNumber : 1 );
                 parameters.Add("@rowspPage", (rowspPage != 0 && rowspPage > 0) ? rowspPage : StaticNembericInBL.CountOfItemsInAdminPages);
 
-                List<long> storeCodes = db.Query<long>(@"select Id from [dbo].[Store] where 
+                List<long> storeCodes = db.Query<long>(@"select Id from [dbo].[Store] where
+                        (@username is null or [dbo].[Store].UserCode in(select Id from [User] where [UserName] like @username or [UserName] like '%'+@username or [UserName] like '%'+@username+'%')) and
                         (@storeType is null or [StoreTypeCode]=@storeType) and 
                         (@status is null or [StoreStatus]=@status) and
                         (@codeOrName is null or 
