@@ -1,3 +1,12 @@
+
+@font-face {
+    font-family: 'iransfm';
+    src: url('../fonts/iransfm.eot?#') format('eot'), /* IE6–8 */ url('../fonts/iransfm.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../fonts/iransfm.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+@font-face {
+    font-family: 'iransfb';
+    src: url('../fonts/iransfb.eot?#') format('eot'), /* IE6–8 */ url('../fonts/iransfb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../fonts/iransfb.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
 /*----------------- main elements -----------------------*/
 
 body,h1,h2,h3,h4,h5,h6,p, ul,li {
@@ -104,11 +113,32 @@ input[type="checkbox"]:checked + label span {
     background: url(../images/checkAfter.png) right 0 no-repeat;
     background-size: 20px;
 }
+.imageInMiddle {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.relativeMatter {
+    position: relative;
+}
+.inlineList {
+    display: inline-block;
+}
+.openUpObject {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 /*--------------- main elements --------------------*/
 
 /*---------------- text elements --------------------*/
 .thickFont {
     font-family: 'iransfb';
+}
+.normalFont {
+    font-family: 'iransfm';
 }
 .textInCenter {
     text-align: center;
@@ -122,6 +152,41 @@ input[type="checkbox"]:checked + label span {
 .textJustified {
     text-align: justify;
 }
+.pinkColor {
+    color: #e91e63;
+}
+.pinkBack {
+    background-color: #e91e63;
+}
+.greenColor {
+    color: #009688;
+}
+.greenBack {
+    background-color: #009688;
+}
+.solidLineHeight {
+    line-height: 1;
+}
+.eightyFontsize  {
+    font-size: 18px;
+}
+.twentyTwoFontsize {
+    font-size: 22px;
+}
+.blackColor {
+    color: #000;
+}
+.pinkBorder {
+    border:solid #e91e63 2px;
+}
+.greenBorder {
+    border:solid #009688 2px;
+}
+.verticalLine {
+    width: 1px;
+    height: 100%;
+    background-color: #f1f1f1;
+}
 /*-----------------text elements ----------------------*/
 
 /*---------------- standard distances ----------------*/
@@ -129,10 +194,10 @@ input[type="checkbox"]:checked + label span {
     margin: 0.5rem 1rem;
 }
 .standardPadding {
-    padding: 1rem;
+    padding:0.5em 1rem;
 }
 .loginPadding {
-    padding: 1.5em;
+    padding:1rem;
 }
 .standardDoublePadding {
     padding: 2rem;
@@ -180,6 +245,9 @@ input[type="checkbox"]:checked + label span {
     margin: 4rem 0 ;
 }
 .elementTopVerticalMargin {
+    margin: 2rem 0 0 0 ;
+}
+.elementTopDoubleVerticalMargin {
     margin: 4rem 0 0 0 ;
 }
 .elementHorizontalMargin {
@@ -187,4 +255,199 @@ input[type="checkbox"]:checked + label span {
 }
 /*------------------- standard distances -----------------*/
 
+/*------------------- standard columns -------------------*/
+.fiveFullColumn {
+    width: 20%;
+    float: right;
+}
+.fourFullColumns {
+    width: 25%;
+    float: right;
+}
+.eightyColumn {
+    width: 78.5%;
+    float: left;
+}
+.twentyColumn {
+    width: 20%;
+    float: right;
+}
+.twoFullColumn {
+    width: 50%;
+    float: right;
+}
+/*------------------- media -------------------------------*/
+@media only screen and (max-width: 1400px) {
+    .siteGuideline {
+        display: none;
+    }
+}
 /*-------------------- personal elements ------------------*/
+.container {
+    box-sizing: border-box;
+    font-family: 'iransfm';
+    color: #525252;
+    direction: rtl;
+    font-size: 1em;
+    min-width: 1024px;
+}
+.titleBar {
+    background: #f3f3f3;
+    color: #818181;
+}
+.categories {
+    color: #969696;
+}
+.sizeManager {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 97%;
+}
+.squizer {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 97%;
+}
+.borderInBothSides {
+    border-right: solid #eeeeee 2px;
+    border-left: solid #eeeeee 2px;
+}
+.selectbox {
+    width: 100%;
+    background-color: #fbfbfb;
+    border-radius: 250px;
+    border-bottom: solid #f7f7f7 4px;
+    color: #979797;
+    padding-left: 36px;
+}
+.searchPart {
+    position: relative;
+    bottom: 13px;
+}
+.searchField {
+    background-color: #fbfbfb;
+    border-radius: 250px;
+    border-bottom: solid #f7f7f7 4px;
+}
+.logo {
+    min-width: 47px;
+    min-height: 18px;
+}
+.icon-select-arrow {
+    width: 12px;
+    height: 26px;
+    background: url("../images/arrow.png") no-repeat center;
+    background-size: contain;
+    position: absolute;
+    left: 1rem;
+    top:50%;
+    transform: translateY(-50%);
+}
+.searchInput {
+    width: 470px;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+}
+.searchButtonPart {
+    width: 43px;
+    height: 43px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+}
+.searchField.standardPadding {
+    padding: 0.45rem 1rem;
+}
+.siteGuideline .greenBorder {
+    border: solid #009688 1px;
+}
+.outlineButton {
+    border-radius: 250px;
+}
+
+.guideline .outlineButton, .letsStarted .outlineButton {
+    max-width: 150px;
+    display: inline-block;
+    min-width: 130px;
+}
+.guideline .standardDoublePadding {
+    padding-bottom: 100px;
+}
+.siteGuideline {
+    position: relative;
+    bottom:13px;
+}
+.boxElement {
+    background-color: #fbfbfb;
+    border-bottom: solid 6px #f7f7f7;
+}
+.radiusBox {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.innerList {
+    background-color: #f7f7f7;
+    font-size: 1rem;
+    border-bottom: solid #efefef 6px;
+    display: none;
+}
+.innerInnerList {
+    background-color: #efefef;
+    display: none;
+}
+.borderRight {
+    border-right:solid #efefef 1px;
+}
+.borderRight:nth-child(1) {
+    border-right:none;
+}
+.innerInnerList .borderRight {
+    border-right:solid #e3e3e3 1px;
+}
+.innerInnerList .borderRight:nth-child(1) {
+    border-right:none;
+}
+.innerInnerList .fiveFullColumn {
+    min-height: 390px;
+}
+.firstHandedList:hover .innerList {
+    display: block;
+}
+.secondHandedList:hover .innerInnerList {
+    display: block;
+}
+.footer ul li {
+    color: #a3a3a3;
+}
+.signs {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.footer .fourFullColumns {
+    min-height: 194px;
+}
+.separatorLine {
+    height: 1px;
+    background-color: #f9f9f9;
+}
+.topSvgHandler {
+    max-width: 250px;
+}
+.letsStarted .topSvgHandler {
+    max-width: 350px;
+}
+.stickToBottomRight {
+    position: absolute;
+    bottom: 2rem;
+    right: 0;
+    width: 50%;
+}
+.stickToBottomLeft {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: 50%;
+}
