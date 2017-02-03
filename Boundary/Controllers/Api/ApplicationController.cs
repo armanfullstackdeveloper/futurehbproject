@@ -50,7 +50,7 @@ namespace Boundary.Controllers.Api
                         }
                     }
                 }
-                return Json(JsonResultHelper.SuccessResult("there is no new version"));
+                return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
             }
             catch (MyExceptionHandler exp1)
             {

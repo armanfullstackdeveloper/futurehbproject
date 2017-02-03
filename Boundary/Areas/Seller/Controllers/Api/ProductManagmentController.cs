@@ -854,17 +854,6 @@ namespace Boundary.Areas.Seller.Controllers.Api
         }
 
 
-        /// <summary>
-        /// افزودن عکس های اصلی و فرعی محصولات
-        /// با قابلیت کراپ
-        /// </summary>
-        /// <param name="productId"></param>
-        /// <param name="isMainImg"></param>
-        /// <param name="top"></param>
-        /// <param name="left"></param>
-        /// <param name="bottom"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
         [Route("uploadimage")]
         public IHttpActionResult PostFile(long productId, bool isMainImg, int top = 0, int left = 0, int bottom = 0, int right = 0)
         {
@@ -912,25 +901,37 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         {
                             return Json(JsonResultHelper.FailedResultWithMessage("فایل نامعتبر است"));
                         }
-                        string path = store.StateCode + "/" + +store.CityCode;
-                        if (store.StateCode == 0 || store.CityCode == 0)
-                        {
-                            path = "Majazi";
-                        }
+
                         string filePath = HttpContext.Current.Server.MapPath("~/Content/Images/Saller/"
-                                                               + path + "/" + store.StoreCode + "/Products/" + productId);
+                                                                                       + store.StateCode + "/" + +store.CityCode + "/" +
+                                                                                         store.StoreCode + "/Products/" + productId);
                         WebImage orginlImage = new WebImage(recivedFile.InputStream);
                         orginlImage.Crop(top, left, bottom, right);
+                        WebImage additionalImage = orginlImage.Clone();
+                        if (additionalImage.Width > 500 || additionalImage.Height > 500)
+                        {
+                            additionalImage.Resize(500, 500);
+                        }
+
+                        //use resizedImg for searchPage
+                        WebImage mainImage = null;
                         string resizedImgFilePath = null;
                         if (isMainImg)
                         {
                             resizedImgFilePath = filePath;
                             resizedImgFilePath = Path.Combine(resizedImgFilePath, "MainImage");
+                            mainImage = orginlImage.Clone();
+                            if (mainImage.Width > 400 || mainImage.Height > 400)
+                            {
+                                mainImage.Resize(400, 400);
+                            }
                         }
+
                         if (Directory.Exists(filePath) == false)
                         {
                             Directory.CreateDirectory(filePath);
                         }
+
                         if (isMainImg && string.IsNullOrEmpty(resizedImgFilePath) == false)
                         {
                             if (Directory.Exists(resizedImgFilePath) == false)
@@ -951,32 +952,29 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
                         string newName = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(lowerFilename);
-                        string imagePath = "";
+                        //که اگه از قبل 4 تا عکس فرعی هست دیگه برای این عکس فرعی ذخیره نشه که از ماکس بالا بزنه
+                        if (new ProductImageBL().GetProductImageCount(productId) < StaticNemberic.MaximumProductImage)
+                            additionalImage.Save(filePath + "/" + newName + extension);
+
                         if (isMainImg && string.IsNullOrEmpty(resizedImgFilePath) == false)
                         {
-                            imagePath = resizedImgFilePath + "/" + newName + extension;
-                            orginlImage.Save(imagePath);
+                            mainImage.Save(resizedImgFilePath + "/" + newName + extension);
                         }
-                        else
-                        {
-                            imagePath = filePath + "/" + newName + extension;
-                            orginlImage.Save(imagePath);
-                        }
-                        //image resizer
-                        ResizeSettings resizeSetting = new ResizeSettings("maxwidth=400&maxheight=400");
-                        ImageBuilder.Current.Build(imagePath, imagePath, resizeSetting);
 
                         string rootPath = filePath.Substring(filePath.IndexOf("Content", StringComparison.Ordinal));
                         rootPath = Path.Combine(rootPath, newName + extension);
+
                         if (isMainImg)
                         {
                             string rootPathForResizedImg = resizedImgFilePath.Substring(resizedImgFilePath.IndexOf("Content", StringComparison.Ordinal));
                             rootPathForResizedImg = Path.Combine(rootPathForResizedImg, newName + extension);
+
                             QueryResult<Product> result = new ProductBL().UpdateMainImag(new ProductImage()
                             {
                                 ImgAddress = rootPathForResizedImg,
                                 ProductCode = productId
                             }, store.StoreCode);
+
                             if (result != null && result.DbMessage.MessageType == MessageType.Success &&
                                 new ProductImageBL().GetProductImageCount(productId) < StaticNemberic.MaximumProductImage)
                             {
@@ -985,6 +983,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                     ImgAddress = rootPath,
                                     ProductCode = productId
                                 }, store.StoreCode);
+
                                 Product product = new ProductBL().SelectOne(productId);
                                 product.RegisterDate = PersianDateTime.Now.Date.ToInt();
                                 new ProductBL().Update(product);
@@ -1025,11 +1024,26 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => productId),
                             Value = productId.ToString()
-                        },
-                                                new ActionInputViewModel()
+                        },new ActionInputViewModel()
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => isMainImg),
                             Value = isMainImg.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => top),
+                            Value = top.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => left),
+                            Value = left.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => bottom),
+                            Value = bottom.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => right),
+                            Value = right.ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
@@ -1050,11 +1064,26 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => productId),
                             Value = productId.ToString()
-                        },
-                                                new ActionInputViewModel()
+                        },new ActionInputViewModel()
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => isMainImg),
                             Value = isMainImg.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => top),
+                            Value = top.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => left),
+                            Value = left.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => bottom),
+                            Value = bottom.ToString()
+                        },new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => right),
+                            Value = right.ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
