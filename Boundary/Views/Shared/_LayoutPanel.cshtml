@@ -11,13 +11,13 @@
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
 
     @RenderSection("Style", false)
-
-
-
-
 </head>
-
-
+@{
+    string userId = User.Identity.GetUserId();
+    MainSession mainSession = (MainSession)Session[userId];
+    long storeCode = mainSession.Store.StoreCode;
+    string homePage = mainSession.Store.HomePage;
+}
 <body>
     <div class="gridContainer clearfix">
         <div id="Middle">
@@ -70,23 +70,13 @@
                                 <li>
                                     @*<a href='#'>*@
                                     <a href="~/Seller/ProductManagment/AddProduct"> افزودن محصول جدید</a>
-                                    @*</a>*@
-                                    @*<ul>
-                                            <li><a href='#'>Sub Product</a></li>
-                                            <li><a href='#'>Sub Product</a></li>
-                                        </ul>*@
                                 </li>
                                 @*<li class='has-sub'>*@
                                 <li>
                                     @*<a href='#'>*@
                                     @using Microsoft.AspNet.Identity
                                     @using Boundary.Controllers.Ordinary
-                                    @{
-                                        string userId = User.Identity.GetUserId();
-                                        MainSession mainSession = (MainSession)Session[userId];
-                                        long storeCode = mainSession.Store.StoreCode;
-                                    }
-                                    <a href="~/shop/@User.Identity.GetUserName()">
+                                    <a href="~/shop/@homePage">
                                         مشاهد محصولات قدیمی
                                     </a>
 

@@ -3,30 +3,22 @@
     ViewBag.Title = "پنل مدیریت";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
-
-
-
-
-
-
-
-
+@using Boundary.Controllers.Ordinary
+@{
+    string userId = User.Identity.GetUserId();
+    MainSession mainSession = (MainSession)Session[userId];
+    long storeCode = mainSession.Store.StoreCode;
+    string homePage = mainSession.Store.HomePage;
+}
 <div id="firstPageNavigator">
     @using Microsoft.AspNet.Identity
     @if (Request.IsAuthenticated)
     {
         <div id="welcomeMessageInPanel">
-
-            <span>@User.Identity.GetUserName()</span> عزیز، به پنل مدیریت محصولات خوش آمدی.
+            به پنل مدیریت فروشگاه خوش آمدید
         </div>
-
-
-         <div> آدرس مستقیم وبسایت شما : <a href="httP://www.hoojibooji.com/shop/@User.Identity.GetUserName()">www.hoojibooji.com/shop/@User.Identity.GetUserName()</a></div>
-
-
+         <div> آدرس مستقیم وبسایت شما : <a href="httP://www.hoojibooji.com/shop/@homePage">www.hoojibooji.com/shop/@homePage</a></div>
     }
-
-
     <div id="allProductCubes">
         <a href="~/Seller/ProductManagment/AddProduct">
             <div id="addNewGuide" class="bigCube">
@@ -44,16 +36,7 @@
                 </div>
             </div>
         </a>
-
-        @using Microsoft.AspNet.Identity
-        @using Boundary.Controllers.Ordinary
-        @{
-            string userId = User.Identity.GetUserId();
-            MainSession mainSession = (MainSession)Session[userId];
-            long storeCode = mainSession.Store.StoreCode;
-        }
-        <a href="~/shop/@User.Identity.GetUserName()">
-
+        <a href="~/shop/@homePage">
             <div id="oldsGuide" class="bigCube">
                 <div id="OGicon" class="cubeIcon"></div>
                 <div id="OGexplain" class="cubeExplain">

@@ -37,34 +37,36 @@
 
         <div id="LogInOpen">
             <div id="ForClose"></div>
-            <div id="LogInOHolder">
-                <div id="SubjectAndClose">
-                    <div id="CloseOnly">
-                        <div id="CloseOnlyHolder"></div>
-                    </div>
-                    <div id="SubjectOnly">
-                        ورود
-                        <p>برای ورود به سایت  نام فرم زیر را پر نمایید</p>
-                    </div>
+            <form id="loginFrm">
+                <div id="LogInOHolder">
+                    <div id="SubjectAndClose">
+                        <div id="CloseOnly">
+                            <div id="CloseOnlyHolder"></div>
+                        </div>
+                        <div id="SubjectOnly">
+                            ورود
+                            <p>برای ورود به سایت  نام فرم زیر را پر نمایید</p>
+                        </div>
 
+                    </div>
+                    <div id="UserNameLogIn">
+                        <input id="UserName" type="text" tabindex="1" placeholder="تلفن همراه">
+                    </div>
+                    <div id="PasswordLogIn">
+                        <input id="Password" type="password" tabindex="2" placeholder="رمز عبور">
+                    </div>
+                    @*<div id="EnterLogIn" style=" margin-top: 26px;">
+                            <input id="RegisterBtn" type="button" value="عضویت">
+                        </div>*@
+                    <div id="MemmoryLogIn">
+                        <input type="checkbox" id="c1" name="cc" />
+                        <label for="c1"><span></span>رمز عبور را بخاطر بسپار</label>
+                    </div>
+                    <div id="EnterLogIn">
+                        <input id="EnterBtn" type="button" tabindex="3" value="ورود">
+                    </div>
                 </div>
-                <div id="UserNameLogIn">
-                    <input id="UserName" type="text" tabindex="1" placeholder="شماره تلفن">
-                </div>
-                <div id="PasswordLogIn">
-                    <input id="Password" type="password" tabindex="2" placeholder="رمز عبور">
-                </div>
-                @*<div id="EnterLogIn" style=" margin-top: 26px;">
-                        <input id="RegisterBtn" type="button" value="عضویت">
-                    </div>*@
-                <div id="MemmoryLogIn">
-                    <input type="checkbox" id="c1" name="cc" />
-                    <label for="c1"><span></span>رمز عبور را بخاطر بسپار</label>
-                </div>
-                <div id="EnterLogIn">
-                    <input id="EnterBtn" type="button" tabindex="3" value="ورود">
-                </div>
-            </div>
+            </form>
             <div id="LogInFaild"></div>
             <div id="LogInSucseed"></div>
         </div>
@@ -127,7 +129,7 @@
                         {
                             <a href="@Url.Action("SellerPanel", "StoreManagment", new { area = "Seller" }, null)">
                                 <div class="HolderIcon">
-                                    <div id="yourStore" class="  IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
+                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
                                 </div>
                             </a>
 
@@ -152,7 +154,7 @@
                         {
                             <a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)">
                                 <div class="HolderIcon">
-                                    <div id="yourStore" class="  IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
+                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
                                 </div>
                             </a>
                         }
@@ -160,7 +162,7 @@
                         {
                             <a href="@Url.Action("Index", "Panel", new { area = "Member" }, null)">
                                 <div class="HolderIcon">
-                                    <div id="yourStore" class="  IconContoller"><span class="IconOrgenizer">پنل کاربری</span></div>
+                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل کاربری</span></div>
                                 </div>
                             </a>
                             <a href="~/Home/UserGuid">
@@ -198,17 +200,17 @@
                             </div>
                         </a>
 
-                            <a href="~/Home/UserGuid">
-                                <div class="HolderIcon">
-                                    <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
-                                </div>
-                            </a>
+                        <a href="~/Home/UserGuid">
+                            <div class="HolderIcon">
+                                <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
+                            </div>
+                        </a>
 
-                            <a href="~/Order">
-                                <div class="HolderIcon">
-                                    <div id="shopBascket" class="DarkRed IconContoller"><span class="IconOrgenizer">سبد خرید</span></div>
-                                </div>
-                            </a>
+                        <a href="~/Order">
+                            <div class="HolderIcon">
+                                <div id="shopBascket" class="DarkRed IconContoller"><span class="IconOrgenizer">سبد خرید</span></div>
+                            </div>
+                        </a>
                     }
 
 
@@ -1503,6 +1505,17 @@
             //on keydown, clear the countdown
             $input.on('keydown', function () {
                 clearTimeout(typingTimer);
+            });
+
+            $(function () {
+                $("#loginFrm input").keypress(function (e) {
+                    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                        $('#EnterBtn').click();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
             });
 
         });
