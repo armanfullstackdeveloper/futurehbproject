@@ -9,6 +9,7 @@ namespace DataModel.Models.DataModel
         public long MemberCode { get; set; } 
         public long CityCode { get; set; }
         public long StateCode { get; set; }
+        public string HomePage { get; set; } 
         public string LogoAddress { get; set; }
         public EStoreStatus Status { get; set; } 
     }
