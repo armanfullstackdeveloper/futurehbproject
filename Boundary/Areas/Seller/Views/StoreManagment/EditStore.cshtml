@@ -1,4 +1,4 @@
-﻿@model DataModel.Models.DataModel / StoreEditDataModel
+﻿@model DataModel.Models.DataModel.StoreEditDataModel
 
 @{
     ViewBag.Title = "ویرایش مشخصات فروشگاه";
@@ -93,33 +93,13 @@
 
         madule.controller('EditShopController', ['$scope', function ($scope) {
             $scope.Data = [];
-            $("#status").html('لطفا کمی صبر کنید ');
+ 
 
+            $scope.Data = @Html.Raw(Json.Encode(Model));  
+            $('#shopKind').val($scope.Data.StoreTypeCode)
 
-            $scope.Data = @Html.Raw(Json.Encode(Model));
             console.log($scope.Data)
-            $scope.loadCategory();
-            $scope.$apply();
-            $('#shopKind').val(result.Response.StoreTypeCode)
-
-            //$scope.loadData = function () {
-            //    $.ajax({
-            //        type: "GET",
-            //        url: "/api/store/storemanagment/editStore",
-            //        success: function (result) {
-            //            $("#status").html('');
-            //            $scope.Data = result.Response;
-            //            $scope.loadCategory();
-            //            $scope.$apply();
-            //            $('#shopKind').val(result.Response.StoreTypeCode)
-            //            console.log($scope.Data)
-            //        },
-            //        error: function () {
-            //            console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-            //        }
-            //    });
-            //}
-            //$scope.loadData();
+           
 
             $scope.loadCategory = function () {
 
@@ -127,15 +107,13 @@
                     type: "GET",
                     url: "/api/store/storemanagment/getCategories",
                     success: function (result) {
-                        console.log(result)
-                        //make multi slected list
+                         //make multi slected list
 
                         $.each(result.Response.Categories, function (index, value) {
                             var temp = -1;
                             if ($scope.Data.ListCategoryCode) {
                                 $.each($scope.Data.ListCategoryCode, function (index2, value2) {
-                                    console.log(value2)
-                                    if (value.Id == value2) {
+                                     if (value.Id == value2) {
                                         temp = 1;
                                     }
                                 })
@@ -164,7 +142,7 @@
 
 
             }
-
+            $scope.loadCategory(); 
 
             $scope.saveData = function () {
                 $("#status").html('لطفا کمی صبر کنید ');
