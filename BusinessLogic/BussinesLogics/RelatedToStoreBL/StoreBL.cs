@@ -334,11 +334,12 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeCode);
                 List<long> catsList = new CatsOfStoreBL().GetCatsByStoreCode(storeCode);
 
+                string email = new UserBL().GetById(store.UserCode).Email;
                 StoreEditDataModel storeEditDataModel = new StoreEditDataModel()
                 {
                     CityCode = store.CityCode,
                     CommercialCode = store.CommercialCode,
-                    //Email = store.Email,
+                    Email = string.IsNullOrEmpty(email)?"": email,
                     ReagentPhoneNumber = store.ReagentPhoneNumber,
                     Latitude = store.Latitude,
                     Longitude = store.Longitude,
@@ -372,7 +373,6 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     session);
                 storedStore.CityCode = storeEditDataModel.CityCode;
                 storedStore.CommercialCode = storeEditDataModel.CommercialCode;
-                //storedStore.Email = storeEditDataModel.Email;
                 storedStore.ReagentPhoneNumber = storeEditDataModel.ReagentPhoneNumber;
                 storedStore.Latitude = storeEditDataModel.Latitude;
                 storedStore.Longitude = storeEditDataModel.Longitude;
@@ -383,6 +383,11 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 storedStore.Name = storeEditDataModel.StoreName;
                 storedStore.HomePage = storeEditDataModel.HomePage;
                 new StoreBL().UpdateWhitOutCommitTransaction(storedStore, session);
+
+                //for email
+                var user=new UserBL().GetById(storedStore.UserCode);
+                user.Email= storeEditDataModel.Email;
+                new UserBL().Update(user);
 
                 //age category hash khali omad hamon ghabli ro hefz kon
                 if (storeEditDataModel.ListCategoryCode != null && storeEditDataModel.ListCategoryCode.Any())

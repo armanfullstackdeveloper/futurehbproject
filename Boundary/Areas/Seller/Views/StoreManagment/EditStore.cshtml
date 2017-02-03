@@ -1,12 +1,13 @@
-﻿@{
+﻿@model DataModel.Models.DataModel.StoreEditDataModel
+
+@{
     ViewBag.Title = "ویرایش مشخصات فروشگاه";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
 
 @section Style{
-    <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselect.css" rel="stylesheet" />
-
+    <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInAddProduct.css" rel="stylesheet" />
 }
 
 <div ng-app="ShopApp" id="EditStore" ng-controller="EditShopController" style=" width: 75%; text-align: right;direction: rtl;padding: 0 2.5%;font-family: 'iransfm'; float: left;">
@@ -15,15 +16,26 @@
 
     <div>
         <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">نوع فروشگاه</div>
+            <div style="width: 150px;float: right;">
+                <select id="shopKind" class="input input-group input-sm" style="margin-bottom: 6px;width: 227px;" ng-model="Data.StoreTypeCode">
+                    <option value="1">فیزیکی </option>
+                    <option value="2">مجازی</option>
+                    <option value="3">خانگی</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 10px;">
             <div style="width: 150px;float: right;">نام فروشگاه</div>
-            <div style="width: 150px;float: right;"><input type="text" class="input input-group input-sm" ng-model="Data.StoreName" /></div>
+            <div style="width: 150px;float: right;"><input type="text" style="width: 227px;" class="input input-group input-sm" ng-model="Data.StoreName" /></div>
         </div>
 
 
         <div class="row" style="margin: 20px 10px;">
             <div style="width: 150px;float: right;">لینک صفحه فروشگاه شما در هوجی بوجی</div>
-            <div style="width: 150px;float: right;"><input id="homePage" type="text" class="input input-group input-sm" ng-model="Data.HomePage" /></div>
-            <div style="width: 368px;float: right; margin: 5px 9px 0 0; color: red;"> لطفا از اعداد و حروف انگلیسی و بدون فاصله استفاده نمایید</div>
+            <div style="width: 150px;float: right;"><input id="homePage" style="width: 227px;" type="text" class="input input-group input-sm" ng-model="Data.HomePage" /></div>
+            <div style="width: 368px;float: right; margin: 36px -150px 0 0; color: red;"> لطفا از اعداد و حروف انگلیسی و بدون فاصله استفاده نمایید</div>
         </div>
         <div class="row" style="margin: 20px 10px;">
             <div style="width: 150px;float: right;"> آدرس سایت شما :</div>
@@ -39,12 +51,25 @@
             <div style="width: 150px;float: right;">توضیحات فروشگاه</div>
             <div style="width: 150px;float: right;"><textarea rows="5" class="input input-group input-lg" ng-model="Data.StoreComments"></textarea></div>
         </div>
-        @*<div class="row" style="margin: 10px;">
-                <div style="width: 150px;float: right;">نوع محصولات فروشگاه</div>
-                <div style="width: 150px;float: right;">
-                    <select multiple="multiple" id="SlectBox"></select>
 
-            </div>*@
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">نوع محصولات فروشگاه</div>
+            <div style="width: 294px;float: right;">
+                <select multiple="multiple" ng-model="Data.ListCategoryCode" placeholder="انتخاب کنید" id="SlectBox"></select>
+
+            </div>
+        </div>
+
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">آدرس سایت (کانال)</div>
+            <div style="width: 227px;float: right;"><input type="text" style="width: 227px;" class="input input-group input-sm" ng-model="Data.Website" /></div>
+        </div>
+
+        <div class="row" style="margin: 10px;">
+            <div style="width: 150px;float: right;">آدرس ایمیل</div>
+            <div style="width: 227px;float: right;"><input type="text" style="width: 227px;" class="input input-group input-sm" ng-model="Data.Email" /></div>
+        </div>
+
 
         <div class="row" style="margin: 10px;">
             <input type="button" class="btn btn-success" value="ذخیره" style="margin-right: 242px;" ng-click="saveData()" />
@@ -54,57 +79,6 @@
 
 
     </div>
-    @*[StringLength(100)]
-            [Display(Name = "نام فروشگاه")]
-            public string StoreName { get; set; }
-
-            [StringLength(1000)]
-            [Display(Name = "توضیحات فروشگاه")]
-            public string StoreComments { get; set; }
-
-            [StringLength(10, MinimumLength = 10)]
-            [Display(Name = "کد شناسه صنفی")]
-            public int? CommercialCode { get; set; }
-
-            [Display(Name = "شماره تلفن معرف")]
-            public decimal? ReagentPhoneNumber { get; set; }
-
-            [Display(Name = "نام شهر")]
-            public long? CityCode { get; set; }
-
-
-
-            [StringLength(200)]
-            [Display(Name = "آدرس کامل")]
-            public string Place { get; set; }
-
-            public decimal? Latitude { get; set; }
-            public decimal? Longitude { get; set; }
-
-
-            [Display(Name = "شماره تماس")]
-            public List<decimal>
-                PhoneNumbers { get; set; }
-
-                [Display(Name = "نوع محصولات فروشگاه")]
-                public List<long>
-                    ListCategoryCode { get; set; }
-
-                    public byte StoreTypeCode { get; set; }
-
-                    public string Email { get; set; }
-                    public string Website { get; set; }
-
-                    [Display(Name = "صفحه شخصی فروشگاه")]
-                    public string HomePage { get; set; }
-
-                URL: api/store/storemanagment/editStore
-        Parameter: StoreEditDataModel
-
-
-    *@
-
-
 
 
 </div>
@@ -119,34 +93,45 @@
 
         madule.controller('EditShopController', ['$scope', function ($scope) {
             $scope.Data = [];
-            $("#status").html('لطفا کمی صبر کنید ');
+ 
 
-            $scope.loadData = function () {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/store/storemanagment/editStore",
-                    success: function (result) {
-                        $("#status").html('');
-                        $scope.Data = result.Response;
-                        //   $scope.loadCategory();
-                        $scope.$apply();
-                        console.log($scope.Data)
-                    },
-                    error: function () {
-                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                    }
-                });
-            }
+            $scope.Data = @Html.Raw(Json.Encode(Model));  
+            $('#shopKind').val($scope.Data.StoreTypeCode)
 
+            console.log($scope.Data)
+           
 
             $scope.loadCategory = function () {
 
                 $.ajax({
                     type: "GET",
-                    url: "/api/store/storemanagment/editStore",
+                    url: "/api/store/storemanagment/getCategories",
                     success: function (result) {
+                         //make multi slected list
 
-                        $scope.Categories = result.Response;
+                        $.each(result.Response.Categories, function (index, value) {
+                            var temp = -1;
+                            if ($scope.Data.ListCategoryCode) {
+                                $.each($scope.Data.ListCategoryCode, function (index2, value2) {
+                                     if (value.Id == value2) {
+                                        temp = 1;
+                                    }
+                                })
+                            }
+
+                            if (temp == 1) {
+                                $("#SlectBox").append($('<option>').text(value.Name).attr('value', value.Id).attr('selected', 'selected'));
+                            }
+                            else {
+                                $("#SlectBox").append($('<option>').text(value.Name).attr('value', value.Id));
+                            }
+
+                        });
+                        var Sumo = $('#SlectBox').SumoSelect({
+                            csvDispCount: 2,
+                            captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                            okCancelInMulti: false
+                        });
 
                     },
                     error: function () {
@@ -155,31 +140,20 @@
                 });
 
 
-                //make multi slected list
-                $.each($scope.Categories, function (index, value) {
-                    $("#SlectBox").append($('<option>').text(value.Name).attr('value', value.Id));
-                });
-                $('#SlectBox').SumoSelect({
-                    csvDispCount: 2,
-                    captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
-                    okCancelInMulti: false
-                });
+
             }
-
-
-            $scope.loadData();
-
-
+            $scope.loadCategory(); 
 
             $scope.saveData = function () {
                 $("#status").html('لطفا کمی صبر کنید ');
+
 
                 $.ajax({
                     type: "POST",
                     url: "/api/store/storemanagment/editStore",
                     data: $scope.Data,
                     success: function (result) {
-                        $("#status").html('عملیات با موفقت انجام شد ');
+                        $("#status").html('عملیات با موفقیت انجام شد ');
                     },
                     error: function () {
                         $("#status").html('عملیات با خطا مواجه شد ');
