@@ -40,9 +40,13 @@
             @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel")
         </h2>
         <h3>جدید ترین فروشگاهها</h3>
+    <p>
+        جستجو با نام فروشگاه یا آی دی
+        @Html.TextBox("txtSearch", null, new { onkeyup = "ajaxSearch();" })
+    </p>
         <p>
-            جستجو با نام فروشگاه یا آی دی
-            @Html.TextBox("txtSearch", null, new { onkeyup = "ajaxSearch();" })
+            جستجو با نام کاربری حساب کاربری
+            @Html.TextBox("txtSearchUserName", null, new { onkeyup = "ajaxSearch();" })
         </p>
         <p>
             @Html.Label("براساس وضعیت", new { @class = "control-label col-md-2" })
@@ -70,7 +74,8 @@ function ajaxSearch() {
             dataType: 'html',
             data: {
                 codeOrName: $("#txtSearch").val(), storeType: $("#ddlStoreType option:selected").val(),
-                status: $("#ddlStoreStatus option:selected").val()
+                status: $("#ddlStoreStatus option:selected").val(),
+                username: $("#txtSearchUserName").val()
             },
             success: function (result) {
                 $("#stores").empty();

@@ -274,6 +274,7 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 Boundary/Web.config
+Boundary/Content/Images
 #Junk Files
 *.DS_Store
 [Tt]humbs.db
