@@ -8,7 +8,13 @@
     src: url('../fonts/iransfb.eot?#') format('eot'), /* IE6–8 */ url('../fonts/iransfb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url('../fonts/iransfb.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
 }
 /*----------------- main elements -----------------------*/
-
+header {
+    margin-bottom: 1rem;
+    float: left;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+}
 body,h1,h2,h3,h4,h5,h6,p, ul,li {
     margin: 0;
     padding: 0;
@@ -131,6 +137,14 @@ input[type="checkbox"]:checked + label span {
     left: 50%;
     transform: translateX(-50%);
 }
+.popUpMadule {
+    position: fixed;
+    background-color: rgba(255,255,255,0.8);
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+}
 /*--------------- main elements --------------------*/
 
 /*---------------- text elements --------------------*/
@@ -156,19 +170,28 @@ input[type="checkbox"]:checked + label span {
     color: #e91e63;
 }
 .pinkBack {
-    background-color: #e91e63;
+    background-color: #e91e63 !important;
 }
 .greenColor {
-    color: #009688;
+    color: #009688 !important;
+}
+.darkGray {
+    color: #777777 !important;
 }
 .greenBack {
-    background-color: #009688;
+    background-color: #009688 !important;
 }
 .solidLineHeight {
     line-height: 1;
 }
 .eightyFontsize  {
     font-size: 18px;
+}
+.thirteenFontSize {
+    font-size: 13px;
+}
+.twelveFontSize {
+    font-size: 12px;
 }
 .twentyTwoFontsize {
     font-size: 22px;
@@ -196,11 +219,17 @@ input[type="checkbox"]:checked + label span {
 .standardPadding {
     padding:0.5em 1rem;
 }
+.standardHalfPadding {
+    padding: 0.5rem;
+}
 .loginPadding {
     padding:1rem;
 }
 .standardDoublePadding {
     padding: 2rem;
+}
+.standardButDoubleVerticalPadding {
+    padding: 0 2.5rem 1rem 2.5rem;
 }
 .standardVerticalMargin {
     margin: 1rem 0rem;
@@ -210,6 +239,9 @@ input[type="checkbox"]:checked + label span {
 }
 .standardVerticalBottomMargin {
     margin:0rem 0rem 1rem 0rem;
+}
+.standardVerticalBottomMargin {
+    margin: 0 0 0.5rem 0;
 }
 .standardVerticalDoubleBottomPadding {
     padding:0rem 0rem 2rem 0rem;
@@ -265,16 +297,34 @@ input[type="checkbox"]:checked + label span {
     float: right;
 }
 .eightyColumn {
-    width: 78.5%;
+    width: 77.9%;
     float: left;
 }
 .twentyColumn {
-    width: 20%;
+    width: 21%;
     float: right;
 }
 .twoFullColumn {
     width: 50%;
     float: right;
+}
+.sixColumn {
+    width: 16.66666666666667%;
+    float: right;
+    padding: 1rem;
+}
+.oneThreeFullColumn {
+    width: 40%;
+    float: right;
+}
+.twoThreeFullColumn {
+    width: 60%;
+    float: right;
+}
+.verticallyInCenter {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
 }
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
@@ -288,12 +338,24 @@ input[type="checkbox"]:checked + label span {
     font-family: 'iransfm';
     color: #525252;
     direction: rtl;
-    font-size: 1em;
+    font-size: 0.9rem;
     min-width: 1024px;
+}
+.popUpMadule {
+    box-sizing: border-box;
+    font-family: 'iransfm';
+    color: #908d8d;
+    direction: rtl;
+    font-size: 1em;
 }
 .titleBar {
     background: #f3f3f3;
     color: #818181;
+    border-bottom: solid #f1f1f1 1px;
+}
+
+.openUpSearch .titleBar {
+    background-color: transparent;
 }
 .categories {
     color: #969696;
@@ -366,7 +428,32 @@ input[type="checkbox"]:checked + label span {
 .outlineButton {
     border-radius: 250px;
 }
-
+.smallPadding {
+    padding: 0.2rem 0.5rem;
+    font-size: 10px;
+}
+.smallVerticalPadding {
+    padding: 0.2rem 0;
+}
+.tagInner {
+    width: auto;
+    display: inline-block;
+    margin-left: 5px;
+}
+.twoPartButton {
+    overflow: hidden;
+    display: inline-block;
+    width: 180px;
+}
+.iconPart {
+    display: inline-block;
+    width: 45px;
+    float: right;
+    padding: 0.2rem 0;
+}
+.fieldPart {
+    padding: 0.25rem 0;
+}
 .guideline .outlineButton, .letsStarted .outlineButton {
     max-width: 150px;
     display: inline-block;
@@ -383,9 +470,19 @@ input[type="checkbox"]:checked + label span {
     background-color: #fbfbfb;
     border-bottom: solid 6px #f7f7f7;
 }
+.borderBottom {
+    border-bottom: solid #f1f1f1 1px;
+}
+.borderBottom:nth-last-child(1) {
+    border: none;
+}
 .radiusBox {
     border-radius: 10px;
     overflow: hidden;
+}
+.openUpSearch.radiusBox {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 .innerList {
     background-color: #f7f7f7;
@@ -433,6 +530,10 @@ input[type="checkbox"]:checked + label span {
     height: 1px;
     background-color: #f9f9f9;
 }
+.boxElement .separatorLine {
+    height: 1px;
+    background-color: #f1f1f1;
+}
 .topSvgHandler {
     max-width: 250px;
 }
@@ -450,4 +551,110 @@ input[type="checkbox"]:checked + label span {
     bottom: 2rem;
     left: 0;
     width: 50%;
+}
+.tabActivate {
+    background-color: #fbfbfb !important;
+}
+.circleImageContainer {
+    width: 80%;
+    display: inline-block;
+    padding: 40% 0;
+    background-color: #fff;
+    border-bottom: solid #f7f7f7 5px;
+    border-radius: 50%;
+    position: relative;
+    vertical-align: bottom;
+}
+.smallExplain {
+    color: #b7b7b7;
+    font-size: 9px;
+}
+.carouselInner {
+    width: 93%;
+    margin:0 auto;
+}
+.defualtArrow {
+    color: #c9c9c9;
+    height: 100%;
+    width: 4%;
+    position: absolute;
+    top:0;
+}
+.rightArrow {
+    right: 0;
+}
+.leftArrow {
+    left: 0;
+}
+.circleDefaultArrows {
+    background-color: #d6d5d5;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+.loginBox .circleDefaultArrows, .signUpBox .circleDefaultArrows{
+    width: 30px;
+    height: 30px;
+}
+.closeTheBox {
+    position: absolute;
+    top:15px;
+    left: 15px;
+}
+.openUpSearch  {
+    width: 100%;
+    z-index: 1;
+    border-top: solid #f3f3f3 1px;
+}
+.itemInfoes, .itemDetail, .itemTitle{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.itemInfoes {
+    width: 52%;
+}
+.itemContainer {
+    overflow: hidden;
+}
+.searchActivate.searchField {
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.searchActivate .searchButtonPart {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.closeTheMadule {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.loginBox {
+    width: 95%;
+    max-width: 300px;
+}
+.signUpBox {
+    width: 95%;
+    max-width: 300px;
+}
+.standardInput {
+    width: 100%;
+    border-radius: 100px;
+    background-color: #f1f1f1;
+    padding: 3px;
+    border:none;
+}
+.loginAction {
+    display: inline-block;
+    padding: 5px 10px;
+    min-width: 150px;
+}
+.loginBox, .signUpBox {
+    box-shadow:0 0 30px #c7c7c7;
 }

@@ -11,6 +11,7 @@
     <link href="~/Content/Cropper Upload Avatar/main.css" rel="stylesheet" />
     <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInAddProduct.css" rel="stylesheet" />
     <link href="~/Content/Fine_Uploader/fine-uploader-new.css" rel="stylesheet" />
+    <link href="~/Content/selectize/selectize.css" rel="stylesheet" />
 }
 
 <div id="AddProduct">
@@ -34,6 +35,12 @@
                 </div>
             </div>
 
+            <div class="orgenizer">
+               
+                <select class="select-beast">
+
+                </select>
+            </div>
 
             <div class="orgenizer">
                 <p>نوع محصول :</p>
@@ -302,7 +309,7 @@
     <script src="~/Content/Fine_Uploader/jquery.fine-uploader.min.js"></script>
     @*<script src="~/Content/Fine_Uploader/fine-uploader.js"></script>*@
     <script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
-
+@*<script src="~/Content/selectize/selectize.min.js"></script>*@
     <script type="text/template" id="qq-template-manual-trigger">
         <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="تصویر را بکشید و اینجا رها کنید">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
@@ -386,6 +393,13 @@
 
         //When page Load , Category Load
         $(document).ready(function () {
+
+            $('.select-beast').selectize({
+                create: true,
+                sortField: 'text'
+            });
+
+            
             $('#SaveProduct').prop('disabled', false);
 
             //set category
