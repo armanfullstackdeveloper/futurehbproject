@@ -14,6 +14,7 @@ using BusinessLogic.Components;
 using BusinessLogic.Helpers;
 using DataModel.Entities;
 using DataModel.Entities.RelatedToStore;
+using DataModel.Enums;
 using DataModel.Models.DataModel;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -48,16 +49,9 @@ namespace Boundary.Controllers.Ordinary
             }
             try
             {
-                AppUser user = new AppUser { UserName = model.UserName, Role = StaticRole.Member, RoleCode = StaticRole.Member.Id };
-                var result = await ShopFinderUserManager.CreateUser(ref user, model.Password,(model.MemberInfo!=null)? model.MemberInfo.Email:string.Empty);
-
-                if (result != null && result.Succeeded == false)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage((result.Errors!=null && result.Errors.Any())?result.Errors.SingleOrDefault():string.Empty), JsonRequestBehavior.AllowGet);
-                }
-                if (result == null)
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-
+                User user = new UserBL().GetByUserNameAndPassword(model.UserName, model.Password);
+                if (user == null || user.RoleCode != ERole.NotRegister)
+                    return Json(JsonResultHelper.FailedResultWithMessage());
 
                 Member member = new Member()
                 {
@@ -81,7 +75,16 @@ namespace Boundary.Controllers.Ordinary
 
                 if (cutomerRegisterResult > 0)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(new AppUser()
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        RoleCode = user.RoleCode,
+                        Role = user.Role,
+                        Password = user.Password,
+                        IsActive = user.IsActive,
+                        UserName = user.UserName,
+                    }, isPersistent: false);
 
                     //ببینم مشتری فروشگاه خاصی هست یا نه
                     long? storeCode = new StoreBL().GetStoreCodeByHomePage(shopname);
@@ -144,122 +147,121 @@ namespace Boundary.Controllers.Ordinary
             }
         }
 
+        //[System.Web.Mvc.Authorize(Roles = StaticString.Role_Member)]
+        //[System.Web.Mvc.HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> UpgradeToSeller(StoreRegisterForUpgradeMemberToSallerDataModel storeRegister)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+        //        }
 
-        [System.Web.Mvc.Authorize(Roles = StaticString.Role_Member)]
-        [System.Web.Mvc.HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpgradeToSeller(StoreRegisterForUpgradeMemberToSallerDataModel storeRegister)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
+        //        string userId = User.Identity.GetUserId();
+        //        if (string.IsNullOrEmpty(userId))
+        //            return Json(JsonResultHelper.FailedResultOfWrongAccess(), JsonRequestBehavior.AllowGet);
 
-                string userId = User.Identity.GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                    return Json(JsonResultHelper.FailedResultOfWrongAccess(), JsonRequestBehavior.AllowGet);
+        //        var storeRegisterResult = new StoreBL().FullRegister(new StoreRegisterDataModel()
+        //        {
+        //            StoreName = storeRegister.StoreName,
+        //            StoreComments = storeRegister.StoreComments,
+        //            CommercialCode = storeRegister.CommercialCode,
+        //            ReagentPhoneNumber = storeRegister.ReagentPhoneNumber,
+        //            CityCode = storeRegister.CityCode,
+        //            Place = storeRegister.Place,
+        //            Latitude = storeRegister.Latitude,
+        //            Longitude = storeRegister.Longitude,
+        //            PhoneNumber = storeRegister.PhoneNumber,
+        //            StoreTypeCode = storeRegister.StoreTypeCode,
+        //            Website = storeRegister.Website,
+        //            SallerName = storeRegister.SallerName,
+        //            NationalCode = storeRegister.NationalCode,
+        //            SallerComments = storeRegister.SallerComments,
+        //            IsMale = storeRegister.IsMale,
+        //            //ListCategoryCode = storeRegister.ListCategoryCode,
+        //            ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList() // |: javad!
+        //        }, userId);
 
-                var storeRegisterResult = new StoreBL().FullRegister(new StoreRegisterDataModel()
-                {
-                    StoreName = storeRegister.StoreName,
-                    StoreComments = storeRegister.StoreComments,
-                    CommercialCode = storeRegister.CommercialCode,
-                    ReagentPhoneNumber = storeRegister.ReagentPhoneNumber,
-                    CityCode = storeRegister.CityCode,
-                    Place = storeRegister.Place,
-                    Latitude = storeRegister.Latitude,
-                    Longitude = storeRegister.Longitude,
-                    PhoneNumber = storeRegister.PhoneNumber,
-                    StoreTypeCode = storeRegister.StoreTypeCode,
-                    Website = storeRegister.Website,
-                    SallerName = storeRegister.SallerName,
-                    NationalCode = storeRegister.NationalCode,
-                    SallerComments = storeRegister.SallerComments,
-                    IsMale = storeRegister.IsMale,
-                    //ListCategoryCode = storeRegister.ListCategoryCode,
-                    ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList() // |: javad!
-                }, userId);
+        //        //age movafagh sabt shod
+        //        if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
+        //        {
+        //            //az table Customer delete beshe //todo: چون اگه خرید کرده باشه اطلاعات خریدشو میخوام و همچنین شاید در آینده خردی کنه
+        //            //Member member = new MemberBL().GetSummaryForSession(userId);
+        //            //bool result = false;
+        //            //if (member != null)
+        //            //    result = new MemberBL().Delete(member.Id);
 
-                //age movafagh sabt shod
-                if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
-                {
-                    //az table Customer delete beshe //todo: چون اگه خرید کرده باشه اطلاعات خریدشو میخوام و همچنین شاید در آینده خردی کنه
-                    //Member member = new MemberBL().GetSummaryForSession(userId);
-                    //bool result = false;
-                    //if (member != null)
-                    //    result = new MemberBL().Delete(member.Id);
+        //            //if (result)
+        //            //{
+        //            //role bayad taghir kone
+        //            User user = new UserBL().GetById(userId);
+        //            user.RoleCode = StaticRole.Seller.Id;
+        //            new UserBL().Update(user);
 
-                    //if (result)
-                    //{
-                    //role bayad taghir kone
-                    User user = new UserBL().GetById(userId);
-                    user.RoleCode = StaticRole.Seller.Id;
-                    new UserBL().Update(user);
+        //            //log off user
+        //            string userCode = User.Identity.GetUserId();
+        //            if (!string.IsNullOrEmpty(userCode))
+        //                Session[userCode] = null;
+        //            AuthenticationManager.SignOut();
 
-                    //log off user
-                    string userCode = User.Identity.GetUserId();
-                    if (!string.IsNullOrEmpty(userCode))
-                        Session[userCode] = null;
-                    AuthenticationManager.SignOut();
+        //            //login again
+        //            await SignInAsync(new AppUser()
+        //            {
+        //                Id = user.Id,
+        //                IsActive = user.IsActive,
+        //                RoleCode = user.RoleCode,
+        //                UserName = user.UserName,
+        //                Role = StaticRole.Seller
+        //            }, isPersistent: false);
 
-                    //login again
-                    await SignInAsync(new AppUser()
-                    {
-                        Id = user.Id,
-                        IsActive = user.IsActive,
-                        RoleCode = user.RoleCode,
-                        UserName = user.UserName,
-                        Role = StaticRole.Seller
-                    }, isPersistent: false);
-
-                    return Json(JsonResultHelper.SuccessResult(), JsonRequestBehavior.AllowGet);
-                    //}
-                }
-                return Json(JsonResultHelper.FailedResultWithMessage(storeRegisterResult.DbMessage.Message), JsonRequestBehavior.AllowGet);
-            }
-            catch (MyExceptionHandler exp1)
-            {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
-                            Value = JObject.FromObject(storeRegister).ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch (Exception exp3)
-            {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                         new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
-                            Value = JObject.FromObject(storeRegister).ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
-            }
-        }
+        //            return Json(JsonResultHelper.SuccessResult(), JsonRequestBehavior.AllowGet);
+        //            //}
+        //        }
+        //        return Json(JsonResultHelper.FailedResultWithMessage(storeRegisterResult.DbMessage.Message), JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (MyExceptionHandler exp1)
+        //    {
+        //        try
+        //        {
+        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+        //            {
+        //                new ActionInputViewModel()
+        //                {
+        //                    Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
+        //                    Value = JObject.FromObject(storeRegister).ToString()
+        //                },
+        //            };
+        //            long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+        //        }
+        //    }
+        //    catch (Exception exp3)
+        //    {
+        //        try
+        //        {
+        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+        //            {
+        //                 new ActionInputViewModel()
+        //                {
+        //                    Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
+        //                    Value = JObject.FromObject(storeRegister).ToString()
+        //                },
+        //            };
+        //            long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+        //        }
+        //    }
+        //}
 
         public ActionResult GetStates()
         {
@@ -353,20 +355,15 @@ namespace Boundary.Controllers.Ordinary
                 return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
             }
 
-            AppUser user = null;
+            User user = null;
             try
             {
-                user = new AppUser { UserName = storeRegister.UserName, Role = StaticRole.Seller, RoleCode = StaticRole.Seller.Id };
-                var result = await new ShopFinderUserManager().CreateUser(ref user, storeRegister.Password, storeRegister.Email);
-
-                if (result == null || result.Succeeded == false)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
-
+                user = new UserBL().GetByUserNameAndPassword(storeRegister.UserName, storeRegister.Password);
+                if (user == null || user.RoleCode != ERole.NotRegister)
+                    return Json(JsonResultHelper.FailedResultWithMessage());
 
                 storeRegister.ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList();
-                storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
+                //storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
@@ -378,7 +375,16 @@ namespace Boundary.Controllers.Ordinary
                     new MemberBL().Insert(member);
 
                     //login user
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(new AppUser()
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        RoleCode = user.RoleCode,
+                        Role = user.Role,
+                        Password = user.Password,
+                        IsActive = user.IsActive,
+                        UserName = user.UserName,
+                    }, isPersistent: false);
                     return Json(JsonResultHelper.SuccessResult(), JsonRequestBehavior.AllowGet);
                 }
 

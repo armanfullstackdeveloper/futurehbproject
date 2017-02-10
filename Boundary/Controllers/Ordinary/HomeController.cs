@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Mvc;
-using Boundary.Helper;
 using BusinessLogic.BussinesLogics;
-using BusinessLogic.BussinesLogics.FirstPageBL;
 using BusinessLogic.Helpers;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -22,10 +21,12 @@ namespace Boundary.Controllers.Ordinary
         {
             return View();
         }
+
         public ActionResult ContactUs()
         {
             return View();
         }
+
         public ActionResult AboutUs()
         {
             return View();
@@ -35,10 +36,12 @@ namespace Boundary.Controllers.Ordinary
         {
             return View();
         }
+
         public ActionResult Complaints()
         {
             return View();
         }
+
         public ActionResult Error(string message, string trackingCode)
         {
             return View(new ErrorViewModel()
@@ -48,52 +51,62 @@ namespace Boundary.Controllers.Ordinary
             });
         }
 
-        //public ActionResult GetActiveAdvertise()
-        //{
-        //    try
-        //    {
-        //        return Json(JsonResultHelper.SuccessResult(new FirstPage_AdvertiseBL().GetActiveSlider()), JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (MyExceptionHandler exp1)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-        //            {
-        //                //new ActionInputViewModel()
-        //                //{
-        //                //    Name = HelpfulFunction.GetVariableName(() => X),
-        //                //    Value = X
-        //                //},
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-        //        }
-        //    }
-        //    catch (Exception exp3)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-        //            {
-        //                //new ActionInputViewModel()
-        //                //{
-        //                //    Name = HelpfulFunction.GetVariableName(() => X),
-        //                //    Value = X
-        //                //},
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-        //        }
-        //    }
-        //}
+        /// <summary>
+        /// download android app
+        /// "~/Content/AndroidAPK/1.1.apk"
+        /// </summary>
+        /// <param name="currentVersion"></param>
+        /// <returns></returns>
+        public FileResult CheckForNewVersion(double currentVersion)  
+        {
+            try
+            {
+                double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                string fileAddress = ConfigurationManager.AppSettings["AndroidApkAddress"];
+                if (newVersion > currentVersion)
+                    return File(fileAddress, "application/vnd.android.package-archive", fileAddress);
+                return null;
+            }
+            catch (MyExceptionHandler exp1)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
+                            Value = currentVersion.ToString()
+                        },
+                    };
+                    new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return null;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            catch (Exception exp3)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
+                            Value = currentVersion.ToString()
+                        },
+                    };
+                    new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return null;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

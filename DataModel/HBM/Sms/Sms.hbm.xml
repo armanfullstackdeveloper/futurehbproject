@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.Sms" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Sms" table="Sms" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Text">
+      <column name="Text" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="SmsType">
+      <column name="SmsType" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="ResponseStatus">
+      <column name="ResponseStatus" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="Reciver">
+      <column name="Reciver" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="TrackingCode">
+      <column name="TrackingCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="CreationDate">
+      <column name="CreationDate" sql-type="int" not-null="false" />
+    </property>
+    <property name="CreationTime">
+      <column name="CreationTime" sql-type="smallint" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

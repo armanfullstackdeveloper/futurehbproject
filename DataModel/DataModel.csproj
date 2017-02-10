@@ -95,6 +95,7 @@
     <Compile Include="Entities\RelatedToStore\Transaction.cs" />
     <Compile Include="Entities\RelatedToStore\UserStoreReport.cs" />
     <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Sms\Sms.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\EAttributeValueStatus.cs" />
@@ -105,6 +106,8 @@
     <Compile Include="Enums\EPaymentResponseResultValues.cs" />
     <Compile Include="Enums\ERole.cs" />
     <Compile Include="Enums\EProductStatus.cs" />
+    <Compile Include="Enums\ESendSmsResponseStatus.cs" />
+    <Compile Include="Enums\ESmsType.cs" />
     <Compile Include="Enums\EStoreStatus.cs" />
     <Compile Include="Enums\EStoreType.cs" />
     <Compile Include="Models\DataModel\ErrorLogVM.cs" />
@@ -112,6 +115,9 @@
     <Compile Include="Models\DataModel\EditMemberDataModel.cs" />
     <Compile Include="Models\DataModel\ProductEditDataModel.cs" />
     <Compile Include="Models\DataModel\ProductToShoppingBagDataModel.cs" />
+    <Compile Include="Models\DataModel\SendSmsDataModel.cs" />
+    <Compile Include="Models\DataModel\UserRegisterDataModel.cs" />
+    <Compile Include="Models\ViewModel\SendSmsResultViewModel.cs" />
     <Compile Include="Models\DataModel\StoreRemovingResultDataModel.cs" />
     <Compile Include="Models\DataModel\StoreShopingBagDataModel.cs" />
     <Compile Include="Models\ViewModel\ActionInputViewModel.cs" />
@@ -243,6 +249,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="HBM\RelatedToOrder\OrderSendingType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\Sms\Sms.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

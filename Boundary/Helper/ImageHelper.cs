@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
+using ImageResizer;
 
 namespace Boundary.Helper
 {
@@ -30,6 +31,17 @@ namespace Boundary.Helper
             BinaryReader br = new BinaryReader(fStream);
             data = br.ReadBytes((int)numBytes);
             return data;
+        }
+
+        public static void Resise(string path, int maxHeight, int maxWidth,string format)
+        {
+            ResizeSettings resizeSetting = new ResizeSettings
+            {
+                MaxHeight = maxHeight,
+                MaxWidth = maxWidth,
+                Format = format,
+            };
+            ImageBuilder.Current.Build(path, path, resizeSetting);
         }
     }
 }

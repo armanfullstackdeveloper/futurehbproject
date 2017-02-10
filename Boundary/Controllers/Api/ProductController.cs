@@ -20,6 +20,11 @@ namespace Boundary.Controllers.Api
     [System.Web.Http.RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
+        /// <summary>
+        /// جزئیات محصول
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("get")]
         public IHttpActionResult GetProduct(long id)
@@ -39,14 +44,17 @@ namespace Boundary.Controllers.Api
                         break;
                     case EProductStatus.Inactive:
                         return Json(JsonResultHelper.FailedResultWithMessage());
-                    case EProductStatus.Suspended: //اگه فروشنده نیست نمیتونه ببینه
+                    case EProductStatus.Suspended:
+                    case EProductStatus.New: //اگه فروشنده نیست نمیتونه ببینه
                         {
                             string userId = this.RequestContext.Principal.Identity.GetUserId();
                             StoreSessionDataModel store = new StoreBL().GetSummaryForSession(userId);
                             if (store == null)
                                 return Json(JsonResultHelper.FailedResultWithMessage());
+                            break;
                         }
-                        break;
+                        
+
                 }
                 return Json(JsonResultHelper.SuccessResult(completeProduct));
             }
@@ -92,6 +100,11 @@ namespace Boundary.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// سرچ پیشرفته
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns></returns>
         [OutputCache(Duration = 60)]
         [System.Web.Http.Route("Search")]
         public IHttpActionResult Search(SearchParametersDataModel filters)
@@ -111,7 +124,11 @@ namespace Boundary.Controllers.Api
                     store = new StoreBL().GetSummaryForSession(userId);
                     //که اگه خود فروشنده بود بتونه همه محصولاتشو چه فعال و چه معلق رو ببینه
                     if (store != null)
-                        lstStatus.Add(EProductStatus.Suspended); 
+                    {
+                        lstStatus.Add(EProductStatus.New);
+                        lstStatus.Add(EProductStatus.Suspended);
+                    }
+                        
                 }
 
                 #endregion getting store Id
@@ -120,10 +137,10 @@ namespace Boundary.Controllers.Api
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه
-                if (lstStatus.Contains(EProductStatus.Suspended) && store!=null)
+                if ((lstStatus.Contains(EProductStatus.Suspended) || lstStatus.Contains(EProductStatus.New)) && store!=null)
                 {
                     result.ProductsSummery.RemoveAll(
-                        p => p.StoreCode != store.StoreCode && p.Status == EProductStatus.Suspended);
+                        p => p.StoreCode != store.StoreCode && (p.Status == EProductStatus.Suspended || p.Status == EProductStatus.New));
                 }
                 return Json(JsonResultHelper.SuccessResult(result));
             }
@@ -169,6 +186,11 @@ namespace Boundary.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// اطلاعات مورد نیاز صفحه سرچ
+        /// </summary>
+        /// <param name="categoryCode"></param>
+        /// <returns></returns>
         [OutputCache(Duration = 60)]
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("getRequiredItemsForSearch")]

@@ -57,8 +57,8 @@ namespace Boundary.Controllers
                 {
                     UserName = user.UserName,
                     Password = password,
-                    Email = email,
-                    RoleCode = user.RoleCode
+                    RoleCode = user.RoleCode,
+                    Email = email
                 };
                 var result = new UserBL().Save(newUser);
                 if (result.DbMessage.MessageType != MessageType.Success)

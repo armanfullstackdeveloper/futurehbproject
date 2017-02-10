@@ -325,3 +325,6 @@ Ankh.NoLoad
 /Varzesh3.Dashboard/T4MVC/
 .vs/*
 .vs/config/*
+Boundary\Content\AndroidAPK
+Boundary\Content\Images
+sh.exe.stackdump

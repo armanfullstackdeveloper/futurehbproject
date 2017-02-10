@@ -192,7 +192,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     MadeIn = productRegisterDataModel.ProductMainAttributeDataModels.MadeIn,
                     //
                     StoreCode = store.StoreCode,
-                    Status = EProductStatus.Active,
+                    Status = EProductStatus.New,
                     RegisterDate = PersianDateTime.Now.Date.ToInt()
                 }, session);
 
@@ -853,7 +853,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
             }
         }
 
-
+        
         [Route("uploadimage")]
         public IHttpActionResult PostFile(long productId, bool isMainImg, int top = 0, int left = 0, int bottom = 0, int right = 0)
         {
@@ -902,29 +902,21 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             return Json(JsonResultHelper.FailedResultWithMessage("فایل نامعتبر است"));
                         }
 
+                        string path = "Majazi";
+                        if (store.StateCode > 0 && store.CityCode > 0)
+                            path = store.StateCode + "/" + +store.CityCode;
                         string filePath = HttpContext.Current.Server.MapPath("~/Content/Images/Saller/"
-                                                                                       + store.StateCode + "/" + +store.CityCode + "/" +
-                                                                                         store.StoreCode + "/Products/" + productId);
+                                                                                       + path + "/" + store.StoreCode +
+                                                                                       "/Products/" + productId);
                         WebImage orginlImage = new WebImage(recivedFile.InputStream);
-                        orginlImage.Crop(top, left, bottom, right);
-                        WebImage additionalImage = orginlImage.Clone();
-                        if (additionalImage.Width > 500 || additionalImage.Height > 500)
-                        {
-                            additionalImage.Resize(500, 500);
-                        }
+                        orginlImage = orginlImage.Crop(top, left, bottom, right);
 
                         //use resizedImg for searchPage
-                        WebImage mainImage = null;
                         string resizedImgFilePath = null;
                         if (isMainImg)
                         {
                             resizedImgFilePath = filePath;
                             resizedImgFilePath = Path.Combine(resizedImgFilePath, "MainImage");
-                            mainImage = orginlImage.Clone();
-                            if (mainImage.Width > 400 || mainImage.Height > 400)
-                            {
-                                mainImage.Resize(400, 400);
-                            }
                         }
 
                         if (Directory.Exists(filePath) == false)
@@ -952,13 +944,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
                         string newName = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(lowerFilename);
-                        //که اگه از قبل 4 تا عکس فرعی هست دیگه برای این عکس فرعی ذخیره نشه که از ماکس بالا بزنه
-                        if (new ProductImageBL().GetProductImageCount(productId) < StaticNemberic.MaximumProductImage)
-                            additionalImage.Save(filePath + "/" + newName + extension);
-
+                        string imageAddress = resizedImgFilePath + "/" + newName + extension;
                         if (isMainImg && string.IsNullOrEmpty(resizedImgFilePath) == false)
                         {
-                            mainImage.Save(resizedImgFilePath + "/" + newName + extension);
+                            orginlImage.Save(imageAddress);
                         }
 
                         string rootPath = filePath.Substring(filePath.IndexOf("Content", StringComparison.Ordinal));
@@ -987,6 +976,9 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                 Product product = new ProductBL().SelectOne(productId);
                                 product.RegisterDate = PersianDateTime.Now.Date.ToInt();
                                 new ProductBL().Update(product);
+
+                                ImageHelper.Resise(imageAddress, StaticNemberic.MaximumImageHeightSize, StaticNemberic.MaximumImageWidthSize, extension.Replace(".",""));                            
+
                                 dynamic jsonObject = new JObject();
                                 jsonObject.ImageAddress = rootPath;
                                 return Ok(JsonResultHelper.SuccessResult(jsonObject));
@@ -1004,6 +996,9 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                 Product product = new ProductBL().SelectOne(productId);
                                 product.RegisterDate = PersianDateTime.Now.Date.ToInt();
                                 new ProductBL().Update(product);
+
+                                ImageHelper.Resise(imageAddress,StaticNemberic.MaximumImageHeightSize,StaticNemberic.MaximumImageWidthSize, extension.Replace(".", ""));
+
                                 dynamic jsonObject = new JObject();
                                 jsonObject.ImageAddress = rootPath;
                                 jsonObject.ImageId = result;
