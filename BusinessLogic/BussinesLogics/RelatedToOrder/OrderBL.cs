@@ -10,6 +10,7 @@ using DataModel.Entities.RelatedToOrder;
 using DataModel.Enums;
 using DataModel.Models.ViewModel;
 using Newtonsoft.Json.Linq;
+using NHibernate.Mapping;
 
 namespace BusinessLogic.BussinesLogics.RelatedToOrder
 {
@@ -368,6 +369,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                 {
                     parameters = new DynamicParameters();
                     parameters.Add("@orderCode", order.Id);
+                    OrderCustomerInfo customerInfo= _db.Query<OrderCustomerInfo>("SELECT * FROM [OrderCustomerInfo] where [OrderCode]=@orderCode", new { orderCode = order.Id }).SingleOrDefault();
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                     List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
                     OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == (byte)EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
@@ -407,6 +409,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                         StatusName = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode).Name,
                         EditableStatus = CheckSellersEditableStatus((EOrderStatus)orderHistoryOfLastStatus.OrderStatusCode),
                         TrackingCode = order.TrackingCode,
+                        CustomerInfo = customerInfo,
                         OrderSendingTypeName = (order.OrderSendingTypeCode != null) ? new OrderSendingTypeBL().SelectOne((byte)order.OrderSendingTypeCode).Name : "-"
                     });
                 }

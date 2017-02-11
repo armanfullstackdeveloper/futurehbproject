@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="DataModel" namespace="DataModel.Entities.RelatedToOrder" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="OrderCustomerInfo" table="OrderCustomerInfo" lazy="false" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="CityCode">
+      <column name="CityCode" sql-type="bigint" not-null="false" />
+    </property>
+    <property name="Name">
+      <column name="Name" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Place">
+      <column name="Place" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="PostalCode">
+      <column name="PostalCode" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="MobileNumber">
+      <column name="MobileNumber" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="PhoneNumber">
+      <column name="PhoneNumber" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Comments">
+      <column name="Comments" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="OrderCode">
+      <column name="OrderCode" sql-type="bigint" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

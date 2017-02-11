@@ -47,6 +47,9 @@
         <th>
             Image
         </th>
+        <th>
+            Home Page
+        </th>
         <th></th>
     </tr>
 
@@ -105,7 +108,10 @@
                 <img src="~/@item.ImgAddress" height="100" width="125" alt="">
             </td>
             <td>
-                @Html.ActionLink("حذف فروشگاه", "Delete", new { id = item.Id }) |
+                @Html.DisplayFor(modelItem => item.HomePage)
+            </td>
+            <td>
+                @*@Html.ActionLink("حذف فروشگاه", "Delete", new { id = item.Id }) |*@
                 @Html.ActionLink("اطلاعات فروشنده", "SellerDetailes", new { id = item.Id })
             </td>
         </tr>

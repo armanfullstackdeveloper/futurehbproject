@@ -17,6 +17,7 @@ namespace BusinessLogic.BussinesLogics.Sms
                 var parameters = new DynamicParameters();
                 parameters.Add("@phoneNumber", phoneNumber);
                 parameters.Add("@smsType", type);
+                parameters.Add("@today", PersianDateTime.Now.Date.ToInt());
                 int result = db.Query<int>("Sms_TodayAttempt", parameters, commandType: CommandType.StoredProcedure).SingleOrDefault();
                 EnsureCloseConnection(db);
                 return result;

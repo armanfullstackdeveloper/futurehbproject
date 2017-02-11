@@ -53,6 +53,7 @@
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\FirstPage\FirstPage_Advertise.cs" />
     <Compile Include="Entities\FirstPage\FirstPage_Slider.cs" />
+    <Compile Include="Entities\RelatedToOrder\OrderCustomerInfo.cs" />
     <Compile Include="Entities\RelatedToOrder\OrderSendingType.cs" />
     <Compile Include="Entities\RelatedToPayments\HBPaymentToMember.cs" />
     <Compile Include="Entities\RelatedToPayments\HBPaymentToStore.cs" />
@@ -252,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="HBM\Sms\Sms.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HBM\RelatedToOrder\OrderCustomerInfo.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

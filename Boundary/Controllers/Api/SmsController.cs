@@ -35,8 +35,8 @@ namespace Boundary.Controllers.Api
             try
             {
                 //check konam az ghabl sabtenam karde ya na
-                bool exist = new UserBL().IfUsernameExist(phoneNumber);
-                if (exist)
+                User user = new UserBL().GetByUserName(phoneNumber);
+                if (user!=null && user.RoleCode!=ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage("تلفن همراه وارد شده، از قبل موجود می باشد"));
                 //check konam bish az 3 bar dar roz nabode bashe baraye ip va shomare khas
                 int count = new SmsBL().TodayAttempt(Convert.ToInt64(phoneNumber.Remove(0, 1)),ESmsType.Registeration);
