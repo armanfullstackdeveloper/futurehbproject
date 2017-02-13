@@ -102,7 +102,8 @@
 
             <div id="firstBox" class="TestInnerNextNext">
                 <div id="Store_information">
-                    <div class="cover"><img src="~/Img/step_2.jpg" /></div>
+                    <div class="cover"><img src="~/Img/step_1.jpg" /></div>
+
                     <div class="standardPadding">
                         <div id="StoreSubject" class="question organizer">اطلاعات فروشگاه</div>
                         <div class="Input_In_Box organizer" id="StoreName">
@@ -117,27 +118,26 @@
                             <p>
                                 <select multiple="multiple" placeholder="نوع محصولات فروشگاه" id="SlectBox">
                                     @*<option value="1">لوازم دیجیتال</option>
-                                        <option value="2">لوازم خانگی</option>
-                                        <option value="3">آرایشی و بهداشتی</option>
-                                        <option value="4">لباس و پوشاک</option>
-                                        <option value="5">صنایع دستی و خانگی</option>
-                                        <option value="6">سایر موارد</option>*@
+                                <option value="2">لوازم خانگی</option>
+                                <option value="3">آرایشی و بهداشتی</option>
+                                <option value="4">لباس و پوشاک</option>
+                                <option value="5">صنایع دستی و خانگی</option>
+                                <option value="6">سایر موارد</option>*@
 
                                 </select>
                             </p>
                             <div class="Alert" id="Alert_SlectBox">لطفا نوع محصولات فروشگاه خود را انتخاب نمایید</div>
                         </div>
                     </div>
+
                     <div id="Back_Question" class="Back">مرحله قبل</div>
                     <div id="Next_TestInnerNext" class="Forward">مرحله بعد</div>
                 </div>
             </div>
 
-
-
             <div id="secondBox" class="TestInnerNext">
                 <div id="Register_information">
-                    <div class="cover"><img src="~/Img/step_1.jpg" /></div>
+                    <div class="cover"><img src="~/Img/step_2.jpg" /></div>
                     <div class="standardPadding">
                         <div id="RegisterSubject" class="question">مشخصات کاربری</div>
                         <div class="Input_In_Box" id="RegisterName">
@@ -148,9 +148,18 @@
                             <div class="Alert" id="Alert_UserName">لطفا شماره تلفن همراه خود را با 09 وارد نمایید</div>
                             <div class="Alert" id="Alert_UserName_Exist"> این شماره تلفن قبلا ثبت شده است</div>
                             <div class="Alert" id="Alert_UserName_Exist_Wait">لطفا صبر کنید</div>
+                            <div class="Alert" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
 
                         </div>
-                        <div class="Input_In_Box" id="RegisterTypeName" style=" margin-top: 16px;">
+                        <div class="Input_In_Box" id="Verify_Code" style="display:none; margin-top: 16px;">
+                            <span class="Header">: کد فعال سازی </span>
+                            <p class="textBoxInput">
+                                <input type="password" id="VerifyTxt" class="" placeholder="کد فعالسازی خود را وارد کنید">
+                            </p>
+                            <div class="Alert" id="Alert_Verify">کد فعالسازی صحیح نمی باشد</div>
+
+                        </div>
+                        <div class="Input_In_Box" id="RegisterTypeName" style="display:none; margin-top: 16px;">
                             <span class="Header">: رمز عبور </span>
                             <p class="textBoxInput">
                                 <input type="password" id="PasswordTxt" class="" placeholder="رمز عبور خود را وارد کنید">
@@ -164,7 +173,7 @@
 
                 </div>
             </div>
-
+      
             <div id="ThiredBox" class="TestInner">
                 <div id="communication_information">
                     <div class='cover'><img src='~/Img/step_3.jpg' /></div>
@@ -676,8 +685,10 @@
                 IsUsernameExsisted = "";
                 $.ajax({
                     type: "GET",
-                    url: "/Account/IsUsernameExsisted/",
-                    data: { username: $('#UserNameTxt').val() },
+                    //  url: "/Account/IsUsernameExsisted/",
+                   // data: { username: $('#UserNameTxt').val() },
+                    url: "/Api/sms/register",
+                    data: { phoneNumber: $('#UserNameTxt').val() },
                     success: function (result) {
 
                         if (result.Response == true) {
@@ -689,12 +700,17 @@
                         }
                         else {
                             $('#Alert_UserName_Exist_Wait').css("display", "none");
-                            IsUsernameExsisted = 'False';
 
-                            if (WhantGoPage3 == "1") {
-                                WhantGoPage3 = "";
-                                next2();
-                            }
+                            $('#Verify_Code').slideToggle();
+
+
+
+                         //   IsUsernameExsisted = 'False';
+
+                          //  if (WhantGoPage3 == "1") {
+                          //      WhantGoPage3 = "";
+                           //     next2();
+                          //  }
 
                         }
                     },

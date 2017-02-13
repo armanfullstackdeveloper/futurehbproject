@@ -150,21 +150,23 @@
 
             <div id="AttributeDiv">
             </div>
+ 
+            <div class="orgenizer">
 
-
-            <div class="orgenizer"  >
                 <p>سایر ویژگی ها  :</p>
 
+                <div id="unLimitedBox" style="direction: rtl;">
+
+                    <div class="onePack">
+                        <input class="ForTextBox" placeholder="نام ویژگی" type="text" id="moreAttrName">
+                        <input class="ForTextBox" style="margin-right:10px;" placeholder="مقدار " type="text" id="moreAttrValue">
+                    </div>
+                    <input type="button" class="addAnotherFilter" onclick="addOnePack(this)" />
+                </div>
                 <p class="Info" style="width:57% !important">اگر ویژگی های دیگری دارد محصول شما ، نام ویژگی و مقدار آن را وارد نمایید</p>
 
-                <div id="unLimitedBox" style="direction: rtl;">
-                    <div class="onePack">
-                        <input class="" placeholder="نام ویژگی" type="text" id="moreAttrName">
-                        <input class="" placeholder="مقدار " type="text" id="moreAttrValue">
-                    </div>
-                </div>
-                <input type="button" onclick="addOnePack(this)" value="اضافه کردن" />
             </div>
+             
 
             <input type="button" id="SaveProduct" class="NextStep" value="ثبت محصول">
 
@@ -750,6 +752,7 @@
                 data.ProductMainAttributeDataModels['Price'] = $('#Price').val().replace(/,/g, '');
                 data.ProductMainAttributeDataModels['DiscountedPrice'] = ($('#DiscountedPrice').val().replace(/,/g, '') == '' ? 0 : $('#DiscountedPrice').val().replace(/,/g, ''));
                 data.ProductMainAttributeDataModels['CanSend'] = ($('#CanSend').val() == null ? "false" : $('#CanSend').val());
+                data.ProductMainAttributeDataModels['IsExist'] = 'true';
                 data.ProductMainAttributeDataModels['PostalCostInTown'] = ($('#PostalCostInTown').val().replace(/,/g, '') == '' ? 0 : $('#PostalCostInTown').val().replace(/,/g, ''));
                 data.ProductMainAttributeDataModels['PostalCostInCountry'] = ($('#PostalCostInCountry').val().replace(/,/g, '') == '' ? 0 : $('#PostalCostInCountry').val().replace(/,/g, ''));
                 data.ProductMainAttributeDataModels['Changeability'] = ($('#Changeability').val() == null ? "false" : $('#Changeability').val());

@@ -11,8 +11,8 @@
     <link href="~/Content/Cropper Upload Avatar/main.css" rel="stylesheet" />
     <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInAddProduct.css" rel="stylesheet" />
     <link href="~/Content/Fine_Uploader/fine-uploader-new.css" rel="stylesheet" />
-    <link href="~/Content/selectize/selectize.css" rel="stylesheet" />
-}
+    <link href="~/Content/selectize/selectize.bootstrap3.css" rel="stylesheet" />
+ }
 
 <div id="AddProduct">
     <div id="Holder1" class="RegisterHolder">
@@ -35,14 +35,7 @@
                 </div>
             </div>
 
-            <div class="orgenizer">
-               
-                <select class="select-beast">
-
-                </select>
-            </div>
-
-            <div class="orgenizer">
+           <div class="orgenizer">
                 <p>نوع محصول :</p>
                 <select class="ForSelect" id="CategoryCode">
                     <option selected disabled value="">انتخاب نمایید</option>
@@ -303,14 +296,17 @@
         }
     </style>
 
+    @*<script src="~/Content/selectize/standalone/selectize.js"></script>*@
+    <script src="~/Content/selectize/standalone/selectize.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Content/Cropper Upload Avatar/main.js"></script>
     <script src="~/Content/Cropper Upload Avatar/cropper.min.js"></script>
     <script src="~/Content/Fine_Uploader/jquery.fine-uploader.min.js"></script>
     @*<script src="~/Content/Fine_Uploader/fine-uploader.js"></script>*@
     <script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
-@*<script src="~/Content/selectize/selectize.min.js"></script>*@
-    <script type="text/template" id="qq-template-manual-trigger">
+   
+
+     <script type="text/template" id="qq-template-manual-trigger">
         <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="تصویر را بکشید و اینجا رها کنید">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
                 <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
@@ -393,11 +389,6 @@
 
         //When page Load , Category Load
         $(document).ready(function () {
-
-            $('.select-beast').selectize({
-                create: true,
-                sortField: 'text'
-            });
 
             
             $('#SaveProduct').prop('disabled', false);
@@ -521,7 +512,7 @@
                             else if (index == 'Brands') {
                                 txt = " <div class='orgenizer'>"
                                    + "<p>برند :</p>"
-                                   + "<div ><select  class='ForSelect'  id='Brands'>"
+                                   + "<div ><select  class='ForSelect select-beast'  id='Brands'>"
                                    + "<option selected disabled value=''>انتخاب نمایید</option>";
                                 $.each(value, function (index2, value2) {
                                     txt += "<option value='" + value2.Value + "'>" + value2.Text + "</option> ";
@@ -531,6 +522,7 @@
                                     + "</div></div></br>";
                                 $("#AttributeDiv").append(txt);
                                 attrebiut.push('Brands');
+                                 
                             }
 
                             else if (index == 'ProductAttributeWithoutItems') {
@@ -550,7 +542,7 @@
 
                                     txt = " <div class='orgenizer'>"
                                        + "<p>" + value2.AttributeName + " :</p>"
-                                       + "<div class='fotAllSelectBoxes' ><select  multiple = 'multiple'  class='ForSelect'  id='" + value2.AttributeCode + "'>"
+                                       + "<div class='fotAllSelectBoxes' ><select  multiple = 'multiple'  class='ForSelect '  id='" + value2.AttributeCode + "'>"
                                        + "<option selected disabled value=''>انتخاب نمایید</option>";
                                     $.each(value2.AttributeItems, function (index3, value3) {
                                         txt += "<option value='" + value3.Value + "'>" + value3.Text + "</option> ";
@@ -559,11 +551,16 @@
                                     txt += "</select>"
                                         + "</div></div></br>";
                                     $("#AttributeDiv").append(txt);
-                                    $('#' + value2.AttributeCode).SumoSelect({
-                                        csvDispCount: 2,
-                                        captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
-                                        okCancelInMulti: false
+
+                                    $('#' + value2.AttributeCode).selectize({
+                                        create: true,
+                                        sortField: 'text'
                                     });
+                                    //$('#' + value2.AttributeCode).SumoSelect({
+                                    //    csvDispCount: 2,
+                                    //    captionFormat: 'تعداد ' + '{0}' + ' مورد انتخاب شد ',
+                                    //    okCancelInMulti: false
+                                    //});
                                     ProductMultiSelectAttributeWithItemsTemp.push(value2.AttributeCode);
 
                                 });
@@ -592,6 +589,11 @@
 
                         });
 
+
+                        $('.select-beast').selectize({
+                            create: true,
+                            sortField: 'text'
+                        });
 
                         $('#Holder2').on('keydown', '.IsNumber', function (e) {
                             -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();

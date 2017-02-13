@@ -536,11 +536,13 @@
                                     var txt = "<div class='TagInside'>";
                                     txt += "<select multiple = 'multiple' onchange='changeAttributeDrop();' id='Attributes_" + value3.AttributeCode + "'>";
                                         //"<option selected disabled value=''>" + value3.AttributeName + "</option>";
-                                    $.each(value3.AttributeItems, function (index2, value2) {
+                                    if (value3 && value3.AttributeItems){
+                                        $.each(value3.AttributeItems, function (index2, value2) {
 
-                                        txt += "<option  value='" + value2.Value + "'>" + value2.Text + "</option> ";
+                                            txt += "<option  value='" + value2.Value + "'>" + value2.Text + "</option> ";
 
-                                    });
+                                        });
+                                    }
                                     txt += "</select>"
                                         + "</div> ";
                                     $("#TagsAndResearch").append(txt);
@@ -552,7 +554,7 @@
                                         selectAll: true,
                                         selectAlltext: 'انتخاب همه'
                                     });
-
+                                    
                                     $.each(Attributes, function (index4, value4) {
                                         if (value4) {
                                             if (value4.Code == value3.AttributeCode) {

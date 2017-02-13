@@ -125,6 +125,7 @@
   font-size: inherit;
   line-height: 20px;
   -webkit-font-smoothing: inherit;
+  background-color: #efefef;
 }
 .selectize-input,
 .selectize-control.single .selectize-input.input-active {
@@ -148,6 +149,7 @@
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+  background-color: #efefef;
 }
 .selectize-control.multi .selectize-input.has-items {
   padding: 5px 12px 2px;
@@ -294,7 +296,7 @@
 }
 .selectize-control.single .selectize-input:after {
   content: ' ';
-  display: block;
+  display: none;
   position: absolute;
   top: 50%;
   right: 17px;
