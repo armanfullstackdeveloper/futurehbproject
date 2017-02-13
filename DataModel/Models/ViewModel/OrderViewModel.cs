@@ -43,7 +43,8 @@ namespace DataModel.Models.ViewModel
         public string OrderTypeName { get; set; } //شیوه پرداخت
         public string MemberName { get; set; }
         public int OverallIncome { get; set; } //مجموع درامد
-        public List<DropDownItemsModel> EditableStatus { get; set; } 
+        public List<DropDownItemsModel> EditableStatus { get; set; }
+        public OrderCustomerInfo CustomerInfo { get; set; } 
     }
 
     public class OrderViewModelForAdmins : OrderViewModel

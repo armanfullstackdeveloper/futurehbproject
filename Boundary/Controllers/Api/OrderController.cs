@@ -57,8 +57,9 @@ namespace Boundary.Controllers.Api
 
                 #endregion
 
-                if(member.CityCode==null)
-                    return Json(JsonResultHelper.FailedResultWithMessage("شهر شما انتخاب نشده است")); 
+                if (member.CityCode == null || string.IsNullOrEmpty(member.MobileNumber) ||
+                    string.IsNullOrEmpty(member.PostalCode) || string.IsNullOrEmpty(member.Place) || string.IsNullOrEmpty(member.PhoneNumber))
+                    return Json(JsonResultHelper.FailedResultWithMessage("مشخصات شما برای ثبت سفارش وارد نشده است"));
 
                 bool haveValidDiscountCode = !string.IsNullOrEmpty(discountCode);
 
@@ -263,6 +264,18 @@ namespace Boundary.Controllers.Api
                             session = null;
                             return Json(JsonResultHelper.FailedResultWithMessage());
                         }
+
+                        new OrderCustomerInfoBL().InsertWhitOutCommitTransaction(new OrderCustomerInfo()
+                        {
+                            OrderCode = orderCode,
+                            PhoneNumber = member.PhoneNumber,
+                            CityCode = member.CityCode,
+                            Comments = "",
+                            MobileNumber = member.MobileNumber,
+                            Name = member.Name,
+                            Place = member.Place,
+                            PostalCode = member.Place,
+                        }, session);
                     }
                 }
                 else
@@ -343,6 +356,18 @@ namespace Boundary.Controllers.Api
                                 session = null;
                                 return Json(JsonResultHelper.FailedResultWithMessage());
                             }
+
+                            new OrderCustomerInfoBL().InsertWhitOutCommitTransaction(new OrderCustomerInfo()
+                            {
+                                OrderCode = orderCode,
+                                PhoneNumber = member.PhoneNumber,
+                                CityCode = member.CityCode,
+                                Comments = "",
+                                MobileNumber = member.MobileNumber,
+                                Name = member.Name,
+                                Place = member.Place,
+                                PostalCode = member.Place,
+                            }, session);
 
                             #region بروز رسانی موجودی قبلی
 
@@ -496,6 +521,18 @@ namespace Boundary.Controllers.Api
                                 session = null;
                                 return Json(JsonResultHelper.FailedResultWithMessage());
                             }
+
+                            new OrderCustomerInfoBL().InsertWhitOutCommitTransaction(new OrderCustomerInfo()
+                            {
+                                OrderCode = orderCode,
+                                PhoneNumber = member.PhoneNumber,
+                                CityCode = member.CityCode,
+                                Comments = "",
+                                MobileNumber = member.MobileNumber,
+                                Name = member.Name,
+                                Place = member.Place,
+                                PostalCode = member.Place,
+                            }, session);
                         }
                     }
                 }

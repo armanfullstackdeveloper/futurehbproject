@@ -66,6 +66,7 @@
     <Compile Include="BussinesLogics\ContactsBL\PublicMessageBL.cs" />
     <Compile Include="BussinesLogics\FirstPageBL\FirstPage_AdvertiseBL.cs" />
     <Compile Include="BussinesLogics\FirstPageBL\FirstPage_SliderBL.cs" />
+    <Compile Include="BussinesLogics\RelatedToOrder\OrderCustomerInfoBL.cs" />
     <Compile Include="BussinesLogics\RelatedToOrder\OrderSendingTypeBL.cs" />
     <Compile Include="BussinesLogics\RelatedToPayments\HBPaymentToMemberBL.cs" />
     <Compile Include="BussinesLogics\RelatedToPayments\HBPaymentToStoreBL.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="BussinesLogics\RelatedToStoreBL\TransactionBL.cs" />
     <Compile Include="BussinesLogics\RelatedToStoreBL\UserStoreReportBL.cs" />
     <Compile Include="BussinesLogics\RoleBL.cs" />
+    <Compile Include="BussinesLogics\Sms\SmsBL.cs" />
     <Compile Include="BussinesLogics\StateBL.cs" />
     <Compile Include="Components\DbMessage.cs" />
     <Compile Include="Components\QueryResult.cs" />

@@ -513,19 +513,6 @@
             <param name="imageId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boundary.Areas.Seller.Controllers.Api.ProductManagmentController.PostFile(System.Int64,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            افزودن عکس های اصلی و فرعی محصولات
-            با قابلیت کراپ
-            </summary>
-            <param name="productId"></param>
-            <param name="isMainImg"></param>
-            <param name="top"></param>
-            <param name="left"></param>
-            <param name="bottom"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
         <member name="M:Boundary.Areas.Seller.Controllers.Api.StoreManagmentController.GetCategories">
             <summary>
             دریافت تمامی دسته بندی های سطح اول
@@ -592,6 +579,34 @@
             <param name="bag"></param>
             <returns></returns>
         </member>
+        <member name="M:Boundary.Controllers.Api.AccountController.UserRegister(DataModel.Models.DataModel.UserRegisterDataModel)">
+            <summary>
+            register user using verificationCode
+            </summary>
+            <param name="userRegisterData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boundary.Controllers.Api.ProductController.GetProduct(System.Int64)">
+            <summary>
+            جزئیات محصول
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boundary.Controllers.Api.ProductController.Search(DataModel.Models.DataModel.SearchParametersDataModel)">
+            <summary>
+            سرچ پیشرفته
+            </summary>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boundary.Controllers.Api.ProductController.GetRequiredItemsForSearch(System.Int64)">
+            <summary>
+            اطلاعات مورد نیاز صفحه سرچ
+            </summary>
+            <param name="categoryCode"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boundary.Controllers.Ordinary.OrderController.Index">
             <summary>
             در این صفحه لیست محصولات موجود در سبد خرید نشان داده خواهد شد
@@ -649,9 +664,29 @@
             برای مدیریت سشن در دیگر کنترلرها
             </summary>
         </member>
+        <member name="M:Boundary.Controllers.Ordinary.HomeController.CheckForNewVersion(System.Double)">
+            <summary>
+            download android app
+            "~/Content/AndroidAPK/1.1.apk"
+            </summary>
+            <param name="currentVersion"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boundary.Controllers.AppUser">
             <summary>
             chon bayad az IUser inherit mishod dige az User estefade nemitonestim bokonim
+            </summary>
+        </member>
+        <member name="M:Boundary.Helper.StaticValue.SmsHelper.RegisterMessage(System.Int32)">
+            <summary>
+            registeration code message 
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boundary.Helper.StaticValue.StaticNemberic">
+            <summary>
+            مقادیر ثابت
             </summary>
         </member>
         <member name="P:Boundary.Helper.StaticValue.StaticNemberic.MinimumTarakoneshValue">
@@ -662,6 +697,16 @@
         <member name="P:Boundary.Helper.StaticValue.StaticNemberic.MaximumProductImage">
             <summary>
             حداکثر تعداد تصاویر مجاز برای یک محصول
+            </summary>
+        </member>
+        <member name="P:Boundary.Helper.StaticValue.StaticNemberic.MaximumImageHeightSize">
+            <summary>
+            حداکثر ارتفاع عکس های کاربران
+            </summary>
+        </member>
+        <member name="P:Boundary.Helper.StaticValue.StaticNemberic.MaximumImageWidthSize">
+            <summary>
+            حداکثر طول عکس های کاربران
             </summary>
         </member>
         <member name="T:Boundary.com.arianpal.merchant.WebService">

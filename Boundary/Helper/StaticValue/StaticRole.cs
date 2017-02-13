@@ -17,12 +17,14 @@ namespace Boundary.Helper.StaticValue
                     return StaticString.Role_Member;
                 case ERole.SuperAdmin:
                     return StaticString.Role_SuperAdmin;
+                case ERole.NotRegister:
+                    return StaticString.Role_NotRegister;
                 default:
                     return null;
             }
         }
 
-        public static Role GetRole(ERole role) 
+        public static Role GetRole(ERole role)
         {
             switch (role)
             {
@@ -34,6 +36,8 @@ namespace Boundary.Helper.StaticValue
                     return Member;
                 case ERole.SuperAdmin:
                     return SuperAdmin;
+                case ERole.NotRegister:
+                    return NotRegister;
                 default:
                     return null;
             }
@@ -83,6 +87,18 @@ namespace Boundary.Helper.StaticValue
                 {
                     Name = StaticString.Role_SuperAdmin,
                     Id = ERole.SuperAdmin
+                };
+            }
+        }
+
+        public static Role NotRegister
+        {
+            get
+            {
+                return new Role()
+                {
+                    Name = StaticString.Role_NotRegister,
+                    Id = ERole.NotRegister
                 };
             }
         }

@@ -31,6 +31,7 @@ namespace DataModel.Models.ViewModel
 
         //نوع فروشگاه
         public  string StoreTypeName { get; set; }
+        public string HomePage { get; set; } 
         public  string Website { get; set; }
 
         public List<decimal> Tells { get; set; }

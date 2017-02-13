@@ -244,9 +244,11 @@
     <Compile Include="Areas\Seller\Controllers\ProductManagmentController.cs" />
     <Compile Include="Areas\Seller\Controllers\StoreManagmentController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AppManagmentController.cs" />
+    <Compile Include="Controllers\Api\SmsController.cs" />
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
+    <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />

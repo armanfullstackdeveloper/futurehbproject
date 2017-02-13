@@ -8,8 +8,6 @@
     <link href="~/fonts/Font.css" rel="stylesheet" />
 
     @RenderSection("Style", false)
-
-
 </head>
 <body>
 
@@ -17,16 +15,27 @@
     {
         @Html.AntiForgeryToken()
     }
-    @using Boundary.Helper.StaticValue
+    @using Boundary.Controllers.Ordinary    @using Boundary.Helper.StaticValue
     @using Microsoft.AspNet.Identity
 
+    @{
+        long storeCode = 0;
+        string homePage = "";
+    }
     @if (Request.IsAuthenticated)
     {
         <div class="showUserName">
-            <div class="userNameWelcom"><span class="">@*@User.Identity.GetUserName()*@ کاربر</span> عزیز، خوش آمدید.</div>
+            <div class="userNameWelcom">خوش آمدید</div>
             @if (User.IsInRole(StaticString.Role_Seller))
-            {<a href="~/shop/code/@User.Identity.GetUserName()">
-
+            {
+                string userId = User.Identity.GetUserId();
+                MainSession mainSession = (MainSession)Session[userId];
+                if (mainSession != null)
+                {
+                    storeCode = mainSession.Store.StoreCode;
+                    homePage = mainSession.Store.HomePage;
+                }
+                <a href="~/shop?id=@storeCode">
                 <div class="goToStoreAdmin">فروشگاه شما</div>
             </a>
             }
@@ -138,7 +147,7 @@
                                         <div id="yourStore" class="  IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
                                     </div>
                                 </a>*@
-                            <a href="~/shop/code/@User.Identity.GetUserName()">
+                            <a href="~/shop?id=@storeCode">
                                 <div class="HolderIcon">
                                     <div id="yourStore" class="Blue IconContoller"><span class="IconOrgenizer">فروشگاه شما</span></div>
                                 </div>
@@ -1765,15 +1774,11 @@
         //chnage all persian number to en number call function
         $("#UserNameTxt , #UserName").on('input', function () {
             var value = $(this).val();
-            $(this).val(value.toEnDigit())
+            $(this).val(value.toEnDigit());
         });
 
     </script>
 
     @RenderSection("Script", false)
-
-
-
-
 </body>
 </html>

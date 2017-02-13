@@ -197,7 +197,6 @@ namespace BusinessLogic.BussinesLogics
             }
         }
 
-
         public bool IfUsernameExist(string username)
         {
             try

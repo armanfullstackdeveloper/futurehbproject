@@ -17,8 +17,8 @@ namespace Boundary
 
             routes.MapRoute(
                 name: "Sore Without action",
-                url: "Shop/{shopname}",
-                defaults: new { controller = "Store", action = "ShopPage"} 
+                url: "Shop/{shopname}/{id}",
+                defaults: new { controller = "Store", action = "ShopPage", shopname = UrlParameter.Optional, id = UrlParameter.Optional } 
             );
 
             routes.MapRoute(

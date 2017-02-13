@@ -1,8 +1,10 @@
-﻿namespace DataModel.Enums 
+﻿using System.ComponentModel;
+
+namespace DataModel.Enums 
 {
     public enum EOrderType
     {
-        SecurePayment=1,
-        FreePayment = 2
+        [Description("پرداخت امن")]SecurePayment=1,
+        [Description("پرداخت آزاد")]FreePayment = 2
     }
 }

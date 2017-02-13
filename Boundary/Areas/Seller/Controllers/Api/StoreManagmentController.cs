@@ -391,9 +391,9 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     {
                         WebImage orginalImage = new WebImage(postedFile.InputStream);
                         orginalImage.Crop(top, left, bottom, right);
-                        if (orginalImage.Width > 500 || orginalImage.Height > 500)
+                        if (orginalImage.Width > 1360 || orginalImage.Height > 380)
                         {
-                            orginalImage.Resize(500, 500);
+                            orginalImage.Resize(1360, 380);
                         }
 
                         orginalImage.Save(filePath + "/" + newName + extension);

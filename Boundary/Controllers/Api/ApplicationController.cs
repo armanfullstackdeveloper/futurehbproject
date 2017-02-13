@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.Configuration;
 using System.Web;
 using System.Web.Http;
 using Boundary.Helper;
@@ -30,39 +29,42 @@ namespace Boundary.Controllers.Api
         {
             try
             {
-                string address = HttpContext.Current.Server.MapPath("~/Content/AndroidAPK");
-                string[] apkFiles = Directory.GetFiles(address)
-                                     .Select(path => Path.GetFileName(path))
-                                     .ToArray();
-                foreach (string item in apkFiles)
-                {
-                    double filename = Convert.ToDouble(Path.GetFileNameWithoutExtension(item));
-                    if (filename > currentVersion)
-                    {
-                        string filePath = address + "/" + item;
-                        if (File.Exists(filePath))
-                        {
-                            FileInfo fileInfo = new FileInfo(filePath);
-                            if (fileInfo.Exists)
-                            {
-                                return Json(JsonResultHelper.SuccessResult("Content/AndroidAPK/" + item));
-                            }
-                        }
-                    }
-                }
-                return Json(JsonResultHelper.SuccessResult("there is no new version"));
+                //string address = HttpContext.Current.Server.MapPath("~/Content/AndroidAPK");
+                //string[] apkFiles = Directory.GetFiles(address)
+                //                     .Select(path => Path.GetFileName(path))
+                //                     .ToArray();
+                //foreach (string item in apkFiles)
+                //{
+                //    double filename = Convert.ToDouble(Path.GetFileNameWithoutExtension(item));
+                //    if (filename > currentVersion)
+                //    {
+                //        string filePath = address + "/" + item;
+                //        if (File.Exists(filePath))
+                //        {
+                //            FileInfo fileInfo = new FileInfo(filePath);
+                //            if (fileInfo.Exists)
+                //            {
+                //                return Json(JsonResultHelper.SuccessResult("Content/AndroidAPK/" + item));
+                //            }
+                //        }
+                //    }
+                //}
+                double newVersion= Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                if(newVersion>currentVersion)
+                    return Json(JsonResultHelper.SuccessResult(ConfigurationManager.AppSettings["AndroidApkAddress"])); 
+                return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
             }
             catch (MyExceptionHandler exp1)
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
                             Value = currentVersion.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -76,13 +78,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                       new ActionInputViewModel()
-                        {
+                       new ActionInputViewModel
+                       {
                             Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
                             Value = currentVersion.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -100,7 +102,7 @@ namespace Boundary.Controllers.Api
         {
             try
             {
-                string userId = this.RequestContext.Principal.Identity.GetUserId();
+                string userId = RequestContext.Principal.Identity.GetUserId();
                 if (string.IsNullOrEmpty(userId))
                 {
                     return Json(JsonResultHelper.SuccessResult(new PublicMessageBL().GetNewest(false)));
@@ -111,14 +113,7 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => categoryCode),
-                        //    Value = categoryCode.ToString()
-                        //},
-                    };
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>();
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
@@ -131,14 +126,7 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        //new ActionInputViewModel()
-                        // {
-                        //     Name = HelpfulFunction.GetVariableName(() => categoryCode),
-                        //     Value = categoryCode.ToString()
-                        // },
-                    };
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>();
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
@@ -164,13 +152,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => mobileInstalled),
                             Value = JObject.FromObject(mobileInstalled).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -184,13 +172,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                           new ActionInputViewModel()
-                        {
+                           new ActionInputViewModel
+                           {
                             Name = HelperFunctionInBL.GetVariableName(() => mobileInstalled),
                             Value = JObject.FromObject(mobileInstalled).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -209,7 +197,7 @@ namespace Boundary.Controllers.Api
             try
             {
                 long result =
-                    new UserProductReportBL().Insert(new UserProductReport()
+                    new UserProductReportBL().Insert(new UserProductReport
                     {
                         ProductCode = productCode,
                         ReportCode = reportCode
@@ -222,17 +210,17 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => productCode),
                             Value = productCode.ToString()
-                        },new ActionInputViewModel()
+                        },new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => reportCode),
                             Value = reportCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -246,17 +234,17 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => productCode),
                             Value = productCode.ToString()
-                        },new ActionInputViewModel()
+                        },new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => reportCode),
                             Value = reportCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -275,7 +263,7 @@ namespace Boundary.Controllers.Api
             try
             {
                 long result =
-                        new UserStoreReportBL().Insert(new UserStoreReport()
+                        new UserStoreReportBL().Insert(new UserStoreReport
                         {
                             StoreCode = storeCode,
                             ReportCode = reportCode
@@ -288,17 +276,17 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => storeCode),
                             Value = storeCode.ToString()
-                        },new ActionInputViewModel()
+                        },new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => reportCode),
                             Value = reportCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -312,17 +300,17 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => storeCode),
                             Value = storeCode.ToString()
-                        },new ActionInputViewModel()
+                        },new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => reportCode),
                             Value = reportCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -350,13 +338,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => scoreCode),
                             Value = scoreCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -370,13 +358,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                       new ActionInputViewModel()
-                        {
+                       new ActionInputViewModel
+                       {
                             Name = HelperFunctionInBL.GetVariableName(() => scoreCode),
                             Value = scoreCode.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -394,8 +382,8 @@ namespace Boundary.Controllers.Api
         {
             try
             {
-                string userId = this.RequestContext.Principal.Identity.GetUserId();
-                long result=new ErrorLogBL().Insert(new ErrorLog()
+                string userId = RequestContext.Principal.Identity.GetUserId();
+                long result=new ErrorLogBL().Insert(new ErrorLog
                 {
                     Date = PersianDateTime.Now.Date.ToInt(),
                     Time = PersianDateTime.Now.TimeOfDay.ToShort(),
@@ -412,13 +400,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => errorLog),
                             Value = JObject.FromObject(errorLog).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -432,13 +420,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                       new ActionInputViewModel()
-                        {
+                       new ActionInputViewModel
+                       {
                             Name = HelperFunctionInBL.GetVariableName(() => errorLog),
                             Value = JObject.FromObject(errorLog).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));

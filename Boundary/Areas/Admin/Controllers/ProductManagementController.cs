@@ -67,7 +67,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public PartialViewResult SearchProductByAjax(SearchParametersDataModel filters, EProductStatus? status, long? productCode)
+        public PartialViewResult SearchProductByAjax(SearchParametersDataModel filters, EProductStatus? status=null, long? productCode=null)
         {
             if (!ModelState.IsValid)
                 return null;

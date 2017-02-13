@@ -17,7 +17,7 @@ namespace Boundary.Controllers.Ordinary
     public class StoreController : BaseController
     {
         [Route("Shop")]
-        public ActionResult ShopPage(string shopname,long? id=null) 
+        public ActionResult ShopPage(string shopname="",long? id=null) 
         {
             try
             {
