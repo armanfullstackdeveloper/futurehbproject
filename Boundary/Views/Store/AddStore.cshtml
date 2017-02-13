@@ -105,40 +105,6 @@
                     <div class="cover"><img src="~/Img/step_1.jpg" /></div>
 
                     <div class="standardPadding">
-                        <div id="StoreSubject" class="question organizer">اطلاعات فروشگاه</div>
-                        <div class="Input_In_Box organizer" id="StoreName">
-                            <span class="Header">  :نام فروشگاه</span>
-                            <p class="textBoxInput">
-                                <input type="text" id="StoreNameTxt" placeholder="نام فروشگاه خود را وارد کنید">
-                            </p>
-                            <div class="Alert" id="Alert_StoreName">لطفا نام فروشگاه را وارد نمایید</div>
-                        </div>
-                        <div class="Input_In_Box organizer" id="StoreTypeName">
-                            <span class="Header">  :نوع کالای فروشگاه </span>
-                            <p>
-                                <select multiple="multiple" placeholder="نوع محصولات فروشگاه" id="SlectBox">
-                                    @*<option value="1">لوازم دیجیتال</option>
-                                <option value="2">لوازم خانگی</option>
-                                <option value="3">آرایشی و بهداشتی</option>
-                                <option value="4">لباس و پوشاک</option>
-                                <option value="5">صنایع دستی و خانگی</option>
-                                <option value="6">سایر موارد</option>*@
-
-                                </select>
-                            </p>
-                            <div class="Alert" id="Alert_SlectBox">لطفا نوع محصولات فروشگاه خود را انتخاب نمایید</div>
-                        </div>
-                    </div>
-
-                    <div id="Back_Question" class="Back">مرحله قبل</div>
-                    <div id="Next_TestInnerNext" class="Forward">مرحله بعد</div>
-                </div>
-            </div>
-
-            <div id="secondBox" class="TestInnerNext">
-                <div id="Register_information">
-                    <div class="cover"><img src="~/Img/step_2.jpg" /></div>
-                    <div class="standardPadding">
                         <div id="RegisterSubject" class="question">مشخصات کاربری</div>
                         <div class="Input_In_Box" id="RegisterName">
                             <span class="Header">: تلفن همراه </span>
@@ -151,6 +117,9 @@
                             <div class="Alert" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
 
                         </div>
+                        @*<div>
+                            <input type="button" style="float:left;" onclick="checkUsernameExist();" value="تایید شماره تلفن" />
+                        </div>*@
                         <div class="Input_In_Box" id="Verify_Code" style="display:none; margin-top: 16px;">
                             <span class="Header">: کد فعال سازی </span>
                             <p class="textBoxInput">
@@ -168,12 +137,48 @@
 
                         </div>
                     </div>
+
+                    <div id="Back_Question" class="Back">مرحله قبل</div>
+                    <div id="Next_TestInnerNext" class="Forward">مرحله بعد</div>
+                </div>
+            </div>
+
+            <div id="secondBox" class="TestInnerNext">
+                <div id="Register_information">
+                    <div class="cover"><img src="~/Img/step_2.jpg" /></div>
+
+                    <div class="standardPadding">
+                        <div id="StoreSubject" class="question organizer">اطلاعات فروشگاه</div>
+                        <div class="Input_In_Box organizer" id="StoreName">
+                            <span class="Header">  :نام فروشگاه</span>
+                            <p class="textBoxInput">
+                                <input type="text" id="StoreNameTxt" placeholder="نام فروشگاه خود را وارد کنید">
+                            </p>
+                            <div class="Alert" id="Alert_StoreName">لطفا نام فروشگاه را وارد نمایید</div>
+                        </div>
+                        <div class="Input_In_Box organizer" id="StoreTypeName">
+                            <span class="Header">  :نوع کالای فروشگاه </span>
+                            <p>
+                                <select multiple="multiple" placeholder="نوع محصولات فروشگاه" id="SlectBox">
+                                    @*<option value="1">لوازم دیجیتال</option>
+                                        <option value="2">لوازم خانگی</option>
+                                        <option value="3">آرایشی و بهداشتی</option>
+                                        <option value="4">لباس و پوشاک</option>
+                                        <option value="5">صنایع دستی و خانگی</option>
+                                        <option value="6">سایر موارد</option>*@
+
+                                </select>
+                            </p>
+                            <div class="Alert" id="Alert_SlectBox">لطفا نوع محصولات فروشگاه خود را انتخاب نمایید</div>
+                        </div>
+                    </div>
+
                     <div id="Back_StoreInfo" class="Back">مرحله قبل</div>
                     <div id="Next_communicationInfo" class="Forward ">مرحله بعد</div>
 
                 </div>
             </div>
-      
+
             <div id="ThiredBox" class="TestInner">
                 <div id="communication_information">
                     <div class='cover'><img src='~/Img/step_3.jpg' /></div>
@@ -287,8 +292,9 @@
             });
 
             //disable page 2 element
-            document.getElementById('UserNameTxt').disabled = true;
-            document.getElementById('PasswordTxt').disabled = true;
+            document.getElementById('StoreNameTxt').disabled = true;
+            $('#SlectBox')[0].sumo.disable();
+
             $('#Next_communicationInfo').unbind('click');
         });
 
@@ -387,19 +393,19 @@
             //    + "<div class='Alert' id='Alert_PhoneNumberTxt'>لطفا شماره تماس  را وارد نمایید</div>"
             //    + "</div>";
 
-           var txt = " <div class='Input_In_Box' id='CityAndState'>"
-                + " <span class='Header'>  :استان و شهرستان </span>"
-                + "<p class='textBoxInput'>"
-                + " <select  placeholder='استان' class='ForDistance' style='margin-bottom: 18px;' id='State'>"
-                + " </select> "
-                + " </p>"
-                + "<p class='textBoxInput'>"
-                + " <select placeholder='شهرستان' class='ForDistance_2' id='City'>"
-                + "<option selected disabled value='' >انتخاب نمایید</option>"
-                + " </select> "
-                + " </p>"
-                + "<div class='Alert' id='Alert_CityAndStateTxt'>ابتدا استان و سپس شهرستان خود را انتخاب نمایید</div>"
-                + "</div>";
+            var txt = " <div class='Input_In_Box' id='CityAndState'>"
+                 + " <span class='Header'>  :استان و شهرستان </span>"
+                 + "<p class='textBoxInput'>"
+                 + " <select  placeholder='استان' class='ForDistance' style='margin-bottom: 18px;' id='State'>"
+                 + " </select> "
+                 + " </p>"
+                 + "<p class='textBoxInput'>"
+                 + " <select placeholder='شهرستان' class='ForDistance_2' id='City'>"
+                 + "<option selected disabled value='' >انتخاب نمایید</option>"
+                 + " </select> "
+                 + " </p>"
+                 + "<div class='Alert' id='Alert_CityAndStateTxt'>ابتدا استان و سپس شهرستان خود را انتخاب نمایید</div>"
+                 + "</div>";
 
             txt += " <div class='Input_In_Box' id='StoreAddress'>"
                 + " <div class='Header' style='margin-top: 78px;'>  :آدرس فروشگاه </div>"
@@ -489,13 +495,13 @@
             //    + "</div>";
 
 
-          var  txt = " <div class='Input_In_Box' id='SiteName'>"
-                + " <span class='Header'>  :آدرس وب سایت یا کانال </span>"
-                + "<p class='textBoxInput'>"
-                + "<input type='text' id='SiteNameTxt' placeholder='آدرس سایت یا کانال خود را وارد کنید'>"
-                + " </p>"
-                + "<div class='Alert' id='Alert_SiteNameTxt'>لطفا آدرس سایت خود را وارد نمایید</div>"
-                + "</div>";
+            var txt = " <div class='Input_In_Box' id='SiteName'>"
+                  + " <span class='Header'>  :آدرس وب سایت یا کانال </span>"
+                  + "<p class='textBoxInput'>"
+                  + "<input type='text' id='SiteNameTxt' placeholder='آدرس سایت یا کانال خود را وارد کنید'>"
+                  + " </p>"
+                  + "<div class='Alert' id='Alert_SiteNameTxt'>لطفا آدرس سایت خود را وارد نمایید</div>"
+                  + "</div>";
 
 
             txt += " <div class='Input_In_Box' id='EmailAddres'>"
@@ -532,11 +538,33 @@
 
         //click Next Page Button  - Page 1 => 2
         $('#Next_TestInnerNext').on("click", function () {
+            checkUsernameExist();
             next1();
         });
 
         //click Next Page   - Page 1 => 2 || 3 => 2
         $('#secondBox').on("click", function (evt) {
+
+            //if (evt.target.id == "#Back_StoreInfo")
+            //    return;
+
+            //else if ($(evt.target).closest('#Back_StoreInfo').length)
+            //    return;
+
+            //if (evt.target.id == "#Next_communicationInfo")
+            //    return;
+
+            //else if ($(evt.target).closest('#Next_communicationInfo').length)
+            //    return;
+
+            //else if ($(evt.target).closest('#UserNameTxt').length)
+            //    return;
+
+            //else if ($(evt.target).closest('#PasswordTxt').length)
+            //    return;
+
+            //else
+            //    next1();
 
             if (evt.target.id == "#Back_StoreInfo")
                 return;
@@ -550,10 +578,10 @@
             else if ($(evt.target).closest('#Next_communicationInfo').length)
                 return;
 
-            else if ($(evt.target).closest('#UserNameTxt').length)
+            else if ($(evt.target).closest('#StoreNameTxt').length)
                 return;
 
-            else if ($(evt.target).closest('#PasswordTxt').length)
+            else if ($(evt.target).closest('#SlectBox').length)
                 return;
 
             else
@@ -573,10 +601,10 @@
             else if ($(evt.target).closest('#Next_TestInnerNext').length)
                 return;
 
-            else if ($(evt.target).closest('#StoreNameTxt').length)
+            else if ($(evt.target).closest('#UserNameTxt').length)
                 return;
 
-            else if ($(evt.target).closest('#SlectBox').length)
+            else if ($(evt.target).closest('#PasswordTxt').length)
                 return;
 
             else
@@ -610,7 +638,7 @@
                 //    return;
 
                 //else
-                    if ($(evt.target).closest('#State').length)
+                if ($(evt.target).closest('#State').length)
                     return;
 
                 else if ($(evt.target).closest('#City').length)
@@ -630,7 +658,7 @@
                 //if ($(evt.target).closest('#PhoneNumberTxt').length)
                 //    return;
 
-              //else 
+                //else
                 if ($(evt.target).closest('#SallerNameTxt').length)
                     return;
 
@@ -646,7 +674,7 @@
                 //    return;
 
                 //else
-                    if ($(evt.target).closest('#SiteNameTxt').length)
+                if ($(evt.target).closest('#SiteNameTxt').length)
                     return;
 
                 else if ($(evt.target).closest('#EmailAddresTxt').length)
@@ -675,24 +703,28 @@
         });
 
         //check username exist or not
-        $('#UserNameTxt').blur(function () {
-            checkUsernameExist();
+        //$('#UserNameTxt').blur(function () {
+        //    checkUsernameExist();
 
-        });
+        //});
 
         function checkUsernameExist() {
+            
+            $('#Alert_UserName_Exist').hide();
             if ($('#UserNameTxt').val().length >= 6 && $('#UserNameTxt').val().length <= 100) {
                 IsUsernameExsisted = "";
+                $('#Alert_UserName_Exist_Wait').fadeToggle();
                 $.ajax({
                     type: "GET",
                     //  url: "/Account/IsUsernameExsisted/",
-                   // data: { username: $('#UserNameTxt').val() },
+                    // data: { username: $('#UserNameTxt').val() },
                     url: "/Api/sms/register",
                     data: { phoneNumber: $('#UserNameTxt').val() },
                     success: function (result) {
 
-                        if (result.Response == true) {
+                        if (result.Success == false) {
                             IsUsernameExsisted = 'True';
+                            $('#Alert_UserName_Exist').html(result.Response);
                             $('#Alert_UserName_Exist').show();
                             $('#Alert_UserName_Exist_Wait').css("display", "none");
 
@@ -705,12 +737,12 @@
 
 
 
-                         //   IsUsernameExsisted = 'False';
+                            //   IsUsernameExsisted = 'False';
 
-                          //  if (WhantGoPage3 == "1") {
-                          //      WhantGoPage3 = "";
-                           //     next2();
-                          //  }
+                            //  if (WhantGoPage3 == "1") {
+                            //      WhantGoPage3 = "";
+                            //     next2();
+                            //  }
 
                         }
                     },
@@ -721,28 +753,24 @@
             }
         };
 
-        function next1() {
-            if ($('#StoreNameTxt').val().length <= 0) {
+        function next1() { 
+            if ($('#UserNameTxt').val().length != 11) {
 
-                $('#Alert_StoreName').css("display", "block");
+                $('#Alert_UserName').css("display", "block");
 
-                if ($('#SlectBox')[0].sumo.getSelStr() == "") {
-                    $('#Alert_SlectBox').css("display", "block");
-
+                if ($('#PasswordTxt').val().length <= 5) {
+                    $('#Alert_Password').css("display", "block");
                 }
-            } else if ($('#SlectBox')[0].sumo.getSelStr() == "") {
+            } else if ($('#PasswordTxt').val().length <= 5) {
 
-                $('#Alert_SlectBox').css("display", "block");
-
+                $('#Alert_Password').css("display", "block");
             } else {
                 if (ajaxresult != "") {
-                    //disable page 1 element
-                    document.getElementById('StoreNameTxt').disabled = true;
-                    $('#SlectBox')[0].sumo.disable();
 
-                    //enable Page 2 element
-                    document.getElementById('UserNameTxt').disabled = false;
-                    document.getElementById('PasswordTxt').disabled = false;
+                    //disable Page 1 element
+                    document.getElementById('UserNameTxt').disabled = true;
+                    document.getElementById('PasswordTxt').disabled = true;
+
                     $('#Next_communicationInfo').bind('click', function () {
                         WhantGoPage3 = "1";
                         next2();
@@ -762,7 +790,7 @@
                             $("#State").append($('<option>').text(value.Name).attr('value', value.Id));
                         });
                     } else if (KindOfStore == 2) {
-                       // document.getElementById('PhoneNumberTxt').disabled = true;
+                        // document.getElementById('PhoneNumberTxt').disabled = true;
                     } else if (KindOfStore == 3) {
                         //document.getElementById('PhoneNumberTxt').disabled = true;
                         document.getElementById('SiteNameTxt').disabled = true;
@@ -794,12 +822,14 @@
 
         function back1() {
             //enable page 1 element
-            document.getElementById('StoreNameTxt').disabled = false;
-            $('#SlectBox')[0].sumo.enable();
+            document.getElementById('UserNameTxt').disabled = false;
+            document.getElementById('PasswordTxt').disabled = false;
+          
 
             //disable page 2 element
-            document.getElementById('UserNameTxt').disabled = true;
-            document.getElementById('PasswordTxt').disabled = true;
+             document.getElementById('StoreNameTxt').disabled = true;
+             $('#SlectBox')[0].sumo.disable();
+
             $('#Next_communicationInfo').unbind('click');
 
             $('.TestInner').addClass('transfare');
@@ -812,27 +842,33 @@
         };
 
         function next2() {
+            if ($('#StoreNameTxt').val().length <= 0) {
 
-            if ($('#UserNameTxt').val().length !=11) {
+                $('#Alert_StoreName').css("display", "block");
 
-                $('#Alert_UserName').css("display", "block");
+                if ($('#SlectBox')[0].sumo.getSelStr() == "") {
+                    $('#Alert_SlectBox').css("display", "block");
 
-                if ($('#PasswordTxt').val().length <= 5) {
-                    $('#Alert_Password').css("display", "block");
                 }
-            } else if ($('#PasswordTxt').val().length <= 5) {
+            } else if ($('#SlectBox')[0].sumo.getSelStr() == "") {
 
-                $('#Alert_Password').css("display", "block");
+                $('#Alert_SlectBox').css("display", "block");
+
             } else {
 
                 ValidationPage3();
                 if (IsUsernameExsisted == 'False') {
-                    //disable Page 2 element
-                    document.getElementById('UserNameTxt').disabled = true;
-                    document.getElementById('PasswordTxt').disabled = true;
-                    $('#Next_communicationInfo').unbind('click');
+                   $('#Next_communicationInfo').unbind('click');
                     $('#Next_communicationInfo').unbind('click');
 
+
+                    //enable Page 1 element
+                    document.getElementById('UserNameTxt').disabled = false;
+                    document.getElementById('PasswordTxt').disabled = false;
+
+                    //disable page 2 element
+                    document.getElementById('StoreNameTxt').disabled = true;
+                    $('#SlectBox')[0].sumo.disable();
 
                     //enable page 3 element
                     if (KindOfStore == 1) {
@@ -858,7 +894,7 @@
 
                             //    }
                             //} else
-                                if ($('#StoreAddressTxt').val().length == "") {
+                            if ($('#StoreAddressTxt').val().length == "") {
 
                                 $('#Alert_StoreAddressTxt').css("display", "block");
                                 if ($("#City option:selected").val() == "") {
@@ -892,7 +928,7 @@
                         });
                     }
                     else if (KindOfStore == 3) {
-                      //  document.getElementById('PhoneNumberTxt').disabled = false;
+                        //  document.getElementById('PhoneNumberTxt').disabled = false;
                         document.getElementById('SiteNameTxt').disabled = false;
                         document.getElementById('EmailAddresTxt').disabled = false;
                         $('#Next_Finish').bind('click', function () {
@@ -923,12 +959,14 @@
         function back2() {
 
             //disable page 1 element
-            document.getElementById('StoreNameTxt').disabled = true;
-            $('#SlectBox')[0].sumo.disable();
+            document.getElementById('UserNameTxt').disabled = true;
+            document.getElementById('PasswordTxt').disabled = true;
 
             //enable Page 2 element
-            document.getElementById('UserNameTxt').disabled = false;
-            document.getElementById('PasswordTxt').disabled = false;
+           
+            document.getElementById('StoreNameTxt').disabled = false;
+            $('#SlectBox')[0].sumo.enable();
+
             $('#Next_communicationInfo').bind('click', function () {
                 WhantGoPage3 = "1";
                 next2();
@@ -936,17 +974,17 @@
 
             //disable page 3 element
             if (KindOfStore == 1) {
-              //  document.getElementById('PhoneNumberTxt').disabled = true;
+                //  document.getElementById('PhoneNumberTxt').disabled = true;
                 document.getElementById('StoreAddressTxt').disabled = true;
                 document.getElementById('State').disabled = true;
                 document.getElementById('City').disabled = true;
             }
             else if (KindOfStore == 2) {
-               // document.getElementById('PhoneNumberTxt').disabled = true;
+                // document.getElementById('PhoneNumberTxt').disabled = true;
                 document.getElementById('SallerNameTxt').disabled = true;
             }
             else if (KindOfStore == 3) {
-               // document.getElementById('PhoneNumberTxt').disabled = true;
+                // document.getElementById('PhoneNumberTxt').disabled = true;
                 document.getElementById('SiteNameTxt').disabled = true;
                 document.getElementById('EmailAddresTxt').disabled = true;
             }
@@ -1065,7 +1103,7 @@
                     "UserName": $('#UserNameTxt').val(),
                     "Password": $.md5($('#PasswordTxt').val()),
                     "StoreName": $('#StoreNameTxt').val(),
-                  //  "PhoneNumber": $('#PhoneNumberTxt').val(),
+                    //  "PhoneNumber": $('#PhoneNumberTxt').val(),
                     "StoreTypeCode": KindOfStore,
                     "CategoryCodes": selectCategori.join(','),
 
@@ -1087,9 +1125,9 @@
                     //    $('#Alert_PhoneNumberTxt').css("display", "block");
                     //}
                 }
-                //else if ($('#PhoneNumberTxt').val().length <= 0) {
-                //    $('#Alert_PhoneNumberTxt').css("display", "block");
-                //}
+                    //else if ($('#PhoneNumberTxt').val().length <= 0) {
+                    //    $('#Alert_PhoneNumberTxt').css("display", "block");
+                    //}
                 else {
 
                     TempData = {
@@ -1097,7 +1135,7 @@
                         "UserName": $('#UserNameTxt').val(),
                         "Password": $.md5($('#PasswordTxt').val()),
                         "StoreName": $('#StoreNameTxt').val(),
-                       // "PhoneNumber": $('#PhoneNumberTxt').val(),
+                        // "PhoneNumber": $('#PhoneNumberTxt').val(),
                         "StoreTypeCode": KindOfStore,
                         "CategoryCodes": selectCategori.join(','),
                         "SallerName": $('#SallerNameTxt').val(),
@@ -1128,9 +1166,9 @@
                     //    $('#Alert_PhoneNumberTxt').css("display", "block");
                     //}
                 }
-                //else if ($('#PhoneNumberTxt').val().length <= 0) {
-                //    $('#Alert_PhoneNumberTxt').css("display", "block");
-                //}
+                    //else if ($('#PhoneNumberTxt').val().length <= 0) {
+                    //    $('#Alert_PhoneNumberTxt').css("display", "block");
+                    //}
                 else {
 
                     TempData = {
@@ -1138,7 +1176,7 @@
                         "UserName": $('#UserNameTxt').val(),
                         "Password": $.md5($('#PasswordTxt').val()),
                         "StoreName": $('#StoreNameTxt').val(),
-                       // "PhoneNumber": $('#PhoneNumberTxt').val(),
+                        // "PhoneNumber": $('#PhoneNumberTxt').val(),
                         "StoreTypeCode": KindOfStore,
                         "CategoryCodes": selectCategori.join(','),
                         "Email": $('#EmailAddresTxt').val(),
@@ -1170,7 +1208,7 @@
                     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                     data: $.param(TempData),
                     success: function (result) {
-                         if (result.Success == true) {
+                        if (result.Success == true) {
 
                             $('#LogInLoadingHolder').hide();
                             $('#LogInSucseed').fadeIn(500);
@@ -1178,9 +1216,9 @@
 
                             //return to root
                             window.location = "/Seller/StoreManagment/SellerPanel";
-                         } else {
-                             $('#LogInLoadingHolder').hide();
-                             $('#LogInFaild').fadeIn(500);
+                        } else {
+                            $('#LogInLoadingHolder').hide();
+                            $('#LogInFaild').fadeIn(500);
 
                             console.log("خطا در ارسال اطلاعات");
                             send = "";
@@ -1259,7 +1297,7 @@
         //$('#communication_Holder').on('keydown', '#PhoneNumberTxt', function (e) {
         //    -1 !== $.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/.test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) || 37 == e.keyCode || 39 == e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) && (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault();
         //});
-        
+
         //chnage all persian number to en number
         String.prototype.toEnDigit = function () {
             return this.replace(/[\u06F0-\u06F9]+/g, function (digit) {
@@ -1290,9 +1328,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
