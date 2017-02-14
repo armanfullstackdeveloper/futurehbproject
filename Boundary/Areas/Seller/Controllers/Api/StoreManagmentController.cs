@@ -441,8 +441,12 @@ namespace Boundary.Areas.Seller.Controllers.Api
         }
 
         [Route("editStoreLogo")]
-        public IHttpActionResult EditStoreLogo(int top = 0, int left = 0, int bottom = 0, int right = 0)
+        public IHttpActionResult EditStoreLogo(int? top = 0, int? left = 0, int? bottom = 0, int? right = 0)
         {
+            top = top >= 0 ? top : 0;
+            left = left >= 0 ? left : 0;
+            bottom = bottom >= 0 ? bottom : 0;
+            right = right >= 0 ? right : 0;
             try
             {
                 #region getting store Id
@@ -503,7 +507,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     if (httpRequest.Files.Count > 0 && string.IsNullOrEmpty(rootPath) == false)
                     {
                         WebImage orginalImage = new WebImage(postedFile.InputStream);
-                        orginalImage.Crop(top, left, bottom, right);
+                        orginalImage.Crop((int)top, (int)left, (int)bottom, (int)right);
                         if (orginalImage.Width > 500 || orginalImage.Height > 500)
                         {
                             orginalImage.Resize(500, 500);
@@ -564,8 +568,12 @@ namespace Boundary.Areas.Seller.Controllers.Api
         }
 
         [Route("editSallerPhoto")]
-        public IHttpActionResult EditSallerPhoto(int top = 0, int left = 0, int bottom = 0, int right = 0)
+        public IHttpActionResult EditSallerPhoto(int? top = 0, int? left = 0, int? bottom = 0, int? right = 0)
         {
+            top = top >= 0 ? top : 0;
+            left = left >= 0 ? left : 0;
+            bottom = bottom >= 0 ? bottom : 0;
+            right = right >= 0 ? right : 0;
             try
             {
                 #region getting store Id
@@ -626,7 +634,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     if (httpRequest.Files.Count > 0 && string.IsNullOrEmpty(rootPath) == false)
                     {
                         WebImage orginalImage = new WebImage(postedFile.InputStream);
-                        orginalImage.Crop(top, left, bottom, right);
+                        orginalImage.Crop((int)top, (int)left, (int)bottom, (int)right);
                         if (orginalImage.Width > 500 || orginalImage.Height > 500)
                         {
                             orginalImage.Resize(500, 500);
