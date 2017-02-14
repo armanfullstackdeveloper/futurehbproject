@@ -108,12 +108,14 @@
                                 <div class="inputField orgenizer" id="Verify_Code" style="display:none;">
                                     <div class="label orgenizer">کد فعال سازی را وارد نمایید</div>
                                     <div class="textBoxInput orgenizer"><input type="text" id="VerifyTxt" placeholder="کد فعالسازی خود را وارد کنید" /></div>
-                                    <div class="Alert" id="Alert_Verify">کد فعالسازی صحیح نمی باشد</div>
-                                </div>
+                                 </div>
                             </div>
                         </div>
                         <div class="orgenizer">
-                            <div style="text-align:center" id="registerStatus"></div>
+                            <div style=" color:red; text-align:center" id="registerStatus"></div>
+                            <div style="display:none;color:red; text-align:center" id="Alert_UserName_Wait">لطفا کمی صبر کنید</div>
+                            <div style="display:none; color:#10de03;text-align:center" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
+
                             <div class="buttonPart redBack topMargin bottomShape"><button id="register">ثبت نام</button></div>
                         </div>
                     </div>
@@ -1692,13 +1694,9 @@
         var verifyLevel=0;
         //register
         $('#register').on("click", function () {
-            console.log(send)
+            $('#registerStatus').html('');
             if (send != '') return;
-
-            var form = $('#__AjaxAntiForgeryForm');
-            var token = $('input[name="__RequestVerificationToken"]', form).val();
-            var pass = $('#PasswordTxt').val() + '';
-            var confPass = $('#ConfirmPasswordTxt').val() + '';
+      
 
             if ($('#UserNameTxt').val().length < 11) {
                 $('#registerStatus').html('لطفا شماره تلفن صحیح خود را با 09 وارد نمایید');
@@ -1716,7 +1714,7 @@
             //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
             //    return;
             //}
-
+            $('#Alert_UserName_Wait').css("display", "block");
             send = 1;
 
             if (verifyLevel == 0) {
@@ -1724,16 +1722,16 @@
                     type: "GET",
                     url: "/Api/sms/register",
                     data: { phoneNumber: $('#UserNameTxt').val() },
-                    success: function (result) {
-                        sendAjax = 0;
+                    success: function (result) { 
+                        send = '';
                         if (result.Success == false) {
                             IsUsernameExsisted = 'True';
                             $('#registerStatus').html(result.Response);
-                             $('#Alert_UserName_Exist_Wait').css("display", "none");
+                            $('#Alert_UserName_Wait').css("display", "none");
 
                         }
                         else {
-                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+                            $('#Alert_UserName_Wait').css("display", "none");
                             $('#Alert_Verify_Send').slideToggle();
                             $('#Verify_Code').slideToggle();
                             verifyLevel = 1;
@@ -1755,19 +1753,22 @@
             $('#registerStatus').html('لطفا کمی صبر نمایید');
 
             TempData = {
-                "__RequestVerificationToken": token,
-                "UserName": $('#UserNameTxt').val(),
+                "phoneNumber": $('#UserNameTxt').val(),
                 "Password": $.md5($('#PasswordTxt').val()),
-                "ConfirmPassword": $.md5($('#PasswordTxt').val())
+                "ConfirmPassword": $.md5($('#PasswordTxt').val()),
+                "VerificationCode": $('#VerifyTxt').val()
+
             };
 
             $.ajax({
-                url: '/Account/RegisterMember',
+                url: '/Api/account/userregister',
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 data: $.param(TempData),
                 success: function (result) {
+                    $('#Alert_UserName_Wait').css("display", "none");
+
                     if (result.Success == true) {
                         $('#registerStatus').html('شما با موفقیت ثبت نام شدید');
 
