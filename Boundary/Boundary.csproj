@@ -515,10 +515,11 @@
     <Content Include="Img\MainPage\SignUp.png" />
     <Content Include="Img\MainPage\SlideNext.png" />
     <Content Include="Img\MainPage\SlidePrev.png" />
-    <Content Include="Img\MainPage\Slides\Slider_1.jpg" />
-    <Content Include="Img\MainPage\Slides\Slider_2.jpg" />
-    <Content Include="Img\MainPage\Slides\slider_3.jpg" />
-    <Content Include="Img\MainPage\Slides\slider_4.jpg" />
+    <Content Include="Img\MainPage\Slides\slide_1.jpg" />
+    <Content Include="Img\MainPage\Slides\slide_2.jpg" />
+    <Content Include="Img\MainPage\Slides\slide_3.jpg" />
+    <Content Include="Img\MainPage\Slides\slide_4.jpg" />
+    <Content Include="Img\MainPage\Slides\slide_5.jpg" />
     <Content Include="Img\MainPage\SpecialIconPointer.png" />
     <Content Include="Img\MainPage\Specials\CameraIcon.png" />
     <Content Include="Img\MainPage\Specials\MountPrice.png" />
@@ -608,10 +609,6 @@
     <Content Include="Img\ProductRegister\Sub_2.png" />
     <Content Include="Img\ProductRegister\Sub_3.png" />
     <Content Include="Img\ProductRegister\Sub_4.png" />
-    <Content Include="Img\slide_1.jpg" />
-    <Content Include="Img\slide_2.jpg" />
-    <Content Include="Img\slide_3.jpg" />
-    <Content Include="Img\slide_4.jpg" />
     <Content Include="Img\StoreRegister\back.png" />
     <Content Include="Img\StoreRegister\backbody.png" />
     <Content Include="Img\StoreRegister\cityback.png" />

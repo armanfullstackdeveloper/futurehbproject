@@ -55,7 +55,7 @@
                             <div id="CloseNear"></div>
                             <div id="MapNear">
 
-                                <div class="mapLoading" style="color:white" class="TextLoad">لطفا صبر کنید</div>
+                                <div class="mapLoading TextLoad" style="color:white" >لطفا صبر کنید</div>
 
                             </div>
 
@@ -669,6 +669,8 @@
                 var nameTemp = $('#SearchTxt').val().replace(/[&\/\\#~;_,+()$~%.!|=+'":*?<>{}-]/g, '');
                 if (nameTemp != '') {
                     name = nameTemp + '';
+                } else {
+                    name = '';
                 }
 
                 updateData();

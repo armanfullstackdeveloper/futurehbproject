@@ -525,6 +525,8 @@
                 var nameTemp = $('#SearchTxt').val().replace(/[&\/\\#~;_,+()$~%.!|=+'":*?<>{}-]/g, '');
                 if (nameTemp != '') {
                     name = nameTemp + '';
+                }else {
+                    name = '';
                 }
 
                 updateData();
