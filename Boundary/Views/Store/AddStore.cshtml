@@ -785,8 +785,8 @@
                     url: "/Api/account/userregister",
                     data: {
                         phoneNumber: $('#UserNameTxt').val(),
-                        Password: $('#PasswordTxt').val(),
-                        ConfirmPassword: $('#PasswordTxt').val(),
+                        Password: $.md5($('#PasswordTxt').val()),
+                        ConfirmPassword: $.md5($('#PasswordTxt').val()),
                         VerificationCode: $('#VerifyTxt').val(),
                     },
                     success: function (result) {

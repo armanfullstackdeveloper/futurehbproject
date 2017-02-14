@@ -100,9 +100,15 @@
                                     <div class="textBoxInput orgenizer"><input type="password" id="PasswordTxt" /></div>
                                 </div>
 
-                                <div class="inputField orgenizer">
+                                @*<div class="inputField orgenizer">
                                     <div class="label orgenizer">تکرار رمز عبور</div>
                                     <div class="textBoxInput orgenizer"><input type="password" id="ConfirmPasswordTxt" /></div>
+                                </div>*@
+
+                                <div class="inputField orgenizer" id="Verify_Code" style="display:none;">
+                                    <div class="label orgenizer">کد فعال سازی را وارد نمایید</div>
+                                    <div class="textBoxInput orgenizer"><input type="text" id="VerifyTxt" placeholder="کد فعالسازی خود را وارد کنید" /></div>
+                                    <div class="Alert" id="Alert_Verify">کد فعالسازی صحیح نمی باشد</div>
                                 </div>
                             </div>
                         </div>
@@ -1377,6 +1383,7 @@
                             </div>
                         </div>*@
                 </div>
+           </div>
         </header>
     </div>
 
@@ -1494,7 +1501,7 @@
         $(function () {
             //setup before functions
             var typingTimer; //timer identifier
-            var doneTypingInterval = 1000; //time in ms, 1 second for example
+            var doneTypingInterval = 500; //time in ms, 1 second for example
             var $input = $('#SearchTextBox');
 
             //on keyup, start the countdown
@@ -1682,6 +1689,7 @@
 
         });
 
+        var verifyLevel=0;
         //register
         $('#register').on("click", function () {
             console.log(send)
@@ -1699,25 +1707,58 @@
             else if ($('#PasswordTxt').val().length < 6) {
                 $('#registerStatus').html('لطفا کلمه عبور خود را بیشتر از 6 کارکتر وارد نمایید');
                 return;
-            }
-            else if ($('#ConfirmPasswordTxt').val().length < 6) {
-                $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
-                return;
-            }
-            else if (confPass != pass) {
-                $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
-                return;
-            }
+             }
+            //else if ($('#ConfirmPasswordTxt').val().length < 6) {
+            //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
+            //    return;
+            //}
+            //else if (confPass != pass) {
+            //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
+            //    return;
+            //}
 
+            send = 1;
+
+            if (verifyLevel == 0) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Api/sms/register",
+                    data: { phoneNumber: $('#UserNameTxt').val() },
+                    success: function (result) {
+                        sendAjax = 0;
+                        if (result.Success == false) {
+                            IsUsernameExsisted = 'True';
+                            $('#registerStatus').html(result.Response);
+                             $('#Alert_UserName_Exist_Wait').css("display", "none");
+
+                        }
+                        else {
+                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+                            $('#Alert_Verify_Send').slideToggle();
+                            $('#Verify_Code').slideToggle();
+                            verifyLevel = 1;
+                            IsUsernameExsisted = 'False';
+
+                            //  if (WhantGoPage3 == "1") {
+                            //      WhantGoPage3 = "";
+                            //     next2();
+                            //  }
+
+                        }
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+             }else{
 
             $('#registerStatus').html('لطفا کمی صبر نمایید');
-            send = 1;
 
             TempData = {
                 "__RequestVerificationToken": token,
                 "UserName": $('#UserNameTxt').val(),
                 "Password": $.md5($('#PasswordTxt').val()),
-                "ConfirmPassword": $.md5($('#ConfirmPasswordTxt').val())
+                "ConfirmPassword": $.md5($('#PasswordTxt').val())
             };
 
             $.ajax({
@@ -1745,6 +1786,7 @@
                     send = "";
                 }
             });
+            }
         })
 
 
