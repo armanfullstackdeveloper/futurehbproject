@@ -36,8 +36,8 @@
                     homePage = mainSession.Store.HomePage;
                 }
                 <a href="~/shop?id=@storeCode">
-                <div class="goToStoreAdmin">فروشگاه شما</div>
-            </a>
+                    <div class="goToStoreAdmin">فروشگاه شما</div>
+                </a>
             }
         </div>
     }
@@ -101,14 +101,14 @@
                                 </div>
 
                                 @*<div class="inputField orgenizer">
-                                    <div class="label orgenizer">تکرار رمز عبور</div>
-                                    <div class="textBoxInput orgenizer"><input type="password" id="ConfirmPasswordTxt" /></div>
-                                </div>*@
+                                        <div class="label orgenizer">تکرار رمز عبور</div>
+                                        <div class="textBoxInput orgenizer"><input type="password" id="ConfirmPasswordTxt" /></div>
+                                    </div>*@
 
                                 <div class="inputField orgenizer" id="Verify_Code" style="display:none;">
                                     <div class="label orgenizer">کد فعال سازی را وارد نمایید</div>
                                     <div class="textBoxInput orgenizer"><input type="text" id="VerifyTxt" placeholder="کد فعالسازی خود را وارد کنید" /></div>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                         <div class="orgenizer">
@@ -1385,7 +1385,7 @@
                             </div>
                         </div>*@
                 </div>
-           </div>
+            </div>
         </header>
     </div>
 
@@ -1691,12 +1691,12 @@
 
         });
 
-        var verifyLevel=0;
+        var verifyLevel = 0;
         //register
         $('#register').on("click", function () {
             $('#registerStatus').html('');
             if (send != '') return;
-      
+
 
             if ($('#UserNameTxt').val().length < 11) {
                 $('#registerStatus').html('لطفا شماره تلفن صحیح خود را با 09 وارد نمایید');
@@ -1705,7 +1705,7 @@
             else if ($('#PasswordTxt').val().length < 6) {
                 $('#registerStatus').html('لطفا کلمه عبور خود را بیشتر از 6 کارکتر وارد نمایید');
                 return;
-             }
+            }
             //else if ($('#ConfirmPasswordTxt').val().length < 6) {
             //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
             //    return;
@@ -1722,10 +1722,9 @@
                     type: "GET",
                     url: "/Api/sms/register",
                     data: { phoneNumber: $('#UserNameTxt').val() },
-                    success: function (result) { 
+                    success: function (result) {
                         send = '';
                         if (result.Success == false) {
-                            IsUsernameExsisted = 'True';
                             $('#registerStatus').html(result.Response);
                             $('#Alert_UserName_Wait').css("display", "none");
 
@@ -1735,12 +1734,6 @@
                             $('#Alert_Verify_Send').slideToggle();
                             $('#Verify_Code').slideToggle();
                             verifyLevel = 1;
-                            IsUsernameExsisted = 'False';
-
-                            //  if (WhantGoPage3 == "1") {
-                            //      WhantGoPage3 = "";
-                            //     next2();
-                            //  }
 
                         }
                     },
@@ -1748,20 +1741,59 @@
                         console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                     }
                 });
-             }else{
+            } else {
 
-          //  $('#registerStatus').html('لطفا کمی صبر نمایید');
+                //  $('#registerStatus').html('لطفا کمی صبر نمایید');
+
+                TempData = {
+                    "phoneNumber": $('#UserNameTxt').val(),
+                    "Password": $.md5($('#PasswordTxt').val()),
+                    "ConfirmPassword": $.md5($('#PasswordTxt').val()),
+                    "VerificationCode": $('#VerifyTxt').val()
+
+                };
+
+                $.ajax({
+                    url: '/Api/account/userregister',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    data: $.param(TempData),
+                    success: function (result) {
+
+                        if (result.Success == true) {
+                            SaveToUser()
+
+                        } else {
+                            $('#Alert_UserName_Wait').css("display", "none");
+                            $('#registerStatus').html('ثبت نام شما با خطا مواجه شد');
+                            //location.reload();
+                            send = "";
+                        }
+                        //console.log("فروشگاه شما با موفقیت ثبت شد");
+                    },
+                    error: function () {
+                        $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                        send = "";
+                    }
+                });
+            }
+        })
+
+        function SaveToUser() {
+
+            var form = $('#__AjaxAntiForgeryForm');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
 
             TempData = {
-                "phoneNumber": $('#UserNameTxt').val(),
+                "__RequestVerificationToken": token,
+                "UserName": $('#UserNameTxt').val(),
                 "Password": $.md5($('#PasswordTxt').val()),
-                "ConfirmPassword": $.md5($('#PasswordTxt').val()),
-                "VerificationCode": $('#VerifyTxt').val()
-
+                "ConfirmPassword": $.md5($('#PasswordTxt').val())
             };
 
             $.ajax({
-                url: '/Api/account/userregister',
+                url: '/Account/RegisterMember',
                 type: 'POST',
                 dataType: "json",
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1770,7 +1802,7 @@
                     $('#Alert_UserName_Wait').css("display", "none");
 
                     if (result.Success == true) {
-                        $('#registerStatus').html('ثبت نام شما با موفقت انجام شد');
+                        $('#registerStatus').html('شما با موفقیت ثبت نام شدید');
 
                         //return to root
                         window.location = "/";
@@ -1786,11 +1818,9 @@
                     $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                     send = "";
                 }
-            });
-            }
-        })
+            }); 
 
-
+        }
 
         $('#SignUp').on('click', function () {
             $('.registerBox').show();
