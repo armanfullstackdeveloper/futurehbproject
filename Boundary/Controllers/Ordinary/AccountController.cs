@@ -79,7 +79,7 @@ namespace Boundary.Controllers.Ordinary
                     {
                         Id = user.Id,
                         Email = user.Email,
-                        RoleCode = user.RoleCode,
+                        RoleCode = ERole.Member,
                         Role = user.Role,
                         Password = user.Password,
                         IsActive = user.IsActive,
@@ -379,7 +379,7 @@ namespace Boundary.Controllers.Ordinary
                     {
                         Id = user.Id,
                         Email = user.Email,
-                        RoleCode = user.RoleCode,
+                        RoleCode = ERole.Seller,
                         Role = user.Role,
                         Password = user.Password,
                         IsActive = user.IsActive,

@@ -226,12 +226,12 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             foreach (long attrCode in model.Values)
                             {
                                 new ProductSearchableAttributeValueBL().SaveWithoutCommit(
-                             new ProductSearchableAttributeValue()
-                             {
-                                 AttributeCode = model.Code,
-                                 AttributeValueCode = attrCode,
-                                 ProductCode = registeredProductCode
-                             }, session);
+                                     new ProductSearchableAttributeValue()
+                                     {
+                                         AttributeCode = model.Code,
+                                         AttributeValueCode = attrCode,
+                                         ProductCode = registeredProductCode
+                                     }, session);
 
                                 //in sharto mizaram ke nashe baraye onaii ke multiSelect nistan, chand value ezafe kard
                                 if (multiSelectAttr.Contains(model.Code) == false)
@@ -853,10 +853,14 @@ namespace Boundary.Areas.Seller.Controllers.Api
             }
         }
 
-        
+
         [Route("uploadimage")]
-        public IHttpActionResult PostFile(long productId, bool isMainImg, int top = 0, int left = 0, int bottom = 0, int right = 0)
+        public IHttpActionResult PostFile(long productId, bool isMainImg, int? top = 0, int? left = 0, int? bottom = 0, int? right = 0)
         {
+            top = top >= 0 ? top : 0;
+            left = left >= 0 ? left : 0;
+            bottom = bottom >= 0 ? bottom : 0;
+            right = right >= 0 ? right : 0;
             if (productId <= 0)
                 return Json(JsonResultHelper.FailedResultWithMessage());
 
@@ -879,7 +883,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
                 var httpRequest = HttpContext.Current.Request;
 
-                if (httpRequest.Files.Count > 0)
+                if (httpRequest != null && httpRequest.Files != null && httpRequest.Files.Count > 0)
                 {
                     foreach (string file in httpRequest.Files)
                     {
@@ -909,7 +913,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                                                                        + path + "/" + store.StoreCode +
                                                                                        "/Products/" + productId);
                         WebImage orginlImage = new WebImage(recivedFile.InputStream);
-                        orginlImage = orginlImage.Crop(top, left, bottom, right);
+                        orginlImage = orginlImage.Crop((int)top, (int)left, (int)bottom, (int)right);
 
                         //use resizedImg for searchPage
                         string resizedImgFilePath = null;
@@ -977,7 +981,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                 product.RegisterDate = PersianDateTime.Now.Date.ToInt();
                                 new ProductBL().Update(product);
 
-                                ImageHelper.Resise(imageAddress, StaticNemberic.MaximumImageHeightSize, StaticNemberic.MaximumImageWidthSize, extension.Replace(".",""));                            
+                                ImageHelper.Resise(imageAddress, StaticNemberic.MaximumImageHeightSize, StaticNemberic.MaximumImageWidthSize, extension.Replace(".", ""));
 
                                 dynamic jsonObject = new JObject();
                                 jsonObject.ImageAddress = rootPath;
@@ -997,7 +1001,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                                 product.RegisterDate = PersianDateTime.Now.Date.ToInt();
                                 new ProductBL().Update(product);
 
-                                ImageHelper.Resise(imageAddress,StaticNemberic.MaximumImageHeightSize,StaticNemberic.MaximumImageWidthSize, extension.Replace(".", ""));
+                                ImageHelper.Resise(imageAddress, StaticNemberic.MaximumImageHeightSize, StaticNemberic.MaximumImageWidthSize, extension.Replace(".", ""));
 
                                 dynamic jsonObject = new JObject();
                                 jsonObject.ImageAddress = rootPath;
@@ -1007,7 +1011,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         }
                     }
                 }
-                return Json(JsonResultHelper.FailedResultWithMessage());
+                return Json(JsonResultHelper.FailedResultWithMessage("تصویری ارسال نشده است"));
             }
             catch (MyExceptionHandler exp1)
             {

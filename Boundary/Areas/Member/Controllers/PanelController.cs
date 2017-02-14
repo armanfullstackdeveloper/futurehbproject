@@ -52,7 +52,7 @@ namespace Boundary.Areas.Member.Controllers
                     {
                         Id = m.Id,
                         Balance = m.Balance,
-                        CityCode = m.CityCode,
+                        CityCode = m.CityCode == 0 ? null : m.CityCode,
                         City = (m.CityCode != null) ? new CityBL().SelectOne((long)m.CityCode).Name : "-",
                         Email = new UserBL().GetById(m.UserCode).Email,
                         Latitude = m.Latitude,
@@ -114,7 +114,7 @@ namespace Boundary.Areas.Member.Controllers
                 if (m != null)
                 {
                     m.Name = model.Name;
-                    m.CityCode = model.CityCode;
+                    m.CityCode = model.CityCode == 0 ? null : model.CityCode;
                     //m.Email = model.Email;
                     m.Latitude = model.Latitude;
                     m.Longitude = model.Longitude;
@@ -131,7 +131,7 @@ namespace Boundary.Areas.Member.Controllers
                         user.Email = model.Email;
                         new UserBL().Update(user);
                     }
-                        
+
 
                     bool result = new MemberBL().Update(m);
                     if (result)

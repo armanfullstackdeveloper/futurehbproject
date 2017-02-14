@@ -55,7 +55,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 parameters.Add("@CommercialCode", storeRegister.CommercialCode);
                 parameters.Add("@ReagentPhoneNumber", storeRegister.ReagentPhoneNumber);
                 parameters.Add("@UserCode", userCode);
-                parameters.Add("@CityCode", storeRegister.CityCode);
+                parameters.Add("@CityCode", storeRegister.CityCode == 0 ? null : storeRegister.CityCode);
                 parameters.Add("@Place", storeRegister.Place);
                 parameters.Add("@Latitude", storeRegister.Latitude);
                 parameters.Add("@Longitude", storeRegister.Longitude);
@@ -90,7 +90,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     {
                         Name = HelperFunctionInBL.GetVariableName(() => userCode),
                         Value = userCode.ToString()
-                    },                
+                    },
                 };
                 throw new MyExceptionHandler(ex.ToString(), ex, JArray.FromObject(lst).ToString());
             }
@@ -137,14 +137,14 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<StoreSummery> GetNewest(long? cityCode, int? pageNumber, int? rowspPage)
+        public List<StoreSummery> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
                 _db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
                 parameters.Add("@cityCode", cityCode);
-                pageNumber = pageNumber ?? 1;
+                pageNumber = (pageNumber == 0 ? 1 : pageNumber) ?? 1;
                 parameters.Add("@PageNumber", pageNumber);
                 rowspPage = rowspPage ?? 12;
                 parameters.Add("@RowspPage", rowspPage);
@@ -339,7 +339,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 {
                     CityCode = store.CityCode,
                     CommercialCode = store.CommercialCode,
-                    Email = string.IsNullOrEmpty(email)?"": email,
+                    Email = string.IsNullOrEmpty(email) ? "" : email,
                     ReagentPhoneNumber = store.ReagentPhoneNumber,
                     Latitude = store.Latitude,
                     Longitude = store.Longitude,
@@ -379,14 +379,14 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 storedStore.Place = storeEditDataModel.Place;
                 storedStore.Comments = storeEditDataModel.StoreComments;
                 storedStore.Website = storeEditDataModel.Website;
-                storedStore.StoreTypeCode = (byte) (storeEditDataModel.StoreTypeCode!=0? storeEditDataModel.StoreTypeCode : storedStore.StoreTypeCode);
+                storedStore.StoreTypeCode = (byte)(storeEditDataModel.StoreTypeCode != 0 ? storeEditDataModel.StoreTypeCode : storedStore.StoreTypeCode);
                 storedStore.Name = storeEditDataModel.StoreName;
                 storedStore.HomePage = storeEditDataModel.HomePage;
                 new StoreBL().UpdateWhitOutCommitTransaction(storedStore, session);
 
                 //for email
-                var user=new UserBL().GetById(storedStore.UserCode);
-                user.Email= storeEditDataModel.Email;
+                var user = new UserBL().GetById(storedStore.UserCode);
+                user.Email = storeEditDataModel.Email;
                 new UserBL().Update(user);
 
                 //age category hash khali omad hamon ghabli ro hefz kon
@@ -411,7 +411,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
                 foreach (decimal item in lstTell)
                 {
-                    if (storeEditDataModel.PhoneNumbers!=null &&!storeEditDataModel.PhoneNumbers.Contains(item))
+                    if (storeEditDataModel.PhoneNumbers != null && !storeEditDataModel.PhoneNumbers.Contains(item))
                         new StoreTellBL().Delete(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
                 }
                 if (storeEditDataModel.PhoneNumbers != null)
@@ -486,18 +486,18 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<long> SearchForAdmin(string codeOrName, string username, byte? storeType, EStoreStatus? status, 
-            int? pageNumber=null, int? rowspPage=null)
+        public List<long> SearchForAdmin(string codeOrName, string username, byte? storeType, EStoreStatus? status,
+            int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
                 IDbConnection db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
-                parameters.Add("@codeOrName", string.IsNullOrEmpty(codeOrName)?null:codeOrName);
+                parameters.Add("@codeOrName", string.IsNullOrEmpty(codeOrName) ? null : codeOrName);
                 parameters.Add("@username", string.IsNullOrEmpty(username) ? null : username);
                 parameters.Add("@storeType", storeType);
                 parameters.Add("@status", status);
-                parameters.Add("@pageNumber", (pageNumber != 0 && pageNumber > 0) ? pageNumber : 1 );
+                parameters.Add("@pageNumber", (pageNumber != 0 && pageNumber > 0) ? pageNumber : 1);
                 parameters.Add("@rowspPage", (rowspPage != 0 && rowspPage > 0) ? rowspPage : StaticNembericInBL.CountOfItemsInAdminPages);
 
                 List<long> storeCodes = db.Query<long>(@"select Id from [dbo].[Store] where
@@ -519,45 +519,45 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public bool AfterStatusChange(string userCode,long storeCode, EStoreStatus status, ISession session)
+        public bool AfterStatusChange(string userCode, long storeCode, EStoreStatus status, ISession session)
         {
             try
             {
                 switch (status)
                 {
                     case EStoreStatus.Active:
-                    {
-                        //فعال شدن تمام محصولاتی که معلق بوده اند
-                        List<Product> result = session.Query<Product>().Where(p => p.StoreCode == storeCode &&
-                            p.Status==EProductStatus.Suspended).ToList();
-                        foreach (Product item in result)
                         {
-                            item.Status = EProductStatus.Active;
-                            new ProductBL().UpdateWhitOutCommitTransaction(item, session);
-                        }
+                            //فعال شدن تمام محصولاتی که معلق بوده اند
+                            List<Product> result = session.Query<Product>().Where(p => p.StoreCode == storeCode &&
+                                p.Status == EProductStatus.Suspended).ToList();
+                            foreach (Product item in result)
+                            {
+                                item.Status = EProductStatus.Active;
+                                new ProductBL().UpdateWhitOutCommitTransaction(item, session);
+                            }
 
-                        //فعال سازی کاربر جهت دسترسی به پنل
-                        User user = new UserBL().GetById(userCode);
-                        user.IsActive = true;
-                        new UserBL().Update(user);
-                    }
+                            //فعال سازی کاربر جهت دسترسی به پنل
+                            User user = new UserBL().GetById(userCode);
+                            user.IsActive = true;
+                            new UserBL().Update(user);
+                        }
                         break;
                     case EStoreStatus.Inactive:
-                    {
-                        //معلق شدن تمام محصولات فعال
-                        List<Product> result = session.Query<Product>().Where(p => p.StoreCode == storeCode &&
-                            p.Status == EProductStatus.Active).ToList();
-                        foreach (Product item in result)
                         {
-                            item.Status = EProductStatus.Suspended;
-                            new ProductBL().UpdateWhitOutCommitTransaction(item, session);
-                        }
+                            //معلق شدن تمام محصولات فعال
+                            List<Product> result = session.Query<Product>().Where(p => p.StoreCode == storeCode &&
+                                p.Status == EProductStatus.Active).ToList();
+                            foreach (Product item in result)
+                            {
+                                item.Status = EProductStatus.Suspended;
+                                new ProductBL().UpdateWhitOutCommitTransaction(item, session);
+                            }
 
-                        //غیر فعال سازی کاربر جهت عدم دسترسی به پنل
-                        User user = new UserBL().GetById(userCode);
-                        user.IsActive = false;
-                        new UserBL().Update(user);
-                    }
+                            //غیر فعال سازی کاربر جهت عدم دسترسی به پنل
+                            User user = new UserBL().GetById(userCode);
+                            user.IsActive = false;
+                            new UserBL().Update(user);
+                        }
                         break;
                 }
                 return true;
@@ -673,7 +673,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     ImageAddressList = imagesWantToDelete
                 };
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 if (session != null)
                     session.Transaction.Rollback();

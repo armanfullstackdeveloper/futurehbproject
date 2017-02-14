@@ -328,8 +328,12 @@ namespace Boundary.Areas.Seller.Controllers.Api
         }
 
         [Route("editStorePhoto")]
-        public IHttpActionResult EditStoreMainPhoto(int top = 0, int left = 0, int bottom = 0, int right = 0)
+        public IHttpActionResult EditStoreMainPhoto(int? top = 0, int? left = 0, int? bottom = 0, int? right = 0)
         {
+            top = top >= 0 ? top : 0;
+            left = left >= 0 ? left : 0;
+            bottom = bottom >= 0 ? bottom : 0;
+            right = right >= 0 ? right : 0;
             try
             {
                 #region getting store Id
@@ -390,7 +394,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     if (httpRequest.Files.Count > 0 && string.IsNullOrEmpty(rootPath) == false)
                     {
                         WebImage orginalImage = new WebImage(postedFile.InputStream);
-                        orginalImage.Crop(top, left, bottom, right);
+                        orginalImage.Crop((int)top, (int)left, (int)bottom, (int)right);
                         if (orginalImage.Width > 1360 || orginalImage.Height > 380)
                         {
                             orginalImage.Resize(1360, 380);
