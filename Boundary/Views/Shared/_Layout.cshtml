@@ -1750,7 +1750,7 @@
                 });
              }else{
 
-            $('#registerStatus').html('لطفا کمی صبر نمایید');
+          //  $('#registerStatus').html('لطفا کمی صبر نمایید');
 
             TempData = {
                 "phoneNumber": $('#UserNameTxt').val(),
@@ -1770,7 +1770,7 @@
                     $('#Alert_UserName_Wait').css("display", "none");
 
                     if (result.Success == true) {
-                        $('#registerStatus').html('شما با موفقیت ثبت نام شدید');
+                        $('#registerStatus').html('ثبت نام شما با موفقت انجام شد');
 
                         //return to root
                         window.location = "/";
