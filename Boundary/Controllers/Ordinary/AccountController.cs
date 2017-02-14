@@ -79,8 +79,8 @@ namespace Boundary.Controllers.Ordinary
                     {
                         Id = user.Id,
                         Email = user.Email,
-                        RoleCode = user.RoleCode,
-                        Role = user.Role,
+                        RoleCode = ERole.Member,
+                        Role = StaticRole.Member,
                         Password = user.Password,
                         IsActive = user.IsActive,
                         UserName = user.UserName,
@@ -379,8 +379,8 @@ namespace Boundary.Controllers.Ordinary
                     {
                         Id = user.Id,
                         Email = user.Email,
-                        RoleCode = user.RoleCode,
-                        Role = user.Role,
+                        RoleCode = ERole.Seller,
+                        Role = StaticRole.Seller,
                         Password = user.Password,
                         IsActive = user.IsActive,
                         UserName = user.UserName,

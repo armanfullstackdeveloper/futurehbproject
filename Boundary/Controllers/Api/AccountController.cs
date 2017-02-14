@@ -51,8 +51,8 @@ namespace Boundary.Controllers.Api
             try
             {
                 //check konam az ghabl sabtenam karde ya na
-                bool exist = new UserBL().IfUsernameExist(userRegisterData.PhoneNumber);
-                if (exist)
+                User findUser = new UserBL().GetByUserName(userRegisterData.PhoneNumber); 
+                if (user != null && user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage("تلفن همراه وارد شده، از قبل موجود می باشد"));
                 //check konam verifacationCode ghablan to sms sabt shode ya na(be tartibe nozoli, akhari)
                 string verificationCode = new SmsBL().VerificationCode(Convert.ToInt64(userRegisterData.PhoneNumber.Remove(0, 1)));
