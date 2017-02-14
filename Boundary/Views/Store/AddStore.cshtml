@@ -113,29 +113,32 @@
                             </p>
                             <div class="Alert" id="Alert_UserName">لطفا شماره تلفن همراه خود را با 09 وارد نمایید</div>
                             <div class="Alert" id="Alert_UserName_Exist"> این شماره تلفن قبلا ثبت شده است</div>
-                            <div class="Alert" id="Alert_UserName_Exist_Wait">لطفا صبر کنید</div>
-                            <div class="Alert" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
-
                         </div>
-                        @*<div>
-                            <input type="button" style="float:left;" onclick="checkUsernameExist();" value="تایید شماره تلفن" />
-                        </div>*@
-                        <div class="Input_In_Box" id="Verify_Code" style="display:none; margin-top: 16px;">
-                            <span class="Header">: کد فعال سازی </span>
-                            <p class="textBoxInput">
-                                <input type="password" id="VerifyTxt" class="" placeholder="کد فعالسازی خود را وارد کنید">
-                            </p>
-                            <div class="Alert" id="Alert_Verify">کد فعالسازی صحیح نمی باشد</div>
-
-                        </div>
-                        <div class="Input_In_Box" id="RegisterTypeName" style="display:none; margin-top: 16px;">
+                        <div class="Input_In_Box" id="RegisterTypeName" style="  margin-top: 16px;">
                             <span class="Header">: رمز عبور </span>
                             <p class="textBoxInput">
                                 <input type="password" id="PasswordTxt" class="" placeholder="رمز عبور خود را وارد کنید">
                             </p>
                             <div class="Alert" id="Alert_Password">لطفا رمز عبور خود را بیش از 6 حرف انتخاب نمایید</div>
+                            <div class="Alert" style="color:#10de03;" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
+                        </div>
+                        @*<div>
+                                <input type="button" style="float:left;" onclick="checkUsernameExist();" value="تایید شماره تلفن" />
+                            </div>*@
+                        <div class="Input_In_Box" id="Verify_Code" style="display:none; margin-top: 16px;">
+                            <span class="Header">: کد فعال سازی را وارد نمایید </span>
+                            <p class="textBoxInput">
+                                <input type="text" id="VerifyTxt" class="" placeholder="کد فعالسازی خود را وارد کنید">
+                            </p>
+                            <div class="Alert" id="Alert_Verify">کد فعالسازی صحیح نمی باشد</div>
 
                         </div>
+
+                        <div class="Input_In_Box">
+                            <div class="Alert" id="Alert_UserName_Exist_Wait">لطفا صبر کنید</div>
+                        </div>
+
+
                     </div>
 
                     <div id="Back_Question" class="Back">مرحله قبل</div>
@@ -173,7 +176,8 @@
                         </div>
                     </div>
 
-                    <div id="Back_StoreInfo" class="Back">مرحله قبل</div>
+                    @*<div id="Back_StoreInfo" class="Back">مرحله قبل</div>*@
+                    <div class="Back">مرحله قبل</div>
                     <div id="Next_communicationInfo" class="Forward ">مرحله بعد</div>
 
                 </div>
@@ -242,6 +246,7 @@
         var TempData = "";
         var ajaxresult = "";
         var latlngJson = "";
+        var verifyLevel = 0;
         var Categories = $.parseJSON('@Html.Raw(Json.Encode(Model))');
 
         $(document).ready(function () {
@@ -538,8 +543,25 @@
 
         //click Next Page Button  - Page 1 => 2
         $('#Next_TestInnerNext').on("click", function () {
-            checkUsernameExist();
-            next1();
+            if (verifyLevel == 0) {
+
+                if ($('#UserNameTxt').val().length != 11) {
+
+                    $('#Alert_UserName').css("display", "block");
+
+                    if ($('#PasswordTxt').val().length <= 5) {
+                        $('#Alert_Password').css("display", "block");
+                    }
+                } else if ($('#PasswordTxt').val().length <= 5) {
+
+                    $('#Alert_Password').css("display", "block");
+                } else {
+                    checkUsernameExist();
+                }
+            }
+            else {
+                verifyNumber();
+            }
         });
 
         //click Next Page   - Page 1 => 2 || 3 => 2
@@ -583,7 +605,8 @@
 
             else if ($(evt.target).closest('#SlectBox').length)
                 return;
-
+            else if (verifyLevel!=2)
+                return;
             else
                 next1();
         });
@@ -607,8 +630,7 @@
             else if ($(evt.target).closest('#PasswordTxt').length)
                 return;
 
-            else
-                back1();
+           // else back1();
         });
 
         //Next Page click - Page 2 => 3  ++  also in the next1 & back2 are crated
@@ -707,37 +729,35 @@
         //    checkUsernameExist();
 
         //});
-
+        var sendAjax = 0;
         function checkUsernameExist() {
-            
-            $('#Alert_UserName_Exist').hide();
-            if ($('#UserNameTxt').val().length >= 6 && $('#UserNameTxt').val().length <= 100) {
+            if (sendAjax == 0) {
+                sendAjax = 1;
+                $('#Alert_Password').css("display", "none");
+                $('#Alert_UserName').css("display", "none");
+                $('#Alert_UserName_Exist').hide();
+
                 IsUsernameExsisted = "";
                 $('#Alert_UserName_Exist_Wait').fadeToggle();
                 $.ajax({
                     type: "GET",
-                    //  url: "/Account/IsUsernameExsisted/",
-                    // data: { username: $('#UserNameTxt').val() },
                     url: "/Api/sms/register",
                     data: { phoneNumber: $('#UserNameTxt').val() },
                     success: function (result) {
-
+                        sendAjax = 0;
                         if (result.Success == false) {
                             IsUsernameExsisted = 'True';
                             $('#Alert_UserName_Exist').html(result.Response);
                             $('#Alert_UserName_Exist').show();
                             $('#Alert_UserName_Exist_Wait').css("display", "none");
 
-
                         }
                         else {
                             $('#Alert_UserName_Exist_Wait').css("display", "none");
-
+                            $('#Alert_Verify_Send').slideToggle();
                             $('#Verify_Code').slideToggle();
-
-
-
-                            //   IsUsernameExsisted = 'False';
+                            verifyLevel = 1;
+                            IsUsernameExsisted = 'False';
 
                             //  if (WhantGoPage3 == "1") {
                             //      WhantGoPage3 = "";
@@ -751,9 +771,51 @@
                     }
                 });
             }
+
         };
 
-        function next1() { 
+        function verifyNumber() {
+            if ($('#VerifyTxt').val().length == 4) {
+
+                $('#Alert_UserName_Exist_Wait').fadeToggle();
+                $.ajax({
+                    type: "POST",
+                    //  url: "/Account/IsUsernameExsisted/",
+                    // data: { username: $('#UserNameTxt').val() },
+                    url: "/Api/account/userregister",
+                    data: {
+                        phoneNumber: $('#UserNameTxt').val(),
+                        Password: $('#PasswordTxt').val(),
+                        ConfirmPassword: $('#PasswordTxt').val(),
+                        VerificationCode: $('#VerifyTxt').val(),
+                    },
+                    success: function (result) {
+
+                        if (result.Success == true) {
+                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+                            $('#Verify_Code').slideToggle();
+                            verifyLevel = 2;
+                            next1();
+
+
+                        }
+                        else {
+
+                            $('#Alert_UserName_Exist').html(result.Response);
+                            $('#Alert_UserName_Exist').show();
+                            $('#Alert_UserName_Exist_Wait').css("display", "none");
+
+
+
+                        }
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+        }
+        function next1() {
             if ($('#UserNameTxt').val().length != 11) {
 
                 $('#Alert_UserName').css("display", "block");
@@ -770,6 +832,9 @@
                     //disable Page 1 element
                     document.getElementById('UserNameTxt').disabled = true;
                     document.getElementById('PasswordTxt').disabled = true;
+
+                    document.getElementById('StoreNameTxt').disabled = false;
+                    $('#SlectBox')[0].sumo.enable();
 
                     $('#Next_communicationInfo').bind('click', function () {
                         WhantGoPage3 = "1";
@@ -824,11 +889,11 @@
             //enable page 1 element
             document.getElementById('UserNameTxt').disabled = false;
             document.getElementById('PasswordTxt').disabled = false;
-          
+
 
             //disable page 2 element
-             document.getElementById('StoreNameTxt').disabled = true;
-             $('#SlectBox')[0].sumo.disable();
+            document.getElementById('StoreNameTxt').disabled = true;
+            $('#SlectBox')[0].sumo.disable();
 
             $('#Next_communicationInfo').unbind('click');
 
@@ -858,7 +923,7 @@
 
                 ValidationPage3();
                 if (IsUsernameExsisted == 'False') {
-                   $('#Next_communicationInfo').unbind('click');
+                    $('#Next_communicationInfo').unbind('click');
                     $('#Next_communicationInfo').unbind('click');
 
 
@@ -963,7 +1028,7 @@
             document.getElementById('PasswordTxt').disabled = true;
 
             //enable Page 2 element
-           
+
             document.getElementById('StoreNameTxt').disabled = false;
             $('#SlectBox')[0].sumo.enable();
 
