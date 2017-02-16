@@ -1249,7 +1249,7 @@ input[type="checkbox"]:checked + label span {
     display: inline-block;
 }
 
-
+/*------------------- animations -----------------------*/
 
 @-webkit-keyframes goCheck {
     from {
