@@ -23,78 +23,82 @@ namespace Boundary.Controllers.Api
     [RoutePrefix("api/Application")]
     public class ApplicationController : ApiController
     {
-        //[HttpGet]
-        //[Route("CheckForNewVersion")]
-        //public IHttpActionResult CheckForNewVersion(double currentVersion) 
-        //{
-        //    try
-        //    {
-        //        //string address = HttpContext.Current.Server.MapPath("~/Content/AndroidAPK");
-        //        //string[] apkFiles = Directory.GetFiles(address)
-        //        //                     .Select(path => Path.GetFileName(path))
-        //        //                     .ToArray();
-        //        //foreach (string item in apkFiles)
-        //        //{
-        //        //    double filename = Convert.ToDouble(Path.GetFileNameWithoutExtension(item));
-        //        //    if (filename > currentVersion)
-        //        //    {
-        //        //        string filePath = address + "/" + item;
-        //        //        if (File.Exists(filePath))
-        //        //        {
-        //        //            FileInfo fileInfo = new FileInfo(filePath);
-        //        //            if (fileInfo.Exists)
-        //        //            {
-        //        //                return Json(JsonResultHelper.SuccessResult("Content/AndroidAPK/" + item));
-        //        //            }
-        //        //        }
-        //        //    }
-        //        //}
-        //        double newVersion= Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
-        //        if(newVersion>currentVersion)
-        //            return Json(JsonResultHelper.SuccessResult(ConfigurationManager.AppSettings["AndroidApkAddress"])); 
-        //        return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
-        //    }
-        //    catch (MyExceptionHandler exp1)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>
-        //            {
-        //                new ActionInputViewModel
-        //                {
-        //                    Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
-        //                    Value = currentVersion.ToString()
-        //                }
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage());
-        //        }
-        //    }
-        //    catch (Exception exp3)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>
-        //            {
-        //               new ActionInputViewModel
-        //               {
-        //                    Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
-        //                    Value = currentVersion.ToString()
-        //                }
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage());
-        //        }
-        //    }
-        //}
+        [HttpGet]
+        [Route("CheckForNewVersion")]
+        public IHttpActionResult CheckForNewVersion(double currentVersion)
+        {
+            try
+            {
+                //string address = HttpContext.Current.Server.MapPath("~/Content/AndroidAPK");
+                //string[] apkFiles = Directory.GetFiles(address)
+                //                     .Select(path => Path.GetFileName(path))
+                //                     .ToArray();
+                //foreach (string item in apkFiles)
+                //{
+                //    double filename = Convert.ToDouble(Path.GetFileNameWithoutExtension(item));
+                //    if (filename > currentVersion)
+                //    {
+                //        string filePath = address + "/" + item;
+                //        if (File.Exists(filePath))
+                //        {
+                //            FileInfo fileInfo = new FileInfo(filePath);
+                //            if (fileInfo.Exists)
+                //            {
+                //                return Json(JsonResultHelper.SuccessResult("Content/AndroidAPK/" + item));
+                //            }
+                //        }
+                //    }
+                //}
+                //double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                //if (newVersion > currentVersion)
+                //    return Json(JsonResultHelper.SuccessResult(ConfigurationManager.AppSettings["AndroidApkAddress"]));
+                //return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
+                double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                if (newVersion > currentVersion)
+                    return Json(JsonResultHelper.SuccessResult());
+                return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
+            }
+            catch (MyExceptionHandler exp1)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
+                    {
+                        new ActionInputViewModel
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
+                            Value = currentVersion.ToString()
+                        }
+                    };
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+            catch (Exception exp3)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
+                    {
+                       new ActionInputViewModel
+                       {
+                            Name = HelperFunctionInBL.GetVariableName(() => currentVersion),
+                            Value = currentVersion.ToString()
+                        }
+                    };
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+        }
 
         [HttpGet]
         [Route("CheckForPublicMessage")]
