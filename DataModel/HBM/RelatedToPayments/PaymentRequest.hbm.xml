@@ -7,6 +7,9 @@
     <property name="PaymentRequestStatusCode">
       <column name="PaymentRequestStatusCode" sql-type="tinyint" not-null="true" />
     </property>
+    <property name="PaymentGateway">
+      <column name="PaymentGateway" sql-type="tinyint" not-null="true" />
+    </property>
     <property name="Description">
       <column name="Description" sql-type="nvarchar" not-null="false" />
     </property>

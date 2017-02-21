@@ -59,16 +59,19 @@ namespace Boundary.Controllers.Api
                 if(verificationCode!=userRegisterData.VerificationCode.ToString())
                     return Json(JsonResultHelper.FailedResultWithMessage("کد وارد شده صحیح نیست"));
 
-                user = new AppUser
+                if (findUser == null)
                 {
-                    UserName = userRegisterData.PhoneNumber,
-                    Role = StaticRole.NotRegister,
-                    RoleCode = StaticRole.NotRegister.Id
-                };
-                var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
-                if (result == null || !result.Succeeded)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage());
+                    user = new AppUser
+                    {
+                        UserName = userRegisterData.PhoneNumber,
+                        Role = StaticRole.NotRegister,
+                        RoleCode = StaticRole.NotRegister.Id
+                    };
+                    var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
+                    if (result == null || !result.Succeeded)
+                    {
+                        return Json(JsonResultHelper.FailedResultWithMessage());
+                    }
                 }
                 return Json(JsonResultHelper.SuccessResult());
             }
@@ -140,7 +143,6 @@ namespace Boundary.Controllers.Api
                 {
                     member.Name = model.MemberInfo.Name;
                     member.CityCode = model.MemberInfo.CityCode;
-                    //member.Email = model.MemberInfo.Email;
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
@@ -153,6 +155,9 @@ namespace Boundary.Controllers.Api
 
                 if (cutomerRegisterResult > 0)
                 {
+                    user.RoleCode = ERole.Member;
+                    new UserBL().Update(user);
+
                     //ببینم مشتری فروشگاه خاصی هست یا نه
                     long? storeCode = new StoreBL().GetStoreCodeByHomePage(shopname);
                     if (storeCode != null && storeCode > 0)
@@ -419,7 +424,7 @@ namespace Boundary.Controllers.Api
 
         [HttpPost]
         [Route("AddStore")]
-        public async Task<IHttpActionResult> AddStore(StoreRegisterDataModel storeRegister)
+        public IHttpActionResult AddStore(StoreRegisterDataModel storeRegister)
         {
             if (!ModelState.IsValid)
             {
@@ -436,6 +441,9 @@ namespace Boundary.Controllers.Api
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
+                    user.RoleCode = ERole.Seller;
+                    new UserBL().Update(user);
+
                     Member member = new Member()
                     {
                         UserCode = user.Id,

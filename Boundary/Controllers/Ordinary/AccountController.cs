@@ -75,6 +75,9 @@ namespace Boundary.Controllers.Ordinary
 
                 if (cutomerRegisterResult > 0)
                 {
+                    user.RoleCode = ERole.Member;
+                    new UserBL().Update(user);
+
                     await SignInAsync(new AppUser()
                     {
                         Id = user.Id,
@@ -363,10 +366,12 @@ namespace Boundary.Controllers.Ordinary
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
                 storeRegister.ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList();
-                //storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
+                    user.RoleCode = ERole.Seller;
+                    new UserBL().Update(user);
+
                     Member member = new Member()
                     {
                         UserCode = user.Id,

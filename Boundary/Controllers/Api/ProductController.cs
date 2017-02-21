@@ -133,7 +133,7 @@ namespace Boundary.Controllers.Api
 
                 #endregion getting store Id
 
-                SearchResultViewModel result = new ProductBL().Search(filters, lstStatus);
+                SearchResultViewModel result = new ProductBL().Search(searchParameters: filters,status: lstStatus,haveImage: true);
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه

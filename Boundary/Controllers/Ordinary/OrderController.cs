@@ -303,7 +303,6 @@ namespace Boundary.Controllers.Ordinary
         #endregion
 
 
-        //[Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
         public ActionResult PaymentResult()
         {
             try
@@ -529,7 +528,10 @@ namespace Boundary.Controllers.Ordinary
             }
         }
 
-
+        public ActionResult PasargadPaymentResult()
+        {
+            return null;
+        }
 
         /// <summary>
         /// از اونجایی که ممکنه حالتی پیش بیاد که نیاز یه پرداخت بانکی نباشه و تماما توسط موجودی قبلی پرداخت شود

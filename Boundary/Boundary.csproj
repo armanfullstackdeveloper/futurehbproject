@@ -42,6 +42,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fluentx, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.2.0.4\lib\Fluentx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fluentx.Mvc, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.Mvc.1.0.4\lib\Fluentx.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -173,6 +181,7 @@
     <Folder Include="Areas\SuperAdmin\Views\Shared\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Img\StoreInfo\" />
+    <Folder Include="Views\PaymentRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -246,13 +255,20 @@
     <Compile Include="Areas\SuperAdmin\Controllers\AppManagmentController.cs" />
     <Compile Include="Controllers\Api\SmsController.cs" />
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
+    <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
     <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />
+    <Compile Include="Model\PaymentViewModel.cs" />
     <Compile Include="Web References\com.arianpal.merchant\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\mellipayamak\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -791,6 +807,14 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\com.arianpal.merchant\WebService.disco" />
+    <Content Include="Web References\mellipayamak\MessagesBL.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\mellipayamak\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\mellipayamak\Send.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -839,9 +863,9 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\Low.cshtml" />
     <Content Include="Views\Home\Complaints.cshtml" />
-    <Content Include="Views\Store\AddShop.cshtml" />
     <Content Include="Scripts\jquery1.8.3.js" />
     <None Include="Web References\com.arianpal.merchant\WebService.wsdl" />
+    <None Include="Web References\mellipayamak\Send.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
@@ -863,6 +887,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://api.payamak-panel.com/post/Send.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\mellipayamak\</RelPath>
+      <UpdateFromURL>http://api.payamak-panel.com/post/Send.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Boundary_mellipayamak_Send</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://merchant.arianpal.com/WebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\com.arianpal.merchant\</RelPath>

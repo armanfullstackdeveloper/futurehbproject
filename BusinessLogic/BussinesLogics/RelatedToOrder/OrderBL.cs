@@ -52,20 +52,20 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
             return (activeBalance>0)?activeBalance:0;
         }
 
-        public List<Order> GetOrdersByPaymentRequestCode(long postedPaymentRequestCode)
+        public List<Order> GetOrdersByPaymentRequestCode(long code)
         {
             try
             {
                 _db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
-                parameters.Add("@paymentRequestCode", postedPaymentRequestCode);
+                parameters.Add("@paymentRequestCode", code);
                 List<Order> lst = _db.Query<Order>("Order_GetAllByPaymentRequestCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                 EnsureCloseConnection(_db);
                 return lst;
             }
             catch (Exception ex)
             {
-                throw new MyExceptionHandler(ex.ToString(), ex, postedPaymentRequestCode.ToString());
+                throw new MyExceptionHandler(ex.ToString(), ex, code.ToString());
             }
         }
 

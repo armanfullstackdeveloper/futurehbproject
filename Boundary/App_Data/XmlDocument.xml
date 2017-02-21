@@ -562,13 +562,23 @@
             <param name="rowspPage"></param>
             <returns></returns>
         </member>
-        <member name="M:Boundary.Controllers.Api.OrderController.Pay(DataModel.Enums.EOrderType,System.Collections.Generic.List{DataModel.Models.ViewModel.ShoppingBagViewModel},System.String)">
+        <member name="M:Boundary.Controllers.Api.OrderController.Register(Boundary.Model.PaymentViewModel)">
             <summary>
-            تائید نهایی و رفتن به درگاه پرداخت
+            ثبت اولیه سفارش 
             </summary>
-            <param name="orderType"></param>
-            <param name="bag"></param>
-            <param name="discountCode"></param>
+            <param name="payment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boundary.Controllers.Api.OrderController.RequestToArianpal(DataModel.Entities.RelatedToPayments.PaymentRequest,System.String,System.String,System.Int32,DataModel.Entities.Member,NHibernate.ISession)">
+            <summary>
+            درخواست به آرین پال جهت انجام پرداخت آنلاین
+            </summary>
+            <param name="paymentRequest"></param>
+            <param name="recNum"></param>
+            <param name="email"></param>
+            <param name="finalPriceToPay"></param>
+            <param name="member"></param>
+            <param name="session"></param>
             <returns></returns>
         </member>
         <member name="M:Boundary.Controllers.Api.OrderController.VerifyDiscountCode(System.String,System.Collections.Generic.List{DataModel.Models.ViewModel.ShoppingBagViewModel})">
@@ -646,6 +656,13 @@
             پس فرضا اگه کاربری خواس اسکرین شات بگیره بگه اینه خروجی من، ملاک همواره کد رهگیریه!
             </summary>
             <returns></returns>       
+        </member>
+        <member name="M:Boundary.Controllers.Ordinary.PaymentRequestController.Pay(System.Int64)">
+            <summary>
+            تائید نهایی و رفتن به درگاه پرداخت
+            </summary>
+            <param name="paymentRequestCode"></param>
+            <returns></returns>
         </member>
         <member name="T:Boundary.Controllers.Ordinary.MainSession">
             <summary>
@@ -827,6 +844,423 @@
             <remarks/>
         </member>
         <member name="P:Boundary.com.arianpal.merchant.verifyPaymentCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.Send">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.#ctor">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.SendSimpleSMSCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.SendSimpleSMS2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.SendSmsCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.SendWithDomainCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetSmsPriceCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetCreditCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetDeliveryCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetDelivery2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetMultiDeliveryCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetMultiDelivery2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetDeliveriesCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetDeliveries2Completed">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetDeliveries3Completed">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.GetInboxCountCompleted">
+            <remarks/>
+        </member>
+        <member name="E:Boundary.mellipayamak.Send.getMessagesCompleted">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMS(System.String,System.String,System.String[],System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMSAsync(System.String,System.String,System.String[],System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMSAsync(System.String,System.String,System.String[],System.String,System.String,System.Boolean,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMS2(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMS2Async(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSimpleSMS2Async(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSms(System.String,System.String,System.String[],System.String,System.String,System.Boolean,System.String,System.Int64[]@,System.Byte[]@)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSmsAsync(System.String,System.String,System.String[],System.String,System.String,System.Boolean,System.String,System.Int64[],System.Byte[])">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendSmsAsync(System.String,System.String,System.String[],System.String,System.String,System.Boolean,System.String,System.Int64[],System.Byte[],System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendWithDomain(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendWithDomainAsync(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.SendWithDomainAsync(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetSmsPrice(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetSmsPriceAsync(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetSmsPriceAsync(System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetCredit(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetCreditAsync(System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetCreditAsync(System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDelivery(System.Int64)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveryAsync(System.Int64)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveryAsync(System.Int64,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDelivery2(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDelivery2Async(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDelivery2Async(System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDelivery(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDeliveryAsync(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDeliveryAsync(System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDelivery2(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDelivery2Async(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetMultiDelivery2Async(System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries(System.Int64[],System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveriesAsync(System.Int64[],System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveriesAsync(System.Int64[],System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries2(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries2Async(System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries2Async(System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries3(System.String[],System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries3Async(System.String[],System.String,System.String)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetDeliveries3Async(System.String[],System.String,System.String,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetInboxCount(System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetInboxCountAsync(System.String,System.String,System.Boolean)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.GetInboxCountAsync(System.String,System.String,System.Boolean,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.getMessages(System.String,System.String,System.Int32,System.String,System.Int32,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.getMessagesAsync(System.String,System.String,System.Int32,System.String,System.Int32,System.Int32)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.getMessagesAsync(System.String,System.String,System.Int32,System.String,System.Int32,System.Int32,System.Object)">
+            <remarks/>
+        </member>
+        <member name="M:Boundary.mellipayamak.Send.CancelAsync(System.Object)">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.MessagesBL">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.MsgID">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.UserID">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.LinkID">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.NumberID">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Tariff">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.MsgType">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Body">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Udh">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.SendDate">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Sender">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Receiver">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.FirstLocation">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.CurrentLocation">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Parts">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.IsFlash">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.IsRead">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.IsUnicode">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Credit">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.Module">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.RecCount">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.RecFailed">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.RecSuccess">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.IsMoneyBack">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.UserStepedMaster">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.UserMaster">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.MoneyBackCount">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.MessagesBL.MoneyBackLevel">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.BaseBL">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSimpleSMSCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSimpleSMSCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendSimpleSMSCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSimpleSMS2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSimpleSMS2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendSimpleSMS2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSmsCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendSmsCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendSmsCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendSmsCompletedEventArgs.recId">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendSmsCompletedEventArgs.status">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendWithDomainCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.SendWithDomainCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.SendWithDomainCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetSmsPriceCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetSmsPriceCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetSmsPriceCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetCreditCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetCreditCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetCreditCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveryCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveryCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetDeliveryCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDelivery2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDelivery2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetDelivery2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetMultiDeliveryCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetMultiDeliveryCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetMultiDeliveryCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetMultiDelivery2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetMultiDelivery2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetMultiDelivery2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveriesCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveriesCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetDeliveriesCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveries2CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveries2CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetDeliveries2CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveries3CompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetDeliveries3CompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetDeliveries3CompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetInboxCountCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.GetInboxCountCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.GetInboxCountCompletedEventArgs.Result">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.getMessagesCompletedEventHandler">
+            <remarks/>
+        </member>
+        <member name="T:Boundary.mellipayamak.getMessagesCompletedEventArgs">
+            <remarks/>
+        </member>
+        <member name="P:Boundary.mellipayamak.getMessagesCompletedEventArgs.Result">
             <remarks/>
         </member>
     </members>
