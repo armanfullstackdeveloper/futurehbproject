@@ -19,7 +19,7 @@
     text-transform: none;
     line-height: 1;
     vertical-align: middle;
-
+    font-size: 1rem;
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1333,4 +1333,3 @@
 .icon-IcoMoon:before {
     content: "\eaea";
 }
-
