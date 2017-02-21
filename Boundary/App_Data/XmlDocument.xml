@@ -569,18 +569,6 @@
             <param name="payment"></param>
             <returns></returns>
         </member>
-        <member name="M:Boundary.Controllers.Api.OrderController.RequestToArianpal(DataModel.Entities.RelatedToPayments.PaymentRequest,System.String,System.String,System.Int32,DataModel.Entities.Member,NHibernate.ISession)">
-            <summary>
-            درخواست به آرین پال جهت انجام پرداخت آنلاین
-            </summary>
-            <param name="paymentRequest"></param>
-            <param name="recNum"></param>
-            <param name="email"></param>
-            <param name="finalPriceToPay"></param>
-            <param name="member"></param>
-            <param name="session"></param>
-            <returns></returns>
-        </member>
         <member name="M:Boundary.Controllers.Api.OrderController.VerifyDiscountCode(System.String,System.Collections.Generic.List{DataModel.Models.ViewModel.ShoppingBagViewModel})">
             <summary>
             اگه کد تخفیف معتبر باشه خروجی این اکشن مبلغ کل پرداختی جدید با توجه به تاثیر کد تخفیف خواهد بود
@@ -646,6 +634,12 @@
             کاهش تعداد یکی از کالاهای موجود در سبد خرید
             </summary>
             <param name="productCode"></param>
+        </member>
+        <member name="M:Boundary.Controllers.Ordinary.OrderController.PasargadPaymentResult">
+            <summary>
+            برگشت نتیجه تراکنش از بانک پاسارگاد
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boundary.Controllers.Ordinary.OrderController.PaymentDetails(DataModel.Models.ViewModel.PaymentResultViewModel)">
             <summary>

@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Xml;
 using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
@@ -302,7 +309,6 @@ namespace Boundary.Controllers.Ordinary
 
         #endregion
 
-
         public ActionResult PaymentResult()
         {
             try
@@ -528,10 +534,101 @@ namespace Boundary.Controllers.Ordinary
             }
         }
 
+        #region Pasargad
+
+        /// <summary>
+        /// برگشت نتیجه تراکنش از بانک پاسارگاد
+        /// </summary>
+        /// <returns></returns>
         public ActionResult PasargadPaymentResult()
         {
+            //اطلاعات زیر جهت ارجاع فاکتور از بانک می باشد
+            string paymentRequestCode = Request.QueryString["iN"]; // شماره فاکتور
+            string orderDate = Request.QueryString["iD"]; // تاریخ فاکتور
+            string transactionReferenceId = Request.QueryString["tref"]; // شماره مرجع
+            string strXml = ReadPaymentResult();
+
+            //در صورتی که تراکنشی انجام نشده باشد فایلی از بانک برگشت داده نمی شود  
+            //دستور شزطی زیر جهت اعلام نتیجه به کاربر است
+            if (strXml == "")
+            {
+                Response.Write("تراکنش  انجام نشد ");
+            }
+            else
+            {
+                XmlDocument oXml = new XmlDocument();
+                oXml.LoadXml(strXml);
+                //xmlResult.Document = oXml;
+
+                XmlElement oElResult = (XmlElement)oXml.SelectSingleNode("//result"); //نتیجه تراکنش
+                XmlElement oElTraceNumber = (XmlElement)oXml.SelectSingleNode("//traceNumber"); //شماره پیگیری
+                XmlElement txNreferenceNumber = (XmlElement)oXml.SelectSingleNode("//referenceNumber"); //شماره ارجاع
+                string result = oElResult.InnerText;
+                //todo: ina ro log konam
+                var orders = new OrderBL().GetOrdersByPaymentRequestCode(Convert.ToInt64(paymentRequestCode));
+                if (orders == null || orders.Count == 0 )
+                    return Json(JsonResultHelper.FailedResultWithMessage("خطا در دریافت اطلاعات خرید"), JsonRequestBehavior.AllowGet);
+                int price = orders.Sum(o => o.OverallPayment);//*10; //convert to rial
+                SendData(paymentRequestCode, orderDate, price.ToString());
+            }
             return null;
         }
+
+        private string ReadPaymentResult()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://pep.shaparak.ir/CheckTransactionResult.aspx");
+            string text = "invoiceUID=" + Request.QueryString["tref"];
+            byte[] textArray = Encoding.UTF8.GetBytes(text);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = textArray.Length;
+            request.GetRequestStream().Write(textArray, 0, textArray.Length);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string result = reader.ReadToEnd();
+            return result;
+        }
+
+        private void SendData(string paymentRequestCode,string orderDate,string amount)
+        {
+            AppSettingsReader appRead = new AppSettingsReader();
+            string merchantCode = appRead.GetValue("PasargadBank_MerchantCode", typeof(string)).ToString();
+            string terminalCode = appRead.GetValue("PasargadBank_TerminalCode", typeof(string)).ToString();
+            string redirectAddress = appRead.GetValue("PasargadBank_RedirectAddress", typeof(string)).ToString();
+            string privateKey = appRead.GetValue("PasargadBank_PrivateKey", typeof(string)).ToString();
+
+            string timeStamp = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            string invoiceDate = orderDate;
+            string invoiceNumber = paymentRequestCode;
+
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.FromXmlString(privateKey);
+
+            string data = "#" + merchantCode + "#" + terminalCode + "#" + invoiceNumber +
+          "#" + invoiceDate + "#" + amount + "#" + timeStamp + "#";
+
+            byte[] signedData = rsa.SignData(Encoding.UTF8.GetBytes(data), new
+            SHA1CryptoServiceProvider());
+
+            string signedString = Convert.ToBase64String(signedData);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://pep.shaparak.ir/VerifyPayment.aspx");
+            string text = "InvoiceNumber=" + invoiceNumber + "&InvoiceDate=" +
+                        invoiceDate + "&MerchantCode=" + merchantCode + "&TerminalCode=" +
+                        terminalCode + "&Amount=" + amount + "&TimeStamp=" + timeStamp + "&Sign=" + signedString;
+            byte[] textArray = Encoding.UTF8.GetBytes(text);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = textArray.Length;
+            request.GetRequestStream().Write(textArray, 0, textArray.Length);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string result = reader.ReadToEnd();
+            //xmlResult.DocumentContent = result;
+            //todo: log result
+        }
+        #endregion
+
 
         /// <summary>
         /// از اونجایی که ممکنه حالتی پیش بیاد که نیاز یه پرداخت بانکی نباشه و تماما توسط موجودی قبلی پرداخت شود
@@ -546,6 +643,5 @@ namespace Boundary.Controllers.Ordinary
         {
             return View(model);
         }
-
     }
 }
