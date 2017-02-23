@@ -1,6 +1,6 @@
 ﻿namespace DataModel.Enums 
 {
-    public enum EPaymentResponseResultValues
+    public enum EPaymentResponseResultValues:byte
     {
         Code_99 = 6,
         Code_88 = 7,
