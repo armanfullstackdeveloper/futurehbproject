@@ -711,7 +711,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 #endregion getting store Id
 
                 User user = new UserBL().GetById(userId);
-                user.UserName = userInfo.UserName;
+                //user.UserName = userInfo.UserName;
                 user.Password = userInfo.Password;
                 user.Email = userInfo.Email;
                 var result = new UserBL().Update(user);
