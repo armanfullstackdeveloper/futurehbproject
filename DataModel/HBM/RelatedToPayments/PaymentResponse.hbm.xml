@@ -7,8 +7,8 @@
     <property name="PaymentRequestCode">
       <column name="PaymentRequestCode" sql-type="bigint" not-null="true" />
     </property>
-    <property name="PaymentResponseStatusCode">
-      <column name="PaymentResponseStatusCode" sql-type="tinyint" not-null="false" />
+    <property name="PaymentResponseStatus">
+      <column name="PaymentResponseStatus" sql-type="tinyint" not-null="false" />
     </property>
     <property name="ShomareMarja">
       <column name="ShomareMarja" sql-type="nvarchar" not-null="false" />

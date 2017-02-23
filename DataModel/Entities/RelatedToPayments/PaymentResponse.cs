@@ -1,10 +1,12 @@
-﻿namespace DataModel.Entities.RelatedToPayments
+﻿using DataModel.Enums;
+
+namespace DataModel.Entities.RelatedToPayments
 {
     public class PaymentResponse : EntityBase<PaymentResponse>
     {
         public virtual long Id { get; set; }
         public virtual long PaymentRequestCode { get; set; }
-        public virtual byte? PaymentResponseStatusCode { get; set; }
+        public virtual EPaymentResponseStatus PaymentResponseStatus { get; set; }
         public virtual string ShomareMarja { get; set; }
         public virtual string ShomareErja { get; set; }
         public virtual string PaymentResult { get; set; } 

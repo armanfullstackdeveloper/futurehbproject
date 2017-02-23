@@ -36,7 +36,7 @@ namespace Boundary.Areas.Admin.Controllers
                 ViewBag.PageNumber = pageNumber;
                 List<User> lstUsers = new UserBL().GetAll(null, active, pageNumber);
                 lstUsers.RemoveAll(u => u.RoleCode == ERole.SuperAdmin || u.RoleCode == ERole.Admin);
-                if (lstUsers != null && lstUsers.Count > 0)
+                if (lstUsers.Count > 0)
                 {
                     foreach (User user in lstUsers)
                     {

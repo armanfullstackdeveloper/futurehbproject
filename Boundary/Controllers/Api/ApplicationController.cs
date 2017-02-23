@@ -396,7 +396,7 @@ namespace Boundary.Controllers.Api
                     Message = errorLog.Message,
                     StackTrace = errorLog.StackTrace,
                     UserCode = userId,
-                    ClientType = EClientType.Android
+                    LogBy = ELogBy.Android
                 });
                 return Json(JsonResultHelper.SuccessResult(result));
             }

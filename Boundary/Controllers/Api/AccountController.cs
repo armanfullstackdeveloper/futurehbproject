@@ -65,7 +65,7 @@ namespace Boundary.Controllers.Api
                     {
                         UserName = userRegisterData.PhoneNumber,
                         Role = StaticRole.NotRegister,
-                        RoleCode = StaticRole.NotRegister.Id
+                        RoleCode = StaticRole.NotRegister.Id,                        
                     };
                     var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
                     if (result == null || !result.Succeeded)
@@ -146,7 +146,7 @@ namespace Boundary.Controllers.Api
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
-                    member.PhoneNumber = model.MemberInfo.PhoneNumber;
+                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber)? model.UserName:model.MemberInfo.PhoneNumber;
                     member.Place = model.MemberInfo.Place;
                     member.PostalCode = model.MemberInfo.PostalCode;
                 }
@@ -155,6 +155,7 @@ namespace Boundary.Controllers.Api
 
                 if (cutomerRegisterResult > 0)
                 {
+                    user.IsActive = true;
                     user.RoleCode = ERole.Member;
                     new UserBL().Update(user);
 
@@ -437,11 +438,11 @@ namespace Boundary.Controllers.Api
                 if (user == null || user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
-                //storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
                     user.RoleCode = ERole.Seller;
+                    user.IsActive = true;
                     new UserBL().Update(user);
 
                     Member member = new Member()

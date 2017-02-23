@@ -105,14 +105,13 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="filters"></param>
         /// <returns></returns>
-        [OutputCache(Duration = 60)]
         [System.Web.Http.Route("Search")]
         public IHttpActionResult Search(SearchParametersDataModel filters)
         {
             try
             {
                 if(!ModelState.IsValid)
-                    return Json(JsonResultHelper.FailedResultWithMessage("there is some problem with input data!"));
+                    return Json(JsonResultHelper.FailedResultOfInvalidInputs());
 
                 List<EProductStatus> lstStatus = new List<EProductStatus>() { EProductStatus.Active};
                 #region getting store Id
@@ -133,7 +132,11 @@ namespace Boundary.Controllers.Api
 
                 #endregion getting store Id
 
-                SearchResultViewModel result = new ProductBL().Search(searchParameters: filters,status: lstStatus,haveImage: true);
+                bool? haveImage = null;
+                if (store == null)
+                    haveImage = true;
+
+                SearchResultViewModel result = new ProductBL().Search(searchParameters: filters,status: lstStatus,haveImage: haveImage);
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه
@@ -191,7 +194,6 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="categoryCode"></param>
         /// <returns></returns>
-        [OutputCache(Duration = 60)]
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("getRequiredItemsForSearch")]
         public IHttpActionResult GetRequiredItemsForSearch(long categoryCode)

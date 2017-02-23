@@ -1,9 +1,9 @@
 ﻿
 namespace DataModel.Enums
 {
-    public enum EClientType
+    public enum ELogBy : byte
     {
-        WebBrowser = 1,
-        Android = 2 
+        WebBrowser = 0,
+        Android = 1
     }
 }

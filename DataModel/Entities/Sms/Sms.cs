@@ -8,7 +8,6 @@ namespace DataModel.Entities.Sms
         public string Text { get; set; }
         public virtual ESmsType SmsType { get; set; }
         public virtual long Reciver { get; set; } 
-        public virtual ESendSmsResponseStatus ResponseStatus { get; set; }
         /// <summary>
         /// RecId
         /// </summary>

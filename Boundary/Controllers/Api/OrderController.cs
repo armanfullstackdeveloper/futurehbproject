@@ -226,7 +226,7 @@ namespace Boundary.Controllers.Api
                             StoreDiscountCode = model.DiscountCode,
                             SendingCost = postalCostForCurrentStore,
                             OrderType = payment.OrderType,
-
+                            StoreCode = model.Store.Id,
                             //مجموع پرداختی در هر سفارش برابر است با هزینه ی کل کالاهای فروشگاه مورد نظر با احتساب تخفیف احتمالی که میخورن
                             //به علاوه هزینه پستی فروشگاه مورد نظر
                             //منهای اون مقداری که از موجودی فعال مشتری برداشت میشه
@@ -320,7 +320,7 @@ namespace Boundary.Controllers.Api
                                 SendingCost = postalCostForCurrentStore,
                                 OrderType = payment.OrderType,
                                 StoreDiscountCode = model.DiscountCode,
-
+                                StoreCode=model.Store.Id,
                                 //چون در این حالت همه از موجودی فعال کاربر کسر میشه پس پرداختی نداریم
                                 OverallPayment = 0,
                             }, session);
@@ -492,6 +492,7 @@ namespace Boundary.Controllers.Api
                                 SendingCost = postalCostForCurrentStore,
                                 OrderType = payment.OrderType,
                                 OverallPayment = payed,
+                                StoreCode = model.Store.Id,
                                 StoreDiscountCode = model.DiscountCode,
                             }, session);
 

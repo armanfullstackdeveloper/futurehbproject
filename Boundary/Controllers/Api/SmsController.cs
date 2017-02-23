@@ -61,6 +61,14 @@ namespace Boundary.Controllers.Api
                 SendSmsResultDataModel result = await response.Content.ReadAsAsync<SendSmsResultDataModel>();
                 long returnValue = Convert.ToInt64(result.Value);
                 var exists = returnValue <= 255 && Enum.IsDefined(typeof(ESendSmsResponseStatus), (byte)returnValue);
+                if (exists)
+                {
+                    //try with soap
+                    mellipayamak.Send send = new mellipayamak.Send();
+                    string soapResult = send.SendSimpleSMS2(smsDataModel.Username, smsDataModel.PassWord, smsDataModel.To, smsDataModel.From, smsDataModel.Text, false);
+                    returnValue = Convert.ToInt64(soapResult);
+                }
+
                 Sms sms = new Sms
                 {
                     Text = verificationCode.ToString(),
@@ -72,12 +80,11 @@ namespace Boundary.Controllers.Api
                 if (exists)
                 {
                     //something happen
-                    sms.ResponseStatus = (ESendSmsResponseStatus)returnValue;
+                    sms.TrackingCode = returnValue;
                     new SmsBL().Insert(sms);
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
                 //everything ok
-                sms.ResponseStatus = ESendSmsResponseStatus.Successfull;
                 sms.TrackingCode = Convert.ToInt64(result.Value);
                 new SmsBL().Insert(sms);
                 return Json(JsonResultHelper.SuccessResult());
@@ -175,12 +182,11 @@ namespace Boundary.Controllers.Api
                 if (exists)
                 {
                     //something happen
-                    sms.ResponseStatus = (ESendSmsResponseStatus)returnValue;
+                    sms.TrackingCode = returnValue;
                     new SmsBL().Insert(sms);
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
                 //everything ok
-                sms.ResponseStatus = ESendSmsResponseStatus.Successfull;
                 sms.TrackingCode = Convert.ToInt64(result.Value);
                 new SmsBL().Insert(sms);
                 return Json(JsonResultHelper.SuccessResult());

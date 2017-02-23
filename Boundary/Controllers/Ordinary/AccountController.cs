@@ -66,7 +66,7 @@ namespace Boundary.Controllers.Ordinary
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
-                    member.PhoneNumber = model.MemberInfo.PhoneNumber;
+                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber) ? model.UserName : model.MemberInfo.PhoneNumber;
                     member.Place = model.MemberInfo.Place;
                     member.PostalCode = model.MemberInfo.PostalCode;
                 }
@@ -76,6 +76,7 @@ namespace Boundary.Controllers.Ordinary
                 if (cutomerRegisterResult > 0)
                 {
                     user.RoleCode = ERole.Member;
+                    user.IsActive = true;
                     new UserBL().Update(user);
 
                     await SignInAsync(new AppUser()
@@ -370,6 +371,7 @@ namespace Boundary.Controllers.Ordinary
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
                     user.RoleCode = ERole.Seller;
+                    user.IsActive = true;
                     new UserBL().Update(user);
 
                     Member member = new Member()
