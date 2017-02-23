@@ -112,7 +112,7 @@ namespace Boundary.Controllers.Ordinary
                             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
                             rsa.FromXmlString(privateKey);
 
-                            //finalPriceToPay = finalPriceToPay * 10; //convert to rial
+                            finalPriceToPay = finalPriceToPay * 10; //convert to rial
                             string data = "#" + merchantCode + "#" + terminalCode + "#" + paymentRequestCode +
                                 "#" + invoiceDate + "#" + finalPriceToPay + "#" + redirectAddress + "#" + ActionIs + "#" + timeStamp + "#";
 

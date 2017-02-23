@@ -331,7 +331,7 @@ namespace Boundary.Controllers.Ordinary
                 {
                     new PaymentResponseBL().Insert(new PaymentResponse()
                     {
-                        TrackingCode = Convert.ToInt64(refnum),
+                        TrackingCode = refnum,
                         PaymentResponseStatusCode = (byte)VerifyResult.Ready,
                         PaymentRequestCode = postedPaymentRequestCode,
                         VerifyDate = PersianDateTime.Now.Date.ToInt(),
@@ -363,7 +363,7 @@ namespace Boundary.Controllers.Ordinary
 
                     new PaymentResponseBL().Insert(new PaymentResponse()
                     {
-                        TrackingCode = Convert.ToInt64(refnum),
+                        TrackingCode = refnum,
                         PaymentResponseStatusCode = (byte)verifyPaymentResult.ResultStatus,
                         PaymentRequestCode = postedPaymentRequestCode,
                         VerifyDate = PersianDateTime.Now.Date.ToInt(),
@@ -479,7 +479,7 @@ namespace Boundary.Controllers.Ordinary
 
                     new PaymentResponseBL().Insert(new PaymentResponse()
                     {
-                        TrackingCode = Convert.ToInt64(refnum),
+                        TrackingCode = refnum,
                         PaymentResponseStatusCode = findedStatus ?? (byte)EPaymentResponseResultValues.OtherReason,
                         PaymentRequestCode = postedPaymentRequestCode,
                         VerifyDate = PersianDateTime.Now.Date.ToInt(),
@@ -545,7 +545,7 @@ namespace Boundary.Controllers.Ordinary
             //اطلاعات زیر جهت ارجاع فاکتور از بانک می باشد
             string paymentRequestCode = Request.QueryString["iN"]; // شماره فاکتور
             string orderDate = Request.QueryString["iD"]; // تاریخ فاکتور
-            string transactionReferenceId = Request.QueryString["tref"]; // شماره مرجع
+            string shomareMarja = Request.QueryString["tref"]; // شماره مرجع
             string strXml = ReadPaymentResult();
 
             //در صورتی که تراکنشی انجام نشده باشد فایلی از بانک برگشت داده نمی شود  
@@ -560,16 +560,39 @@ namespace Boundary.Controllers.Ordinary
                 oXml.LoadXml(strXml);
                 //xmlResult.Document = oXml;
 
-                XmlElement oElResult = (XmlElement)oXml.SelectSingleNode("//result"); //نتیجه تراکنش
-                XmlElement oElTraceNumber = (XmlElement)oXml.SelectSingleNode("//traceNumber"); //شماره پیگیری
-                XmlElement txNreferenceNumber = (XmlElement)oXml.SelectSingleNode("//referenceNumber"); //شماره ارجاع
-                string result = oElResult.InnerText;
+                XmlElement oElResult = (XmlElement)oXml.SelectSingleNode("//result");
+                XmlElement oElTraceNumber = (XmlElement)oXml.SelectSingleNode("//traceNumber");
+                XmlElement txNreferenceNumber = (XmlElement)oXml.SelectSingleNode("//referenceNumber");
+                string paymentResult = oElResult.InnerText;  //نتیجه تراکنش 
+                string trackingCode = oElTraceNumber.InnerText;  //شماره پیگیری
+                string shomareErja = txNreferenceNumber.InnerText;  //شماره ارجاع
+                var result = new PaymentResponseBL().Insert(new PaymentResponse()
+                {
+                    TrackingCode = trackingCode,
+                    PaymentRequestCode = Convert.ToInt64(paymentRequestCode),
+                    //PaymentResponseStatusCode = 
+                    PaymentResult = paymentResult,
+                    ShomareErja = shomareErja,
+                    ShomareMarja = shomareMarja,
+                    VerifyDate = PersianDateTime.Now.Date.ToInt(),
+                    VerifyTime = PersianDateTime.Now.TimeOfDay.ToShort(),
+                });
+                //todo: check konam age inja nafrestam, tarakonesh anjam mishe ya na
                 //todo: ina ro log konam
                 var orders = new OrderBL().GetOrdersByPaymentRequestCode(Convert.ToInt64(paymentRequestCode));
-                if (orders == null || orders.Count == 0 )
+                if (orders == null || orders.Count == 0)
                     return Json(JsonResultHelper.FailedResultWithMessage("خطا در دریافت اطلاعات خرید"), JsonRequestBehavior.AllowGet);
-                int price = orders.Sum(o => o.OverallPayment);//*10; //convert to rial
+                int price = orders.Sum(o => o.OverallPayment)* 10; //convert to rial
                 SendData(paymentRequestCode, orderDate, price.ToString());
+                //todo: ino badan barrasi konam
+                return RedirectToAction("PaymentDetails", new PaymentResultViewModel()
+                {
+                    IsSuccess = true,
+                    MemberProfit = 0,
+                    Message = "خرید با موفقیت انجام شد",
+                    TrackingCode = trackingCode,
+                    //IsProfitAddedToBalance = 
+                });
             }
             return null;
         }
@@ -589,12 +612,12 @@ namespace Boundary.Controllers.Ordinary
             return result;
         }
 
-        private void SendData(string paymentRequestCode,string orderDate,string amount)
+        private void SendData(string paymentRequestCode, string orderDate, string amount)
         {
             AppSettingsReader appRead = new AppSettingsReader();
             string merchantCode = appRead.GetValue("PasargadBank_MerchantCode", typeof(string)).ToString();
             string terminalCode = appRead.GetValue("PasargadBank_TerminalCode", typeof(string)).ToString();
-            string redirectAddress = appRead.GetValue("PasargadBank_RedirectAddress", typeof(string)).ToString();
+            //string redirectAddress = appRead.GetValue("PasargadBank_RedirectAddress", typeof(string)).ToString();
             string privateKey = appRead.GetValue("PasargadBank_PrivateKey", typeof(string)).ToString();
 
             string timeStamp = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");

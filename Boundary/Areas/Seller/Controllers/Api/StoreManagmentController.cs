@@ -694,74 +694,74 @@ namespace Boundary.Areas.Seller.Controllers.Api
             }
         }
 
-        [Route("UpdateUserInfo")]
-        public IHttpActionResult UpdateUserInfo(StoreRegisterDataModel userInfo)
-        {
-            if (!ModelState.IsValid)
-                return Json(JsonResultHelper.FailedResultWithMessage());
-            try
-            {
-                #region getting store Id
+        //[Route("UpdateUserInfo")]
+        //public IHttpActionResult UpdateUserInfo(StoreRegisterDataModel userInfo)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return Json(JsonResultHelper.FailedResultWithMessage());
+        //    try
+        //    {
+        //        #region getting store Id
 
-                string userId = this.RequestContext.Principal.Identity.GetUserId();
-                StoreSessionDataModel storeSessionDataModel = new StoreBL().GetSummaryForSession(userId);
-                if (storeSessionDataModel == null)
-                    return Json(JsonResultHelper.FailedResultOfWrongAccess());
+        //        string userId = this.RequestContext.Principal.Identity.GetUserId();
+        //        StoreSessionDataModel storeSessionDataModel = new StoreBL().GetSummaryForSession(userId);
+        //        if (storeSessionDataModel == null)
+        //            return Json(JsonResultHelper.FailedResultOfWrongAccess());
 
-                #endregion getting store Id
+        //        #endregion getting store Id
 
-                User user = new UserBL().GetById(userId);
-                //user.UserName = userInfo.UserName;
-                user.Password = userInfo.Password;
-                user.Email = userInfo.Email;
-                var result = new UserBL().Update(user);
+        //        User user = new UserBL().GetById(userId);
+        //        //user.UserName = userInfo.UserName;
+        //        user.Password = userInfo.Password;
+        //        user.Email = userInfo.Email;
+        //        var result = new UserBL().Update(user);
 
 
-                if (result.DbMessage.MessageType != MessageType.Success)
-                    return Json(JsonResultHelper.FailedResultWithMessage());
-                return Json(JsonResultHelper.SuccessResult());
-            }
-            catch (MyExceptionHandler exp1)
-            {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => userInfo),
-                            Value = JObject.FromObject(userInfo).ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage());
-                }
-            }
-            catch (Exception exp3)
-            {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => userInfo),
-                            Value = JObject.FromObject(userInfo).ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage());
-                }
-            }
-        }
+        //        if (result.DbMessage.MessageType != MessageType.Success)
+        //            return Json(JsonResultHelper.FailedResultWithMessage());
+        //        return Json(JsonResultHelper.SuccessResult());
+        //    }
+        //    catch (MyExceptionHandler exp1)
+        //    {
+        //        try
+        //        {
+        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+        //            {
+        //                new ActionInputViewModel()
+        //                {
+        //                    Name = HelperFunctionInBL.GetVariableName(() => userInfo),
+        //                    Value = JObject.FromObject(userInfo).ToString()
+        //                },
+        //            };
+        //            long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return Json(JsonResultHelper.FailedResultWithMessage());
+        //        }
+        //    }
+        //    catch (Exception exp3)
+        //    {
+        //        try
+        //        {
+        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+        //            {
+        //                new ActionInputViewModel()
+        //                {
+        //                    Name = HelperFunctionInBL.GetVariableName(() => userInfo),
+        //                    Value = JObject.FromObject(userInfo).ToString()
+        //                },
+        //            };
+        //            long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return Json(JsonResultHelper.FailedResultWithMessage());
+        //        }
+        //    }
+        //}
 
         [HttpGet]
         [Route("removeStore")]

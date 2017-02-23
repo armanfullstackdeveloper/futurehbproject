@@ -4,8 +4,11 @@
     {
         public virtual long Id { get; set; }
         public virtual long PaymentRequestCode { get; set; }
-        public virtual byte PaymentResponseStatusCode { get; set; }
-        public virtual long TrackingCode { get; set; }
+        public virtual byte? PaymentResponseStatusCode { get; set; }
+        public virtual string ShomareMarja { get; set; }
+        public virtual string ShomareErja { get; set; }
+        public virtual string PaymentResult { get; set; } 
+        public virtual string TrackingCode { get; set; }
         public virtual int VerifyDate { get; set; }
         public virtual short VerifyTime { get; set; }
     }

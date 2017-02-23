@@ -41,7 +41,7 @@ namespace Boundary.Controllers.Api
                 //check konam bish az 3 bar dar roz nabode bashe baraye ip va shomare khas
                 int count = new SmsBL().TodayAttempt(Convert.ToInt64(phoneNumber.Remove(0, 1)),ESmsType.Registeration);
                 if (count >= Convert.ToInt32(WebConfigurationManager.AppSettings["mellipayamak_maxAttemptPerDay"]))
-                    return Json(JsonResultHelper.FailedResultWithMessage("عملیات با خطا مواجه شد"));
+                    return Json(JsonResultHelper.FailedResultWithMessage("لطفا زمانی دیگر اقدام کتید"));
 
                 SendSmsDataModel smsDataModel = new SendSmsDataModel
                 {

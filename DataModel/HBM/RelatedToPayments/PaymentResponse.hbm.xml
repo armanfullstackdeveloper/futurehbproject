@@ -8,10 +8,19 @@
       <column name="PaymentRequestCode" sql-type="bigint" not-null="true" />
     </property>
     <property name="PaymentResponseStatusCode">
-      <column name="PaymentResponseStatusCode" sql-type="tinyint" not-null="true" />
+      <column name="PaymentResponseStatusCode" sql-type="tinyint" not-null="false" />
+    </property>
+    <property name="ShomareMarja">
+      <column name="ShomareMarja" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="ShomareErja">
+      <column name="ShomareErja" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="PaymentResult">
+      <column name="PaymentResult" sql-type="nvarchar" not-null="false" />
     </property>
     <property name="TrackingCode">
-      <column name="TrackingCode" sql-type="bigint" not-null="true" />
+      <column name="TrackingCode" sql-type="nvarchar" not-null="false" />
     </property>
     <property name="VerifyDate">
       <column name="VerifyDate" sql-type="int" not-null="true" />

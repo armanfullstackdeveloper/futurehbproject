@@ -584,6 +584,13 @@
             <param name="userRegisterData"></param>
             <returns></returns>
         </member>
+        <member name="M:Boundary.Controllers.Api.AccountController.UpdateUserAccount(DataModel.Models.DataModel.UserAccountDataModel)">
+            <summary>
+            update user account info
+            </summary>
+            <param name="userAccountDataModel"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boundary.Controllers.Api.ProductController.GetProduct(System.Int64)">
             <summary>
             جزئیات محصول
