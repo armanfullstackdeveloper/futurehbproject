@@ -116,7 +116,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public SearchResultViewModel Search(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null)
+        public SearchResultViewModel Search(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null,bool? haveImage=null)
         {
             try
             {
@@ -133,8 +133,8 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
                 parameters.Add("@tileShowView", searchParameters.TileShow);
                 parameters.Add("@minPrice", searchParameters.MinPrice);
                 parameters.Add("@maxPrice", searchParameters.MaxPrice);
-                //searchParameters.JustExsisted = searchParameters.JustExsisted ?? false;
                 parameters.Add("@justExsisted", searchParameters.JustExsisted);
+                parameters.Add("@haveImage", haveImage);
                 searchParameters.SortBy = searchParameters.SortBy ?? 1;
                 parameters.Add("@sortBy", searchParameters.SortBy);
                 searchParameters.Ascending = searchParameters.Ascending ?? false;

@@ -10,9 +10,6 @@
     <property name="SmsType">
       <column name="SmsType" sql-type="tinyint" not-null="false" />
     </property>
-    <property name="ResponseStatus">
-      <column name="ResponseStatus" sql-type="tinyint" not-null="false" />
-    </property>
     <property name="Reciver">
       <column name="Reciver" sql-type="bigint" not-null="false" />
     </property>

@@ -8,6 +8,8 @@ namespace DataModel.Entities.RelatedToOrder {
         public virtual long Id { get; set; }
         public virtual EOrderType OrderType { get; set; } 
         public virtual long MemberCode { get; set; }
+        public virtual long? StoreCode { get; set; }
+
 
         /// <summary>
         /// چون ممکنه اصلا نیاز به پرداخت آنلاین نباشه

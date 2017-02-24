@@ -45,7 +45,7 @@ namespace BusinessLogic.BussinesLogics
                     ErrorLogCode = temp,
                     Date = date,
                     Time = time,
-                    ClientType = EClientType.WebBrowser
+                    LogBy = ELogBy.WebBrowser
                 });
                 if (lst.IndexOf(item) == 0)
                     errorLogCode = temp;
@@ -63,7 +63,7 @@ namespace BusinessLogic.BussinesLogics
                 ErrorLogCode = temp,
                 Date = date,
                 Time = time,
-                ClientType = EClientType.WebBrowser
+                LogBy = ELogBy.WebBrowser
             });
             return (long) errorLogCode;
         }
@@ -96,7 +96,7 @@ namespace BusinessLogic.BussinesLogics
                     ErrorLogCode = temp,
                     Date = date,
                     Time = time,
-                    ClientType = EClientType.WebBrowser
+                    LogBy = ELogBy.WebBrowser
                 });
                 if (lst.IndexOf(item) == 0)
                     errorLogCode = temp;

@@ -9,12 +9,13 @@ namespace DataModel.Enums
         NoCredit = 2,
         DailyLimit = 3,
         SendLimit = 4,
-        InvalidNumber = 5,
+        InvalidSenderNumber = 5,
         SystemISDisable = 6,
         BadWords = 7,
         PardisMinimumReceivers = 8,
         NumberIsPublic = 9,
-        UnKnown=10,//was not in doc
-        Failed=11
+        InactiveUser=10,
+        Failed=11,
+        UserInfoNotRegister=12
     }
 }

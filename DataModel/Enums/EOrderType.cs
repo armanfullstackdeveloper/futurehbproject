@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 
-namespace DataModel.Enums 
+namespace DataModel.Enums
 {
-    public enum EOrderType
+    public enum EOrderType : byte
     {
-        [Description("پرداخت امن")]SecurePayment=1,
-        [Description("پرداخت آزاد")]FreePayment = 2
+        [Description("پرداخت امن")]
+        SecurePayment = 1,
+        [Description("پرداخت آزاد")]
+        FreePayment = 2
     }
 }

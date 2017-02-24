@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
 using BusinessLogic.BussinesLogics;
-using BusinessLogic.BussinesLogics.RelatedToOrder;
 using BusinessLogic.Helpers;
-using DataModel.Entities.RelatedToOrder;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
@@ -66,7 +64,7 @@ namespace Boundary.Controllers.Ordinary
                 double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
                 string fileAddress = ConfigurationManager.AppSettings["AndroidApkAddress"];
                 if (newVersion > currentVersion)
-                    return File(fileAddress, "application/vnd.android.package-archive", fileAddress);
+                    return File(fileAddress, "application/vnd.android.package-archive","hoojibooji.apk");
                 return null;
             }
             catch (MyExceptionHandler exp1)

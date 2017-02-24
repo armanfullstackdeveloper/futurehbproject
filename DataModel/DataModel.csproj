@@ -103,7 +103,9 @@
     <Compile Include="Enums\EClientType.cs" />
     <Compile Include="Enums\EOrderStatus.cs" />
     <Compile Include="Enums\EOrderType.cs" />
+    <Compile Include="Enums\EPaymentGateways.cs" />
     <Compile Include="Enums\EPaymentRequestResultValues.cs" />
+    <Compile Include="Enums\EPaymentResponseStatus.cs" />
     <Compile Include="Enums\EPaymentResponseResultValues.cs" />
     <Compile Include="Enums\ERole.cs" />
     <Compile Include="Enums\EProductStatus.cs" />

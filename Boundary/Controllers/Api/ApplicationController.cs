@@ -25,7 +25,7 @@ namespace Boundary.Controllers.Api
     {
         [HttpGet]
         [Route("CheckForNewVersion")]
-        public IHttpActionResult CheckForNewVersion(double currentVersion) 
+        public IHttpActionResult CheckForNewVersion(double currentVersion)
         {
             try
             {
@@ -49,9 +49,13 @@ namespace Boundary.Controllers.Api
                 //        }
                 //    }
                 //}
-                double newVersion= Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
-                if(newVersion>currentVersion)
-                    return Json(JsonResultHelper.SuccessResult(ConfigurationManager.AppSettings["AndroidApkAddress"])); 
+                //double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                //if (newVersion > currentVersion)
+                //    return Json(JsonResultHelper.SuccessResult(ConfigurationManager.AppSettings["AndroidApkAddress"]));
+                //return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
+                double newVersion = Convert.ToDouble(ConfigurationManager.AppSettings["AndroidApkVersion"]);
+                if (newVersion > currentVersion)
+                    return Json(JsonResultHelper.SuccessResult());
                 return Json(JsonResultHelper.FailedResultWithMessage("there is no new version"));
             }
             catch (MyExceptionHandler exp1)
@@ -392,7 +396,7 @@ namespace Boundary.Controllers.Api
                     Message = errorLog.Message,
                     StackTrace = errorLog.StackTrace,
                     UserCode = userId,
-                    ClientType = EClientType.Android
+                    LogBy = ELogBy.Android
                 });
                 return Json(JsonResultHelper.SuccessResult(result));
             }

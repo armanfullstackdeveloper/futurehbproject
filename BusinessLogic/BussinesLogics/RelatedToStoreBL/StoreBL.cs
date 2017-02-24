@@ -659,6 +659,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     imagesWantToDelete.Add(store.LogoAddress);
                     imagesWantToDelete.Add(new SellerBL().GetSellerPhotoAddres(store.SallerCode));
 
+                    new SellerBL().Delete(new SellerBL().SelectOne(store.SallerCode).Id);
                     result = new UserBL().DeleteById(store.UserCode);
                 }
 
