@@ -66,7 +66,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 parameters.Add("@Type", storeRegister.StoreTypeCode);
                 parameters.Add("@Website", storeRegister.Website);
                 parameters.Add("@CatsCode", storeRegister.ListCategoryCode.AsTableValuedParameter("dbo.IdTable"));
-                parameters.Add("@PhoneNumber", storeRegister.PhoneNumber);
+                parameters.Add("@PhoneNumber", string.IsNullOrEmpty(storeRegister.PhoneNumber)?null:storeRegister.PhoneNumber);
                 parameters.Add("@storeStatus", (byte)EStoreStatus.Active);
                 parameters.Add("@ProcResult", dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
 
@@ -311,7 +311,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     storeDetails = multipleResults.Read<StoreDetailsViewModel>().SingleOrDefault();
                     if (storeDetails != null)
                     {
-                        storeDetails.Tells = multipleResults.Read<decimal>().ToList();
+                        storeDetails.Tells = multipleResults.Read<string>().ToList();
                         storeDetails.Images = multipleResults.Read<string>().ToList();
                         storeDetails.Categories = multipleResults.Read<string>().ToList();
                     }
@@ -331,7 +331,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             {
                 _db = EnsureOpenConnection();
                 Store store = new StoreBL().SelectOne(storeCode);
-                List<decimal> lstTell = new StoreTellBL().GetTellsById(storeCode);
+                List<string> lstTell = new StoreTellBL().GetTellsById(storeCode);
                 List<long> catsList = new CatsOfStoreBL().GetCatsByStoreCode(storeCode);
 
                 string email = new UserBL().GetById(store.UserCode).Email;
@@ -408,15 +408,15 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     }
                 }
 
-                List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
-                foreach (decimal item in lstTell)
+                List<string> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
+                foreach (string item in lstTell)
                 {
                     if (storeEditDataModel.PhoneNumbers != null && !storeEditDataModel.PhoneNumbers.Contains(item))
                         new StoreTellBL().Delete(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
                 }
                 if (storeEditDataModel.PhoneNumbers != null)
                 {
-                    foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                    foreach (string item in storeEditDataModel.PhoneNumbers)
                     {
                         if (!lstTell.Contains(item))
                             new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });

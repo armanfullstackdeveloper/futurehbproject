@@ -34,7 +34,7 @@ namespace DataModel.Models.ViewModel
         public string HomePage { get; set; } 
         public  string Website { get; set; }
 
-        public List<decimal> Tells { get; set; }
+        public List<string> Tells { get; set; }
         public List<string> Images { get; set; }
         public List<string> Categories { get; set; }
 

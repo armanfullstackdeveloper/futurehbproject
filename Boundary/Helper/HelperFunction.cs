@@ -1,5 +1,9 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 using Boundary.com.arianpal.merchant;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.Helpers;
@@ -68,6 +72,45 @@ namespace Boundary.Helper
                 // Return the hexadecimal string.
                 return sBuilder.ToString();
             }
+        }
+
+        public static void UpdateSiteMap(string link)
+        {
+            try
+            {
+                string address = System.Web.HttpContext.Current.Server.MapPath("~") + @"sitemap.xml";
+                XDocument xDocument = XDocument.Load(address);
+                XElement root = xDocument.Root;
+                var lastRow = root.Elements().First();
+                var xml = new XElement("url",
+                    new XElement("loc", link),
+                    new XElement("lastmod", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")),
+                    new XElement("changefreq", "daily"),
+                    new XElement("priority", "0.9"));
+                lastRow.AddBeforeSelf(xml);
+                var node = xDocument.Root.Elements().First();
+                if (node.Name.NamespaceName == "")
+                {
+                    node.Attributes("xmlns").Remove();
+                    node.Name = node.Parent.Name.Namespace + node.Name.LocalName;
+                }
+                foreach (XElement element in node.Elements())
+                {
+                    if (element.Name.NamespaceName == "")
+                    {
+                        element.Attributes("xmlns").Remove();
+                        element.Name = element.Parent.Name.Namespace + element.Name.LocalName;
+                    }
+                }
+                xDocument.Save(address
+);
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
         }
     }
 }

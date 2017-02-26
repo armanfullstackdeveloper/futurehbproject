@@ -690,6 +690,15 @@
             <param name="currentVersion"></param>
             <returns></returns>
         </member>
+        <member name="M:Boundary.Controllers.Ordinary.SearchController.GetProduct(System.Int32,System.String,System.String)">
+            <summary>
+            صفحه ی جزئیات محصول
+            </summary>
+            <param name="id"></param>
+            <param name="store"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boundary.Controllers.AppUser">
             <summary>
             chon bayad az IUser inherit mishod dige az User estefade nemitonestim bokonim

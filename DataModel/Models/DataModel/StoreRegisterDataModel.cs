@@ -54,7 +54,7 @@ namespace DataModel.Models.DataModel
         public virtual string Longitude { get; set; }
 
         [Display(Name = "شماره تماس")]
-        public decimal? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "نوع محصولات فروشگاه")]
         public List<long> ListCategoryCode { get; set; }
@@ -121,7 +121,7 @@ namespace DataModel.Models.DataModel
         public decimal? Longitude { get; set; }
 
         [Display(Name = "شماره تماس")]
-        public List<decimal> PhoneNumbers { get; set; } 
+        public List<string> PhoneNumbers { get; set; } 
 
         [Display(Name = "نوع محصولات فروشگاه")]
         public List<long> ListCategoryCode { get; set; }

@@ -233,6 +233,16 @@ namespace Boundary.Areas.Admin.Controllers
                     result = new StoreBL().UpdateWhitOutCommitTransaction(store, session);
                 }
 
+                if (status == EProductStatus.Active)
+                {
+                    //add to sitemap
+                    string productName = product.Name.Trim().Replace(" ", "-").Replace("(", "").Replace(")", "");
+                    string storeName = new StoreBL().SelectOneWhitOutCommitTransaction(product.StoreCode, session).Name.Trim().Replace(" ", "-").Replace("(", "").Replace(")", "");
+                    string categoryName = new CategoryBL().SelectOneWhitOutCommitTransaction(product.CategoryCode.Value, session).Name.Trim().Replace(" ", "-").Replace("(", "").Replace(")", "");
+                    string address = $"http://www.hoojibooji.com/product/{id}/{productName}/{storeName}/{categoryName}/";
+                    HelperFunction.UpdateSiteMap(address);
+                }
+
                 session.Transaction.Commit();
                 if (result)
                     return Json(JsonResultHelper.SuccessResult(true), JsonRequestBehavior.AllowGet);

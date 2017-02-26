@@ -302,7 +302,6 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     }
                 }
 
-
                 session.Transaction.Commit();
 
                 #endregion
