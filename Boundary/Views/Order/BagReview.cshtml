@@ -85,7 +85,7 @@
             <div class="Row">
                 <h3 style="margin-bottom:1em;">
                     مشخصات تحویل گیرنده:
-                </h3>            
+                </h3>
                 <div id="showInfo" ng-hide="EditBox">
                     <div class="form-group">
                         <label class="forLable">نام و نام خانوادگی : </label>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="NLinputs">
                     <div class="GoEmailNl DarkRed">
-                        <input name="" class="DarkRed" type="button"  ng-click="checkDiscount()" value="تایید">
+                        <input name="" class="DarkRed" type="button" ng-click="checkDiscount()" value="تایید">
                     </div>
                     <div class="WriteEmailNl">
                         <input name="" type="text" ng-model="DiscountCode" placeholder="کد تخفیف">
@@ -147,7 +147,7 @@
                     <div class="forInput">
                         <select ng-model="orderType" ng-init="orderType='1'">
                             <option value="1">پرداخت امن</option>
-                            <option value="2">پرداخت آزاد</option> 
+                            <option value="2">پرداخت آزاد</option>
                         </select>
                     </div>
                 </div>
@@ -164,9 +164,12 @@
 
 
                 <input class="fromTop btn btn-default inputRight" type="button" ng-click="Payment()" value="پرداخت" />
-               <div ng-show="showLoading" class="orgenizer FromTop">
-                   لطفا کمی صبر کنید
+                <div ng-show="showLoading" class="orgenizer FromTop">
+                    لطفا کمی صبر کنید
                 </div>
+                <div id="error" class="orgenizer FromTop">
+                 </div>
+
             </div>
         </div>
 
@@ -269,20 +272,33 @@
           }
           $scope.Payment=function(){
               $scope.showLoading=true;
-              var url="/api/order/pay?orderType="+$scope.orderType;
+
+              //  var url="/api/order/pay?orderType="+$scope.orderType;
+
+              var Data={
+                  Ordertype:$scope.Ordertype,
+                  Paymentgateway:1,
+                  Bag:$scope.Product
+              };
+
               if($scope.DiscountCode){
-                  url+="&discountCode="+$scope.DiscountCode
+                  Data.push({"discountCode":$scope.DiscountCode});
               }
 
               $.ajax({
                   type: "POST",
                   contentType: "application/json",
-                  url: url,
-                  data: JSON.stringify($scope.Product) ,
+                  url: "/api/Order/Register",
+                  data:JSON.stringify( Data),
                   success: function (result) {
                       console.log(result)
-                      if(result.Success==true){
-                          window.location.href =  result.Response;
+                      if(result.Success==true)
+                      { 
+                          window.location.href = "/Paymentrequest/pay?Paymentrequestcode="+ result.Response;
+                      }
+                      else{
+                          $scope.Showloading=false;
+                          $('#error').html(result.Response)
                       }
 
                       // $scope.Balance=result;

@@ -421,6 +421,9 @@
     <Content Include="Img\Ad\golBano1.jpg" />
     <Content Include="Img\Ad\golBano2.jpg" />
     <Content Include="Img\Ad\katoniLand.jpg" />
+    <Content Include="Img\Ad\nikoMezon.jpg" />
+    <Content Include="Img\Ad\rajabi.jpg" />
+    <Content Include="Img\Ad\royaMezon.jpg" />
     <Content Include="Img\Ad\torkShop.jpg" />
     <Content Include="Img\Ad\torkShop2.jpg" />
     <Content Include="Img\Ad\torkShop3.jpg" />
@@ -839,7 +842,6 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\Low.cshtml" />
     <Content Include="Views\Home\Complaints.cshtml" />
-    <Content Include="Views\Store\AddShop.cshtml" />
     <Content Include="Scripts\jquery1.8.3.js" />
     <None Include="Web References\com.arianpal.merchant\WebService.wsdl" />
   </ItemGroup>
