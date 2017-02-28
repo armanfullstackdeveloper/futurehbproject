@@ -44,7 +44,7 @@ li {
     width: auto;
 }
 
-div {
+* {
     box-sizing: border-box;
 }
 
@@ -185,6 +185,7 @@ input[type="checkbox"]:checked + label span {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    min-width: 200px;
 }
 
 .popUpMadule {
@@ -205,7 +206,12 @@ input[type="checkbox"]:checked + label span {
     overflow: hidden;
     white-space: nowrap;
 }
-
+.noWrap {
+    white-space: nowrap;
+}
+.noOverFlows {
+    overflow: unset !important;
+}
 /*--------------- main elements --------------------*/
 
 /*---------------- text elements --------------------*/
@@ -237,6 +243,26 @@ input[type="checkbox"]:checked + label span {
     color: #e91e63;
 }
 
+.orangeColor {
+    color: #e97b1e;
+}
+
+.orangeBorder {
+    border: solid #e97b1e 2px;
+}
+
+.redColor {
+    color: #d83c3c;
+}
+
+.lightRedBack {
+    background-color: #f9e9e9  ;
+}
+
+.lightGreenBack {
+    background-color: #eaf4f3;
+}
+
 .pinkBack {
     background-color: #e91e63 !important;
 }
@@ -257,8 +283,20 @@ input[type="checkbox"]:checked + label span {
     background-color: #009688 !important;
 }
 
+.reallyLightBack {
+    background-color: #fdfdfd !important;
+}
+
+.almostGrayColor {
+    color: #949494;
+}
+
 .solidLineHeight {
     line-height: 1;
+}
+
+.fullHeight {
+    height: 100%;
 }
 
 .eightyFontsize {
@@ -275,6 +313,10 @@ input[type="checkbox"]:checked + label span {
 
 .twentyTwoFontsize {
     font-size: 22px !important;
+}
+
+.thirtyFontsize {
+    font-size: 30px;
 }
 
 .blackColor {
@@ -298,6 +340,9 @@ input[type="checkbox"]:checked + label span {
 /*-----------------text elements ----------------------*/
 
 /*---------------- standard distances ----------------*/
+.smallestVerticalPadding {
+    padding: 0.15rem 0;
+}
 .standardMargin {
     margin: 0.5rem 1rem;
 }
@@ -313,7 +358,9 @@ input[type="checkbox"]:checked + label span {
 .standardHalfPadding {
     padding: 0.5rem;
 }
-
+.standardHalfMargin {
+    margin: 0.5rem;
+}
 .loginPadding {
     padding: 1rem;
 }
@@ -345,7 +392,9 @@ input[type="checkbox"]:checked + label span {
 .standardVerticalDoubleBottomPadding {
     padding: 0rem 0rem 2rem 0rem;
 }
-
+.standardVerticalDoubleBottomMargin {
+    margin: 0rem 0rem 2rem 0rem;
+}
 .standardHalfVerticalMargin {
     margin: 0.5rem 0;
 }
@@ -423,7 +472,15 @@ input[type="checkbox"]:checked + label span {
     width: 25%;
     float: right;
 }
-
+.fourColumns {
+    width: 22.5%;
+    float: right;
+}
+.signColumn {
+    width: 3.333333333333333%;
+    float: right;
+    margin-top: 1.5rem;
+}
 .eightyColumn {
     width: 77.9%;
     float: left;
@@ -438,7 +495,11 @@ input[type="checkbox"]:checked + label span {
     width: 50%;
     float: right;
 }
-
+.twoColumn {
+    width: 48%;
+    float: right;
+    margin-left: 2%;
+}
 .sixColumn {
     width: 16.66666666666667%;
     float: right;
@@ -469,6 +530,39 @@ input[type="checkbox"]:checked + label span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.twoSixColumn {
+    width: 33.33333333333334%;
+    float: right;       
+}
+
+.fourSixColumn {
+    width: 66.66666666666668%;
+    float: right;
+}
+
+.oneFiveColumn {
+    width: 20%;
+    float: right;
+}
+
+.fiveSixColumn {
+    width: 83.33333333333333%;
+    float: right;
+}
+
+.oneSixColumn {
+    width: 16.66666666666667%;
+    float: right;
+}
+
+.fourFiveColumn {
+    width: 80%;
+    float: right;
+}
+.mixHeight {
+    height: 135px;
 }
 
 /*------------------- media -------------------------------*/
@@ -527,6 +621,12 @@ input[type="checkbox"]:checked + label span {
     .innerStandardSearch {
         width: 200px;
         min-width: 200px !important;
+    }
+
+    .explain {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -642,6 +742,9 @@ input[type="checkbox"]:checked + label span {
 
 .outlineButton {
     border-radius: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .smallPadding {
@@ -702,6 +805,25 @@ input[type="checkbox"]:checked + label span {
 .boxElement {
     background-color: #fbfbfb;
     border-bottom: solid 6px #f7f7f7;
+}
+
+.reallyLightBack {
+    border: solid 1px #f4f4f4;
+}
+
+.greenCart.boxElement {
+    background-color: #eaf4f3;
+    border-bottom: solid 6px #c8eeea;
+}
+
+.pinkCart.boxElement {
+    background-color: #fef2f6 !important;
+    border-bottom: solid 6px #f8e0e8;
+}
+
+.orangeCart.boxElement {
+    background-color: #fff4e7 !important;
+    border-bottom: solid 6px #fcead5;
 }
 
 .borderBottom {
@@ -778,11 +900,6 @@ input[type="checkbox"]:checked + label span {
     color: #a3a3a3;
 }
 
-.signs {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 
 .footer .fourFullColumns {
     min-height: 194px;
@@ -800,6 +917,7 @@ input[type="checkbox"]:checked + label span {
 
 .topSvgHandler {
     max-width: 250px;
+    min-width: 160px;
 }
 
 .letsStarted .topSvgHandler {
@@ -816,11 +934,22 @@ input[type="checkbox"]:checked + label span {
     right: 0;
     width: 50%;
 }
-
+.stickToCenterLeft {
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    transform: translateY(-50%);
+}
+.stickToCenterRight {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
 .stickToBottomLeft {
     position: absolute;
     bottom: 2rem;
-    left: 0;
+    left: 0%;
     width: 50%;
 }
 
@@ -942,6 +1071,11 @@ input[type="checkbox"]:checked + label span {
     background-color: #f1f1f1;
     padding: 3px;
     border: none;
+}
+
+.offCode .standardInput {
+    padding:11px 15px;
+    background-color: #fff;
 }
 
 .loginAction {
@@ -1248,7 +1382,95 @@ input[type="checkbox"]:checked + label span {
     animation: compassMove 10s ease forwards infinite;
     display: inline-block;
 }
-
+.listColumn {
+    height: 198px;
+}
+.listColumn:nth-child(1) {
+    width: 39%;
+    float: right;
+}
+.listColumn:nth-child(2) {
+    width: 25%;
+    float: right;
+}
+.listColumn:nth-child(3) {
+    width: 15%;
+    float: right;
+}
+.listColumn:nth-child(4) {
+    width: 21%;
+    float: right;
+}
+.mainShopInfoes {
+    width: 96%;
+    float: right;
+}
+.deleteList {
+    width: 4%;
+    float: right;
+    height: 198px;
+}
+.shopList .boxElement {
+    background-color: #f9f9f9;
+}
+.listHeader {
+    white-space: nowrap;
+}
+.itemTags .colorInner, .itemTags .boxElement {
+    height: 40px;
+}
+.itemTags .boxElement {
+    background-color: #fff;
+}
+.itemTags .colorInner {
+    width: 35px;
+}
+.itemTags .colorCircle {
+    width: 20px;
+    height: 20px;
+}
+.cartIcon {
+    width: 80px;
+    display: inline-block;
+}
+.giftBoxIcon {
+    width: 40px;
+}
+.bigCartSpace {
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.bigCartWidth {
+    width: 50.333%;
+}
+.smallCartWidth {
+    width: 20.333%;
+}
+.smallCartStickToCenterLeft {
+    position: absolute;
+    top: 50%;
+    left: -20.33%;
+    transform: translateY(-50%);
+}
+.innerPlus {
+    height: 215px;
+}
+.innerCart {
+    height: 204px;
+}
+.changeableWidth {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e0e2e2;
+    color: #fff;
+    display: inline-block;
+}
+.shorterHeight {
+    height: 207px;
+}
 /*------------------- animations -----------------------*/
 
 @-webkit-keyframes goCheck {
