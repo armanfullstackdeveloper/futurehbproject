@@ -4,6 +4,11 @@
         <name>Boundary</name>
     </assembly>
     <members>
+        <member name="T:Boundary.Areas.Admin.Controllers.BoxController">
+            <summary>
+            مدیریت باکس های مختلف
+            </summary>
+        </member>
         <member name="M:Boundary.Areas.Admin.Controllers.OrderManagementController.Index(System.Int32)">
             <summary>
             show all orders

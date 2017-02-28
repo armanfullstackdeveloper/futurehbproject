@@ -32,12 +32,12 @@ namespace BusinessLogic.BussinesLogics.FirstPageBL
             }
         }
 
-        public List<FirstPage_SliderDataModel> GetActiveSlider()
+        public IEnumerable<FirstPage_SliderDataModel> GetActiveSlider()
         {
             _db = EnsureOpenConnection();
             var parameters = new DynamicParameters();
             parameters.Add("@persianToday", PersianDateTime.Now.Date.ToInt());
-            List<FirstPage_SliderDataModel> firstPageSliders = _db.Query<FirstPage_SliderDataModel>("FirstPage_Slider_GetActiveSlider", parameters, commandType: CommandType.StoredProcedure).ToList();
+            IEnumerable<FirstPage_SliderDataModel> firstPageSliders = _db.QueryAsync<FirstPage_SliderDataModel>("FirstPage_Slider_GetActiveSlider", parameters, commandType: CommandType.StoredProcedure).Result;
             EnsureCloseConnection(_db);
             return firstPageSliders;
         }

@@ -1,4 +1,4 @@
-﻿@model DataModel.Entities.FirstPage.FirstPage_Advertise
+﻿@model DataModel.Entities.FirstPage.Box
 
 @{
     Layout = null;
@@ -9,10 +9,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+    <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm("PostCreate", "Advertise", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+    @using (Html.BeginForm("PostEdit", "Box", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         
@@ -20,15 +20,24 @@
             <h4>FirstPage_Advertise</h4>
             <hr />
             @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
     
             <div class="form-group">
-                @Html.LabelFor(model => model.PlaceCode, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Position, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.PlaceCode)
-                    @Html.ValidationMessageFor(model => model.PlaceCode)
+                    @Html.EditorFor(model => model.Position)
+                    @Html.ValidationMessageFor(model => model.Position)
                 </div>
             </div>
             
+            <div class="form-group">
+                @Html.LabelFor(model => model.OrderNumber, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OrderNumber)
+                    @Html.ValidationMessageFor(model => model.OrderNumber)
+                </div>
+            </div>
+    
             <div class="form-group">
                 @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -67,8 +76,15 @@
                     @Html.EditorFor(model => model.Link)
                     @Html.ValidationMessageFor(model => model.Link)
                 </div>
-            </div>        
+            </div>   
             
+            <div class="form-group">
+                @Html.Label("Current Image", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <img src="~/@Model.ImgAddress" height="250" width="400" alt="">
+                </div>
+            </div>
+
             <div class="form-group">
                 @Html.Label("Choose a pictiure", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -78,7 +94,7 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>

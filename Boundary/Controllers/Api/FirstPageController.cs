@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using Boundary.Helper;
 using BusinessLogic.BussinesLogics;
 using BusinessLogic.BussinesLogics.FirstPageBL;
@@ -19,12 +19,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Boundary.Controllers.Api
 {
-    [System.Web.Http.RoutePrefix("api/firstPage")]
+    [RoutePrefix("api/firstPage")]
     public class FirstPageController : ApiController
     {
-        [System.Web.Http.HttpGet]
-        [OutputCache(Duration = 60)]
-        [System.Web.Http.Route("GetActiveSlider")]
+        [HttpGet]
+        [Route("GetActiveSlider")]
         public IHttpActionResult GetActiveSlider()
         {
             try
@@ -59,14 +58,13 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        [OutputCache(Duration = 60)]
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("GetActiveAdvertise")]
-        public IHttpActionResult GetActiveAdvertise()
+        [HttpGet]
+        [Route("GetActiveBox")]
+        public IHttpActionResult GetActiveBox(string position)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new FirstPage_AdvertiseBL().GetActiveAdvertise()));
+                return Json(JsonResultHelper.SuccessResult(new BoxBL().GetActiveBox(position)));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -94,11 +92,10 @@ namespace Boundary.Controllers.Api
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
             }
-        }
+        } 
 
-        [OutputCache(Duration = 60)]
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("GetNewestStore")]
+        [HttpGet]
+        [Route("GetNewestStore")]
         public IHttpActionResult GetNewestStore(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
@@ -109,21 +106,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => cityCode),
                             Value = cityCode.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -137,21 +134,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                    new ActionInputViewModel()
-                        {
+                    new ActionInputViewModel
+                    {
                             Name = HelperFunctionInBL.GetVariableName(() => cityCode),
                             Value = cityCode.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -168,8 +165,8 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("TopSearchSummeray")]
+        [HttpGet]
+        [Route("TopSearchSummeray")]
         public IHttpActionResult TopSearchSummeray(string name)
         {
             try
@@ -181,13 +178,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
-                            Value = name.ToString()
-                        },
+                            Value = name
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -201,13 +198,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                         new ActionInputViewModel()
-                        {
+                         new ActionInputViewModel
+                         {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
-                            Value = name.ToString()
-                        },
+                            Value = name
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -228,8 +225,8 @@ namespace Boundary.Controllers.Api
         /// <param name="pageNumber"></param>
         /// <param name="rowspPage"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("TopSearchForProduct")]
+        [HttpGet]
+        [Route("TopSearchForProduct")]
         public IHttpActionResult TopSearchForProduct(string name, int? pageNumber, int? rowspPage)
         {
             try
@@ -240,21 +237,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                      new ActionInputViewModel()
-                        {
+                      new ActionInputViewModel
+                      {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
-                            Value = name.ToString()
-                        },                        new ActionInputViewModel()
+                            Value = name
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -268,21 +265,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                      new ActionInputViewModel()
-                        {
+                      new ActionInputViewModel
+                      {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
                             Value = name
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -302,8 +299,8 @@ namespace Boundary.Controllers.Api
         /// <param name="pageNumber"></param>
         /// <param name="rowspPage"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("TopSearchForStore")]
+        [HttpGet]
+        [Route("TopSearchForStore")]
         public IHttpActionResult TopSearchForStore(string name, int? pageNumber, int? rowspPage)
         {
             try
@@ -314,21 +311,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                      new ActionInputViewModel()
-                        {
+                      new ActionInputViewModel
+                      {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
                             Value = name
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -342,21 +339,21 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                      new ActionInputViewModel()
-                        {
+                      new ActionInputViewModel
+                      {
                             Name = HelperFunctionInBL.GetVariableName(() => name),
-                            Value = name.ToString()
-                        },                        new ActionInputViewModel()
+                            Value = name
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => pageNumber),
                             Value = pageNumber.ToString()
-                        },                        new ActionInputViewModel()
+                        },                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => rowspPage),
                             Value = rowspPage.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -368,7 +365,7 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        [System.Web.Http.Route("ContactUs")]
+        [Route("ContactUs")]
         public IHttpActionResult ContactUs(ContactUsDataModel contactUs)
         {
             try
@@ -383,7 +380,7 @@ namespace Boundary.Controllers.Api
                     (
                     contactUs.Email,            //email
                     contactUs.FullName,         //display name
-                    System.Text.Encoding.UTF8
+                    Encoding.UTF8
                     );
 
                 MailMessage oMailMessage = new MailMessage { From = oMailAddress, Sender = oMailAddress };
@@ -400,12 +397,12 @@ namespace Boundary.Controllers.Api
                         (
                             "info@hoojibooji.com",
                             "HoojiBooji",
-                            System.Text.Encoding.UTF8
+                            Encoding.UTF8
                         ));
 
-                oMailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+                oMailMessage.BodyEncoding = Encoding.UTF8;
                 oMailMessage.Body = strBody;
-                oMailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+                oMailMessage.SubjectEncoding = Encoding.UTF8;
 
 
                 //یه پیشوند یا امضا قبل از سابجکت قرار میدهیم تا فیلترینگ
@@ -425,13 +422,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => contactUs),
                             Value = JObject.FromObject(contactUs).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -445,13 +442,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                         new ActionInputViewModel()
-                        {
+                         new ActionInputViewModel
+                         {
                             Name = HelperFunctionInBL.GetVariableName(() => contactUs),
                             Value = JObject.FromObject(contactUs).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -463,8 +460,8 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("ForgetPassword")]
+        [HttpGet]
+        [Route("ForgetPassword")]
         public IHttpActionResult ForgetPassword(string email) 
         {
             try
@@ -492,7 +489,7 @@ namespace Boundary.Controllers.Api
                     (
                     "info@hoojibooji.com",            //email
                     " هوجی بوجی ",         //display name
-                    System.Text.Encoding.UTF8
+                    Encoding.UTF8
                     );
 
                 MailMessage oMailMessage = new MailMessage { From = oMailAddress, Sender = oMailAddress };
@@ -507,12 +504,12 @@ namespace Boundary.Controllers.Api
                         (
                             email,
                             user.UserName,
-                            System.Text.Encoding.UTF8
+                            Encoding.UTF8
                         ));
 
-                oMailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+                oMailMessage.BodyEncoding = Encoding.UTF8;
                 oMailMessage.Body = strBody;
-                oMailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+                oMailMessage.SubjectEncoding = Encoding.UTF8;
 
 
                 //یه پیشوند یا امضا قبل از سابجکت قرار میدهیم تا فیلترینگ
@@ -532,13 +529,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => email),
                             Value = email
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -552,13 +549,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                         new ActionInputViewModel()
-                        {
+                         new ActionInputViewModel
+                         {
                             Name = HelperFunctionInBL.GetVariableName(() => email),
                             Value = email
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -570,9 +567,8 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        [OutputCache(Duration = 60)]
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("getMenue")]
+        [HttpGet]
+        [Route("getMenue")]
         public IHttpActionResult GetMenu()
         {
             try
@@ -583,14 +579,7 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => categoryCode),
-                        //    Value = categoryCode.ToString()
-                        //},
-                    };
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>();
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
@@ -603,14 +592,7 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        //new ActionInputViewModel()
-                        // {
-                        //     Name = HelpfulFunction.GetVariableName(() => categoryCode),
-                        //     Value = categoryCode.ToString()
-                        // },
-                    };
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>();
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }

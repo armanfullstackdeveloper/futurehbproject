@@ -17,8 +17,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Boundary.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// مدیریت باکس های مختلف
+    /// </summary>
     [Authorize(Roles = StaticString.Role_Admin + "," + StaticString.Role_SuperAdmin)]
-    public class AdvertiseController : BaseController 
+    public class BoxController : BaseController 
     {
         public ActionResult Index()
         {
@@ -34,7 +37,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                return View(new FirstPage_AdvertiseBL().SelectAll());
+                return View(new BoxBL().SelectAll());
             }
             catch (MyExceptionHandler exp1)
             {
@@ -108,7 +111,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult PostCreate(FirstPage_Advertise advertise, HttpPostedFileBase file)
+        public ActionResult PostCreate(Box box, HttpPostedFileBase file)
         {
             try
             {
@@ -149,8 +152,8 @@ namespace Boundary.Areas.Admin.Controllers
                 string rootPath = filePath.Substring(filePath.IndexOf("Content", System.StringComparison.Ordinal));
                 rootPath = System.IO.Path.Combine(rootPath, newName + extension);
 
-                advertise.ImgAddress = rootPath;
-                if (new FirstPage_AdvertiseBL().Insert(advertise) > 0)
+                box.ImgAddress = rootPath;
+                if (new BoxBL().Insert(box) > 0)
                 {
                     if (string.IsNullOrEmpty(rootPath) == false)
                         file.SaveAs(filePath + "/" + newName + extension);
@@ -166,8 +169,8 @@ namespace Boundary.Areas.Admin.Controllers
                     {
                         new ActionInputViewModel()
                         {
-                            Name = HelperFunctionInBL.GetVariableName(() => advertise),
-                            Value = JObject.FromObject(advertise).ToString()
+                            Name = HelperFunctionInBL.GetVariableName(() => box),
+                            Value = JObject.FromObject(box).ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
@@ -186,8 +189,8 @@ namespace Boundary.Areas.Admin.Controllers
                     {
                          new ActionInputViewModel()
                         {
-                            Name = HelperFunctionInBL.GetVariableName(() => advertise),
-                            Value = JObject.FromObject(advertise).ToString()
+                            Name = HelperFunctionInBL.GetVariableName(() => box),
+                            Value = JObject.FromObject(box).ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
@@ -214,7 +217,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                return View(new FirstPage_AdvertiseBL().SelectOne(id));
+                return View(new BoxBL().SelectOne(id));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -244,7 +247,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult PostEdit(FirstPage_Advertise advertise, HttpPostedFileBase file)
+        public ActionResult PostEdit(Box box, HttpPostedFileBase file)
         {
             try
             {
@@ -292,11 +295,11 @@ namespace Boundary.Areas.Admin.Controllers
 
                 //ghabl az virayesh addresse ghabli ro dar miyaram ta age movafagh virayesh shod va akse jadidam dasht ghabliye
                 //dar sorate vojod hazf she
-                string lastBoxImgAddress = new FirstPage_AdvertiseBL().GetImgAddressById(advertise.Id);
+                string lastBoxImgAddress = new BoxBL().GetImgAddressById(box.Id);
 
-                advertise.ImgAddress = (string.IsNullOrEmpty(rootPath)) ? lastBoxImgAddress : rootPath;
+                box.ImgAddress = (string.IsNullOrEmpty(rootPath)) ? lastBoxImgAddress : rootPath;
 
-                bool result = new FirstPage_AdvertiseBL().Update(advertise);
+                bool result = new BoxBL().Update(box);
                 if (!result) return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
 
                 if (file == null || string.IsNullOrEmpty(rootPath)) return RedirectToAction("Index");
@@ -317,8 +320,8 @@ namespace Boundary.Areas.Admin.Controllers
                     {
                         new ActionInputViewModel()
                         {
-                            Name = HelperFunctionInBL.GetVariableName(() => advertise),
-                            Value = JObject.FromObject(advertise).ToString()
+                            Name = HelperFunctionInBL.GetVariableName(() => box),
+                            Value = JObject.FromObject(box).ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
@@ -337,8 +340,8 @@ namespace Boundary.Areas.Admin.Controllers
                     {
                          new ActionInputViewModel()
                         {
-                            Name = HelperFunctionInBL.GetVariableName(() => advertise),
-                            Value = JObject.FromObject(advertise).ToString()
+                            Name = HelperFunctionInBL.GetVariableName(() => box),
+                            Value = JObject.FromObject(box).ToString()
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
@@ -365,7 +368,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                return View(new FirstPage_AdvertiseBL().SelectOne(id));
+                return View(new BoxBL().SelectOne(id));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -409,8 +412,8 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                string imgAddress = new FirstPage_AdvertiseBL().GetImgAddressById(id);
-                if (new FirstPage_AdvertiseBL().Delete(id))
+                string imgAddress = new BoxBL().GetImgAddressById(id);
+                if (new BoxBL().Delete(id))
                 {
                     if (!string.IsNullOrEmpty(imgAddress))
                     {

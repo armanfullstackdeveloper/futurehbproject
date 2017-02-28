@@ -64,7 +64,7 @@
     <Compile Include="BussinesLogics\CityBL.cs" />
     <Compile Include="BussinesLogics\ContactsBL\ContactWithUsBL.cs" />
     <Compile Include="BussinesLogics\ContactsBL\PublicMessageBL.cs" />
-    <Compile Include="BussinesLogics\FirstPageBL\FirstPage_AdvertiseBL.cs" />
+    <Compile Include="BussinesLogics\FirstPageBL\BoxBL.cs" />
     <Compile Include="BussinesLogics\FirstPageBL\FirstPage_SliderBL.cs" />
     <Compile Include="BussinesLogics\RelatedToOrder\OrderCustomerInfoBL.cs" />
     <Compile Include="BussinesLogics\RelatedToOrder\OrderSendingTypeBL.cs" />

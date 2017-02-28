@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataModel.Entities.FirstPage.FirstPage_Advertise>
+﻿@model IEnumerable<DataModel.Entities.FirstPage.Box>
 
 @{
     Layout = null;
@@ -21,7 +21,10 @@
         <table class="table" border="1">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.PlaceCode)
+                    @Html.DisplayNameFor(model => model.Position)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNumber)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.StartDate)
@@ -47,8 +50,11 @@
             @foreach (var item in Model) {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PlaceCode)
-                    </td>           
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>      
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNumber)
+                    </td>       
                     <td>
                         @Html.DisplayFor(modelItem => item.StartDate)
                     </td>

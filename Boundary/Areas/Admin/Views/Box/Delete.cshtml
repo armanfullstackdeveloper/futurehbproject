@@ -1,4 +1,4 @@
-﻿@model DataModel.Entities.FirstPage.FirstPage_Advertise
+﻿@model DataModel.Entities.FirstPage.Box
 
 @{
     Layout = null;
@@ -18,11 +18,19 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.PlaceCode)
+                @Html.DisplayNameFor(model => model.Position)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PlaceCode)
+                @Html.DisplayFor(model => model.Position)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderNumber)
             </dd>
     
             <dt>
@@ -75,7 +83,7 @@
     
         </dl>
     
-        @using (Html.BeginForm("PostDelete", "Advertise", new { id = Model.Id }, FormMethod.Post))
+        @using (Html.BeginForm("PostDelete", "Box", new { id = Model.Id }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
     

@@ -227,7 +227,7 @@
     <Compile Include="Areas\Seller\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AdminManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ErroHandlingController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdvertiseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BoxController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\PanelController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentToMemberController.cs" />
@@ -713,10 +713,10 @@
     <Content Include="Areas\Admin\Views\MainSlider\Create.cshtml" />
     <Content Include="Areas\Admin\Views\MainSlider\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\MainSlider\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Delete.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\web.config" />
     <Content Include="Areas\SuperAdmin\Views\AdminManagement\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\AdminManagement\Create.cshtml" />
