@@ -166,6 +166,12 @@ input[type="checkbox"]:checked + label span {
     height: 100%;
 }
 
+.noObjectFits {
+    object-fit: unset !important;
+    width: unset;
+    height: unset;
+}
+
 .squareItem > .imageInMiddle {
     overflow: hidden;
 }
