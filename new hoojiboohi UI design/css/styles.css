@@ -161,7 +161,15 @@ input[type="checkbox"]:checked + label span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    object-fit: contain;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.noObjectFits {
+    object-fit: unset !important;
+    width: unset;
+    height: unset;
 }
 
 .squareItem > .imageInMiddle {
@@ -247,6 +255,10 @@ input[type="checkbox"]:checked + label span {
     color: #e97b1e;
 }
 
+.orangeBack {
+    background-color: #e97b1e;
+}
+
 .orangeBorder {
     border: solid #e97b1e 2px;
 }
@@ -321,6 +333,10 @@ input[type="checkbox"]:checked + label span {
 
 .blackColor {
     color: #000;
+}
+
+.blackBack {
+    background-color: #000;
 }
 
 .pinkBorder {
@@ -454,6 +470,12 @@ input[type="checkbox"]:checked + label span {
 .elementHorizontalMargin {
     margin: 0 2rem;
 }
+.standardTopVerticalMargin {
+    margin-top: 1rem;
+}
+.standardHalfHorizontalLeftPadding {
+    padding-left: 0.5rem;
+}
 
 /*------------------- standard distances -----------------*/
 
@@ -462,7 +484,14 @@ input[type="checkbox"]:checked + label span {
     width: 20%;
     float: right;
 }
-
+.collections  .twoFiveColumn {
+    width: 39%;
+    float: right;
+}
+.collections  .oneFiveColumn {
+    width: 19%;
+    float: right;
+}
 .threeFiveFullColumn {
     width: 60%;
     float: right;
@@ -745,6 +774,13 @@ input[type="checkbox"]:checked + label span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.circleButton {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .smallPadding {
@@ -1470,6 +1506,35 @@ input[type="checkbox"]:checked + label span {
 }
 .shorterHeight {
     height: 207px;
+}
+
+/*------------------- collection boxes -----------------*/
+.boxImage {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+.bigBox .boxImage {
+    padding-bottom: 73.3%;
+}
+.smallBox .boxImage {
+    padding-bottom: 101%;
+}
+.mediumBox .boxImage {
+    padding-bottom: 69%;
+}
+.rectangleBox .boxImage {
+    padding-bottom: 93%;
+}
+.twoFiveColumn .mediumBox .boxImage {
+    padding-bottom: 67.5%;
+}
+.collections .twoThreeFullColumn {
+    width: 58%;
+}
+.collections .oneThreeFullColumn {
+    width: 42%;
 }
 /*------------------- animations -----------------------*/
 
