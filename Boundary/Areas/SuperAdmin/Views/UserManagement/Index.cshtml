@@ -14,9 +14,12 @@
     <script src="~/Js/jquery-2.1.3.min.js"></script>
 </head>
     <body>
-        <h2>
-            @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel", new { area = StaticString.Role_Admin }, null) 
-        </h2>
+    <h2>
+        @Html.ActionLink("بازگشت به پنل مدیریت", "Index", "Panel", new { area = StaticString.Role_Admin }, null) 
+    </h2>
+        <p>
+            @Html.ActionLink("ایجاد فروشگاه آسان", "CreateSimpleStore","StoreManagement", new { area = StaticString.Role_Admin }, null)
+        </p>
         <p>
             جستجو با نام کاربری یا آی دی
             @Html.TextBox("txtSearch")

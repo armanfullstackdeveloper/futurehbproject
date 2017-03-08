@@ -457,6 +457,8 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     parameters = new DynamicParameters();
                     parameters.Add("@orderCode", order.Id);
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
+                    if(lstProducts==null || lstProducts.Count==0)
+                        continue;
                     List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
                     OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == (byte)EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده                    
                     OrderHistory orderHistoryOfLastStatus =
@@ -480,18 +482,17 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     }
 
                     int overallOrderCost = overallProductCostConsideringDiscounts + order.SendingCost; //مجموع هزینه کالاها در سفارش = مجموع هزینه سفارش  + PostalCost
-
                     lst.Add(new OrderViewModelForAdmins()
                     {
                         OrderCode = order.Id,
                         OrderType = order.OrderType,
-                        Date = (orderHistoryOfAfterPayment!=null)?orderHistoryOfAfterPayment.Date:0,
-                        Time = (orderHistoryOfAfterPayment!=null)?orderHistoryOfAfterPayment.Time:0,
+                        Date = (orderHistoryOfAfterPayment != null) ? orderHistoryOfAfterPayment.Date : 0,
+                        Time = (orderHistoryOfAfterPayment != null) ? orderHistoryOfAfterPayment.Time : 0,
                         ShopName = _db.Query<string>("SELECT Name FROM [Store] where [Id]=(select StoreCode from Product where Id=@productCode)", new { productCode = lstProducts[0].ProductCode }).SingleOrDefault(),
                         MemberName = _db.Query<string>("SELECT Name FROM [Member] where [Id]=@memberCode", new { memberCode = order.MemberCode }).SingleOrDefault(),
                         OrderStatus = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode),
                         OverallPayment = order.OverallPayment,
-                        OverallOrderCost = overallOrderCost, //todo: farada bayad tebghe in ba foroshandeha tasviye hesab konam
+                        OverallOrderCost = overallOrderCost, 
                         MemberUsedBalance = overallOrderCost - order.OverallPayment,
                         IsPony = (new HBPaymentToStoreBL().SelectOne(order.Id) != null),
                         CanPony = CheckCanPony(order.OrderType, orderHistoryOfLastStatus.OrderStatusCode),

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BusinessLogic.BussinesLogics.RelatedToOrder;
 using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.Components;
@@ -137,7 +138,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<StoreSummery> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
+        public async Task<IEnumerable<StoreSummery>> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
@@ -149,7 +150,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 rowspPage = rowspPage ?? 12;
                 parameters.Add("@RowspPage", rowspPage);
 
-                List<StoreSummery> lst = _db.Query<StoreSummery>("Store_GetNewest", parameters, commandType: CommandType.StoredProcedure).ToList();
+                IEnumerable<StoreSummery> lst = await _db.QueryAsync<StoreSummery>("Store_GetNewest", parameters, commandType: CommandType.StoredProcedure);
                 EnsureCloseConnection(_db);
                 return lst;
             }

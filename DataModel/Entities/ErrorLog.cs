@@ -14,5 +14,6 @@ namespace DataModel.Entities {
         public virtual int? Date { get; set; }
         public virtual short? Time { get; set; }
         public virtual ELogBy LogBy { get; set; }
+        public virtual string UserAgent { get; set; }
     }
 }

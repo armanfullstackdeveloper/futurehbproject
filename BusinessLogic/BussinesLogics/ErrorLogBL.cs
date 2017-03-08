@@ -17,8 +17,9 @@ namespace BusinessLogic.BussinesLogics
         /// <param name="exception"></param>
         /// <param name="userCode"></param>
         /// <param name="actionInput"></param>
+        /// <param name="userAgent"></param>
         /// <returns></returns>
-        public long LogException(MyExceptionHandler exception, string userCode, string actionInput = null)
+        public long LogException(MyExceptionHandler exception, string userCode, string actionInput = null,string userAgent="")
         {
             List<Exception> lst = new List<Exception>();
             Exception currentException = exception;
@@ -45,7 +46,8 @@ namespace BusinessLogic.BussinesLogics
                     ErrorLogCode = temp,
                     Date = date,
                     Time = time,
-                    LogBy = ELogBy.WebBrowser
+                    LogBy = ELogBy.WebBrowser,
+                    UserAgent = userAgent
                 });
                 if (lst.IndexOf(item) == 0)
                     errorLogCode = temp;
@@ -63,13 +65,14 @@ namespace BusinessLogic.BussinesLogics
                 ErrorLogCode = temp,
                 Date = date,
                 Time = time,
-                LogBy = ELogBy.WebBrowser
+                LogBy = ELogBy.WebBrowser,
+                UserAgent = userAgent
             });
             return (long) errorLogCode;
         }
 
 
-        public long LogException(Exception exception, string userCode, string actionInput = null)
+        public long LogException(Exception exception, string userCode, string actionInput = null, string userAgent = "")
         {
             List<Exception> lst = new List<Exception>() { exception };
             Exception currentException = exception;
@@ -96,7 +99,8 @@ namespace BusinessLogic.BussinesLogics
                     ErrorLogCode = temp,
                     Date = date,
                     Time = time,
-                    LogBy = ELogBy.WebBrowser
+                    LogBy = ELogBy.WebBrowser,
+                    UserAgent = userAgent
                 });
                 if (lst.IndexOf(item) == 0)
                     errorLogCode = temp;

@@ -719,7 +719,6 @@ namespace Boundary.Controllers.Ordinary
         /// پس فرضا اگه کاربری خواس اسکرین شات بگیره بگه اینه خروجی من، ملاک همواره کد رهگیریه!
         /// </summary>
         /// <returns></returns>       
-        //[Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
         public ActionResult PaymentDetails(PaymentResultViewModel model)
         {
             return View(model);

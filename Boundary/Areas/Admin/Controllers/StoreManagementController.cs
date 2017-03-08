@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using Boundary.Areas.Admin.Models;
+using Boundary.Controllers;
 using Boundary.Controllers.Ordinary;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
+using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
 using BusinessLogic.Helpers;
 using DataModel.Entities.RelatedToStore;
@@ -87,7 +92,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public PartialViewResult SearchStoreByAjax(string codeOrName,byte? storeType=null,EStoreStatus? status=null, string username ="")  
+        public PartialViewResult SearchStoreByAjax(string codeOrName, byte? storeType = null, EStoreStatus? status = null, string username = "")
         {
             try
             {
@@ -152,7 +157,7 @@ namespace Boundary.Areas.Admin.Controllers
                 }
             }
         }
-                
+
         public ActionResult SellerDetailes(long id)
         {
             try
@@ -167,10 +172,10 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                Store store=new StoreBL().SelectOne(id);
+                Store store = new StoreBL().SelectOne(id);
                 if (store != null)
                 {
-                    DataModel.Entities.RelatedToStore.Seller seller = new SellerBL().SelectOne((long) store.SallerCode);
+                    DataModel.Entities.RelatedToStore.Seller seller = new SellerBL().SelectOne((long)store.SallerCode);
                     return View(seller);
                 }
                 return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
@@ -233,12 +238,12 @@ namespace Boundary.Areas.Admin.Controllers
 
                 ISession session = NHibernateConfiguration.OpenSession();
                 session.BeginTransaction();
-                
+
                 Store store = new StoreBL().SelectOne(storeCode);
                 store.StoreStatus = status;
                 if (new StoreBL().UpdateWhitOutCommitTransaction(store, session))
                 {
-                    new StoreBL().AfterStatusChange(store.UserCode,storeCode, status, session);
+                    new StoreBL().AfterStatusChange(store.UserCode, storeCode, status, session);
                     session.Transaction.Commit();
                     return Json(JsonResultHelper.SuccessResult(true), JsonRequestBehavior.AllowGet);
                 }
@@ -367,7 +372,7 @@ namespace Boundary.Areas.Admin.Controllers
                         if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("~/" + address)))
                         {
                             System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("~/" + address));
-                        }  
+                        }
                     }
                     return RedirectToAction("Index");
                 }
@@ -414,5 +419,86 @@ namespace Boundary.Areas.Admin.Controllers
                 }
             }
         }
-	}
+
+        [HttpGet]
+        public ActionResult CreateSimpleStore()
+        {
+            CheckSessionDataModel checkSession = CheckAdminSession();
+            if (!checkSession.IsSuccess)
+            {
+                if (checkSession.Message == StaticString.Message_WrongAccess)
+                    return RedirectToAction(StaticString.Action_Login, StaticString.Controller_ForLogin, new { area = "" });
+                if (checkSession.Message == StaticString.Message_UnSuccessFull)
+                    return RedirectToAction(StaticString.Action_Error, StaticString.Controller_ForError, new { area = "" });
+                return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateSimpleStore(SimpleStoreRegisterViewModel simpleStoreRegisterViewModel)
+        {
+            CheckSessionDataModel checkSession = CheckAdminSession();
+            if (!checkSession.IsSuccess)
+            {
+                if (checkSession.Message == StaticString.Message_WrongAccess)
+                    return RedirectToAction(StaticString.Action_Login, StaticString.Controller_ForLogin, new { area = "" });
+                if (checkSession.Message == StaticString.Message_UnSuccessFull)
+                    return RedirectToAction(StaticString.Action_Error, StaticString.Controller_ForError, new { area = "" });
+                return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
+            }
+            try
+            {
+                AppUser appUser = new AppUser()
+                {
+                    UserName = simpleStoreRegisterViewModel.PhoneNumber,
+                    Password = HelperFunction.GetMd5Hash(simpleStoreRegisterViewModel.Password),
+                    IsActive = true,
+                    RoleCode = ERole.Seller
+                };
+                var result = await new ShopFinderUserManager().CreateUser(ref appUser, appUser.Password, "");
+
+                var cats = new CategoryBL().GetFirstLevel().Select(c => c.Id).ToList();
+                var storeRegisterResult = new StoreBL().FullRegister(new StoreRegisterDataModel()
+                {
+                    UserName = appUser.UserName,
+                    Password = appUser.Password,
+                    ListCategoryCode = cats,
+                    StoreTypeCode = simpleStoreRegisterViewModel.StoreType
+                }, appUser.Id);
+
+                DataModel.Entities.Member member = new DataModel.Entities.Member()
+                {
+                    UserCode = appUser.Id,
+                };
+                new MemberBL().Insert(member);
+                return RedirectToAction("Index", "UserManagement");
+            }
+            catch (MyExceptionHandler exp1)
+            {
+                try
+                {
+                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JObject.FromObject(simpleStoreRegisterViewModel).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception exp3)
+            {
+                try
+                {
+                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JObject.FromObject(simpleStoreRegisterViewModel).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+    }
 }

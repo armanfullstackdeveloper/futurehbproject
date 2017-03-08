@@ -28,6 +28,9 @@
     <property name="LogBy">
       <column name="LogBy" sql-type="tinyint" not-null="false" />
     </property>
+    <property name="UserAgent">
+      <column name="UserAgent" sql-type="nvarchar" not-null="false" />
+    </property>
     <!--<bag name="ExceptionHandler">
       <key column="ExceptionHandlerCode" />
       <one-to-many class="ExceptionHandler" />

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataModel.Enums;
 
 namespace DataModel.Models.DataModel
 {
@@ -64,7 +65,7 @@ namespace DataModel.Models.DataModel
         /// </summary>
         public string CategoryCodes { get; set; }
 
-        public byte StoreTypeCode { get; set; }
+        public EStoreType StoreTypeCode { get; set; }
         
         public string Website { get; set; }
 

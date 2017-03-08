@@ -31,7 +31,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAll();
+                ViewBag.Categories = new CategoryBL().GetAllAsync();
                 List<AttributeViewModel> lstAttributes = new AttributeBL().GetByCategoryCodeForShow(null);
                 return View(lstAttributes ?? new List<AttributeViewModel>());
             }
@@ -122,7 +122,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAll();
+                ViewBag.Categories = new CategoryBL().GetAllAsync();
                 ViewBag.AttributeType = new AttributeTypeBL().SelectAll();
                 return View();
             }

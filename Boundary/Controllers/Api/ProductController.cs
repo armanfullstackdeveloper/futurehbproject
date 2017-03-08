@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
@@ -14,10 +14,11 @@ using DataModel.Models.DataModel;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
+using WebApi.OutputCache.V2;
 
 namespace Boundary.Controllers.Api
 {
-    [System.Web.Http.RoutePrefix("api/product")]
+    [RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
         /// <summary>
@@ -25,8 +26,8 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("get")]
+        [HttpGet]
+        [Route("get")]
         public IHttpActionResult GetProduct(long id)
         {
             try
@@ -47,7 +48,7 @@ namespace Boundary.Controllers.Api
                     case EProductStatus.Suspended:
                     case EProductStatus.New: //اگه فروشنده نیست نمیتونه ببینه
                         {
-                            string userId = this.RequestContext.Principal.Identity.GetUserId();
+                            string userId = RequestContext.Principal.Identity.GetUserId();
                             StoreSessionDataModel store = new StoreBL().GetSummaryForSession(userId);
                             if (store == null)
                                 return Json(JsonResultHelper.FailedResultWithMessage());
@@ -62,13 +63,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => id),
                             Value = id.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -82,13 +83,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                      new ActionInputViewModel()
-                        {
+                      new ActionInputViewModel
+                      {
                             Name = HelperFunctionInBL.GetVariableName(() => id),
                             Value = id.ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -105,18 +106,19 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="filters"></param>
         /// <returns></returns>
-        [System.Web.Http.Route("Search")]
-        public IHttpActionResult Search(SearchParametersDataModel filters)
+        [CacheOutput(ClientTimeSpan = 600, ServerTimeSpan = 600)]
+        [Route("Search")]
+        public async Task<IHttpActionResult> Search(SearchParametersDataModel filters)
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                     return Json(JsonResultHelper.FailedResultOfInvalidInputs());
 
-                List<EProductStatus> lstStatus = new List<EProductStatus>() { EProductStatus.Active};
+                List<EProductStatus> lstStatus = new List<EProductStatus> { EProductStatus.Active };
                 #region getting store Id
 
-                string userId = this.RequestContext.Principal.Identity.GetUserId();
+                string userId = RequestContext.Principal.Identity.GetUserId();
                 StoreSessionDataModel store = null;
                 if (!string.IsNullOrEmpty(userId))
                 {
@@ -127,7 +129,7 @@ namespace Boundary.Controllers.Api
                         lstStatus.Add(EProductStatus.New);
                         lstStatus.Add(EProductStatus.Suspended);
                     }
-                        
+
                 }
 
                 #endregion getting store Id
@@ -136,11 +138,11 @@ namespace Boundary.Controllers.Api
                 if (store == null)
                     haveImage = true;
 
-                SearchResultViewModel result = new ProductBL().Search(searchParameters: filters,status: lstStatus,haveImage: haveImage);
+                SearchResultViewModel result = await new ProductBL().Search(searchParameters: filters, status: lstStatus, haveImage: haveImage);
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه
-                if ((lstStatus.Contains(EProductStatus.Suspended) || lstStatus.Contains(EProductStatus.New)) && store!=null)
+                if ((lstStatus.Contains(EProductStatus.Suspended) || lstStatus.Contains(EProductStatus.New)) && store != null)
                 {
                     result.ProductsSummery.RemoveAll(
                         p => p.StoreCode != store.StoreCode && (p.Status == EProductStatus.Suspended || p.Status == EProductStatus.New));
@@ -151,13 +153,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => filters),
                             Value = JObject.FromObject(filters).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -171,13 +173,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => filters),
                             Value = JObject.FromObject(filters).ToString()
-                        },
+                        }
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
@@ -194,25 +196,26 @@ namespace Boundary.Controllers.Api
         /// </summary>
         /// <param name="categoryCode"></param>
         /// <returns></returns>
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("getRequiredItemsForSearch")]
-        public IHttpActionResult GetRequiredItemsForSearch(long categoryCode)
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 600, ServerTimeSpan = 600)]
+        [Route("getRequiredItemsForSearch")]
+        public async Task<IHttpActionResult> GetRequiredItemsForSearch(long categoryCode)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new CategoryBL().GetRequiredItemsForSearch(categoryCode)));
+                return Json(JsonResultHelper.SuccessResult(await new CategoryBL().GetRequiredItemsForSearchAsync(categoryCode)));
             }
             catch (MyExceptionHandler exp1)
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                        new ActionInputViewModel()
+                        new ActionInputViewModel
                         {
                             Name = HelperFunctionInBL.GetVariableName(() => categoryCode),
                             Value = categoryCode.ToString()
-                        },
+                        }
                     };
                     long? code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(new { success = false, response = StaticString.Message_UnSuccessFull, trackingCode = code });
@@ -226,13 +229,13 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>
                     {
-                       new ActionInputViewModel()
-                        {
+                       new ActionInputViewModel
+                       {
                             Name = HelperFunctionInBL.GetVariableName(() => categoryCode),
                             Value = categoryCode.ToString()
-                        },
+                        }
                     };
                     long? code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(new { success = false, response = StaticString.Message_UnSuccessFull, trackingCode = code });

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -91,11 +92,11 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
         [HttpGet]
         [Route("getRequiredItemsForNewProduct")]
-        public IHttpActionResult GetRequiredItemsForNewProduct(long catCode)
+        public async Task<IHttpActionResult> GetRequiredItemsForNewProduct(long catCode)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new CategoryBL().GetRequiredItemsForNewProduct(catCode)));
+                return Json(JsonResultHelper.SuccessResult(await new CategoryBL().GetRequiredItemsForNewProductAsync(catCode)));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -323,10 +324,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             Value = JObject.FromObject(productRegisterDataModel).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
@@ -346,10 +347,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             Value = JObject.FromObject(productRegisterDataModel).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }

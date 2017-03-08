@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
+using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
 using BusinessLogic.Components;
 using BusinessLogic.Helpers;
@@ -121,7 +122,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -141,7 +142,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -366,7 +367,15 @@ namespace Boundary.Controllers.Ordinary
                 if (user == null || user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
+                if (string.IsNullOrEmpty(storeRegister.CategoryCodes))
+                {
+                    var cats = new CategoryBL().GetFirstLevel().Select(c => c.Id).ToList();
+                    storeRegister.ListCategoryCode = cats;
+                }
+                else
+                {
                 storeRegister.ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList();
+                }
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
@@ -413,7 +422,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -435,7 +444,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)

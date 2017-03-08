@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 using BusinessLogic.Helpers;
 using Dapper;
@@ -38,7 +39,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public List<Category> GetThirdLevel(long? thirdLeveleCategoryCode=null)
+        public List<Category> GetThirdLevel(long? thirdLeveleCategoryCode = null)
         {
             try
             {
@@ -53,18 +54,17 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public List<Category> GetAll(bool withImage=false)
+        public async Task<IEnumerable<Category>> GetAllAsync(bool withImage = false)
         {
             _db = EnsureOpenConnection();
-            List<Category> lstFirstLevel;
-            using (var txScope = new TransactionScope())
+            IEnumerable<Category> lstFirstLevel;
+            using (var txScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                lstFirstLevel = _db.Query<Category>(
-                    $"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetFirstLevel()").ToList();
-                List<Category> lstSecondLevel = _db.Query<Category>(
-                    $"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetSecondLevel(null)").ToList();
-                List<Category> lstThirdLevel = _db.Query<Category>(
-                   $"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetThirdLevel(null)").ToList();
+                lstFirstLevel = await _db.QueryAsync<Category>($"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetFirstLevel()");
+                IEnumerable<Category> lstSecondLevel = await _db.QueryAsync<Category>(
+                    $"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetSecondLevel(null)");
+                IEnumerable<Category> lstThirdLevel = await _db.QueryAsync<Category>(
+                   $"SELECT {(withImage ? "*" : "[Id],[Name],[BaseCategoryCode]")} FROM dbo.Category_GetThirdLevel(null)");
                 foreach (Category category1 in lstFirstLevel)
                 {
                     foreach (Category category2 in lstSecondLevel)
@@ -90,7 +90,45 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             return lstFirstLevel;
         }
 
-        public ProductRegisterRequireItemsViewModel GetRequiredItemsForNewProduct(long catCode)
+        public async Task<IEnumerable<Category>> GetAllForMenueAsync()
+        {
+            _db = EnsureOpenConnection();
+            IEnumerable<Category> lstFirstLevel;
+            using (var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                lstFirstLevel = await _db.QueryAsync<Category>("SELECT * FROM dbo.Category_GetFirstLevel()");
+                IEnumerable<Category> lstSecondLevel = await _db.QueryAsync<Category>("SELECT * FROM dbo.Category_GetSecondLevel(null)");
+                IEnumerable<Category> lstThirdLevel = await _db.QueryAsync<Category>("SELECT * FROM dbo.Category_GetThirdLevelForMenue(null)");
+                foreach (Category category1 in lstFirstLevel)
+                {
+                    foreach (Category category2 in lstSecondLevel)
+                    {
+                        if (category1.Id == category2.BaseCategoryCode)
+                        {
+                            foreach (Category category3 in lstThirdLevel)
+                            {
+                                if (category2.Id == category3.BaseCategoryCode)
+                                {
+                                    if (category2.SubCategories == null)
+                                        category2.SubCategories = new List<Category>();
+                                    category2.SubCategories.Add(category3);
+                                }
+                            }
+                            if (category1.SubCategories == null)
+                                category1.SubCategories = new List<Category>();
+                            if (category2.SubCategories!= null && category2.SubCategories.Count > 0)
+                                category1.SubCategories.Add(category2);
+                        }
+                    }
+                }
+                lstFirstLevel.ToList().RemoveAll(cat => cat.SubCategories==null || cat.SubCategories.All(sub => sub.SubCategories==null || sub.SubCategories.Count == 0));
+                tx.Complete();
+            }
+            EnsureCloseConnection(_db);
+            return lstFirstLevel;
+        }
+
+        public async Task<ProductRegisterRequireItemsViewModel> GetRequiredItemsForNewProductAsync(long catCode)
         {
             try
             {
@@ -101,7 +139,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
                 var parameters = new DynamicParameters();
                 parameters.Add("@catCode", catCode);
 
-                using (var multipleResults = _db.QueryMultiple("Category_GetRequiredItemsForNewProduct", parameters, commandType: CommandType.StoredProcedure))
+                using (var multipleResults = await _db.QueryMultipleAsync("Category_GetRequiredItemsForNewProduct", parameters, commandType: CommandType.StoredProcedure))
                 {
                     result.ProductAttributeWithoutItems = multipleResults.Read<ProductAttributeWithoutItemsViewModel>().ToList();
                     result.ProductSelectAttributeWithItems = multipleResults.Read<ProductAttributeWithItemsViewModel>().ToList();
@@ -158,7 +196,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public ProductSearchRequireItemsViewModel GetRequiredItemsForSearch(long catCode)
+        public async Task<ProductSearchRequireItemsViewModel> GetRequiredItemsForSearchAsync(long catCode)
         {
             try
             {
@@ -169,7 +207,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
                 var parameters = new DynamicParameters();
                 parameters.Add("@catCode", catCode);
 
-                using (var multipleResults = _db.QueryMultiple("Category_GetRequiredItemsForSearch", parameters, commandType: CommandType.StoredProcedure))
+                using (var multipleResults = await _db.QueryMultipleAsync("Category_GetRequiredItemsForSearch", parameters, commandType: CommandType.StoredProcedure))
                 {
                     result.ProductAttributeWithItems = multipleResults.Read<ProductAttributeWithItemsViewModel>().ToList();
                     lstAttributeValues = multipleResults.Read<AttributeValue>().ToList();

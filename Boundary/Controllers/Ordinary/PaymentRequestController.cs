@@ -30,23 +30,13 @@ namespace Boundary.Controllers.Ordinary
         /// <param name="paymentRequestCode"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
         public ActionResult Pay(long paymentRequestCode)
         {
-            CheckSessionDataModel checkSessionForMember = CheckMembererSession();
-            CheckSessionDataModel checkSessionForSeller = CheckSallerSession();
-            if (!checkSessionForMember.IsSuccess && !checkSessionForSeller.IsSuccess)
-            {
-                return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-            }
-            long memberCode = (checkSessionForMember.IsSuccess) ?
-                checkSessionForMember.MainSession.Member.Id : checkSessionForSeller.MainSession.Store.MemberCode;
-
             try
             {
                 PaymentRequest paymentRequest = new PaymentRequestBL().SelectOne(paymentRequestCode);
                 var orders = new OrderBL().GetOrdersByPaymentRequestCode(paymentRequestCode);
-                if (orders == null || orders.Count == 0 || memberCode == 0 || orders[0].MemberCode != memberCode)
+                if (orders == null || orders.Count == 0)
                     return Json(JsonResultHelper.FailedResultWithMessage("خطا در دریافت اطلاعات خرید"), JsonRequestBehavior.AllowGet);
 
                 int finalPriceToPay = orders.Sum(o => o.OverallPayment);

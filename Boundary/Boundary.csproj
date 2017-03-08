@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Boundary</RootNamespace>
     <AssemblyName>Boundary</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +101,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
@@ -107,12 +109,13 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -149,7 +152,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -162,8 +164,17 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx">
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.V2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -196,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\Admin\Models\StoreRegisterViewModel.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -777,6 +789,7 @@
     <Content Include="Areas\SuperAdmin\Views\UserManagement\Edit.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\UserManagement\Index.cshtml" />
     <Content Include="Areas\Seller\Views\StoreManagment\EditStore.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\CreateSimpleStore.cshtml" />
     <None Include="Properties\PublishProfiles\ShoFinderPublish.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Properties\Settings.settings">

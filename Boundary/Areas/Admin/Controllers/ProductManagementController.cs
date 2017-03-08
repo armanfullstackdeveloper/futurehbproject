@@ -22,7 +22,7 @@ namespace Boundary.Areas.Admin.Controllers
     [Authorize(Roles = StaticString.Role_Admin + "," + StaticString.Role_SuperAdmin)]
     public class ProductManagementController : BaseController
     {
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> Index()
         {
             try
             {
@@ -36,8 +36,9 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAll();
-                return View(new ProductBL().Search(new SearchParametersDataModel(), null).ProductsSummery);
+                ViewBag.Categories = await new CategoryBL().GetAllAsync();
+                var result = await new ProductBL().Search(new SearchParametersDataModel(), null);
+                return View(result.ProductsSummery);
             }
             catch (MyExceptionHandler exp1)
             {
@@ -67,7 +68,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public PartialViewResult SearchProductByAjax(SearchParametersDataModel filters, EProductStatus? status=null, long? productCode=null)
+        public async System.Threading.Tasks.Task<PartialViewResult> SearchProductByAjax(SearchParametersDataModel filters, EProductStatus? status = null, long? productCode = null)
         {
             if (!ModelState.IsValid)
                 return null;
@@ -83,8 +84,8 @@ namespace Boundary.Areas.Admin.Controllers
                     return null;
                 }
 
-                return PartialView("_ProductSummery", new ProductBL().Search(filters,
-                    (status==null)?null:new List<EProductStatus>() { (EProductStatus) status }, productCode).ProductsSummery);
+                var result = await new ProductBL().Search(filters, (status == null) ? null : new List<EProductStatus>() { (EProductStatus)status }, productCode);
+                return PartialView("_ProductSummery", result.ProductsSummery);
             }
             catch (MyExceptionHandler exp1)
             {

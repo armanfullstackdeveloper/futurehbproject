@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using BusinessLogic.Components;
 using BusinessLogic.Helpers;
 using Dapper;
@@ -116,7 +117,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public SearchResultViewModel Search(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null,bool? haveImage=null)
+        public async Task<SearchResultViewModel> Search(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null,bool? haveImage=null)
         {
             try
             {
@@ -174,7 +175,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
 
                 SearchResultViewModel searchResult = new SearchResultViewModel();
                 List<ProductAttrbiutesDataModel> lstProductAttrbiutesDataModels = null;
-                using (var multipleResults = _db.QueryMultiple("Search", parameters,
+                using (var multipleResults = await _db.QueryMultipleAsync("Search", parameters,
                     commandType: CommandType.StoredProcedure))
                 {
                     searchResult.ProductsSummery = multipleResults.Read<ProductSummary>().ToList();

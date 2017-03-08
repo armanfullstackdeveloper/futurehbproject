@@ -188,7 +188,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -208,7 +208,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -473,7 +473,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -495,7 +495,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)

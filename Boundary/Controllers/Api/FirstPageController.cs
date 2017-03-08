@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Boundary.Helper;
@@ -16,6 +17,7 @@ using DataModel.Models.DataModel;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
+using WebApi.OutputCache.V2;
 
 namespace Boundary.Controllers.Api
 {
@@ -92,15 +94,16 @@ namespace Boundary.Controllers.Api
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
             }
-        } 
+        }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 1800, ServerTimeSpan = 1800)]
         [Route("GetNewestStore")]
-        public IHttpActionResult GetNewestStore(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
+        public async Task<IHttpActionResult> GetNewestStore(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new StoreBL().GetNewest(cityCode, pageNumber, rowspPage)));
+                return Json(JsonResultHelper.SuccessResult(await new StoreBL().GetNewest(cityCode, pageNumber, rowspPage)));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -462,7 +465,7 @@ namespace Boundary.Controllers.Api
 
         [HttpGet]
         [Route("ForgetPassword")]
-        public IHttpActionResult ForgetPassword(string email) 
+        public IHttpActionResult ForgetPassword(string email)
         {
             try
             {
@@ -475,7 +478,7 @@ namespace Boundary.Controllers.Api
                 string newPass = Guid.NewGuid().ToString();
                 newPass = newPass.Substring(0, 10);
                 string hashPass = HelperFunction.GetMd5Hash(newPass);
-                
+
 
                 User user = users.FirstOrDefault();
                 user.Password = hashPass;
@@ -568,12 +571,14 @@ namespace Boundary.Controllers.Api
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 1800, ServerTimeSpan = 1800)]
         [Route("getMenue")]
-        public IHttpActionResult GetMenu()
+        public async Task<IHttpActionResult> GetMenu()
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new CategoryBL().GetAll(withImage:true)));
+                var result = await new CategoryBL().GetAllForMenueAsync();
+                return Json(JsonResultHelper.SuccessResult(result.ToList()));
             }
             catch (MyExceptionHandler exp1)
             {
