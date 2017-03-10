@@ -21,5 +21,20 @@ namespace Boundary.Helper.StaticValue
         {
             return $"رمز عبور جدید شما: {pass}";
         }
+
+        public static string NewOrderForBuyer(string trackingCode) 
+        {
+            return $"خرید شما با موفقیت ثبت شد. کد پیگیری خرید شما {trackingCode} می باشد. با تشکر از همراهی شما";
+        }
+
+        public static string NewOrderForSeller()
+        {
+            return $"سفارش جدیدی برای شما در هوجی بوجی ایجاد شده است. لطفا وارد پنل خود شده و نسبت به ویرایش وضعیت سفارش اقدام کنید. با تشکر از همراهی شما.";
+        }
+
+        public static string NewOrderForAdmin()
+        {
+            return $"اطللاع رسانی جهت ایجاد سفارش جدید در هوجی بوجی";
+        }
     }
 }

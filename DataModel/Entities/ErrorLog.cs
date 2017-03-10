@@ -13,6 +13,7 @@ namespace DataModel.Entities {
         public string UserCode { get; set; }
         public virtual int? Date { get; set; }
         public virtual short? Time { get; set; }
-        public virtual EClientType ClientType { get; set; }
+        public virtual ELogBy LogBy { get; set; }
+        public virtual string UserAgent { get; set; }
     }
 }

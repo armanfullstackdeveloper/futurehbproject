@@ -43,7 +43,7 @@ namespace Boundary.Controllers.Api
         [Route("UserRegister")]
         public async Task<IHttpActionResult> UserRegister(UserRegisterDataModel userRegisterData)
         {
-            if (!ModelState.IsValid || userRegisterData.PhoneNumber.Length!=11 || userRegisterData.Password.Length<6)
+            if (!ModelState.IsValid || userRegisterData.PhoneNumber.Length != 11 || userRegisterData.Password.Length < 6)
             {
                 return Json(JsonResultHelper.FailedResultOfInvalidInputs());
             }
@@ -51,24 +51,27 @@ namespace Boundary.Controllers.Api
             try
             {
                 //check konam az ghabl sabtenam karde ya na
-                User findUser = new UserBL().GetByUserName(userRegisterData.PhoneNumber); 
-                if (user != null && user.RoleCode != ERole.NotRegister)
+                User findUser = new UserBL().GetByUserName(userRegisterData.PhoneNumber);
+                if (findUser != null && findUser.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage("تلفن همراه وارد شده، از قبل موجود می باشد"));
                 //check konam verifacationCode ghablan to sms sabt shode ya na(be tartibe nozoli, akhari)
                 string verificationCode = new SmsBL().VerificationCode(Convert.ToInt64(userRegisterData.PhoneNumber.Remove(0, 1)));
-                if(verificationCode!=userRegisterData.VerificationCode.ToString())
+                if (verificationCode != userRegisterData.VerificationCode.ToString())
                     return Json(JsonResultHelper.FailedResultWithMessage("کد وارد شده صحیح نیست"));
 
-                user = new AppUser
+                if (findUser == null)
                 {
-                    UserName = userRegisterData.PhoneNumber,
-                    Role = StaticRole.NotRegister,
-                    RoleCode = StaticRole.NotRegister.Id
-                };
-                var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
-                if (result == null || !result.Succeeded)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage());
+                    user = new AppUser
+                    {
+                        UserName = userRegisterData.PhoneNumber,
+                        Role = StaticRole.NotRegister,
+                        RoleCode = StaticRole.NotRegister.Id,                        
+                    };
+                    var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
+                    if (result == null || !result.Succeeded)
+                    {
+                        return Json(JsonResultHelper.FailedResultWithMessage());
+                    }
                 }
                 return Json(JsonResultHelper.SuccessResult());
             }
@@ -127,8 +130,8 @@ namespace Boundary.Controllers.Api
             }
             try
             {
-                User user = new UserBL().GetByUserNameAndPassword(model.UserName,model.Password);
-                if (user == null || user.RoleCode!=ERole.NotRegister)
+                User user = new UserBL().GetByUserNameAndPassword(model.UserName, model.Password);
+                if (user == null || user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
                 Member member = new Member()
@@ -140,11 +143,10 @@ namespace Boundary.Controllers.Api
                 {
                     member.Name = model.MemberInfo.Name;
                     member.CityCode = model.MemberInfo.CityCode;
-                    //member.Email = model.MemberInfo.Email;
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
-                    member.PhoneNumber = model.MemberInfo.PhoneNumber;
+                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber)? model.UserName:model.MemberInfo.PhoneNumber;
                     member.Place = model.MemberInfo.Place;
                     member.PostalCode = model.MemberInfo.PostalCode;
                 }
@@ -153,6 +155,10 @@ namespace Boundary.Controllers.Api
 
                 if (cutomerRegisterResult > 0)
                 {
+                    user.IsActive = true;
+                    user.RoleCode = ERole.Member;
+                    new UserBL().Update(user);
+
                     //ببینم مشتری فروشگاه خاصی هست یا نه
                     long? storeCode = new StoreBL().GetStoreCodeByHomePage(shopname);
                     if (storeCode != null && storeCode > 0)
@@ -182,7 +188,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -202,7 +208,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -419,7 +425,7 @@ namespace Boundary.Controllers.Api
 
         [HttpPost]
         [Route("AddStore")]
-        public async Task<IHttpActionResult> AddStore(StoreRegisterDataModel storeRegister)
+        public IHttpActionResult AddStore(StoreRegisterDataModel storeRegister)
         {
             if (!ModelState.IsValid)
             {
@@ -432,10 +438,13 @@ namespace Boundary.Controllers.Api
                 if (user == null || user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
-                //storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
+                    user.RoleCode = ERole.Seller;
+                    user.IsActive = true;
+                    new UserBL().Update(user);
+
                     Member member = new Member()
                     {
                         UserCode = user.Id,
@@ -464,7 +473,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -486,7 +495,7 @@ namespace Boundary.Controllers.Api
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -567,6 +576,79 @@ namespace Boundary.Controllers.Api
                         //     Name = HelpfulFunction.GetVariableName(() => categoryCode),
                         //     Value = categoryCode.ToString()
                         // },
+                    };
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+        }
+
+        /// <summary>
+        /// update user account info
+        /// </summary>
+        /// <param name="userAccountDataModel"></param>
+        /// <returns></returns>
+        [Authorize]
+        [Route("UpdateUserAccount")]
+        public IHttpActionResult UpdateUserAccount(UserAccountDataModel userAccountDataModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(JsonResultHelper.FailedResultWithMessage());
+            }
+            if (userAccountDataModel.PhoneNumber.Length != 11 || userAccountDataModel.PhoneNumber.StartsWith("09") == false)
+                return Json(JsonResultHelper.FailedResultOfInvalidInputs());
+            try
+            {
+                User user = new UserBL().GetByUserName(userAccountDataModel.PhoneNumber);
+                if (user.UserName != userAccountDataModel.PhoneNumber)
+                {
+                    bool checkExsistBefore = new UserBL().IfUsernameExist(userAccountDataModel.PhoneNumber);
+                    if(checkExsistBefore)
+                        return Json(JsonResultHelper.FailedResultWithMessage("این شماره از قبل موجود می باشد"));
+                }
+                user.UserName = userAccountDataModel.PhoneNumber;
+                user.Password = userAccountDataModel.Password;
+                var result = new UserBL().Update(user);
+                if (result.DbMessage.MessageType == MessageType.Success)
+                    return Json(JsonResultHelper.SuccessResult());
+                return Json(JsonResultHelper.FailedResultWithMessage());
+            }
+            catch (MyExceptionHandler exp1)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => userAccountDataModel),
+                            Value = JObject.FromObject(userAccountDataModel).ToString()
+                        },
+                    };
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
+                }
+                catch (Exception)
+                {
+                    return Json(JsonResultHelper.FailedResultWithMessage());
+                }
+            }
+            catch (Exception exp3)
+            {
+                try
+                {
+                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
+                    {
+                        new ActionInputViewModel()
+                        {
+                            Name = HelperFunctionInBL.GetVariableName(() => userAccountDataModel),
+                            Value = JObject.FromObject(userAccountDataModel).ToString()
+                        },
                     };
                     long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));

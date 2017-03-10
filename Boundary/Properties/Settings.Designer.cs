@@ -32,5 +32,15 @@ namespace Boundary.Properties {
                 return ((string)(this["Boundary_com_arianpal_merchant_WebService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://api.payamak-panel.com/post/Send.asmx")]
+        public string Boundary_mellipayamak_Send {
+            get {
+                return ((string)(this["Boundary_mellipayamak_Send"]));
+            }
+        }
     }
 }

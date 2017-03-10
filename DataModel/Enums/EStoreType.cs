@@ -1,9 +1,9 @@
 ﻿namespace DataModel.Enums
 {
-    public enum EStoreType
+    public enum EStoreType : byte
     {
         Physical = 1,
         Online = 2,
-        Homemade = 3 
+        Homemade = 3
     }
 }

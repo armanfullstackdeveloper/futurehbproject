@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Boundary.Helper;
 using BusinessLogic.BussinesLogics;
@@ -17,7 +18,7 @@ namespace Boundary.Controllers.Ordinary
     public class StoreController : BaseController
     {
         [Route("Shop")]
-        public ActionResult ShopPage(string shopname="",long? id=null) 
+        public async Task<ActionResult> ShopPage(string shopname="",long? id=null) 
         {
             try
             {
@@ -44,7 +45,7 @@ namespace Boundary.Controllers.Ordinary
 
                 #endregion getting store Id
 
-                SearchResultViewModel result = new ProductBL().Search(new SearchParametersDataModel()
+                SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
                 {
                     StoreCode = storeCode
                 }, lstStatus);

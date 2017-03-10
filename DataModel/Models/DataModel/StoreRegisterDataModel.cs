@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataModel.Enums;
 
 namespace DataModel.Models.DataModel
 {
@@ -54,7 +55,7 @@ namespace DataModel.Models.DataModel
         public virtual string Longitude { get; set; }
 
         [Display(Name = "شماره تماس")]
-        public decimal? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "نوع محصولات فروشگاه")]
         public List<long> ListCategoryCode { get; set; }
@@ -64,7 +65,7 @@ namespace DataModel.Models.DataModel
         /// </summary>
         public string CategoryCodes { get; set; }
 
-        public byte StoreTypeCode { get; set; }
+        public EStoreType StoreTypeCode { get; set; }
         
         public string Website { get; set; }
 
@@ -121,7 +122,7 @@ namespace DataModel.Models.DataModel
         public decimal? Longitude { get; set; }
 
         [Display(Name = "شماره تماس")]
-        public List<decimal> PhoneNumbers { get; set; } 
+        public List<string> PhoneNumbers { get; set; } 
 
         [Display(Name = "نوع محصولات فروشگاه")]
         public List<long> ListCategoryCode { get; set; }

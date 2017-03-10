@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
+using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
 using BusinessLogic.Components;
 using BusinessLogic.Helpers;
@@ -66,7 +67,7 @@ namespace Boundary.Controllers.Ordinary
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
-                    member.PhoneNumber = model.MemberInfo.PhoneNumber;
+                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber) ? model.UserName : model.MemberInfo.PhoneNumber;
                     member.Place = model.MemberInfo.Place;
                     member.PostalCode = model.MemberInfo.PostalCode;
                 }
@@ -75,6 +76,10 @@ namespace Boundary.Controllers.Ordinary
 
                 if (cutomerRegisterResult > 0)
                 {
+                    user.RoleCode = ERole.Member;
+                    user.IsActive = true;
+                    new UserBL().Update(user);
+
                     await SignInAsync(new AppUser()
                     {
                         Id = user.Id,
@@ -117,7 +122,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -137,7 +142,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(model).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -362,11 +367,22 @@ namespace Boundary.Controllers.Ordinary
                 if (user == null || user.RoleCode != ERole.NotRegister)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
+                if (string.IsNullOrEmpty(storeRegister.CategoryCodes))
+                {
+                    var cats = new CategoryBL().GetFirstLevel().Select(c => c.Id).ToList();
+                    storeRegister.ListCategoryCode = cats;
+                }
+                else
+                {
                 storeRegister.ListCategoryCode = storeRegister.CategoryCodes.Split(',').Select(Int64.Parse).ToList();
-                //storeRegister.PhoneNumber = Convert.ToDecimal(user.UserName);
+                }
                 var storeRegisterResult = new StoreBL().FullRegister(storeRegister, user.Id);
                 if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
                 {
+                    user.RoleCode = ERole.Seller;
+                    user.IsActive = true;
+                    new UserBL().Update(user);
+
                     Member member = new Member()
                     {
                         UserCode = user.Id,
@@ -406,7 +422,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)
@@ -428,7 +444,7 @@ namespace Boundary.Controllers.Ordinary
                             Value = JObject.FromObject(storeRegister).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString(), HttpContext.Request.UserAgent);
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -91,11 +92,11 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
         [HttpGet]
         [Route("getRequiredItemsForNewProduct")]
-        public IHttpActionResult GetRequiredItemsForNewProduct(long catCode)
+        public async Task<IHttpActionResult> GetRequiredItemsForNewProduct(long catCode)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new CategoryBL().GetRequiredItemsForNewProduct(catCode)));
+                return Json(JsonResultHelper.SuccessResult(await new CategoryBL().GetRequiredItemsForNewProductAsync(catCode)));
             }
             catch (MyExceptionHandler exp1)
             {
@@ -302,7 +303,6 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     }
                 }
 
-
                 session.Transaction.Commit();
 
                 #endregion
@@ -324,10 +324,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             Value = JObject.FromObject(productRegisterDataModel).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
@@ -347,10 +347,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             Value = JObject.FromObject(productRegisterDataModel).ToString()
                         },
                     };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString(), Request.Headers.UserAgent.ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage());
                 }
@@ -912,32 +912,25 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         string filePath = HttpContext.Current.Server.MapPath("~/Content/Images/Saller/"
                                                                                        + path + "/" + store.StoreCode +
                                                                                        "/Products/" + productId);
-                        WebImage orginlImage = new WebImage(recivedFile.InputStream);
-                        orginlImage = orginlImage.Crop((int)top, (int)left, (int)bottom, (int)right);
-
-                        //use resizedImg for searchPage
-                        string resizedImgFilePath = null;
-                        if (isMainImg)
-                        {
-                            resizedImgFilePath = filePath;
-                            resizedImgFilePath = Path.Combine(resizedImgFilePath, "MainImage");
-                        }
+                        WebImage image = new WebImage(recivedFile.InputStream);
+                        image = image.Crop((int)top, (int)left, (int)bottom, (int)right);
 
                         if (Directory.Exists(filePath) == false)
                         {
                             Directory.CreateDirectory(filePath);
                         }
 
-                        if (isMainImg && string.IsNullOrEmpty(resizedImgFilePath) == false)
+                        if (isMainImg)
                         {
-                            if (Directory.Exists(resizedImgFilePath) == false)
+                            filePath = Path.Combine(filePath, "MainImage");
+                            if (Directory.Exists(filePath) == false)
                             {
-                                Directory.CreateDirectory(resizedImgFilePath);
+                                Directory.CreateDirectory(filePath);
                             }
                             else
                             {
                                 string mainImgAddress = new ProductBL().GetProductMainImageAddress(productId);
-                                Array.ForEach(Directory.GetFiles(resizedImgFilePath), File.Delete);
+                                Array.ForEach(Directory.GetFiles(filePath), File.Delete);
                                 mainImgAddress = mainImgAddress.Replace(@"\MainImage", string.Empty);
                                 if (string.IsNullOrWhiteSpace(mainImgAddress) == false && File.Exists(HttpContext.Current.Server.MapPath("~/" + mainImgAddress)))
                                 {
@@ -948,18 +941,15 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
                         string newName = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(lowerFilename);
-                        string imageAddress = resizedImgFilePath + "/" + newName + extension;
-                        if (isMainImg && string.IsNullOrEmpty(resizedImgFilePath) == false)
-                        {
-                            orginlImage.Save(imageAddress);
-                        }
+                        string imageAddress = filePath + "/" + newName + extension;
+                        image.Save(imageAddress);
 
                         string rootPath = filePath.Substring(filePath.IndexOf("Content", StringComparison.Ordinal));
                         rootPath = Path.Combine(rootPath, newName + extension);
 
                         if (isMainImg)
                         {
-                            string rootPathForResizedImg = resizedImgFilePath.Substring(resizedImgFilePath.IndexOf("Content", StringComparison.Ordinal));
+                            string rootPathForResizedImg = filePath.Substring(filePath.IndexOf("Content", StringComparison.Ordinal));
                             rootPathForResizedImg = Path.Combine(rootPathForResizedImg, newName + extension);
 
                             QueryResult<Product> result = new ProductBL().UpdateMainImag(new ProductImage()
@@ -971,18 +961,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                             if (result != null && result.DbMessage.MessageType == MessageType.Success &&
                                 new ProductImageBL().GetProductImageCount(productId) < StaticNemberic.MaximumProductImage)
                             {
-                                new ProductImageBL().SaveImageWithCheckingIsItForThatStore(new ProductImage()
-                                {
-                                    ImgAddress = rootPath,
-                                    ProductCode = productId
-                                }, store.StoreCode);
-
-                                Product product = new ProductBL().SelectOne(productId);
-                                product.RegisterDate = PersianDateTime.Now.Date.ToInt();
-                                new ProductBL().Update(product);
-
                                 ImageHelper.Resise(imageAddress, StaticNemberic.MaximumImageHeightSize, StaticNemberic.MaximumImageWidthSize, extension.Replace(".", ""));
-
                                 dynamic jsonObject = new JObject();
                                 jsonObject.ImageAddress = rootPath;
                                 return Ok(JsonResultHelper.SuccessResult(jsonObject));

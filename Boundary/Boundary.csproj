@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Boundary</RootNamespace>
     <AssemblyName>Boundary</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fluentx, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.2.0.4\lib\Fluentx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fluentx.Mvc, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.Mvc.1.0.4\lib\Fluentx.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -92,6 +101,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
@@ -99,12 +109,13 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -141,7 +152,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -154,8 +164,17 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx">
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.V2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -173,6 +192,7 @@
     <Folder Include="Areas\SuperAdmin\Views\Shared\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Img\StoreInfo\" />
+    <Folder Include="Views\PaymentRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -187,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
+    <Compile Include="Areas\Admin\Models\StoreRegisterViewModel.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -218,7 +239,7 @@
     <Compile Include="Areas\Seller\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AdminManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ErroHandlingController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdvertiseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BoxController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\PanelController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentToMemberController.cs" />
@@ -246,13 +267,20 @@
     <Compile Include="Areas\SuperAdmin\Controllers\AppManagmentController.cs" />
     <Compile Include="Controllers\Api\SmsController.cs" />
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
+    <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
     <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />
+    <Compile Include="Model\PaymentViewModel.cs" />
     <Compile Include="Web References\com.arianpal.merchant\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\mellipayamak\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -700,10 +728,10 @@
     <Content Include="Areas\Admin\Views\MainSlider\Create.cshtml" />
     <Content Include="Areas\Admin\Views\MainSlider\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\MainSlider\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Advertise\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Box\Delete.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\web.config" />
     <Content Include="Areas\SuperAdmin\Views\AdminManagement\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\AdminManagement\Create.cshtml" />
@@ -764,6 +792,7 @@
     <Content Include="Areas\SuperAdmin\Views\UserManagement\Edit.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\UserManagement\Index.cshtml" />
     <Content Include="Areas\Seller\Views\StoreManagment\EditStore.cshtml" />
+    <Content Include="Areas\Admin\Views\StoreManagement\CreateSimpleStore.cshtml" />
     <None Include="Properties\PublishProfiles\ShoFinderPublish.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Properties\Settings.settings">
@@ -783,6 +812,9 @@
     <Content Include="Scripts\angular_paging_Mjh.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="sitemap.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web References\com.arianpal.merchant\PaymentRequestResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -794,6 +826,14 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\com.arianpal.merchant\WebService.disco" />
+    <Content Include="Web References\mellipayamak\MessagesBL.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\mellipayamak\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\mellipayamak\Send.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -844,6 +884,7 @@
     <Content Include="Views\Home\Complaints.cshtml" />
     <Content Include="Scripts\jquery1.8.3.js" />
     <None Include="Web References\com.arianpal.merchant\WebService.wsdl" />
+    <None Include="Web References\mellipayamak\Send.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
@@ -865,6 +906,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://api.payamak-panel.com/post/Send.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\mellipayamak\</RelPath>
+      <UpdateFromURL>http://api.payamak-panel.com/post/Send.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Boundary_mellipayamak_Send</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://merchant.arianpal.com/WebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\com.arianpal.merchant\</RelPath>

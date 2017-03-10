@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
@@ -23,6 +25,10 @@ using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using NHibernate;
+using DataModel.Entities;
+using System.Security.Cryptography;
+using System.Text;
+using Boundary.Model;
 
 namespace Boundary.Controllers.Api
 {
@@ -30,30 +36,28 @@ namespace Boundary.Controllers.Api
     public class OrderController : ApiController
     {
         /// <summary>
-        /// تائید نهایی و رفتن به درگاه پرداخت
+        /// ثبت اولیه سفارش 
         /// </summary>
-        /// <param name="orderType"></param>
-        /// <param name="bag"></param>
-        /// <param name="discountCode"></param>
+        /// <param name="payment"></param>
         /// <returns></returns>
-        [Route("Pay")]
+        [HttpPost]
+        [Route("Register")]
         [Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
-        public IHttpActionResult Pay([FromUri] EOrderType orderType, [FromBody] List<ShoppingBagViewModel> bag, [FromUri] string discountCode = null)
+        public IHttpActionResult Register(PaymentViewModel payment)
         {
-            if (bag == null || bag.Count <= 0)
+            if (payment.Bag == null || payment.Bag.Count <= 0)
                 return Json(JsonResultHelper.FailedResultWithMessage("سبد خرید خالی است"));
 
             ISession session = null;
             try
             {
-
                 #region getting customer Id
 
                 string userId = this.RequestContext.Principal.Identity.GetUserId();
-                DataModel.Entities.Member member = new MemberBL().GetSummaryForSession(userId);
+                Member member = new MemberBL().GetSummaryForSession(userId);
                 member = new MemberBL().SelectOne(member.Id); //چون مشخصات کاملشو میخوام
                 if (member == null || member.Id <= 0)
-                    return Json(JsonResultHelper.FailedResultOfWrongAccess());                
+                    return Json(JsonResultHelper.FailedResultOfWrongAccess());
 
                 #endregion
 
@@ -61,13 +65,13 @@ namespace Boundary.Controllers.Api
                     string.IsNullOrEmpty(member.PostalCode) || string.IsNullOrEmpty(member.Place) || string.IsNullOrEmpty(member.PhoneNumber))
                     return Json(JsonResultHelper.FailedResultWithMessage("مشخصات شما برای ثبت سفارش وارد نشده است"));
 
-                bool haveValidDiscountCode = !string.IsNullOrEmpty(discountCode);
+                bool haveValidDiscountCode = !string.IsNullOrEmpty(payment.DiscountCode);
 
                 StoreDiscount storeDiscount = null;
                 //رکورد مورد نظر که دارای این کد تخفیف است را پیدا می کنیم
                 if (haveValidDiscountCode)
                 {
-                    storeDiscount = new StoreDiscountBL().SelectByCode(discountCode);
+                    storeDiscount = new StoreDiscountBL().SelectByCode(payment.DiscountCode);
                     if (storeDiscount == null || storeDiscount.IsActive == false)
                         haveValidDiscountCode = false;
                 }
@@ -77,9 +81,9 @@ namespace Boundary.Controllers.Api
 
                 //برای اطمینان بیشتر خودم لیست محصولاتو لود میکنم
                 List<StoreShopingBagDataModel> lstStoreShopingBag = new List<StoreShopingBagDataModel>();
-                foreach (ShoppingBagViewModel model in bag)
+                foreach (ShoppingBagViewModel model in payment.Bag)
                 {
-                    if (bag.Count(p => p.ProductCode == model.ProductCode) > 1)
+                    if (payment.Bag.Count(p => p.ProductCode == model.ProductCode) > 1)
                         return Json(JsonResultHelper.FailedResultWithMessage("خطا در سبد خرید. امکان ثبت کالای تکراری در سبد خرید وجود ندارد"));
 
                     if (model.Count <= 0)
@@ -90,7 +94,7 @@ namespace Boundary.Controllers.Api
                         return Json(JsonResultHelper.FailedResultWithMessage("کالای مورد نظر قابلیت ارسال ندارد"));
                     if (!product.IsExist)
                         return Json(JsonResultHelper.FailedResultWithMessage("کالای مورد نظر موجود نیست"));
-                    if (lstStoreShopingBag.Exists(s => s.Store.Id == product.StoreCode)==false)
+                    if (lstStoreShopingBag.Exists(s => s.Store.Id == product.StoreCode) == false)
                     {
                         lstStoreShopingBag.Add(new StoreShopingBagDataModel(new StoreBL().SelectOne(product.StoreCode)));
                     }
@@ -133,11 +137,11 @@ namespace Boundary.Controllers.Api
                     //اگه فروشگاه تو شهر خودش نبود، که باید هزینه پستی حساب بشه
                     if (member.CityCode != model.Store.CityCode)
                     {
-                        overallPaymentWithoutConsideringMemberActiveBalance += model.Products.Select(p => p.PostalCostInCountry).Max();  
+                        overallPaymentWithoutConsideringMemberActiveBalance += model.Products.Select(p => p.PostalCostInCountry).Max();
                     }
                     else
                     {
-                        overallPaymentWithoutConsideringMemberActiveBalance += model.Products.Select(p => p.PostalCostInTown).Max();                        
+                        overallPaymentWithoutConsideringMemberActiveBalance += model.Products.Select(p => p.PostalCostInTown).Max();
                     }
                 }
 
@@ -155,6 +159,9 @@ namespace Boundary.Controllers.Api
 
                 PaymentRequest paymentRequest = null;
                 int finalPriceToPay;
+                
+                //کد مورد نیاز برای درخواست بعدی جهت ارجاع به بانک
+                long paymentRequestCode;
 
                 //حالت اصلی: که مبلغ قابل پرداخت با در نظر گرفتن کسر شدن موجودی فعال بیشتر از حداقل مقدار تراکنش هست***
                 if (overallPaymentWithConsideringMemberActiveBalance >= StaticNemberic.MinimumTarakoneshValue)
@@ -166,9 +173,10 @@ namespace Boundary.Controllers.Api
                     paymentRequest = new PaymentRequest()
                     {
                         Description = "",
-                        PaymentRequestStatusCode = (byte)ResultValues.Ready
+                        PaymentRequestStatusCode = (byte)ResultValues.Ready,
+                        PaymentGateway = payment.PaymentGateway
                     };
-                    long paymentRequestCode = new PaymentRequestBL().InsertWhitOutCommitTransaction(paymentRequest,
+                    paymentRequestCode = new PaymentRequestBL().InsertWhitOutCommitTransaction(paymentRequest,
                         session);
 
                     if (paymentRequestCode <= 0)
@@ -217,8 +225,8 @@ namespace Boundary.Controllers.Api
                             MemberCode = member.Id,
                             StoreDiscountCode = model.DiscountCode,
                             SendingCost = postalCostForCurrentStore,
-                            OrderType = orderType,
-
+                            OrderType = payment.OrderType,
+                            StoreCode = model.Store.Id,
                             //مجموع پرداختی در هر سفارش برابر است با هزینه ی کل کالاهای فروشگاه مورد نظر با احتساب تخفیف احتمالی که میخورن
                             //به علاوه هزینه پستی فروشگاه مورد نظر
                             //منهای اون مقداری که از موجودی فعال مشتری برداشت میشه
@@ -310,9 +318,9 @@ namespace Boundary.Controllers.Api
                                 PaymentRequestCode = null,
                                 MemberCode = member.Id,
                                 SendingCost = postalCostForCurrentStore,
-                                OrderType = orderType,
+                                OrderType = payment.OrderType,
                                 StoreDiscountCode = model.DiscountCode,
-
+                                StoreCode=model.Store.Id,
                                 //چون در این حالت همه از موجودی فعال کاربر کسر میشه پس پرداختی نداریم
                                 OverallPayment = 0,
                             }, session);
@@ -375,7 +383,7 @@ namespace Boundary.Controllers.Api
 
 
                             //اگه پرداخت آزاد بود 
-                            if (orderType == EOrderType.FreePayment)
+                            if (payment.OrderType == EOrderType.FreePayment)
                             {
                                 //چون پرداخت آزاده یعنی باید کم شه از حسابش
                                 member.Balance -= overallCostForCurrentStore;
@@ -410,7 +418,12 @@ namespace Boundary.Controllers.Api
                         }
 
                         //اگه پرداخت آنلاینی در کار نبوده باشه و تماما از موجودی قبلی کاربر استفاده شده باشد
-                        return Json(JsonResultHelper.SuccessResult("http://" + Request.Headers.Host + string.Format("/Order/PaymentDetails?IsSuccess=true&Message={0}&TrackingCode={1}&MemberProfit={2}&IsProfitAddedToBalance={3}", StaticString.Message_SuccessFull, "-", profitOfOrders, (orderType == EOrderType.FreePayment) ? "true" : "false")));
+                        return Json(JsonResultHelper.SuccessResult("http://" + Request.Headers.Host +
+                            string.Format("/Order/PaymentDetails?IsSuccess=true&Message={0}&TrackingCode={1}&MemberProfit={2}&IsProfitAddedToBalance={3}",
+                            StaticString.Message_SuccessFull,
+                            "-",
+                            profitOfOrders,
+                            (payment.OrderType == EOrderType.FreePayment) ? "true" : "false")));
 
                     }
                     else //چون حداقل مقدار تراکنش MinimumTarakoneshValue تومان می باشد
@@ -423,9 +436,10 @@ namespace Boundary.Controllers.Api
                         paymentRequest = new PaymentRequest()
                         {
                             Description = "",
-                            PaymentRequestStatusCode = (byte)ResultValues.Ready
+                            PaymentRequestStatusCode = (byte)ResultValues.Ready,
+                            PaymentGateway = payment.PaymentGateway
                         };
-                        long paymentRequestCode = new PaymentRequestBL().InsertWhitOutCommitTransaction(paymentRequest,
+                        paymentRequestCode = new PaymentRequestBL().InsertWhitOutCommitTransaction(paymentRequest,
                             session);
 
                         if (paymentRequestCode <= 0)
@@ -476,8 +490,9 @@ namespace Boundary.Controllers.Api
                                 PaymentRequestCode = paymentRequestCode,
                                 MemberCode = member.Id,
                                 SendingCost = postalCostForCurrentStore,
-                                OrderType = orderType,
+                                OrderType = payment.OrderType,
                                 OverallPayment = payed,
+                                StoreCode = model.Store.Id,
                                 StoreDiscountCode = model.DiscountCode,
                             }, session);
 
@@ -539,83 +554,18 @@ namespace Boundary.Controllers.Api
 
 
                 //خب وقتی تا اینجا اومدیم یعنی پرداخت آنلاین داریم حتما
-                #region check arianpal
-
-                //get user email
-                DataModel.Entities.User user = new UserBL().GetById(userId);
-
-                WebService ws = new WebService();
-                PaymentRequestResult requestResult =
-                    ws.RequestPayment(WebConfigurationManager.AppSettings["MerchantID"],
-                        WebConfigurationManager.AppSettings["Password"], finalPriceToPay, string.Empty, member.Name ?? string.Empty,
-                        (user!=null)?user.Email:string.Empty, member.MobileNumber ?? string.Empty,
-                        paymentRequest.Id.ToString(),
-                        "http://" + Request.Headers.Host + "/" + StaticString.Action_OrderPaymentReturnUrl);
-
-                if (requestResult.ResultStatus == ResultValues.Succeed)
-                {
-                    paymentRequest.PaymentRequestStatusCode = (byte)ResultValues.Succeed;
-                    bool updateResult = new PaymentRequestBL().UpdateWhitOutCommitTransaction(paymentRequest, session);
-                    if (!updateResult)
-                    {
-                        session.Transaction.Rollback();
-                        session = null;
-                        return Json(JsonResultHelper.FailedResultWithMessage(HelperFunction.PaymentRequestResultMessage((byte)requestResult.ResultStatus)));
-                    }
-
-
-                    //آدرس مورد نیاز برای وصل شدن به درگاه
-                    return Json(JsonResultHelper.SuccessResult(requestResult.PaymentPath));
-                }
-                else
-                {
-                    if (finalPriceToPay < StaticNemberic.MinimumTarakoneshValue)
-                    {
-                        //حواسم باشه طبق دیتابیس تنظیم شده این
-                        paymentRequest.PaymentRequestStatusCode = (byte)EPaymentRequestResultValues.MinimumTransactionFailed;
-                    }
-                    else
-                    {
-                        paymentRequest.PaymentRequestStatusCode = (byte)requestResult.ResultStatus;
-                    }
-
-                    bool updateResult = new PaymentRequestBL().UpdateWhitOutCommitTransaction(paymentRequest, session);
-                    if (!updateResult)
-                    {
-                        session.Transaction.Rollback();
-                        session = null;
-                        //return BadRequest(new StaticString().PaymentRequestResultMessage((byte)requestResult.ResultStatus));
-                    }
-
-                    return Json(JsonResultHelper.FailedResultWithMessage(HelperFunction.PaymentRequestResultMessage((byte)requestResult.ResultStatus)));
-                }
-
-                #endregion
+                //این کد درخواستو به کاربر رو خروجی میدیم تا با درخواست بعدی اول مبلغ تراکنش لود شه بعد به بانک ارجاع میدیم
+                //این دو مرحله ای بودن به خاطر اینه که اندروید رو هم داشته باشیم و کدها یکی باشه
+                return Json(JsonResultHelper.SuccessResult(paymentRequestCode));
             }
             catch (MyExceptionHandler exp1)
             {
                 try
                 {
-                    if (session != null)
-                        session.Transaction.Rollback();
+                    session?.Transaction.Rollback();
                     session = null;
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => discountCode),
-                            Value = discountCode
-                        },new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => bag),
-                            Value = JArray.FromObject(bag).ToString()
-                        },new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => orderType),
-                            Value = orderType.ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ??
+                        HttpContext.Current.Request.UserHostAddress, JObject.FromObject(payment).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -627,26 +577,10 @@ namespace Boundary.Controllers.Api
             {
                 try
                 {
-                    if (session != null)
-                        session.Transaction.Rollback();
+                    session?.Transaction.Rollback();
                     session = null;
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                         new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => discountCode),
-                            Value = discountCode
-                        },new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => bag),
-                            Value = JArray.FromObject(bag).ToString()
-                        },new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => orderType),
-                            Value = orderType.ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
+                    long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ??
+                        HttpContext.Current.Request.UserHostAddress, JObject.FromObject(payment).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
                 }
                 catch (Exception)
@@ -656,10 +590,9 @@ namespace Boundary.Controllers.Api
             }
             finally
             {
-                if (session != null) session.Transaction.Commit();
+                session?.Transaction.Commit();
             }
         }
-
 
         /// <summary>
         /// اگه کد تخفیف معتبر باشه خروجی این اکشن مبلغ کل پرداختی جدید با توجه به تاثیر کد تخفیف خواهد بود
@@ -688,7 +621,7 @@ namespace Boundary.Controllers.Api
                 #endregion
 
                 if (member.CityCode == null)
-                    return Json(JsonResultHelper.FailedResultWithMessage("شهر شما انتخاب نشده است")); 
+                    return Json(JsonResultHelper.FailedResultWithMessage("شهر شما انتخاب نشده است"));
 
 
                 //برای اطمینان بیشتر خودم لیست محصولاتو لود میکنم

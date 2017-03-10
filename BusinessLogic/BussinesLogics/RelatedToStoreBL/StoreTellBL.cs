@@ -58,14 +58,14 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<decimal> GetTellsById(long storeCode)
+        public List<string> GetTellsById(long storeCode)
         {
             try
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@StoreCode", storeCode);
-                List<decimal> lst =
-                    _db.Query<decimal>("StoreTell_SelectByStoreCode", parameters,
+                List<string> lst =
+                    _db.Query<string>("StoreTell_SelectByStoreCode", parameters,
                         commandType: CommandType.StoredProcedure).ToList();
                 EnsureCloseConnection(_db);
                 return lst;

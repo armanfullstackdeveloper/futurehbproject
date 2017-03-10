@@ -11,8 +11,8 @@ namespace Boundary
 
             routes.MapRoute(
                 name: "Product Without action",
-                url: "Product/{id}",
-                defaults: new { controller = "Search", action = "GetProduct" }
+                url: "Product/{id}/{category}/{store}/{name}",
+                defaults: new { controller = "Search", action = "GetProduct", store = UrlParameter.Optional, name = UrlParameter.Optional, category=UrlParameter.Optional } 
             );
 
             routes.MapRoute(
@@ -44,11 +44,6 @@ namespace Boundary
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-
-
-
-
         }
     }
 }

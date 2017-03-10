@@ -8,7 +8,7 @@ namespace BusinessLogic.Helpers
     {
         public IDbConnection EnsureOpenConnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["ShopFinderForDapper"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["ShopFinderConnectionString"].ConnectionString);
         }
 
         public void EnsureCloseConnection(IDbConnection dbConnection)

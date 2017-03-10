@@ -32,9 +32,8 @@ namespace Boundary.Areas.Member.Controllers
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
                 }
-                long memberCode = (checkSessionForMember.IsSuccess) ? checkSessionForMember.MainSession.Member.Id :
-checkSessionForSeller.MainSession.Store.MemberCode;
-                //   return View(new OrderBL().GetMemberOrders(memberCode));
+                long memberCode = (checkSessionForMember.IsSuccess) ? 
+                    checkSessionForMember.MainSession.Member.Id : checkSessionForSeller.MainSession.Store.MemberCode;
                 return Json(JsonResultHelper.SuccessResult(new OrderBL().GetMemberOrders(memberCode)), JsonRequestBehavior.AllowGet);
             }
             catch (MyExceptionHandler exp1)
@@ -76,8 +75,8 @@ checkSessionForSeller.MainSession.Store.MemberCode;
                 {
                     return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
                 }
-                long memberCode = (checkSessionForMember.IsSuccess) ? checkSessionForMember.MainSession.Member.Id :
-checkSessionForSeller.MainSession.Store.MemberCode;
+                long memberCode = (checkSessionForMember.IsSuccess) ? 
+                    checkSessionForMember.MainSession.Member.Id : checkSessionForSeller.MainSession.Store.MemberCode;
 
                 //چک کنیم اصلا سفارش متعلق به خودش هست یا نه
                 Order order = new OrderBL().SelectOne(orderCode);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Boundary.Controllers.Ordinary;
 using Boundary.Helper;
@@ -81,7 +82,7 @@ namespace Boundary.Areas.Seller.Controllers
             }
         }
 
-        public ActionResult ProductList()
+        public async Task<ActionResult> ProductList()
         {
             CheckSessionDataModel checkSession = CheckSallerSession();
             if (!checkSession.IsSuccess)
@@ -93,7 +94,7 @@ namespace Boundary.Areas.Seller.Controllers
                 return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
             }
 
-            SearchResultViewModel result = new ProductBL().Search(new SearchParametersDataModel()
+            SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
             {
                 StoreCode = checkSession.MainSession.Store.StoreCode
             }, new List<EProductStatus>() { EProductStatus.Active, EProductStatus.Suspended });

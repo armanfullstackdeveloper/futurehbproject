@@ -10,6 +10,9 @@
     <property name="MemberCode">
       <column name="MemberCode" sql-type="bigint" not-null="true" />
     </property>
+    <property name="StoreCode">
+      <column name="StoreCode" sql-type="bigint" not-null="false" />
+    </property>
     <property name="PaymentRequestCode">
       <column name="PaymentRequestCode" sql-type="bigint" not-null="false" />
     </property>

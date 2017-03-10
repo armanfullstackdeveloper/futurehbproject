@@ -19,9 +19,16 @@ namespace Boundary.Controllers.Ordinary
             return View();
         }
 
-        //[OutputCache(Duration = 60)]
+        /// <summary>
+        /// صفحه ی جزئیات محصول
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="store"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [OutputCache(Duration = 60)]
         [Route("Product")]
-        public ActionResult GetProduct(int id)
+        public ActionResult GetProduct(int id,string store="",string name="")
         {
             try
             {

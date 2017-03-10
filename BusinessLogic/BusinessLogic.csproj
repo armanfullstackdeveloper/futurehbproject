@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BusinessLogic</RootNamespace>
     <AssemblyName>BusinessLogic</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +65,7 @@
     <Compile Include="BussinesLogics\CityBL.cs" />
     <Compile Include="BussinesLogics\ContactsBL\ContactWithUsBL.cs" />
     <Compile Include="BussinesLogics\ContactsBL\PublicMessageBL.cs" />
-    <Compile Include="BussinesLogics\FirstPageBL\FirstPage_AdvertiseBL.cs" />
+    <Compile Include="BussinesLogics\FirstPageBL\BoxBL.cs" />
     <Compile Include="BussinesLogics\FirstPageBL\FirstPage_SliderBL.cs" />
     <Compile Include="BussinesLogics\RelatedToOrder\OrderCustomerInfoBL.cs" />
     <Compile Include="BussinesLogics\RelatedToOrder\OrderSendingTypeBL.cs" />

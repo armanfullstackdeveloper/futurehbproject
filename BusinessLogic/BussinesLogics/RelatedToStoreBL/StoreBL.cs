@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BusinessLogic.BussinesLogics.RelatedToOrder;
 using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.Components;
@@ -66,7 +67,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 parameters.Add("@Type", storeRegister.StoreTypeCode);
                 parameters.Add("@Website", storeRegister.Website);
                 parameters.Add("@CatsCode", storeRegister.ListCategoryCode.AsTableValuedParameter("dbo.IdTable"));
-                parameters.Add("@PhoneNumber", storeRegister.PhoneNumber);
+                parameters.Add("@PhoneNumber", string.IsNullOrEmpty(storeRegister.PhoneNumber)?null:storeRegister.PhoneNumber);
                 parameters.Add("@storeStatus", (byte)EStoreStatus.Active);
                 parameters.Add("@ProcResult", dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
 
@@ -137,7 +138,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public List<StoreSummery> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
+        public async Task<IEnumerable<StoreSummery>> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
@@ -149,7 +150,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 rowspPage = rowspPage ?? 12;
                 parameters.Add("@RowspPage", rowspPage);
 
-                List<StoreSummery> lst = _db.Query<StoreSummery>("Store_GetNewest", parameters, commandType: CommandType.StoredProcedure).ToList();
+                IEnumerable<StoreSummery> lst = await _db.QueryAsync<StoreSummery>("Store_GetNewest", parameters, commandType: CommandType.StoredProcedure);
                 EnsureCloseConnection(_db);
                 return lst;
             }
@@ -311,7 +312,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     storeDetails = multipleResults.Read<StoreDetailsViewModel>().SingleOrDefault();
                     if (storeDetails != null)
                     {
-                        storeDetails.Tells = multipleResults.Read<decimal>().ToList();
+                        storeDetails.Tells = multipleResults.Read<string>().ToList();
                         storeDetails.Images = multipleResults.Read<string>().ToList();
                         storeDetails.Categories = multipleResults.Read<string>().ToList();
                     }
@@ -331,7 +332,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             {
                 _db = EnsureOpenConnection();
                 Store store = new StoreBL().SelectOne(storeCode);
-                List<decimal> lstTell = new StoreTellBL().GetTellsById(storeCode);
+                List<string> lstTell = new StoreTellBL().GetTellsById(storeCode);
                 List<long> catsList = new CatsOfStoreBL().GetCatsByStoreCode(storeCode);
 
                 string email = new UserBL().GetById(store.UserCode).Email;
@@ -408,15 +409,15 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     }
                 }
 
-                List<decimal> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
-                foreach (decimal item in lstTell)
+                List<string> lstTell = new StoreTellBL().GetTellsById(storeEditDataModel.StoreCode);
+                foreach (string item in lstTell)
                 {
                     if (storeEditDataModel.PhoneNumbers != null && !storeEditDataModel.PhoneNumbers.Contains(item))
                         new StoreTellBL().Delete(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
                 }
                 if (storeEditDataModel.PhoneNumbers != null)
                 {
-                    foreach (decimal item in storeEditDataModel.PhoneNumbers)
+                    foreach (string item in storeEditDataModel.PhoneNumbers)
                     {
                         if (!lstTell.Contains(item))
                             new StoreTellBL().Save(new StoreTell() { PhoneNumber = item, StoreCode = storeEditDataModel.StoreCode });
@@ -659,6 +660,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                     imagesWantToDelete.Add(store.LogoAddress);
                     imagesWantToDelete.Add(new SellerBL().GetSellerPhotoAddres(store.SallerCode));
 
+                    new SellerBL().Delete(new SellerBL().SelectOne(store.SallerCode).Id);
                     result = new UserBL().DeleteById(store.UserCode);
                 }
 

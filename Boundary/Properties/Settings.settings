@@ -5,5 +5,8 @@
     <Setting Name="Boundary_com_arianpal_merchant_WebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://merchant.arianpal.com/WebService.asmx</Value>
     </Setting>
+    <Setting Name="Boundary_mellipayamak_Send" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://api.payamak-panel.com/post/Send.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

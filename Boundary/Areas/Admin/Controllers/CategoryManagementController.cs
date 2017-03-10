@@ -92,7 +92,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAll();
+                ViewBag.Categories = new CategoryBL().GetAllAsync();
                 ViewBag.level = level;
                 return View();
             }
@@ -418,7 +418,7 @@ namespace Boundary.Areas.Admin.Controllers
                 }
 
 
-                ViewBag.Categories = new CategoryBL().GetAll();
+                ViewBag.Categories = new CategoryBL().GetAllAsync();
                 ViewBag.level = level;
                 return View(new CategoryBL().SelectOne(id));
             }

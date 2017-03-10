@@ -12,7 +12,7 @@
     <link href="~/Content/DropdownMultiSelect-sumoselect/sumoselectInAddProduct.css" rel="stylesheet" />
     <link href="~/Content/Fine_Uploader/fine-uploader-new.css" rel="stylesheet" />
     <link href="~/Content/selectize/selectize.bootstrap3.css" rel="stylesheet" />
- }
+}
 
 <div id="AddProduct">
     <div id="Holder1" class="RegisterHolder">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-           <div class="orgenizer">
+            <div class="orgenizer">
                 <p>نوع محصول :</p>
                 <select class="ForSelect" id="CategoryCode">
                     <option selected disabled value="">انتخاب نمایید</option>
@@ -77,7 +77,7 @@
 
             <div class="orgenizer">
                 <p>قیمت : (تومان)</p>
-                <input class="ForTextBox" placeholder="  قیمت  " type="text" id="Price">
+                <input class="ForTextBox" placeholder=" قیمت " type="text" id="Price">
                 <p class="Info">قیمت  کالای خود را وارد نمایید</p>
                 <div id="PriceError" class="ErrorHolder">
                     <div class="Error">لطفا این فیلد را خالی نگذارید</div>
@@ -304,9 +304,9 @@
     <script src="~/Content/Fine_Uploader/jquery.fine-uploader.min.js"></script>
     @*<script src="~/Content/Fine_Uploader/fine-uploader.js"></script>*@
     <script src="~/Content/DropdownMultiSelect-sumoselect/jquery.sumoselect.min.js"></script>
-   
 
-     <script type="text/template" id="qq-template-manual-trigger">
+
+    <script type="text/template" id="qq-template-manual-trigger">
         <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="تصویر را بکشید و اینجا رها کنید">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
                 <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
@@ -390,7 +390,7 @@
         //When page Load , Category Load
         $(document).ready(function () {
 
-            
+
             $('#SaveProduct').prop('disabled', false);
 
             //set category
@@ -522,7 +522,7 @@
                                     + "</div></div></br>";
                                 $("#AttributeDiv").append(txt);
                                 attrebiut.push('Brands');
-                                 
+
                             }
 
                             else if (index == 'ProductAttributeWithoutItems') {

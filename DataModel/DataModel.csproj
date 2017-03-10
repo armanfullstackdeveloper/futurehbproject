@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataModel</RootNamespace>
     <AssemblyName>DataModel</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +52,7 @@
     <Compile Include="Entities\ErrorLog.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\EntityBase.cs" />
-    <Compile Include="Entities\FirstPage\FirstPage_Advertise.cs" />
+    <Compile Include="Entities\FirstPage\Box.cs" />
     <Compile Include="Entities\FirstPage\FirstPage_Slider.cs" />
     <Compile Include="Entities\RelatedToOrder\OrderCustomerInfo.cs" />
     <Compile Include="Entities\RelatedToOrder\OrderSendingType.cs" />
@@ -103,7 +104,9 @@
     <Compile Include="Enums\EClientType.cs" />
     <Compile Include="Enums\EOrderStatus.cs" />
     <Compile Include="Enums\EOrderType.cs" />
+    <Compile Include="Enums\EPaymentGateways.cs" />
     <Compile Include="Enums\EPaymentRequestResultValues.cs" />
+    <Compile Include="Enums\EPaymentResponseStatus.cs" />
     <Compile Include="Enums\EPaymentResponseResultValues.cs" />
     <Compile Include="Enums\ERole.cs" />
     <Compile Include="Enums\EProductStatus.cs" />
@@ -126,7 +129,6 @@
     <Compile Include="Models\ViewModel\ColorViewModel.cs" />
     <Compile Include="Models\DataModel\NameValueDataModel.cs" />
     <Compile Include="Models\ViewModel\ErrorViewModel.cs" />
-    <Compile Include="Models\ViewModel\FirstPage_AdvertiseViewModel.cs" />
     <Compile Include="Models\ViewModel\JsonResultViewModel.cs" />
     <Compile Include="Models\ViewModel\MemberViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderHistoryViewModel.cs" />
@@ -186,7 +188,7 @@
     <EmbeddedResource Include="HBM\RelatedToProduct\ProductLike.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HBM\FirstPage\FirstPage_Advertise.hbm.xml" />
+    <EmbeddedResource Include="HBM\FirstPage\Box.hbm.xml" />
     <EmbeddedResource Include="HBM\FirstPage\FirstPage_Slider.hbm.xml" />
   </ItemGroup>
   <ItemGroup>

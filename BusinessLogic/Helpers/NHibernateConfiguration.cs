@@ -1,5 +1,7 @@
-﻿using NHibernate;
+﻿using System.Configuration;
+using NHibernate;
 using NHibernate.Cfg;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace BusinessLogic.Helpers
 {
@@ -17,6 +19,7 @@ namespace BusinessLogic.Helpers
                 {
                     var configuration = new Configuration();
                     configuration.Configure();
+                    configuration.SetProperty(Environment.ConnectionString, ConfigurationManager.ConnectionStrings["ShopFinderConnectionString"].ConnectionString);
                     configuration.AddAssembly(System.Reflection.Assembly.Load("DataModel"));
                     _sessionFactory = configuration.BuildSessionFactory();
                 }
