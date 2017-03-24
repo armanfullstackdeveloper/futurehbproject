@@ -6,8 +6,8 @@
 }
 <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
 
-<div class="container">
-    <h1>خرید شما به پایان رسید</h1>
+ <div  style="text-align:center" class="container">
+    <h1 style="text-align:center">خرید شما به پایان رسید</h1>
 
     <div ng-app="ShopApp" ng-controller="ShoppingInfoController">
 
@@ -26,9 +26,10 @@
             </div>
             
             <div class="form-group orgenizer">
-                <label>سود شما از این خرید </label>
                 @if (Model.IsProfitAddedToBalance != null)
                 {
+                    <label>سود شما از این خرید </label>
+
                     <h2>@Model.MemberProfit</h2>
                     if ((bool)Model.IsProfitAddedToBalance)
                     {
@@ -37,6 +38,8 @@
                     }
                     else
                     {
+                        <label>سود شما از این خرید </label>
+
                         <span>که بعد از اتمام فرایند خرید به حساب شما در هوجی بوجی افزوده خواهد شد</span>
 
                     }

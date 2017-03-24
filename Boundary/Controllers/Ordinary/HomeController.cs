@@ -17,31 +17,11 @@ namespace Boundary.Controllers.Ordinary
             return View();
         }
 
-        public ActionResult UserGuid()
+        public ActionResult Index2()
         {
             return View();
         }
-
-        public ActionResult ContactUs()
-        {
-            return View();
-        }
-
-        public ActionResult AboutUs()
-        {
-            return View();
-        }
-
-        public ActionResult Low()
-        {
-            return View();
-        }
-
-        public ActionResult Complaints()
-        {
-            return View();
-        }
-
+ 
         public ActionResult Error(string message, string trackingCode)
         {
             return View(new ErrorViewModel()

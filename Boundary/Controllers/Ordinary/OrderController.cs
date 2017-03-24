@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -8,9 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.UI;
 using System.Xml;
-using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
@@ -739,4 +737,5 @@ namespace Boundary.Controllers.Ordinary
             return View(model);
         }
     }
+
 }

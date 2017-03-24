@@ -22,23 +22,23 @@
 
                 <table style="float:right;direction: rtl; margin:30px auto;" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
                     <tr>
-                        <th style=" text-align center;"></th>
-                        <th style=" text-align center;">نام محصول</th>
-                        <th style=" text-align center;">نام فروشگاه</th>
-                        <th style=" text-align center;">تعداد</th>
+                        <th style=" text-align: center;"></th>
+                        <th style=" text-align: center;">نام محصول</th>
+                        <th style=" text-align: center;">نام فروشگاه</th>
+                        <th style=" text-align: center;">تعداد</th>
                         @*<th style=" text-align: center;">هزینه پستی</th>*@
-                        <th style=" text-align center;">قیمت واحد</th>
-                        <th style=" text-align center;">قیمت کل</th>
+                        <th style=" text-align: center;">قیمت واحد</th>
+                        <th style=" text-align: center;">قیمت کل</th>
                     </tr>
                     <tr ng-repeat=" item in Product">
-                        <td style=" text-align center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
-                        <td style=" text-align center;" ng-bind="item.ProductName"></td>
-                        <td style=" text-align center;" ng-bind="item.StoreName"></td>
-                        <td style=" text-align center;" ng-bind="item.Count"></td>
+                        <td style=" text-align: center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
+                        <td style=" text-align: center;" ng-bind="item.ProductName"></td>
+                        <td style=" text-align: center;" ng-bind="item.StoreName"></td>
+                        <td style=" text-align: center;" ng-bind="item.Count"></td>
                         @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
-                        <td style=" text-align center;" ng-bind="item.RealPrice"></td>
-                        <td style=" text-align center;" ng-bind="item.TotalPrice"></td>
-                        <td style=" text-align center;">
+                        <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
+                        <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
+                        <td style=" text-align: center;">
                             <i style="cursor:pointer" ng-click="RemoveProduct(item.ProductCode)">X</i>
                         </td>
                     </tr>
@@ -47,32 +47,32 @@
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align center;">مجموع خرید</td>
-                        <td style=" text-align center;" ng-bind="AllTotalPrice"></td>
+                        <td style=" text-align: center;">مجموع خرید</td>
+                        <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
                     </tr>
                     <tr>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align center;">مجموع هزینه پستی</td>
-                        <td style=" text-align center;" ng-bind="AllPostalCost"></td>
+                        <td style=" text-align: center;">مجموع هزینه پستی</td>
+                        <td style=" text-align: center;" ng-bind="AllPostalCost"></td>
                     </tr>
                     <tr>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align center;">موجودی قبلی حساب شما </td>
-                        <td style=" text-align center;" ng-bind="Balance"></td>
+                        <td style=" text-align: center;">موجودی قبلی حساب شما </td>
+                        <td style=" text-align: center;" ng-bind="Balance"></td>
                     </tr>
                     <tr>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align center;">مبلغ قابل پرداخت  </td>
-                        <td style=" text-align center;" ng-bind="PayPrice"></td>
+                        <td style=" text-align: center;">مبلغ قابل پرداخت  </td>
+                        <td style=" text-align: center;" ng-bind="PayPrice"></td>
                     </tr>
 
                 </table>
@@ -167,6 +167,9 @@
                 <div ng-show="showLoading" class="orgenizer FromTop">
                     لطفا کمی صبر کنید
                 </div>
+                <div id="error" class="orgenizer FromTop">
+                 </div>
+
             </div>
         </div>
 
@@ -269,21 +272,33 @@
           }
           $scope.Payment=function(){
               $scope.showLoading=true;
-              var url="/PaymentRequest/pay?orderType="+$scope.orderType;
-              if($scope.DiscountCode) {
-                  url += "&discountCode=" + $scope.DiscountCode;
+
+              //  var url="/api/order/pay?orderType="+$scope.orderType;
+
+              var Data={
+                  Ordertype:$scope.Ordertype,
+                  Paymentgateway:1,
+                  Bag:$scope.Product
+              };
+
+              if($scope.DiscountCode){
+                  Data.push({"discountCode":$scope.DiscountCode});
               }
 
               $.ajax({
                   type: "POST",
                   contentType: "application/json",
-                  url: url,
-                  data: JSON.stringify($scope.Product) ,
+                  url: "/api/Order/Register",
+                  data:JSON.stringify( Data),
                   success: function (result) {
-                      debugger;
-                      console.log(result);
-                      if(result.Success==true){
-                          window.location.href =  result.Response;
+                      console.log(result)
+                      if(result.Success==true)
+                      { 
+                          window.location.href = "/Paymentrequest/pay?Paymentrequestcode="+ result.Response;
+                      }
+                      else{
+                          $scope.Showloading=false;
+                          $('#error').html(result.Response)
                       }
 
                       // $scope.Balance=result;
