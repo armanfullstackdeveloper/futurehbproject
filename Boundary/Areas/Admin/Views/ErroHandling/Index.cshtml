@@ -27,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LogBy)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAgent)
+        </th>
         <th></th>
     </tr>
 
@@ -47,6 +50,9 @@
             </td>
             <td>
                 @item.LogBy.ToString()
+            </td>
+            <td>
+                @item.UserAgent
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |

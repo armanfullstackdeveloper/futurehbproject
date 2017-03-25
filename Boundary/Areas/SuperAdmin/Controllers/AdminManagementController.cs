@@ -207,11 +207,11 @@ namespace Boundary.Areas.SuperAdmin.Controllers
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+                    return Json(JsonResultHelper.FailedResultWithMessage(code+" :"+ exp1.ToString()), JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                    return Json(JsonResultHelper.FailedResultWithMessage(exp.ToString()), JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception exp3)
@@ -227,11 +227,11 @@ namespace Boundary.Areas.SuperAdmin.Controllers
                         },
                     };
                     long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
+                    return Json(JsonResultHelper.FailedResultWithMessage(code + " :" + exp3.ToString()), JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                    return Json(JsonResultHelper.FailedResultWithMessage(exp.ToString()), JsonRequestBehavior.AllowGet);
                 }
             }
         }

@@ -496,7 +496,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 recentProduct.CanSend = productEditDataModel.ProductMainAttributeDataModels.CanSend;
                 recentProduct.PostalCostInCountry = productEditDataModel.ProductMainAttributeDataModels.PostalCostInCountry;
                 recentProduct.PostalCostInTown = productEditDataModel.ProductMainAttributeDataModels.PostalCostInTown;
-                recentProduct.CategoryCode = productEditDataModel.ProductMainAttributeDataModels.CategoryCode;
+                //recentProduct.CategoryCode = productEditDataModel.ProductMainAttributeDataModels.CategoryCode;
                 recentProduct.Changeability = productEditDataModel.ProductMainAttributeDataModels.Changeability ?? false;
                 recentProduct.DiscountedPrice = productEditDataModel.ProductMainAttributeDataModels.DiscountedPrice;
                 recentProduct.Price = productEditDataModel.ProductMainAttributeDataModels.Price;

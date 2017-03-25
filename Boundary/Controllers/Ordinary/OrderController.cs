@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -8,9 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.UI;
 using System.Xml;
-using Boundary.com.arianpal.merchant;
 using Boundary.Helper;
 using Boundary.Helper.StaticValue;
 using BusinessLogic.BussinesLogics;
@@ -555,7 +553,23 @@ namespace Boundary.Controllers.Ordinary
             //دستور شزطی زیر جهت اعلام نتیجه به کاربر است
             if (strXml == "")
             {
-                Response.Write("تراکنش  انجام نشد ");
+                new PaymentResponseBL().Insert(new PaymentResponse()
+                {
+                    PaymentRequestCode = Convert.ToInt64(paymentRequestCode),
+                    PaymentResponseStatus = EPaymentResponseStatus.Fail,
+                    ShomareMarja = shomareMarja,
+                    VerifyDate = PersianDateTime.Now.Date.ToInt(),
+                    VerifyTime = PersianDateTime.Now.TimeOfDay.ToShort(),
+                });
+
+                return RedirectToAction("PaymentDetails", new PaymentResultViewModel()
+                {
+                    IsSuccess = false,
+                    MemberProfit = 0,   //todo: ina ro bayad badan barrasi konam
+                    Message = "تراکنش  انجام نشد",
+                    //TrackingCode = trackingCode,
+                    //IsProfitAddedToBalance = 
+                });
             }
             else
             {
@@ -652,7 +666,6 @@ namespace Boundary.Controllers.Ordinary
                     //IsProfitAddedToBalance = 
                 });
             }
-            return null;
         }
 
         private string ReadPaymentResult()
@@ -724,4 +737,5 @@ namespace Boundary.Controllers.Ordinary
             return View(model);
         }
     }
+
 }
