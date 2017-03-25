@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> hoojibooji | هوجی بوجی</title> 
+    <title> hoojibooji | هوجی بوجی</title>
 
     <link rel="shortcut icon" href="~/Img/MainPage/Logo.png" type="image/x-icon" />
     <link rel='icon' href="~/Img/MainPage/Logo.png" type='image/x-icon' />
@@ -14,11 +14,11 @@
     <meta http-equiv="content-language" content="fa" />
     <meta name="keywords" content="خرید آنلاین ، خرید پستی ، ساخت فروشگاه ، فروشگاه ساز ، ساخت فروشگاه آنلاین " />
     <meta name="description" content="خرید آنلاین انواع محصولات از هزاران فروشگاه با پرداخت آنلاین و ارسال توسط پست" />
-    
+
     <link rel="stylesheet" href="~/newAsset/css/styles.css">
     <link rel="stylesheet" href="~/newAsset/css/icons.css">
- 
-</head>
+    <link href="~/newAsset/css/owl.carousel.min.css" rel="stylesheet" />
+ </head>
 
 <body ng-controller="HomeCtrl">
     <header class="container">
@@ -173,8 +173,8 @@
                             <span class="goLeft relativeMatter soloHeight logo">
                                 <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
                             </span>
-                            <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span>
-                            <span class="goLeft lostInResponse">تماس با ما</span>
+                            <a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
+                            <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>
                         </div>
                         <div class="searchPart goLeft standardHorizontalMargin">
                             <div class="searchType goLeft">
@@ -530,70 +530,72 @@
                         </div>
                         <div class="innerBox carouselContainer organizer thickFont relativeMatter">
                             <!-- be ezaye har mahsool y dune az in six column ha repeat mishe -->
-                            <div class="arrows">
-                                <div class="rightArrow defaultArrow">
-                                    <span class="icon icon-arrow-right2 objectInMiddle"></span>
+                            <div class="arrows owl-nav1">
+                                <div class="rightArrow defaultArrow owl-prev prev1 pointer">
+                                    <span class="icon icon-arrow-right2 objectInMiddle "></span>
                                 </div>
-                                <div class="leftArrow defaultArrow">
+                                <div class="leftArrow defaultArrow owl-next next1 pointer">
                                     <span class="icon icon-arrow-left2 objectInMiddle"></span>
                                 </div>
                             </div>
                             <div class="carouselInner">
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                <div class="owl-carousel owl-theme">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                    <div class="borderRight item">
+                                        <div class="organizer standardVerticalMargin">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
                                         </div>
+                                        <div class="organizer pinkColor">نام محصول</div>
+                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                     </div>
-                                    <div class="organizer pinkColor">نام محصول</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                 </div>
-                            </div>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -932,10 +934,18 @@
             <div class="fourFullColumns">
                 <div class="organizer blackColor standardVerticalMargin">سایر صفحات</div>
                 <ul>
-                    <li>قوانین سایت</li>
-                    <li>ارتباط با ما</li>
-                    <li>درباره ما</li>
-                    <li>سوالات متداول</li>
+                    <a href="~/Static/Law"> 
+                        <li>قوانین سایت</li>
+                    </a>
+                    <a href="~/Static/ContactUs">
+                        <li>تماس با ما</li>
+                    </a>
+                    <a href="~/Static/AboutUs">
+                        <li>درباره ما</li>
+                    </a>
+                    <a href="~/Static/Complaints">      
+                        <li>شکایات ، پیشنهادات</li>
+                    </a>
                 </ul>
             </div>
             <div class="fourFullColumns">
@@ -943,7 +953,7 @@
                 <ul>
                     <a href="~/Store/AddStore"> <li>ثبت فروشگاه</li></a>
                     <li class="pointer" ng-click="showRegisterBox();">ثبت نام</li>
-                    <li class="pointer"  ng-click="showLoginBox();">ورود</li>
+                    <li class="pointer" ng-click="showLoginBox();">ورود</li>
                     <li>فروش ویژه</li>
                     <li>ثبت تبلیغات شما</li>
                 </ul>
@@ -965,44 +975,51 @@
         </div>
     </footer>
 
-  
+
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/newAsset/js/owl.carousel.min.js"></script>
     <script src="~/newAsset/js/Home.js"></script>
 
     @*<script type="application/ld+json">
-        {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "url": "http://hoojibooji.com",
-        "url": "http://hoojibooji.com",
-        "contactPoint": [{
-        "@type": "ContactPoint",
-        "telephone": "+98-935-189-2347",
-        "contactType": "shopping"
-        }]
-        }
-    </script>*@
- 
+            {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "url": "http://hoojibooji.com",
+            "url": "http://hoojibooji.com",
+            "contactPoint": [{
+            "@type": "ContactPoint",
+            "telephone": "+98-935-189-2347",
+            "contactType": "shopping"
+            }]
+            }
+        </script>*@
 
-     <!--Start of Zendesk Chat Script-->
+
+    <!--Start of Zendesk Chat Script-->
     <script type="text/javascript">
-        window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-        d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-        $.src="https://v2.zopim.com/?4faxteyy0f515HRP92eBL75N76krLJrg";z.t=+new Date;$.
-        type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+        window.$zopim || (function (d, s) {
+            var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+                z.set.
+                _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+            $.src = "https://v2.zopim.com/?4faxteyy0f515HRP92eBL75N76krLJrg"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+        })(document, "script");
     </script>
-     <!--End of Zendesk Chat Script-->
+    <!--End of Zendesk Chat Script-->
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-91988544-1', 'auto');
-      ga('send', 'pageview');
+        ga('create', 'UA-91988544-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 

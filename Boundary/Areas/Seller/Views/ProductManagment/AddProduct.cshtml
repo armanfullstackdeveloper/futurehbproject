@@ -686,14 +686,16 @@
                     }
                 })
 
-                var selectedColor = $('#Colors')[0].sumo.getSelStr().split(',');
-                data.ProductMainAttributeDataModels['Colors'] = [];
-                for (var j = 0; j < selectedColor.length; j++) {
-                    if (selectedColor[j] != '') {
-                        data.ProductMainAttributeDataModels['Colors'].push(selectedColor[j]);
+                if ($('#Colors')[0].sumo) {
+
+                    var selectedColor = $('#Colors')[0].sumo.getSelStr().split(',');
+                    data.ProductMainAttributeDataModels['Colors'] = [];
+                    for (var j = 0; j < selectedColor.length; j++) {
+                        if (selectedColor[j] != '') {
+                            data.ProductMainAttributeDataModels['Colors'].push(selectedColor[j]);
+                        }
                     }
                 }
-
 
                 for (var i = 0; i < ProductAttributeWithoutItemsTemp.length; i++) {
 
@@ -701,12 +703,13 @@
                 }
 
                 for (var i = 0; i < ProductMultiSelectAttributeWithItemsTemp.length; i++) {
-                    var selectedAttribute = $('#' + ProductMultiSelectAttributeWithItemsTemp[i])[0].sumo.getSelStr().split(',');
-                    selectedAttribute = selectedAttribute.filter(function (n) { return n != '' });
+                    if ($('#' + ProductMultiSelectAttributeWithItemsTemp[i])[0].sumo) {
+                        var selectedAttribute = $('#' + ProductMultiSelectAttributeWithItemsTemp[i])[0].sumo.getSelStr().split(',');
+                        selectedAttribute = selectedAttribute.filter(function (n) { return n != '' });
 
-                    data.ProductAttributeWithItemsDataModels.push({ 'Code': ProductMultiSelectAttributeWithItemsTemp[i], 'Values': selectedAttribute });
+                        data.ProductAttributeWithItemsDataModels.push({ 'Code': ProductMultiSelectAttributeWithItemsTemp[i], 'Values': selectedAttribute });
+                    }
                 }
-
                 for (var i = 0; i < ProductSelectAttributeWithItemsTemp.length; i++) {
                     if ($("#" + ProductSelectAttributeWithItemsTemp[i] + " option:selected").val() != '') {
                         arrayTemp = [];
@@ -867,7 +870,7 @@
         //chnage all persian number to en number call function
         $("#DiscountedPrice ,#Price, #PostalCostInTown , #PostalCostInCountry ").on('input', function () {
             var value = $(this).val();
-             $(this).val(value.toEnDigit())
+            $(this).val(value.toEnDigit())
         });
 
 
