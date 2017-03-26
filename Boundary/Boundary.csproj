@@ -663,6 +663,7 @@
     <Content Include="Img\MainPage\yourStore.png" />
     <Content Include="Js\AllPageNeeded.js" />
     <Content Include="Js\FirstPage.js" />
+    <Content Include="newAsset\css\owl.carousel.min.css" />
     <Content Include="newAsset\js\Home.js" />
     <Content Include="Js\OLD\Common.js" />
     <Content Include="Content\ImageGallery\gallery.js" />
@@ -711,6 +712,7 @@
     <Content Include="newAsset\images\truck.svg" />
     <Content Include="newAsset\images\trustLogo.png" />
     <Content Include="newAsset\images\trustLogo2.png" />
+    <Content Include="newAsset\js\owl.carousel.min.js" />
     <Content Include="newAsset\productdetail.html" />
     <Content Include="newAsset\shopcart.html" />
     <Content Include="newAsset\storedetails.html" />
