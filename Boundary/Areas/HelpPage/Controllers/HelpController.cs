@@ -3,12 +3,11 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Boundary.Areas.HelpPage.ModelDescriptions;
 using Boundary.Areas.HelpPage.Models;
+using Boundary.Helper.StaticValue;
 
 namespace Boundary.Areas.HelpPage.Controllers
 {
-    /// <summary>
-    /// The controller that will handle requests for the help page.
-    /// </summary>
+    [System.Web.Mvc.Authorize(Roles = StaticString.Role_Admin + "," + StaticString.Role_SuperAdmin)]
     public class HelpController : Controller
     {
         private const string ErrorViewName = "Error";
