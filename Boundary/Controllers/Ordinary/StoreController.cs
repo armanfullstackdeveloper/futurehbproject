@@ -45,10 +45,16 @@ namespace Boundary.Controllers.Ordinary
 
                 #endregion getting store Id
 
+                bool? imageOnly=true;
+                if (checkSession.MainSession.Store != null)
+                {
+                    imageOnly = null;
+                }
+
                 SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
                 {
                     StoreCode = storeCode
-                }, lstStatus);
+                }, lstStatus,null, imageOnly);
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه

@@ -451,11 +451,11 @@
 
                                     colorTemp += " <li class='moreFilter' id='showMoreColor' onclick='moreColor();'>+ بیشتر</li> " +
                                         "<li><input type='checkbox' onclick='changeColorDrop();' id='" + value2.Value + "' name='cc' />" +
-                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:#" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
+                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
                                     haveMoreColor = true;
                                 } else {
                                     colorTemp += " <li><input onclick='changeColorDrop();' type='checkbox' id='" + value2.Value + "' name='cc' />" +
-                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:#" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
+                                        "<label for='" + value2.Value + "'><span></span><div class='colors' style='background-color:" + value2.ColorHex + ";'></div>" + value2.Text + "</label> </li>";
                                 }
 
                             });
