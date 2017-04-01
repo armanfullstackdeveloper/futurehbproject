@@ -17,7 +17,7 @@ namespace Boundary.Controllers.Ordinary
             return View();
         }
 
-        public ActionResult Index2()
+        public ActionResult low()
         {
             return View();
         }

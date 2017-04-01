@@ -880,7 +880,7 @@
     <Content Include="Web References\com.arianpal.merchant\VerifyPaymentResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\low.cshtml" />
     <Content Include="Views\Static\AboutUs.cshtml" />
     <Content Include="Views\Static\Complaints.cshtml" />
     <Content Include="Views\Static\ContactUs.cshtml" />
