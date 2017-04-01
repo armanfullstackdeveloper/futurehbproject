@@ -43,11 +43,6 @@
             or you can provide the samples for the requests/responses.
             </summary>
         </member>
-        <member name="T:Boundary.Areas.HelpPage.Controllers.HelpController">
-            <summary>
-            The controller that will handle requests for the help page.
-            </summary>
-        </member>
         <member name="M:Boundary.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
             <summary>
             Sets the documentation provider for help page.
