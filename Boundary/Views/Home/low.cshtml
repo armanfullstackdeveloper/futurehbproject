@@ -18,9 +18,15 @@
     <link rel="stylesheet" href="~/newAsset/css/styles.css">
     <link rel="stylesheet" href="~/newAsset/css/icons.css">
     <link href="~/newAsset/css/owl.carousel.min.css" rel="stylesheet" />
- </head>
+</head>
 
 <body ng-controller="HomeCtrl">
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
     <header class="container">
         <div class="sizeManager">
             <div class="header">
@@ -242,9 +248,7 @@
                                         <div class="titleBar thickFont organizer standardPadding">
                                             <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
                                             <div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>
-                                        </div>
-
-
+                                        </div> 
                                         <div class="itemContainer organizer borderBottom">
                                             <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
                                                 <div class="oneThreeFullColumn">
@@ -275,21 +279,23 @@
         </div>
         <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin">
             <nav class="boxElement relativeMatter">
-                <ul class="sizeManager">
-                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList">
-                        <span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>  لوازم دیجیتال
+                 <ul class="sizeManager">
+                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
+                     
+                        
+                           @*<span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>*@  {{menu.Name}}
                         <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
                             <ul>
                                 <!-- in list hamishe bayad 5 ta bashe -->
-                                <li class="fiveFullColumn borderRight loginPadding secondHandedList">
-                                    موبایل
+                                <li class="fiveFullColumn borderRight loginPadding secondHandedList" ng-repeat="subMenu in menu.SubCategories">
+                                    {{subMenu.Name}}
                                     <div class="organizer openUpObject standardHorizontalPadding innerInnerList">
                                         <!-- in ham hamishe bayad 5 ta bashe -->
                                         <div class="fiveFullColumn standardHorizontalPadding borderRight">
-                                            <div class="organizer standardVerticalMargin">برندها</div>
+                                            @*<div class="organizer standardVerticalMargin">برندها</div>*@
                                             <ul class="normalFont standardVerticalPadding">
-                                                <li>اپل</li>
-                                                <li>سامسونگ</li>
+                                                <li ng-repeat="subSubMenu in subMenu.SubCategories" > <a href="/Search/#!/categoryCode-{{subSubMenu.Id}}"> {{subSubMenu.Name}}</a> </li>
+                                                @*<li>سامسونگ</li>
                                                 <li>ال جی</li>
                                                 <li>اچ تی سی</li>
                                                 <li>سونی</li>
@@ -299,7 +305,7 @@
                                                 <li>ایسوس</li>
                                                 <li>لنوو</li>
                                                 <li>دیمو</li>
-                                                <li>اسمارت</li>
+                                                <li>اسمارت</li>*@
                                             </ul>
                                         </div>
                                         <div class="fiveFullColumn loginPadding borderRight">
@@ -312,14 +318,58 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="fiveFullColumn borderRight loginPadding">تبلت</li>
+                                @*<li class="fiveFullColumn borderRight loginPadding">تبلت</li>
                                 <li class="fiveFullColumn borderRight loginPadding">لپتاپ</li>
                                 <li class="fiveFullColumn borderRight loginPadding">دوربین</li>
-                                <li class="fiveFullColumn borderRight loginPadding">تلویزیون</li>
+                                <li class="fiveFullColumn borderRight loginPadding">تلویزیون</li>*@
                             </ul>
                         </div>
                     </li>
-                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList"><span class="icon icon-aid-kit twentyTwoFontsize standardHorizontalLeftMargin"></span> زیبایی و آرایشی</li>
+                    @*                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList">
+                            <span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>  لوازم دیجیتال
+                            <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
+                                <ul>
+                                    <!-- in list hamishe bayad 5 ta bashe -->
+                                    <li class="fiveFullColumn borderRight loginPadding secondHandedList">
+                                        موبایل
+                                        <div class="organizer openUpObject standardHorizontalPadding innerInnerList">
+                                            <!-- in ham hamishe bayad 5 ta bashe -->
+                                            <div class="fiveFullColumn standardHorizontalPadding borderRight">
+                                                <div class="organizer standardVerticalMargin">برندها</div>
+                                                <ul class="normalFont standardVerticalPadding">
+                                                    <li>اپل</li>
+                                                    <li>سامسونگ</li>
+                                                    <li>ال جی</li>
+                                                    <li>اچ تی سی</li>
+                                                    <li>سونی</li>
+                                                    <li>هواووی</li>
+                                                    <li>نوکیا</li>
+                                                    <li>مایکروسافت</li>
+                                                    <li>ایسوس</li>
+                                                    <li>لنوو</li>
+                                                    <li>دیمو</li>
+                                                    <li>اسمارت</li>
+                                                </ul>
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="fiveFullColumn borderRight loginPadding">تبلت</li>
+                                    <li class="fiveFullColumn borderRight loginPadding">لپتاپ</li>
+                                    <li class="fiveFullColumn borderRight loginPadding">دوربین</li>
+                                    <li class="fiveFullColumn borderRight loginPadding">تلویزیون</li>
+                                </ul>
+                            </div>
+                        </li>
+
+                            <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList"><span class="icon icon-aid-kit twentyTwoFontsize standardHorizontalLeftMargin"></span> زیبایی و آرایشی</li>*@
                 </ul>
             </nav>
         </div>
@@ -328,23 +378,24 @@
         <div class="closeTheMadule" ng-click="closeBox();"></div>
         <!-- box login -->
         <div class="loginBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
-            <div class="closeTheBox pointercircleDefaultArrows pinkBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize"></span> </div>
-            <div class="organizer borderBottom standardHalfVerticalPadding">
-                <img src="~/newAsset/images/carryBox.svg" style="width: 80px;">
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin">
-                <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
-                <div class="organizer"><input type="text" class="standardInput"></div>
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin">
-                <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                <div class="organizer"><input type="text" class="standardInput"></div>
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin"></div>
-            <div class="organizer loginPadding">
-                <div class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin">ورود</div>
-                <div class="organizer twelveFontSize">ثبت نام | فراموشی رمز عبور</div>
-            </div>
+            <form id="loginFrm">
+                <div class="closeTheBox pointercircleDefaultArrows pinkBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize"></span> </div>
+                <div class="organizer borderBottom standardHalfVerticalPadding">
+                    <img src="~/newAsset/images/carryBox.svg" style="width: 80px;">
+                </div>
+                <div class="organizer borderBottom standardPaddingForlogin">
+                    <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
+                    <div class="organizer"><input type="text" id="UserName" class="standardInput textInCenter"></div>
+                </div>
+                <div class="organizer borderBottom standardPaddingForlogin">
+                    <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
+                    <div class="organizer"><input type="text" id="Password" class="standardInput textInCenter"></div>
+                </div>
+                <div class="organizer loginPadding">
+                    <div id="EnterBtn" class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin pointer">ورود</div>
+                    <div class="organizer twelveFontSize">  <span class="pointer" ng-click="closeBox();showRegisterBox();">ثبت نام</span>|<span  class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
+                </div>
+            </form>
         </div>
         <!-- box signup -->
         <div class="signUpBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
@@ -354,20 +405,28 @@
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
-                <div class="organizer"><input type="text" class="standardInput"></div>
+                <div class="organizer"><input type="text" id="UserNameTxt" class="standardInput"></div>
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                <div class="organizer"><input type="text" class="standardInput"></div>
+                <div class="organizer"><input type="text" id="PasswordTxt" class="standardInput"></div>
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">تکرار رمز عبور</div>
-                <div class="organizer"><input type="text" class="standardInput"></div>
+                <div class="organizer"><input type="text" id="ConfirmPasswordTxt" class="standardInput"></div>
             </div>
-            <div class="organizer borderBottom standardPaddingForlogin"></div>
+            <div class="organizer borderBottom standardPaddingForlogin" style="display:none;">
+                <div class="organizer standardHalfVerticalMarginForlogin">کد فعالسازی</div>
+                <div class="organizer"><input type="text" id="VerifyTxt" class="standardInput"></div>
+            </div>
+            <div class="organizer standardPaddingForlogin">
+                <div style="color:red; text-align:center" id="registerStatus"></div>
+                <div style="display:none;color:red; text-align:center" id="Alert_UserName_Wait">لطفا کمی صبر کنید</div>
+                <div style="display:none; color:#10de03;text-align:center" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
+            </div>
             <div class="organizer loginPadding">
-                <div class="outlineButton whiteColor greenBack standardPaddingForlogin loginAction standardVerticalBottomMargin">ثبت نام</div>
-                <div class="organizer twelveFontSize">ورود | فراموشی رمز عبور</div>
+                <div id="register" class="outlineButton whiteColor greenBack standardPaddingForlogin loginAction standardVerticalBottomMargin">ثبت نام</div>
+                <div class="organizer twelveFontSize pointer" ng-click="closeBox();showLoginBox();" >ورود</div>
             </div>
         </div>
     </div>
@@ -526,10 +585,9 @@
                     <div class="boxElement radiusBox">
                         <div class="titleBar organizer eightyFontsize thickFont loginPadding">
                             <div class="goRight"><span class="icon icon-price-tags"></span> جدیدترین محصولات </div>
-                            <div class="goLeft">بیشتر ببینید ...</div>
+                            @*<div class="goLeft">بیشتر ببینید ...</div>*@
                         </div>
                         <div class="innerBox carouselContainer organizer thickFont relativeMatter">
-                            <!-- be ezaye har mahsool y dune az in six column ha repeat mishe -->
                             <div class="arrows owl-nav1">
                                 <div class="rightArrow defaultArrow owl-prev prev1 pointer">
                                     <span class="icon icon-arrow-right2 objectInMiddle "></span>
@@ -539,63 +597,9 @@
                                 </div>
                             </div>
                             <div class="carouselInner">
-                                <div class="owl-carousel owl-theme">
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
-                                    <div class="borderRight item">
-                                        <div class="organizer standardVerticalMargin">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="organizer pinkColor">نام محصول</div>
-                                        <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                                    </div>
+                                <div class="owl-carousel owl-theme owlSlider1">
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -620,130 +624,181 @@
                     <div class="tabContainer boxElement organizer radiusBox">
                         <div class="tabHeader organizer titleBar">
                             <ul>
-                                <li class="twoFullColumn loginPadding tabDeactivate">پرفروش ترین محصولات</li>
-                                <li class="twoFullColumn borderRight loginPadding ">پرفروش ترین فروشگاه ها</li>
+                                <li class="twoFullColumn loginPadding  pointer" ng-class="topVisitProduct?'tabDeactivate':''" ng-click="topVisitProduct=true;topLikeProduct=false;" ng-init="topVisitProduct=true;">پربازدید ترین محصولات</li>
+                                <li class="twoFullColumn borderRight loginPadding pointer" ng-class="topLikeProduct?'tabDeactivate':''" ng-click="topLikeProduct=true;topVisitProduct=false;">محبوب ترین محصولات</li>
 
                             </ul>
                         </div>
                         <div class="tabContent organizer textInCenter">
-                            <div class="contentInner organizer">
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
+                            <div class="innerBox carouselContainer organizer thickFont relativeMatter" ng-show="topVisitProduct">
+                                <div class="arrows owl-nav1">
+                                    <div class="rightArrow defaultArrow owl-prev prev3 pointer">
+                                        <span class="icon icon-arrow-right2 objectInMiddle "></span>
                                     </div>
-                                    <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton greenBorder">
-                                            <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
-                                            <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
-                                        </div>
+                                    <div class="leftArrow defaultArrow owl-next next3 pointer">
+                                        <span class="icon icon-arrow-left2 objectInMiddle"></span>
                                     </div>
                                 </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
+                                <div class="carouselInner">
+                                    <div class="owl-carousel owl-theme owlSlider3">
+
+                                        <div class="borderRight item">
+                                            <div class="organizer standardVerticalMargin">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer pinkColor">نام محصول</div>
+                                            <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                         </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton greenBorder">
-                                            <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
-                                            <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton greenBorder">
-                                            <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
-                                            <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton greenBorder">
-                                            <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
-                                            <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <!-- vaghti rooye header marboote tab click shod in element paein displayesh block mishe -->
-                            <div class="contentInner organizer" style="display: none;">
-                                <!-- be ezaye har ye mahsoole por forush yki az ina repeat mishe -->
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
+                            <div class="innerBox carouselContainer organizer thickFont relativeMatter" ng-show="topLikeProduct">
+                                <div class="arrows owl-nav1">
+                                    <div class="rightArrow defaultArrow owl-prev prev5 pointer">
+                                        <span class="icon icon-arrow-right2 objectInMiddle "></span>
                                     </div>
-                                    <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton pinkBorder">
-                                            <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
-                                            <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
-                                        </div>
+                                    <div class="leftArrow defaultArrow owl-next next5 pointer">
+                                        <span class="icon icon-arrow-left2 objectInMiddle"></span>
                                     </div>
                                 </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton pinkBorder">
-                                            <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
+                                <div class="carouselInner">
+                                    <div class="owl-carousel owl-theme owlSlider5">
+
+                                        <div class="borderRight item">
+                                            <div class="organizer standardVerticalMargin">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer pinkColor">نام محصول</div>
+                                            <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
                                             <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton pinkBorder">
-                                            <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
-                                            <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="fourFullColumns standardDoublePadding borderRight">
-                                    <div class="organizer">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
-                                    <div class="organizer">
-                                        <div class="twoPartButton outlineButton pinkBorder">
-                                            <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
-                                            <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
+                            @*<div class="contentInner organizer" ng-show="topVisitProduct">
+                                        <div class="fourFullColumns standardDoublePadding borderRight">
+                                            <div class="organizer">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
+                                            <div class="organizer">
+                                                <div class="twoPartButton outlineButton greenBorder">
+                                                    <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
+                                                    <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns standardDoublePadding borderRight">
+                                            <div class="organizer">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
+                                            <div class="organizer">
+                                                <div class="twoPartButton outlineButton greenBorder">
+                                                    <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
+                                                    <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns standardDoublePadding borderRight">
+                                            <div class="organizer">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
+                                            <div class="organizer">
+                                                <div class="twoPartButton outlineButton greenBorder">
+                                                    <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
+                                                    <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns standardDoublePadding borderRight">
+                                            <div class="organizer">
+                                                <div class="circleImageContainer">
+                                                    <img src="" alt="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="organizer standardVerticalMargin greenColor">نام محصول</div>
+                                            <div class="organizer">
+                                                <div class="twoPartButton outlineButton greenBorder">
+                                                    <div class="iconPart greenBack"><span class="icon icon-cart whiteColor"></span> </div>
+                                                    <div class="fieldPart greenColor thirteenFontSize">اضافه به سبد خرید</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- vaghti rooye header marboote tab click shod in element paein displayesh block mishe -->
+                                <div class="contentInner organizer" ng-show="topLikeProduct">
+                                    <!-- be ezaye har ye mahsoole por forush yki az ina repeat mishe -->
+                                    <div class="fourFullColumns standardDoublePadding borderRight">
+                                        <div class="organizer">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="organizer standardVerticalMargin pinkColor">نام فروش</div>
+                                        <div class="organizer">
+                                            <div class="twoPartButton outlineButton pinkBorder">
+                                                <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
+                                                <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fourFullColumns standardDoublePadding borderRight">
+                                        <div class="organizer">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
+                                        <div class="organizer">
+                                            <div class="twoPartButton outlineButton pinkBorder">
+                                                <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
+                                                <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fourFullColumns standardDoublePadding borderRight">
+                                        <div class="organizer">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
+                                        <div class="organizer">
+                                            <div class="twoPartButton outlineButton pinkBorder">
+                                                <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
+                                                <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fourFullColumns standardDoublePadding borderRight">
+                                        <div class="organizer">
+                                            <div class="circleImageContainer">
+                                                <img src="" alt="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="organizer standardVerticalMargin pinkColor">نام فروشگاه</div>
+                                        <div class="organizer">
+                                            <div class="twoPartButton outlineButton pinkBorder">
+                                                <div class="iconPart pinkBack"><span class="icon icon-ticket whiteColor"></span> </div>
+                                                <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
                         </div>
                     </div>
                 </div>
@@ -751,72 +806,20 @@
                     <div class="boxElement radiusBox">
                         <div class="titleBar organizer eightyFontsize thickFont loginPadding">
                             <div class="goRight"><span class="icon icon-cart"></span> جدیدترین فروشگاه ها </div>
-                            <div class="goLeft">بیشتر ببینید ...</div>
+                            @*<div class="goLeft">بیشتر ببینید ...</div>*@
                         </div>
+
                         <div class="innerBox carouselContainer organizer thickFont relativeMatter">
-                            <!-- be ezaye har forooshgah y dune az in six column ha repeat mishe -->
-                            <div class="arrows">
-                                <div class="rightArrow defaultArrow">
-                                    <span class="icon icon-arrow-right2 objectInMiddle"></span>
+                            <div class="arrows owl-nav1">
+                                <div class="rightArrow defaultArrow owl-prev prev4 pointer">
+                                    <span class="icon icon-arrow-right2 objectInMiddle "></span>
                                 </div>
-                                <div class="leftArrow defaultArrow">
+                                <div class="leftArrow defaultArrow owl-next next4 pointer">
                                     <span class="icon icon-arrow-left2 objectInMiddle"></span>
                                 </div>
                             </div>
                             <div class="carouselInner">
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
-                                </div>
-                                <div class="sixColumn borderRight">
-                                    <div class="organizer standardVerticalMargin">
-                                        <div class="circleImageContainer">
-                                            <img src="" alt="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="organizer pinkColor">نام فروشگاه</div>
-                                    <div class="organizer smallExplain">توضیحی مختصر در مورد این فروشگاه</div>
+                                <div class="owl-carousel owl-theme owlSlider4">
                                 </div>
                             </div>
                         </div>
@@ -934,7 +937,7 @@
             <div class="fourFullColumns">
                 <div class="organizer blackColor standardVerticalMargin">سایر صفحات</div>
                 <ul>
-                    <a href="~/Static/Law"> 
+                    <a href="~/Static/Law">
                         <li>قوانین سایت</li>
                     </a>
                     <a href="~/Static/ContactUs">
@@ -943,7 +946,7 @@
                     <a href="~/Static/AboutUs">
                         <li>درباره ما</li>
                     </a>
-                    <a href="~/Static/Complaints">      
+                    <a href="~/Static/Complaints">
                         <li>شکایات ، پیشنهادات</li>
                     </a>
                 </ul>
@@ -980,6 +983,7 @@
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/newAsset/js/owl.carousel.min.js"></script>
     <script src="~/newAsset/js/Home.js"></script>
+    <script src="~/Content/MD5_encriptin/MD5.js"></script>
 
     @*<script type="application/ld+json">
             {
