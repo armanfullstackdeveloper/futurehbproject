@@ -1,11 +1,14 @@
 ﻿angular.module('Home', [])
 
- .controller('HomeCtrl', ['$scope', function ($scope) {
+ .controller('HomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
      var noProductPic = "Img/MainPage/NoProductPic.png",
         noStorePic = "Img/MainPage/NoStorePic.png",
         root = "http://hoojibooji.com/",
-        owl1, owl3, owl4, owl5;
+        send = '',
+        verifyLevel = 0,
+        owl1,owl2, owl3, owl4, owl5;
+
 
      $scope.showRegisterBox = function () {
          $('.popUpMadule').fadeIn();
@@ -25,24 +28,27 @@
      }
 
      loadMenu();
+     loadCustomBox();
      loadInitProduct(1);
      loadInitProduct(3);
      loadInitProduct(5);
      loadInitStore(4);
-
-     function loadMenu() {
  
+     function loadMenu() {
+
          $.ajax({
              type: "GET",
-             url: "/api/firstPage/getMenue", 
+             url: "/api/firstPage/getMenue",
              success: function (result) {
-                  if (result.Success != true) {
+                 if (result.Success != true) {
                      console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                      return;
-                  }
-                  if (result.Response.length > 0) {
-                      $scope.allMenu = result.Response;
-                  }
+                 }
+                 if (result.Response.length > 0) {
+                     $timeout(function () {
+                         $scope.allMenu = result.Response;
+                     }, 1);
+                 }
              },
              error: function () {
                  console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
@@ -159,7 +165,7 @@
 
      function loadNewStore(event, type) {
          var PageNumber = 1;
-  
+
          if (event && event.item) {
              count = event.item.count;
              PageNumber = parseInt((count * 1) / 10) + 1;
@@ -180,7 +186,7 @@
                  }
                  setTimeout(function (index, value) {
                      if (result.Response.length > 0) {
-                           $.each(result.Response, function (index, value) {
+                         $.each(result.Response, function (index, value) {
                              event.relatedTarget.add(createStoreHtml(value));
                          });
                          event.relatedTarget.update();
@@ -237,18 +243,18 @@
              margin: 10,
              center: false,
              nav: false,
-             item: 5,
-             responsive: {
-                 0: {
-                     items: 1
-                 },
-                 600: {
-                     items: 3
-                 },
-                 1000: {
-                     items: 5
-                 }
-             }
+             items: 5,
+             //responsive: {
+             //    0: {
+             //        items: 1
+             //    },
+             //    600: {
+             //        items: 3
+             //    },
+             //    1000: {
+             //        items: 5
+             //    }
+             //}
          });
          $(".prev" + type).click(function () {
              owl.trigger('prev.owl.carousel');
@@ -269,17 +275,80 @@
          });
      }
 
-     $scope.login = function () {
+     function loadCustomBox(){
+         $.ajax({
+             type: "GET",
+             url: "/api/firstPage/GetActiveBox",
+             data:{
+                 position:'slider'
+             },
+             success: function (result) {
+                 if (result.Success != true) {
+                     console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                     return;
+                 }
+                 
+                 $scope.Box = result.Response;
+
+                 showSlider(2);
+                 showBoxs();
+
+
+             },
+             error: function () {
+                 $scope.loading = false;
+                 console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+             }
+         });
+     }
+
+     function showSlider(type) {
+         $timeout(function () {
+              owl2 = $('.owlSlider' + type + '').owlCarousel({
+                 rtl: true,
+                 loop: true,
+                 nav: false,
+                 items: 1,
+                 autoplay: true,
+                 autoplayTimeout: 2000,
+                 autoplayHoverPause: true
+             });
+             $(".prev" + type).click(function () {
+                 owl2.trigger('prev.owl.carousel');
+             });
+             $(".next" + type).click(function () {
+                 owl2.trigger('next.owl.carousel');
+             });
+         },500);
+     }
+
+     function showBoxs() {
+         $.ajax({
+             type: "GET",
+             url: "/api/firstPage/GetActiveBox",
+             data: {
+                 position: 'category'
+             },
+             success: function (result) {
+                 if (result.Success != true) {
+                     console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                     return;
+                 }
+                  $scope.Box2 = result.Response;
+             },
+             error: function () {
+                  console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+             }
+         });
 
      }
 
-
      //Login
      $('#EnterBtn').on("click", function () {
-          
+
          var form = $('#__AjaxAntiForgeryForm');
          var token = $('input[name="__RequestVerificationToken"]', form).val();
-  
+
          $.ajax({
              url: '/Account/Login',
              type: 'POST',
@@ -288,27 +357,27 @@
                  __RequestVerificationToken: token,
                  UserName: $('#UserName').val(),
                  Password: $.md5($('#Password').val())
-              },
+             },
              success: function (result) {
 
                  if (result.Success == true) {
 
-                         //success
-                         if (returnUrl == "") {
-                             //return to root
-                             window.location = "/";
+                     //success
+                     if (returnUrl == "") {
+                         //return to root
+                         window.location = "/";
 
-                         } else {
-                             //return to returnUrl
-                             window.location = returnUrl;
-                         }
- 
+                     } else {
+                         //return to returnUrl
+                         window.location = returnUrl;
+                     }
+
                  } else {
                      //failed
                  }
              },
              error: function () {
-               //failed
+                 //failed
              }
 
          });
@@ -316,9 +385,6 @@
 
      });
 
-
-
-     var verifyLevel = 0;
      //register
      $('#register').on("click", function () {
          $('#registerStatus').html('');
@@ -333,12 +399,12 @@
              $('#registerStatus').html('لطفا کلمه عبور خود را بیشتر از 6 کارکتر وارد نمایید');
              return;
          }
-          else if ($('#ConfirmPasswordTxt').val().length < 6) {
+         else if ($('#ConfirmPasswordTxt').val().length < 6) {
              $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
-              return;
-          }
+             return;
+         }
          else if (confPass != pass) {
-            $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
+             $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
              return;
          }
          $('#Alert_UserName_Wait').css("display", "block");
@@ -394,9 +460,9 @@
                      } else {
                          $('#Alert_UserName_Wait').css("display", "none");
                          $('#registerStatus').html('ثبت نام شما با خطا مواجه شد');
-                          send = "";
+                         send = "";
                      }
-                  },
+                 },
                  error: function () {
                      $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                      send = "";
@@ -446,8 +512,6 @@
          });
 
      }
-
-
 
      $("#loginFrm input").keypress(function (e) {
          if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
