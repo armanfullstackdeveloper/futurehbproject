@@ -269,12 +269,15 @@
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
     <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
     <Compile Include="Controllers\Ordinary\StaticController.cs" />
+    <Compile Include="Helper\AttributeFilters\HoojiBoojiExceptionHandler.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
     <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />
+    <Compile Include="Model\ErrorLogModel.cs" />
+    <Compile Include="Model\ExceptionResultModel.cs" />
     <Compile Include="Model\PaymentViewModel.cs" />
     <Compile Include="Web References\com.arianpal.merchant\Reference.cs">
       <AutoGen>True</AutoGen>

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.WebHost;
 using System.Web.Routing;
 using System.Web.SessionState;
+using Boundary.Helper.AttributeFilters;
 
 namespace Boundary
 {
@@ -24,31 +25,7 @@ namespace Boundary
                 defaults: new { id = RouteParameter.Optional }
                 );
 
-            //For Client Session Enable(For ApiController)
-            //RouteTable.Routes.MapHttpRoute(
-            // name: "DefaultApi",
-            // routeTemplate: "api/{controller}/{id}",
-            // defaults: new { id = RouteParameter.Optional }
-            // ).RouteHandler = new SessionRouteHandler();
+            config.Filters.Add(new HoojiBoojiApiExceptionHandler());
         }
-
-        //#region For Client Session Enable(For ApiController)
-
-        //public class SessionRouteHandler : IRouteHandler
-        //{
-        //    IHttpHandler IRouteHandler.GetHttpHandler(RequestContext requestContext)
-        //    {
-        //        return new SessionControllerHandler(requestContext.RouteData);
-        //    }
-        //}
-        //public class SessionControllerHandler : HttpControllerHandler, IRequiresSessionState
-        //{
-        //    public SessionControllerHandler(RouteData routeData)
-        //        : base(routeData)
-        //    { }
-        //}
-
-        //#endregion
-
     }
 }
