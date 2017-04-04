@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
+using Boundary.Helper.AttributeFilters;
 using BusinessLogic.BussinesLogics;
 using BusinessLogic.Helpers;
 using DataModel.Models.ViewModel;
@@ -10,10 +11,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Boundary.Controllers.Ordinary
 {
-    public class HomeController : Controller
+    public class HomeController : Controller       
     {
         public ActionResult Index()
         {
+            throw new Exception("djksbfjdsf1052845");
             return View();
         }
 
