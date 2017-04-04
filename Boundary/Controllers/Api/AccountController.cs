@@ -65,7 +65,7 @@ namespace Boundary.Controllers.Api
                     {
                         UserName = userRegisterData.PhoneNumber,
                         Role = StaticRole.NotRegister,
-                        RoleCode = StaticRole.NotRegister.Id,                        
+                        RoleCode = StaticRole.NotRegister.Id,
                     };
                     var result = await new ShopFinderUserManager().CreateUser(ref user, userRegisterData.Password, "");
                     if (result == null || !result.Succeeded)
@@ -146,7 +146,7 @@ namespace Boundary.Controllers.Api
                     member.Latitude = model.MemberInfo.Latitude;
                     member.Longitude = model.MemberInfo.Longitude;
                     member.MobileNumber = model.MemberInfo.MobileNumber;
-                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber)? model.UserName:model.MemberInfo.PhoneNumber;
+                    member.PhoneNumber = string.IsNullOrEmpty(model.MemberInfo.PhoneNumber) ? model.UserName : model.MemberInfo.PhoneNumber;
                     member.Place = model.MemberInfo.Place;
                     member.PostalCode = model.MemberInfo.PostalCode;
                 }
@@ -218,103 +218,56 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        //[Authorize(Roles = StaticString.Role_Member)]
-        //[HttpPost]
-        //[Route("UpgradeToSeller")]
-        //public IHttpActionResult UpgradeMembershipFromMemberToSeller(StoreRegisterForUpgradeMemberToSallerDataModel storeRegister)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Json(JsonResultHelper.FailedResultWithMessage());
-        //    }
-        //    try
-        //    {
-        //        string userId = this.RequestContext.Principal.Identity.GetUserId();
-        //        if (string.IsNullOrEmpty(userId))
-        //            return Json(JsonResultHelper.FailedResultOfWrongAccess());
+        /// <summary>
+        /// ارتقاء کاربری به فروشنده
+        /// </summary>
+        /// <param name="storeRegister"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Roles = StaticString.Role_Member)]
+        [Route("UpgradeToSeller")]
+        public IHttpActionResult UpgradeMembershipFromMemberToSeller(StoreRegisterForUpgradeMemberToSallerDataModel storeRegister)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(JsonResultHelper.FailedResultWithMessage());
+            }
+            string userId = this.RequestContext.Principal.Identity.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+                return Json(JsonResultHelper.FailedResultOfWrongAccess());
 
-        //        var storeRegisterResult = new StoreBL().FullRegister(new StoreRegisterDataModel()
-        //        {
-        //            StoreName = storeRegister.StoreName,
-        //            StoreComments = storeRegister.StoreComments,
-        //            CommercialCode = storeRegister.CommercialCode,
-        //            ReagentPhoneNumber = storeRegister.ReagentPhoneNumber,
-        //            CityCode = storeRegister.CityCode,
-        //            Place = storeRegister.Place,
-        //            Latitude = storeRegister.Latitude,
-        //            Longitude = storeRegister.Longitude,
-        //            PhoneNumber = storeRegister.PhoneNumber,
-        //            ListCategoryCode = storeRegister.ListCategoryCode,
-        //            StoreTypeCode = storeRegister.StoreTypeCode,
-        //            Website = storeRegister.Website,
-        //            SallerName = storeRegister.SallerName,
-        //            NationalCode = storeRegister.NationalCode,
-        //            SallerComments = storeRegister.SallerComments,
-        //            IsMale = storeRegister.IsMale,
-        //        }, userId);
+            var storeRegisterResult = new StoreBL().FullRegister(new StoreRegisterDataModel()
+            {
+                StoreName = storeRegister.StoreName,
+                StoreComments = storeRegister.StoreComments,
+                CommercialCode = storeRegister.CommercialCode,
+                ReagentPhoneNumber = storeRegister.ReagentPhoneNumber,
+                CityCode = storeRegister.CityCode,
+                Place = storeRegister.Place,
+                Latitude = storeRegister.Latitude,
+                Longitude = storeRegister.Longitude,
+                PhoneNumber = storeRegister.PhoneNumber,
+                ListCategoryCode = storeRegister.ListCategoryCode,
+                StoreTypeCode = storeRegister.StoreTypeCode,
+                Website = storeRegister.Website,
+                SallerName = storeRegister.SallerName,
+                NationalCode = storeRegister.NationalCode,
+                SallerComments = storeRegister.SallerComments,
+                IsMale = storeRegister.IsMale,
+            }, userId);
 
-        //        //age movafagh sabt shod
-        //        if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
-        //        {
-        //            ////az table Customer delete beshe   //todo: چون اگه خرید کرده باشه اطلاعات خریدشو میخوام و همچنین شاید در آینده خردی کنه
-        //            //DataModel.Entities.Member member = new MemberBL().GetSummaryForSession(userId);
-        //            //bool result = false;
-        //            //if (member != null)
-        //            //    result = new MemberBL().Delete(member.Id);
+            //age movafagh sabt shod
+            if (storeRegisterResult.DbMessage.MessageType == MessageType.Success)
+            {
+                //update role
+                User user = new UserBL().GetById(userId);
+                user.RoleCode = StaticRole.Seller.Id;
+                new UserBL().Update(user);
+                return Json(JsonResultHelper.SuccessResult(storeRegisterResult.DbMessage.Message));
+            }
 
-        //            //if (result)
-        //            //{
-        //                //role bayad taghir kone
-        //                User user = new UserBL().GetById(userId);
-        //                user.RoleCode = StaticRole.Seller.Id;
-        //                new UserBL().Update(user);
-        //                return Json(JsonResultHelper.SuccessResult(storeRegisterResult.DbMessage.Message));
-        //            //}
-        //        }
-
-        //        return Json(JsonResultHelper.FailedResultWithMessage(storeRegisterResult.DbMessage.Message));
-        //    }
-        //    catch (MyExceptionHandler exp1)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-        //            {
-        //                new ActionInputViewModel()
-        //                {
-        //                    Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
-        //                    Value = JObject.FromObject(storeRegister).ToString()
-        //                },
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp1, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage());
-        //        }
-        //    }
-        //    catch (Exception exp3)
-        //    {
-        //        try
-        //        {
-        //            List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-        //            {
-        //                new ActionInputViewModel()
-        //                {
-        //                    Name = HelperFunctionInBL.GetVariableName(() => storeRegister),
-        //                    Value = JObject.FromObject(storeRegister).ToString()
-        //                },
-        //            };
-        //            long code = new ErrorLogBL().LogException(exp3, RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress, JArray.FromObject(lst).ToString());
-        //            return Json(JsonResultHelper.FailedResultWithTrackingCode(code));
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return Json(JsonResultHelper.FailedResultWithMessage());
-        //        }
-        //    }
-        //}
+            return Json(JsonResultHelper.FailedResultWithMessage(storeRegisterResult.DbMessage.Message));
+        }
 
         [HttpPost]
         [Route("CheackUserName")]
@@ -587,11 +540,6 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        /// <summary>
-        /// update user account info
-        /// </summary>
-        /// <param name="userAccountDataModel"></param>
-        /// <returns></returns>
         [Authorize]
         [Route("UpdateUserAccount")]
         public IHttpActionResult UpdateUserAccount(UserAccountDataModel userAccountDataModel)
@@ -608,7 +556,7 @@ namespace Boundary.Controllers.Api
                 if (user.UserName != userAccountDataModel.PhoneNumber)
                 {
                     bool checkExsistBefore = new UserBL().IfUsernameExist(userAccountDataModel.PhoneNumber);
-                    if(checkExsistBefore)
+                    if (checkExsistBefore)
                         return Json(JsonResultHelper.FailedResultWithMessage("این شماره از قبل موجود می باشد"));
                 }
                 user.UserName = userAccountDataModel.PhoneNumber;
@@ -660,142 +608,5 @@ namespace Boundary.Controllers.Api
             }
         }
 
-        //private IAuthenticationManager Authentication
-        //{
-        //    get { return Request.GetOwinContext().Authentication; }
-        //}
-
-        //#region External Login
-        ////GET api/Account/ExternalLogin
-        //[OverrideAuthentication]
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        //[AllowAnonymous]
-        //[Route("ExternalLogin", Name = "ExternalLogin")]
-        //public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
-        //{
-        //    if (error != null)
-        //    {
-        //        return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
-        //    }
-
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        return new ChallengeResult(provider, this);
-        //    }
-
-        //    ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-        //    if (externalLogin == null)
-        //    {
-        //        return InternalServerError();
-        //    }
-
-        //    if (externalLogin.LoginProvider != provider)
-        //    {
-        //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-        //        return new ChallengeResult(provider, this);
-        //    }
-        //    AppUser user = await ShopFinderUserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-        //        externalLogin.ProviderKey));
-
-        //    bool hasRegistered = user != null;
-
-        //    if (hasRegistered)
-        //    {
-        //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-        //        ClaimsIdentity oAuthIdentity = await ShopFinderUserManager.CreateIdentityAsync(user,
-        //            OAuthDefaults.AuthenticationType);
-        //        ClaimsIdentity cookieIdentity = await ShopFinderUserManager.CreateIdentityAsync(user,
-        //            CookieAuthenticationDefaults.AuthenticationType);
-        //        AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-        //        Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
-        //    }
-        //    else
-        //    {
-        //        IEnumerable<Claim> claims = externalLogin.GetClaims();
-        //        ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-        //        Authentication.SignIn(identity);
-        //    }
-
-        //    return Ok();
-        //}
-
-        ////private IHttpActionResult GetErrorResult(IdentityResult result)
-        ////{
-        ////    if (result == null)
-        ////    {
-        ////        return InternalServerError();
-        ////    }
-
-        ////    if (!result.Succeeded)
-        ////    {
-        ////        if (result.Errors != null)
-        ////        {
-        ////            foreach (string error in result.Errors)
-        ////            {
-        ////                ModelState.AddModelError("", error);
-        ////            }
-        ////        }
-
-        ////        if (ModelState.IsValid)
-        ////        {
-        ////            // No ModelState errors are available to send, so just return an empty BadRequest.
-        ////            return BadRequest();
-        ////        }
-
-        ////        return BadRequest(ModelState);
-        ////    }
-
-        ////    return null;
-        ////}
-
-        //private class ExternalLoginData
-        //{
-        //    public string LoginProvider { get; set; }
-        //    public string ProviderKey { get; set; }
-        //    public string UserName { get; set; }
-
-        //    public IList<Claim> GetClaims()
-        //    {
-        //        IList<Claim> claims = new List<Claim>();
-        //        claims.Add(new Claim(ClaimTypes.NameIdentifier, ProviderKey, null, LoginProvider));
-
-        //        if (UserName != null)
-        //        {
-        //            claims.Add(new Claim(ClaimTypes.Name, UserName, null, LoginProvider));
-        //        }
-
-        //        return claims;
-        //    }
-
-        //    public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
-        //    {
-        //        if (identity == null)
-        //        {
-        //            return null;
-        //        }
-
-        //        Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
-
-        //        if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
-        //            || String.IsNullOrEmpty(providerKeyClaim.Value))
-        //        {
-        //            return null;
-        //        }
-
-        //        if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
-        //        {
-        //            return null;
-        //        }
-
-        //        return new ExternalLoginData
-        //        {
-        //            LoginProvider = providerKeyClaim.Issuer,
-        //            ProviderKey = providerKeyClaim.Value,
-        //            UserName = identity.FindFirstValue(ClaimTypes.Name)
-        //        };
-        //    }
-        //}
-        //#endregion External Login
     }
 }

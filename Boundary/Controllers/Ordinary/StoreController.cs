@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Boundary.Helper;
+using Boundary.Helper.AttributeFilters;
 using BusinessLogic.BussinesLogics;
 using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
@@ -18,103 +19,49 @@ namespace Boundary.Controllers.Ordinary
     public class StoreController : BaseController
     {
         [Route("Shop")]
-        public async Task<ActionResult> ShopPage(string shopname="",long? id=null) 
+        public async Task<ActionResult> ShopPage(string shopname = "", long? id = null)
         {
-            try
+            long? storeCode = id ?? new StoreBL().GetStoreCodeByHomePage(shopname);
+            if (storeCode == null || storeCode <= 0)
+                return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+            StoreDetailsViewModel storeDetails = new StoreBL().GetOneStoreDetails((long)storeCode);
+            //اگه فروشگاه وجود نداشت و یا غیر فعال بود، نمایش داده نمیشه
+            if (storeDetails == null || storeDetails.StoreStatus == EStoreStatus.Inactive)
+                return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+
+            List<EProductStatus> lstStatus = new List<EProductStatus>() { EProductStatus.Active };
+            #region getting store Id
+            CheckSessionDataModel checkSession = CheckSallerSession();
+            if (checkSession != null && checkSession.IsSuccess)
             {
-                long? storeCode = id ?? new StoreBL().GetStoreCodeByHomePage(shopname);
-                if (storeCode == null || storeCode <= 0)
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                
-                StoreDetailsViewModel storeDetails = new StoreBL().GetOneStoreDetails((long) storeCode);
-                
-                //اگه فروشگاه وجود نداشت و یا غیر فعال بود، نمایش داده نمیشه
-                if (storeDetails == null || storeDetails.StoreStatus == EStoreStatus.Inactive)
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-
-
-                List<EProductStatus> lstStatus = new List<EProductStatus>() { EProductStatus.Active };
-                #region getting store Id
-
-                CheckSessionDataModel checkSession = CheckSallerSession();
-                if (checkSession.IsSuccess)
-                {
-                    if(checkSession.MainSession.Store!=null)
-                        lstStatus.Add(EProductStatus.Suspended);
-                }
-
-                #endregion getting store Id
-
-                SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
-                {
-                    StoreCode = storeCode
-                }, lstStatus);
-
-                //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
-                //یعنی نباید معلق های بقیه رو ببینه
-                //چون این اکشنو هم میتونه خود فروشنده فراخوانی کنه هم دیگران
-                if (lstStatus.Contains(EProductStatus.Suspended) && checkSession.MainSession.Store != null)
-                {
-                    result.ProductsSummery.RemoveAll(p => p.StoreCode != checkSession.MainSession.Store.StoreCode && 
-                        p.Status == EProductStatus.Suspended);
-                }
-
-                StoreViewModel storeViewModel=new StoreViewModel()
-                {
-                    StoreDetailes = storeDetails,
-                    Products = result
-                };
-                return View(storeViewModel);
+                if (checkSession.MainSession.Store != null)
+                    lstStatus.Add(EProductStatus.Suspended);
             }
-            catch (MyExceptionHandler exp1)
+            #endregion getting store Id
+
+            bool? imageOnly = true;
+            if (checkSession != null && checkSession.MainSession!=null && checkSession.MainSession.Store != null)
             {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => shopname),
-                            Value = shopname
-                        },
-                        new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => id),
-                            Value = id.ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
+                imageOnly = null;
             }
-            catch (Exception exp3)
+            SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
             {
-                try
-                {
-                    List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
-                    {
-                         new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => shopname),
-                            Value = shopname
-                        },new ActionInputViewModel()
-                        {
-                            Name = HelperFunctionInBL.GetVariableName(() => id),
-                            Value = id.ToString()
-                        },
-                    };
-                    long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
-                    return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception)
-                {
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
+                StoreCode = storeCode
+            }, lstStatus, null, imageOnly);
+            //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
+            //یعنی نباید معلق های بقیه رو ببینه
+            //چون این اکشنو هم میتونه خود فروشنده فراخوانی کنه هم دیگران
+            if (lstStatus.Contains(EProductStatus.Suspended) && checkSession != null && checkSession.MainSession != null && checkSession.MainSession.Store != null)
+            {
+                result.ProductsSummery.RemoveAll(p => p.StoreCode != checkSession.MainSession.Store.StoreCode &&
+                    p.Status == EProductStatus.Suspended);
             }
+            StoreViewModel storeViewModel = new StoreViewModel()
+            {
+                StoreDetailes = storeDetails,
+                Products = result
+            };
+            return View(storeViewModel);
         }
 
         [HttpGet]

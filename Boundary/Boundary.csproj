@@ -93,6 +93,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.5\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -111,6 +115,7 @@
     </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -269,12 +274,15 @@
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
     <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
     <Compile Include="Controllers\Ordinary\StaticController.cs" />
+    <Compile Include="Helper\AttributeFilters\ExceptionHandler.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
     <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
     <Compile Include="Helper\StaticValue\StaticString.cs" />
+    <Compile Include="Model\ErrorLogModel.cs" />
+    <Compile Include="Model\ExceptionResultModel.cs" />
     <Compile Include="Model\PaymentViewModel.cs" />
     <Compile Include="Web References\com.arianpal.merchant\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -850,6 +858,9 @@
     <Content Include="newAsset\fonts\iransfm.ttf" />
     <Content Include="newAsset\fonts\iransfm.woff" />
     <Content Include="newAsset\fonts\iransfm.woff2" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\ShoFinderPublish.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Properties\Settings.settings">

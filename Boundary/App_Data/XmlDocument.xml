@@ -43,11 +43,6 @@
             or you can provide the samples for the requests/responses.
             </summary>
         </member>
-        <member name="T:Boundary.Areas.HelpPage.Controllers.HelpController">
-            <summary>
-            The controller that will handle requests for the help page.
-            </summary>
-        </member>
         <member name="M:Boundary.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
             <summary>
             Sets the documentation provider for help page.
@@ -589,11 +584,11 @@
             <param name="userRegisterData"></param>
             <returns></returns>
         </member>
-        <member name="M:Boundary.Controllers.Api.AccountController.UpdateUserAccount(DataModel.Models.DataModel.UserAccountDataModel)">
+        <member name="M:Boundary.Controllers.Api.AccountController.UpgradeMembershipFromMemberToSeller(DataModel.Models.DataModel.StoreRegisterForUpgradeMemberToSallerDataModel)">
             <summary>
-            update user account info
+            ارتقاء کاربری به فروشنده
             </summary>
-            <param name="userAccountDataModel"></param>
+            <param name="storeRegister"></param>
             <returns></returns>
         </member>
         <member name="M:Boundary.Controllers.Api.ProductController.GetProduct(System.Int64)">
@@ -707,6 +702,11 @@
         <member name="T:Boundary.Controllers.AppUser">
             <summary>
             chon bayad az IUser inherit mishod dige az User estefade nemitonestim bokonim
+            </summary>
+        </member>
+        <member name="T:Boundary.Helper.AttributeFilters.HoojiBoojiApiExceptionHandler">
+            <summary>
+            ExceptionHandler for api
             </summary>
         </member>
         <member name="M:Boundary.Helper.StaticValue.SmsHelper.RegisterMessage(System.Int32)">

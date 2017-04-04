@@ -39,7 +39,7 @@ namespace BusinessLogic.BussinesLogics
             {
                 temp = new ErrorLogBL().Insert(new ErrorLog()
                 {
-                    Input = actionInput,
+                    Input = actionInput != null ? actionInput.Replace("\\r\\n", "").Replace("\r\n", "").Trim().Replace("\\", "").Replace("\"", "") : string.Empty,
                     Message = item.Message,
                     StackTrace = item.StackTrace,
                     UserCode = string.IsNullOrEmpty(userCode) ? null : userCode,
@@ -92,7 +92,7 @@ namespace BusinessLogic.BussinesLogics
             {
                 temp = new ErrorLogBL().Insert(new ErrorLog()
                 {
-                    Input = actionInput,
+                    Input = actionInput != null ? actionInput.Replace("\\r\\n", "").Replace("\r\n", "").Trim().Replace("\\", "").Replace("\"", "") : string.Empty,
                     Message = item.Message,
                     StackTrace = item.StackTrace,
                     UserCode = string.IsNullOrEmpty(userCode) ? null : userCode,
