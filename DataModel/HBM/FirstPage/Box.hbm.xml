@@ -28,5 +28,14 @@
     <property name="OrderNumber">
       <column name="OrderNumber" sql-type="int" not-null="false" />
     </property>
+    <property name="Title">
+      <column name="Title" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Description">
+      <column name="Description" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="IsForApp">
+      <column name="IsForApp" sql-type="bit" not-null="false" />
+    </property>
   </class>
 </hibernate-mapping>

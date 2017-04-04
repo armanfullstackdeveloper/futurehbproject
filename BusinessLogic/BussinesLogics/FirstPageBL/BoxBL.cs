@@ -29,7 +29,7 @@ namespace BusinessLogic.BussinesLogics.FirstPageBL
             }
         }
 
-        public IEnumerable<Box> GetActiveBox(string position)  
+        public IEnumerable<Box> GetActiveBox(string position,bool? isForApp)  
         {
             try
             {
@@ -37,6 +37,7 @@ namespace BusinessLogic.BussinesLogics.FirstPageBL
                 var parameters = new DynamicParameters();
                 parameters.Add("@persianToday", PersianDateTime.Now.Date.ToInt());
                 parameters.Add("@position", position);
+                parameters.Add("@isForApp", isForApp);
                 IEnumerable<Box> result = _db.QueryAsync<Box>("Box_GetActive", parameters,
                     commandType: CommandType.StoredProcedure).Result;
                 EnsureCloseConnection(_db);

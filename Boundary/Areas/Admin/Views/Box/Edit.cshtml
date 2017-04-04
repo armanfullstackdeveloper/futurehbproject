@@ -15,13 +15,13 @@
     @using (Html.BeginForm("PostEdit", "Box", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
             <h4>FirstPage_Advertise</h4>
             <hr />
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Position, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -29,7 +29,7 @@
                     @Html.ValidationMessageFor(model => model.Position)
                 </div>
             </div>
-            
+
             <div class="form-group">
                 @Html.LabelFor(model => model.OrderNumber, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -37,7 +37,7 @@
                     @Html.ValidationMessageFor(model => model.OrderNumber)
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -45,7 +45,7 @@
                     @Html.ValidationMessageFor(model => model.StartDate)
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -53,7 +53,7 @@
                     @Html.ValidationMessageFor(model => model.EndDate)
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.StartTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -61,7 +61,7 @@
                     @Html.ValidationMessageFor(model => model.StartTime)
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -69,15 +69,35 @@
                     @Html.ValidationMessageFor(model => model.EndTime)
                 </div>
             </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Link, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Link)
                     @Html.ValidationMessageFor(model => model.Link)
                 </div>
-            </div>   
-            
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsForApp, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IsForApp)
+                    @Html.ValidationMessageFor(model => model.IsForApp)
+                </div>
+            </div>
             <div class="form-group">
                 @Html.Label("Current Image", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -91,7 +111,7 @@
                     <input type="file" name="file" id="file" />
                 </div>
             </div>
-    
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
@@ -99,7 +119,7 @@
             </div>
         </div>
     }
-    
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
