@@ -498,6 +498,11 @@ input[type="checkbox"] {
     float: right;
 }
 
+.sevenFullColumn {
+    width:14.28571428571429%;
+    float: right;
+}
+
 .collections .twoFiveColumn {
     width: 39%;
     float: right;
