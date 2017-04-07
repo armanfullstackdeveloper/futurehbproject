@@ -31,6 +31,12 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li {
     list-style: none;
 }
 
+a, a:visited, a:hover {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+}
+
 .totalRadius {
     border-radius: 250px;
 }
@@ -846,7 +852,7 @@ button {
 }
 
 .smallPadding {
-    padding: 0.2rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     font-size: 10px;
 }
 
@@ -1094,16 +1100,12 @@ button {
     right: 0;    
 }
 
-.rightArrowShadow {
-    box-shadow: -4px 0 48px #6f6f6f;
-}
-
 .leftArrow {
     left: 0;    
 }
 
 .leftArrowShadow {
-    box-shadow: 4px 0 48px #6f6f6f;
+    box-shadow: 4px 0 28px #cdcdcd;
 }
 
 .slider .rightArrowShadow {
