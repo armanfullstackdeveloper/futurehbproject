@@ -57,6 +57,11 @@ li {
     float: right;
 }
 
+.extraFullWidth {
+    width: 104%;
+    float: right;
+}
+
 .fullForTwoElements {
     width: 102%;
 }
@@ -646,9 +651,6 @@ button {
 
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
-    .siteGuideline {
-        display: none;
-    }
 
     .oneFourFullColumn .iconPart {
         display: inline-block;
@@ -707,6 +709,10 @@ button {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .siteGuideline {
+        display: none;
+    }
 }
 
 /*-------------------- personal elements ------------------*/
@@ -732,6 +738,7 @@ button {
     background: #f3f3f3;
     color: #818181;
     border-bottom: solid #f1f1f1 1px;
+    z-index: 4;
 }
 
 .openUpSearch .titleBar {
@@ -1068,7 +1075,7 @@ button {
 }
 
 .carouselInner {
-    width: 93%;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -1079,14 +1086,33 @@ button {
     width: 4%;
     position: absolute;
     top: 0;
+    z-index: 3;
+    background-color:#fbfbfb ;
 }
 
 .rightArrow {
-    right: 0;
+    right: 0;    
+}
+
+.rightArrowShadow {
+    box-shadow: -4px 0 48px #6f6f6f;
 }
 
 .leftArrow {
-    left: 0;
+    left: 0;    
+}
+
+.leftArrowShadow {
+    box-shadow: 4px 0 48px #6f6f6f;
+}
+
+.slider .rightArrowShadow {
+    box-shadow: unset;
+}
+
+.slider .leftArrowShadow {
+    box-shadow: unset;
+}
 }
 
 .circleDefaultArrows {
@@ -1094,6 +1120,35 @@ button {
     border-radius: 50%;
     width: 35px;
     height: 35px;
+}
+
+.noProductFound {
+    position: absolute;
+    width: 50%;
+    right:0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.noStoreFound {
+    position: absolute;
+    width: 50%;
+    left:0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.circleAroundArrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #474747;
 }
 
 .loginBox .circleDefaultArrows, .signUpBox .circleDefaultArrows {
@@ -1111,6 +1166,8 @@ button {
     width: 100%;
     z-index: 1;
     border-top: solid #f3f3f3 1px;
+    overflow-y: scroll;
+    height: 480px;
 }
 
 .itemInfoes, .itemDetail, .itemTitle {
@@ -1626,6 +1683,14 @@ button {
 
 .productList .innerStandardSearch {
     min-width: 500px;
+}
+
+.storeFrontPage .openUpObject {
+    left: -55px;
+}
+
+.storeFrontPage .topPointer {
+    background: url("../images/topPointer.png") no-repeat 93%;
 }
 
 /*------------------- collection boxes -----------------*/
