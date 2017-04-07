@@ -2,12 +2,12 @@
 
  .controller('HomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
-     var noProductPic = "Img/MainPage/NoProductPic.png",
-        noStorePic = "Img/MainPage/NoStorePic.png",
-        root = "http://hoojibooji.com/",
-        send = '',
-        verifyLevel = 0,
-        owl1,owl2, owl3, owl4, owl5;
+     $scope.noProductPic = "Img/MainPage/NoProductPic.png";
+     $scope.noStorePic = "Img/MainPage/NoStorePic.png";
+     var root = "http://hoojibooji.com/",
+       send = '',
+       verifyLevel = 0,
+       owl1, owl2, owl3, owl4, owl5;
 
 
      $scope.showRegisterBox = function () {
@@ -33,7 +33,7 @@
      loadInitProduct(3);
      loadInitProduct(5);
      loadInitStore(4);
- 
+
      function loadMenu() {
 
          $.ajax({
@@ -203,7 +203,7 @@
      }
 
      function createProductHtml(value) {
-         if (value.ImgAddress == null) value.ImgAddress = noProductPic;
+         if (value.ImgAddress == null) value.ImgAddress = $scope.noProductPic;
          var PriceTemp = value.Price + '';
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
@@ -220,7 +220,7 @@
      }
 
      function createStoreHtml(value) {
-         if (value.LogoAddress == null) value.LogoAddress = noStorePic;
+         if (value.LogoAddress == null) value.LogoAddress = $scope.noStorePic;
          var storeType = 'فروشگاه مجازی'
          if (value && value.CityName && value.CityName != '-') {
              storeType = 'شهر : ' + value.CityName;
@@ -275,19 +275,19 @@
          });
      }
 
-     function loadCustomBox(){
+     function loadCustomBox() {
          $.ajax({
              type: "GET",
              url: "/api/firstPage/GetActiveBox",
-             data:{
-                 position:'slider'
+             data: {
+                 position: 'slider'
              },
              success: function (result) {
                  if (result.Success != true) {
                      console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                      return;
                  }
-                 
+
                  $scope.Box = result.Response;
 
                  showSlider(2);
@@ -304,7 +304,7 @@
 
      function showSlider(type) {
          $timeout(function () {
-              owl2 = $('.owlSlider' + type + '').owlCarousel({
+             owl2 = $('.owlSlider' + type + '').owlCarousel({
                  rtl: true,
                  loop: true,
                  nav: false,
@@ -319,7 +319,7 @@
              $(".next" + type).click(function () {
                  owl2.trigger('next.owl.carousel');
              });
-         },500);
+         }, 500);
      }
 
      function showBoxs() {
@@ -334,14 +334,148 @@
                      console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                      return;
                  }
-                  $scope.Box2 = result.Response;
+                 $scope.Box2 = result.Response;
              },
              error: function () {
-                  console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                 console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
              }
          });
 
      }
+
+
+
+     //When page load , check search box typing
+     $(function () {
+         //setup before functions
+         var typingTimer; //timer identifier
+         var doneTypingInterval = 500; //time in ms, 1 second for example
+         var $input = $('#SearchTextBox');
+
+         //on keyup, start the countdown
+         $input.on('keyup', function () {
+
+             if ($('#SearchTextBox').val().length <= 1) {
+                 $("#Search_Task_Open").slideUp("slow", function() {
+                     $('.searchField').removeClass('searchActivate');
+                 });
+
+             }
+
+             clearTimeout(typingTimer);
+             typingTimer = setTimeout(ajaxSearch, doneTypingInterval);
+         });
+
+         //on keydown, clear the countdown
+         $input.on('keydown', function () {
+             clearTimeout(typingTimer);
+         });
+
+         $("#loginFrm input").keypress(function (e) {
+             if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                 $('#EnterBtn').click();
+                 return false;
+             } else {
+                 return true;
+             }
+         });
+
+     });
+
+     //if click outside of search result , hide search result
+     $(document).click(function (event) {
+         if (!$(event.target).closest('#Search_Task_Open').length) {
+             $("#Search_Task_Open").slideUp("slow", function () {
+                 $('.searchField').removeClass('searchActivate');
+             });
+         }
+     });
+
+     //When typing done , Product and Store Load
+     function ajaxSearch() {
+         if ($('#SearchTextBox').val().length >= 2) {
+
+             //$('#SearchInProductHolder').html("");
+             //$('#SearchInStoreHolder').html("");
+             //$('#LoadProduct').show();
+             //$('#LoadStore').show();
+             $("#Search_Task_Open").slideDown("slow");
+             $('.searchField').addClass('searchActivate');
+            
+             $scope.searchResult = [];
+             $.ajax({
+                 type: "GET",
+                 url: "/api/firstPage/TopSearchSummeray/",
+                 data: {
+                     name: $("#SearchTextBox").val()
+                 },
+                 success: function (result) {
+                     $timeout(function () {
+                         $scope.searchResult = result.Response;
+                     });
+                 }
+
+             });
+         }
+
+     };
+
+     //user is "finished typing," do something
+     function SearchResultShow(result) {
+
+         var product = "";
+         var shop = "";
+
+         $('#LoadProduct').hide();
+         $('#LoadStore').hide();
+
+         if (result.ProductsResult != "") {
+             $.each(result.ProductsResult, function (index, value) {
+
+                 if (value.ProductImgAddress == null) value.ProductImgAddress = $scope.noProductPic;
+                 product += "<a href='/product/" + value.ProductId + "' > <div class='Product_Search_Inner'>"
+                     + "  <div class='Product_Search_Inner_Pic'><img src='" + root + value.ProductImgAddress + "' alt=" + value.ProductName + " /></div>"
+                     + "<div class='Product_Search_Inner_Rap'>"
+                     + " <div class='P_name_Rap'>"
+                     + value.ProductName
+                     + " </div>"
+                     + " <div class='P_City_Rap'>" + value.CityName + "</div>"
+                     + " <div class='P_Store_Rap'>" + value.StoreName + "</div>"
+                     + "</div>"
+                     + "</div></a>";
+             });
+
+         } else {
+             product = " <div id='NoProductFind'> </div>";
+
+         }
+
+         if (result.StoresResult != "") {
+             $.each(result.StoresResult, function (index, value) {
+
+                 if (value.ImgAddress == null) value.ImgAddress = $scope.noStorePic;
+                 shop += "<a href='/shop/code/" + value.Id + "' > <div class='Store_Search_Inner'>"
+                     + " <div class='Store_Search_Inner_Pic'><img src='" + root + value.ImgAddress + "' alt='' /></div>"
+                     + " <div class='Store_Search_Inner_Rap'>"
+                     + " <div class='S_name_Rap'>" + value.Name + "</div>"
+                     + "<div class='S_City_Rap'> " + value.CityName + " </div>"
+                     + "</div>"
+                     + " </div></a>";
+
+             });
+
+         } else {
+             shop = " <div id='NoStoreFind'> </div>";
+
+         }
+
+
+         $('#SearchInProductHolder').append(product);
+         $('#SearchInStoreHolder').append(shop);
+
+
+     };
+
 
      //Login
      $('#EnterBtn').on("click", function () {
@@ -512,15 +646,6 @@
          });
 
      }
-
-     $("#loginFrm input").keypress(function (e) {
-         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-             $('#EnterBtn').click();
-             return false;
-         } else {
-             return true;
-         }
-     });
 
  }]);
 
