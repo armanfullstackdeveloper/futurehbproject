@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using Boundary.Helper;
 using BusinessLogic.BussinesLogics;
 using BusinessLogic.BussinesLogics.FirstPageBL;
@@ -13,6 +14,7 @@ using BusinessLogic.BussinesLogics.RelatedToProductBL;
 using BusinessLogic.BussinesLogics.RelatedToStoreBL;
 using BusinessLogic.Helpers;
 using DataModel.Entities;
+using DataModel.Entities.FirstPage;
 using DataModel.Models.DataModel;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -62,11 +64,12 @@ namespace Boundary.Controllers.Api
 
         [HttpGet]
         [Route("GetActiveBox")]
-        public IHttpActionResult GetActiveBox(string position)
+        [ResponseType(typeof(IEnumerable<Box>))]
+        public IHttpActionResult GetActiveBox(string position=null,bool? isForApp=null)
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new BoxBL().GetActiveBox(position)));
+                return Json(JsonResultHelper.SuccessResult(new BoxBL().GetActiveBox(position, isForApp)));
             }
             catch (MyExceptionHandler exp1)
             {

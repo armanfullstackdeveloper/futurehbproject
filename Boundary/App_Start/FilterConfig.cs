@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Boundary.Helper.AttributeFilters;
 
 namespace Boundary
 {
@@ -7,6 +8,9 @@ namespace Boundary
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            //for exception handeling
+            filters.Add(new HoojiBoojiExceptionHandler());
         }
     }
 }
