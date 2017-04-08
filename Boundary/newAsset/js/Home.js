@@ -4,10 +4,12 @@
 
      $scope.noProductPic = "Img/MainPage/NoProductPic.png";
      $scope.noStorePic = "Img/MainPage/NoStorePic.png";
+     
      var root = "http://hoojibooji.com/",
        send = '',
        verifyLevel = 0,
        owl1, owl2, owl3, owl4, owl5;
+     var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
 
 
      $scope.showRegisterBox = function () {
@@ -288,10 +290,15 @@
                      return;
                  }
 
-                 $scope.Box = result.Response;
+                 $timeout(function () {
+                     $scope.Box = result.Response;
+                     $timeout(function () {
+                         showSlider(2);
+                         showBoxs();
+                     }, 500)
+                 }, 1)
 
-                 showSlider(2);
-                 showBoxs();
+
 
 
              },
@@ -303,23 +310,21 @@
      }
 
      function showSlider(type) {
-         $timeout(function () {
-             owl2 = $('.owlSlider' + type + '').owlCarousel({
-                 rtl: true,
-                 loop: true,
-                 nav: false,
-                 items: 1,
-                 autoplay: true,
-                 autoplayTimeout: 2000,
-                 autoplayHoverPause: true
-             });
-             $(".prev" + type).click(function () {
-                 owl2.trigger('prev.owl.carousel');
-             });
-             $(".next" + type).click(function () {
-                 owl2.trigger('next.owl.carousel');
-             });
-         }, 500);
+         owl2 = $('.owlSlider' + type + '').owlCarousel({
+             rtl: true,
+             loop: true,
+             nav: false,
+             items: 1,
+             autoplay: true,
+             autoplayTimeout: 2000,
+             autoplayHoverPause: true
+         });
+         $(".prev" + type).click(function () {
+             owl2.trigger('prev.owl.carousel');
+         });
+         $(".next" + type).click(function () {
+             owl2.trigger('next.owl.carousel');
+         });
      }
 
      function showBoxs() {
@@ -356,7 +361,7 @@
          $input.on('keyup', function () {
 
              if ($('#SearchTextBox').val().length <= 1) {
-                 $("#Search_Task_Open").slideUp("slow", function() {
+                 $("#Search_Task_Open").slideUp("slow", function () {
                      $('.searchField').removeClass('searchActivate');
                  });
 
@@ -401,7 +406,7 @@
              //$('#LoadStore').show();
              $("#Search_Task_Open").slideDown("slow");
              $('.searchField').addClass('searchActivate');
-            
+
              $scope.searchResult = [];
              $.ajax({
                  type: "GET",
@@ -419,63 +424,6 @@
          }
 
      };
-
-     //user is "finished typing," do something
-     function SearchResultShow(result) {
-
-         var product = "";
-         var shop = "";
-
-         $('#LoadProduct').hide();
-         $('#LoadStore').hide();
-
-         if (result.ProductsResult != "") {
-             $.each(result.ProductsResult, function (index, value) {
-
-                 if (value.ProductImgAddress == null) value.ProductImgAddress = $scope.noProductPic;
-                 product += "<a href='/product/" + value.ProductId + "' > <div class='Product_Search_Inner'>"
-                     + "  <div class='Product_Search_Inner_Pic'><img src='" + root + value.ProductImgAddress + "' alt=" + value.ProductName + " /></div>"
-                     + "<div class='Product_Search_Inner_Rap'>"
-                     + " <div class='P_name_Rap'>"
-                     + value.ProductName
-                     + " </div>"
-                     + " <div class='P_City_Rap'>" + value.CityName + "</div>"
-                     + " <div class='P_Store_Rap'>" + value.StoreName + "</div>"
-                     + "</div>"
-                     + "</div></a>";
-             });
-
-         } else {
-             product = " <div id='NoProductFind'> </div>";
-
-         }
-
-         if (result.StoresResult != "") {
-             $.each(result.StoresResult, function (index, value) {
-
-                 if (value.ImgAddress == null) value.ImgAddress = $scope.noStorePic;
-                 shop += "<a href='/shop/code/" + value.Id + "' > <div class='Store_Search_Inner'>"
-                     + " <div class='Store_Search_Inner_Pic'><img src='" + root + value.ImgAddress + "' alt='' /></div>"
-                     + " <div class='Store_Search_Inner_Rap'>"
-                     + " <div class='S_name_Rap'>" + value.Name + "</div>"
-                     + "<div class='S_City_Rap'> " + value.CityName + " </div>"
-                     + "</div>"
-                     + " </div></a>";
-
-             });
-
-         } else {
-             shop = " <div id='NoStoreFind'> </div>";
-
-         }
-
-
-         $('#SearchInProductHolder').append(product);
-         $('#SearchInStoreHolder').append(shop);
-
-
-     };
-
 
      //Login
      $('#EnterBtn').on("click", function () {

@@ -32,169 +32,172 @@
             <div class="header">
                 <div class="organizer mainHeader elementTopVerticalMargin">
 
-                    <!-- menu samte rast dar halate mamooli-->
-                    <div class="primaryOptions pinkColor solidLineHeight thickFont goRight">
-                        <span class="goRight pointer" ng-click="showLoginBox();"><span class="icon icon-user-check"></span> ورود</span>
-                        <span class="borderInBothSides pointer goRight standardHorizontalPadding standardHorizontalMargin"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
-                        <a href="~/Store/AddStore" class="pinkColor"><span class="goRight standardHalfHorizontalLeftMargin"><span class="icon icon-file-text"></span>  ثبت فروشگاه</span></a>
-                        <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div>
+                    @using Boundary.Controllers.Ordinary    @using Boundary.Helper.StaticValue
+                    @using Microsoft.AspNet.Identity
 
-                    </div>
+                    @{
+                        long storeCode = 0;
+                        string homePage = "";
+                    }
 
-                    <!-- menu samte rast dar halate login forushgah-->
-                    <div style="display: none" class="afterLogin primaryOptions pinkColor solidLineHeight thickFont goRight">
-                        <div class="storeFrontPage profilePic goRight relativeMatter">
-                            <img src="" class="imageInMiddle">
-                            <div class="openUpObject profileMiniBox textInCenter standardDoublePadding boxElement radiusBox relativeMatter">
-                                <div class="topPointer organizer"></div>
-                                <div class="profilePic relativeMatter blockInlineMode elementTopVerticalMargin">
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole(StaticString.Role_Seller))
+                        {
+                            string userId = User.Identity.GetUserId();
+                            MainSession mainSession = (MainSession)Session[userId];
+                            if (mainSession != null)
+                            {
+                                storeCode = mainSession.Store.StoreCode;
+                                homePage = mainSession.Store.HomePage;
+                            }
+
+                            <div class="afterLogin primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <div class="storeFrontPage profilePic goRight relativeMatter">
                                     <img src="" class="imageInMiddle">
+                                    <div class="openUpObject profileMiniBox textInCenter standardDoublePadding boxElement radiusBox relativeMatter">
+                                        <div class="topPointer organizer"></div>
+                                        <div class="profilePic relativeMatter blockInlineMode elementTopVerticalMargin">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                        <a href="~/shop?id=@storeCode">
+                                            <div class="organizer darkGray standardHalfVerticalMargin">مشاهده فروشگاهتان</div>
+                                        </a>
+                                        @*<div class="organizer standardVerticalMargin">تغییر رمز عبور</div>*@
+                                        <div class="exitMode organizer">
+                                            <a href="~/Account/LogOff">
+                                                <div class="outlineButton redBack thickFont standardPadding whiteColor elementTopVerticalMargin"><span class="icon icon-exit"></span> خروج</div>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="organizer darkGray standardHalfVerticalMargin">مشاهده فروشگاهتان</div>
-                                <div class="organizer standardVerticalMargin">تغییر رمز عبور</div>
-                                <div class="exitMode organizer">
-                                    <div class="outlineButton redBack thickFont standardPadding whiteColor elementTopVerticalMargin"><span class="icon icon-exit"></span> خروج</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div>
-                        <div class="thickFont siteGuideline standardPadding goRight pinkBorder outlineButton pinkColor"><span class="icon icon-box-add standardHorizontalLeftMargin twentyTwoFontsize"></span>افزودن محصول جدید</div>
 
-                    </div>
-                    <!-- menu samte rast dar halate login karbar mamooli-->
-                    <div style="display: none" class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
-                        <span class="goRight"><span class="icon icon-user-tie"></span> پروفایل شما</span>
-                        <div class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin relativeMatter shopBasketOpener">
-                            <span class="counter twelveFontSize greenBack totalRadius smallPadding whiteColor">1</span> <span class="icon icon-credit-card"></span> سبد خرید شما
-                            <div class="openUpObject shopBasket boxElement radiusBox goRight">
+                                <a href="~/Static/UserGuid" class="pinkColor">
+                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div>
+                                </a>
+                                <a href="~/Seller/ProductManagment/AddProduct">
+                                    <div class="thickFont siteGuideline standardPadding goRight pinkBorder outlineButton pinkColor"><span class="icon icon-box-add standardHorizontalLeftMargin twentyTwoFontsize"></span>افزودن محصول جدید</div>
+                                </a>
 
-                                <div class="topPointer organizer"></div>
-                                <div class="forOverFlow">
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
-                                        <div class="oneThreeFullColumn">
-                                            <div class="circleImageContainer">
-                                                <img src="" alt="" class="imageInMiddle">
-                                            </div>
-                                        </div>
-                                        <div class="twoThreeFullColumn">
-                                            <div class="itemInfoes verticallyInCenter">
-                                                <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
-                                                <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
-                                                <div class="itemTags organizer">
-                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
-                        </div>
-                        <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
-                        <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div>
 
-                    </div>
+                        }
+                        if (User.IsInRole(StaticString.Role_Admin) || User.IsInRole(StaticString.Role_SuperAdmin))
+                        {
+                            <div class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)">
+                                    <span class="goRight"><span class="icon icon-user-tie"></span> صفحه مدیریت </span>
+                                </a>
+                                <a href="~/Account/LogOff">
+                                    <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
+                                </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"><div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+
+                            </div>
+
+                        }
+                        if (User.IsInRole(StaticString.Role_Member))
+                        {
+                            <div class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <a href="@Url.Action("Index", "Panel", new { area = "Member" }, null)">
+                                    <span class="goRight"><span class="icon icon-user-tie"></span> صفحه مدیریت </span>
+                                </a>
+                                <div class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin relativeMatter shopBasketOpener">
+                                    @*<span class="counter twelveFontSize greenBack totalRadius smallPadding whiteColor">1</span>*@
+                                    <a href="~/Order">
+                                        <span class="icon icon-credit-card"></span> سبد خرید شما
+                                    </a>
+                                    <!-- hover for bascket-->
+                                    @*<div class="openUpObject shopBasket boxElement radiusBox goRight">
+
+                                            <div class="topPointer organizer"></div>
+                                            <div class="forOverFlow">
+                                                <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
+                                                    <div class="oneThreeFullColumn">
+                                                        <div class="circleImageContainer">
+                                                            <img src="" alt="" class="imageInMiddle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="twoThreeFullColumn">
+                                                        <div class="itemInfoes verticallyInCenter">
+                                                            <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                            <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                            <div class="itemTags organizer">
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
+                                                    <div class="oneThreeFullColumn">
+                                                        <div class="circleImageContainer">
+                                                            <img src="" alt="" class="imageInMiddle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="twoThreeFullColumn">
+                                                        <div class="itemInfoes verticallyInCenter">
+                                                            <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                            <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                            <div class="itemTags organizer">
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+
+                                </div>
+                                <a href="~/Account/LogOff">
+                                    <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
+                                </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"><div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        <div class="primaryOptions pinkColor solidLineHeight thickFont goRight">
+                            <span class="goRight pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
+                            <span class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
+                            <a href="~/Store/AddStore" class="pinkColor"><span class="goRight standardHalfHorizontalLeftMargin"><span class="icon icon-file-text"></span>  ثبت فروشگاه</span></a>
+                            <a href="~/Static/UserGuid" class="pinkColor"> <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+
+                        </div>
+                    }
+
+
+                    <!-- menu samte rast dar halate mamooli-->
+
 
                     <div class="secondaryOptions goLeft">
                         <div class="forUs pinkColor solidLineHeight thickFont goLeft">
                             <span class="goLeft relativeMatter soloHeight logo">
                                 <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
                             </span>
-                            <a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
-                            <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>
+                            @*<a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>*@
+
+                            <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">خرید آنلاین از صد ها فروشگاه </span>
+                            <span class="goLeft lostInResponse">هوجی بوجی</span>
+
                         </div>
                         <div class="searchPart goLeft standardHorizontalMargin">
-                           <!--
-                                <div class="searchType goLeft">
-                                <div class="selectbox relativeMatter standardPadding goLeft">
-                                    <span class="icon-select-arrow goLeft"></span>
-                                    <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
-                                    <div class="options">
-                                        <div class="optionInner"></div>
-                                    </div>
-                                </div>
-                            </div>
-                           -->
+                            <!--
+                                 <div class="searchType goLeft">
+                                 <div class="selectbox relativeMatter standardPadding goLeft">
+                                     <span class="icon-select-arrow goLeft"></span>
+                                     <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
+                                     <div class="options">
+                                         <div class="optionInner"></div>
+                                     </div>
+                                 </div>
+                             </div>
+                            -->
                             <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
                             <div class="searchField goLeft standardPadding relativeMatter standardHorizontalLeftMargin">
                                 <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
@@ -204,13 +207,13 @@
                                 <!-- box search in hast k baz mishe -->
                                 <div id="Search_Task_Open" class="openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
                                     <div class="verticalLine objectInMiddle"></div>
-                                    <div class="twoFullColumn searchInProducts" ng-show="searchResult.ProductsResult.length>0">
-                                        <div class="noProductFound textInCenter">
+                                    <div class="twoFullColumn searchInProducts">
+                                        <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
                                             <div class="organizer">
                                                 <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
                                             </div>
                                             <div class="organizer thickFont">محصولی یافت نشد</div>
-                                            <div class="organizer twelveFontSize">با کلمه دیگری تلاش کنید</div>
+                                            <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
                                         </div>
                                         <div class="titleBar relativeMatter thickFont organizer standardPadding">
                                             <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
@@ -219,7 +222,7 @@
 
 
                                         <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
-                                        <div ng-repeat="productsResult in searchResult.ProductsResult">
+                                        <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
                                             <div class="itemContainer organizer standardPadding relativeMatter">
                                                 <a href="~/product/{{productsResult.ProductId}}">
                                                     <div class="oneThreeFullColumn">
@@ -229,48 +232,33 @@
                                                     </div>
                                                     <div class="twoThreeFullColumn">
                                                         <div class="itemInfoes verticallyInCenter">
-                                                            <div class="itemTitle greenColor organizer thirteenFontSize">iphone 6S 64GB</div>
+                                                            <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
                                                             <div class="itemTags organizer">
-                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="separatorLine organizer"></div>
-                                                    <div class="itemContainer organizer standardPadding relativeMatter">
-                                                        <div class="oneThreeFullColumn">
-                                                            <div class="circleImageContainer">
-                                                                <img src="" alt="" class="imageInMiddle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="twoThreeFullColumn">
-                                                            <div class="itemInfoes verticallyInCenter">
-                                                                <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
-                                                                <div class="itemTags organizer">
-                                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </a>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="twoFullColumn searchInStore" ng-show="searchResult.StoresResult.length>0">
+                                    <div class="twoFullColumn searchInStore">
 
-                                        <div class="noStoreFound objectInMiddle textInCenter">
+                                        <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
                                             <div class="organizer">
                                                 <img src="~/newAsset/images/store.svg" width="90" />
                                             </div>
                                             <div class="organizer thickFont">فروشگاهی یافت نشد</div>
-                                            <div class="organizer twelveFontSize">با کلمه دیگری تلاش کنید</div>
+                                            <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
                                         </div>
 
                                         <div class="titleBar relativeMatter thickFont organizer standardPadding">
                                             <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
                                             @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
                                         </div>
-                                        <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult">
+                                        <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
                                             <a href="~/shop/code/{{storesResult.Id}}">
                                                 <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
                                                     <div class="oneThreeFullColumn">
@@ -312,36 +300,25 @@
                             <ul>
                                 <!-- in list hamishe bayad 5 ta bashe -->
                                 <li class="sevenFullColumn borderRight loginPadding secondHandedList" ng-repeat="subMenu in menu.SubCategories">
-                                    {{subMenu.Name}}
-                                    <div class="organizer openUpObject standardHorizontalPadding innerInnerList">
-                                        <!-- in ham hamishe bayad 5 ta bashe -->
-                                        <div class="sevenFullColumn standardHorizontalPadding borderRight">
-                                            @*<div class="organizer standardVerticalMargin">برندها</div>*@
-                                            <ul class="normalFont standardVerticalPadding">
-                                                <li ng-repeat="subSubMenu in subMenu.SubCategories"> <a href="/Search/#!/categoryCode-{{subSubMenu.Id}}"> {{subSubMenu.Name}}</a> </li>
-                                                @*<li>سامسونگ</li>
-                                                    <li>ال جی</li>
-                                                    <li>اچ تی سی</li>
-                                                    <li>سونی</li>
-                                                    <li>هواووی</li>
-                                                    <li>نوکیا</li>
-                                                    <li>مایکروسافت</li>
-                                                    <li>ایسوس</li>
-                                                    <li>لنوو</li>
-                                                    <li>دیمو</li>
-                                                    <li>اسمارت</li>*@
-                                            </ul>
-                                        </div>
-                                        <div class="fiveFullColumn loginPadding borderRight">
-                                        </div>
-                                        <div class="fiveFullColumn loginPadding borderRight">
-                                        </div>
-                                        <div class="fiveFullColumn loginPadding borderRight">
-                                        </div>
-                                        <div class="fiveFullColumn loginPadding borderRight">
-                                        </div>
-                                    </div>
+                                    <a href="/Search/#!/categoryCode-{{subMenu.Id}}"> {{subMenu.Name}}</a>
                                 </li>
+                                @*<div class="organizer openUpObject standardHorizontalPadding innerInnerList">
+                                             <div class="sevenFullColumn standardHorizontalPadding borderRight">
+                                                 <ul class="normalFont standardVerticalPadding">
+                                                    <li ng-repeat="subSubMenu in subMenu.SubCategories"> <a href="/Search/#!/categoryCode-{{subSubMenu.Id}}"> {{subSubMenu.Name}}</a> </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                            <div class="fiveFullColumn loginPadding borderRight">
+                                            </div>
+                                        </div>
+                                    </li*@
                                 @*<li class="fiveFullColumn borderRight loginPadding">تبلت</li>
                                     <li class="fiveFullColumn borderRight loginPadding">لپتاپ</li>
                                     <li class="fiveFullColumn borderRight loginPadding">دوربین</li>
@@ -413,11 +390,11 @@
                 </div>
                 <div class="organizer borderBottom standardPaddingForlogin">
                     <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                    <div class="organizer"><input type="text" id="Password" class="standardInput textInCenter"></div>
+                    <div class="organizer"><input type="password" id="Password" class="standardInput textInCenter"></div>
                 </div>
                 <div class="organizer loginPadding">
-                    <div id="EnterBtn" class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin pointer">ورود</div>
-                    <div class="organizer twelveFontSize">  <span class="pointer" ng-click="closeBox();showRegisterBox();">ثبت نام</span>|<span class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
+                    <div id="EnterBtn" ng-click="closeBox();showRegisterBox();" class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin pointer">ورود</div>
+                    <div class="organizer twelveFontSize" ng-click="closeBox();showRegisterBox();">  <span class="pointer" >ثبت نام</span>|<span class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
                 </div>
             </form>
         </div>
@@ -429,19 +406,19 @@
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
-                <div class="organizer"><input type="text" id="UserNameTxt" class="standardInput"></div>
+                <div class="organizer"><input type="text" id="UserNameTxt" class="standardInput textInCenter"></div>
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                <div class="organizer"><input type="text" id="PasswordTxt" class="standardInput"></div>
+                <div class="organizer"><input type="password" id="PasswordTxt" class="standardInput textInCenter"></div>
             </div>
             <div class="organizer borderBottom standardPaddingForlogin">
                 <div class="organizer standardHalfVerticalMarginForlogin">تکرار رمز عبور</div>
-                <div class="organizer"><input type="text" id="ConfirmPasswordTxt" class="standardInput"></div>
+                <div class="organizer"><input type="password" id="ConfirmPasswordTxt" class="standardInput textInCenter"></div>
             </div>
             <div class="organizer borderBottom standardPaddingForlogin" style="display:none;">
                 <div class="organizer standardHalfVerticalMarginForlogin">کد فعالسازی</div>
-                <div class="organizer"><input type="text" id="VerifyTxt" class="standardInput"></div>
+                <div class="organizer"><input type="text" id="VerifyTxt" class="standardInput textInCenter"></div>
             </div>
             <div class="organizer standardPaddingForlogin">
                 <div style="color:red; text-align:center" id="registerStatus"></div>
@@ -1003,7 +980,7 @@
                             <div class="circleDefaultArrows goLeft relativeMatter"><span class="icon icon-arrow-left2 whiteColor objectInMiddle"></span> </div>
                         </div>
                     </div>
-                </div>                
+                </div>
                 <!-- tablighata injan -->
                 <div class="itemContainer boxElement organizer radiusBox standardVerticalBottomMargin relativeMatter">
                     <img class="imageInMiddle" />
@@ -1048,23 +1025,26 @@
                     <a href="~/Store/AddStore"> <li>ثبت فروشگاه</li></a>
                     <li class="pointer" ng-click="showRegisterBox();">ثبت نام</li>
                     <li class="pointer" ng-click="showLoginBox();">ورود</li>
-                    <li>فروش ویژه</li>
-                    <li>ثبت تبلیغات شما</li>
+                    @*<li>فروش ویژه</li>
+                        <li>ثبت تبلیغات شما</li>*@
                 </ul>
             </div>
             <div class="fourFullColumns relativeMatter">
                 <div class="organizer socials">
                     <div class="organizer blackColor standardVerticalMargin">ما را دنبال کنید</div>
                     <div class="organizer twentyTwoFontsize searchPart blackColor">
-                        <span class="icon icon-telegram standardHorizontalLeftMargin"></span>
-                        <span class="icon icon-google-plus3 standardHorizontalLeftMargin"></span>
-                        <span class="icon icon-linkedin standardHorizontalLeftMargin"></span>
-                        <span class="icon icon-instagram standardHorizontalLeftMargin"></span>
+                        <a href="http://telegram.me/hoojibooji"><span class="icon icon-telegram standardHorizontalLeftMargin"></span></a>
+                        <a href="https://plus.google.com/b/100179687917234386429/108107077749163715881?pageId=100179687917234386429"><span class="icon icon-google-plus3 standardHorizontalLeftMargin"></span></a>
+                        <a href="https://www.linkedin.com/company-beta/13252116/"><span class="icon icon-linkedin standardHorizontalLeftMargin"></span></a>
+                        <a href="https://www.instagram.com/hoojibooji/"><span class="icon icon-instagram standardHorizontalLeftMargin"></span></a>
                     </div>
                 </div>
                 <div class="organizer signs">
-                    <img class="standardHorizontalLeftMargin" src="~/newAsset/images/trustLogo.png" alt=""> <img src="~/newAsset/images/trustLogo2.png" alt="">
-                </div>
+
+                    <img id='fukzesgtnbqesizpjxlz' style='width: 50%;cursor: pointer;' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=60291&p=gvkaobpduiwkpfvlrfth", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=60291&p=wlbqlymaodrfbsiynbpd' />
+                    <img id='rgvldrftxlapwmcsxlap' style='width: 47%;cursor: pointer;' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=51383&p=yncrnbpdfuixaqgwfuix", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='logo-namdElectronicDigital' src='https://trustseal.enamad.ir/logo.aspx?id=51383&p=fujylznbvjymukaqvjym' />
+
+                 </div>
             </div>
         </div>
     </footer>
