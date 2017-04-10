@@ -63,8 +63,13 @@ li {
     float: right;
 }
 
+.separateLine {
+    width: 100%;
+    height: 1px;
+}
+
 .extraFullWidth {
-    width: 104%;
+    width: 103%;
     float: right;
 }
 
@@ -83,6 +88,11 @@ li {
 .moveFromBottom {
     position: relative;
     bottom: 10px;
+}
+
+.moveFromTop {
+    position: relative;
+    top: 3px;
 }
 
 .elementInMiddle {
@@ -108,6 +118,14 @@ li {
     top: 0;
     left: 0;
     position: fixed;
+}
+
+.prefer {
+    z-index: 1;
+}
+
+.doublePrefer {
+    z-index: 2;
 }
 
 .objectInMiddle {
@@ -313,6 +331,10 @@ button {
     background-color: #009688 !important;
 }
 
+.grayBack {
+    background-color:#e1e1e1 !important;
+}
+
 .whiteBack {
     background-color: #fff !important;
 }
@@ -373,6 +395,18 @@ button {
     border: solid #009688 2px;
 }
 
+.darkerGrayBack{
+    background-color: #d5d5d5;
+}
+
+.bottomGrayBorder {
+    border-bottom: solid #e1e1e1 1px;
+}
+
+.bottomDarkerGrayBorder {
+    border-bottom: solid #c1c1c1 1px;
+}
+
 .verticalLine {
     width: 1px;
     height: 100%;
@@ -392,6 +426,10 @@ button {
 
 .standardPadding {
     padding: 0.5em 1rem;
+}
+
+.standardBottomVerticalPadding {
+    padding-bottom: 1rem;
 }
 
 .standardPaddingForlogin {
@@ -479,7 +517,7 @@ button {
 }
 
 .standardHorizontalLeftMargin {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 1rem;
 }
 
 .standardHorizontalPadding {
@@ -728,7 +766,6 @@ button {
     color: #525252;
     direction: rtl;
     font-size: 0.9rem;
-    min-width: 1024px;
 }
 
 .popUpMadule {
@@ -1094,6 +1131,11 @@ button {
     top: 0;
     z-index: 3;
     background-color:#fbfbfb ;
+    min-width: 38px;
+}
+
+.slider .defaultArrow {
+    background-color: transparent;
 }
 
 .rightArrow {
@@ -1695,6 +1737,10 @@ button {
     background: url("../images/topPointer.png") no-repeat 93%;
 }
 
+.button_text {
+    display: none !important;
+}
+
 /*------------------- collection boxes -----------------*/
 .boxImage {
     width: 100%;
@@ -1810,4 +1856,148 @@ button {
     100% {
         transform: rotate(8deg);
     }
+}
+
+/*----------------------------- responsive view ----------------------------------*/
+@media only screen and (max-width: 1024px) {
+
+.hiddenInPhone {
+    display: none;
+}
+
+.noObjective {
+    position: unset !important;
+}
+
+.explain {
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+} 
+
+/*------ distances -------*/
+
+.smallVerticalMargin {
+    margin: 0.2rem 0;
+}
+
+.noTopMarginInPhone {
+    margin: 0;
+}
+
+.standardVerticalPaddingInPhone {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.HalfHorizontalPaddingInPhone {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.standardVerticalMarginInPhone {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.standardPaddingInPhone {
+    padding: 1rem;
+}
+.topVerticalMarginInPhone {
+    margin-top: 1rem;
+}
+
+/*------ texts -------*/
+
+/*------ columns -------*/
+
+.organizerInPhone {
+    width: 100% !important;
+}
+
+.fullColumnInPhone {
+    width: 102% !important;
+}
+
+.twoColumnInPhone {
+    width: 48%;
+    margin-left: 2%;
+}
+
+/*------ personals -------*/
+.siteGuideline {
+    display: block;
+    bottom: 0;
+}
+
+.line {
+    height:3px;
+    border-radius: 10px;
+    transform: translate(0,0) rotate(0,0);
+    transition: ease 0.25s;
+    width: 25px;
+}
+
+.navigation {
+    width: 25px;
+    margin-top: 0.8rem;
+} 
+
+.logo {
+    min-width: 42px;
+    min-height: 42px;
+}
+.circleSearchIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.clothCollection {
+    padding: 0.7rem 1rem;
+}
+.horizontalLineInPhone {
+    width: 100%;
+    height: 1px;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+}
+.guideline .standardDoublePadding {
+    padding-bottom: 2rem;
+}
+.footer .fourFullColumns {
+    min-height: unset;
+}
+.rightPopUp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 290px;
+    height: 100%;
+}
+.topPopup {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+.topLine {
+    transform: rotate(-45deg);
+    width:12px;
+    position: relative;
+    left: -14px;
+    top: 2px;
+}
+.bottomLine {
+    transform: rotate(45deg);
+    width: 12px;
+    position: relative;
+    left: -14px;
+    bottom: 2px;
+}
+.userActs {
+    margin-top: 1.5rem;
+}
+.categories {
+    color: #6f6f6f;
+}
+.searchInput {
+    width: 100%;
+}
 }

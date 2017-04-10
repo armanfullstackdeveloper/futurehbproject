@@ -2,8 +2,7 @@
 <html ng-app="Home" lang="fa">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> hoojibooji | هوجی بوجی</title>
 
@@ -30,7 +29,7 @@
     <header class="container">
         <div class="sizeManager">
             <div class="header">
-                <div class="organizer mainHeader elementTopVerticalMargin">
+                <div class="organizer mainHeader elementTopVerticalMargin noTopMarginInPhone HalfHorizontalPaddingInPhone standardVerticalPaddingInPhone">
 
                     @using Boundary.Controllers.Ordinary    @using Boundary.Helper.StaticValue
                     @using Microsoft.AspNet.Identity
@@ -161,29 +160,180 @@
                     }
                     else
                     {
-                        <div class="primaryOptions pinkColor solidLineHeight thickFont goRight">
+                        <div class="primaryOptions pinkColor solidLineHeight thickFont goRight hiddenInPhone">
                             <span class="goRight pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
                             <span class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
-                            <a href="~/Store/AddStore" class="pinkColor"><span class="goRight standardHalfHorizontalLeftMargin"><span class="icon icon-file-text"></span>  ثبت فروشگاه</span></a>
-                            <a href="~/Static/UserGuid" class="pinkColor"> <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+                            <a href="~/Static/UserGuid" class="pinkColor"><span class="goRight standardHalfHorizontalLeftMargin"><span class="icon icon-compass2 "></span> راهنمای سایت </span></a>
+                            <a href="~/Store/AddStore" class="pinkColor"> 
+                                <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor">
+                                    <span class="icon icon-file-text movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>ثبت فروشگاه 
+                                </div>
+                            </a>
 
                         </div>
+                        <!-- roo navigation click shod navigationOpen baz mishe. khasiate toggle dare yni dobare click shod baste ham bshe-->
+                        <div class="navigation goRight doublePrefer relativeMatter">
+                            <!-- class topLine ve line vaghti ezafe mishe k roo navigation click bshe-->
+                            <div class="line organizer blackBack"></div>
+                            <!--<div class="line organizer blackBack topLine"></div>-->
+                            <div class="line organizer smallVerticalMargin blackBack"></div>
+                            <!-- class bottomLine ve line vaghti ezafe mishe k roo navigation click bshe-->
+                            <div class="line organizer blackBack"></div>
+                            <!--<div class="line organizer blackBack bottomLine"></div>-->
+                        </div>
+
+                        <div class="navigationOpen rightPopUp grayBack prefer" style="display: none;">
+                            <div class="userActs organizer">
+                                <span class="goLeft standardHorizontalLeftMargin pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
+                                <span class="goLeft standardHorizontalPadding pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
+                            </div>
+                            <div class="separateLine darkerGrayBack organizer standardTopVerticalMargin"></div>
+                            <div class="categories">
+                                <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
+                                <div class="organizer grayBack bottomGrayBorder">
+                                    <span class="organizer standardPadding thickFont"> کتگوری اصلی<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
+                                    <!-- in div zir shakhe category hast-->
+                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder">زیرشاخه</div>
+                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder">زیرشاخه</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="goRight hiddenInDesktop">
+                            <div class="goRight textInRight">
+                                <a href="~/Store/AddStore" class="pinkColor">
+                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor">
+                                        <span class="icon icon-file-text movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>ثبت فروشگاه
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
                     }
 
 
                     <!-- menu samte rast dar halate mamooli-->
 
+                    <div class="goLeft hiddenInDesktop">
+                        <span class="goLeft relativeMatter soloHeight logo">
+                            <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
+                        </span>
+                        <div class="circleSearchIcon whiteColor goLeft pinkBack relativeMatter standardHorizontalLeftMargin">
+                            <span class="icon icon-search goRight eightyFontsize objectInMiddle"></span>
+                        </div>
 
-                    <div class="secondaryOptions goLeft">
-                        <div class="forUs pinkColor solidLineHeight thickFont goLeft">
+
+                        <div class="searchPart goLeft">
+                            <!--
+             <div class="searchType goLeft">
+             <div class="selectbox relativeMatter standardPadding goLeft">
+                 <span class="icon-select-arrow goLeft"></span>
+                 <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
+                 <div class="options">
+                     <div class="optionInner"></div>
+                 </div>
+             </div>
+         </div>
+        -->
+                            <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
+                            <div class="topPopup standardPadding relativeMatter doublePrefer organizer whiteBack">
+                                <div class="searchField goLeft standardPadding relativeMatter organizer">
+                                    <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
+                                    <div class="searchTextPart goRight">
+                                        <input type="text" id="SearchTextBox" placeholder="فروشگاه یا کالای خود را بیابید" class="searchInput thickFont darkGray" />
+                                    </div>
+                                    <!-- box search in hast k baz mishe -->
+                                    <div id="Search_Task_Open" class="openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
+                                        <div class="verticalLine objectInMiddle"></div>
+                                        <div class="twoFullColumn searchInProducts">
+                                            <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
+                                                <div class="organizer">
+                                                    <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
+                                                </div>
+                                                <div class="organizer thickFont">محصولی یافت نشد</div>
+                                                <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
+                                            </div>
+                                            <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                                <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
+                                                @*<div class="titleSeemore goLeft greenColor thirteenFontSize">بیشتر ببینید</div>*@
+                                            </div>
+
+
+                                            <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
+                                            <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
+                                                <div class="itemContainer organizer standardPadding relativeMatter">
+                                                    <a href="~/product/{{productsResult.ProductId}}">
+                                                        <div class="oneThreeFullColumn">
+                                                            <div class="circleImageContainer">
+                                                                <img ng-src="/{{productsResult.ProductImgAddress?productsResult.ProductImgAddress:noProductPic}}" alt="{{productsResult.ProductName}}" class="imageInMiddle">
+                                                            </div>
+                                                        </div>
+                                                        <div class="twoThreeFullColumn">
+                                                            <div class="itemInfoes verticallyInCenter">
+                                                                <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
+                                                                <div class="itemTags organizer">
+                                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="separatorLine organizer"></div>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="twoFullColumn searchInStore">
+
+                                            <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
+                                                <div class="organizer">
+                                                    <img src="~/newAsset/images/store.svg" width="90" />
+                                                </div>
+                                                <div class="organizer thickFont">فروشگاهی یافت نشد</div>
+                                                <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
+                                            </div>
+
+                                            <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                                <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
+                                                @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
+                                            </div>
+                                            <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
+                                                <a href="~/shop/code/{{storesResult.Id}}">
+                                                    <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
+                                                        <div class="oneThreeFullColumn">
+                                                            <div class="circleImageContainer">
+                                                                <img ng-src="/{{storesResult.ImgAddress?storesResult.ImgAddress:noStorePic}}" alt="{{storesResult.Name}}" class="imageInMiddle">
+                                                            </div>
+                                                        </div>
+                                                        <div class="twoThreeFullColumn">
+                                                            <div class="itemInfoes verticallyInCenter">
+                                                                <div class="itemTitle greenColor organizer darkGray thirteenFontSize" ng-bind="storesResult.Name"> </div>
+                                                                @*<div class="itemDetail organizer smallExplain greenColor smallVerticalPadding" ng-bind="storesResult.CityName"> </div>*@
+                                                                <div class="itemTags organizer">
+                                                                    <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="storesResult.CityName"> </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="separatorLine organizer"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="secondaryOptions goLeft hiddenInPhone">
+                        <div class="forUs solidLineHeight thickFont goLeft">
                             <span class="goLeft relativeMatter soloHeight logo">
                                 <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
                             </span>
                             @*<a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
                                 <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>*@
 
-                            <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">خرید آنلاین از صد ها فروشگاه </span>
-                            <span class="goLeft lostInResponse">هوجی بوجی</span>
+                            <span class="goLeft leftBorder standardHorizontalPadding standardHorizontalMargin lostInResponse">هوجی بوجی، خرید آنلاین از صد ها فروشگاه </span>
 
                         </div>
                         <div class="searchPart goLeft standardHorizontalMargin">
@@ -375,6 +525,8 @@
             </nav>
         </div>
     </header>
+
+
     <div style="display: none" class="popUpMadule">
         <div class="closeTheMadule" ng-click="closeBox();"></div>
         <!-- box login -->
@@ -435,8 +587,8 @@
     <div class="container">
 
         <div class="sizeManager">
-            <div class="eightyColumn">
-                <div class="organizer slider">
+            <div class="eightyColumn organizerInPhone">
+                <div class="organizer slider hiddenInPhone">
                     <!-- mahale gharar dadan slider -->
                     @*<div class="horizontalImage">
                         <img src="~/Img/MainPage/Slides/slide_1.jpg" alt="">
@@ -480,7 +632,7 @@
                 </div>
                 <div class="collections organizer standardVerticalMargin">
                     <div class="collectionTheme_1 extraFullWidth">
-                        <div class="twoFiveColumn standardHalfHorizontalLeftPadding">
+                        <div class="twoFiveColumn standardHalfHorizontalLeftPadding organizerInPhone">
                             <a href="~/Search/#!/categoryCode-69">
                                 <div class="bigBox boxElement orangeCart organizer radiusBox">
                                     <div class="organizer boxImage relativeMatter">
@@ -500,9 +652,9 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="oneFiveColumn standardHalfHorizontalPadding">
+                        <div class="oneFiveColumn standardHalfHorizontalPadding fullColumnInPhone">
                             <a href="~/Search/#!/categoryCode-52">
-                                <div class="mediumBox  boxElement pinkCart organizer radiusBox">
+                                <div class="mediumBox twoColumnInPhone boxElement pinkCart organizer radiusBox standardVerticalMarginInPhone">
                                     <div class="boxImage organizer relativeMatter">
                                         <img src="~/newAsset/images/collection/mediumBoxGlass.jpg" class="imageInMiddle">
                                     </div>
@@ -512,17 +664,17 @@
                                 </div>
                             </a>
                             <a href="~/Search/#!/categoryCode-37">
-                                <div class="mediumBox boxElement greenCart organizer radiusBox standardTopVerticalMargin">
+                                <div class="mediumBox twoColumnInPhone boxElement greenCart organizer radiusBox standardTopVerticalMargin standardVerticalMarginInPhone">
                                     <div class="boxImage organizer relativeMatter">
                                         <img src="~/newAsset/images/collection/mediumBoxWatch.jpg" class="imageInMiddle">
                                     </div>
                                     <div class="organizer boxText loginPadding">
-                                        <div class="organizer pinkColor thickFont">کالکشن عینک</div>
+                                        <div class="organizer greenColor thickFont">کالکشن عینک</div>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="twoFiveColumn">
+                        <div class="twoFiveColumn organizerInPhone">
                             <div class="organizer">
                                 <div class="twoFullColumn standardHalfHorizontalPadding">
                                     <a href="~/Search/#!/categoryCode-79">
@@ -530,7 +682,7 @@
                                             <div class="boxImage organizer relativeMatter">
                                                 <img src="~/newAsset/images/collection/manto.jpg" class="imageInMiddle">
                                             </div>
-                                            <div class="organizer boxText loginPadding">
+                                            <div class="organizer boxText loginPadding clothCollection">
                                                 <div class="organizer orangeColor thickFont">کالکشن مانتو</div>
                                             </div>
                                         </div>
@@ -547,7 +699,7 @@
                                                 </div>
                                                 <div class="twoThreeFullColumn">
                                                     <div class="organizer boxText standardHalfHorizontalPadding">
-                                                        <div class="organizer pinkColor thickFont standardTopVerticalMargin noWrap">زیورآلات</div>
+                                                        <div class="organizer greenColor thickFont standardTopVerticalMargin noWrap">کیف</div>
                                                     </div>
                                                 </div>
                                             </a>
@@ -563,7 +715,7 @@
                                                 </div>
                                                 <div class="twoThreeFullColumn">
                                                     <div class="organizer boxText standardHalfHorizontalPadding">
-                                                        <div class="organizer pinkColor thickFont standardTopVerticalMargin noWrap">کالکشن کیف</div>
+                                                        <div class="organizer pinkColor thickFont standardTopVerticalMargin noWrap">جواهرات</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -583,7 +735,7 @@
                                             <div class="organizer thickFont standardTopVerticalMargin">کالکشن عروسک </div>
                                             <div class="organizer twelveFontSize almostGrayColor standardHalfVerticalPadding">انواع عروسک های نمدی و اسباب بازی  </div>
                                             <div class="organizer guideline">
-                                                <div class="outlineButton blackBack thickFont standardPadding whiteColor">مشاهده کالکشن <span class="icon icon-arrow-left2"></span> </div>
+                                                <div class="outlineButton blackBack thickFont standardPadding whiteColor">مشاهده کالکشن <span class="icon icon-arrow-left2 hiddenInPhone"></span> </div>
                                             </div>
                                         </div>
                                     </div>
@@ -594,23 +746,23 @@
                 </div>
                 <div class="organizer guideline">
                     <div class="boxElement textInCenter organizer radiusBox relativeMatter">
-                        <div class="twoFullColumn standardDoublePadding">
+                        <div class="twoFullColumn standardDoublePadding organizerInPhone standardPaddingInPhone">
                             <div class="organizer">
                                 <img class="topSvgHandler" src="~/newAsset/images/gifts.svg">
                             </div>
-                            <div class="organizer pinkColor eightyFontsize twentyTwoFontsize thickFont standardVerticalMargin">برای فروشنده ها</div>
+                            <div class="organizer pinkColor textEllipsis eightyFontsize twentyTwoFontsize thickFont standardVerticalMargin">برای فروشنده ها</div>
                             <div class="organizer explain">
                                 در هر جای ایران عزیزمان که باشید و هر محصولی که داشته باشید به آسانی
                                 می توانید در بستر هوجی بوجی محصولاتتان را به نمایش بگدارید و به
                                 کسب و کار خود رونق ببخشید. اگر آماده هستید بر روی دکمه زیر کلیک کرده
                                 یا آن را لمس کنید
                             </div>
-                            <div class="organizer stickToBottomRight">
+                            <div class="organizer stickToBottomRight organizerInPhone noObjective topVerticalMarginInPhone">
                                 <a href="~/Store/AddStore">  <div class="outlineButton greenBorder thickFont greenColor standardPadding">شروع کن </div></a>
                             </div>
                         </div>
-                        <div class="verticalLine objectInMiddle"></div>
-                        <div class="twoFullColumn standardDoublePadding">
+                        <div class="verticalLine objectInMiddle horizontalLineInPhone"></div>
+                        <div class="twoFullColumn standardDoublePadding organizerInPhone standardPaddingInPhone">
                             <div class="organizer">
                                 <img class="topSvgHandler" src="~/newAsset/images/menandwomen.svg">
                             </div>
@@ -620,7 +772,7 @@
                                 و خریداری محصول خود را پیدا کنید و با بهترین قیمت و مقایسه درست
                                 انتخابی عالی داشته باشید
                             </div>
-                            <div class="organizer stickToBottomLeft">
+                            <div class="organizer stickToBottomLeft organizerInPhone noObjective topVerticalMarginInPhone">
                                 <a href="" ng-click="showLoginBox();"><div class="outlineButton pinkBorder thickFont pinkColor standardPadding">شروع کن</div></a>
                             </div>
                         </div>
@@ -646,7 +798,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="carouselInner">
+                            <div class="carouselInner standardBottomVerticalPadding">
                                 <div class="owl-carousel owl-theme owlSlider1">
                                 </div>
                             </div>
@@ -654,11 +806,11 @@
                     </div>
                 </div>
                 <div class="organizer letsStarted textInCenter boxElement radiusBox standardDoublePadding">
-                    <div class="twoFullColumn">
+                    <div class="twoFullColumn organizerInPhone">
 
                         <img class="topSvgHandler" src="~/newAsset/images/storeInPhone.svg">
                     </div>
-                    <div class="twoFullColumn standardHorizontalPadding elementTopDoubleVerticalMargin">
+                    <div class="twoFullColumn organizerInPhone standardHorizontalPadding elementTopDoubleVerticalMargin">
                         <div class="organizer thickFont eightyFontsize greenColor">آیا میخواهید محصول شما را به صورت ویژه نمایش بدهیم؟</div>
                         <div class="organizer explain standardDoubleVerticalMargin">
                             اگر میخواهید محصولتان به صورت ویژه دیده شود و مشتری جذب کند میتوانید از طریق
@@ -693,7 +845,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carouselInner">
+                                <div class="carouselInner standardBottomVerticalPadding">
                                     <div class="owl-carousel owl-theme owlSlider3">
 
                                         <div class="borderRight item">
@@ -702,7 +854,7 @@
                                                     <img src="" alt="" class="imageInMiddle">
                                                 </div>
                                             </div>
-                                            <div class="organizer pinkColor">نام محصول</div>
+                                            <div class="organizer pinkColor textEllipsis">نام محصول</div>
                                             <div class="standardVerticalBottomMargin">توضیحی مختصر در مورد این محصول</div>
                                         </div>
 
@@ -722,7 +874,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carouselInner">
+                                <div class="carouselInner standardBottomVerticalPadding">
                                     <div class="owl-carousel owl-theme owlSlider5">
 
                                         <div class="borderRight item">
@@ -731,7 +883,7 @@
                                                     <img src="" alt="" class="imageInMiddle">
                                                 </div>
                                             </div>
-                                            <div class="organizer pinkColor">نام محصول</div>
+                                            <div class="organizer pinkColor textEllipsis">نام محصول</div>
                                             <div class="standardVerticalBottomMargin">توضیحی مختصر در مورد این محصول</div>
                                             <div class="fieldPart pinkColor thirteenFontSize">خرید از فروشگاه</div>
                                         </div>
@@ -880,7 +1032,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="carouselInner">
+                            <div class="carouselInner standardBottomVerticalPadding">
                                 <div class="owl-carousel owl-theme owlSlider4">
                                 </div>
                             </div>
@@ -888,7 +1040,7 @@
                     </div>
                 </div>
             </div>
-            <div class="twentyColumn">
+            <div class="twentyColumn organizerInPhone">
                 @* <div class="organizer">
              <!-- be ezaye har mahsule vizhe k ezafe mishe yeki az in itemContainer ha repeat mishe -->
             <div class="itemContainer thickFont boxElement organizer radiusBox standardVerticalBottomMargin standardHalfPadding relativeMatter">
@@ -997,7 +1149,7 @@
     <footer class="container thickFont footer">
         <div class="separatorLine organizer standardVerticalMargin"></div>
         <div class="squizer thickFont">
-            <div class="fourFullColumns">
+            <div class="fourFullColumns organizerInPhone">
                 <div class="organizer blackColor standardVerticalMargin">دسته بندی ها</div>
                 <ul>
                     <li>لوازم دیجیتال</li>
@@ -1006,7 +1158,7 @@
                     <li>زیبایی و آرایش</li>
                 </ul>
             </div>
-            <div class="fourFullColumns">
+            <div class="fourFullColumns organizerInPhone">
                 <div class="organizer blackColor standardVerticalMargin">سایر صفحات</div>
                 <ul>
                     <a href="~/Static/Law">
@@ -1023,7 +1175,7 @@
                     </a>
                 </ul>
             </div>
-            <div class="fourFullColumns">
+            <div class="fourFullColumns organizerInPhone">
                 <div class="organizer blackColor standardVerticalMargin">تکمیل اطلاعات</div>
                 <ul>
                     <a href="~/Store/AddStore"> <li>ثبت فروشگاه</li></a>
@@ -1033,7 +1185,7 @@
                         <li>ثبت تبلیغات شما</li>*@
                 </ul>
             </div>
-            <div class="fourFullColumns relativeMatter">
+            <div class="fourFullColumns relativeMatter organizerInPhone">
                 <div class="organizer socials">
                     <div class="organizer blackColor standardVerticalMargin">ما را دنبال کنید</div>
                     <div class="organizer twentyTwoFontsize searchPart blackColor">
