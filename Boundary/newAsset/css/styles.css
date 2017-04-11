@@ -1192,6 +1192,10 @@ button {
     border-left: solid #f3f3f3 1px;
 }
 
+.slider .owl-item {
+    padding: 0;
+}
+
 .slider .leftArrowShadow {
     box-shadow: unset;
 }
