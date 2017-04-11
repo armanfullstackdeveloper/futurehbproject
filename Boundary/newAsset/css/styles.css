@@ -99,8 +99,17 @@ li {
     margin: 0 auto;
 }
 
-.pointerHand {
+.pointer {
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.pointer:hover {
+    color: #333;
+}
+
+.hiddenInDesktop {
+    display: none;
 }
 
 .whiteColor {
@@ -559,6 +568,7 @@ button {
 .standardRightVerticalMargin {
     padding-right: 1rem;
 }
+
 /*------------------- standard distances -----------------*/
 
 /*------------------- standard columns -------------------*/
@@ -716,6 +726,7 @@ button {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        cursor: pointer;
     }
 
     .oneFourFullColumn .fieldPart {
@@ -734,10 +745,16 @@ button {
 
 }
 
-@media only screen and (max-width: 1225px) {
+
+@media only screen and (max-width: 1346px) {
+
     .lostInResponse {
         display: none;
     }
+}
+
+
+@media only screen and (max-width: 1225px) {
 
     .offPrice {
         display: none;
@@ -752,10 +769,6 @@ button {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    .siteGuideline {
-        display: none;
     }
 }
 
@@ -859,6 +872,12 @@ button {
     left: 0;
     top: 0;
     border-radius: 50%;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.searchButtonPart:hover {
+    background-color: #333 !important;
 }
 
 .searchField.standardPadding {
@@ -874,6 +893,13 @@ button {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+.outlineButton.greenBorder:hover {
+    background-color: #009688;
+    color: #fff !important;
 }
 
 .circleButton {
@@ -881,6 +907,7 @@ button {
     height: 55px;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
 }
 
 .productItem .circleButton {
@@ -912,6 +939,7 @@ button {
 .twoPartButton {
     display: inline-block;
     width: 180px;
+    cursor: pointer;
 }
 
 .iconPart {
@@ -1865,6 +1893,10 @@ button {
     display: none;
 }
 
+.hiddenInDesktop {
+    display: block;
+}
+
 .noObjective {
     position: unset !important;
 }
@@ -1894,6 +1926,7 @@ button {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
+
 .standardVerticalMarginInPhone {
     margin-top: 1rem;
     margin-bottom: 1rem;
