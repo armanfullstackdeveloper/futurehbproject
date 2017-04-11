@@ -902,6 +902,11 @@ button {
     color: #fff !important;
 }
 
+.outlineButton.pinkBorder:hover {
+    background-color: #e91e63;
+    color: #fff !important;
+}
+
 .circleButton {
     width: 55px;
     height: 55px;
