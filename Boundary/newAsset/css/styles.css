@@ -1171,7 +1171,7 @@ button {
 }
 
 .leftArrow {
-    left: 0;    
+    left: 0;
 }
 
 .leftArrowShadow {
@@ -1180,6 +1180,11 @@ button {
 
 .slider .rightArrowShadow {
     box-shadow: unset;
+}
+
+.owl-item {
+    padding: 0.5rem;
+    border-left: solid #f3f3f3 1px;
 }
 
 .slider .leftArrowShadow {
