@@ -212,6 +212,107 @@
                     }
 
 
+                    <div class="searchPart goRight standardHorizontalMargin hiddenInPhone">
+                        <!--
+             <div class="searchType goLeft">
+             <div class="selectbox relativeMatter standardPadding goLeft">
+                 <span class="icon-select-arrow goLeft"></span>
+                 <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
+                 <div class="options">
+                     <div class="optionInner"></div>
+                 </div>
+             </div>
+         </div>
+        -->
+                        <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
+                        <div class="searchField goLeft standardPadding relativeMatter standardHorizontalLeftMargin">
+                            <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
+                            <div class="searchTextPart goLeft">
+                                <input type="text" placeholder="فروشگاه یا کالای خود را بیابید" class="SearchTextBox searchInput thickFont darkGray" />
+                            </div>
+                            <!-- box search in hast k baz mishe -->
+                            <div class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
+                                <div class="verticalLine objectInMiddle"></div>
+                                <div class="twoFullColumn searchInProducts">
+                                    <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
+                                        <div class="organizer">
+                                            <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
+                                        </div>
+                                        <div class="organizer thickFont">محصولی یافت نشد</div>
+                                        <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
+                                    </div>
+                                    <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                        <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
+                                        @*<div class="titleSeemore goLeft greenColor thirteenFontSize">بیشتر ببینید</div>*@
+                                    </div>
+
+
+                                    <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
+                                    <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
+                                        <div class="itemContainer organizer standardPadding relativeMatter">
+                                            <a href="~/product/{{productsResult.ProductId}}">
+                                                <div class="oneThreeFullColumn">
+                                                    <div class="circleImageContainer">
+                                                        <img ng-src="/{{productsResult.ProductImgAddress?productsResult.ProductImgAddress:noProductPic}}" alt="{{productsResult.ProductName}}" class="imageInMiddle">
+                                                    </div>
+                                                </div>
+                                                <div class="twoThreeFullColumn">
+                                                    <div class="itemInfoes verticallyInCenter">
+                                                        <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
+                                                        <div class="itemTags organizer">
+                                                            <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="separatorLine organizer"></div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="twoFullColumn searchInStore">
+
+                                    <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
+                                        <div class="organizer">
+                                            <img src="~/newAsset/images/store.svg" width="90" />
+                                        </div>
+                                        <div class="organizer thickFont">فروشگاهی یافت نشد</div>
+                                        <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
+                                    </div>
+
+                                    <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                        <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
+                                        @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
+                                    </div>
+                                    <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
+                                        <a href="~/shop/code/{{storesResult.Id}}">
+                                            <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
+                                                <div class="oneThreeFullColumn">
+                                                    <div class="circleImageContainer">
+                                                        <img ng-src="/{{storesResult.ImgAddress?storesResult.ImgAddress:noStorePic}}" alt="{{storesResult.Name}}" class="imageInMiddle">
+                                                    </div>
+                                                </div>
+                                                <div class="twoThreeFullColumn">
+                                                    <div class="itemInfoes verticallyInCenter">
+                                                        <div class="itemTitle greenColor organizer darkGray thirteenFontSize" ng-bind="storesResult.Name"> </div>
+                                                        @*<div class="itemDetail organizer smallExplain greenColor smallVerticalPadding" ng-bind="storesResult.CityName"> </div>*@
+                                                        <div class="itemTags organizer">
+                                                            <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="storesResult.CityName"> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="separatorLine organizer"></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     <!-- menu samte rast dar halate mamooli-->
 
                     <div class="goLeft hiddenInDesktop">
@@ -325,6 +426,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="secondaryOptions goLeft hiddenInPhone">
                         <div class="forUs solidLineHeight thickFont goLeft">
                             <span class="goLeft relativeMatter soloHeight logo">
@@ -333,107 +435,11 @@
                             @*<a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
                                 <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>*@
 
-                            <span class="goLeft leftBorder standardHalfHorizontalLeftPadding standardHalfHorizontalLeftMargin lostInResponse">هوجی بوجی، خرید آنلاین از صد ها فروشگاه </span>
+                            <span class="goLeft leftBorder standardHorizontalLeftPadding standardHalfHorizontalLeftMargin lostInResponse moveMoreFromBottom">
+                            <span class="goLeft standardHalfVerticalBottomMargin greenColor">هوجی بوجی</span>
+                                <span class="goLeft clearLeft twelveFontSize normalFont">خرید آنلاین از صد ها فروشگاه </span>
+                            </span>
 
-                        </div>
-                        <div class="searchPart goLeft standardHorizontalMargin">
-                            <!--
-                                 <div class="searchType goLeft">
-                                 <div class="selectbox relativeMatter standardPadding goLeft">
-                                     <span class="icon-select-arrow goLeft"></span>
-                                     <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
-                                     <div class="options">
-                                         <div class="optionInner"></div>
-                                     </div>
-                                 </div>
-                             </div>
-                            -->
-                            <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
-                            <div class="searchField goLeft standardPadding relativeMatter standardHorizontalLeftMargin">
-                                <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
-                                <div class="searchTextPart goLeft">
-                                    <input type="text" placeholder="فروشگاه یا کالای خود را بیابید" class="SearchTextBox searchInput thickFont darkGray" />
-                                </div>
-                                <!-- box search in hast k baz mishe -->
-                                <div class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
-                                    <div class="verticalLine objectInMiddle"></div>
-                                    <div class="twoFullColumn searchInProducts">
-                                        <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
-                                            <div class="organizer">
-                                                <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
-                                            </div>
-                                            <div class="organizer thickFont">محصولی یافت نشد</div>
-                                            <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
-                                        </div>
-                                        <div class="titleBar relativeMatter thickFont organizer standardPadding">
-                                            <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
-                                            @*<div class="titleSeemore goLeft greenColor thirteenFontSize">بیشتر ببینید</div>*@
-                                        </div>
-
-
-                                        <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
-                                        <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
-                                            <div class="itemContainer organizer standardPadding relativeMatter">
-                                                <a href="~/product/{{productsResult.ProductId}}">
-                                                    <div class="oneThreeFullColumn">
-                                                        <div class="circleImageContainer">
-                                                            <img ng-src="/{{productsResult.ProductImgAddress?productsResult.ProductImgAddress:noProductPic}}" alt="{{productsResult.ProductName}}" class="imageInMiddle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="twoThreeFullColumn">
-                                                        <div class="itemInfoes verticallyInCenter">
-                                                            <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
-                                                            <div class="itemTags organizer">
-                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="separatorLine organizer"></div>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="twoFullColumn searchInStore">
-
-                                        <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
-                                            <div class="organizer">
-                                                <img src="~/newAsset/images/store.svg" width="90" />
-                                            </div>
-                                            <div class="organizer thickFont">فروشگاهی یافت نشد</div>
-                                            <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
-                                        </div>
-
-                                        <div class="titleBar relativeMatter thickFont organizer standardPadding">
-                                            <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
-                                            @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
-                                        </div>
-                                        <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
-                                            <a href="~/shop/code/{{storesResult.Id}}">
-                                                <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
-                                                    <div class="oneThreeFullColumn">
-                                                        <div class="circleImageContainer">
-                                                            <img ng-src="/{{storesResult.ImgAddress?storesResult.ImgAddress:noStorePic}}" alt="{{storesResult.Name}}" class="imageInMiddle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="twoThreeFullColumn">
-                                                        <div class="itemInfoes verticallyInCenter">
-                                                            <div class="itemTitle greenColor organizer darkGray thirteenFontSize" ng-bind="storesResult.Name"> </div>
-                                                            @*<div class="itemDetail organizer smallExplain greenColor smallVerticalPadding" ng-bind="storesResult.CityName"> </div>*@
-                                                            <div class="itemTags organizer">
-                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="storesResult.CityName"> </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="separatorLine organizer"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -85,6 +85,10 @@ li {
     float: left !important;
 }
 
+.clearLeft {
+    clear: left;
+}
+
 .moveFromBottom {
     position: relative;
     bottom: 10px;
@@ -477,7 +481,7 @@ button {
     margin: 0rem 0rem 1rem 0rem;
 }
 
-.standardVerticalBottomMargin {
+.standardHalfVerticalBottomMargin {
     margin: 0 0 0.5rem 0;
 }
 
@@ -567,6 +571,10 @@ button {
 
 .standardRightVerticalMargin {
     padding-right: 1rem;
+}
+
+.standardHorizontalLeftPadding {
+    padding-left: 1rem;
 }
 
 /*------------------- standard distances -----------------*/
@@ -836,6 +844,11 @@ button {
     bottom: 13px;
 }
 
+.moveMoreFromBottom {
+    position: relative;
+    bottom: 10px;
+}
+
 .searchField {
     background-color: #fbfbfb;
     border-radius: 250px;
@@ -843,7 +856,7 @@ button {
 }
 
 .logo {
-    min-width: 47px;
+    min-width: 45px;
     min-height: 18px;
 }
 
@@ -1154,6 +1167,15 @@ button {
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
+    z-index: 0;
+    position: relative;
+}
+
+.arrows {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .defaultArrow {
