@@ -356,7 +356,7 @@ namespace Boundary.Controllers.Api
                                 Date = PersianDateTime.Now.Date.ToInt(),
                                 Time = PersianDateTime.Now.TimeOfDay.ToInteger(),
                                 OrderCode = orderCode,
-                                OrderStatusCode = (byte)EOrderStatus.PendingApprovalSeller, //در انتظار تائید فروشنده
+                                OrderStatusCode = EOrderStatus.PendingApprovalSeller, //در انتظار تائید فروشنده
                                 UserCode = RequestContext.Principal.Identity.GetUserId() ?? HttpContext.Current.Request.UserHostAddress
                             }, session) == false)
                             {

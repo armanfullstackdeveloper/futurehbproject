@@ -65,7 +65,7 @@ namespace Boundary.Areas.Member.Controllers
         }
 
         [Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
-        public ActionResult UpdateStatus(long orderCode, byte newStatusCode)
+        public ActionResult UpdateStatus(long orderCode, EOrderStatus newStatusCode)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Boundary.Areas.Member.Controllers
                 OrderHistory orderHistoryOfLastStatus =
                         lstOrderHistories.OrderByDescending(o => o.Date).ThenByDescending(o => o.Time).First();
                 List<DropDownItemsModel> editableStatus = new OrderBL().CheckMembersEditableStatus((EOrderStatus)orderHistoryOfLastStatus.OrderStatusCode);
-                if (editableStatus.Exists(s => s.Value == newStatusCode) == false)
+                if (editableStatus.Exists(s => s.Value == (byte)newStatusCode) == false)
                     return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
 
                 var result = new OrderHistoryBL().UpdateOrderStatus(order, newStatusCode,

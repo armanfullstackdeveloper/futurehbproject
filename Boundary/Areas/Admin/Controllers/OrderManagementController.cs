@@ -9,6 +9,7 @@ using BusinessLogic.BussinesLogics;
 using BusinessLogic.BussinesLogics.RelatedToOrder;
 using BusinessLogic.Helpers;
 using DataModel.Entities.RelatedToOrder;
+using DataModel.Enums;
 using DataModel.Models.ViewModel;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
@@ -273,7 +274,7 @@ namespace Boundary.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostEdit(long orderCode, byte newStatus)
+        public ActionResult PostEdit(long orderCode, EOrderStatus newStatus)
         {
             try
             {

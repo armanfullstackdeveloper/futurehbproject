@@ -8,6 +8,7 @@ using DataModel.Entities.FirstPage;
 using DataModel.Entities.RelatedToStore;
 using NHibernate;
 using NHibernate.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.BussinesLogics.FirstPageBL
 {
@@ -32,12 +33,12 @@ namespace BusinessLogic.BussinesLogics.FirstPageBL
             }
         }
 
-        public IEnumerable<FirstPage_SliderDataModel> GetActiveSlider()
+        public async Task<IEnumerable<FirstPage_SliderDataModel>> GetActiveSlider()
         {
             _db = EnsureOpenConnection();
             var parameters = new DynamicParameters();
             parameters.Add("@persianToday", PersianDateTime.Now.Date.ToInt());
-            IEnumerable<FirstPage_SliderDataModel> firstPageSliders = _db.QueryAsync<FirstPage_SliderDataModel>("FirstPage_Slider_GetActiveSlider", parameters, commandType: CommandType.StoredProcedure).Result;
+            IEnumerable<FirstPage_SliderDataModel> firstPageSliders = await _db.QueryAsync<FirstPage_SliderDataModel>("FirstPage_Slider_GetActiveSlider", parameters, commandType: CommandType.StoredProcedure);
             EnsureCloseConnection(_db);
             return firstPageSliders;
         }

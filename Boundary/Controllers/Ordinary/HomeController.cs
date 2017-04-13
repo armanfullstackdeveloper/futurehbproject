@@ -15,7 +15,6 @@ namespace Boundary.Controllers.Ordinary
     {
         public ActionResult Index()
         {
-            throw new Exception("djksbfjdsf1052845");
             return View();
         }
 
