@@ -17,13 +17,8 @@ header {
     position: relative;
 }
 
-
 *:focus {
     outline: none;
-}
-
-a{
-    text-decoration: none;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ul, li {
@@ -34,6 +29,12 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li {
     font-weight: inherit;
     line-height: inherit;
     list-style: none;
+}
+
+a, a:visited, a:hover {
+    text-decoration: none;
+    color: inherit;
+    border: none;
 }
 
 .totalRadius {
@@ -62,6 +63,16 @@ li {
     float: right;
 }
 
+.separateLine {
+    width: 100%;
+    height: 1px;
+}
+
+.extraFullWidth {
+    width: 103%;
+    float: right;
+}
+
 .fullForTwoElements {
     width: 102%;
 }
@@ -74,17 +85,35 @@ li {
     float: left !important;
 }
 
+.clearLeft {
+    clear: left;
+}
+
 .moveFromBottom {
     position: relative;
     bottom: 10px;
+}
+
+.moveFromTop {
+    position: relative;
+    top: 3px;
 }
 
 .elementInMiddle {
     margin: 0 auto;
 }
 
-.pointerHand {
+.pointer {
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.pointer:hover {
+    color: #333;
+}
+
+.hiddenInDesktop {
+    display: none;
 }
 
 .whiteColor {
@@ -104,6 +133,14 @@ li {
     position: fixed;
 }
 
+.prefer {
+    z-index: 1;
+}
+
+.doublePrefer {
+    z-index: 2;
+}
+
 .objectInMiddle {
     position: absolute;
     top: 50%;
@@ -116,49 +153,49 @@ input[type="radio"] {
     display: none;
 }
 
-    input[type="radio"] + label span {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: -1px 0px 0 5px;
-        vertical-align: middle;
-        background: url(../images/radioBeforeConfirm.png) right -140px no-repeat;
-        background-size: 20px;
-        cursor: pointer;
-    }
+input[type="radio"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: -1px 0px 0 5px;
+    vertical-align: middle;
+    background: url(../images/radioBeforeConfirm.png) right -140px no-repeat;
+    background-size: 20px;
+    cursor: pointer;
+}
 
-    input[type="radio"]:checked + label span {
-        -webkit-animation: goCheck steps(7) 0.15s forwards;
-        -moz-animation: goCheck steps(7) 0.15s forwards;
-        -o-animation: goCheck steps(7) 0.15s forwards;
-        animation: goCheck steps(7) 0.15s forwards;
-        background: url(../images/radioAfterConfirm.png) right 0 no-repeat;
-        background-size: 20px;
-    }
+input[type="radio"]:checked + label span {
+    -webkit-animation: goCheck steps(7) 0.15s forwards;
+    -moz-animation: goCheck steps(7) 0.15s forwards;
+    -o-animation: goCheck steps(7) 0.15s forwards;
+    animation: goCheck steps(7) 0.15s forwards;
+    background: url(../images/radioAfterConfirm.png) right 0 no-repeat;
+    background-size: 20px;
+}
 
 input[type="checkbox"] {
     display: none;
 }
 
-    input[type="checkbox"] + label span {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: -1px 0px 0 5px;
-        vertical-align: middle;
-        background: url(../images/beforeConfirm.png) right -140px no-repeat;
-        background-size: 20px;
-        cursor: pointer;
-    }
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: -1px 0px 0 5px;
+    vertical-align: middle;
+    background: url(../images/beforeConfirm.png) right -140px no-repeat;
+    background-size: 20px;
+    cursor: pointer;
+}
 
-    input[type="checkbox"]:checked + label span {
-        -webkit-animation: goCheck steps(7) 0.15s forwards;
-        -moz-animation: goCheck steps(7) 0.15s forwards;
-        -o-animation: goCheck steps(7) 0.15s forwards;
-        animation: goCheck steps(7) 0.15s forwards;
-        background: url(../images/afterConfirm.png) right 0 no-repeat;
-        background-size: 20px;
-    }
+input[type="checkbox"]:checked + label span {
+    -webkit-animation: goCheck steps(7) 0.15s forwards;
+    -moz-animation: goCheck steps(7) 0.15s forwards;
+    -o-animation: goCheck steps(7) 0.15s forwards;
+    animation: goCheck steps(7) 0.15s forwards;
+    background: url(../images/afterConfirm.png) right 0 no-repeat;
+    background-size: 20px;
+}
 
 .imageInMiddle {
     position: absolute;
@@ -226,6 +263,12 @@ input[type="checkbox"] {
 .noOverFlows {
     overflow: unset !important;
 }
+
+button {
+    cursor: pointer;
+    border: inherit;
+}
+
 /*--------------- main elements --------------------*/
 
 /*---------------- text elements --------------------*/
@@ -254,7 +297,7 @@ input[type="checkbox"] {
 }
 
 .pinkColor {
-    color: #e91e63 !important;
+    color: #e91e63;
 }
 
 .orangeColor {
@@ -301,6 +344,14 @@ input[type="checkbox"] {
     background-color: #009688 !important;
 }
 
+.grayBack {
+    background-color:#e1e1e1 !important;
+}
+
+.whiteBack {
+    background-color: #fff !important;
+}
+
 .reallyLightBack {
     background-color: #fdfdfd !important;
 }
@@ -329,6 +380,10 @@ input[type="checkbox"] {
     font-size: 12px !important;
 }
 
+.tenFontSize {
+    font-size: 10px;
+}
+
 .twentyTwoFontsize {
     font-size: 22px !important;
 }
@@ -353,6 +408,18 @@ input[type="checkbox"] {
     border: solid #009688 2px;
 }
 
+.darkerGrayBack{
+    background-color: #d5d5d5;
+}
+
+.bottomGrayBorder {
+    border-bottom: solid #e1e1e1 1px;
+}
+
+.bottomDarkerGrayBorder {
+    border-bottom: solid #c1c1c1 1px;
+}
+
 .verticalLine {
     width: 1px;
     height: 100%;
@@ -372,6 +439,10 @@ input[type="checkbox"] {
 
 .standardPadding {
     padding: 0.5em 1rem;
+}
+
+.standardBottomVerticalPadding {
+    padding-bottom: 1rem;
 }
 
 .standardPaddingForlogin {
@@ -410,7 +481,7 @@ input[type="checkbox"] {
     margin: 0rem 0rem 1rem 0rem;
 }
 
-.standardVerticalBottomMargin {
+.standardHalfVerticalBottomMargin {
     margin: 0 0 0.5rem 0;
 }
 
@@ -428,6 +499,10 @@ input[type="checkbox"] {
 
 .standardHalfVerticalMarginForlogin {
     margin: 0rem 0 0.25rem 0;
+}
+
+.standardSmallVerticalMargin {
+    padding: 0.25rem 0rem;
 }
 
 .standardVerticalPadding {
@@ -455,7 +530,7 @@ input[type="checkbox"] {
 }
 
 .standardHorizontalLeftMargin {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 1rem;
 }
 
 .standardHorizontalPadding {
@@ -486,8 +561,20 @@ input[type="checkbox"] {
     margin-top: 1rem;
 }
 
+.standardHalfTopVerticalMargin {
+    margin-top: 0.5rem;
+}
+
 .standardHalfHorizontalLeftPadding {
     padding-left: 0.5rem;
+}
+
+.standardRightVerticalMargin {
+    padding-right: 1rem;
+}
+
+.standardHorizontalLeftPadding {
+    padding-left: 1rem;
 }
 
 /*------------------- standard distances -----------------*/
@@ -495,11 +582,6 @@ input[type="checkbox"] {
 /*------------------- standard columns -------------------*/
 .fiveFullColumn {
     width: 20%;
-    float: right;
-}
-
-.sevenFullColumn {
-    width:14.28571428571429%;
     float: right;
 }
 
@@ -524,7 +606,7 @@ input[type="checkbox"] {
 }
 
 .fourColumns {
-    width: 22.5%;
+    width: 25%;
     float: right;
 }
 
@@ -598,8 +680,9 @@ input[type="checkbox"] {
 }
 
 .oneFiveColumn {
-    width: 20%;
+    width: 18%;
     float: right;
+    margin-left: 1%;
 }
 
 .fiveSixColumn {
@@ -612,9 +695,16 @@ input[type="checkbox"] {
     float: right;
 }
 
-.fourFiveColumn {
-    width: 80%;
+.oneSevenColumn {
+    width: 14.28571428571429%;
     float: right;
+}
+
+
+.fourFiveColumn {
+    width: 78%;
+    float: right;
+    margin-left: 1%;
 }
 
 .mixHeight {
@@ -623,9 +713,6 @@ input[type="checkbox"] {
 
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
-    .siteGuideline {
-        display: none;
-    }
 
     .oneFourFullColumn .iconPart {
         display: inline-block;
@@ -647,6 +734,7 @@ input[type="checkbox"] {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        cursor: pointer;
     }
 
     .oneFourFullColumn .fieldPart {
@@ -662,12 +750,19 @@ input[type="checkbox"] {
     .cartHeight {
         height: 70px;
     }
+
 }
 
-@media only screen and (max-width: 1225px) {
+
+@media only screen and (max-width: 1346px) {
+
     .lostInResponse {
         display: none;
     }
+}
+
+
+@media only screen and (max-width: 1225px) {
 
     .offPrice {
         display: none;
@@ -692,7 +787,6 @@ input[type="checkbox"] {
     color: #525252;
     direction: rtl;
     font-size: 0.9rem;
-    min-width: 1024px;
 }
 
 .popUpMadule {
@@ -708,6 +802,7 @@ input[type="checkbox"] {
     background: #f3f3f3;
     color: #818181;
     border-bottom: solid #f1f1f1 1px;
+    z-index: 4;
 }
 
 .openUpSearch .titleBar {
@@ -749,6 +844,11 @@ input[type="checkbox"] {
     bottom: 13px;
 }
 
+.moveMoreFromBottom {
+    position: relative;
+    bottom: 10px;
+}
+
 .searchField {
     background-color: #fbfbfb;
     border-radius: 250px;
@@ -756,7 +856,7 @@ input[type="checkbox"] {
 }
 
 .logo {
-    min-width: 47px;
+    min-width: 45px;
     min-height: 18px;
 }
 
@@ -785,6 +885,12 @@ input[type="checkbox"] {
     left: 0;
     top: 0;
     border-radius: 50%;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.searchButtonPart:hover {
+    background-color: #333 !important;
 }
 
 .searchField.standardPadding {
@@ -800,6 +906,18 @@ input[type="checkbox"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+}
+
+.outlineButton.greenBorder:hover {
+    background-color: #009688;
+    color: #fff !important;
+}
+
+.outlineButton.pinkBorder:hover {
+    background-color: #e91e63;
+    color: #fff !important;
 }
 
 .circleButton {
@@ -807,10 +925,16 @@ input[type="checkbox"] {
     height: 55px;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
+}
+
+.productItem .circleButton {
+    width: 40px;
+    height: 40px;
 }
 
 .smallPadding {
-    padding: 0.2rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     font-size: 10px;
 }
 
@@ -833,6 +957,7 @@ input[type="checkbox"] {
 .twoPartButton {
     display: inline-block;
     width: 180px;
+    cursor: pointer;
 }
 
 .iconPart {
@@ -892,17 +1017,17 @@ input[type="checkbox"] {
     border-bottom: solid #f1f1f1 1px;
 }
 
-    .borderBottom:nth-last-child(1) {
-        border: none;
-    }
+.borderBottom:nth-last-child(1) {
+    border: none;
+}
 
 .tableShape .borderBottom {
     border-bottom: solid #e1e1e1 1px;
 }
 
-    .tableShape .borderBottom:nth-last-child(1) {
-        border: none;
-    }
+.tableShape .borderBottom:nth-last-child(1) {
+    border: none;
+}
 
 .tableShape .borderRight {
     border-right: solid #e1e1e1 1px !important;
@@ -934,17 +1059,17 @@ input[type="checkbox"] {
     border-right: solid #efefef 1px;
 }
 
-    .borderRight:nth-child(1) {
-        border-right: none;
-    }
+.borderRight:nth-child(1) {
+    border-right: none;
+}
 
 .innerInnerList .borderRight {
     border-right: solid #e3e3e3 1px;
 }
 
-    .innerInnerList .borderRight:nth-child(1) {
-        border-right: none;
-    }
+.innerInnerList .borderRight:nth-child(1) {
+    border-right: none;
+}
 
 .innerInnerList .fiveFullColumn {
     min-height: 390px;
@@ -961,7 +1086,6 @@ input[type="checkbox"] {
 .footer ul li {
     color: #a3a3a3;
 }
-
 
 .footer .fourFullColumns {
     min-height: 194px;
@@ -1040,9 +1164,18 @@ input[type="checkbox"] {
 }
 
 .carouselInner {
-    width: 93%;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
+    z-index: 0;
+    position: relative;
+}
+
+.arrows {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .defaultArrow {
@@ -1051,14 +1184,43 @@ input[type="checkbox"] {
     width: 4%;
     position: absolute;
     top: 0;
+    z-index: 3;
+    background-color:#fbfbfb ;
+    min-width: 38px;
+}
+
+.slider .defaultArrow {
+    background-color: transparent;
 }
 
 .rightArrow {
-    right: 0;
+    right: 0;    
 }
 
 .leftArrow {
     left: 0;
+}
+
+.leftArrowShadow {
+    box-shadow: 4px 0 28px #cdcdcd;
+}
+
+.slider .rightArrowShadow {
+    box-shadow: unset;
+}
+
+.owl-item {
+    padding: 0.5rem;
+    border-left: solid #f3f3f3 1px;
+}
+
+.slider .owl-item {
+    padding: 0;
+}
+
+.slider .leftArrowShadow {
+    box-shadow: unset;
+}
 }
 
 .circleDefaultArrows {
@@ -1066,6 +1228,35 @@ input[type="checkbox"] {
     border-radius: 50%;
     width: 35px;
     height: 35px;
+}
+
+.noProductFound {
+    position: absolute;
+    width: 50%;
+    right:0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.noStoreFound {
+    position: absolute;
+    width: 50%;
+    left:0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.circleAroundArrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #474747;
 }
 
 .loginBox .circleDefaultArrows, .signUpBox .circleDefaultArrows {
@@ -1083,6 +1274,8 @@ input[type="checkbox"] {
     width: 100%;
     z-index: 1;
     border-top: solid #f3f3f3 1px;
+    overflow-y: scroll;
+    height: 480px;
 }
 
 .itemInfoes, .itemDetail, .itemTitle {
@@ -1123,17 +1316,11 @@ input[type="checkbox"] {
 .loginBox {
     width: 95%;
     max-width: 300px;
-    display: none;
-}
-
-.pointer {
-    cursor: pointer;
 }
 
 .signUpBox {
     width: 95%;
     max-width: 300px;
-    display: none;
 }
 
 .standardInput {
@@ -1250,7 +1437,6 @@ input[type="checkbox"] {
     z-index: 1;
 }
 
-
 .mapHolder {
     height: 104px;
     margin-bottom: 15px;
@@ -1262,6 +1448,11 @@ input[type="checkbox"] {
     border-radius: 10px;
     background-color: #f3f3f3;
     overflow: hidden;
+}
+
+.squareFullWidth {
+    width: 100%;
+    padding-bottom: 100%;
 }
 
 .mapHolder img {
@@ -1305,7 +1496,7 @@ input[type="checkbox"] {
 
 .standardSelectBox.boxElement {
     border-bottom-width: 4px;
-    color: #b9b9b9;
+    color: #949494;
 }
 
 .standardSelectBox {
@@ -1315,9 +1506,9 @@ input[type="checkbox"] {
     font-size: 14px;
 }
 
-    .standardSelectBox.standardHorizontalLeftMargin {
-        margin-left: 2rem;
-    }
+.standardSelectBox.standardHorizontalLeftMargin {
+    margin-left: 2rem;
+}
 
 .circleRadius {
     border-radius: 50%;
@@ -1373,6 +1564,14 @@ input[type="checkbox"] {
     border-right: solid #f3f3f3 1px;
 }
 
+.sequencedBorder .leftBorder:nth-last-child(1) {
+    border-left: none;
+}
+
+.leftBorder {
+    border-left: solid #f3f3f3 1px;
+}
+
 .minorTop {
     position: relative;
     top: 5px;
@@ -1387,10 +1586,10 @@ input[type="checkbox"] {
     background-color: #fbfbfb;
 }
 
-    .pagination span span {
-        box-shadow: none;
-        padding: 0;
-    }
+.pagination span span {
+    box-shadow: none;
+    padding: 0;
+}
 
 .profilePic {
     width: 45px;
@@ -1399,14 +1598,20 @@ input[type="checkbox"] {
     background-color: #f9f9f9;
 }
 
+.productItem .profilePic {
+    width: 35px;
+    height: 35px;
+
+}
+
 .afterLogin {
     position: relative;
     bottom: 10px;
 }
 
-    .afterLogin .siteGuideline {
-        bottom: 0;
-    }
+.afterLogin .siteGuideline {
+    bottom: 0;
+}
 
 .profileMiniBox {
     z-index: 1;
@@ -1464,7 +1669,7 @@ input[type="checkbox"] {
     position: absolute;
     top: -10px;
     right: 5px;
-    background-color: rgba(0,150,136, 0.8) !important;
+    background-color: rgba(0, 150, 136, 0.8) !important;
 }
 
 .movingCompass {
@@ -1476,25 +1681,25 @@ input[type="checkbox"] {
     height: 198px;
 }
 
-    .listColumn:nth-child(1) {
-        width: 39%;
-        float: right;
-    }
+.listColumn:nth-child(1) {
+    width: 39%;
+    float: right;
+}
 
-    .listColumn:nth-child(2) {
-        width: 25%;
-        float: right;
-    }
+.listColumn:nth-child(2) {
+    width: 25%;
+    float: right;
+}
 
-    .listColumn:nth-child(3) {
-        width: 15%;
-        float: right;
-    }
+.listColumn:nth-child(3) {
+    width: 15%;
+    float: right;
+}
 
-    .listColumn:nth-child(4) {
-        width: 21%;
-        float: right;
-    }
+.listColumn:nth-child(4) {
+    width: 21%;
+    float: right;
+}
 
 .mainShopInfoes {
     width: 96%;
@@ -1584,6 +1789,22 @@ input[type="checkbox"] {
     height: 207px;
 }
 
+.productList .innerStandardSearch {
+    min-width: 500px;
+}
+
+.storeFrontPage .openUpObject {
+    left: -55px;
+}
+
+.storeFrontPage .topPointer {
+    background: url("../images/topPointer.png") no-repeat 93%;
+}
+
+.button_text {
+    display: none !important;
+}
+
 /*------------------- collection boxes -----------------*/
 .boxImage {
     width: 100%;
@@ -1618,13 +1839,21 @@ input[type="checkbox"] {
 .collections .oneThreeFullColumn {
     width: 42%;
 }
+
+.productList .fourColumns {
+    width: 24%;
+    float: right;
+    margin-left: 1%;
+}
+.shadowForBox {
+    box-shadow: 0 0 15px #E9E9E9;
+}
 /*------------------- animations -----------------------*/
 
 @-webkit-keyframes goCheck {
     from {
         background-position: right 0px;
     }
-
     to {
         background-position: right -140px;
     }
@@ -1634,7 +1863,6 @@ input[type="checkbox"] {
     from {
         background-position: right 0px;
     }
-
     to {
         background-position: right -140px;
     }
@@ -1644,7 +1872,6 @@ input[type="checkbox"] {
     from {
         background-position: right 0px;
     }
-
     to {
         background-position: right -140px;
     }
@@ -1654,7 +1881,6 @@ input[type="checkbox"] {
     from {
         background-position: right 0px;
     }
-
     to {
         background-position: right -140px;
     }
@@ -1664,44 +1890,183 @@ input[type="checkbox"] {
     0% {
         transform: rotate(0deg);
     }
-
     10% {
         transform: rotate(20deg);
     }
-
     20% {
         transform: rotate(43deg);
     }
-
     30% {
         transform: rotate(0deg);
     }
-
     40% {
         transform: rotate(-10deg);
     }
-
     50% {
         transform: rotate(20deg);
     }
-
     60% {
         transform: rotate(25deg);
     }
-
     70% {
         transform: rotate(-20deg);
     }
-
     80% {
         transform: rotate(12deg);
     }
-
     90% {
         transform: rotate(10deg);
     }
-
     100% {
         transform: rotate(8deg);
     }
+}
+
+/*----------------------------- responsive view ----------------------------------*/
+@media only screen and (max-width: 1024px) {
+
+.hiddenInPhone {
+    display: none;
+}
+
+.hiddenInDesktop {
+    display: block;
+}
+
+.noObjective {
+    position: unset !important;
+}
+
+.explain {
+    white-space: unset;
+    overflow: unset;
+    text-overflow: unset;
+} 
+
+/*------ distances -------*/
+
+.smallVerticalMargin {
+    margin: 0.2rem 0;
+}
+
+.noTopMarginInPhone {
+    margin: 0;
+}
+
+.standardVerticalPaddingInPhone {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.HalfHorizontalPaddingInPhone {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.standardVerticalMarginInPhone {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.standardPaddingInPhone {
+    padding: 1rem;
+}
+.topVerticalMarginInPhone {
+    margin-top: 1rem;
+}
+
+/*------ texts -------*/
+
+/*------ columns -------*/
+
+.organizerInPhone {
+    width: 100% !important;
+}
+
+.fullColumnInPhone {
+    width: 102% !important;
+}
+
+.twoColumnInPhone {
+    width: 48%;
+    margin-left: 2%;
+}
+
+/*------ personals -------*/
+.siteGuideline {
+    display: block;
+    bottom: 0;
+}
+
+.line {
+    height:3px;
+    border-radius: 10px;
+    transform: translate(0,0) rotate(0,0);
+    transition: ease 0.25s;
+    width: 25px;
+}
+
+.navigation {
+    width: 25px;
+    margin-top: 0.8rem;
+} 
+
+.logo {
+    min-width: 42px;
+    min-height: 42px;
+}
+.circleSearchIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.clothCollection {
+    padding: 0.7rem 1rem;
+}
+.horizontalLineInPhone {
+    width: 100%;
+    height: 1px;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+}
+.guideline .standardDoublePadding {
+    padding-bottom: 2rem;
+}
+.footer .fourFullColumns {
+    min-height: unset;
+}
+.rightPopUp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 290px;
+    height: 100%;
+}
+.topPopup {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+.topLine {
+    transform: rotate(-45deg);
+    width:12px;
+    position: relative;
+    left: -14px;
+    top: 2px;
+}
+.bottomLine {
+    transform: rotate(45deg);
+    width: 12px;
+    position: relative;
+    left: -14px;
+    bottom: 2px;
+}
+.userActs {
+    margin-top: 1.5rem;
+}
+.categories {
+    color: #6f6f6f;
+}
+.searchInput {
+    width: 100%;
+}
 }
