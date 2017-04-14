@@ -489,7 +489,7 @@
              $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
              return;
          }
-         else if (confPass != pass) {
+         else if ($('#ConfirmPasswordTxt').val() != $('#PasswordTxt').val()) {
              $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
              return;
          }
