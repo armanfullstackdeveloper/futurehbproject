@@ -15,20 +15,20 @@
          $('.loginBox').hide();
 
          $('.popUpMadule').fadeIn();
-         $('.signUpBox').slideDown();
+         $('.signUpBox').fadeIn();
      }
 
      $scope.showLoginBox = function () {
          $('.signUpBox').hide();
 
          $('.popUpMadule').fadeIn();
-         $('.loginBox').slideDown();
+         $('.loginBox').fadeIn();
      }
 
      $scope.closeBox = function () {
          $('.popUpMadule').fadeOut();
-         $('.loginBox').slideUp();
-         $('.signUpBox').slideUp();
+         $('.loginBox').fadeOut();
+         $('.signUpBox').fadeOut();
 
      }
 
@@ -38,6 +38,10 @@
      loadInitProduct(3);
      loadInitProduct(5);
      loadInitStore(4);
+
+     $('.navigation').on('click', function () {
+         $('.navigationOpen').slideToggle();
+     })
 
      function loadMenu() {
 
