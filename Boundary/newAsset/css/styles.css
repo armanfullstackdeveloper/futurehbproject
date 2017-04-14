@@ -991,7 +991,7 @@ button {
 
 .boxElement {
     background-color: #fbfbfb;
-    border-bottom: solid 6px #f7f7f7;
+    box-shadow: 0px 6px 0px #f4f4f4;
 }
 
 .reallyLightBack {
@@ -1000,17 +1000,17 @@ button {
 
 .greenCart.boxElement {
     background-color: #eaf4f3;
-    border-bottom: solid 6px #c8eeea;
+    box-shadow: 0px 6px 0px #c8eeea;
 }
 
 .pinkCart.boxElement {
     background-color: #fef2f6 !important;
-    border-bottom: solid 6px #f8e0e8;
+    box-shadow: 0px 6px 0px #f8e0e8;
 }
 
 .orangeCart.boxElement {
     background-color: #fff4e7 !important;
-    border-bottom: solid 6px #fcead5;
+    box-shadow: 0px 6px 0px #fcead5;
 }
 
 .borderBottom {
@@ -1817,19 +1817,19 @@ button {
 }
 
 .smallBox .boxImage {
-    padding-bottom: 101%;
+    padding-bottom: 107%;
 }
 
 .mediumBox .boxImage {
-    padding-bottom: 69%;
+    padding-bottom: 71%;
 }
 
 .rectangleBox .boxImage {
-    padding-bottom: 93%;
+    padding-bottom: 94%;
 }
 
 .twoFiveColumn .mediumBox .boxImage {
-    padding-bottom: 67.5%;
+    padding-bottom: 68.5%;
 }
 
 .collections .twoThreeFullColumn {
