@@ -114,7 +114,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
         /// <param name="lastStatusCode"></param>
         /// <param name="userCode"></param>
         /// <returns></returns>
-        public UpdateOrderStatusResultViewModel UpdateOrderStatus(Order order, byte newStatusCode,byte lastStatusCode,string userCode)
+        public UpdateOrderStatusResultViewModel UpdateOrderStatus(Order order, EOrderStatus newStatusCode, EOrderStatus lastStatusCode,string userCode)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                 }
 
                 //اگه وضعیتو "دریافت شده" کنه یعنی پایان فرایند خرید و باید اقدامات مورد نیاز انجام بگیره                
-                if (newStatusCode == (byte)EOrderStatus.Received)
+                if (newStatusCode == EOrderStatus.Received)
                 {
                     //اگه پرداخت آزاد بوده باشه که یعنی هم از موجودی فعالش در صورت استفاده کسر شده و هم سود خرید به حسابش ریخته شده
 

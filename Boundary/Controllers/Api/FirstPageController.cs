@@ -28,11 +28,12 @@ namespace Boundary.Controllers.Api
     {
         [HttpGet]
         [Route("GetActiveSlider")]
-        public IHttpActionResult GetActiveSlider()
+        public async Task<IHttpActionResult> GetActiveSlider()
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(new FirstPage_SliderBL().GetActiveSlider()));
+                var result = await new FirstPage_SliderBL().GetActiveSlider();
+                return Json(JsonResultHelper.SuccessResult(result));
             }
             catch (MyExceptionHandler exp1)
             {

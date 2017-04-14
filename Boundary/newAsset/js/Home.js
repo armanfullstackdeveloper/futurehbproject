@@ -9,15 +9,18 @@
        send = '',
        verifyLevel = 0,
        owl1, owl2, owl3, owl4, owl5;
-     var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
 
 
      $scope.showRegisterBox = function () {
+         $('.loginBox').hide();
+
          $('.popUpMadule').fadeIn();
          $('.signUpBox').slideDown();
      }
 
      $scope.showLoginBox = function () {
+         $('.signUpBox').hide();
+
          $('.popUpMadule').fadeIn();
          $('.loginBox').slideDown();
      }
@@ -210,13 +213,13 @@
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
 
-         var html = '<a href="/product/' + value.Id + '"> <div class="borderRight item">'
+         var html = '<a href="/product/' + value.Id + '/' + value.StoreName + '/' + value.Name + '/قیمت' + PriceTemp + 'تومان" > <div class="borderRight item">'
                 + ' <div class="organizer standardVerticalMargin">'
                 + '<div class="circleImageContainer">'
-                + " <img src='" + root + value.ImgAddress + "' alt='" + value.Name + ", قیمت: " + PriceTemp + "' class='imageInMiddle'>"
+                + " <img src='" + root + value.ImgAddress + "' alt='"+value.StoreName + '/'+ value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
                 + ' </div></div>'
                 + ' <div class="organizer pinkColor">' + value.Name + '</div>'
-                + ' <div class="organizer smallExplain">قیمت : ' + PriceTemp + ' تومان ' + '</div>'
+                + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
                 + ' </div></a>';
          return html;
      }
@@ -246,17 +249,17 @@
              center: false,
              nav: false,
              items: 5,
-             //responsive: {
-             //    0: {
-             //        items: 1
-             //    },
-             //    600: {
-             //        items: 3
-             //    },
-             //    1000: {
-             //        items: 5
-             //    }
-             //}
+             responsive: {
+                 0: {
+                     items: 1
+                 },
+                 600: {
+                     items: 3
+                 },
+                 1000: {
+                     items: 5
+                 }
+             }
          });
          $(".prev" + type).click(function () {
              owl.trigger('prev.owl.carousel');
@@ -355,13 +358,13 @@
          //setup before functions
          var typingTimer; //timer identifier
          var doneTypingInterval = 500; //time in ms, 1 second for example
-         var $input = $('#SearchTextBox');
+         var $input = $('.SearchTextBox');
 
          //on keyup, start the countdown
          $input.on('keyup', function () {
 
-             if ($('#SearchTextBox').val().length <= 1) {
-                 $("#Search_Task_Open").slideUp("slow", function () {
+             if ($('.SearchTextBox').val().length <= 1) {
+                 $(".Search_Task_Open").slideUp("slow", function () {
                      $('.searchField').removeClass('searchActivate');
                  });
 
@@ -389,8 +392,8 @@
 
      //if click outside of search result , hide search result
      $(document).click(function (event) {
-         if (!$(event.target).closest('#Search_Task_Open').length) {
-             $("#Search_Task_Open").slideUp("slow", function () {
+         if (!$(event.target).closest('.Search_Task_Open').length) {
+             $(".Search_Task_Open").slideUp("slow", function () {
                  $('.searchField').removeClass('searchActivate');
              });
          }
@@ -398,13 +401,14 @@
 
      //When typing done , Product and Store Load
      function ajaxSearch() {
-         if ($('#SearchTextBox').val().length >= 2) {
+         if ($('.SearchTextBox').val().length >= 2) {
 
              //$('#SearchInProductHolder').html("");
              //$('#SearchInStoreHolder').html("");
              //$('#LoadProduct').show();
              //$('#LoadStore').show();
-             $("#Search_Task_Open").slideDown("slow");
+             console.log('1')
+             $(".Search_Task_Open").slideDown("slow");
              $('.searchField').addClass('searchActivate');
 
              $scope.searchResult = [];
@@ -412,7 +416,7 @@
                  type: "GET",
                  url: "/api/firstPage/TopSearchSummeray/",
                  data: {
-                     name: $("#SearchTextBox").val()
+                     name: $(".SearchTextBox").val()
                  },
                  success: function (result) {
                      $timeout(function () {

@@ -633,7 +633,7 @@ namespace Boundary.Controllers.Ordinary
                         Date = PersianDateTime.Now.Date.ToInt(),
                         Time = PersianDateTime.Now.TimeOfDay.ToInteger(),
                         OrderCode = item.Id,
-                        OrderStatusCode = (byte)EOrderStatus.PendingApprovalSeller,
+                        OrderStatusCode = EOrderStatus.PendingApprovalSeller,
                         UserCode = User.Identity.GetUserId() ?? Request.UserHostAddress
                     });
 

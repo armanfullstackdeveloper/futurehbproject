@@ -68,7 +68,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
 
 
         [Route("UpdateStatus")]
-        public IHttpActionResult UpdateStatus(long orderCode, byte newStatusCode)
+        public IHttpActionResult UpdateStatus(long orderCode, EOrderStatus newStatusCode)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 OrderHistory orderHistoryOfLastStatus =
                         lstOrderHistories.OrderByDescending(o => o.Date).ThenByDescending(o => o.Time).First();
                 List<DropDownItemsModel> editableStatus = new OrderBL().CheckSellersEditableStatus((EOrderStatus)orderHistoryOfLastStatus.OrderStatusCode);
-                if (editableStatus.Exists(s => s.Value == newStatusCode) == false)
+                if (editableStatus.Exists(s => s.Value == (byte)newStatusCode) == false)
                     return Json(JsonResultHelper.FailedResultWithMessage());
 
                 Order order = new OrderBL().SelectOne(orderCode);

@@ -49,7 +49,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
             Member fullMember = new MemberBL().SelectOne(memberCode);
             int blockedBalance = GetMemberBlokedBalance(memberCode);
             int activeBalance = fullMember.Balance - blockedBalance;
-            return (activeBalance>0)?activeBalance:0;
+            return (activeBalance > 0) ? activeBalance : 0;
         }
 
         public List<Order> GetOrdersByPaymentRequestCode(long code)
@@ -292,10 +292,10 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     parameters.Add("@orderCode", order.Id);
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                     List<OrderHistory> lstOrderHistories = new OrderHistoryBL().GetAllForOrder(order.Id);
-                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == 1); //در انتظار تائید فروشنده
+                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
 
                     //age be in vaziyat nareside bashe yani aslan pardakht nashode! pas aslan neshonesh nemidim
-                    if(orderHistoryOfAfterPayment==null)
+                    if (orderHistoryOfAfterPayment == null)
                         continue;
 
                     OrderHistory orderHistoryOfLastStatus =
@@ -312,10 +312,10 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                         OverallDiscount = ((lstProducts.Sum(p => p.OverallPrice) + order.SendingCost) - order.OverallPayment),
                         ProductDetailes = lstProducts,
                         ShopName = _db.Query<string>("SELECT Name FROM [Store] where [Id]=(select StoreCode from Product where Id=@productCode)", new { productCode = lstProducts[0].ProductCode }).SingleOrDefault(),
-                        StatusName = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode).Name,
-                        EditableStatus = CheckMembersEditableStatus((EOrderStatus)orderHistoryOfLastStatus.OrderStatusCode),
+                        StatusName = new OrderStatusBL().SelectOne((byte)orderHistoryOfLastStatus.OrderStatusCode).Name,
+                        EditableStatus = CheckMembersEditableStatus(orderHistoryOfLastStatus.OrderStatusCode),
                         TrackingCode = order.TrackingCode,
-                        OrderSendingTypeName = (order.OrderSendingTypeCode!=null)?new OrderSendingTypeBL().SelectOne((byte) order.OrderSendingTypeCode).Name:"-"
+                        OrderSendingTypeName = (order.OrderSendingTypeCode != null) ? new OrderSendingTypeBL().SelectOne((byte)order.OrderSendingTypeCode).Name : "-"
                     });
                 }
                 EnsureCloseConnection(_db);
@@ -369,13 +369,13 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                 {
                     parameters = new DynamicParameters();
                     parameters.Add("@orderCode", order.Id);
-                    OrderCustomerInfo customerInfo= _db.Query<OrderCustomerInfo>("SELECT * FROM [OrderCustomerInfo] where [OrderCode]=@orderCode", new { orderCode = order.Id }).SingleOrDefault();
+                    OrderCustomerInfo customerInfo = _db.Query<OrderCustomerInfo>("SELECT * FROM [OrderCustomerInfo] where [OrderCode]=@orderCode", new { orderCode = order.Id }).SingleOrDefault();
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                     List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
-                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == (byte)EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
-                    
+                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
+
                     //age be in vaziyat nareside bashe yani aslan pardakht nashode! pas aslan neshonesh nemidim
-                    if(orderHistoryOfAfterPayment==null)
+                    if (orderHistoryOfAfterPayment == null)
                         continue;
 
                     OrderHistory orderHistoryOfLastStatus =
@@ -406,8 +406,8 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                         OverallIncome = overallOrderCost, //سود هوجی بوجی از سفارش اینجا تاثیر نمیذاره
                         ProductDetailes = lstProducts,
                         MemberName = _db.Query<string>("SELECT Name FROM [Member] where [Id]=@memberCode", new { memberCode = order.MemberCode }).SingleOrDefault(),
-                        StatusName = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode).Name,
-                        EditableStatus = CheckSellersEditableStatus((EOrderStatus)orderHistoryOfLastStatus.OrderStatusCode),
+                        StatusName = new OrderStatusBL().SelectOne((byte)orderHistoryOfLastStatus.OrderStatusCode).Name,
+                        EditableStatus = CheckSellersEditableStatus(orderHistoryOfLastStatus.OrderStatusCode),
                         TrackingCode = order.TrackingCode,
                         CustomerInfo = customerInfo,
                         OrderSendingTypeName = (order.OrderSendingTypeCode != null) ? new OrderSendingTypeBL().SelectOne((byte)order.OrderSendingTypeCode).Name : "-"
@@ -457,15 +457,15 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     parameters = new DynamicParameters();
                     parameters.Add("@orderCode", order.Id);
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
-                    if(lstProducts==null || lstProducts.Count==0)
+                    if (lstProducts == null || lstProducts.Count == 0)
                         continue;
                     List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
-                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == (byte)EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده                    
+                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.SingleOrDefault(o => o.OrderStatusCode == EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده                    
                     OrderHistory orderHistoryOfLastStatus =
                         lstOrderHistories.OrderByDescending(o => o.Date).ThenByDescending(o => o.Time).First();
 
                     //برای زمانی که پرداخت انجام نشه
-                    if (orderHistoryOfAfterPayment == null) 
+                    if (orderHistoryOfAfterPayment == null)
                         orderHistoryOfAfterPayment = orderHistoryOfLastStatus;
 
                     StoreDiscount storeDiscount = null;
@@ -490,9 +490,9 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                         Time = (orderHistoryOfAfterPayment != null) ? orderHistoryOfAfterPayment.Time : 0,
                         ShopName = _db.Query<string>("SELECT Name FROM [Store] where [Id]=(select StoreCode from Product where Id=@productCode)", new { productCode = lstProducts[0].ProductCode }).SingleOrDefault(),
                         MemberName = _db.Query<string>("SELECT Name FROM [Member] where [Id]=@memberCode", new { memberCode = order.MemberCode }).SingleOrDefault(),
-                        OrderStatus = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode),
+                        OrderStatus = new OrderStatusBL().SelectOne((byte)orderHistoryOfLastStatus.OrderStatusCode),
                         OverallPayment = order.OverallPayment,
-                        OverallOrderCost = overallOrderCost, 
+                        OverallOrderCost = overallOrderCost,
                         MemberUsedBalance = overallOrderCost - order.OverallPayment,
                         IsPony = (new HBPaymentToStoreBL().SelectOne(order.Id) != null),
                         CanPony = CheckCanPony(order.OrderType, orderHistoryOfLastStatus.OrderStatusCode),
@@ -522,18 +522,18 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
         /// <param name="orderType"></param>
         /// <param name="orderStatusCode"></param>
         /// <returns></returns>
-        private bool CheckCanPony(EOrderType orderType, byte orderStatusCode)
+        private bool CheckCanPony(EOrderType orderType, EOrderStatus orderStatusCode)
         {
             if (orderType == EOrderType.FreePayment) //اگه پرداخت آزاد باشه
             {
                 //اگه از طرف فروشنده رد نشده باشه، میشه پرداخت کرد
-                if (orderStatusCode != (byte)EOrderStatus.RejectedBySeller)
+                if (orderStatusCode != EOrderStatus.RejectedBySeller)
                     return true;
                 return false;
             }
             else
             {
-                if (orderStatusCode == (byte)EOrderStatus.Received) //اگه ته فرایند خرید باشیم میشه
+                if (orderStatusCode == EOrderStatus.Received) //اگه ته فرایند خرید باشیم میشه
                     return true;
                 return false;
             }
@@ -555,7 +555,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                 parameters.Add("@orderCode", order.Id);
                 List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                 List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
-                OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.Single(o => o.OrderStatusCode == (byte)EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
+                OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.Single(o => o.OrderStatusCode == EOrderStatus.AwaitingPayment); //در انتظار تائید فروشنده
                 OrderHistory orderHistoryOfLastStatus =
                     lstOrderHistories.OrderByDescending(o => o.Date).ThenByDescending(o => o.Time).First();
 
@@ -586,7 +586,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     {
                         Date = orderHistory.Date,
                         OrderCode = orderHistory.OrderCode,
-                        OrderStatus = (EOrderStatus)orderHistory.OrderStatusCode,
+                        OrderStatus = orderHistory.OrderStatusCode,
                         Time = orderHistory.Time,
                         UserCode = orderHistory.UserCode,
                         UserRoleName = (role != null) ? role.Name : "-"
@@ -602,7 +602,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     ShopName = _db.Query<string>("SELECT Name FROM [Store] where [Id]=(select StoreCode from Product where Id=@productCode)", new { productCode = lstProducts[0].ProductCode }).SingleOrDefault(),
                     ProductDetailes = lstProducts,
                     MemberName = _db.Query<string>("SELECT Name FROM [Member] where [Id]=@memberCode", new { memberCode = order.MemberCode }).SingleOrDefault(),
-                    OrderStatus = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode),
+                    OrderStatus = new OrderStatusBL().SelectOne((byte)orderHistoryOfLastStatus.OrderStatusCode),
                     OverallPayment = order.OverallPayment,
                     OverallDiscount = ((lstProducts.Sum(p => p.OverallPrice) + order.SendingCost) - order.OverallPayment), //یعنی اگرم محصولات تخفیفی داشتند اونا رو در نظر نگیریم تا تو تخفیف کل بیان
                     OverallOrderCost = overallOrderCost,
@@ -654,7 +654,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                     parameters.Add("@orderCode", order.Id);
                     List<OrderProductsViewModel> lstProducts = _db.Query<OrderProductsViewModel>("OrderProducts_GetAllDetailesByOrderCode", parameters, commandType: CommandType.StoredProcedure).ToList();
                     List<OrderHistory> lstOrderHistories = _db.Query<OrderHistory>("SELECT * FROM [OrderHistory] where [OrderCode]=@orderCode", new { orderCode = order.Id }).ToList();
-                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.Single(o => o.OrderStatusCode == 1); //در انتظار تائید فروشنده
+                    OrderHistory orderHistoryOfAfterPayment = lstOrderHistories.Single(o => o.OrderStatusCode == EOrderStatus.PendingApprovalSeller); //در انتظار تائید فروشنده
                     OrderHistory orderHistoryOfLastStatus =
                         lstOrderHistories.OrderByDescending(o => o.Date).ThenByDescending(o => o.Time).First();
 
@@ -681,7 +681,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                         Time = orderHistoryOfAfterPayment.Time,
                         ShopName = _db.Query<string>("SELECT Name FROM [Store] where [Id]=(select StoreCode from Product where Id=@productCode)", new { productCode = lstProducts[0].ProductCode }).SingleOrDefault(),
                         MemberName = _db.Query<string>("SELECT Name FROM [Member] where [Id]=@memberCode", new { memberCode = order.MemberCode }).SingleOrDefault(),
-                        OrderStatus = new OrderStatusBL().SelectOne(orderHistoryOfLastStatus.OrderStatusCode),
+                        OrderStatus = new OrderStatusBL().SelectOne((byte)orderHistoryOfLastStatus.OrderStatusCode),
                         OverallPayment = order.OverallPayment,
                         OverallOrderCost = overallOrderCost, //todo: farada bayad tebghe in ba foroshandeha tasviye hesab konam
                         MemberUsedBalance = overallOrderCost - order.OverallPayment,
