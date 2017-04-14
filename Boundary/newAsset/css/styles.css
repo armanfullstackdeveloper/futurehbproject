@@ -31,6 +31,10 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li {
     list-style: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
+}
+
 a, a:visited, a:hover {
     text-decoration: none;
     color: inherit;
@@ -795,7 +799,7 @@ button {
     color: #908d8d;
     direction: rtl;
     font-size: 1em;
-    z-index: 2;
+    z-index: 5;
 }
 
 .titleBar {
@@ -828,6 +832,10 @@ button {
 .borderInBothSides {
     border-right: solid #eeeeee 2px;
     border-left: solid #eeeeee 2px;
+}
+
+.veryLightColor {
+    color: #eeeeee;
 }
 
 .selectbox {
