@@ -451,37 +451,42 @@
                     <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
 
 
-                        @*<span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>*@  {{menu.Name}}
-                        <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
-                            <ul>
-                                <!-- in list hamishe bayad 5 ta bashe -->
-                                <li class="oneSevenColumn borderRight loginPadding secondHandedList" ng-repeat="subMenu in menu.SubCategories">
-                                    <a href="/Search/#!/categoryCode-{{subMenu.Id}}"> {{subMenu.Name}}</a>
-                                </li>
-                                @*<div class="organizer openUpObject standardHorizontalPadding innerInnerList">
-                                             <div class="oneSevenColumn standardHorizontalPadding borderRight">
-                                                 <ul class="normalFont standardVerticalPadding">
-                                                    <li ng-repeat="subSubMenu in subMenu.SubCategories"> <a href="/Search/#!/categoryCode-{{subSubMenu.Id}}"> {{subSubMenu.Name}}</a> </li>
+                        @*<span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>*@ 
+                        <a href="/Search/#!/categoryCode-{{menu.Id}}" >
+                            <div>
+                                {{menu.Name}}
+                            </div>
+                        </a>
+                            <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
+                                <ul>
+                                    <!-- in list hamishe bayad 5 ta bashe -->
+                                    <li class="oneSevenColumn borderRight loginPadding secondHandedList" ng-repeat="subMenu in menu.SubCategories">
+                                        <a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a>
+                                    </li>
+                                    @*<div class="organizer openUpObject standardHorizontalPadding innerInnerList">
+                             <div class="oneSevenColumn standardHorizontalPadding borderRight">
+                                 <ul class="normalFont standardVerticalPadding">
+                                    <li ng-repeat="subSubMenu in subMenu.SubCategories"> <a href="/Search/#!/categoryCode-{{subSubMenu.Id}}"> {{subSubMenu.Name}}</a> </li>
 
-                                                </ul>
-                                            </div>
-                                            <div class="fiveFullColumn loginPadding borderRight">
-                                            </div>
-                                            <div class="fiveFullColumn loginPadding borderRight">
-                                            </div>
-                                            <div class="fiveFullColumn loginPadding borderRight">
-                                            </div>
-                                            <div class="fiveFullColumn loginPadding borderRight">
-                                            </div>
-                                        </div>
-                                    </li*@
-                                @*<li class="fiveFullColumn borderRight loginPadding">تبلت</li>
-                                    <li class="fiveFullColumn borderRight loginPadding">لپتاپ</li>
-                                    <li class="fiveFullColumn borderRight loginPadding">دوربین</li>
-                                    <li class="fiveFullColumn borderRight loginPadding">تلویزیون</li>*@
-                            </ul>
+                                </ul>
+                            </div>
+                            <div class="fiveFullColumn loginPadding borderRight">
+                            </div>
+                            <div class="fiveFullColumn loginPadding borderRight">
+                            </div>
+                            <div class="fiveFullColumn loginPadding borderRight">
+                            </div>
+                            <div class="fiveFullColumn loginPadding borderRight">
+                            </div>
                         </div>
-                    </li>
+                    </li*@
+                                    @*<li class="fiveFullColumn borderRight loginPadding">تبلت</li>
+                    <li class="fiveFullColumn borderRight loginPadding">لپتاپ</li>
+                    <li class="fiveFullColumn borderRight loginPadding">دوربین</li>
+                    <li class="fiveFullColumn borderRight loginPadding">تلویزیون</li>*@
+                                </ul>
+                            </div>
+</li>
                     @*                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList">
                         <span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>  لوازم دیجیتال
                         <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
@@ -538,7 +543,7 @@
         <!-- box login -->
         <div class="loginBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
             <form id="loginFrm">
-                <div class="closeTheBox pointercircleDefaultArrows pinkBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize"></span> </div>
+                <div class="closeTheBox pointercircleDefaultArrows pinkBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize pointer"></span> </div>
                 <div class="organizer borderBottom standardHalfVerticalPadding">
                     <img src="~/newAsset/images/carryBox.svg" style="width: 80px;">
                 </div>
@@ -558,7 +563,7 @@
         </div>
         <!-- box signup -->
         <div class="signUpBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
-            <div class="closeTheBox pointercircleDefaultArrows greenBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize"></span> </div>
+            <div class="closeTheBox pointercircleDefaultArrows greenBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize pointer"></span> </div>
             <div class="organizer borderBottom standardHalfVerticalPadding">
                 <img src="~/newAsset/images/signUp.svg" style="width: 105px;">
             </div>
@@ -1159,7 +1164,7 @@
                             </div>
         </div>
     </div>
-
+    </div>
 
     <footer class="container thickFont footer">
         <div class="separatorLine organizer standardVerticalMargin"></div>
@@ -1220,7 +1225,9 @@
         </div>
     </footer>
 
-
+    <script>
+        var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
+    </script>
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/newAsset/js/owl.carousel.min.js"></script>
