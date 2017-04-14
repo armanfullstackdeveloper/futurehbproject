@@ -715,6 +715,10 @@ button {
     height: 135px;
 }
 
+.owl-carousel .owl-stage {
+    margin-right: 2%;
+}
+
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
 
