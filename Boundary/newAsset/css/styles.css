@@ -286,6 +286,7 @@ button {
 
 .textInCenter {
     text-align: center;
+    direction: ltr;
 }
 
 .textInRight {
@@ -719,10 +720,10 @@ button {
     margin-right: 2%;
 }
 
-.owl-carousel .owl-item img {
+/*.owl-carousel .owl-item img {
     position: relative;
     left: 2%;
-}
+}*/
 
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
@@ -2059,6 +2060,7 @@ button {
     height: 100%;
 }
 .topPopup {
+    display:none;
     position: fixed;
     top: 0;
     right: 0;
