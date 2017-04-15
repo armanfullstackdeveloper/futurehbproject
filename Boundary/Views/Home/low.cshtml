@@ -191,12 +191,11 @@
                             <div class="separateLine darkerGrayBack organizer standardTopVerticalMargin"></div>
                             <div class="categories">
                                 <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
-                                <div class="organizer grayBack bottomGrayBorder">
-                                    <span class="organizer standardPadding thickFont"> کتگوری اصلی<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
+                                <div class="organizer grayBack bottomGrayBorder" ng-repeat="menu in allMenu">
+                                    <span class="organizer standardPadding thickFont"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
                                     <!-- in div zir shakhe category hast-->
-                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder">زیرشاخه</div>
-                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder">زیرشاخه</div>
-                                </div>
+                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                                 </div>
                             </div>
                         </div>
 
