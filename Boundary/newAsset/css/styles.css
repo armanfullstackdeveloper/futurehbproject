@@ -719,6 +719,11 @@ button {
     margin-right: 2%;
 }
 
+.owl-carousel .owl-item img {
+    position: relative;
+    left: 2%;
+}
+
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {
 
