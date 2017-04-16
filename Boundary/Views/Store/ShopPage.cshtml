@@ -1,7 +1,7 @@
 ﻿@model DataModel.Models.ViewModel.StoreViewModel
 
 @{
-    ViewBag.Title = "فروشگاه";
+    ViewBag.Title ="فروشگاه " +Model.StoreDetailes.Name+ " , آدرس فروشگاه : "+ Model.StoreDetailes.CityName+' '+ Model.StoreDetailes.Place+ Model.StoreDetailes.StoreTypeName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
