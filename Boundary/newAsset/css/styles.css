@@ -9,6 +9,14 @@
 }
 
 /*----------------- main elements -----------------------*/
+.hiddenObject {
+    display: none;
+}
+
+.shownObject {
+    display: block;
+}
+
 header {
     margin-bottom: 1rem;
     float: left;
