@@ -145,6 +145,10 @@ li {
     position: fixed;
 }
 
+.resetIndex {
+    z-index: 0;
+}
+
 .prefer {
     z-index: 1;
 }
@@ -728,10 +732,20 @@ button {
     margin-right: 2%;
 }
 
-/*.owl-carousel .owl-item img {
+.slider .owl-carousel .owl-item img {
     position: relative;
     left: 2%;
-}*/
+}
+
+.outside {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
 /*------------------- media -------------------------------*/
 @media only screen and (max-width: 1400px) {

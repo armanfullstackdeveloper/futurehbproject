@@ -186,20 +186,25 @@
                             <!--<div class="line organizer blackBack bottomLine"></div>-->
                         </div>
 
-                        <div class="navigationOpen rightPopUp grayBack prefer" style="display: none;">
-                            <div class="userActs organizer">
-                                <span class="goLeft standardHorizontalLeftMargin pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
-                                <span class="goLeft standardHorizontalPadding pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
-                            </div>
-                            <div class="separateLine darkerGrayBack organizer standardTopVerticalMargin"></div>
-                            <div class="categories">
-                                <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
-                                <div class="organizer grayBack bottomGrayBorder" ng-repeat="menu in allMenu">
-                                    <span class="organizer standardPadding thickFont"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
-                                    <!-- in div zir shakhe category hast-->
-                                    <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                        <div class="navigationPanel">
+                            <!-- roo in click shod navigation baste beshe-->
+                            <div class="outside" style="display: none;"></div>
+                            <div class="navigationOpen rightPopUp grayBack prefer" style="display: none;">
+                                <div class="userActs organizer">
+                                    <span class="goLeft standardHorizontalLeftMargin pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
+                                    <span class="goLeft standardHorizontalPadding pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
+                                </div>
+                                <div class="separateLine darkerGrayBack organizer standardTopVerticalMargin"></div>
+                                <div class="categories">
+                                    <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
+                                    <div class="organizer grayBack bottomGrayBorder" ng-repeat="menu in allMenu">
+                                        <span class="organizer standardPadding thickFont"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
+                                        <!-- in div zir shakhe category hast-->
+                                        <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="goRight hiddenInDesktop">
@@ -323,6 +328,7 @@
                             <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
                         </span>
                         <div class="circleSearchIcon whiteColor goLeft pinkBack relativeMatter standardHorizontalLeftMargin">
+                            <!-- ree search icon click shod class icon-search beshe icon-cross-->
                             <span class="icon icon-search goRight eightyFontsize objectInMiddle"></span>
                         </div>
 
@@ -340,7 +346,7 @@
                              </div>
                             -->
                             <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
-                            <div class="topPopup standardPadding relativeMatter doublePrefer organizer whiteBack">
+                            <div class="topPopup standardPadding relativeMatter doublePrefer organizer whiteBack resetIndex">
                                 <div class="searchField goLeft standardPadding relativeMatter organizer">
                                     <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
                                     <div class="searchTextPart goRight">
@@ -802,7 +808,7 @@
                 </div>
                 <div class="organizer newProducts standardVerticalMargin">
                     <div class="boxElement radiusBox">
-                        <div class="titleBar relativeMatter organizer eightyFontsize thickFont loginPadding">
+                        <div class="titleBar organizer eightyFontsize thickFont loginPadding">
                             <div class="goRight"><span class="icon icon-price-tags"></span> جدیدترین محصولات </div>
                             @*<div class="goLeft">بیشتر ببینید ...</div>*@
                         </div>
@@ -845,7 +851,7 @@
                 </div>
                 <div class="organizer bestSells standardVerticalMargin thickFont textInCenter">
                     <div class="tabContainer boxElement organizer radiusBox">
-                        <div class="tabHeader organizer titleBar relativeMatter">
+                        <div class="tabHeader organizer titleBar">
                             <ul>
                                 <li class="twoFullColumn loginPadding  pointer" ng-class="topVisitProduct?'tabDeactivate':''" ng-click="topVisitProduct=true;topLikeProduct=false;" ng-init="topVisitProduct=true;">پربازدید ترین محصولات</li>
                                 <li class="twoFullColumn borderRight loginPadding pointer" ng-class="topLikeProduct?'tabDeactivate':''" ng-click="topLikeProduct=true;topVisitProduct=false;">محبوب ترین محصولات</li>
@@ -1035,7 +1041,7 @@
                 </div>
                 <div class="organizer newStores">
                     <div class="boxElement radiusBox">
-                        <div class="titleBar relativeMatter organizer eightyFontsize thickFont loginPadding">
+                        <div class="titleBar organizer eightyFontsize thickFont loginPadding">
                             <div class="goRight"><span class="icon icon-cart"></span> جدیدترین فروشگاه ها </div>
                             @*<div class="goLeft">بیشتر ببینید ...</div>*@
                         </div>
