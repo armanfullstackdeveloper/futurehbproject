@@ -4,7 +4,7 @@
 
      $scope.noProductPic = "Img/MainPage/NoProductPic.png";
      $scope.noStorePic = "Img/MainPage/NoStorePic.png";
-     
+
      var root = "http://hoojibooji.com/",
        send = '',
        verifyLevel = 0,
@@ -40,6 +40,11 @@
      loadInitStore(4);
 
      $('.navigation').on('click', function () {
+
+
+         $('#line1').addClass('topLine')
+
+
          $('.navigationOpen').slideToggle();
      })
 
@@ -220,7 +225,7 @@
          var html = '<a href="/product/' + value.Id + '/' + value.StoreName + '/' + value.Name + '/قیمت' + PriceTemp + 'تومان" > <div class="borderRight item">'
                 + ' <div class="organizer standardVerticalMargin">'
                 + '<div class="circleImageContainer">'
-                + " <img src='" + root + value.ImgAddress + "' alt='"+value.StoreName + '/'+ value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
+                + " <img src='" + root + value.ImgAddress + "' alt='" + value.StoreName + '/' + value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
                 + ' </div></div>'
                 + ' <div class="organizer pinkColor">' + value.Name + '</div>'
                 + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
@@ -438,7 +443,7 @@
 
          var form = $('#__AjaxAntiForgeryForm');
          var token = $('input[name="__RequestVerificationToken"]', form).val();
-
+         $('#loginMessage').html('');
          $.ajax({
              url: '/Account/Login',
              type: 'POST',
@@ -452,6 +457,9 @@
 
                  if (result.Success == true) {
 
+                     $scope.closeBox();
+                     $('#loginMessage').html("شما با موفقیت وارد شدید");
+
                      //success
                      if (returnUrl == "") {
                          //return to root
@@ -463,7 +471,7 @@
                      }
 
                  } else {
-                     //failed
+                     $('#loginMessage').html(result.Response);
                  }
              },
              error: function () {
@@ -510,14 +518,12 @@
                      if (result.Success == false) {
                          $('#registerStatus').html(result.Response);
                          $('#Alert_UserName_Wait').css("display", "none");
-
                      }
                      else {
                          $('#Alert_UserName_Wait').css("display", "none");
                          $('#Alert_Verify_Send').slideToggle();
-                         $('#Verify_Code').slideToggle();
+                         $('.VerifyBox').slideToggle();
                          verifyLevel = 1;
-
                      }
                  },
                  error: function () {
@@ -533,7 +539,6 @@
                  "Password": $.md5($('#PasswordTxt').val()),
                  "ConfirmPassword": $.md5($('#ConfirmPasswordTxt').val()),
                  "VerificationCode": $('#VerifyTxt').val()
-
              };
 
              $.ajax({
