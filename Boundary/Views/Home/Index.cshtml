@@ -221,8 +221,7 @@
 
                     }
 
-
-                    <div class="searchPart goRight standardHorizontalMargin hiddenInPhone">
+                     <div class="searchPart goRight standardHorizontalMargin hiddenInPhone">
                         <!--
                              <div class="searchType goLeft">
                              <div class="selectbox relativeMatter standardPadding goLeft">
@@ -244,7 +243,7 @@
                             <div class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
                                 <div class="verticalLine objectInMiddle"></div>
                                 <div class="twoFullColumn searchInProducts">
-                                    <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
+                                    <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult.length>0">
                                         <div class="organizer">
                                             <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
                                         </div>
@@ -282,7 +281,7 @@
                                 </div>
                                 <div class="twoFullColumn searchInStore">
 
-                                    <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
+                                    <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult.length>0">
                                         <div class="organizer">
                                             <img src="~/newAsset/images/store.svg" width="90" />
                                         </div>
@@ -358,7 +357,7 @@
                                     <div class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
                                         <div class="verticalLine objectInMiddle"></div>
                                         <div class="twoFullColumn searchInProducts">
-                                            <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult">
+                                            <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult.length>0">
                                                 <div class="organizer">
                                                     <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
                                                 </div>
@@ -396,7 +395,7 @@
                                         </div>
                                         <div class="twoFullColumn searchInStore">
 
-                                            <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult">
+                                            <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult.length>0">
                                                 <div class="organizer">
                                                     <img src="~/newAsset/images/store.svg" width="90" />
                                                 </div>
