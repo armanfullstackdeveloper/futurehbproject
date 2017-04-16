@@ -196,6 +196,8 @@
     <Folder Include="Areas\Seller\Views\Shared\" />
     <Folder Include="Areas\SuperAdmin\Views\Shared\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Img\Helper\AttributeFilters\" />
+    <Folder Include="Img\Helper\StaticValue\" />
     <Folder Include="Img\StoreInfo\" />
     <Folder Include="Views\PaymentRequest\" />
   </ItemGroup>
@@ -276,7 +278,9 @@
     <Compile Include="Controllers\Ordinary\StaticController.cs" />
     <Compile Include="Helper\AttributeFilters\ExceptionHandler.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
+    <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />
+    <Compile Include="Helper\ProductAttrbiuteReference.cs" />
     <Compile Include="Helper\StaticValue\SmsHelper.cs" />
     <Compile Include="Helper\StaticValue\StaticNemberic.cs" />
     <Compile Include="Helper\StaticValue\StaticRole.cs" />
@@ -333,8 +337,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ImageHelper.cs" />
-    <Compile Include="Helper\ProductAttrbiuteReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

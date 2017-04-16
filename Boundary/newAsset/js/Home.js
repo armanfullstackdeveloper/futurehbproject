@@ -223,10 +223,10 @@
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
 
-         var html = '<a href="/product/' + value.Id + '/' + value.StoreName.replace(/:/g, '') + '/' + value.Name.replace(/:/g, '') + '/قیمت' + PriceTemp + 'تومان" > <div class="borderRight item">'
+         var html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="borderRight item">'
                 + ' <div class="organizer standardVerticalMargin">'
                 + '<div class="circleImageContainer">'
-                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='" + value.StoreName + '/' + value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
+                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='نام_فروشگاه=" + value.StoreName + '/نام_محصول=' + value.Name + "/قیمت=" + PriceTemp + "تومان' class='imageInMiddle'>"
                 + ' </div></div>'
                 + ' <div class="organizer pinkColor">' + value.Name + '</div>'
                 + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'

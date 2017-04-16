@@ -1,7 +1,7 @@
 ﻿@model DataModel.Models.ViewModel.CompleteProductForOne
 
 @{
-    ViewBag.Title = "نمایش محصول";
+    ViewBag.Title = "نام محصول : "+ Model.Product.Name + " , قیمت: " + Model.Product.Price+ " , نام فروشگاه : " + Model.StoreSummery.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
