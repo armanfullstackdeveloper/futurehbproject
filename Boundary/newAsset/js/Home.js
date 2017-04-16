@@ -43,6 +43,7 @@
 
 
          $('#line1').addClass('topLine')
+         $('#line3').addClass('bottomLine')
 
 
          $('.navigationOpen').slideToggle();
@@ -222,10 +223,10 @@
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
 
-         var html = '<a href="/product/' + value.Id + '/' + value.StoreName + '/' + value.Name + '/قیمت' + PriceTemp + 'تومان" > <div class="borderRight item">'
+         var html = '<a href="/product/' + value.Id + '/' + value.StoreName.replace(/:/g, '') + '/' + value.Name.replace(/:/g, '') + '/قیمت' + PriceTemp + 'تومان" > <div class="borderRight item">'
                 + ' <div class="organizer standardVerticalMargin">'
                 + '<div class="circleImageContainer">'
-                + " <img src='" + root + value.ImgAddress + "' alt='" + value.StoreName + '/' + value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
+                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='" + value.StoreName + '/' + value.Name + "/قیمت" + PriceTemp + "' class='imageInMiddle'>"
                 + ' </div></div>'
                 + ' <div class="organizer pinkColor">' + value.Name + '</div>'
                 + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
@@ -242,7 +243,7 @@
          var html = '<a href="/shop/code/' + value.Id + '"> <div class="borderRight item">'
                         + ' <div class="organizer standardVerticalMargin">'
                         + '<div class="circleImageContainer">'
-                        + " <img src='" + root + value.LogoAddress + "' alt='" + value.Name + "," + storeType + "' class='imageInMiddle'>"
+                        + " <img src='" + root + value.LogoAddress + "?w=143&h=143&mode=carve' alt='" + value.Name + "," + storeType + "' class='imageInMiddle'>"
                         + ' </div></div>'
                         + ' <div class="organizer pinkColor">' + value.Name + '</div>'
                         + ' <div class="organizer smallExplain"> ' + storeType + '</div>'
