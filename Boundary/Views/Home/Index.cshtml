@@ -200,9 +200,11 @@
                                 <div class="categories">
                                     <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
                                     <div class="organizer grayBack bottomGrayBorder" ng-repeat="menu in allMenu">
-                                        <span class="organizer standardPadding thickFont"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
+                                        <span class="organizer standardPadding thickFont pointer" ng-click="showSubmenu($event)"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
                                         <!-- in div zir shakhe category hast-->
-                                        <div class="organizer darkerGrayBack standardPadding thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                                        <div class="submenu">
+                                            <div class="organizer darkerGrayBack standardPadding pointer thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -457,8 +459,8 @@
                 </div>
             </div>
         </div>
-        <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin" ng-show="menu.length>0">
-            <nav class="boxElement relativeMatter">
+        <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin hiddenInPhone" >
+            <nav class="boxElement relativeMatter hiddenMenuInFirst">
                 <ul class="sizeManager">
                     <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
 

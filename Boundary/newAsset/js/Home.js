@@ -41,7 +41,7 @@
 
      var navCounter = 0;
      $('.navigation').on('click', function () {
-          if (navCounter == 0) {
+         if (navCounter == 0) {
              navCounter = 1;
              $('#line1').addClass('topLine');
              $('#line3').addClass('bottomLine');
@@ -56,16 +56,15 @@
              $('.navigationOpen ').slideUp();
          }
 
-      }) 
+     })
 
-      $('.outside').on("click", function () {
+     $('.outside').on("click", function () {
          navCounter = 0;
          $('#line1').removeClass('topLine');
          $('#line3').removeClass('bottomLine');
          $('.outside').hide();
          $('.navigationOpen ').slideUp();
      })
-
 
      $('#searchIconInMobile').on('click', function () {
          $('#searchBoxInMobile').slideDown();
@@ -85,6 +84,12 @@
                  if (result.Response.length > 0) {
                      $timeout(function () {
                          $scope.allMenu = result.Response;
+                         $('.hiddenMenuInFirst').show();
+                         setTimeout(function () {
+                             console.log('323')
+                                  $('.submenu').hide();
+                              },5)
+
                      }, 1);
                  }
              },
@@ -385,9 +390,9 @@
      }
 
 
-
      //When page load , check search box typing
      $(function () {
+
          //setup before functions
          var typingTimer1, typingTimer2; //timer identifier
          var doneTypingInterval = 500; //time in ms, 1 second for example
@@ -411,8 +416,6 @@
          $input1.on('keydown', function () {
              clearTimeout(typingTimer1);
          });
-
-
 
          //mobile 
          //on keyup, start the countdown
@@ -679,6 +682,22 @@
          });
 
      }
+ 
+     $scope.showSubmenu = function (element) {
+
+         if ($(element.currentTarget).next().is(':visible')) {
+             $(element.currentTarget).next().slideUp();
+             $(element.currentTarget).children().removeClass('icon-arrow-up2');
+             $(element.currentTarget).children().addClass('icon-arrow-down2');
+          }else{
+            $('.submenu').slideUp();
+            $(element.currentTarget).next().slideDown();
+            $(element.currentTarget).children().removeClass('icon-arrow-down2');
+            $(element.currentTarget).children().addClass('icon-arrow-up2');
+         }
+      
+     }
+
 
  }]);
 
