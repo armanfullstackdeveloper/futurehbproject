@@ -39,15 +39,38 @@
      loadInitProduct(5);
      loadInitStore(4);
 
+     var navCounter = 0;
      $('.navigation').on('click', function () {
+          if (navCounter == 0) {
+             navCounter = 1;
+             $('#line1').addClass('topLine');
+             $('#line3').addClass('bottomLine');
+             $('.outside').show();
+             $('.navigationOpen ').slideDown();
 
+         } else {
+             navCounter = 0;
+             $('#line1').removeClass('topLine');
+             $('#line3').removeClass('bottomLine');
+             $('.outside').hide();
+             $('.navigationOpen ').slideUp();
+         }
 
-         $('#line1').addClass('topLine')
-         $('#line3').addClass('bottomLine')
+      }) 
 
-
-         $('.navigationOpen').slideToggle();
+      $('.outside').on("click", function () {
+         navCounter = 0;
+         $('#line1').removeClass('topLine');
+         $('#line3').removeClass('bottomLine');
+         $('.outside').hide();
+         $('.navigationOpen ').slideUp();
      })
+
+
+     $('#searchIconInMobile').on('click', function () {
+         $('#searchBoxInMobile').slideDown();
+         $('.searchField').addClass('.searchActivate')
+     });
 
      function loadMenu() {
 
@@ -366,27 +389,47 @@
      //When page load , check search box typing
      $(function () {
          //setup before functions
-         var typingTimer; //timer identifier
+         var typingTimer1, typingTimer2; //timer identifier
          var doneTypingInterval = 500; //time in ms, 1 second for example
-         var $input = $('.SearchTextBox');
+         var $input1 = $('#SearchTextBox1');
+         var $input2 = $('#SearchTextBox2');
 
+         //desktop
          //on keyup, start the countdown
-         $input.on('keyup', function () {
+         $input1.on('keyup', function () {
 
-             if ($('.SearchTextBox').val().length <= 1) {
-                 $(".Search_Task_Open").slideUp("slow", function () {
-                     $('.searchField').removeClass('searchActivate');
+             if ($input1.val().length <= 1) {
+                 $("#Search_Task_Open1").slideUp("slow", function () {
+                     $('#searchField1').removeClass('searchActivate');
                  });
-
              }
-
-             clearTimeout(typingTimer);
-             typingTimer = setTimeout(ajaxSearch, doneTypingInterval);
+             clearTimeout(typingTimer1);
+             typingTimer1 = setTimeout(ajaxSearch1, doneTypingInterval);
          });
 
          //on keydown, clear the countdown
-         $input.on('keydown', function () {
-             clearTimeout(typingTimer);
+         $input1.on('keydown', function () {
+             clearTimeout(typingTimer1);
+         });
+
+
+
+         //mobile 
+         //on keyup, start the countdown
+         $input2.on('keyup', function () {
+
+             if ($input2.val().length <= 1) {
+                 $("#Search_Task_Open2").slideUp("slow", function () {
+                     $('#searchField2').removeClass('searchActivate');
+                 });
+             }
+             clearTimeout(typingTimer2);
+             typingTimer2 = setTimeout(ajaxSearch2, doneTypingInterval);
+         });
+
+         //on keydown, clear the countdown
+         $input2.on('keydown', function () {
+             clearTimeout(typingTimer2);
          });
 
          $("#loginFrm input").keypress(function (e) {
@@ -410,23 +453,51 @@
      });
 
      //When typing done , Product and Store Load
-     function ajaxSearch() {
-         if ($('.SearchTextBox').val().length >= 2) {
+     function ajaxSearch1() {
+         if ($('#SearchTextBox1').val().length >= 2) {
 
              //$('#SearchInProductHolder').html("");
              //$('#SearchInStoreHolder').html("");
              //$('#LoadProduct').show();
              //$('#LoadStore').show();
-             console.log('1')
-             $(".Search_Task_Open").slideDown("slow");
-             $('.searchField').addClass('searchActivate');
+             $("#Search_Task_Open1").slideDown("slow");
+             $('#searchField1').addClass('searchActivate');
 
              $scope.searchResult = [];
              $.ajax({
                  type: "GET",
                  url: "/api/firstPage/TopSearchSummeray/",
                  data: {
-                     name: $(".SearchTextBox").val()
+                     name: $("#SearchTextBox1").val()
+                 },
+                 success: function (result) {
+                     $timeout(function () {
+                         $scope.searchResult = result.Response;
+                     });
+                 }
+
+             });
+         }
+
+     };
+
+     //When typing done , Product and Store Load
+     function ajaxSearch2() {
+         if ($('#SearchTextBox2').val().length >= 2) {
+
+             //$('#SearchInProductHolder').html("");
+             //$('#SearchInStoreHolder').html("");
+             //$('#LoadProduct').show();
+             //$('#LoadStore').show();
+             $("#Search_Task_Open2").slideDown("slow");
+             $('#searchField2').addClass('searchActivate');
+
+             $scope.searchResult = [];
+             $.ajax({
+                 type: "GET",
+                 url: "/api/firstPage/TopSearchSummeray/",
+                 data: {
+                     name: $("#SearchTextBox2").val()
                  },
                  success: function (result) {
                      $timeout(function () {
