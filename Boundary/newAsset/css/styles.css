@@ -13,6 +13,14 @@
     display: none;
 }
 
+.hiddenMenuInFirst {
+    display: none;
+}
+
+.submenu{
+    display:none;
+}
+
 .shownObject {
     display: block;
 }
