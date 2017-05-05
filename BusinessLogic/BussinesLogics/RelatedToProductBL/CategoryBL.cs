@@ -139,16 +139,16 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
                 var parameters = new DynamicParameters();
                 parameters.Add("@catCode", catCode);
 
-                using (var multipleResults = await _db.QueryMultipleAsync("Category_GetRequiredItemsForNewProduct", parameters, commandType: CommandType.StoredProcedure))
+                using (var multipleResults = _db.QueryMultiple("Category_GetRequiredItemsForNewProduct", parameters, commandType: CommandType.StoredProcedure))
                 {
-                    result.ProductAttributeWithoutItems = multipleResults.Read<ProductAttributeWithoutItemsViewModel>().ToList();
-                    result.ProductSelectAttributeWithItems = multipleResults.Read<ProductAttributeWithItemsViewModel>().ToList();
-                    lstAttributeValues = multipleResults.Read<AttributeValue>().ToList();
-                    result.ProductMultiSelectAttributeWithItems = multipleResults.Read<ProductAttributeWithItemsViewModel>().ToList();
-                    lstMultiSelectAttributeValues = multipleResults.Read<AttributeValue>().ToList();
+                    result.ProductAttributeWithoutItems = (await multipleResults.ReadAsync<ProductAttributeWithoutItemsViewModel>()).ToList();
+                    result.ProductSelectAttributeWithItems = (await multipleResults.ReadAsync<ProductAttributeWithItemsViewModel>()).ToList();
+                    lstAttributeValues = (await multipleResults.ReadAsync<AttributeValue>()).ToList();
+                    result.ProductMultiSelectAttributeWithItems = (await multipleResults.ReadAsync<ProductAttributeWithItemsViewModel>()).ToList();
+                    lstMultiSelectAttributeValues = (await multipleResults.ReadAsync<AttributeValue>()).ToList();
                     //
-                    result.Brands = multipleResults.Read<DropDownItemsModel>().ToList();
-                    result.Colors = multipleResults.Read<ColorViewModel>().ToList();
+                    result.Brands = (await multipleResults.ReadAsync<DropDownItemsModel>()).ToList();
+                    result.Colors = (await multipleResults.ReadAsync<ColorViewModel>()).ToList();
                 }
 
                 foreach (AttributeValue attributeValue in lstAttributeValues)
@@ -207,17 +207,17 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
                 var parameters = new DynamicParameters();
                 parameters.Add("@catCode", catCode);
 
-                using (var multipleResults = await _db.QueryMultipleAsync("Category_GetRequiredItemsForSearch", parameters, commandType: CommandType.StoredProcedure))
+                using (var multipleResults = _db.QueryMultiple("Category_GetRequiredItemsForSearch", parameters, commandType: CommandType.StoredProcedure))
                 {
-                    result.ProductAttributeWithItems = multipleResults.Read<ProductAttributeWithItemsViewModel>().ToList();
-                    lstAttributeValues = multipleResults.Read<AttributeValue>().ToList();
+                    result.ProductAttributeWithItems = (await multipleResults.ReadAsync<ProductAttributeWithItemsViewModel>()).ToList();
+                    lstAttributeValues = (await multipleResults.ReadAsync<AttributeValue>()).ToList();
                     //
-                    result.Brands = multipleResults.Read<DropDownItemsModel>().ToList();
-                    result.Colors = multipleResults.Read<ColorViewModel>().ToList();
+                    result.Brands = (await multipleResults.ReadAsync<DropDownItemsModel>()).ToList();
+                    result.Colors = (await multipleResults.ReadAsync<ColorViewModel>()).ToList();
                     //
-                    lstCities = multipleResults.Read<City>().ToList();
-                    result.States = multipleResults.Read<StateViewModel>().ToList();
-                    result.MaxPrice = multipleResults.Read<int>().SingleOrDefault();
+                    lstCities = (await multipleResults.ReadAsync<City>()).ToList();
+                    result.States = (await multipleResults.ReadAsync<StateViewModel>()).ToList();
+                    result.MaxPrice = (await multipleResults.ReadAsync<int>()).SingleOrDefault();
                 }
 
                 foreach (AttributeValue attributeValue in lstAttributeValues)
