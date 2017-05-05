@@ -71,6 +71,11 @@
          $('.searchField').addClass('.searchActivate')
      });
 
+     $('#closeSearchBoxInMobile').on('click', function () {
+         $('#searchBoxInMobile').slideUp();
+         $('.searchField').removeClass('.searchActivate')
+     })
+
      function loadMenu() {
 
          $.ajax({
