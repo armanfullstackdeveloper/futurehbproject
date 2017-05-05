@@ -1,171 +1,294 @@
-﻿
+﻿@model DataModel.Models.ViewModel.CompleteProductForOne
+
 @{
-    ViewBag.Title = "قوانین سایت";
+    ViewBag.Title = "نام محصول : " + Model.Product.Name + " , قیمت: " + Model.Product.Price + " , نام فروشگاه : " + Model.StoreSummery.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+ 
 
-<link href="~/Css/MainPage/MainPage.css" rel="stylesheet" />
-<div class="boxesForFields" style="direction:rtl; font-size:16px;">
 
-    <h2>قوانین سایت هوجی بوجی </h2>
 
-    <br>
-    فروشندگان ابتدا باید از مطابقت داشتن فعالیت ها، مبادلات و فروش کالای خود با قوانین سایت اطمینان حاصل نمایند. در صورت منطبق نبودن آنها با قوانین سایت، از انجام هر یک از این امور جلوگیری شده و همچنین ممکن است تغییرات دیگری نظیر ایجاد محدودیت در تسهیلات خرید و فروش و حتی بسته شدن حساب کاربر خاطی اعمال شود. این قوانین یا به دلیل مغایرت این کالاها و فعالیت ها با قوانین کشوری می باشد و یا اینکه با خط مشی و قوانین هوجی بوجی مطابقت ندارد.
-    <br>
-    اقلام مندرج در این لیست تحت هیچ شرایطی نمی توانند مورد خرید و فروش قرار گیرند.
-    <br>
-    <br>
-    <br>
-    <span class="styleBlackB">لیست فعالیت های ممنوعه</span>
-    <br>
-    كاربران می‏بایست هنگام داد و ستد از طریق سایت، از ارتکاب موارد زیر خودداری نمایند:
-    <br>
-    <ol>
-        <li>
-            تخلف ازهریک از بخش های توافق نامه کاربری،حفظ حریم شخصی و دستورالعمل حل اختلاف  با هوجی بوجی مجاز نمی باشد.
-        </li>
-        <li>
-            تخطی از قوانین و مقررات جمهوری اسلامی ایران اعم از قوانین جزایی، مدنی، مالی، تجاری، بانکی، مالیاتی، گمرکی، اداری و به طور خاص قانون تجارت الکترونیک، قانون جرائم رایانه‌ای و قانون مبارزه با پول‌شویی.
-        </li>
-        <li>
-            نقض حقوق مولفین ، مصنفین و هنرمندان و یا حقوق مندرج در قانون ثبت اختراعات، طرح‌های صنعتی و علایم تجاری، حقوق منبعث از قانون حمایت از حقوق پدیدآورندگان نرم‌افزارهای رایانه‌ای، حقوق مذکور در قانون ترجمه و تکثیر کتب و نشریات و آثار صوتی
-        </li>
-        <li>
-            ارایه اطلاعات مخدوش نادرست و غیر موثق.
-        </li>
-        <li>
-            فروش و عرضه اجناس تقلبی
-        </li>
-        <li>
-            ارتکاب عملی که کلاهبرداری و یا در حکم آن به شمار بیاید.
-        </li>
-        <li>
-            عدم همکاری در تحقیقات و یا عدم تأیید اطلاعاتی که به سایت داده‌ شده است.
-        </li>
-        <li>
-            استفاده از پروکسی ناشناس
-        </li>
-        <li>
-            استفاده از حساب کاربری هوجی بوجی که سابقا با این موارد ممنوعه مرتبط باشد.
-        </li>
-        <li>
-            انجام مبادله یا استفاده از خدمات به نحوی که منجر به طرح شکایت یا اخذ جریمه‌ از هوجی بوجی یا هر یك از کاربران شود.
-        </li>
-        <li>
-            سوءاستفاده یا تخلف از قوانین جرائم رایانه ایی
-        </li>
-        <li>
-            افشا یا انتشار اطلاعات کاربران دیگر و یا استفاده از آن اطلاعات برای اهداف تجاری .
-        </li>
-        <li>
-            ارسال پیام‌های الکترونیکی ناخواسته و هرزنامه‌ها به سایر کاربران یا سوء استفاده از خدمات برای کسب منفعت مالی.
-        </li>
-        <li>
-            تلاش برای مداخله و اخلال در سایت یا خدمات ایسام.
-        </li>
-        <li>
-            هرگونه کپی‌برداری جزئی یا کلی از سایت بدون اخذ اجازه قبلی از شرکت ایسام.
-        </li>
-        <li>
-            استفاده از نرم‌افزارهای اخلال‌گر مانند ویروس‌ها و تروجان‌ها و کرم‌های اینترنتی که موجب اخلال در کار رایانه‌های شرکت یا سرقت اطلاعات شود.
-        </li>
-        <li>
-            انجام امور مرتبط با خیریه و جمع آوری کمک های مالی.
-        </li>
-        <li>
-            انجام معامله خارج از سایت هوجی بوجی به هر شکلی مجاز نمی باشد. تبادل هرگونه اطلاعات تماس و یا دادن پیشنهاد جهت انجام معامله خارج از سایت هوجی بوجی ممنوع است.
-        </li>
-        <li>
-            انجام فعالیت های ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a>
-        </li>
-    </ol>
-    <br>
-    <br>
-    <span class="styleBlackB">لیست مبادلات ممنوعه</span>
-    <br>
-    انجام مبادلات زیر در هوجی بوجی ممنوع بوده و از خدمات سایت محروم‌ خواهند بود:
-    <br>
-    <ol>
-        <li>
-            مبادلات مرتبط با ارایه خدمات
-        </li>
-        <li>
-            مبادلات مربوط به فروش اجناسی که متعلق به فروشنده نیستند یا فروشنده مجاز به فروش آن‌ها نیست
-        </li>
-        <li>
-            مبادلاتی که منجر به نقض حقوق مالکیت فکری کالاهایی که دارای چنین حقوقی هستند گردد
-        </li>
-        <li>مبادلات مرتبط با اموال تاريخی، فرهنگی به دست آمده از حفاری غیرمجاز</li>
-        <li>
-            مبادلاتی که اطلاعات شخصی افراد دیگر را به طور غیرقانونی فاش می‌کند
-        </li>
-        <li>
-            مبادلات مربوط به شرکت‌های هرمی، برنامه‌های شبکه‌ای و برنامه‌های بازاریابی چندسطحی
-        </li>
-        <li>
-            قمار و شرط‌ بندی و سایر فعالیت‌هایی که با دریافت مبلغی برای شرکت در مسابقه جایزه می‌دهند
-        </li>
-        <li>
-            مبادلاتی که افراد مختلف بدان وسیله به نمایندگی از طرف فروشندگان وجوه را دریافت و جمع‌آوری می‌کنند
-        </li>
-        <li>مبادلاتی که طبق قوانین جمهوری اسلامی مجاز شمرده نمی شود</li>
 
-    </ol>
-    <br>
-    <br>
-    <span class="styleBlackB">لیست فعالیت های ممنوع مرتبط با ثبت کالا</span>
-    <br>
-    <ol>
-        <li>ثبت کالای بدون عکس </li>
-        <li>ثبت کالا با تصویر نامرتبط </li>
-        <li>ثبت کالای نامشخص و کلی </li>
-        <li>ثبت کالاهای تبلیغاتی </li>
-        <li>ثبت کالاهای خدماتی </li>
-        <li>ثبت اعضای بدن </li>
-        <li>ثبت اموال غیرمنقول </li>
-        <li>ثبت کالاهای قاچاق و دولتی </li>
-        <li>ثبت کالا با عناوین تبلیغاتی</li>
-        <li>ثبت کالا با هزینه پستی نامتعارف </li>
-        <li>ثبت هزینه پستی برای کالای مجازی </li>
-        <li>ثبت چندین کالای نامرتبط در یک کالا </li>
-        <li>ثبت کالای دست دوم با تصویر اینترنتی </li>
-        <li>ثبت کالا با مشخصات و توضیحات نامرتبط </li>
-        <li>ثبت کالاهای منتسب به رژیم اشغال گر قدس</li>
-        <li>ثبت عنوان و توضیحات کالا با حروف انگلیسی</li>
-        <li>ثبت کالا با قیمت بیشتر از بیست میلیون تومان </li>
-        <li>ثبت کالا به صورت غیر اختصاصی برای کاربر خاص </li>
-        <li>ثبت کالاهایی که مبادله آنها طبق قانون ممنوع است </li>
-        <li>ثبت اموال سرقتی و کالاهای با شماره سریال پاک شده </li>
-        <li>ثبت کالاهایی که برای مصرف‌کننده خطر جدی در پی دارد </li>
-        <li>ثبت کالاهایی که مبادله آنها دارای مقررات و نظامات خاص است </li>
-        <li>ثبت کالاهای به‌دست‌آمده از ارتکاب جرم یا نقض مقررات كشوری </li>
-        <li>ثبت مواد مخدر و روان گردانها ، عناصر سازنده و متعلقات مربوط به آنها </li>
-        <li>ثبت کالاهای خلاف شئون و یا دارای عناوین و تصاویر خلاف شئون </li>
-        <li>ثبت کالاهای مرتبط با بخت‌آزمایی، قمار و شرط‌ بندی</li>
-        <li>ثبت کالای مرتبط با بازاریابی شبکه ای، چندمرحله ای، هرمی، ماتریسی و غیره </li>
-        <li>
-            ثبت کالاهای تکراری (توجه: ثبت دو کالای یکسان با دو شماره سریال متفاوت نیز کالای
-            تکراری محسوب می شود.)
-        </li>
-        <li>
-            ثبت آگهی خرید (کاربران به جای ثبت آگهی خرید، می توانند به گروه کالای مورد نظر مراجعه و آن کالا را خریداری کنند)
-        </li>
-        <li>
-            ثبت تاکسی درمی تمام گونه های حیوانات (نظیر حرام گوشت، حلال گوشت، اهلی، وحشی و حتی
-            با مجوز تاکسی درمی و شکار)
-        </li>
-        <li>ثبت کالاهایی که نیاز به خدمات پیش و پس از فروش دارند </li>
-        <li>
-            ثبت كالاهایی كه در توضيح آنها از مفاهيم انتزاعی در حوزه دين و اعتقادات مردمی استفاده شده است.
-        </li>
-        <li>
-            ثبت کالاهای دارای خواص معنوی و یا ارزش معنوی (متبرک)، حرز، دعا، طلسم، سحر، جادو و جنبل، بخت، شانس، اقبال، یمن، گشایش امور، رزق و روزی
-        </li>
-        <li>ثبت کالاهای متعلق به میراث فرهنگی کشور</li>
-        <li>ثبت کالاهای ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a> </li>
-        <li>ثبت کلیه کالاهایی که طبق قوانین جمهوری اسلامی غیرمجاز می باشند </li>
-    </ol>
-    <br>
-    <br>
-</div>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    <script src="~/Scripts/angular.min.js"></script>
+ 
+    <script>
+        angular.module('ShopApp', [])
+        .controller('ShowProductController', ['$scope', function ($scope) {
+
+            $scope.Data = @Html.Raw(Json.Encode(Model));
+            console.log($scope.Data)
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.ImgAddress && $scope.Data.Product.ImgAddress!=null) {
+                var temp = $scope.Data.Product.ImgAddress + '';
+                $scope.Data.Product.ImgAddress = temp.replace(/\\/g, '/');
+            }else{
+                $scope.Data.Product.ImgAddress = "Img/MainPage/NoProductPic.png"
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.OtherImagesAddress) {
+                $.each($scope.Data.Product.OtherImagesAddress , function(index,value){
+                    var temp = $scope.Data.Product.OtherImagesAddress[index].ImgAddress + '';
+                    $scope.Data.Product.OtherImagesAddress[index].ImgAddress = temp.replace(/\\/g, '/');
+                })
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.DiscountedPrice) {
+                var temp = $scope.Data.Product.DiscountedPrice + '';
+                $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            }
+
+            if ($scope.Data && $scope.Data.Product && $scope.Data.Product.Price) {
+                var temp = $scope.Data.Product.Price + '';
+                $scope.Data.Product.Price = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            }
+
+            if($scope.Data&&$scope.Data.ProductAttrbiutesViewModels&&$scope.Data.ProductAttrbiutesViewModels!='')
+            {
+                $.each($scope.Data.ProductAttrbiutesViewModels, function (index, value) {
+                    if (value) {
+                        value.Value = '';
+                        $.each(value.AttributeValues, function (index2, value2) {
+                            if (value2) {
+                                if (value.Value) {
+                                    value.Value += ' , ' + value2;
+                                } else {
+                                    value.Value += value2;
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+           
+            $scope.AddToBasket=function(){
+
+                var realPrice='';
+                if($scope.Data.Product && $scope.Data.Product.DiscountedPrice && $scope.Data.Product.DiscountedPrice!=0){
+                    realPrice=$scope.Data.Product.DiscountedPrice;
+                }
+                else if($scope.Data.Product && $scope.Data.Product.Price && $scope.Data.Product.Price!=0){
+                    realPrice=$scope.Data.Product.Price;
+                }
+                else{
+                    realPrice=0;
+                }
+
+                if(realPrice && realPrice!=0){
+                    realPrice= realPrice.replace(/,/g,'');
+                }
+
+                var ProductToShoppingBagDataModel ={
+                    ProductCode:$scope.Data.Product.Id,
+                    ProductName:$scope.Data.Product.Name,
+                    RealPrice:realPrice,
+                    StoreName:$scope.Data.StoreSummery.Name,
+                    ImgAddress:$scope.Data.Product.ImgAddress,
+                    PostalCostInCountry:$scope.Data.Product.PostalCostInCountry,
+                    PostalCostInTown:$scope.Data.Product.PostalCostInTown
+            };
+
+                console.log(ProductToShoppingBagDataModel)
+
+                $.ajax({
+                    type: "GET",
+                    url: "/order/AddToBag/",
+                    data: ProductToShoppingBagDataModel,
+                    success: function (result) {
+                       window.location.href='/order' ;
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            };
+
+            var lat = $scope.Data.StoreSummery.Latitude;
+            var longi = $scope.Data.StoreSummery.Longitude;
+
+            //Google map Api
+            $(function () {
+                var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(longi));
+                var options = {
+                    zoom: 13,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("MiniMapHolder"), options);
+                new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+
+            });
+
+
+        }]);
+
+    </script> 
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
+
+
+
+ 
+
+
+
+
+
+
+
+
+@*<div id="Middle" ng-app="ShopApp" ng-controller="ShowProductController">
+        <div id="GalleryAndInfes">
+            <div id="GalleryHolder">
+                <div class="gallery">
+                    <div class="images">
+                        <img ng-src="~/{{Data.Product.ImgAddress}}" />
+                    </div>
+                </div>
+
+            </div>
+            <div id="InfoHolder">
+                <div id="MapAndSellerInfoes">
+                    <div id="MiniMapHolder" ng-show="Data.StoreSummery.Latitude!=null"></div>
+                    <div id="SellerInfoHolder">
+                        <div id="addToBascketButton" style="text-align:center">
+                            <a class="btn btn-switch" style="background-color: #b9b9b9;padding: 5px;" href="~/shop/code/{{Data.StoreSummery.Id}}"> سایر محصولات فروشنده </a>
+                        </div>
+                     </div>
+                </div>
+                <div id="ProductAndPriceInfoes">
+                    <div id="ProductName">
+                        <div id="NameOfTheProductHolder">
+
+                            <div id="NameOfTheProduct" ng-bind="Data.Product.Name"></div>
+                        </div>
+                        <div id="PriceOfTheProduct">
+
+                            <div ng-show="Data.Product.DiscountedPrice">
+                                <div id="PriceSubject">قیمت :</div>
+                                <div id="OriginalPrice" ng-bind="Data.Product.Price+' تومان '"></div>
+                                <div id="OffPrice2" ng-bind="Data.Product.DiscountedPrice+' تومان '"></div>
+                            </div>
+                            <div ng-hide="Data.Product.DiscountedPrice">
+                                <div id="PriceSubject">قیمت :</div>
+                                <div id="OffPrice2" ng-bind="Data.Product.Price +' تومان '"></div>
+                            </div>
+
+                        </div>
+
+                        <div ng-show="Data.Colors.length!=0" id="ColorsOfTheProducts">
+                            <div id="ColorSubject" style="width: 71px;">رنگ ها :</div>
+                            <div ng-repeat="color in Data.Colors" class="ColoSeperator" style="background-color:{{color.ColorHex}} "></div>
+                        </div>
+                    </div>
+                    <div class="Outer" ng-show="Data.Product.MadeIn">
+                        <div class="InnerSubject">کشور سازنده :</div>
+                        <div class="InnerInformation" ng-bind="Data.Product.MadeIn"></div>
+                    </div>
+
+                    <div id="AddressTags">
+                        <div ng-show="Data.StoreSummery.CityName && Data.StoreSummery.CityName!='-'" id="CityAndStateTags">
+                            <div ng-bind="Data.StoreSummery.CityName" class="Tag"></div>
+                        </div>
+                        <div ng-show="Data.StoreSummery.Name" class="Outer">
+                            <div class="InnerSubject">نام فروشگاه :</div>
+                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Name"></div>
+                        </div>
+                        <div ng-show="Data.StoreSummery.Place" class="Outer">
+                            <div class="InnerSubject">آدرس :</div>
+                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Place"></div>
+                        </div>
+
+                        <div ng-show="Data.StoreSummery.PhoneNumber" class="Outer">
+                            <div class="InnerSubject">تلفن تماس :</div>
+                            <div ng-bind="Data.StoreSummery.PhoneNumber" class="InnerInformation"></div>
+                        </div>
+
+                    </div>
+                    <div id="SellerInfoHolder">
+                        <div id="OtherProducts" ng-show="Data.Product.CanSend && Data.Product.CanSend" style="width: 90%;background-color: rgba(109, 216, 23, 0.55);font-size: 17px;"><a ng-click="AddToBasket()">افزودن به سبد خرید</a></div>
+
+                     </div>
+
+                </div>
+                <div id="SpecialAbilities">
+                    <div ng-show="Data.Product.CanGiveBack" class="giveBack" ripple="ripple" ripple-color="#FFF">قابل پس دادن</div>
+                    <div ng-show="Data.Product.CanSend" class="Send" ripple="ripple" ripple-color="#FFF">قابل ارسال</div>
+                    <div ng-show="Data.Product.Changeability" class="Switch" ripple="ripple" ripple-color="#FFF">قابل تعویض</div>
+                    <div ng-show="Data.Product.IsExist" class="SpecialProduct" ripple="ripple" ripple-color="#FFF">موجود</div>
+                </div>
+            </div>
+            <div id="DetailTabs" ng-show="Data.ProductAttrbiutesViewModels!=nul">
+
+                <div class="tabs">
+                    <div class="tabs-header">
+                        <div class="border"></div>
+                        <ul style="margin-top:0;">
+                            <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات محصول</a></li>
+                           </ul>
+                        <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
+                    </div>
+                    <div class="tabs-content">
+                        <div tab-id="1" id="TabOneDetailes" class="tab active">
+
+                            <div ng-show="Data.ProductAttrbiutesViewModels" ng-repeat="item in Data.ProductAttrbiutesViewModels">
+                                <div ng-if="$index %2 == 0">
+                                    <div class="rightSide" style="height:30px;">
+                                        <div class="TabHolder">
+                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
+                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="$index %2 !=0">
+                                    <div class="LeftSide" style="height:30px;">
+                                        <div class="TabHolder">
+                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
+                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
