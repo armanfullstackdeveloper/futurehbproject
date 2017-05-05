@@ -91,8 +91,7 @@
                          $scope.allMenu = result.Response;
                          $('.hiddenMenuInFirst').show();
                          setTimeout(function () {
-                             console.log('323')
-                                  $('.submenu').hide();
+                                   $('.submenu').hide();
                               },5)
 
                      }, 1);
