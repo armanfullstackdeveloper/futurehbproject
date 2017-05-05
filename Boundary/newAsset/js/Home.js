@@ -71,6 +71,11 @@
          $('.searchField').addClass('.searchActivate')
      });
 
+     $('#closeSearchBoxInMobile').on('click', function () {
+         $('#searchBoxInMobile').slideUp();
+         $('.searchField').removeClass('.searchActivate')
+     })
+
      function loadMenu() {
 
          $.ajax({
@@ -86,8 +91,7 @@
                          $scope.allMenu = result.Response;
                          $('.hiddenMenuInFirst').show();
                          setTimeout(function () {
-                             console.log('323')
-                                  $('.submenu').hide();
+                                   $('.submenu').hide();
                               },5)
 
                      }, 1);
