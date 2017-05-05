@@ -673,6 +673,7 @@
     <Content Include="Img\MainPage\yourStore.png" />
     <Content Include="Js\AllPageNeeded.js" />
     <Content Include="Js\FirstPage.js" />
+    <Content Include="newAsset\404.html" />
     <Content Include="newAsset\css\owl.carousel.min.css" />
     <Content Include="newAsset\images\collection\manto.jpg" />
     <Content Include="newAsset\images\collection\zivar.jpg" />
