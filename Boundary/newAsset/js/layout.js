@@ -1,8 +1,5 @@
-﻿angular.module('Home', [])
-
- .controller('HomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
-  
-      
+﻿app.controller('layoutCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+   
      var send = '';
      var verifyLevel = 0;
      var navCounter = 0;

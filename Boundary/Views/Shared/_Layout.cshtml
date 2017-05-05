@@ -16,14 +16,14 @@
 
     @RenderSection("Style", false)
 </head>
-<body ng-app="Home" ng-controller="HomeCtrl">
+<body ng-app="app" >
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
     {
         @Html.AntiForgeryToken()
     }
 
-    <header class="container">
+    <header class="container" ng-controller="layoutCtrl">
         <div class="sizeManager">
             <div class="header">
                 <div class="organizer mainHeader elementTopVerticalMargin noTopMarginInPhone HalfHorizontalPaddingInPhone standardVerticalPaddingInPhone">
@@ -464,7 +464,7 @@
 
     @RenderBody()
 
-    <footer class="container thickFont footer">
+    <footer class="container thickFont footer" ng-controller="layoutCtrl">
         <div class="separatorLine organizer standardVerticalMargin"></div>
         <div class="squizer thickFont">
             <div class="fourFullColumns organizerInPhone">
@@ -541,14 +541,17 @@
 
 
 
-    <script>
-        var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
-    </script>
+   
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Content/MD5_encriptin/MD5.js"></script>
+    <script>
+        var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
+        var app = angular.module('app', []);
+     </script>
+    <script src="~/newAsset/js/layout.js"></script>
 
-    <script src="~/newAsset/js/Home.js"></script>
+ 
 
     @RenderSection("Script", false)
 

@@ -1,6 +1,4 @@
-﻿angular.module('Home', [])
-
- .controller('HomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+﻿app.controller('indexCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
      $scope.noProductPic = "Img/MainPage/NoProductPic.png";
      $scope.noStorePic = "Img/MainPage/NoStorePic.png";
