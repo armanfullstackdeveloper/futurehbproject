@@ -4,28 +4,31 @@
 
      $scope.noProductPic = "Img/MainPage/NoProductPic.png";
      $scope.noStorePic = "Img/MainPage/NoStorePic.png";
-     
+
      var root = "http://hoojibooji.com/",
        send = '',
        verifyLevel = 0,
        owl1, owl2, owl3, owl4, owl5;
-     var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
 
 
      $scope.showRegisterBox = function () {
+         $('.loginBox').hide();
+
          $('.popUpMadule').fadeIn();
-         $('.signUpBox').slideDown();
+         $('.signUpBox').fadeIn();
      }
 
      $scope.showLoginBox = function () {
+         $('.signUpBox').hide();
+
          $('.popUpMadule').fadeIn();
-         $('.loginBox').slideDown();
+         $('.loginBox').fadeIn();
      }
 
      $scope.closeBox = function () {
          $('.popUpMadule').fadeOut();
-         $('.loginBox').slideUp();
-         $('.signUpBox').slideUp();
+         $('.loginBox').fadeOut();
+         $('.signUpBox').fadeOut();
 
      }
 
@@ -35,6 +38,43 @@
      loadInitProduct(3);
      loadInitProduct(5);
      loadInitStore(4);
+
+     var navCounter = 0;
+     $('.navigation').on('click', function () {
+         if (navCounter == 0) {
+             navCounter = 1;
+             $('#line1').addClass('topLine');
+             $('#line3').addClass('bottomLine');
+             $('.outside').show();
+             $('.navigationOpen ').slideDown();
+
+         } else {
+             navCounter = 0;
+             $('#line1').removeClass('topLine');
+             $('#line3').removeClass('bottomLine');
+             $('.outside').hide();
+             $('.navigationOpen ').slideUp();
+         }
+
+     })
+
+     $('.outside').on("click", function () {
+         navCounter = 0;
+         $('#line1').removeClass('topLine');
+         $('#line3').removeClass('bottomLine');
+         $('.outside').hide();
+         $('.navigationOpen ').slideUp();
+     })
+
+     $('#searchIconInMobile').on('click', function () {
+         $('#searchBoxInMobile').slideDown();
+         $('.searchField').addClass('.searchActivate')
+     });
+
+     $('#closeSearchBoxInMobile').on('click', function () {
+         $('#searchBoxInMobile').slideUp();
+         $('.searchField').removeClass('.searchActivate')
+     })
 
      function loadMenu() {
 
@@ -49,6 +89,11 @@
                  if (result.Response.length > 0) {
                      $timeout(function () {
                          $scope.allMenu = result.Response;
+                         $('.hiddenMenuInFirst').show();
+                         setTimeout(function () {
+                                   $('.submenu').hide();
+                              },5)
+
                      }, 1);
                  }
              },
@@ -210,13 +255,13 @@
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
 
-         var html = '<a href="/product/' + value.Id + '"> <div class="borderRight item">'
+         var html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="borderRight item">'
                 + ' <div class="organizer standardVerticalMargin">'
                 + '<div class="circleImageContainer">'
-                + " <img src='" + root + value.ImgAddress + "' alt='" + value.Name + ", قیمت: " + PriceTemp + "' class='imageInMiddle'>"
+                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='نام_فروشگاه=" + value.StoreName + '/نام_محصول=' + value.Name + "/قیمت=" + PriceTemp + "تومان' class='imageInMiddle'>"
                 + ' </div></div>'
                 + ' <div class="organizer pinkColor">' + value.Name + '</div>'
-                + ' <div class="organizer smallExplain">قیمت : ' + PriceTemp + ' تومان ' + '</div>'
+                + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
                 + ' </div></a>';
          return html;
      }
@@ -230,7 +275,7 @@
          var html = '<a href="/shop/code/' + value.Id + '"> <div class="borderRight item">'
                         + ' <div class="organizer standardVerticalMargin">'
                         + '<div class="circleImageContainer">'
-                        + " <img src='" + root + value.LogoAddress + "' alt='" + value.Name + "," + storeType + "' class='imageInMiddle'>"
+                        + " <img src='" + root + value.LogoAddress + "?w=143&h=143&mode=carve' alt='" + value.Name + "," + storeType + "' class='imageInMiddle'>"
                         + ' </div></div>'
                         + ' <div class="organizer pinkColor">' + value.Name + '</div>'
                         + ' <div class="organizer smallExplain"> ' + storeType + '</div>'
@@ -246,17 +291,17 @@
              center: false,
              nav: false,
              items: 5,
-             //responsive: {
-             //    0: {
-             //        items: 1
-             //    },
-             //    600: {
-             //        items: 3
-             //    },
-             //    1000: {
-             //        items: 5
-             //    }
-             //}
+             responsive: {
+                 0: {
+                     items: 1
+                 },
+                 600: {
+                     items: 3
+                 },
+                 1000: {
+                     items: 5
+                 }
+             }
          });
          $(".prev" + type).click(function () {
              owl.trigger('prev.owl.carousel');
@@ -349,31 +394,49 @@
      }
 
 
-
      //When page load , check search box typing
      $(function () {
+
          //setup before functions
-         var typingTimer; //timer identifier
+         var typingTimer1, typingTimer2; //timer identifier
          var doneTypingInterval = 500; //time in ms, 1 second for example
-         var $input = $('#SearchTextBox');
+         var $input1 = $('#SearchTextBox1');
+         var $input2 = $('#SearchTextBox2');
 
+         //desktop
          //on keyup, start the countdown
-         $input.on('keyup', function () {
+         $input1.on('keyup', function () {
 
-             if ($('#SearchTextBox').val().length <= 1) {
-                 $("#Search_Task_Open").slideUp("slow", function () {
-                     $('.searchField').removeClass('searchActivate');
+             if ($input1.val().length <= 1) {
+                 $("#Search_Task_Open1").slideUp("slow", function () {
+                     $('#searchField1').removeClass('searchActivate');
                  });
-
              }
-
-             clearTimeout(typingTimer);
-             typingTimer = setTimeout(ajaxSearch, doneTypingInterval);
+             clearTimeout(typingTimer1);
+             typingTimer1 = setTimeout(ajaxSearch1, doneTypingInterval);
          });
 
          //on keydown, clear the countdown
-         $input.on('keydown', function () {
-             clearTimeout(typingTimer);
+         $input1.on('keydown', function () {
+             clearTimeout(typingTimer1);
+         });
+
+         //mobile 
+         //on keyup, start the countdown
+         $input2.on('keyup', function () {
+
+             if ($input2.val().length <= 1) {
+                 $("#Search_Task_Open2").slideUp("slow", function () {
+                     $('#searchField2').removeClass('searchActivate');
+                 });
+             }
+             clearTimeout(typingTimer2);
+             typingTimer2 = setTimeout(ajaxSearch2, doneTypingInterval);
+         });
+
+         //on keydown, clear the countdown
+         $input2.on('keydown', function () {
+             clearTimeout(typingTimer2);
          });
 
          $("#loginFrm input").keypress(function (e) {
@@ -389,30 +452,59 @@
 
      //if click outside of search result , hide search result
      $(document).click(function (event) {
-         if (!$(event.target).closest('#Search_Task_Open').length) {
-             $("#Search_Task_Open").slideUp("slow", function () {
+         if (!$(event.target).closest('.Search_Task_Open').length) {
+             $(".Search_Task_Open").slideUp("slow", function () {
                  $('.searchField').removeClass('searchActivate');
              });
          }
      });
 
      //When typing done , Product and Store Load
-     function ajaxSearch() {
-         if ($('#SearchTextBox').val().length >= 2) {
+     function ajaxSearch1() {
+         if ($('#SearchTextBox1').val().length >= 2) {
 
              //$('#SearchInProductHolder').html("");
              //$('#SearchInStoreHolder').html("");
              //$('#LoadProduct').show();
              //$('#LoadStore').show();
-             $("#Search_Task_Open").slideDown("slow");
-             $('.searchField').addClass('searchActivate');
+             $("#Search_Task_Open1").slideDown("slow");
+             $('#searchField1').addClass('searchActivate');
 
              $scope.searchResult = [];
              $.ajax({
                  type: "GET",
                  url: "/api/firstPage/TopSearchSummeray/",
                  data: {
-                     name: $("#SearchTextBox").val()
+                     name: $("#SearchTextBox1").val()
+                 },
+                 success: function (result) {
+                     $timeout(function () {
+                         $scope.searchResult = result.Response;
+                     });
+                 }
+
+             });
+         }
+
+     };
+
+     //When typing done , Product and Store Load
+     function ajaxSearch2() {
+         if ($('#SearchTextBox2').val().length >= 2) {
+
+             //$('#SearchInProductHolder').html("");
+             //$('#SearchInStoreHolder').html("");
+             //$('#LoadProduct').show();
+             //$('#LoadStore').show();
+             $("#Search_Task_Open2").slideDown("slow");
+             $('#searchField2').addClass('searchActivate');
+
+             $scope.searchResult = [];
+             $.ajax({
+                 type: "GET",
+                 url: "/api/firstPage/TopSearchSummeray/",
+                 data: {
+                     name: $("#SearchTextBox2").val()
                  },
                  success: function (result) {
                      $timeout(function () {
@@ -430,7 +522,7 @@
 
          var form = $('#__AjaxAntiForgeryForm');
          var token = $('input[name="__RequestVerificationToken"]', form).val();
-
+         $('#loginMessage').html('');
          $.ajax({
              url: '/Account/Login',
              type: 'POST',
@@ -444,6 +536,9 @@
 
                  if (result.Success == true) {
 
+                     $scope.closeBox();
+                     $('#loginMessage').html("شما با موفقیت وارد شدید");
+
                      //success
                      if (returnUrl == "") {
                          //return to root
@@ -455,7 +550,7 @@
                      }
 
                  } else {
-                     //failed
+                     $('#loginMessage').html(result.Response);
                  }
              },
              error: function () {
@@ -485,7 +580,7 @@
              $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
              return;
          }
-         else if (confPass != pass) {
+         else if ($('#ConfirmPasswordTxt').val() != $('#PasswordTxt').val()) {
              $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
              return;
          }
@@ -502,14 +597,12 @@
                      if (result.Success == false) {
                          $('#registerStatus').html(result.Response);
                          $('#Alert_UserName_Wait').css("display", "none");
-
                      }
                      else {
                          $('#Alert_UserName_Wait').css("display", "none");
                          $('#Alert_Verify_Send').slideToggle();
-                         $('#Verify_Code').slideToggle();
+                         $('.VerifyBox').slideToggle();
                          verifyLevel = 1;
-
                      }
                  },
                  error: function () {
@@ -525,7 +618,6 @@
                  "Password": $.md5($('#PasswordTxt').val()),
                  "ConfirmPassword": $.md5($('#ConfirmPasswordTxt').val()),
                  "VerificationCode": $('#VerifyTxt').val()
-
              };
 
              $.ajax({
@@ -594,6 +686,22 @@
          });
 
      }
+ 
+     $scope.showSubmenu = function (element) {
+
+         if ($(element.currentTarget).next().is(':visible')) {
+             $(element.currentTarget).next().slideUp();
+             $(element.currentTarget).children().removeClass('icon-arrow-up2');
+             $(element.currentTarget).children().addClass('icon-arrow-down2');
+          }else{
+            $('.submenu').slideUp();
+            $(element.currentTarget).next().slideDown();
+            $(element.currentTarget).children().removeClass('icon-arrow-down2');
+            $(element.currentTarget).children().addClass('icon-arrow-up2');
+         }
+      
+     }
+
 
  }]);
 

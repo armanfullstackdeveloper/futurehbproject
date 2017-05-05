@@ -9,6 +9,22 @@
 }
 
 /*----------------- main elements -----------------------*/
+.hiddenObject {
+    display: none;
+}
+
+.hiddenMenuInFirst {
+    display: none;
+}
+
+.submenu{
+    display:none;
+}
+
+.shownObject {
+    display: block;
+}
+
 header {
     margin-bottom: 1rem;
     float: left;
@@ -29,6 +45,10 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li {
     font-weight: inherit;
     line-height: inherit;
     list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
 }
 
 a, a:visited, a:hover {
@@ -133,6 +153,10 @@ li {
     position: fixed;
 }
 
+.resetIndex {
+    z-index: 0;
+}
+
 .prefer {
     z-index: 1;
 }
@@ -147,6 +171,14 @@ li {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.objectStickToLeft {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 input[type="radio"] {
@@ -282,6 +314,7 @@ button {
 
 .textInCenter {
     text-align: center;
+    direction: ltr;
 }
 
 .textInRight {
@@ -322,6 +355,10 @@ button {
 
 .lightGreenBack {
     background-color: #eaf4f3;
+}
+
+.lightGreenColor {
+    color: #77e2ae;
 }
 
 .pinkBack {
@@ -406,6 +443,10 @@ button {
 
 .greenBorder {
     border: solid #009688 2px;
+}
+
+.whiteBorder {
+    border: solid #fff 2px;
 }
 
 .darkerGrayBack{
@@ -561,6 +602,10 @@ button {
     margin-top: 1rem;
 }
 
+.standardTopElementalVerticalMargin {
+    margin-top: 7rem;
+}
+
 .standardHalfTopVerticalMargin {
     margin-top: 0.5rem;
 }
@@ -663,6 +708,16 @@ button {
     float: right;
 }
 
+.fourFiveFullColumn {
+    width: 80%;
+    float: right;
+}
+
+.oneFiveFullColumn {
+    width: 20%;
+    float: right;
+}
+
 .verticallyInCenter {
     position: absolute;
     top: 50%;
@@ -709,6 +764,53 @@ button {
 
 .mixHeight {
     height: 135px;
+}
+
+.owl-carousel .owl-stage {
+    margin-right: 2%;
+}
+
+.slider .owl-carousel .owl-item img {
+    position: relative;
+    left: 2%;
+}
+
+.outside {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.lightGreenFullScreen {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #77e2ae;
+    z-index: -1;
+}
+
+.storeHolder {
+    width: 100%;
+    padding-bottom: 63%;
+    background: url('../images/404.png') no-repeat center;
+    background-size: contain;
+}
+
+.words {
+    width: 400px;
+    height: 190px;
+    background: url('../images/404Word.png') no-repeat center;
+    background-size: contain;
+}
+
+.maxWidth_1 {
+    max-width: 800px;
 }
 
 /*------------------- media -------------------------------*/
@@ -780,6 +882,13 @@ button {
     }
 }
 
+
+@media only screen and (max-width: 928px) {
+    .words {
+        width: 100%;
+    }
+}
+
 /*-------------------- personal elements ------------------*/
 .container {
     box-sizing: border-box;
@@ -795,7 +904,7 @@ button {
     color: #908d8d;
     direction: rtl;
     font-size: 1em;
-    z-index: 2;
+    z-index: 5;
 }
 
 .titleBar {
@@ -814,6 +923,7 @@ button {
 }
 
 .sizeManager {
+    direction: rtl;
     max-width: 1400px;
     margin: 0 auto;
     width: 97%;
@@ -828,6 +938,10 @@ button {
 .borderInBothSides {
     border-right: solid #eeeeee 2px;
     border-left: solid #eeeeee 2px;
+}
+
+.veryLightColor {
+    color: #eeeeee;
 }
 
 .selectbox {
@@ -991,7 +1105,7 @@ button {
 
 .boxElement {
     background-color: #fbfbfb;
-    border-bottom: solid 6px #f7f7f7;
+    box-shadow: 0px 6px 0px #f4f4f4;
 }
 
 .reallyLightBack {
@@ -1000,17 +1114,17 @@ button {
 
 .greenCart.boxElement {
     background-color: #eaf4f3;
-    border-bottom: solid 6px #c8eeea;
+    box-shadow: 0px 6px 0px #c8eeea;
 }
 
 .pinkCart.boxElement {
     background-color: #fef2f6 !important;
-    border-bottom: solid 6px #f8e0e8;
+    box-shadow: 0px 6px 0px #f8e0e8;
 }
 
 .orangeCart.boxElement {
     background-color: #fff4e7 !important;
-    border-bottom: solid 6px #fcead5;
+    box-shadow: 0px 6px 0px #fcead5;
 }
 
 .borderBottom {
@@ -1172,7 +1286,7 @@ button {
 }
 
 .arrows {
-    z-index: 1;
+    /*z-index: 1;*/
     position: absolute;
     width: 100%;
     height: 100%;
@@ -1184,7 +1298,7 @@ button {
     width: 4%;
     position: absolute;
     top: 0;
-    z-index: 3;
+    z-index: 1;
     background-color:#fbfbfb ;
     min-width: 38px;
 }
@@ -1817,19 +1931,19 @@ button {
 }
 
 .smallBox .boxImage {
-    padding-bottom: 101%;
+    padding-bottom: 107%;
 }
 
 .mediumBox .boxImage {
-    padding-bottom: 69%;
+    padding-bottom: 71%;
 }
 
 .rectangleBox .boxImage {
-    padding-bottom: 93%;
+    padding-bottom: 94%;
 }
 
 .twoFiveColumn .mediumBox .boxImage {
-    padding-bottom: 67.5%;
+    padding-bottom: 68.5%;
 }
 
 .collections .twoThreeFullColumn {
@@ -1976,6 +2090,14 @@ button {
 
 /*------ texts -------*/
 
+.textInCenterInPhone {
+    text-align: center;
+}
+
+.normalFontSizeInPhone {
+    font-size: 15px !important;
+}
+
 /*------ columns -------*/
 
 .organizerInPhone {
@@ -1992,6 +2114,26 @@ button {
 }
 
 /*------ personals -------*/
+
+.activeSearch {
+    background-color: #e1e1e1;
+}
+
+.activeSearch .titleBar {
+    color: #000 !important;
+}
+
+.closeTheSearch {
+    width: 50px;
+    height: 50px;
+}
+
+.newSearch {
+    width: 100%;
+    padding-left: 50px;
+    float: right;
+}
+
 .siteGuideline {
     display: block;
     bottom: 0;
@@ -2042,6 +2184,7 @@ button {
     height: 100%;
 }
 .topPopup {
+    display:none;
     position: fixed;
     top: 0;
     right: 0;
@@ -2068,5 +2211,8 @@ button {
 }
 .searchInput {
     width: 100%;
+}
+.standardTopElementalVerticalMargin {
+    margin-top: 1rem;
 }
 }

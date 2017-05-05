@@ -653,13 +653,13 @@ input[type="checkbox"]:checked + label span {
 	float: left;
 	padding: 0 4%;
 	border-right: solid #333 1px;
-	margin-top: 60px;
+	margin-top: 30px;
 	font-family: 'iransfm';
 }
 #ContactPlace {
 	float: left;
 	padding: 0 4%;
-	margin-top: 60px;
+	margin-top: 30px;
 	font-family: 'iransfm';
 }
 #UserControl {
