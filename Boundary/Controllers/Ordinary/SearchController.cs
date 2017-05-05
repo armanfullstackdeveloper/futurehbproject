@@ -14,8 +14,11 @@ namespace Boundary.Controllers.Ordinary
 {
     public class SearchController : BaseController
     {
-        public ActionResult Search()
+        public ActionResult Search(string categoryName="",string subCategoryName = "", string subsubCategoryName = "")
         {
+            ViewBag.CategoryName = string.IsNullOrEmpty(categoryName)?" ": categoryName;
+            ViewBag.SubCategoryName = string.IsNullOrEmpty(subCategoryName)?" ":"-"+subCategoryName;
+            ViewBag.SubSubCategoryName = string.IsNullOrEmpty(subsubCategoryName) ? " " : "-" + subsubCategoryName;
             return View();
         }
 
