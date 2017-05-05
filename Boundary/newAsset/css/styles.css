@@ -357,6 +357,10 @@ button {
     background-color: #eaf4f3;
 }
 
+.lightGreenColor {
+    color: #77e2ae;
+}
+
 .pinkBack {
     background-color: #e91e63 !important;
 }
@@ -439,6 +443,10 @@ button {
 
 .greenBorder {
     border: solid #009688 2px;
+}
+
+.whiteBorder {
+    border: solid #fff 2px;
 }
 
 .darkerGrayBack{
@@ -592,6 +600,10 @@ button {
 
 .standardTopVerticalMargin {
     margin-top: 1rem;
+}
+
+.standardTopElementalVerticalMargin {
+    margin-top: 7rem;
 }
 
 .standardHalfTopVerticalMargin {
@@ -785,14 +797,14 @@ button {
 
 .storeHolder {
     width: 100%;
-    padding-bottom: 100%;
+    padding-bottom: 63%;
     background: url('../images/404.png') no-repeat center;
     background-size: contain;
 }
 
 .words {
     width: 400px;
-    height: 400px;
+    height: 190px;
     background: url('../images/404Word.png') no-repeat center;
     background-size: contain;
 }
@@ -867,6 +879,13 @@ button {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+
+@media only screen and (max-width: 928px) {
+    .words {
+        width: 100%;
     }
 }
 
@@ -2071,6 +2090,14 @@ button {
 
 /*------ texts -------*/
 
+.textInCenterInPhone {
+    text-align: center;
+}
+
+.normalFontSizeInPhone {
+    font-size: 15px !important;
+}
+
 /*------ columns -------*/
 
 .organizerInPhone {
@@ -2184,5 +2211,8 @@ button {
 }
 .searchInput {
     width: 100%;
+}
+.standardTopElementalVerticalMargin {
+    margin-top: 1rem;
 }
 }

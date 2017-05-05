@@ -454,7 +454,6 @@
     <Content Include="Css\ProductRegister\ProductRegister.css" />
     <Content Include="Css\StoreInfo.css" />
     <Content Include="Css\StoreRegister\StoreRegister.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\Font.css" />
     <Content Include="Global.asax" />
     <Content Include="Img\Ad\golBano1.jpg" />

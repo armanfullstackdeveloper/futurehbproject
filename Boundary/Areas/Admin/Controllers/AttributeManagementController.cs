@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Boundary.Controllers.Ordinary;
 using Boundary.Helper;
@@ -17,7 +19,7 @@ namespace Boundary.Areas.Admin.Controllers
     [Authorize(Roles = StaticString.Role_Admin + "," + StaticString.Role_SuperAdmin)]
     public class AttributeManagementController : BaseController
     {
-        public ActionResult Index() 
+        public async Task<ActionResult> Index() 
         {
             try
             {
@@ -31,7 +33,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAllAsync();
+                ViewBag.Categories = await new CategoryBL().GetAllAsync();
                 List<AttributeViewModel> lstAttributes = new AttributeBL().GetByCategoryCodeForShow(null);
                 return View(lstAttributes ?? new List<AttributeViewModel>());
             }
@@ -108,7 +110,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             try
             {
@@ -122,7 +124,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAllAsync();
+                ViewBag.Categories = await new CategoryBL().GetAllAsync();
                 ViewBag.AttributeType = new AttributeTypeBL().SelectAll();
                 return View();
             }
