@@ -175,12 +175,12 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
 
                 SearchResultViewModel searchResult = new SearchResultViewModel();
                 List<ProductAttrbiutesDataModel> lstProductAttrbiutesDataModels = null;
-                using (var multipleResults = await _db.QueryMultipleAsync("Search", parameters,
+                using (var multipleResults = _db.QueryMultiple("Search", parameters,
                     commandType: CommandType.StoredProcedure))
                 {
-                    searchResult.ProductsSummery = multipleResults.Read<ProductSummary>().ToList();
+                    searchResult.ProductsSummery = (await multipleResults.ReadAsync<ProductSummary>()).ToList();
                     if (searchParameters.TileShow != null && (bool)!searchParameters.TileShow)
-                        lstProductAttrbiutesDataModels = multipleResults.Read<ProductAttrbiutesDataModel>().ToList();
+                        lstProductAttrbiutesDataModels = (await multipleResults.ReadAsync<ProductAttrbiutesDataModel>()).ToList();
                     searchResult.ProductsCount = parameters.Get<int>("@productCount");
                 }
                 EnsureCloseConnection(_db);

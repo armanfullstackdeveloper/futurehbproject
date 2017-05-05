@@ -454,7 +454,6 @@
     <Content Include="Css\ProductRegister\ProductRegister.css" />
     <Content Include="Css\StoreInfo.css" />
     <Content Include="Css\StoreRegister\StoreRegister.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\Font.css" />
     <Content Include="Global.asax" />
     <Content Include="Img\Ad\golBano1.jpg" />
@@ -673,7 +672,6 @@
     <Content Include="Img\MainPage\yourStore.png" />
     <Content Include="Js\AllPageNeeded.js" />
     <Content Include="Js\FirstPage.js" />
-    <Content Include="newAsset\404.html" />
     <Content Include="newAsset\css\owl.carousel.min.css" />
     <Content Include="newAsset\images\collection\manto.jpg" />
     <Content Include="newAsset\images\collection\zivar.jpg" />

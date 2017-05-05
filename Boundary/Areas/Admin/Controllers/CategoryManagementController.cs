@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using System.Web;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Boundary.Areas.Admin.Controllers
 {
@@ -78,7 +79,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Create(int level)
+        public async Task<ActionResult> Create(int level)
         {
             try
             {
@@ -92,7 +93,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.Categories = new CategoryBL().GetAllAsync();
+                ViewBag.Categories = await new CategoryBL().GetAllAsync();
                 ViewBag.level = level;
                 return View();
             }
@@ -403,7 +404,7 @@ namespace Boundary.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult Edit(long id, int level) 
+        public async Task<ActionResult> Edit(long id, int level) 
         {
             try
             {
@@ -418,7 +419,7 @@ namespace Boundary.Areas.Admin.Controllers
                 }
 
 
-                ViewBag.Categories = new CategoryBL().GetAllAsync();
+                ViewBag.Categories = await new CategoryBL().GetAllAsync();
                 ViewBag.level = level;
                 return View(new CategoryBL().SelectOne(id));
             }
