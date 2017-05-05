@@ -1,0 +1,548 @@
+﻿@model IEnumerable<DataModel.Models.ViewModel.ShoppingBagViewModel>
+
+
+@{
+    ViewBag.Title = "سبد خرید";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+
+}
+
+<div class="container" ng-controller="orderCtrl">
+
+    <div ng-show="!Data || Data.length==0" style="text-align: center">
+        <div><img src="~/Img/emptyBascket.jpg" /></div>
+        <div>
+            <div> <b>سبد خرید شما خالی است</b></div>
+            <div>
+                برای خرید انواع البسه و سایر لوازم مورد نیاز خود ابتدا وارد شوید و از امکانات کامل ما
+                استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
+                سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید
+            </div>
+        </div>
+    </div>
+    <div class="sizeManager" ng-show="Data && Data.length!= 0">
+        <div class="storeCheck relativeMatter organizer">
+            <!-- dar soorati k mahsool takhfif nadashte bashe -->
+            <div class="storePricesManagement organizer standardVerticalDoubleBottomPadding">
+                <div class="fourSixColumn">
+                    <div class="storeBox reallyLightBack organizer boxElement radiusBox relativeMatter noOverFlows">
+                        <div class="storeName borderBottom loginPadding eightyFontsize thickFont almostGrayColor organizer">
+                            <div class="profilePic goRight relativeMatter standardHorizontalLeftMargin">
+                                <img src="" class="imageInMiddle">
+                                <div class="openUpObject profileMiniBox textInCenter loginPadding boxElement radiusBox relativeMatter">
+                                    <div class="topPointer organizer"></div>
+                                    <div class="profilePic relativeMatter blockInlineMode">
+                                        <img src="" class="imageInMiddle">
+                                    </div>
+                                    <div class="organizer pinkColor">نام فروشگاه</div>
+
+                                    <div class="organizer standardPadding">
+                                        <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
+                                        <div class="fourFullColumns">
+                                            <div class="squareItem relativeMatter">
+                                                <img src="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns">
+                                            <div class="squareItem relativeMatter">
+                                                <img src="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns ">
+                                            <div class="squareItem relativeMatter">
+                                                <img src="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                        <div class="fourFullColumns">
+                                            <div class="squareItem relativeMatter">
+                                                <img src="" class="imageInMiddle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="organizer twelveFontSize pinkColor">مشاهده همه محصولات</div>
+                                </div>
+                            </div>
+                            <span class="goRight standardHalfVerticalMargin" ng-bind="Data[0].StoreName+' فروشگاه '">نام فروشگاه</span>
+                        </div>
+                        <div class="shopList loginPadding organizer">
+                            <!-- be ezaye har mahsool yeki az in boxElement ha repeat mishe -->
+                            <div class="boxElement radiusBox standardVerticalBottomMargin" ng-repeat="item in Data">
+                                <div class="mainShopInfoes">
+                                    <div class="shopContainer">
+                                        <div class="mainInfo goRight listColumn">
+                                            <div class="listHeader loginPadding borderBottom thickFont almostGrayColor">مشخصات اصلی</div>
+                                            <div class="itemContainer thickFont organizer radiusBox standardVerticalBottomMargin relativeMatter loginPadding">
+                                                <div class="organizer">
+                                                    <div class="oneThreeFullColumn">
+                                                        <div class="circleImageContainer">
+                                                            <img ng-src="~/{{item.ImgAddress}}" alt="" class="imageInMiddle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="twoThreeFullColumn">
+                                                        <div class="itemInfoes verticallyInCenter">
+                                                            <div class="pinkColor" ng-bind="item.ProductName">نام محصول</div>
+                                                            <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                            <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                            <div class="itemTags organizer">
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                                <div class="colorInner textInCenter standardHalfHorizontalMargin">
+                                                                    <div class="boxElement radiusBox textInCenter relativeMatter">
+                                                                        <span class="colorCircle objectInMiddle" style="background-color: #f00;"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shopPrice goRight listColumn rightBorder">
+                                            <div class="listHeader  loginPadding borderBottom thickFont almostGrayColor">قیمت محصول</div>
+                                            <div class="priceNotice loginPadding relativeMatter mixHeight">
+                                                <div class="organizer objectInMiddle noWrap textInRight loginPadding">
+                                                    <span class="offPrice lightGray crossOver standardHorizontalLeftMargin">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin">5,290,000 <span class="twelveFontSize">تومان</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shopCount goRight listColumn rightBorder">
+                                            <div class="listHeader  loginPadding borderBottom thickFont almostGrayColor">تعداد سفارش</div>
+                                            <div class="counterContainer textInCenter loginPadding relativeMatter mixHeight">
+
+                                                <div class="objectInMiddle">
+                                                    <div class="organizer">
+                                                        <span class="icon icon-arrow-up2 lightGray pointer" ng-click="CountPlus(item.ProductCode)"></span>
+                                                    </div>
+                                                    <div class="organizer">
+                                                        <span class="changeableWidth eightyFontsize relativeMatter">
+                                                            <span class="objectInMiddle" ng-bind="item.Count">1</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="organizer aLittleFromBottom">
+                                                        <span class="icon icon-arrow-down2  lightGray pointer" ng-click="CountMinus(item.ProductCode)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="shopTotalPrice goRight listColumn rightBorder">
+                                            <div class="listHeader  loginPadding borderBottom thickFont almostGrayColor">قیمت کل</div>
+                                            <div class="organizer textInRight loginPadding relativeMatter mixHeight">
+                                                <div class="organizer objectInMiddle noWrap">
+                                                    <span class="mainPrice redColor twentyTwoFontsize thickFont standardHorizontalLeftMargin loginPadding">5,290,000 <span class="twelveFontSize">تومان</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="deleteList goRight rightBorder relativeMatter lightRedBack pointer" ng-click="RemoveProduct(item.ProductCode)">
+                                    <span class="icon icon-bin objectInMiddle twentyTwoFontsize redColor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bigCartWidth bigCartObjects stickToCenterLeft">
+                            <div class="oneFiveColumn fullHeight stickToCenterRight">
+                                <div class="plusSign organizer">
+                                    <span class="icon icon-plus twentyTwoFontsize objectInMiddle  lightGray"></span>
+                                </div>
+                            </div>
+                            <div class="fourFiveColumn greenCart boxElement radiusBox bigCartSpace standardDoublePadding">
+                                <div class="cartContainer textInCenter thickFont greenColor">
+                                    <div class="cartIcon">
+                                        <img src="~/newAsset/images/truck.svg">
+                                    </div>
+                                    <div class="organizer cartTitle">هزینه ارسال</div>
+                                    <div class="organizer cartPrice eightyFontsize">
+                                        <span>28,000</span> <span class="twelveFontSize">تومان</span>
+                                    </div>
+                                    <div class="organizer cartExplain twelveFontSize darkGray">این محصول دارای هزینه ارسال می باشد</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*تخفیف اگه داشته باشه*@
+            <!-- dar soorati k mahsool takhfif dashte bashe -->
+            @*<div class="storePricesManagement organizer standardVerticalDoubleBottomPadding">
+                    <div class="fiveSixColumn">
+                        <div class="storeBox reallyLightBack organizer boxElement radiusBox relativeMatter noOverFlows">
+
+                            <div class="storeName borderBottom loginPadding eightyFontsize thickFont almostGrayColor organizer">
+                                <div class="profilePic goRight relativeMatter standardHorizontalLeftMargin">
+                                    <img src="" class="imageInMiddle">
+                                    <div class="openUpObject profileMiniBox textInCenter loginPadding boxElement radiusBox relativeMatter">
+                                        <div class="topPointer organizer"></div>
+                                        <div class="profilePic relativeMatter blockInlineMode">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                        <div class="organizer pinkColor">نام فروشگاه</div>
+
+                                        <div class="organizer standardPadding">
+                                            <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
+                                            <div class="fourFullColumns">
+                                                <div class="squareItem relativeMatter">
+                                                    <img src="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="fourFullColumns">
+                                                <div class="squareItem relativeMatter">
+                                                    <img src="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="fourFullColumns ">
+                                                <div class="squareItem relativeMatter">
+                                                    <img src="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                            <div class="fourFullColumns">
+                                                <div class="squareItem relativeMatter">
+                                                    <img src="" class="imageInMiddle">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="organizer twelveFontSize pinkColor">مشاهده همه محصولات</div>
+                                    </div>
+                                </div>
+                                <span class="goRight standardHalfVerticalMargin">نام فروشگاه</span>
+                            </div>
+
+                            <div class="shopList loginPadding standardVerticalBottomMargin organizer">
+                                <div class="fourFiveColumn">
+                                    <div class="boxElement radiusBox">
+                                        <div class="mainShopInfoes">
+                                            <div class="shopContainer">
+                                                <div class="mainInfo goRight listColumn">
+                                                    <div class="listHeader loginPadding borderBottom thickFont almostGrayColor">مشخصات اصلی</div>
+                                                    <div class="itemContainer thickFont organizer radiusBox standardVerticalBottomMargin relativeMatter loginPadding">
+                                                        <div class="organizer">
+                                                            <div class="oneThreeFullColumn">
+                                                                <div class="circleImageContainer">
+                                                                    <img src="" alt="" class="imageInMiddle">
+                                                                </div>
+                                                            </div>
+                                                            <div class="twoThreeFullColumn">
+                                                                <div class="itemInfoes verticallyInCenter">
+                                                                    <div class="pinkColor">برند: <span>Apple</span></div>
+                                                                    <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                                    <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                                    <div class="itemTags organizer">
+                                                                        <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                                        <div class="colorInner textInCenter standardHalfHorizontalMargin">
+                                                                            <div class="boxElement radiusBox textInCenter relativeMatter">
+                                                                                <span class="colorCircle objectInMiddle" style="background-color: #f00;"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="shopPrice goRight listColumn rightBorder">
+                                                    <div class="listHeader loginPadding borderBottom thickFont almostGrayColor">قیمت محصول</div>
+                                                    <div class="priceNotice loginPadding relativeMatter mixHeight">
+                                                        <div class="organizer objectInMiddle noWrap textInRight loginPadding">
+                                                            <span class="offPrice lightGray crossOver standardHorizontalLeftMargin">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin">290,000 <span class="twelveFontSize">تومان</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="shopCount goRight listColumn rightBorder">
+                                                    <div class="listHeader  loginPadding borderBottom thickFont almostGrayColor">تعداد سفارش</div>
+                                                    <div class="counterContainer textInCenter loginPadding relativeMatter mixHeight">
+
+                                                        <div class="objectInMiddle">
+                                                            <div class="organizer">
+                                                                <span class="icon icon-arrow-up2 lightGray"></span>
+                                                            </div>
+                                                            <div class="organizer">
+                                                                <span class="changeableWidth eightyFontsize relativeMatter">
+                                                                    <span class="objectInMiddle">12</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="organizer aLittleFromBottom">
+                                                                <span class="icon icon-arrow-down2  lightGray"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="shopTotalPrice goRight listColumn rightBorder">
+                                                    <div class="listHeader loginPadding borderBottom thickFont almostGrayColor">قیمت کل</div>
+                                                    <div class="organizer textInRight loginPadding relativeMatter mixHeight">
+                                                        <div class="organizer objectInMiddle noWrap">
+                                                            <span class="mainPrice redColor twentyTwoFontsize thickFont standardHorizontalLeftMargin loginPadding">5,290,000 <span class="twelveFontSize">تومان</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="deleteList goRight rightBorder relativeMatter lightRedBack">
+                                            <span class="icon icon-bin objectInMiddle twentyTwoFontsize redColor"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oneFiveColumn">
+                                    <div class="organizer">
+                                        <div class="oneFiveColumn fullHeight">
+                                            <div class="plusSign organizer relativeMatter innerPlus">
+                                                <span class="icon icon-plus twentyTwoFontsize objectInMiddle  lightGray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="fourFiveColumn goLeft pinkCart boxElement radiusBox innerCart relativeMatter">
+                                            <div class="cartContainer textInCenter thickFont pinkColor">
+                                                <div class="objectInMiddle">
+                                                    <div class="cartIcon giftBoxIcon">
+                                                        <img src="~/newAsset/images/giftBox.svg">
+                                                    </div>
+                                                    <div class="organizer cartTitle">دارای تخفیف</div>
+                                                    <div class="organizer cartPrice eightyFontsize">
+                                                        <span>5 درصد</span></span>
+                                                    </div>
+                                                    <div class="organizer cartExplain twelveFontSize darkGray">این محصول دارای تخفیف می باشد</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="smallCartWidth smallCartStickToCenterLeft">
+                                <div class="oneFiveColumn fullHeight stickToCenterRight">
+                                    <div class="plusSign organizer">
+                                        <span class="icon icon-plus twentyTwoFontsize objectInMiddle  lightGray"></span>
+                                    </div>
+                                </div>
+                                <div class="fourFiveColumn goLeft greenCart boxElement radiusBox smallCartSpace standardDoublePadding">
+                                    <div class="cartContainer textInCenter thickFont greenColor">
+                                        <div class="cartIcon">
+                                            <img src="~/newAsset/images/truck.svg">
+                                        </div>
+                                        <div class="organizer cartTitle">هزینه ارسال</div>
+                                        <div class="organizer cartPrice eightyFontsize">
+                                            <span>28,000</span> <span class="twelveFontSize">تومان</span>
+                                        </div>
+                                        <div class="organizer cartExplain twelveFontSize darkGray">این محصول دارای هزینه ارسال می باشد</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <div class="organizer separatorLine standardVerticalBottomMargin"></div>
+        <div class="organizer">
+            <div class="fourColumns goLeft standardVerticalDoubleBottomMargin">
+                <div class="organizer radiusBox standardHalfPadding textInRight noWrap">
+                    <span class="greenColor eightyFontsize thickFont darkGray goRight twoFullColumn smallestVerticalPadding">قیمت کل: </span>
+                    <span class="mainPrice greenColor twentyTwoFontsize thickFont goRight twoFullColumn">290,000 <span class="twelveFontSize">تومان</span></span>
+                </div>
+                <div class="organizer radiusBox standardHalfPadding textInRight noWrap">
+                    <span class="greenColor eightyFontsize thickFont darkGray goRight twoFullColumn smallestVerticalPadding">مجموع تخفیف: </span>
+                    <span class="mainPrice greenColor twentyTwoFontsize thickFont goRight twoFullColumn">290,000 <span class="twelveFontSize">تومان</span></span>
+                </div>
+                <div class="organizer radiusBox standardHalfPadding textInRight noWrap">
+                    <span class="greenColor eightyFontsize thickFont darkGray goRight twoFullColumn smallestVerticalPadding">هزینه ارسال: </span>
+                    <span class="mainPrice greenColor twentyTwoFontsize thickFont goRight twoFullColumn">290,000 <span class="twelveFontSize">تومان</span></span>
+                </div>
+                <div class="organizer radiusBox standardHalfPadding textInRight noWrap">
+                    <span class="greenColor eightyFontsize thickFont darkGray goRight twoFullColumn standardHalfVerticalPadding">مبلغ قابل پرداخت: </span>
+                    <span class="mainPrice pinkColor thirtyFontsize thickFont goRight twoFullColumn"><span ng-bind="AllTotalPrice">290,000</span>  <span class="twelveFontSize">تومان</span></span>
+                </div>
+            </div>
+            <div class="twoColumn">
+                <div class="organizer backToHome textInCenter orangeCart boxElement radiusBox loginPadding">
+                    <div class="oneFourFullColumn">
+
+                        <img class="topSvgHandler" src="~/newAsset/images/specialDiscount.svg">
+                    </div>
+                    <div class="threeFourFullColumn standardHorizontalPadding">
+                        <div class="organizer thickFont twentyTwoFontsize solidLineHeight orangeColor">کد تخفیف</div>
+                        <div class="organizer explain standardVerticalMargin thickFont">اگر از طرف شخص خاصی معرفی شده اید و کد تخفیف به شما اختصاص داده شده است لطفا کد را در باکس زیر وارد نمایید</div>
+                        <div class="organizer offCode">
+                            <div class="threeFourFullColumn standardHalfHorizontalPadding">
+                                <input type="text" placeholder="کد را وارد کنید" class="standardInput">
+                            </div>
+                            <div class="oneFourFullColumn">
+                                <div class="outlineButton orangeBorder thickFont orangeColor standardPadding">اعمال تخفیف</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oneSixColumn orangeCart boxElement radiusBox innerCart relativeMatter shorterHeight">
+                <div class="cartContainer textInCenter thickFont orangeColor">
+                    <div class="objectInMiddle">
+                        <div class="cartIcon">
+                            <img src="~/newAsset/images/credit-card.svg">
+                        </div>
+                        <div class="organizer cartTitle">تخفیف ویژه</div>
+                        <div class="organizer cartPrice eightyFontsize">
+                            <span>30 درصد</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fullWidth nextAction elementTopVerticalMargin">
+            <div class="twoColumn">
+                <div class="organizer backToHome textInCenter pinkCart boxElement radiusBox loginPadding">
+                    <div class="oneFourFullColumn">
+
+                        <img class="topSvgHandler" src="~/newAsset/images/livingRoom.svg">
+                    </div>
+                    <div class="threeFourFullColumn standardHorizontalPadding">
+                        <div class="organizer thickFont twentyTwoFontsize solidLineHeight pinkColor">برگشت به خانه</div>
+                        <div class="organizer explain standardVerticalMargin thickFont">
+                            انصراف از خرید و بازگشت به صفحه اصلی هوجی بوجی (درصورت انصراف
+                            از خرید های خود میتوانید از این طریق به صفحه اصلی ما بازگردید)
+                        </div>
+                        <div class="organizer guideline">
+                            <a href="/">
+                                <div class="outlineButton pinkBorder thickFont pinkColor standardPadding">برگشت</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="twoColumn">
+                <div class="organizer backToHome textInCenter greenCart boxElement radiusBox loginPadding">
+                    <div class="oneFourFullColumn">
+
+                        <img class="topSvgHandler" src="~/newAsset/images/completeShop.svg">
+                    </div>
+                    <div class="threeFourFullColumn standardHorizontalPadding">
+                        <div class="organizer thickFont twentyTwoFontsize solidLineHeight greenColor">تکمیل فرایند خرید</div>
+                        <div class="organizer explain standardVerticalMargin thickFont">
+                            در صورت اتمام خرید و مطمئن شدن از خریدتان دکمه زیر را لمس یا
+                            کلیک کنید تا به مرحله بعدی هدایت شوید
+                        </div>
+                        <div class="organizer guideline">
+                            @using Boundary.Helper.StaticValue
+                            @using Microsoft.AspNet.Identity
+
+                            @if (Request.IsAuthenticated)
+                            {
+                                <a class="btn btn-success" href="~/Order/MemberInfo">
+                                    <div class="outlineButton greenBorder thickFont greenColor standardPadding">تکمیل خرید</div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success" href="~/Order/MemberLogin">
+                                    <div class="outlineButton greenBorder thickFont greenColor standardPadding">تکمیل خرید</div>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section Script{
+    <script>
+        var data= @Html.Raw(Json.Encode(Model));
+    </script>
+    <script src="~/newAsset/js/order.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="container" ng-app="ShopApp" ng-controller="ShowOrderController">
+
+        <div class="emptyCartShopNotice" ng-show="Data.length==0">
+            <div class="guideBox">
+                <div class="imagePart"><img src="~/Img/emptyBascket.jpg" class="imageInMiddle" /></div>
+                <div class="textFieldPart">
+                    <div class="headerPart">سبد خرید شما خالی است</div>
+                    <div class="contentPart">برای خرید انواع البسه و سایر لوازم مورد نیاز خود ابتدا وارد شوید و از امکانات کامل ما
+     استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
+    سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید</div>
+                </div>
+                <div class="buttonPart"><a href="/"><button>ورود</button></a></div>
+            </div>
+        </div>
+        <table class="firstHide table  table-borderd table-hover table-stariped" style="float:right;direction: rtl; margin:30px auto;" ng-show="Data.length>0" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
+            <tr>
+                <th style=" text-align: center;"></th>
+                <th style=" text-align: center;">نام محصول</th>
+                <th style=" text-align: center;">نام فروشگاه</th>
+                <th style=" text-align: center;">تعداد</th>
+                 <th style=" text-align: center;">قیمت واحد</th>
+                <th style=" text-align: center;">قیمت کل</th>
+             </tr>
+            <tr ng-repeat=" item in Data" >
+                <td style=" text-align: center;"><div class="tablePicHandler"><img width="60" ng-src="~/{{item.ImgAddress}}" /></div></td>
+                <td style=" text-align: center;" ng-bind="item.ProductName"></td>
+                <td style=" text-align: center;" ng-bind="item.StoreName"></td>
+                <td style=" text-align: center; font-size: 17px;">
+                    <i class="glyphicon glyphicon-plus" style="cursor:pointer" ng-click="CountPlus(item.ProductCode )"></i>
+                    <p ng-bind="item.Count"></p>
+                    <i class="glyphicon glyphicon-minus"  style="cursor:pointer" ng-click="CountMinus(item.ProductCode)"></i>
+                </td>
+                 <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
+                <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
+                <td style=" text-align: center;">
+                    <div class="removeItem"  ng-click="RemoveProduct(item.ProductCode)"></div>
+                </td>
+            </tr>
+            <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                 <td></td>
+                <td style=" text-align: center;">مجموع خرید</td>
+                <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
+            </tr>
+
+        </table>
+
+        <div ng-show="Data.length>0"  class="firstHide">
+            @using Boundary.Helper.StaticValue
+            @using Microsoft.AspNet.Identity
+
+            @if (Request.IsAuthenticated)
+            {
+
+                        <a class="btn btn-success" href="~/Order/MemberInfo">تکمیل خرید</a>
+             }
+            else
+            {
+                <a class="btn btn-success" href="~/Order/MemberLogin">تکمیل خرید</a>
+            }
+            <a class="btn btn-info" href="/">بازگشت به صفحه اول</a>
+        </div>
+
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+

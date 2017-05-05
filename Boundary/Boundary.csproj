@@ -675,6 +675,8 @@
     <Content Include="newAsset\css\owl.carousel.min.css" />
     <Content Include="newAsset\images\collection\manto.jpg" />
     <Content Include="newAsset\images\collection\zivar.jpg" />
+    <Content Include="newAsset\js\order.js" />
+    <Content Include="newAsset\js\getProduct.js" />
     <Content Include="newAsset\js\layout.js" />
     <Content Include="newAsset\js\index.js" />
     <Content Include="Js\OLD\Common.js" />
@@ -904,6 +906,7 @@
     <Content Include="Views\Static\UserGuid.cshtml" />
     <Content Include="Views\Static\Law - Copy.cshtml" />
     <Content Include="Views\Shared\_LayoutNew.cshtml" />
+    <Content Include="Views\Order\Index - Copy.cshtml" />
     <None Include="Web References\com.arianpal.merchant\WebService.disco" />
     <Content Include="Web References\mellipayamak\MessagesBL.datasource">
       <DependentUpon>Reference.map</DependentUpon>
