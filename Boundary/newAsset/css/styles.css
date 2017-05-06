@@ -849,6 +849,12 @@ button {
         left: 10px;
     }
 
+     .threeFourFullColumn .allInfo  .offValue {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
     .cartHeight {
         height: 70px;
     }
@@ -1025,6 +1031,11 @@ button {
 }
 
 .outlineButton.greenBorder:hover {
+    background-color: #009688;
+    color: #fff !important;
+}
+
+.outlineButton.greenBorder .fieldPart:hover {
     background-color: #009688;
     color: #fff !important;
 }
