@@ -441,8 +441,16 @@ button {
     border: solid #e91e63 2px;
 }
 
+.rightPinkBorder {
+    border-right: solid #e91e63 2px;
+}
+
 .greenBorder {
     border: solid #009688 2px;
+}
+
+.rightGreenBorder {
+    border-right: solid #009688 2px;
 }
 
 .whiteBorder {
@@ -453,8 +461,20 @@ button {
     background-color: #d5d5d5;
 }
 
+.darkGray {
+    background-color: #868686;
+}
+
+.darkGrayColor {
+    color: #868686;
+}
+
 .bottomGrayBorder {
     border-bottom: solid #e1e1e1 1px;
+}
+
+.rightGrayBorder {
+    border-right: solid #e1e1e1 1px;
 }
 
 .bottomDarkerGrayBorder {
@@ -465,6 +485,10 @@ button {
     width: 1px;
     height: 100%;
     background-color: #f1f1f1;
+}
+
+.compeletRadius {
+    border-radius: 50%;
 }
 
 /*-----------------text elements ----------------------*/
@@ -484,6 +508,10 @@ button {
 
 .standardBottomVerticalPadding {
     padding-bottom: 1rem;
+}
+
+.standardBottomVerticalMargin {
+    margin-bottom: 1rem;
 }
 
 .standardPaddingForlogin {
@@ -602,6 +630,10 @@ button {
     margin-top: 1rem;
 }
 
+.standardTopDoubleVerticalMargin {
+    margin-top: 2rem;
+}
+
 .standardTopElementalVerticalMargin {
     margin-top: 7rem;
 }
@@ -618,8 +650,16 @@ button {
     padding-right: 1rem;
 }
 
+.standardRightVerticalPadding {
+    margin-right: 1rem;
+}
+
 .standardHorizontalLeftPadding {
     padding-left: 1rem;
+}
+
+.standardRightDoubleVerticalMargin {
+    margin-right: 2rem;
 }
 
 /*------------------- standard distances -----------------*/
@@ -896,6 +936,31 @@ button {
 }
 
 /*-------------------- personal elements ------------------*/
+
+.mediumCircle {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: -10px;
+    top: 5px;
+}
+
+.smallCircle {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: -7px;
+    top: 5px;
+}
+
+.mainTitleSubject {
+    margin-bottom: 1rem;
+}
+
+.smallSub  {
+    padding-right: 1rem;
+}
+
 .container {
     box-sizing: border-box;
     font-family: 'iransfm';
@@ -1928,6 +1993,11 @@ button {
 
 .button_text {
     display: none !important;
+}
+
+.staticCover {
+    background-color: #2bafaf;
+    height: 300px;
 }
 
 /*------------------- collection boxes -----------------*/
