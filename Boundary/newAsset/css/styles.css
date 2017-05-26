@@ -337,8 +337,24 @@ button {
     color: #e97b1e;
 }
 
+.telegramColor {
+    color: #35ade1;
+}
+
+.telegramBack {
+    background-color: #35ade1;
+}
+
+.cherryColor {
+    color: #e13535;
+}
+
+.cherryBack {
+    background-color: #e13535;
+}
+
 .orangeBack {
-    background-color: #e97b1e;
+    background-color: #e97b1e !important;
 }
 
 .orangeBorder {
@@ -485,6 +501,13 @@ button {
     width: 1px;
     height: 100%;
     background-color: #f1f1f1;
+}
+
+.inMiddle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .compeletRadius {
@@ -769,6 +792,12 @@ button {
     float: right;
 }
 
+.oneThreeColumn {
+    width: 31.33333333333334%;
+    float: right;
+    margin-left: 2%;
+}
+
 .fourSixColumn {
     width: 66.66666666666668%;
     float: right;
@@ -936,6 +965,25 @@ button {
 }
 
 /*-------------------- personal elements ------------------*/
+
+.socialCover {
+    height: 250px;
+    background: url('/newAsset/images/telegram.jpg') no-repeat center;
+}
+
+.instagramCover {
+    height: 250px;
+    background: url('/newAsset/images/instagram.jpg') no-repeat center;
+}
+
+.googleCover {
+    height: 250px;
+    background: url('/newAsset/images/google.jpg') no-repeat center;
+}
+
+.telegramWidth {
+    width: 30px;
+}
 
 .mediumCircle {
     width: 18px;
@@ -1348,6 +1396,10 @@ button {
     overflow: hidden;
 }
 
+.middleContext {
+    vertical-align: middle;
+}
+
 .smallExplain {
     color: #b7b7b7;
     font-size: 9px;
@@ -1480,6 +1532,11 @@ button {
 
 .itemContainer {
     overflow: hidden;
+}
+
+.flatRadiusBox {
+    border-radius: 15px;
+    box-shadow: 0 0 22px #e2e2e2;
 }
 
 .searchActivate.searchField {
