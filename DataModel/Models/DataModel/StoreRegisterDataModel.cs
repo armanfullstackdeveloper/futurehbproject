@@ -69,6 +69,7 @@ namespace DataModel.Models.DataModel
         
         public string Website { get; set; }
 
+        public string HomePage { get; set; } 
         #endregion
 
 
