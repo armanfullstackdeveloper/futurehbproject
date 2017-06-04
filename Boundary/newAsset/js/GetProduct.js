@@ -3,10 +3,13 @@
     $scope.Data = data;
     $scope.noProductPic = "Img/MainPage/NoProductPic.png";
     $scope.noStorePic = "Img/MainPage/NoStorePic.png";
+    $scope.owl1Data;
+    $scope.owl2Data;
     var root = "http://hoojibooji.com/";
     var lat = $scope.Data.StoreSummery.Latitude;
     var longi = $scope.Data.StoreSummery.Longitude;
     var owl1, owl2;
+
 
     console.log($scope.Data)
 
@@ -157,6 +160,8 @@
 
 
                     if (type == 'RelatedProduct') {
+                        $scope.owl1Data=result;
+
                         $('.owlSlider1').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
                             $('.owlSlider1').append(createProductHtml(value, type));
@@ -164,12 +169,15 @@
                         initOwl(type, owl1);
                     }
                     else if (type == 'OtherShopProduct') {
+                        $scope.owl2Data=result;
+
                         $('.owlSlider2').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
                             $('.owlSlider2').append(createProductHtml(value, type));
                         });
                         initOwl(type, owl2)
                     }
+                    $scope.$apply();
 
                 }
             },
@@ -180,8 +188,7 @@
     }
 
     function initOwl(type, owl) {
-        var selector;
-        if (type == 'RelatedProduct') {
+         if (type == 'RelatedProduct') {
             owl = $('.owlSlider1').owlCarousel({
                 rtl: true,
                 loop: false,

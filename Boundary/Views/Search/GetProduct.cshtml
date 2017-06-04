@@ -85,46 +85,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="organizer features standardVerticalMargin">
+                        <div class="organizer features standardVerticalMargin"ng-show="Data.ProductAttrbiutesViewModels" >
                             <div class="tableShape boxElement radiusBox thickFont">
-                                <div class="tRow organizer borderBottom relativeMatter">
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">رزولوشن تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
+                                <div class="tRow organizer borderBottom relativeMatter" >
+                                    <div ng-repeat="item in Data.ProductAttrbiutesViewModels">
+                                        <div class="twoFullColumn" ng-show="$index %2 == 0">
+                                            <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
+                                            <div class="tValue goLeft standardPadding">
+                                                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+                                                @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
+                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                            </div>
+                                        </div>
+                                        <div class="twoFullColumn" ng-show="$index %2 != 0">
+                                            <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
+                                            <div class="tValue goLeft standardPadding">
+                                                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+                                                @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
+                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">اندازه تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">15 inch</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tRow organizer borderBottom relativeMatter">
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">رزولوشن تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                        </div>
-                                    </div>
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">اندازه تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">15 inch</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                  
+                                 </div>
+                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="organizer newProducts standardVerticalMargin">
+            <div class="organizer newProducts standardVerticalMargin"  ng-show="owl1Data">
                 <div class="boxElement radiusBox">
                     <div class="titleBar organizer eightyFontsize thickFont loginPadding">
                         <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مشابه </div>
@@ -160,22 +149,26 @@
                 </div>
             </div>
             <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
-            <div class="organizer">
+            @*<div class="organizer">
                 <div class="mapHolder relativeMatter">
                     <div id="MiniMapHolder"></div>
                     <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
                 </div>
-            </div>
+            </div>*@
             <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.Place">
                 <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
                 <div class="organizer" ng-bind="Data.StoreSummery.Place">
                 </div>
             </div>
+            <div class="organizer standardPadding borderBottom" ng-show="!Data.StoreSummery.Place">
+                <div class="organizer standardHalfVerticalMargin thickFont">فروشگاه مجازی</div>
+                 
+            </div>
             <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.PhoneNumber">
                 <div class="organizer standardHalfVerticalMargin thickFont">شماره تلفن</div>
                 <div class="organizer"><span ng-bind="Data.StoreSummery.PhoneNumber"></span></div>
             </div>
-            <div class="organizer standardPadding borderBottom">
+            <div class="organizer standardPadding borderBottom" ng-show="owl2Data">
                 <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
                 <div class="fullWidth relativeMatter noBack">
                     <div class="arrows owl-nav1">
