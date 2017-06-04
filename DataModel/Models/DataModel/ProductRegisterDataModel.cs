@@ -81,6 +81,7 @@ namespace DataModel.Models.DataModel
 
         [Display(Name = "نام کالا")]
         public string Name { get; set; }
+        public string Detailes { get; set; }
 
         public List<long> Colors { get; set; }
 

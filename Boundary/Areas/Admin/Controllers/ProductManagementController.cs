@@ -37,7 +37,7 @@ namespace Boundary.Areas.Admin.Controllers
                 }
 
                 ViewBag.Categories = await new CategoryBL().GetAllAsync();
-                var result = await new ProductBL().Search(new SearchParametersDataModel(), null);
+                var result = await new ProductBL().SearchAsync(new SearchParametersDataModel(), null);
                 return View(result.ProductsSummery);
             }
             catch (MyExceptionHandler exp1)
@@ -84,7 +84,7 @@ namespace Boundary.Areas.Admin.Controllers
                     return null;
                 }
 
-                var result = await new ProductBL().Search(filters, (status == null) ? null : new List<EProductStatus>() { (EProductStatus)status }, productCode);
+                var result = await new ProductBL().SearchAsync(filters, (status == null) ? null : new List<EProductStatus>() { (EProductStatus)status }, productCode);
                 return PartialView("_ProductSummery", result.ProductsSummery);
             }
             catch (MyExceptionHandler exp1)

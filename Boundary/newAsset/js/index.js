@@ -2,7 +2,6 @@
 
      $scope.noProductPic = "Img/MainPage/NoProductPic.png";
      $scope.noStorePic = "Img/MainPage/NoStorePic.png";
-
      var root = "http://hoojibooji.com/";
      var owl1, owl2, owl3, owl4, owl5;
      loadCustomBox();
@@ -18,6 +17,7 @@
              url: "/api/product/search",
              data: {
                  sortBy: type,
+                 SearchPlace: 1,//FirstPage
                  PageNumber: 1,
                  RowsPage: 10
              },
@@ -90,6 +90,7 @@
              type: "POST",
              url: "/api/product/search",
              data: {
+                 SearchPlace: 1,//FirstPage
                  sortBy: type,
                  PageNumber: PageNumber,
                  RowsPage: 10
@@ -159,6 +160,7 @@
      function createProductHtml(value) {
          if (value.ImgAddress == null) value.ImgAddress = $scope.noProductPic;
          var PriceTemp = value.Price + '';
+         if (value.DiscountedPrice) PriceTemp = value.DiscountedPrice + '';
          PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
 

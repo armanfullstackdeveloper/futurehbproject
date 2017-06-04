@@ -67,6 +67,8 @@ namespace DataModel.Entities.RelatedToProduct
         public string ImgAddress { get; set; }
 
         public EProductStatus Status { get; set; }
+
+        public string Detailes { get; set; } 
     }
 
     

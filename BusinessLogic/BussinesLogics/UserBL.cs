@@ -154,7 +154,7 @@ namespace BusinessLogic.BussinesLogics
                         Name = HelperFunctionInBL.GetVariableName(() => username),
                         Value = username
                     },
-                                        new ActionInputViewModel()
+                    new ActionInputViewModel()
                     {
                         Name = HelperFunctionInBL.GetVariableName(() => password),
                         Value = password

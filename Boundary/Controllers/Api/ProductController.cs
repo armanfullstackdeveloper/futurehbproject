@@ -54,7 +54,7 @@ namespace Boundary.Controllers.Api
                                 return Json(JsonResultHelper.FailedResultWithMessage());
                             break;
                         }
-                        
+
 
                 }
                 return Json(JsonResultHelper.SuccessResult(completeProduct));
@@ -138,7 +138,7 @@ namespace Boundary.Controllers.Api
                 if (store == null)
                     haveImage = true;
 
-                SearchResultViewModel result = await new ProductBL().Search(searchParameters: filters, status: lstStatus, haveImage: haveImage);
+                SearchResultViewModel result = await new ProductBL().SearchAsync(searchParameters: filters, status: lstStatus, haveImage: haveImage);
 
                 //اگه قرار بود محصولات معلقو هم بیاره باید  فقط اونایی رو بیاره که مال خود فروشگاه لاگین باشند
                 //یعنی نباید معلق های بقیه رو ببینه
@@ -146,6 +146,21 @@ namespace Boundary.Controllers.Api
                 {
                     result.ProductsSummery.RemoveAll(
                         p => p.StoreCode != store.StoreCode && (p.Status == EProductStatus.Suspended || p.Status == EProductStatus.New));
+                }
+
+                switch (filters.SearchPlace)
+                {
+                    case SearchPlace.Non:
+                        break;
+                    case SearchPlace.FirstPage:
+                        result.ProductsSummery.Shuffle();
+                        break;
+                    case SearchPlace.SearchPage:
+                        break;
+                    case SearchPlace.ProductDetails:
+                        break;
+                    case SearchPlace.StoreHomePage:
+                        break;
                 }
                 return Json(JsonResultHelper.SuccessResult(result));
             }
