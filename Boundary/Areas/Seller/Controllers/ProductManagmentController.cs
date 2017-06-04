@@ -127,11 +127,6 @@ namespace Boundary.Areas.Seller.Controllers
                 {
                     List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
                     {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => X),
-                        //    Value = X
-                        //},
                     };
                     long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
@@ -147,11 +142,6 @@ namespace Boundary.Areas.Seller.Controllers
                 {
                     List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
                     {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => X),
-                        //    Value = X
-                        //},
                     };
                     long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);

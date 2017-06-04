@@ -109,7 +109,7 @@ namespace Boundary.Controllers.Api
             try
             {
                 var result = await new StoreBL().GetNewest(cityCode, pageNumber, rowspPage);
-                result.ToList().Shuffle();
+                result.Shuffle();
                 return Json(JsonResultHelper.SuccessResult(result));
             }
             catch (MyExceptionHandler exp1)
