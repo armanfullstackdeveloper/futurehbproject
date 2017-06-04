@@ -119,7 +119,7 @@
 
 
     loadInitProduct('RelatedProduct');
-    //loadInitProduct('OtherShopProduct');
+    loadInitProduct('OtherShopProduct');
 
     function loadInitProduct(type) {
 
@@ -128,7 +128,7 @@
             data = {
                 sortBy: 3,//پر بازدید ترین ها
                 SearchPlace: 3,//ProductDetails
-                CategoryCode:$scope.Data.Product.CategoryCode,
+                CategoryCode: $scope.Data.Product.CategoryCode,
                 PageNumber: 1,
                 RowsPage: 10
             }
@@ -154,23 +154,22 @@
                     return;
                 }
                 if (result.Response.ProductsSummery.length > 0) {
-                   
+
 
                     if (type == 'RelatedProduct') {
                         $('.owlSlider1').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
-                            $('.owlSlider1').append(createProductHtml(value));
+                            $('.owlSlider1').append(createProductHtml(value, type));
                         });
                         initOwl(type, owl1);
-                        console.log('`sads')
                     }
                     else if (type == 'OtherShopProduct') {
                         $('.owlSlider2').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
-                            $('.owlSlider2').append(createProductHtml(value));
+                            $('.owlSlider2').append(createProductHtml(value, type));
                         });
                         initOwl(type, owl2)
-                    } 
+                    }
 
                 }
             },
@@ -182,52 +181,76 @@
 
     function initOwl(type, owl) {
         var selector;
-        if (type == 'RelatedProduct') { selector=1 }
-        else if (type == 'OtherShopProduct') { selector=2}
-
-        owl = $('.owlSlider' + selector).owlCarousel({
-            rtl: true,
-            loop: false,
-            margin: 10,
-            center: false,
-            nav: false,
-            items: 5,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 5
-                }
-            }
-        }); 
-        
         if (type == 'RelatedProduct') {
-            $(".prev1" ).click(function () {
+            owl = $('.owlSlider1').owlCarousel({
+                rtl: true,
+                loop: false,
+                margin: 10,
+                center: false,
+                nav: false,
+                items: 5,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+
+
+        }
+        else if (type == 'OtherShopProduct') {
+            owl = $('.owlSlider2' ).owlCarousel({
+                rtl: true,
+                loop: false,
+                margin: 10,
+                center: false,
+                nav: false,
+                items: 4,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+
+        }
+
+
+        if (type == 'RelatedProduct') {
+            $(".prev1").click(function () {
                 owl.trigger('prev.owl.carousel');
             });
-            $(".next1" ).click(function () {
+            $(".next1").click(function () {
                 owl.trigger('next.owl.carousel');
             });
         }
         else if (type == 'OtherShopProduct') {
-            $(".prev2" ).click(function () {
+            $(".prev2").click(function () {
                 owl.trigger('prev.owl.carousel');
             });
             $(".next2").click(function () {
                 owl.trigger('next.owl.carousel');
             });
-       }
-       
+        }
+
         owl.on('changed.owl.carousel', function (event) {
             if (!event.item || (event.item.index + event.page.size + 4 >= event.item.count)) {
                 if ($scope.loading) return;
                 $scope.loading = true;
                 loadNewProduct(event, type);
-                
+
             }
         });
     }
@@ -266,7 +289,7 @@
         $.ajax({
             type: "POST",
             url: "/api/product/search",
-            data:data,
+            data: data,
             success: function (result) {
                 $scope.loading = false;
                 if (result.Success != true) {
@@ -276,7 +299,7 @@
                 setTimeout(function (index, value) {
                     if (result.Response.ProductsSummery.length > 0) {
                         $.each(result.Response.ProductsSummery, function (index, value) {
-                            event.relatedTarget.add(createProductHtml(value))
+                            event.relatedTarget.add(createProductHtml(value, type))
                         })
                         event.relatedTarget.update();
                     }
@@ -290,25 +313,35 @@
         });
     }
 
-    function createProductHtml(value) {
+    function createProductHtml(value, type) {
         if (value.ImgAddress == null) value.ImgAddress = $scope.noProductPic;
         var PriceTemp = value.Price + '';
         if (value.DiscountedPrice) PriceTemp = value.DiscountedPrice + '';
         PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        var html
+        if (type == 'RelatedProduct') {
+            html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="borderRight item">'
+                  + ' <div class="organizer standardVerticalMargin">'
+                  + '<div class="circleImageContainer">'
+                  + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='نام_فروشگاه=" + value.StoreName + '/نام_محصول=' + value.Name + "/قیمت=" + PriceTemp + "تومان' class='imageInMiddle'>"
+                  + ' </div></div>'
+                  + ' <div class="organizer pinkColor">' + value.Name + '</div>'
+                  + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
+                  + ' </div></a>';
+        }
+        else if (type == 'OtherShopProduct') {
 
-
-        var html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="borderRight item">'
-               + ' <div class="organizer standardVerticalMargin">'
-               + '<div class="circleImageContainer">'
+            html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="fourFullColumns item">'
+              + ' <div class="squareItem relativeMatte">'
                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='نام_فروشگاه=" + value.StoreName + '/نام_محصول=' + value.Name + "/قیمت=" + PriceTemp + "تومان' class='imageInMiddle'>"
-               + ' </div></div>'
-               + ' <div class="organizer pinkColor">' + value.Name + '</div>'
-               + ' <div class="organizer smallExplain">قیمت' + PriceTemp + 'تومان ' + '</div>'
-               + ' </div></a>';
+              + ' </div>'
+              + ' </div></a>';
+        }
         return html;
-    } 
+
+    }
+
 
     $('#mainContainer').slideDown();
 }]);
 
- 

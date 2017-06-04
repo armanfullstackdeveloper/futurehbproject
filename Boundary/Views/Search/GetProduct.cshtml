@@ -127,8 +127,7 @@
             <div class="organizer newProducts standardVerticalMargin">
                 <div class="boxElement radiusBox">
                     <div class="titleBar organizer eightyFontsize thickFont loginPadding">
-                        <div class="goRight"><span class="icon icon-price-tags"></span> جدیدترین محصولات </div>
-                        @*<div class="goLeft">بیشتر ببینید ...</div>*@
+                        <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مشابه </div>
                     </div>
                     <div class="innerBox carouselContainer organizer thickFont relativeMatter">
                         <div class="arrows owl-nav1">
@@ -150,37 +149,6 @@
                     </div>
                 </div>
             </div>
-
-            @*<div class="organizer newProducts">
-                <div class="boxElement radiusBox">
-                    <div class="titleBar organizer eightyFontsize thickFont loginPadding">
-                        <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مرتبط </div>
-                    </div>
-                    <div class="innerBox carouselContainer organizer thickFont relativeMatter">
-                        <div class="arrows owl-nav1">
-                            <div class="rightArrow rightArrowShadow defaultArrow owl-prev prevRelatedProduct pointer">
-                                <div class="circleAroundArrow objectInMiddle">
-                                    <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
-                                </div>
-                            </div>
-                            <div class="leftArrow leftArrowShadow defaultArrow owl-next nextRelatedProduct pointer">
-                                <div class="circleAroundArrow objectInMiddle">
-                                    <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carouselInner">
-                            <div class="carouselInner">
-                                <div class="sixColumn borderRight">
-                                    <div class="owl-carousel owl-theme owlSliderRelatedProduct">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>*@
         </div>
 
     </div>
@@ -188,7 +156,7 @@
         <div class="boxElement textInCenter organizer radiusBox relativeMatter">
             <div class="organizer sellerLogo standardHalfVerticalMargin">
                 <div class="circleImageContainer">
-                    <img ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
+                    <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
                 </div>
             </div>
             <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
@@ -211,41 +179,48 @@
                 <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
                 <div class="fullWidth relativeMatter noBack">
                     <div class="arrows owl-nav1">
-                        <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
+                        <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev2 pointer">
                             <div class="circleAroundArrow objectInMiddle">
                                 <span class="icon icon-arrow-right2 objectInMiddle"></span>
                             </div>
                         </div>
-                        <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
+                        <div class="leftArrow leftArrowShadow defaultArrow owl-next next2 pointer">
                             <div class="circleAroundArrow objectInMiddle">
                                 <span class="icon icon-arrow-left2 objectInMiddle"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="minorWidth elementInMiddle">
-                        <div class="minorOrganizer">
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
+                    <div class="carouselInner">
+                        <div class="owl-carousel owl-theme owlSlider2">
+                            <div class="minorWidth elementInMiddle">
+                                <div class="minorOrganizer">
+                                    <div class="fourFullColumns">
+                                        <div class="squareItem relativeMatter">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                    </div>
+                                    @*<div class="fourFullColumns">
+                                        <div class="squareItem relativeMatter">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                    </div>
+                                    <div class="fourFullColumns ">
+                                        <div class="squareItem relativeMatter">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                    </div>
+                                    <div class="fourFullColumns">
+                                        <div class="squareItem relativeMatter">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div> 
                         </div>
                     </div>
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                    <div class="fourFullColumns ">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                            </div>
-                        </div>
+
+
+                  
                 </div>
             </div>
             <div class="organizer standardPadding borderBottom">
@@ -255,7 +230,6 @@
     </div>
 </div>
 
-</div>
 
 
 @section Script{
