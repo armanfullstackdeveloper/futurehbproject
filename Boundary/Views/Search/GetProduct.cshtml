@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "نام محصول : "+ Model.Product.Name + " , قیمت: " + Model.Product.Price+ " , نام فروشگاه : " + Model.StoreSummery.Name;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
 @section Style{
@@ -11,8 +11,6 @@
     <link href="~/Content/ImageGallery/gallery.css" rel="stylesheet" />
     <link href="~/Content/ImageMagnifier/jQuery.MagnifierRentgen.min.css" rel="stylesheet" />
     <link href="~/Content/MterialDesign/Material_Tab.css" rel="stylesheet" />
-
-
 }
 
 <div id="Middle" ng-app="ShopApp" ng-controller="ShowProductController">

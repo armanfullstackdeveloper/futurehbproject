@@ -2,6 +2,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="~/Img/MainPage/Logo.png" type="image/x-icon" />
+    <link rel='icon' href="~/Img/MainPage/Logo.png" type='image/x-icon' />
+    <link rel='apple-touch-icon' href="img/logo.png" />
+    <meta http-equiv="content-language" content="fa" />
+    <meta name="keywords" content="خرید آنلاین ، خرید پستی ، ساخت فروشگاه ، فروشگاه ساز ، ساخت فروشگاه آنلاین " />
+    <meta name="description" content="خرید آنلاین انواع محصولات از هزاران فروشگاه با پرداخت آنلاین و ارسال توسط پست" />
+
     <title>@ViewBag.Title</title>
     <link href="~/Css/boilerplate.css" rel="stylesheet" />
     <link href="~/Css/Common.css" rel="stylesheet" />
@@ -112,10 +120,9 @@
                             </div>
                         </div>
                         <div class="orgenizer">
-                            <div style=" color:red; text-align:center" id="registerStatus"></div>
+                            <div style="color:red; text-align:center" id="registerStatus"></div>
                             <div style="display:none;color:red; text-align:center" id="Alert_UserName_Wait">لطفا کمی صبر کنید</div>
                             <div style="display:none; color:#10de03;text-align:center" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
-
                             <div class="buttonPart redBack topMargin bottomShape"><button id="register">ثبت نام</button></div>
                         </div>
                     </div>
@@ -130,8 +137,8 @@
             <div id="TopDrawer">
                 <div id="LogoHolder">
                     <div id="LogoPlace"><a href="~/"><img src="~/Img/MainPage/Logo.png" alt="Hooji Booji"></a></div>
-                    <div id="AboutPlace"> <a href="~/Home/AboutUs">درباره ما</a></div>
-                    <div id="ContactPlace"> <a href="~/Home/ContactUs">تماس با ما</a></div>
+                    <div id="AboutPlace"> <a href="~/Static/AboutUs">درباره ما</a></div>
+                    <div id="ContactPlace"> <a href="~/Static/ContactUs">تماس با ما</a></div>
                 </div>
                 <div id="UserControl">
                     @if (Request.IsAuthenticated)
@@ -179,10 +186,10 @@
                         {
                             <a href="@Url.Action("Index", "Panel", new { area = "Member" }, null)">
                                 <div class="HolderIcon">
-                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل کاربری</span></div>
+                                    <div id="yourStore" class="IconContoller"><span class="IconOrgenizer">پنل کاربری</span></div>
                                 </div>
                             </a>
-                            <a href="~/Home/UserGuid">
+                            <a href="~/Static/UserGuid">
                                 <div class="HolderIcon">
                                     <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
                                 </div>
@@ -217,7 +224,7 @@
                             </div>
                         </a>
 
-                        <a href="~/Home/UserGuid">
+                        <a href="~/Static/UserGuid">
                             <div class="HolderIcon">
                                 <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
                             </div>
@@ -323,8 +330,10 @@
 
             <div id="BottomDrawer">
                 <div id="Application">
-                    <div id="DownloadGuide">نرم افزار هوجی بوجی را دانلود کنید</div>
-                    <div id="DownloadIcon"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
+                    <a href="cafebazaar.ir/app/com.milad.hoojibooji.hoojiboojifinall/?l=fa">
+                        <div id="DownloadGuide">نرم افزار هوجی بوجی را دانلود کنید</div>
+                        <div id="DownloadIcon"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
+                    </a>
                 </div>
                 <div id="ProductMobileOrgenizer">دسته بندی ها</div>
                 <div id='cssmenu'>
@@ -1418,18 +1427,20 @@
             </div>
             <div id="ContactAndAbout">
                 <div id="ContactUs" style="font-size: 17px;">
-                    <div id="TitleCU"><a href="/Home/Low">قوانین سایت</a></div>
-                    <div id="TitleCU"><a href="/Home/ContactUs">تماس با ما</a></div>
-                    <div id="TitleCU"><a href="/Home/AboutUs">درباره ما</a></div>
-                    <div id="TitleCU"><a href="/Home/Complaints">شکایات ، پیشنهادات</a></div>
+                    <div id="TitleCU"><a href="/Static/Law">قوانین سایت</a></div>
+                    <div id="TitleCU"><a href="/Static/ContactUs">تماس با ما</a></div>
+                    <div id="TitleCU"><a href="/Static/AboutUs">درباره ما</a></div>
+                    <div id="TitleCU"><a href="/Static/Complaints">شکایات ، پیشنهادات</a></div>
 
                 </div>
 
                 <div id="DownloadApp">
-                    <div id="TitleDA" class="FooterFont">دانلود اپلیکیشن برنامه</div>
-                    <div id="DAAppDLlinks">
-                        <div id="AndroidAppDlFooter"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
-                    </div>
+                    <a href="cafebazaar.ir/app/com.milad.hoojibooji.hoojiboojifinall/?l=fa">
+                        <div id="TitleDA" class="FooterFont">دانلود اپلیکیشن برنامه</div>
+                        <div id="DAAppDLlinks">
+                            <div id="AndroidAppDlFooter"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
+                        </div>
+                    </a>
                 </div>
                 <!--<div id="AboutUs">
                     <div id="TitleAU" class="FooterFont">درباره ما</div>
@@ -1447,11 +1458,11 @@
         <div id="LeftSideFooter">
             <div id="UserArea">
                 <div id="TitleUA" style="font-size: 17px;">هوجی بوجی واژه ای است که ریشه ای مازنی داشته و به معنای جستجو کردن و انتخاب بهترین ها می باشد</div>
-               
+
                 <img id='rgvldrftxlapwmcsxlap' style='width: 17%;cursor: pointer; float: left; margin: -1px 0 -131px 70px;' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=51383&p=yncrnbpdfuixaqgwfuix", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=51383&p=fujylznbvjymukaqvjym' />
 
-                
-                 @*<div id="UAitems">
+
+                @*<div id="UAitems">
                         <ul>
                             <li>ورود به سایت</li>
                             <li>ثبت نام در سایت</li>
@@ -1822,7 +1833,7 @@
                     $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
                     send = "";
                 }
-            }); 
+            });
 
         }
 
@@ -1857,5 +1868,19 @@
     </script>
 
     @RenderSection("Script", false)
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-90647252-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
 </body>
 </html>

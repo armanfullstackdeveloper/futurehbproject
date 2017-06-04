@@ -337,8 +337,24 @@ button {
     color: #e97b1e;
 }
 
+.telegramColor {
+    color: #35ade1;
+}
+
+.telegramBack {
+    background-color: #35ade1;
+}
+
+.cherryColor {
+    color: #e13535;
+}
+
+.cherryBack {
+    background-color: #e13535;
+}
+
 .orangeBack {
-    background-color: #e97b1e;
+    background-color: #e97b1e !important;
 }
 
 .orangeBorder {
@@ -441,8 +457,16 @@ button {
     border: solid #e91e63 2px;
 }
 
+.rightPinkBorder {
+    border-right: solid #e91e63 2px;
+}
+
 .greenBorder {
     border: solid #009688 2px;
+}
+
+.rightGreenBorder {
+    border-right: solid #009688 2px;
 }
 
 .whiteBorder {
@@ -453,8 +477,20 @@ button {
     background-color: #d5d5d5;
 }
 
+.darkGray {
+    background-color: #868686;
+}
+
+.darkGrayColor {
+    color: #868686;
+}
+
 .bottomGrayBorder {
     border-bottom: solid #e1e1e1 1px;
+}
+
+.rightGrayBorder {
+    border-right: solid #e1e1e1 1px;
 }
 
 .bottomDarkerGrayBorder {
@@ -465,6 +501,17 @@ button {
     width: 1px;
     height: 100%;
     background-color: #f1f1f1;
+}
+
+.inMiddle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.compeletRadius {
+    border-radius: 50%;
 }
 
 /*-----------------text elements ----------------------*/
@@ -484,6 +531,10 @@ button {
 
 .standardBottomVerticalPadding {
     padding-bottom: 1rem;
+}
+
+.standardBottomVerticalMargin {
+    margin-bottom: 1rem;
 }
 
 .standardPaddingForlogin {
@@ -602,6 +653,10 @@ button {
     margin-top: 1rem;
 }
 
+.standardTopDoubleVerticalMargin {
+    margin-top: 2rem;
+}
+
 .standardTopElementalVerticalMargin {
     margin-top: 7rem;
 }
@@ -618,8 +673,16 @@ button {
     padding-right: 1rem;
 }
 
+.standardRightVerticalPadding {
+    margin-right: 1rem;
+}
+
 .standardHorizontalLeftPadding {
     padding-left: 1rem;
+}
+
+.standardRightDoubleVerticalMargin {
+    margin-right: 2rem;
 }
 
 /*------------------- standard distances -----------------*/
@@ -727,6 +790,12 @@ button {
 .twoSixColumn {
     width: 33.33333333333334%;
     float: right;
+}
+
+.oneThreeColumn {
+    width: 31.33333333333334%;
+    float: right;
+    margin-left: 2%;
 }
 
 .fourSixColumn {
@@ -849,6 +918,12 @@ button {
         left: 10px;
     }
 
+     .threeFourFullColumn .allInfo  .offValue {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
     .cartHeight {
         height: 70px;
     }
@@ -890,6 +965,50 @@ button {
 }
 
 /*-------------------- personal elements ------------------*/
+
+.socialCover {
+    height: 250px;
+    background: url('/newAsset/images/telegram.jpg') no-repeat center;
+}
+
+.instagramCover {
+    height: 250px;
+    background: url('/newAsset/images/instagram.jpg') no-repeat center;
+}
+
+.googleCover {
+    height: 250px;
+    background: url('/newAsset/images/google.jpg') no-repeat center;
+}
+
+.telegramWidth {
+    width: 30px;
+}
+
+.mediumCircle {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: -10px;
+    top: 5px;
+}
+
+.smallCircle {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: -7px;
+    top: 5px;
+}
+
+.mainTitleSubject {
+    margin-bottom: 1rem;
+}
+
+.smallSub  {
+    padding-right: 1rem;
+}
+
 .container {
     box-sizing: border-box;
     font-family: 'iransfm';
@@ -1025,6 +1144,11 @@ button {
 }
 
 .outlineButton.greenBorder:hover {
+    background-color: #009688;
+    color: #fff !important;
+}
+
+.outlineButton.greenBorder .fieldPart:hover {
     background-color: #009688;
     color: #fff !important;
 }
@@ -1272,6 +1396,10 @@ button {
     overflow: hidden;
 }
 
+.middleContext {
+    vertical-align: middle;
+}
+
 .smallExplain {
     color: #b7b7b7;
     font-size: 9px;
@@ -1404,6 +1532,11 @@ button {
 
 .itemContainer {
     overflow: hidden;
+}
+
+.flatRadiusBox {
+    border-radius: 15px;
+    box-shadow: 0 0 22px #e2e2e2;
 }
 
 .searchActivate.searchField {
@@ -1917,6 +2050,11 @@ button {
 
 .button_text {
     display: none !important;
+}
+
+.staticCover {
+    background-color: #2bafaf;
+    height: 300px;
 }
 
 /*------------------- collection boxes -----------------*/

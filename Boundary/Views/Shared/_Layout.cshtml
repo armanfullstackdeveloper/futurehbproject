@@ -1,1868 +1,600 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html lang="fa">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.title</title>
     <link rel="shortcut icon" href="~/Img/MainPage/Logo.png" type="image/x-icon" />
     <link rel='icon' href="~/Img/MainPage/Logo.png" type='image/x-icon' />
     <link rel='apple-touch-icon' href="img/logo.png" />
     <meta http-equiv="content-language" content="fa" />
-    <meta name="keywords" content="خرید آنلاین ، خرید پستی ، ساخت فروشگاه ، فروشگاه ساز ، ساخت فروشگاه آنلاین " />
-    <meta name="description" content="خرید آنلاین انواع محصولات از هزاران فروشگاه با پرداخت آنلاین و ارسال توسط پست" />
-
-    <title>@ViewBag.Title</title>
-    <link href="~/Css/boilerplate.css" rel="stylesheet" />
-    <link href="~/Css/Common.css" rel="stylesheet" />
-    <link href="~/fonts/Font.css" rel="stylesheet" />
+    <meta name="keywords" content="@ViewBag.keywords " />
+    <meta name="description" content="@ViewBag.description" />
+    <link rel="stylesheet" href="~/newAsset/css/styles.css">
+    <link rel="stylesheet" href="~/newAsset/css/icons.css">
 
     @RenderSection("Style", false)
 </head>
-<body>
+<body ng-app="app" >
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
     {
         @Html.AntiForgeryToken()
     }
-    @using Boundary.Controllers.Ordinary    @using Boundary.Helper.StaticValue
-    @using Microsoft.AspNet.Identity
 
-    @{
-        long storeCode = 0;
-        string homePage = "";
-    }
-    @if (Request.IsAuthenticated)
-    {
-        <div class="showUserName">
-            <div class="userNameWelcom">خوش آمدید</div>
-            @if (User.IsInRole(StaticString.Role_Seller))
-            {
-                string userId = User.Identity.GetUserId();
-                MainSession mainSession = (MainSession)Session[userId];
-                if (mainSession != null)
-                {
-                    storeCode = mainSession.Store.StoreCode;
-                    homePage = mainSession.Store.HomePage;
-                }
-                <a href="~/shop?id=@storeCode">
-                    <div class="goToStoreAdmin">فروشگاه شما</div>
-                </a>
-            }
-        </div>
-    }
-    <div class="gridContainer clearfix">
-
-
-        <div id="LogInOpen">
-            <div id="ForClose"></div>
-            <form id="loginFrm">
-                <div id="LogInOHolder">
-                    <div id="SubjectAndClose">
-                        <div id="CloseOnly">
-                            <div id="CloseOnlyHolder"></div>
-                        </div>
-                        <div id="SubjectOnly">
-                            ورود
-                            <p>برای ورود به سایت  نام فرم زیر را پر نمایید</p>
-                        </div>
-
-                    </div>
-                    <div id="UserNameLogIn">
-                        <input id="UserName" type="text" tabindex="1" placeholder="تلفن همراه">
-                    </div>
-                    <div id="PasswordLogIn">
-                        <input id="Password" type="password" tabindex="2" placeholder="رمز عبور">
-                    </div>
-                    @*<div id="EnterLogIn" style=" margin-top: 26px;">
-                            <input id="RegisterBtn" type="button" value="عضویت">
-                        </div>*@
-                    <div id="MemmoryLogIn">
-                        <input type="checkbox" id="c1" name="cc" />
-                        <label for="c1"><span></span>رمز عبور را بخاطر بسپار</label>
-                    </div>
-                    <div id="EnterLogIn">
-                        <input id="EnterBtn" type="button" tabindex="3" value="ورود">
-                    </div>
-                </div>
-            </form>
-            <div id="LogInFaild"></div>
-            <div id="LogInSucseed"></div>
-        </div>
-
-        <div class="orgenizer registerBox" style=" display:none">
-            <div class="boxesForFields">
-
-                <div class="transparentBack"></div>
-                <div class="popUpLimiter">
-                    <div class="closeThePopup"></div>
-                    <div class="orgenizer threeColumns" style="width: 100%;">
-                        <div class="imagePart"><img src="~/Img/step_1.jpg" class="imageInMiddle" /></div>
-                        <div class="textFieldPart">
-                            <div class="headerPart" style="width: 100%;">لطفا مشخصات کاربری خود را وارد کنید</div>
-                            <div class="contentPart">
-                                <div class="inputField orgenizer">
-                                    <div class="label orgenizer">شماره تماس</div>
-                                    <div class="textBoxInput orgenizer"><input type="tel" id="UserNameTxt" /></div>
-                                </div>
-                                <div class="inputField orgenizer">
-                                    <div class="label orgenizer">رمز عبور</div>
-                                    <div class="textBoxInput orgenizer"><input type="password" id="PasswordTxt" /></div>
-                                </div>
-
-                                @*<div class="inputField orgenizer">
-                                        <div class="label orgenizer">تکرار رمز عبور</div>
-                                        <div class="textBoxInput orgenizer"><input type="password" id="ConfirmPasswordTxt" /></div>
-                                    </div>*@
-
-                                <div class="inputField orgenizer" id="Verify_Code" style="display:none;">
-                                    <div class="label orgenizer">کد فعال سازی را وارد نمایید</div>
-                                    <div class="textBoxInput orgenizer"><input type="text" id="VerifyTxt" placeholder="کد فعالسازی خود را وارد کنید" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="orgenizer">
-                            <div style="color:red; text-align:center" id="registerStatus"></div>
-                            <div style="display:none;color:red; text-align:center" id="Alert_UserName_Wait">لطفا کمی صبر کنید</div>
-                            <div style="display:none; color:#10de03;text-align:center" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
-                            <div class="buttonPart redBack topMargin bottomShape"><button id="register">ثبت نام</button></div>
-                        </div>
-                    </div>
-                </div>
-                <!--
-                <div class="succesfullSign">ثبت نام شما با موفقیت انجام شد</div>
-                          -->
-            </div>
-
-        </div>
-        <header id="HeadSection">
-            <div id="TopDrawer">
-                <div id="LogoHolder">
-                    <div id="LogoPlace"><a href="~/"><img src="~/Img/MainPage/Logo.png" alt="Hooji Booji"></a></div>
-                    <div id="AboutPlace"> <a href="~/Home/AboutUs">درباره ما</a></div>
-                    <div id="ContactPlace"> <a href="~/Home/ContactUs">تماس با ما</a></div>
-                </div>
-                <div id="UserControl">
+    <header class="container" ng-controller="layoutCtrl">
+        <div class="sizeManager">
+            <div class="header">
+                <div class="organizer mainHeader elementTopVerticalMargin noTopMarginInPhone HalfHorizontalPaddingInPhone standardVerticalPaddingInPhone">
+                    @using Boundary.Controllers.Ordinary    @using Boundary.Helper.StaticValue
+                    @using Microsoft.AspNet.Identity
+                    @{
+                        long storeCode = 0;
+                        string homePage = "";
+                    }
                     @if (Request.IsAuthenticated)
                     {
-                        <a href="~/Account/LogOff">
-                            <div class="HolderIcon">
-                                <div id="LogOut" class="IconContoller"><span class="IconOrgenizer">خروج</span></div>
-                            </div>
-                        </a>
-
                         if (User.IsInRole(StaticString.Role_Seller))
                         {
-                            <a href="@Url.Action("SellerPanel", "StoreManagment", new { area = "Seller" }, null)">
-                                <div class="HolderIcon">
-                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
-                                </div>
-                            </a>
+                            string userId = User.Identity.GetUserId();
+                            MainSession mainSession = (MainSession)Session[userId];
+                            if (mainSession != null)
+                            {
+                                storeCode = mainSession.Store.StoreCode;
+                                homePage = mainSession.Store.HomePage;
+                            }
 
-                            @*<a href="~/Panel">
-                                    <div class="HolderIcon">
-                                        <div id="yourStore" class="  IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
+                            <div class="afterLogin primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <div class="storeFrontPage profilePic goRight relativeMatter">
+                                    <img src="" class="imageInMiddle">
+                                    <div class="openUpObject profileMiniBox textInCenter standardDoublePadding boxElement radiusBox relativeMatter">
+                                        <div class="topPointer organizer"></div>
+                                        <div class="profilePic relativeMatter blockInlineMode elementTopVerticalMargin">
+                                            <img src="" class="imageInMiddle">
+                                        </div>
+                                        <a href="~/shop?id=@storeCode">
+                                            <div class="organizer darkGray standardHalfVerticalMargin">مشاهده فروشگاهتان</div>
+                                        </a>
+
+                                        @*<div class="organizer standardVerticalMargin">تغییر رمز عبور</div>*@
+                                        <div class="exitMode organizer">
+                                            <a href="~/Account/LogOff">
+                                                <div class="outlineButton redBack thickFont standardPadding whiteColor elementTopVerticalMargin"><span class="icon icon-exit"></span> خروج</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </a>*@
-                            <a href="~/shop?id=@storeCode">
-                                <div class="HolderIcon">
-                                    <div id="yourStore" class="Blue IconContoller"><span class="IconOrgenizer">فروشگاه شما</span></div>
                                 </div>
-                            </a>
-                            <a href="~/Home/UserGuid">
-                                <div class="HolderIcon">
-                                    <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
-                                </div>
-                            </a>
+
+                                <a href="~//Seller/StoreManagment/SellerPanel" class="pinkColor">
+                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>پنل مدیریت </div>
+                                </a>
+                                <a href="~/Seller/ProductManagment/AddProduct">
+                                    <div class="thickFont siteGuideline standardPadding goRight pinkBorder outlineButton pinkColor"><span class="icon icon-box-add standardHorizontalLeftMargin twentyTwoFontsize"></span>افزودن محصول جدید</div>
+                                </a>
+                            </div>
+
 
                         }
                         if (User.IsInRole(StaticString.Role_Admin) || User.IsInRole(StaticString.Role_SuperAdmin))
                         {
-                            <a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)">
-                                <div class="HolderIcon">
-                                    <div id="yourStore" class=" IconContoller"><span class="IconOrgenizer">پنل مدیریت</span></div>
-                                </div>
-                            </a>
+                            <div class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)">
+                                    <span class="goRight"><span class="icon icon-user-tie"></span> صفحه مدیریت </span>
+                                </a>
+                                <span class="veryLightColor goRight standardHorizontalMargin">|</span>
+                                <a href="~/Account/LogOff">
+                                    <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
+                                </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"><div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+                            </div>
+
                         }
                         if (User.IsInRole(StaticString.Role_Member))
                         {
-                            <a href="@Url.Action("Index", "Panel", new { area = "Member" }, null)">
-                                <div class="HolderIcon">
-                                    <div id="yourStore" class="IconContoller"><span class="IconOrgenizer">پنل کاربری</span></div>
-                                </div>
-                            </a>
-                            <a href="~/Home/UserGuid">
-                                <div class="HolderIcon">
-                                    <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
-                                </div>
-                            </a>
+                            <div class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
+                                <a href="@Url.Action("Index", "Panel", new { area = "Member" }, null)">
+                                    <span class="goRight"><span class="icon icon-user-tie"></span> صفحه مدیریت </span>
+                                </a>
+                                <div class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin relativeMatter shopBasketOpener">
+                                    @*<span class="counter twelveFontSize greenBack totalRadius smallPadding whiteColor">1</span>*@
+                                    <a href="~/Order">
+                                        <span class="icon icon-credit-card"></span> سبد خرید شما
+                                    </a>
+                                    <!-- hover for bascket-->
+                                    @*<div class="openUpObject shopBasket boxElement radiusBox goRight">
 
+                                            <div class="topPointer organizer"></div>
+                                            <div class="forOverFlow">
+                                                <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
+                                                    <div class="oneThreeFullColumn">
+                                                        <div class="circleImageContainer">
+                                                            <img src="" alt="" class="imageInMiddle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="twoThreeFullColumn">
+                                                        <div class="itemInfoes verticallyInCenter">
+                                                            <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                            <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                            <div class="itemTags organizer">
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                            <a href="~/Order">
-                                <div class="HolderIcon">
-                                    <div id="shopBascket" class="DarkRed IconContoller"><span class="IconOrgenizer">سبد خرید</span></div>
+                                                <div class="itemContainer thickFont organizer loginPadding relativeMatter borderBottom">
+                                                    <div class="oneThreeFullColumn">
+                                                        <div class="circleImageContainer">
+                                                            <img src="" alt="" class="imageInMiddle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="twoThreeFullColumn">
+                                                        <div class="itemInfoes verticallyInCenter">
+                                                            <div class="itemTitle greenColor organizer">iphone 6S 64GB</div>
+                                                            <div class="itemDetail organizer smallExplain">دستگاه آیفون سون کارکرده با قیمت مناسب</div>
+                                                            <div class="itemTags organizer">
+                                                                <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack">نام فروشگاه</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
                                 </div>
-                            </a>
+                                <a href="~/Account/LogOff">
+                                    <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
+                                </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"><div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
+                            </div>
+
                         }
-
-                        @*<div class="HolderIcon">
-                                   <p>خوش آمدی </p><span>@User.Identity.GetUserName()</span>
-                            </div>*@
                     }
                     else
                     {
-                        <div class="HolderIcon">
-                            <div id="LogIn" class="Green IconContoller"><span class="IconOrgenizer"> ورود</span></div>
+                        <div class="primaryOptions pinkColor solidLineHeight thickFont goRight hiddenInPhone">
+                            <span class="goRight pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
+                            <span class="borderInBothSides goRight standardHorizontalPadding standardHorizontalMargin pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
+                            <a href="~/Static/UserGuid" class="pinkColor"><span class="goRight standardHalfHorizontalLeftMargin pointer"><span class="icon icon-compass2 "></span> راهنمای سایت </span></a>
+                            <a href="~/Store/AddStore" class="pinkColor">
+                                <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor">
+                                    <span class="icon icon-file-text movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>ثبت فروشگاه
+                                </div>
+                            </a>
                         </div>
-                        @*<a href="~/Account/RegisterMember">*@
-
-                        <div class="HolderIcon">
-                            <div id="SignUp" class=" IconContoller"><span class="IconOrgenizer"> عضویت</span></div>
+                        <!-- roo navigation click shod navigationOpen baz mishe. khasiate toggle dare yni dobare click shod baste ham bshe-->
+                        <div class="navigation pointer goRight doublePrefer relativeMatter">
+                            <!-- class topLine ve line vaghti ezafe mishe k roo navigation click bshe-->
+                            <div id="line1" class="line organizer blackBack"></div>
+                            <!--<div class="line organizer blackBack topLine"></div>-->
+                            <div id="line2" class="line organizer smallVerticalMargin blackBack"></div>
+                            <!-- class bottomLine ve line vaghti ezafe mishe k roo navigation click bshe-->
+                            <div id="line3" class="line organizer blackBack"></div>
+                            <!--<div class="line organizer blackBack bottomLine"></div>-->
                         </div>
-                        @*</a>*@
-                        <a href="~/Store/AddStore">
-                            <div class="HolderIcon">
-                                <div id="storeRegister" class="Blue IconContoller"><span class="IconOrgenizer">ثبت فروشگاه </span></div>
-                            </div>
-                        </a>
 
-                        <a href="~/Home/UserGuid">
-                            <div class="HolderIcon">
-                                <div id="Favorites" class="DarkRed IconContoller"><span class="IconOrgenizer">راهنما</span></div>
+                        <div class="navigationPanel">
+                            <!-- roo in click shod navigation baste beshe-->
+                            <div class="outside pointer" style="display: none;"></div>
+                            <div class="navigationOpen rightPopUp grayBack prefer" style="display: none;">
+                                <div class="userActs organizer">
+                                    <span class="goLeft standardHorizontalLeftMargin pointer" ng-click="showLoginBox();"><span class="icon icon-user-check pointer"></span> ورود</span>
+                                    <span class="goLeft standardHorizontalPadding pointer"><span class="icon icon-user-plus"></span> <span ng-click="showRegisterBox();"> ثبت نام</span></span>
+                                </div>
+                                <div class="separateLine darkerGrayBack organizer standardTopVerticalMargin"></div>
+                                <div class="categories">
+                                    <!-- be ezaye har ye doone item category yki az ina tekrar mishe-->
+                                    <div class="organizer grayBack bottomGrayBorder" ng-repeat="menu in allMenu">
+                                        <span class="organizer standardPadding thickFont pointer" ng-click="showSubmenu($event)"> {{menu.Name}}<span class="icon icon-arrow-down2 goLeft moveFromTop"></span></span>
+                                        <!-- in div zir shakhe category hast-->
+                                        <div class="submenu">
+                                            <div class="organizer darkerGrayBack standardPadding pointer thickFont bottomDarkerGrayBorder" ng-repeat="subMenu in menu.SubCategories"><a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
 
-                        <a href="~/Order">
-                            <div class="HolderIcon">
-                                <div id="shopBascket" class="DarkRed IconContoller"><span class="IconOrgenizer">سبد خرید</span></div>
+                        </div>
+
+                        <div class="goRight hiddenInDesktop">
+                            <div class="goRight textInRight">
+                                <a href="~/Store/AddStore" class="pinkColor">
+                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor">
+                                        <span class="icon icon-file-text movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>ثبت فروشگاه
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        </div>
+
                     }
-
-
-                    <div class="HolderIcon">
-                        <div id="Search" class="GreenAndBlue IconContoller"><span class="IconOrgenizer">جست و جو</span></div>
-                    </div>
-                    <div id="SearchOpen">
-                        <div id="TextField">
-                            <input type="text" id="SearchTextBox" placeholder="جست و جو">
-                        </div>
-                        <div id="Search_ButtonOpen">
-                            <input type="button">
-                        </div>
-
-
-                        <div id="Search_Task_Open">
-                            <div id="JustStore">
-                                <div id="SeachInStores">
-                                    <div id="Subject_Store_Search">
-                                        <p>فروشگاه ها</p>
-                                    </div>
-                                    <div id="SearchInStoreHolder">
-                                        <!--
-                                        <div id="NoStoreFind"> </div>
-                                        !-->
-                                        <!--<div class="Store_Search_Inner">
-                                            <div class="Store_Search_Inner_Pic"><img src="Img/MainPage/NoStorePic.png" alt=""/></div>
-                                            <div class="Store_Search_Inner_Rap">
-                                                <div class="S_name_Rap">فروشگاه داداشیای سالخورده دارغوز اباد
-                                                    غربی</div>
-                                                <div class="S_City_Rap">کهکیلویه و بویر احمد</div>
-                                            </div>
-                                        </div>-->
-                                    </div>
-
-                                    <div class="Load" id="LoadStore">
-                                        <div class="LoadMiddleHolderSearch">
-                                            <div class="LoadHolderSearch">
-                                                <div class="LoadinIcon"></div>
-                                                <div class="LoadinIconSeconde"></div>
-                                                <div class="LoadinIconThird"></div>
-                                            </div>
-                                        </div>
-                                        <div class="TextLoadSearch">لطفا صبر کنید</div>
-                                    </div>
-
-
-                                </div>
-                                <div class="More">بیشتر</div>
+                    <div class="searchPart goRight standardHorizontalMargin hiddenInPhone">
+                        <!--
+                             <div class="searchType goLeft">
+                             <div class="selectbox relativeMatter standardPadding goLeft">
+                                 <span class="icon-select-arrow goLeft"></span>
+                                 <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
+                                 <div class="options">
+                                     <div class="optionInner"></div>
+                                 </div>
+                             </div>
+                         </div>
+                        -->
+                        <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
+                        <div id="searchField1" class="searchField  goLeft standardPadding relativeMatter standardHorizontalLeftMargin">
+                            <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
+                            <div class="searchTextPart goLeft">
+                                <input id="SearchTextBox1" type="text" placeholder="فروشگاه یا کالای خود را بیابید" class="SearchTextBox searchInput thickFont darkGray" />
                             </div>
-                            <div id="JustProduct">
-                                <div id="SeachInProducts">
-                                    <div id="Subject_Product_Search">
-                                        <p>محصولات</p>
-                                    </div>
-                                    <div id="SearchInProductHolder">
-                                        <!--
-                                        <div id="NoProductFind"> </div>
-                                        !-->
-                                        <!--<div class="Product_Search_Inner">
-                                            <div class="Product_Search_Inner_Pic"><img src="Img/MainPage/NoProductPic.png" alt=""/></div>
-                                            <div class="Product_Search_Inner_Rap">
-                                                <div class="P_name_Rap">product number one in the scene
-                                                    here for search</div>
-                                                <div class="P_City_Rap">کهکیلویه و بویر احمد</div>
-                                                <div class="P_Store_Rap">شیر سماور سازان خاور میانه</div>
-                                            </div>
-                                        </div>-->
-                                    </div>
-
-                                    <div class="Load" id="LoadProduct">
-                                        <div class="LoadMiddleHolderSearch">
-                                            <div class="LoadHolderSearch">
-                                                <div class="LoadinIcon"></div>
-                                                <div class="LoadinIconSeconde"></div>
-                                                <div class="LoadinIconThird"></div>
-                                            </div>
+                            <!-- box search in hast k baz mishe -->
+                            <div id="Search_Task_Open1" class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
+                                <div class="verticalLine objectInMiddle"></div>
+                                <div class="twoFullColumn searchInProducts">
+                                    <div class="noProductFound textInCenter" ng-hide="searchResult.ProductsResult.length>0">
+                                        <div class="organizer">
+                                            <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
                                         </div>
-                                        <div class="TextLoadSearch">لطفا صبر کنید</div>
+                                        <div class="organizer thickFont">محصولی یافت نشد</div>
+                                        <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
                                     </div>
-                                </div>
-                                <div class="More">بیشتر</div>
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div id="BottomDrawer">
-                <div id="Application">
-                    <div id="DownloadGuide">نرم افزار هوجی بوجی را دانلود کنید</div>
-                    <div id="DownloadIcon"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
-                </div>
-                <div id="ProductMobileOrgenizer">دسته بندی ها</div>
-                <div id='cssmenu'>
-                    <div id="Return"></div>
-                    <ul>
-                        <li class='has-sub'>
-                            <a class="digital adjust" href='#' ripple="ripple" ripple-color="#d0416d">لوازم دیجیتال</a>
-                            <ul>
-                                <li> <a href='#' ripple="ripple" ripple-color="#FFF">موبایل</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">تبلت</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لپتاپ</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">قطعات جانبی</a>  </li>
-                            </ul>
-                        </li>
-                        <li class='has-sub'>
-                            <a class="clean adjust" href='#' ripple="ripple" ripple-color="#d0416d">آرایشی بهداشتی</a>
-                            <ul>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لوازم بهداشتی</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لوازم آرایشی</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">عطر و ادکلن</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">تمیز کننده ها</a>  </li>
-                            </ul>
-                        </li>
-                        <li class='has-sub'>
-                            <a class="cloth adjust" href='#' ripple="ripple" ripple-color="#d0416d">پوشاک و لباس</a>
-                            <ul>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">مردانه</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">زنانه</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">بچگانه</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">جواهرات</a>  </li>
-                            </ul>
-                        </li>
-                        <li class='has-sub'>
-                            <a class="home adjust" href='#' ripple="ripple" ripple-color="#d0416d">لوازم خانگی</a>
-                            <ul>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لوازم آشپزخانه</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لوازم اتاق خواب</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">لوازم نشیمنگاه</a>  </li>
-                                <li> <a href='#' ripple="ripple" ripple-color="#fff">سرویس ها و ست</a>  </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div id="Categories">
-                    <div id="holder_1">
-                        <div id="Category_1">
-                            <p>لوازم دیجیتال</p>
-                            <div class="openMenu lightRed">
-                                <div>
-                                    <div id="HolderForSubMain_1">
-                                        <div class="SubCategory">
-                                            <div id="SC_1_1_icon"></div>
-                                            <div class="SC_1_1_header">موبایل</div>
-                                            <div class="subCategoryInner" id="SubCategory_1_1_open_1">
-                                                <div class="Column">
-                                                    <div class="ColumnSub">برندها</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(330)">Apple</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(331)">Samsung</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(332)">LG</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(334)">HTC</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(335)">Sony</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(333)">Huawei</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(337)">Nokia</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(336)">Microsoft</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(338)">Lenovo</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(339)">Asus</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(348)">Dimo</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(347)">Smart</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23">مشاهده موارد بیشتر</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">سیستم عامل</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(331)/Attributes-(?Code-1/Values-(6200)!)">اندروید</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(331)/Attributes-(?Code-1/Values-(6199)!)">iOS</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23/Brands-(331)/Attributes-(?Code-1/Values-(6201)!)">ویندوز</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-23">سایر سیستم عامل ها</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">لوازم جانبی</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-32">microSD کارت حافظه</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-28">کیف و کاور </a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-29">هدفون</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-30">هندزفری</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-34">پاوربانک</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-31">انواع کابل</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-33">هارد اکسترنال</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                        <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
+                                        @*<div class="titleSeemore goLeft greenColor thirteenFontSize">بیشتر ببینید</div>*@
                                     </div>
-                                    <div id="HolderForSubMain_2">
-                                        <div class="SubCategory">
-                                            <div id="SC_1_2_icon"></div>
-                                            <div class="SC_1_1_header">تبلت</div>
-                                            <div class="subCategoryInner" id="SubCategory_1_2_open_2">
-                                                <div class="Column">
-                                                    <div class="ColumnSub">برندها</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10330)">Apple</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10332)">Samsung</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10331)">Microsoft</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10333)">Asus</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10334)">Lenovo</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10336)">Amazon</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10341)">Sony</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10335)">Huawei</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10340)">Acer</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10339)">Dell</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Brands-(10337)">LG</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24">مشاهده موارد بیشتر</a></li>
-                                                        </ul>
+
+                                    <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
+                                    <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
+                                        <div class="itemContainer organizer standardPadding relativeMatter">
+                                            <a href="~/product/{{productsResult.ProductId}}">
+                                                <div class="oneThreeFullColumn">
+                                                    <div class="circleImageContainer">
+                                                        <img ng-src="/{{productsResult.ProductImgAddress?productsResult.ProductImgAddress:noProductPic}}" alt="{{productsResult.ProductName}}" class="imageInMiddle">
                                                     </div>
                                                 </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">سیستم عامل</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-7/Values-(6257)!)">اندروید</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-7/Values-(6256)!)">iOS</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-7/Values-(6258)!)">ویندوزفون</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/OSCode_OT-10204">سایر سیستم عامل ها</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">اندازه</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-10/Values-(6276)!)">کوچکتر از 8 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-10/Values-(6274)!)">بین 8 تا 10 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-24/Attributes-(?Code-10/Values-(6275)!)">بزرگتر از 10 اینچ</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="HolderForSubMain_3">
-                                        <div class="SubCategory">
-                                            <div id="SC_1_3_icon"></div>
-                                            <div class="SC_1_1_header">لپ تاپ</div>
-                                            <div class="subCategoryInner" id="SubCategory_1_3_open_3">
-                                                <div class="Column">
-                                                    <div class="ColumnSub">برندها</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10392)">Apple</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10393)">Asus</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10394)">Lenovo</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10395)">HP</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10397)">MSI</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10396)">Acer</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10403)">Sony</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10402)">Fujitsu</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10400)">Dell</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10404)">Toshiba</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25/Brands-(10405)">Razer</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-25">مشاهده موارد بیشتر</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                @*<div class="Column">
-                                                        <div class="ColumnSub">نوع کاربری</div>
-                                                        <div class="ColumnSubItems">
-                                                            <ul>
-                                                                <li><a href="">عمومی</a></li>
-                                                                <li><a href="">مالتی مدیا</a></li>
-                                                                <li><a href="">صنعتی</a></li>
-                                                                <li><a href="">بازی</a></li>
-                                                            </ul>
+                                                <div class="twoThreeFullColumn">
+                                                    <div class="itemInfoes verticallyInCenter">
+                                                        <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
+                                                        <div class="itemTags organizer">
+                                                            <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
                                                         </div>
-                                                    </div>*@
-                                                <div class="Column">
-                                                    <div class="ColumnSub">لوازم جانبی</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-32">microSD کارت حافظه</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-28">کیف و کاور </a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-29">هدفون</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-30">هندزفری</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-34">پاوربانک</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-31">انواع کابل</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-33">هارد اکسترنال</a>  </li>
-                                                        </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="separatorLine organizer"></div>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div id="HolderForSubMain_4">
-                                        <div class="SubCategory">
-                                            <div id="SC_1_4_icon"></div>
-                                            <div class="SC_1_1_header">دوربین</div>
-                                            <div class="subCategoryInner" id="SubCategory_1_4_open_4">
-                                                <div class="Column">
-                                                    <div class="ColumnSub">برندها</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10411)">Canon</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10412)">Nikon</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10414)">Fuji</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10410)">Sony</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10415)">Samsung</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Brands-(10416)">Olympus</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26">مشاهده موارد بیشتر</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">کیفیت لنز</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6339)!)">تا 6 مگاپیکسل</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6337)!)">از 6 تا 8 مگاپیکسل </a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6338)!)">از 8تا 10 مگاپیکسل</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6333)!)">از 10 12 مگاپیکسل</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6334)!)">از 12 تا 15 مگاپیکسل</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6335)!)">از 15 تا 20 مگاپیکسل</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-26/Attributes-(?Code-15/Values-(6336)!)">از 20 مگاپیکسل و بیشتر</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">لوازم جانبی</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-32">microSD کارت حافظه</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-28">کیف و کاور </a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-29">هدفون</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-30">هندزفری</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-34">پاوربانک</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li> <a href="~/Search/#!/categoryCode-31">انواع کابل</a>  </li>
-                                                            <li> <a href="~/Search/#!/categoryCode-33">هارد اکسترنال</a>  </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="twoFullColumn searchInStore">
+                                    <div class="noStoreFound objectInMiddle textInCenter" ng-hide="searchResult.StoresResult.length>0">
+                                        <div class="organizer">
+                                            <img src="~/newAsset/images/store.svg" width="90" />
                                         </div>
+                                        <div class="organizer thickFont">فروشگاهی یافت نشد</div>
+                                        <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
                                     </div>
-                                    <div id="HolderForSubMain_4_domain">
-                                        <div class="SubCategory">
-                                            <div id="SC_1_4_domain_icon"></div>
-                                            <div class="SC_1_1_header">تلویزیون</div>
-                                            <div class="subCategoryInner" id="SubCategory_1_4_open_4_domain">
-                                                <div class="Column">
-                                                    <div class="ColumnSub">برندها</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10419)">Samsung</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10420)">LG</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10422)">Sony</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10423)">Xvision</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10425)">Sierra</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10426)">Snowa</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10427)">Sharp</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10430)">Panasonic</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10431)">Farassoo</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Brands-(10429)">Tecnocom</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27">مشاهده موارد بیشتر</a></li>
-                                                        </ul>
+                                    <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                        <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
+                                        @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
+                                    </div>
+                                    <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
+                                        <a href="~/shop/code/{{storesResult.Id}}">
+                                            <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
+                                                <div class="oneThreeFullColumn">
+                                                    <div class="circleImageContainer">
+                                                        <img ng-src="/{{storesResult.ImgAddress?storesResult.ImgAddress:noStorePic}}" alt="{{storesResult.Name}}" class="imageInMiddle">
                                                     </div>
                                                 </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">اندازه</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Attributes-(?Code-21/Values-(6356/6357/6358/6359/6360/6361/6362)!)">کوچکتر از 32 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Attributes-(?Code-21/Values-(6362/6363/6364/6365/6366)!)">32 تا 42 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Attributes-(?Code-21/Values-(6366/6367/6368/6369/6370/6371/6372)!)">42 تا 50 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Attributes-(?Code-21/Values-(6372/6373/6374/6375/6376/6377/6378/6379)!)">50 تا 70 اینچ</a></li>
-                                                            <li><a href="~/Search/#!/categoryCode-27/Attributes-(?Code-21/Values-(6355/6379/6380/6381/6382/6383/6384/6385/6386)!)">70 اینچ و بزرگتر</a></li>
-                                                        </ul>
+                                                <div class="twoThreeFullColumn">
+                                                    <div class="itemInfoes verticallyInCenter">
+                                                        <div class="itemTitle greenColor organizer darkGray thirteenFontSize" ng-bind="storesResult.Name"> </div>
+                                                        @*<div class="itemDetail organizer smallExplain greenColor smallVerticalPadding" ng-bind="storesResult.CityName"> </div>*@
+                                                        <div class="itemTags organizer">
+                                                            <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="storesResult.CityName"> </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
+                                        <div class="separatorLine organizer"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="holder_2">
-                        <div id="Category_2">
-                            <p>زیبایی و آرایشی</p>
-                            <div class="openMenu lightRed">
-                                <div id="HolderForSubMain_5">
-                                    <div class="SubCategory">
-                                        <div id="SC_2_1_icon"></div>
-                                        <div class="SC_2_1_header">عینک</div>
-                                        <div class="subCategoryInner" id="SubCategory_2_1_open_1">
-                                            <div class="Column">
-                                                <div class="ColumnSub">برندها</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16804)">Dunhill</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16805)">Emporio Armani</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16809)">Giorgio Armani</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16813)">hugo boss</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16820)">Marc Jacobs</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16823)">Mont Blanc</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16827)">Police</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16805)">Porsche Design</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16828)">Kids</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Brands-(16832)">Ray Ban</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-53/Brands-(16843)">Apple</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-53/Brands-(16847)">Calvin Clain</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع عینک</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-53/Attributes-(?Code-73/Values-(6566)!)">طبی مردانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-53/Attributes-(?Code-73/Values-(6567)!)">طبی زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Attributes-(?Code-70/Values-(6542)!)">آفتابی مردانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-52/Attributes-(?Code-70/Values-(6543)!)">آفتابی زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-54"> ورزشی</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @*<div class="Column">
-                                                    <div class="ColumnSub">لوازم جانبی</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="">کیف و قاب عینک</a></li>
-                                                            <li><a href="">عدسی عینک</a></li>
-                                                            <li><a href="">تمیز کننده ها</a></li>
-                                                            <li><a href="">لوازم تعمیراتی عینک</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_6">
-                                    <div class="SubCategory">
-                                        <div id="SC_2_2_icon"></div>
-                                        <div class="SC_2_1_header">زیور آلات</div>
-                                        <div class="subCategoryInner" id="SubCategory_2_2_open_2">
-                                            <div class="Column">
-                                                <div class="ColumnSub">بر اساس نوع</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-49">دستبند</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-47">گردنبند</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-48">انگشتر</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-50">گوشواره</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-51">ست و نیم ست</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @*<div class="Column">
-                                                    <div class="ColumnSub">جنسیت</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="">جواهرات زنانه</a></li>
-                                                            <li><a href="">جواهرات مردانه</a></li>
-                                                            <li><a href="">جواهرات کودکانه</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">بر اساس جنس</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="">آلیاژ</a></li>
-                                                            <li><a href="">طلا</a></li>
-                                                            <li><a href="">نقره</a></li>
-                                                            <li><a href="">تیتانیوم</a></li>
-                                                            <li><a href="">برنز</a></li>
-                                                            <li><a href="">طلای سفید</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="">با نگین</a></li>
-                                                            <li><a href="">با یاقوت</a></li>
-                                                            <li><a href="">با الماس</a></li>
-                                                            <li><a href="">با عقیق</a></li>
-                                                            <li><a href="">سایر سنگ ها</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_7">
-                                    <div class="SubCategory">
-                                        <div id="SC_2_3_icon"></div>
-                                        <div class="SC_2_1_header">عطر</div>
-                                        <div class="subCategoryInner" id="SubCategory_2_3_open_3">
-                                            <div class="Column">
-                                                <div class="ColumnSub">برندها</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(66)">Gucci</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(51)">Dior</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(43)">Chanel</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(75)">Jaguar</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(87)">Lacoste</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(82)">Carol</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(97)">My</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(97)">Armaf</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(68)">Hermes</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(22)">Aramis</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Brands-(25)">Ecsis</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/">مشاهده موارد بیشتر</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">طبع و طعم</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6483)!)">گرم</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6478)!)">خنک</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6481)!)">شیرین</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6476)!)">تلخ</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6477)!)">تند</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6482)!)">طبیعت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-43/Values-(6480)!)">شرقی</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">جنسیت</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-42/Values-(6474)!)">عطر زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-35/Attributes-(?Code-42/Values-(6472)!)">عطر مردانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-36/Attributes-(?Code-42/Values-(6474)!)">اسپری زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-36/Attributes-(?Code-42/Values-(6472)!)">اسپری مردانه</a></li>
 
-                                                    </ul>
+                    <!-- menu samte rast dar halate mamooli-->
+                    <div class="goLeft hiddenInDesktop">
+                        <span class="goLeft relativeMatter soloHeight logo">
+                            <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits">
+                        </span>
+                        <div id="searchIconInMobile" class="circleSearchIcon whiteColor goLeft pinkBack relativeMatter standardHorizontalLeftMargin">
+                            <!-- ree search icon click shod class icon-search beshe icon-cross-->
+                            <span class="icon icon-search goRight eightyFontsize objectInMiddle pointer"></span>
+                        </div>
+
+                        <div class="searchPart goLeft">
+                            <!--
+                                 <div class="searchType goLeft">
+                                 <div class="selectbox relativeMatter standardPadding goLeft">
+                                     <span class="icon-select-arrow goLeft"></span>
+                                     <div class="defaultSelectValue goRight">فروشگاه یا کالا؟</div>
+                                     <div class="options">
+                                         <div class="optionInner"></div>
+                                     </div>
+                                 </div>
+                             </div>
+                            -->
+                            <!-- har vaght box search baz shod "searchActivate" ezafe bshe be class "searchField" -->
+                            <div id="searchBoxInMobile" class="topPopup loginPadding relativeMatter newSearch doublePrefer organizer whiteBack resetIndex">
+                                <div id="searchField2" class="searchField standardPadding relativeMatter organizer">
+                                    <div class="searchButtonPart goLeft pinkBack"><span class="icon icon-search whiteColor twentyTwoFontsize objectInMiddle"></span> </div>
+                                    <div class="searchTextPart goRight">
+                                        <input id="SearchTextBox2" type="text" placeholder="فروشگاه یا کالای خود را بیابید" class="SearchTextBox searchInput thickFont darkGray" />
+                                    </div>
+                                    <!-- box search in hast k baz mishe -->
+                                    <div id="Search_Task_Open2" class="Search_Task_Open openUpSearch relativeMatter openUpObject boxElement radiusBox" style="display: none">
+                                        <div class="twoFullColumn leftBorder searchInProducts pointer" ng-class="showProductBoxInSearch?'activeSearch':''" ng-init="showProductBoxInSearch=true;" ng-click="showProductBoxInSearch=true;showStoreBoxInSearch=false;">
+
+                                            <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                                <div class="titleSubject goRight"><span class="icon icon-barcode"></span> محصولات</div>
+                                                @*<div class="titleSeemore goLeft greenColor thirteenFontSize">بیشتر ببینید</div>*@
+                                            </div>
+
+                                            <!-- be ezaye har element yaft shode ye seperator line miad be joz element akhar k badesh nmiad separator line -->
+                                        </div>
+                                        <div class="twoFullColumn searchInStore pointer" ng-class="showStoreBoxInSearch?'activeSearch':''" ng-click="showProductBoxInSearch=false;showStoreBoxInSearch=true;">
+
+                                            <div class="titleBar relativeMatter thickFont organizer standardPadding">
+                                                <div class="titleSubject goRight"><span class="icon icon-cart"></span>  فروشگاه</div>
+                                                @*<div class="titleSeemore goLeft pinkColor thirteenFontSize">بیشتر ببینید</div>*@
+                                            </div>
+                                        </div>
+                                        <div class="organizer">
+                                            <div ng-show="showProductBoxInSearch">
+                                                <div ng-repeat="productsResult in searchResult.ProductsResult" ng-show="searchResult.ProductsResult">
+                                                    <div class="itemContainer organizer standardPadding relativeMatter">
+                                                        <a href="~/product/{{productsResult.ProductId}}">
+                                                            <div class="oneThreeFullColumn">
+                                                                <div class="circleImageContainer">
+                                                                    <img ng-src="/{{productsResult.ProductImgAddress?productsResult.ProductImgAddress:noProductPic}}" alt="{{productsResult.ProductName}}" class="imageInMiddle">
+                                                                </div>
+                                                            </div>
+                                                            <div class="twoThreeFullColumn">
+                                                                <div class="itemInfoes verticallyInCenter">
+                                                                    <div class="itemTitle greenColor organizer thirteenFontSize" ng-bind="productsResult.ProductName"> </div>
+                                                                    <div class="itemTags organizer">
+                                                                        <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="productsResult.StoreName">نام فروشگاه</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="separatorLine organizer"></div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="objectInMiddle textInCenter" ng-hide="searchResult.ProductsResult.length>0">
+                                                    <div class="organizer">
+                                                        <img src="~/newAsset/images/mailbox-empty-tool.svg" width="90" />
+                                                    </div>
+                                                    <div class="organizer thickFont">محصولی یافت نشد</div>
+                                                    <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="showStoreBoxInSearch">
+                                                <div class="itemContainer organizer borderBottom" ng-repeat="storesResult in searchResult.StoresResult" ng-show="searchResult.StoresResult">
+                                                    <a href="~/shop/code/{{storesResult.Id}}">
+                                                        <div class="itemContainer organizer radiusBox standardPadding relativeMatter">
+                                                            <div class="oneThreeFullColumn">
+                                                                <div class="circleImageContainer">
+                                                                    <img ng-src="/{{storesResult.ImgAddress?storesResult.ImgAddress:noStorePic}}" alt="{{storesResult.Name}}" class="imageInMiddle">
+                                                                </div>
+                                                            </div>
+                                                            <div class="twoThreeFullColumn">
+                                                                <div class="itemInfoes verticallyInCenter">
+                                                                    <div class="itemTitle greenColor organizer darkGray thirteenFontSize" ng-bind="storesResult.Name"> </div>
+                                                                    @*<div class="itemDetail organizer smallExplain greenColor smallVerticalPadding" ng-bind="storesResult.CityName"> </div>*@
+                                                                    <div class="itemTags organizer">
+                                                                        <div class="tagInner outlineButton fillButton smallPadding whiteColor pinkBack" ng-bind="storesResult.CityName"> </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="separatorLine organizer"></div>
+                                                </div>
+                                                <div class="objectInMiddle textInCenter" ng-hide="searchResult.StoresResult.length>0">
+                                                    <div class="organizer">
+                                                        <img src="~/newAsset/images/store.svg" width="90" />
+                                                    </div>
+                                                    <div class="organizer thickFont">فروشگاهی یافت نشد</div>
+                                                    <div class="organizer twelveFontSize">با عبارتی دیگر امتحان نمایید</div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div id="HolderForSubMain_8">
-                                    <div class="SubCategory">
-                                        <div id="SC_2_4_icon"></div>
-                                        <div class="SC_2_1_header">ساعت</div>
-                                        <div class="subCategoryInner" id="SubCategory_2_4_open_4">
-                                            <div class="Column">
-                                                <div class="ColumnSub">برندها</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(153)">Casio</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(137)">Swatch</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(136)">Tissot</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(139)">Festina</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(140)">Candino</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(138)">Rodina</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(145)">Jaguar</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(157)">Orient</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(155)">Lotus</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(154)">Calvin klein</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Brands-(159)">Puma</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37">مشاهده موارد بیشتر</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">جنسیت</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-49/Values-(7158)!)">عقربه ای مردانه </a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-49/Values-(7159)!)">عقربه ای زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-49/Values-(7160)!)">عقربه ای کودکانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-40/Attributes-(?Code-50/Values-(7161)!)">دیجیتال مردانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-40/Attributes-(?Code-50/Values-(7162)!)">دیجیتال زنانه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-40/Attributes-(?Code-50/Values-(7163)!)">دیجیتال کودکانه</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع ساعت</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-45/Values-(6488)!)">فلزی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-45/Values-(6486)!)">چرم</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-45/Values-(6490)!)">لاستیکی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-45/Values-(6487)!)">سرامیک</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-37/Attributes-(?Code-45/Values-(6484)!)">برزنت</a></li>
-                                                    </ul>
-                                                </div>
-                                                @*<div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="">شیشه ای</a></li>
-                                                        <li><a href="">با جواهر</a></li>
-                                                    </ul>
-                                                    </div>*@
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="closeTheSearch objectStickToLeft textInCenter">
+                                    <span id="closeSearchBoxInMobile" class="icon icon-cross objectInMiddle pointer"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="holder_3">
-                        <div id="Category_3">
-                            <p>پوشاک و لباس</p>
-                            <div class="openMenu lightRed">
-                                <div id="HolderForSubMain_9">
-                                    <div class="SubCategory">
-                                        <div id="SC_3_1_icon"></div>
-                                        <div class="SC_3_1_header">مردانه</div>
-                                        <div class="subCategoryInner" id="SubCategory_3_1_open_1">
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع لباس</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-55">تی شرت و پولوشرت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-56">پیراهن</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-57">لباس ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-58">شلوار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-59">جوراب</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-60">سوئیشرت و هودی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-61">لباس زیر و زیرپوش</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-62">بلوز آستین بلند و بافت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-63">کت و شلوار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-64">لباس خانگی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-65">ژاکت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-66">شلوارک</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-67">جلیقه و ژیله</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-68">کاپشن، بارانی و پالتو</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع کفش</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-69">کفش ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-70">کلاسیک</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-71">راحتی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-72">کالج</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-73">چکمه و نیم بوت</a></li>
-                                                        @*<li><a href="~/Search/#!/atrCode-4015/subCat-180/">اکسسوری کفش</a></li>*@
-                                                        <li><a href="~/Search/#!/categoryCode-74">دمپایی و روفرشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-75">صندل</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع کیف</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-101">چمدان چرخ دار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-102">کوله پشتی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-103">کیف دستی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-104">ساک مسافرتی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-105">کیف پستچی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-106">ساک و کیف خرید</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-107">کیف و ساک ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-109">کیف و کوله کودکان</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_10">
-                                    <div class="SubCategory">
-                                        <div id="SC_3_2_icon"></div>
-                                        <div class="SC_3_1_header">زنانه</div>
-                                        <div class="subCategoryInner" id="SubCategory_3_2_open_2">
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع لباس</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-76">تاپ و تی شرت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-77">شال و روسری</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-78">شلوار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-79">مانتو</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-80">لباس زیر</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-81">جوراب</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-82">لباس خانگی و لباس خواب</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-83">بلوز آستین بلند و بافت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-84">لباس مجلسی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-85">لباس ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-86">پیراهن </a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-87">تونیک، سارافون و زیر سارافونی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-88">بلوز و شومیز</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-89">ژاکت</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-90">لباس باردهی و شیر دهی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-91">دامن</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-92">چادر و پوشش اسلامی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-93">ژیله و جلیقه</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-94">کاپشن، بارانی و پالتو</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع کفش</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-95">کفش ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-96">کفش تخت</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-97">کفش پاشنه دار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-98">صندل</a></li>
-                                                        @*<li><a href="~/Search/#!/categoryCode-9">اکسسوری کفش</a></li>*@
-                                                        <li><a href="~/Search/#!/categoryCode-99">دمپایی و روفرشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-100">چکمه و نیم پوت</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع کیف</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-101">چمدان چرخ دار</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-102">کوله پشتی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-103">کیف دستی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-104">ساک مسافرتی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-105">کیف پستچی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-106">ساک و کیف خرید</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-107">کیف و ساک ورزشی</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-109">کیف و کوله کودکان</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_11">
-                                    <div class="SubCategory">
-                                        <div id="SC_3_3_icon"></div>
-                                        <div class="SC_3_1_header">بچگانه</div>
-                                        <div class="subCategoryInner" id="SubCategory_3_3_open_3">
-                                            <div class="Column">
-                                                <div class="ColumnSub">نوع</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="~/Search/#!/categoryCode-110">لباس نوزاد</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-111">لباس کودک</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-112">لباس نوجوان</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-113">کفش</a></li>
-                                                        <li><a href="~/Search/#!/categoryCode-109">کیف و کوله </a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            @*<div class="Column">
-                                                    <div class="ColumnSub">طرح</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">ساده</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">کارتونی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">راه راه</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">گل دار</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">خال خالی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">نقاشی و طراحی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">لوگو</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">چهارخانه</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">تایپوگرافی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">هندسی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">عدد و حروف</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">سایر طرح ها</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="Column">
-                                                    <div class="ColumnSub">نوع پارچه</div>
-                                                    <div class="ColumnSubItems">
-                                                        <ul>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">نخی</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">کتان</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">حریر</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">کاموا</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">پشم</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">پنبه</a></li>
-                                                            <li><a href="~/Search/#!/atrCode-4015/subCat-17/">پلی استر</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                                @*<div id="HolderForSubMain_12" style="display:none;">
-                                        <div class="SubCategory">
-                                            <div id="SC_3_4_icon"></div>
-                                            <div class="SC_3_1_header">زهرمار</div>
-                                        </div>
-                                        <div class="subCategoryInner" id="SubCategory_3_4_open_4">
-                                            <div class="Column">
-                                                <div class="ColumnSub">برندها</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="">Apple</a></li>
-                                                        <li><a href="">Samsung</a></li>
-                                                        <li><a href="">LG</a></li>
-                                                        <li><a href="">HTC</a></li>
-                                                        <li><a href="">Sony</a></li>
-                                                        <li><a href="">Huawei</a></li>
-                                                        <li><a href="">Alcatel</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="">Gigabyte</a></li>
-                                                        <li><a href="">Lenovo</a></li>
-                                                        <li><a href="">Dimo</a></li>
-                                                        <li><a href="">Smart</a></li>
-                                                        <li><a href="">مشاهده موارد بیشتر</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">سیستم عامل</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li><a href="">اندروید</a></li>
-                                                        <li><a href="">iOS</a></li>
-                                                        <li><a href="">ویندوزفون</a></li>
-                                                        <li><a href="">سایر سیستم عامل ها</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="Column">
-                                                <div class="ColumnSub">لوازم جانبی</div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li> <a href="~/Search/#!/atrCode-1005/subCat-12/">microSD کارت حافظه</a>  </li>
-                                                        <li> <a href="~/Search/#!/atrCode-1002/subCat-8/">کیف و کاور </a>  </li>
-                                                        <li> <a href="~/Search/#!/atrCode-1003/subCat-9/">هدفون</a>  </li>
-                                                        <li> <a href="~/Search/#!/atrCode-1003/subCat-10/">هندزفری</a>  </li>
-                                                        <li> <a href="~/Search/#!/atrCode-1006/subCat-14/">پاوربانک</a>  </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ColumnSubItems">
-                                                    <ul>
-                                                        <li> <a href="~/Search/#!/atrCode-1004/subCat-11/">انواع کابل</a>  </li>
-                                                        <li> <a href="~/Search/#!/atrCode-1009/subCat-13/">هارد اکسترنال</a>  </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
-                            </div>
+                    <div class="secondaryOptions goLeft hiddenInPhone">
+                        <div class="forUs solidLineHeight thickFont goLeft">
+                            <span class="goLeft relativeMatter soloHeight logo">
+                                <a href="/"> <img src="~/newAsset/images/logo.png" alt="" class="imageInMiddle noObjectFits"></a>
+                            </span>
+                            @*<a href="~/Static/ContactUs" class="pinkColor"> <span class="goLeft borderInBothSides standardHorizontalPadding standardHorizontalMargin lostInResponse">ارتباط با ما</span> </a>
+                                <a href="~/Static/UserGuid" class="pinkColor"> <span class="goLeft lostInResponse">راهنما</span> </a>*@
+                            <h1>
+                                <span class="goLeft leftBorder standardHorizontalLeftPadding standardHalfHorizontalLeftMargin lostInResponse moveMoreFromBottom">
+                                    <span class="goLeft standardHalfVerticalBottomMargin greenColor">هوجی بوجی</span>
+                                    <span class="goLeft clearLeft twelveFontSize normalFont">خرید آنلاین از صد ها فروشگاه </span>
+                                </span>
+                            </h1>
                         </div>
                     </div>
-                    @*<div id="holder_4" style="display:none;">
-                            <div id="Category_4">
-                                <p>لوازم خانگی</p>
-                            </div>
-                            <div id="open_4">
-                                <div id="HolderForSubMain_13">
-                                    <div id="SubCategory_4_1">
-                                        <div id="SC_4_1_icon"></div>
-                                        <div class="SC_4_1_header">موبایل</div>
-                                    </div>
-                                    <div id="SubCategory_4_1_open_1">
-                                        <div class="Column">
-                                            <div class="ColumnSub">برندها</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Apple</a></li>
-                                                    <li><a href="">Samsung</a></li>
-                                                    <li><a href="">LG</a></li>
-                                                    <li><a href="">HTC</a></li>
-                                                    <li><a href="">Sony</a></li>
-                                                    <li><a href="">Huawei</a></li>
-                                                    <li><a href="">Alcatel</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Gigabyte</a></li>
-                                                    <li><a href="">Lenovo</a></li>
-                                                    <li><a href="">Dimo</a></li>
-                                                    <li><a href="">Smart</a></li>
-                                                    <li><a href="">مشاهده موارد بیشتر</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">سیستم عامل</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">اندروید</a></li>
-                                                    <li><a href="">iOS</a></li>
-                                                    <li><a href="">ویندوزفون</a></li>
-                                                    <li><a href="">سایر سیستم عامل ها</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">لوازم جانبی</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1005/subCat-12/">microSD کارت حافظه</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1002/subCat-8/">کیف و کاور </a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-9/">هدفون</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-10/">هندزفری</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1006/subCat-14/">پاوربانک</a>  </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1004/subCat-11/">انواع کابل</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1009/subCat-13/">هارد اکسترنال</a>  </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_14">
-                                    <div id="SubCategory_4_2">
-                                        <div id="SC_4_2_icon"></div>
-                                        <div class="SC_4_1_header">تبلت</div>
-                                    </div>
-                                    <div id="SubCategory_4_2_open_2">
-                                        <div class="Column">
-                                            <div class="ColumnSub">برندها</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Apple</a></li>
-                                                    <li><a href="">Samsung</a></li>
-                                                    <li><a href="">LG</a></li>
-                                                    <li><a href="">HTC</a></li>
-                                                    <li><a href="">Sony</a></li>
-                                                    <li><a href="">Huawei</a></li>
-                                                    <li><a href="">Alcatel</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Gigabyte</a></li>
-                                                    <li><a href="">Lenovo</a></li>
-                                                    <li><a href="">Dimo</a></li>
-                                                    <li><a href="">Smart</a></li>
-                                                    <li><a href="">مشاهده موارد بیشتر</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">سیستم عامل</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">اندروید</a></li>
-                                                    <li><a href="">iOS</a></li>
-                                                    <li><a href="">ویندوزفون</a></li>
-                                                    <li><a href="">سایر سیستم عامل ها</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">لوازم جانبی</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1005/subCat-12/">microSD کارت حافظه</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1002/subCat-8/">کیف و کاور </a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-9/">هدفون</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-10/">هندزفری</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1006/subCat-14/">پاوربانک</a>  </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1004/subCat-11/">انواع کابل</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1009/subCat-13/">هارد اکسترنال</a>  </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_15">
-                                    <div id="SubCategory_4_3">
-                                        <div id="SC_4_3_icon"></div>
-                                        <div class="SC_4_1_header">لپ تاپ</div>
-                                    </div>
-                                    <div id="SubCategory_4_3_open_3">
-                                        <div class="Column">
-                                            <div class="ColumnSub">برندها</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Apple</a></li>
-                                                    <li><a href="">Samsung</a></li>
-                                                    <li><a href="">LG</a></li>
-                                                    <li><a href="">HTC</a></li>
-                                                    <li><a href="">Sony</a></li>
-                                                    <li><a href="">Huawei</a></li>
-                                                    <li><a href="">Alcatel</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Gigabyte</a></li>
-                                                    <li><a href="">Lenovo</a></li>
-                                                    <li><a href="">Dimo</a></li>
-                                                    <li><a href="">Smart</a></li>
-                                                    <li><a href="">مشاهده موارد بیشتر</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">سیستم عامل</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">اندروید</a></li>
-                                                    <li><a href="">iOS</a></li>
-                                                    <li><a href="">ویندوزفون</a></li>
-                                                    <li><a href="">سایر سیستم عامل ها</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">لوازم جانبی</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1005/subCat-12/">microSD کارت حافظه</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1002/subCat-8/">کیف و کاور </a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-9/">هدفون</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-10/">هندزفری</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1006/subCat-14/">پاوربانک</a>  </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1004/subCat-11/">انواع کابل</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1009/subCat-13/">هارد اکسترنال</a>  </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="HolderForSubMain_16">
-                                    <div id="SubCategory_4_4">
-                                        <div id="SC_4_4_icon"></div>
-                                        <div class="SC_4_1_header">زهرمار</div>
-                                    </div>
-                                    <div id="SubCategory_4_4_open_4">
-                                        <div class="Column">
-                                            <div class="ColumnSub">برندها</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Apple</a></li>
-                                                    <li><a href="">Samsung</a></li>
-                                                    <li><a href="">LG</a></li>
-                                                    <li><a href="">HTC</a></li>
-                                                    <li><a href="">Sony</a></li>
-                                                    <li><a href="">Huawei</a></li>
-                                                    <li><a href="">Alcatel</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">Gigabyte</a></li>
-                                                    <li><a href="">Lenovo</a></li>
-                                                    <li><a href="">Dimo</a></li>
-                                                    <li><a href="">Smart</a></li>
-                                                    <li><a href="">مشاهده موارد بیشتر</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">سیستم عامل</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li><a href="">اندروید</a></li>
-                                                    <li><a href="">iOS</a></li>
-                                                    <li><a href="">ویندوزفون</a></li>
-                                                    <li><a href="">سایر سیستم عامل ها</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="Column">
-                                            <div class="ColumnSub">لوازم جانبی</div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1005/subCat-12/">microSD کارت حافظه</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1002/subCat-8/">کیف و کاور </a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-9/">هدفون</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1003/subCat-10/">هندزفری</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1006/subCat-14/">پاوربانک</a>  </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ColumnSubItems">
-                                                <ul>
-                                                    <li> <a href="~/Search/#!/atrCode-1004/subCat-11/">انواع کابل</a>  </li>
-                                                    <li> <a href="~/Search/#!/atrCode-1009/subCat-13/">هارد اکسترنال</a>  </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
                 </div>
             </div>
-        </header>
-    </div>
+        </div>
+        <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin hiddenInPhone">
+            <nav class="boxElement relativeMatter hiddenMenuInFirst">
+                <ul class="sizeManager">
+                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
 
-
+                        @*<span class="icon icon-display twentyTwoFontsize standardHorizontalLeftMargin"></span>*@
+                        <a href="/Search/#!/categoryCode-{{menu.Id}}">
+                            <div>
+                                {{menu.Name}}
+                            </div>
+                        </a>
+                        <div class="innerList organizer textInRight standardHorizontalPadding openUpObject sizeManager">
+                            <ul>
+                                <!-- in list hamishe bayad 5 ta bashe -->
+                                <li class="oneSevenColumn borderRight loginPadding secondHandedList" ng-repeat="subMenu in menu.SubCategories">
+                                    <a href="/Search/#!/categoryCode-{{subMenu.Id}}"><div>{{subMenu.Name}}</div> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
 
     @RenderBody()
 
-
-
-
-
-
-
-    <footer id="Footer">
-        <div id="RightSideFooter">
-            <div id="Shortcuts">
-                <div class="FooterFont" id="TitleSC">میانبرها</div>
-                <div id="SCitems">
-                    <ul>
-                        <li><a href="/Search/#!/categoryCode-23/">تلفن همراه</a></li>
-                        <li><a href="/Search/#!/categoryCode-25/">لپ تاپ</a></li>
-                        <li><a href="/Search/#!/categoryCode-27/">تلویزیون</a></li>
-                        <li><a href="/Search/#!/categoryCode-52/">عینک</a></li>
-                        <li><a href="/Search/#!/categoryCode-37/">ساعت</a></li>
-                        <li><a href="/Search/#!/categoryCode-69">کفش</a></li>
-                        <li><a href="/Search/#!/categoryCode-77">شال و روسری</a></li>
-                    </ul>
-                </div>
+    <footer class="container thickFont footer" ng-controller="layoutCtrl">
+        <div class="separatorLine organizer standardVerticalMargin"></div>
+        <div class="squizer thickFont">
+            <div class="fourFullColumns organizerInPhone">
+                <div class="organizer blackColor standardVerticalMargin">دسته بندی ها</div>
+                <ul>
+                    <li> <a href="/Search/#!/categoryCode-1"><h1>لوازم دیجیتال</h1></a></li>
+                    <li> <a href="/Search/#!/categoryCode-2"><h1>زیبایی و آرایش</h1></a></li>
+                    <li> <a href="/Search/#!/categoryCode-3"><h1>پوشاک و لباس</h1></a></li>
+                    <li> <a href="/Search/#!/categoryCode-4"><h1>لوازم خانگی</h1></a></li>
+                    <li> <a href="/Search/#!/categoryCode-5"><h1>صنایع دستی و سنتی</h1></a></li>
+                    <li> <a href="/Search/#!/categoryCode-6"><h1>فرهنگ و هنر</h1> </a></li>
+                </ul>
             </div>
-            <div id="ContactAndAbout">
-                <div id="ContactUs" style="font-size: 17px;">
-                    <div id="TitleCU"><a href="/Home/Low">قوانین سایت</a></div>
-                    <div id="TitleCU"><a href="/Home/ContactUs">تماس با ما</a></div>
-                    <div id="TitleCU"><a href="/Home/AboutUs">درباره ما</a></div>
-                    <div id="TitleCU"><a href="/Home/Complaints">شکایات ، پیشنهادات</a></div>
-
-                </div>
-
-                <div id="DownloadApp">
-                    <div id="TitleDA" class="FooterFont">دانلود اپلیکیشن برنامه</div>
-                    <div id="DAAppDLlinks">
-                        <div id="AndroidAppDlFooter"><img src="~/Img/MainPage/AppDownloadGoogle.png"></div>
-                    </div>
-                </div>
-                <!--<div id="AboutUs">
-                    <div id="TitleAU" class="FooterFont">درباره ما</div>
-                    <div id="AUitems">
-                        <ul>
-                            <li>چگونه به ما بپیوندید؟</li>
-                            <li>هوجی بوجی چیست؟</li>
-                            <li>چگونه با سایت کار کنیم؟</li>
-                            <li>داشتن ویترین شخصی در هوجی بوجی</li>
-                        </ul>
-                    </div>
-                </div>-->
-            </div>
-        </div>
-        <div id="LeftSideFooter">
-            <div id="UserArea">
-                <div id="TitleUA" style="font-size: 17px;">هوجی بوجی واژه ای است که ریشه ای مازنی داشته و به معنای جستجو کردن و انتخاب بهترین ها می باشد</div>
-               
-                <img id='rgvldrftxlapwmcsxlap' style='width: 17%;cursor: pointer; float: left; margin: -1px 0 -131px 70px;' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=51383&p=yncrnbpdfuixaqgwfuix", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=51383&p=fujylznbvjymukaqvjym' />
-
-                
-                 @*<div id="UAitems">
-                        <ul>
-                            <li>ورود به سایت</li>
-                            <li>ثبت نام در سایت</li>
-                            <li>چگونه عضو شویم</li>
-                        </ul>
-                    </div>*@
-
-                @*<div id="NewsLetter">
-                        <div id="TitleNL" class="FooterFont">خبرنامه</div>
-                        <div id="NLexplanation">
-                            اولین نفری باشید که از جدیدترین اخبار سایت و مهمترین اتفاق های هوجی بوجی
-                            مطلع می شوید.
+            <div class="fourFullColumns organizerInPhone">
+                <div class="organizer blackColor standardVerticalMargin">سایر صفحات</div>
+                <ul>
+                    <li>
+                        <div>
+                            <a href="~/Static/Law">
+                                قوانین سایت
+                            </a>
                         </div>
-                        <div class="NLinputs">
-                            <div class="GoEmailNl DarkRed">
-                                <input name="" class="DarkRed" type="button" value="ثبت">
-                            </div>
-                            <div class="WriteEmailNl">
-                                <input name="" type="text" placeholder="ایمیل خود را وارد کنید">
-                            </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="~/Static/ContactUs">
+                                تماس با ما
+                            </a>
                         </div>
-                    </div>*@
+                    </li>
+                    <li>
+                        <div>
+                            <a href="~/Static/AboutUs">
+                                درباره ما
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="~/Static/Complaints">
+                                شکایات ، پیشنهادات
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div id="SocialAndUpdates">
-                <div id="SocialLinks">
-                    <div id="TitleSL" class="FooterFont">هوجی بوجی در شبکه های اجتماعی</div>
-                    <div id="SLlinkShapeHolder">
-                        <div id="Twitter"><img src="~/Img/MainPage/Twitter.png"></div>
-                        <div id="FaceBook"><img src="~/Img/MainPage/Fb.png"></div>
-                        <div id="GooglePlus"><img src="~/Img/MainPage/GooglePlus.png"></div>
-                        <div id="Feed"><img src="~/Img/MainPage/Feed.png"></div>
+            <div class="fourFullColumns organizerInPhone">
+                <div class="organizer blackColor standardVerticalMargin">تکمیل اطلاعات</div>
+                <ul>
+                    <a href="~/Store/AddStore"> <li>ثبت فروشگاه</li></a>
+                    <li class="pointer" ng-click="showRegisterBox();">ثبت نام</li>
+                    <li class="pointer" ng-click="showLoginBox();">ورود</li>
+                    @*<li>فروش ویژه</li>
+                        <li>ثبت تبلیغات شما</li>*@
+                </ul>
+            </div>
+            <div class="fourFullColumns relativeMatter organizerInPhone">
+                <div class="organizer socials">
+                    <div class="organizer blackColor standardVerticalMargin">ما را دنبال کنید</div>
+                    <div class="organizer twentyTwoFontsize searchPart blackColor">
+                        <a href="http://telegram.me/hoojibooji"><span class="icon icon-telegram standardHorizontalLeftMargin"></span></a>
+                        <a href="https://plus.google.com/b/100179687917234386429/108107077749163715881?pageId=100179687917234386429"><span class="icon icon-google-plus3 standardHorizontalLeftMargin"></span></a>
+                        <a href="https://www.linkedin.com/company-beta/13252116/"><span class="icon icon-linkedin standardHorizontalLeftMargin"></span></a>
+                        <a href="https://www.instagram.com/hoojibooji/"><span class="icon icon-instagram standardHorizontalLeftMargin"></span></a>
                     </div>
+                </div>
+                <div class="organizer signs">
+                    <img id='fukzesgtnbqesizpjxlz' style='width: 30%;cursor: pointer;' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=60291&p=gvkaobpduiwkpfvlrfth", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=60291&p=wlbqlymaodrfbsiynbpd' />
+                    <img id='rgvldrftxlapwmcsxlap' style='width: 27%;cursor: pointer;' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=51383&p=yncrnbpdfuixaqgwfuix", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='logo-namdElectronicDigital' src='https://trustseal.enamad.ir/logo.aspx?id=51383&p=fujylznbvjymukaqvjym' />
                 </div>
             </div>
         </div>
     </footer>
 
 
+
+   
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Content/MD5_encriptin/MD5.js"></script>
-    <script src="~/Js/AllPageNeeded.js"></script>
+    <script>
+        var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
+        var app = angular.module('app', []);
+     </script>
+    <script src="~/newAsset/js/layout.js"></script>
+
+ 
+
+    @RenderSection("Script", false)
+
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+        window.$zopim || (function (d, s) {
+            var z = $zopim = function (c) { z._.push(c) }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) {
+                z.set.
+                _.push(o)
+            }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8");
+            $.src = "https://v2.zopim.com/?4faxteyy0f515HRP92eBL75N76krLJrg"; z.t = +new Date; $.
+            type = "text/javascript"; e.parentNode.insertBefore($, e)
+        })(document, "script");
+    </script>
+    <!--End of Zendesk Chat Script-->
 
     <script>
-
-
-        var noProductPic = "Img/MainPage/NoProductPic.png";
-        var noStorePic = "Img/MainPage/NoStorePic.png";
-        var returnUrl = "@Html.Raw(ViewBag.ReturnUrl)";
-        var root = "@Url.Content("~/")";
-
-
-        //When page load , check search box typing
-        $(function () {
-            //setup before functions
-            var typingTimer; //timer identifier
-            var doneTypingInterval = 500; //time in ms, 1 second for example
-            var $input = $('#SearchTextBox');
-
-            //on keyup, start the countdown
-            $input.on('keyup', function () {
-
-                if ($('#SearchTextBox').val().length <= 1) {
-                    // $('#Search_Task_Open').css("display", "none");
-                    //$("#Search_Task_Open").fadeOut("slow");
-                    $("#Search_Task_Open").slideUp("slow");
-
-                }
-
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(ajaxSearch, doneTypingInterval);
-            });
-
-            //on keydown, clear the countdown
-            $input.on('keydown', function () {
-                clearTimeout(typingTimer);
-            });
-
-            $(function () {
-                $("#loginFrm input").keypress(function (e) {
-                    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-                        $('#EnterBtn').click();
-                        return false;
-                    } else {
-                        return true;
-                    }
-                });
-            });
-
-        });
-
-        //if click outside of search result , hide search result
-        $(document).click(function (event) {
-            if (!$(event.target).closest('#Search_Task_Open').length) {
-                $("#Search_Task_Open").slideUp("slow");
-            }
-        });
-
-        //When typing done , Product and Store Load
-        function ajaxSearch() {
-            if ($('#SearchTextBox').val().length >= 2) {
-
-                $('#SearchInProductHolder').html("");
-                $('#SearchInStoreHolder').html("");
-                $('#LoadProduct').show();
-                $('#LoadStore').show();
-                $("#Search_Task_Open").slideDown("slow");
-
-                $.ajax({
-                    type: "GET",
-                    url: "/api/firstPage/TopSearchSummeray/",
-                    data: {
-                        name: $("#SearchTextBox").val()
-                    },
-                    success: function (result) {
-                        result = result.Response;
-
-                        SearchResultShow(result);
-                    }
-
-                });
-            }
-
-        };
-
-        //user is "finished typing," do something
-        function SearchResultShow(result) {
-
-            var product = "";
-            var shop = "";
-
-            $('#LoadProduct').hide();
-            $('#LoadStore').hide();
-
-            if (result.ProductsResult != "") {
-                $.each(result.ProductsResult, function (index, value) {
-
-                    if (value.ProductImgAddress == null) value.ProductImgAddress = noProductPic;
-                    product += "<a href='/product/" + value.ProductId + "' > <div class='Product_Search_Inner'>"
-                        + "  <div class='Product_Search_Inner_Pic'><img src='" + root + value.ProductImgAddress + "' alt=" + value.ProductName + " /></div>"
-                        + "<div class='Product_Search_Inner_Rap'>"
-                        + " <div class='P_name_Rap'>"
-                        + value.ProductName
-                        + " </div>"
-                        + " <div class='P_City_Rap'>" + value.CityName + "</div>"
-                        + " <div class='P_Store_Rap'>" + value.StoreName + "</div>"
-                        + "</div>"
-                        + "</div></a>";
-                });
-
-            } else {
-                product = " <div id='NoProductFind'> </div>";
-
-            }
-
-            if (result.StoresResult != "") {
-                $.each(result.StoresResult, function (index, value) {
-
-                    if (value.ImgAddress == null) value.ImgAddress = noStorePic;
-                    shop += "<a href='/shop/code/" + value.Id + "' > <div class='Store_Search_Inner'>"
-                        + " <div class='Store_Search_Inner_Pic'><img src='" + root + value.ImgAddress + "' alt='' /></div>"
-                        + " <div class='Store_Search_Inner_Rap'>"
-                        + " <div class='S_name_Rap'>" + value.Name + "</div>"
-                        + "<div class='S_City_Rap'> " + value.CityName + " </div>"
-                        + "</div>"
-                        + " </div></a>";
-
-                });
-
-            } else {
-                shop = " <div id='NoStoreFind'> </div>";
-
-            }
-
-
-            $('#SearchInProductHolder').append(product);
-            $('#SearchInStoreHolder').append(shop);
-
-
-        };
-
-        var send = '';
-
-
-        //Login
-        $('#EnterBtn').on("click", function () {
-
-            $('#EnterBtn').addClass('GoLogIn');
-            $('#EnterBtn').prop('disabled', true);
-            // $('#RegisterBtn').prop('disabled', true);
-
-            var form = $('#__AjaxAntiForgeryForm');
-            var token = $('input[name="__RequestVerificationToken"]', form).val();
-            var remember = "";
-            if ($('#c1').val() == "on") remember = "true";
-            else remember = "false";
-
-            $.ajax({
-                url: '/Account/Login',
-                type: 'POST',
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: token,
-                    UserName: $('#UserName').val(),
-                    Password: $.md5($('#Password').val()),
-                    RememberMe: remember
-                },
-                success: function (result) {
-
-                    if (result.Success == true) {
-
-                        $('#LogInSucseed').fadeIn(1000).fadeTo(100, 1.0, function () {
-
-                            if (returnUrl == "") {
-                                //return to root
-                                window.location = "/";
-
-                            } else {
-                                //return to returnUrl
-                                window.location = returnUrl;
-                            }
-                        });
-
-                    } else {
-                        $('#LogInFaild').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
-                        $('#EnterBtn').removeClass('GoLogIn');
-                        $('#EnterBtn').prop('disabled', false);
-                        // $('#RegisterBtn').prop('disabled', false);
-
-                    }
-                },
-                error: function () {
-                    $('#LogInFaild').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
-                    $('#EnterBtn').removeClass('GoLogIn');
-                    $('#EnterBtn').prop('disabled', false);
-                    // $('#RegisterBtn').prop('disabled', false);
-
-                }
-
-            });
-
-
-        });
-
-        var verifyLevel = 0;
-        //register
-        $('#register').on("click", function () {
-            $('#registerStatus').html('');
-            if (send != '') return;
-
-
-            if ($('#UserNameTxt').val().length < 11) {
-                $('#registerStatus').html('لطفا شماره تلفن صحیح خود را با 09 وارد نمایید');
-                return;
-            }
-            else if ($('#PasswordTxt').val().length < 6) {
-                $('#registerStatus').html('لطفا کلمه عبور خود را بیشتر از 6 کارکتر وارد نمایید');
-                return;
-            }
-            //else if ($('#ConfirmPasswordTxt').val().length < 6) {
-            //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
-            //    return;
-            //}
-            //else if (confPass != pass) {
-            //    $('#registerStatus').html('لطفا تکرا کلمه عبور را مشابه کلمه عبور وارد نمایید');
-            //    return;
-            //}
-            $('#Alert_UserName_Wait').css("display", "block");
-            send = 1;
-
-            if (verifyLevel == 0) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Api/sms/register",
-                    data: { phoneNumber: $('#UserNameTxt').val() },
-                    success: function (result) {
-                        send = '';
-                        if (result.Success == false) {
-                            $('#registerStatus').html(result.Response);
-                            $('#Alert_UserName_Wait').css("display", "none");
-
-                        }
-                        else {
-                            $('#Alert_UserName_Wait').css("display", "none");
-                            $('#Alert_Verify_Send').slideToggle();
-                            $('#Verify_Code').slideToggle();
-                            verifyLevel = 1;
-
-                        }
-                    },
-                    error: function () {
-                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                    }
-                });
-            } else {
-
-                //  $('#registerStatus').html('لطفا کمی صبر نمایید');
-
-                TempData = {
-                    "phoneNumber": $('#UserNameTxt').val(),
-                    "Password": $.md5($('#PasswordTxt').val()),
-                    "ConfirmPassword": $.md5($('#PasswordTxt').val()),
-                    "VerificationCode": $('#VerifyTxt').val()
-
-                };
-
-                $.ajax({
-                    url: '/Api/account/userregister',
-                    type: 'POST',
-                    dataType: "json",
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    data: $.param(TempData),
-                    success: function (result) {
-
-                        if (result.Success == true) {
-                            SaveToUser()
-
-                        } else {
-                            $('#Alert_UserName_Wait').css("display", "none");
-                            $('#registerStatus').html('ثبت نام شما با خطا مواجه شد');
-                            //location.reload();
-                            send = "";
-                        }
-                        //console.log("فروشگاه شما با موفقیت ثبت شد");
-                    },
-                    error: function () {
-                        $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                        send = "";
-                    }
-                });
-            }
-        })
-
-        function SaveToUser() {
-
-            var form = $('#__AjaxAntiForgeryForm');
-            var token = $('input[name="__RequestVerificationToken"]', form).val();
-
-            TempData = {
-                "__RequestVerificationToken": token,
-                "UserName": $('#UserNameTxt').val(),
-                "Password": $.md5($('#PasswordTxt').val()),
-                "ConfirmPassword": $.md5($('#PasswordTxt').val())
-            };
-
-            $.ajax({
-                url: '/Account/RegisterMember',
-                type: 'POST',
-                dataType: "json",
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                data: $.param(TempData),
-                success: function (result) {
-                    $('#Alert_UserName_Wait').css("display", "none");
-
-                    if (result.Success == true) {
-                        $('#registerStatus').html('شما با موفقیت ثبت نام شدید');
-
-                        //return to root
-                        window.location = "/";
-                        // window.location = "/Member/Panel";
-                    } else {
-                        $('#registerStatus').html('ثبت نام شما با خطا مواجه شد');
-                        //location.reload();
-                        send = "";
-                    }
-                    //console.log("فروشگاه شما با موفقیت ثبت شد");
-                },
-                error: function () {
-                    $('#registerStatus').html("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                    send = "";
-                }
-            }); 
-
-        }
-
-        $('#SignUp').on('click', function () {
-            $('.registerBox').show();
-        })
-        $('.closeThePopup').on('click', function () {
-            $('.registerBox').hide();
-        })
-        $('.transparentBack').on('click', function () {
-            $('.registerBox').hide();
-        })
-
-
-        //chnage all persian number to en number
-        String.prototype.toEnDigit = function () {
-            return this.replace(/[\u06F0-\u06F9]+/g, function (digit) {
-                var ret = '';
-                for (var i = 0, len = digit.length; i < len; i++) {
-                    ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
-                }
-                return ret;
-            });
-        };
-
-        //chnage all persian number to en number call function
-        $("#UserNameTxt , #UserName").on('input', function () {
-            var value = $(this).val();
-            $(this).val(value.toEnDigit());
-        });
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-90647252-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 
-    @RenderSection("Script", false)
+    @*<script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "url": "http://hoojibooji.com",
+        "url": "http://hoojibooji.com",
+        "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+98-935-189-2347",
+        "contactType": "shopping"
+        }]
+        }
+        </script>*@
+
 </body>
 </html>
