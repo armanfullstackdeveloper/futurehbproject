@@ -78,9 +78,18 @@ li {
     float: right;
 }
 
+.minorOrganizer {
+    width: 98%;
+    float: right;
+}
+
 .fullWidth {
     width: 102%;
     float: right;
+}
+
+.minorWidth {
+    width: 80%;
 }
 
 .separateLine {
@@ -1431,6 +1440,17 @@ button {
     min-width: 38px;
 }
 
+.noBack .defaultArrow {
+    color: #c9c9c9;
+    height: 100%;
+    width: 3%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    background-color:transparent ;
+    min-width: 18px;
+}
+
 .slider .defaultArrow {
     background-color: transparent;
 }
@@ -1445,6 +1465,10 @@ button {
 
 .leftArrowShadow {
     box-shadow: 4px 0 28px #cdcdcd;
+}
+
+.noBack .leftArrowShadow {
+    box-shadow: none;
 }
 
 .slider .rightArrowShadow {
@@ -1470,6 +1494,11 @@ button {
     border-radius: 50%;
     width: 35px;
     height: 35px;
+}
+
+.noBack .circleAroundArrow {
+    background-color: transparent;
+    color: #474747;
 }
 
 .noProductFound {
