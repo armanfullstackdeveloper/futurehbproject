@@ -17,6 +17,7 @@ using DataModel.Entities;
 using DataModel.Entities.FirstPage;
 using DataModel.Models.DataModel;
 using DataModel.Models.ViewModel;
+using Fluentx;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using WebApi.OutputCache.V2;
@@ -66,7 +67,7 @@ namespace Boundary.Controllers.Api
         [HttpGet]
         [Route("GetActiveBox")]
         [ResponseType(typeof(IEnumerable<Box>))]
-        public IHttpActionResult GetActiveBox(string position=null,bool? isForApp=null)
+        public IHttpActionResult GetActiveBox(string position = null, bool? isForApp = null)
         {
             try
             {
@@ -107,7 +108,9 @@ namespace Boundary.Controllers.Api
         {
             try
             {
-                return Json(JsonResultHelper.SuccessResult(await new StoreBL().GetNewest(cityCode, pageNumber, rowspPage)));
+                var result = await new StoreBL().GetNewest(cityCode, pageNumber, rowspPage);
+                result.ToList().Shuffle();
+                return Json(JsonResultHelper.SuccessResult(result));
             }
             catch (MyExceptionHandler exp1)
             {

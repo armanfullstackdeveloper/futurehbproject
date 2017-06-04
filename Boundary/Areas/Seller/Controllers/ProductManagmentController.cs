@@ -94,7 +94,7 @@ namespace Boundary.Areas.Seller.Controllers
                 return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
             }
 
-            SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
+            SearchResultViewModel result = await new ProductBL().SearchAsync(new SearchParametersDataModel()
             {
                 StoreCode = checkSession.MainSession.Store.StoreCode
             }, new List<EProductStatus>() { EProductStatus.Active, EProductStatus.Suspended });

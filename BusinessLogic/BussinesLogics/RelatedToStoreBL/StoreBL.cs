@@ -439,7 +439,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 _db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
                 parameters.Add("@shopname", shopname);
-                long storeCode = _db.Query<long>("Store_SelectIdByHomePage", parameters, commandType: CommandType.StoredProcedure).SingleOrDefault();
+                long storeCode = _db.Query<long>("Store_SelectIdByHomePage", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 EnsureCloseConnection(_db);
                 return storeCode;
             }
