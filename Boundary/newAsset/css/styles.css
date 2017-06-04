@@ -971,6 +971,10 @@ button {
 
 /*-------------------- personal elements ------------------*/
 
+.minHeight_1 {
+    min-height: 600px;
+}
+
 .socialCover {
     height: 250px;
     background: url('/newAsset/images/telegram.jpg') no-repeat center;
