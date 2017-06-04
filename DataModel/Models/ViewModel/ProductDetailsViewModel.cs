@@ -46,6 +46,7 @@ namespace DataModel.Models.ViewModel
         [Display(Name = "کشور سازنده")]
         [StringLength(15)]
         public string MadeIn { get; set; }
+        public string Detailes { get; set; }
 
         /// <summary>
         /// this is for main image 

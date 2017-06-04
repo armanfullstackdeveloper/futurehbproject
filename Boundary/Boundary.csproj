@@ -277,6 +277,7 @@
     <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
     <Compile Include="Controllers\Ordinary\StaticController.cs" />
     <Compile Include="Helper\AttributeFilters\ExceptionHandler.cs" />
+    <Compile Include="Helper\ExtensionMethod.cs" />
     <Compile Include="Helper\HelperFunction.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\JsonResultHelper.cs" />

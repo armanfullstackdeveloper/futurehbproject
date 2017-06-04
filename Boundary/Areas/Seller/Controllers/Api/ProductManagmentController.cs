@@ -191,6 +191,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                     IsExist = productRegisterDataModel.ProductMainAttributeDataModels.IsExist ?? true,
                     Warranty = productRegisterDataModel.ProductMainAttributeDataModels.Warranty,
                     MadeIn = productRegisterDataModel.ProductMainAttributeDataModels.MadeIn,
+                    Detailes = productRegisterDataModel.ProductMainAttributeDataModels.Detailes,
                     //
                     StoreCode = store.StoreCode,
                     Status = EProductStatus.New,
@@ -503,6 +504,7 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 recentProduct.IsExist = productEditDataModel.ProductMainAttributeDataModels.IsExist ?? false;
                 recentProduct.Warranty = productEditDataModel.ProductMainAttributeDataModels.Warranty;
                 recentProduct.MadeIn = productEditDataModel.ProductMainAttributeDataModels.MadeIn;
+                recentProduct.Detailes = productEditDataModel.ProductMainAttributeDataModels.Detailes;
                 //
                 recentProduct.StoreCode = store.StoreCode;
                 //recentProduct.Status = ;

@@ -94,7 +94,7 @@ namespace Boundary.Areas.Seller.Controllers
                 return Json(JsonResultHelper.FailedResultWithMessage(checkSession.Message), JsonRequestBehavior.AllowGet);
             }
 
-            SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
+            SearchResultViewModel result = await new ProductBL().SearchAsync(new SearchParametersDataModel()
             {
                 StoreCode = checkSession.MainSession.Store.StoreCode
             }, new List<EProductStatus>() { EProductStatus.Active, EProductStatus.Suspended });
@@ -127,11 +127,6 @@ namespace Boundary.Areas.Seller.Controllers
                 {
                     List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
                     {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => X),
-                        //    Value = X
-                        //},
                     };
                     long code = new ErrorLogBL().LogException(exp1, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);
@@ -147,11 +142,6 @@ namespace Boundary.Areas.Seller.Controllers
                 {
                     List<ActionInputViewModel> lst = new List<ActionInputViewModel>()
                     {
-                        //new ActionInputViewModel()
-                        //{
-                        //    Name = HelpfulFunction.GetVariableName(() => X),
-                        //    Value = X
-                        //},
                     };
                     long code = new ErrorLogBL().LogException(exp3, User.Identity.GetUserId() ?? Request.UserHostAddress, JArray.FromObject(lst).ToString());
                     return Json(JsonResultHelper.FailedResultWithTrackingCode(code), JsonRequestBehavior.AllowGet);

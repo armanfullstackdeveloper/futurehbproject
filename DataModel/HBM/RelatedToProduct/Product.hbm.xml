@@ -43,6 +43,9 @@
     <property name="Name">
       <column name="Name" sql-type="nvarchar" not-null="false" />
     </property>
+    <property name="Detailes">
+      <column name="Detailes" sql-type="nvarchar" not-null="false" />
+    </property>
     <property name="ImgAddress">
       <column name="ImgAddress" sql-type="nvarchar" not-null="false" />
     </property>
@@ -52,7 +55,7 @@
     <property name="PostalCostInCountry">
       <column name="PostalCostInCountry" sql-type="int" not-null="false" />
     </property>
-      <property name="PostalCostInTown">
+    <property name="PostalCostInTown">
       <column name="PostalCostInTown" sql-type="int" not-null="false" />
     </property>
   </class>

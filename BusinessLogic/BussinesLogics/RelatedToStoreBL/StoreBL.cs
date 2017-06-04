@@ -67,7 +67,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 parameters.Add("@Type", storeRegister.StoreTypeCode);
                 parameters.Add("@Website", storeRegister.Website);
                 parameters.Add("@CatsCode", storeRegister.ListCategoryCode.AsTableValuedParameter("dbo.IdTable"));
-                parameters.Add("@PhoneNumber", string.IsNullOrEmpty(storeRegister.PhoneNumber)?null:storeRegister.PhoneNumber);
+                parameters.Add("@PhoneNumber", string.IsNullOrEmpty(storeRegister.PhoneNumber) ? null : storeRegister.PhoneNumber);
                 parameters.Add("@storeStatus", (byte)EStoreStatus.Active);
                 parameters.Add("@ProcResult", dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
 
@@ -138,7 +138,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
             }
         }
 
-        public async Task<IEnumerable<StoreSummery>> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
+        public async Task<IList<StoreSummery>> GetNewest(long? cityCode = null, int? pageNumber = null, int? rowspPage = null)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
 
                 IEnumerable<StoreSummery> lst = await _db.QueryAsync<StoreSummery>("Store_GetNewest", parameters, commandType: CommandType.StoredProcedure);
                 EnsureCloseConnection(_db);
-                return lst;
+                return lst.ToList();
             }
             catch (Exception ex)
             {
@@ -439,7 +439,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 _db = EnsureOpenConnection();
                 var parameters = new DynamicParameters();
                 parameters.Add("@shopname", shopname);
-                long storeCode = _db.Query<long>("Store_SelectIdByHomePage", parameters, commandType: CommandType.StoredProcedure).SingleOrDefault();
+                long storeCode = _db.Query<long>("Store_SelectIdByHomePage", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 EnsureCloseConnection(_db);
                 return storeCode;
             }

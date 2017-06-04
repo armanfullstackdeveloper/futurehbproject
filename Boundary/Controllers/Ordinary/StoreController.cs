@@ -43,7 +43,7 @@ namespace Boundary.Controllers.Ordinary
             {
                 imageOnly = null;
             }
-            SearchResultViewModel result = await new ProductBL().Search(new SearchParametersDataModel()
+            SearchResultViewModel result = await new ProductBL().SearchAsync(new SearchParametersDataModel()
             {
                 StoreCode = storeCode
             }, lstStatus, null, imageOnly);

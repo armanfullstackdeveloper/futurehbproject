@@ -117,7 +117,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToProductBL
             }
         }
 
-        public async Task<SearchResultViewModel> Search(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null,bool? haveImage=null)
+        public async Task<SearchResultViewModel> SearchAsync(SearchParametersDataModel searchParameters, List<EProductStatus> status, long? productCode = null,bool? haveImage=null)
         {
             try
             {

@@ -136,6 +136,8 @@ namespace DataModel.Models.DataModel
             set { _longitude = value; }
         }
 
+        public SearchPlace SearchPlace { get; set; }
+
         public List<ProductAttributeWithItemsDataModel> Attributes { get; set; }
     }
 
@@ -143,5 +145,14 @@ namespace DataModel.Models.DataModel
     {
         public long AttributeCode { get; set; }
         public long AttributeValueCode { get; set; }
+    }
+
+    public enum SearchPlace
+    {
+        Non = 0,
+        FirstPage = 1,
+        SearchPage = 2,
+        ProductDetails = 3,
+        StoreHomePage = 4
     }
 }
