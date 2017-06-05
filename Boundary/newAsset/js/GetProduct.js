@@ -349,6 +349,36 @@
     }
 
 
+    //initiate the plugin and pass the id of the div containing gallery images
+    $("#zoom_03").elevateZoom({
+        gallery: 'gallery_01',
+        zoomWindowPosition: 10,
+        easing: true,
+        zoomWindowOffety:100,
+        zoomWindowOffetx: -20,
+        zoomWindowWidth:500,
+        zoomWindowHeight:500,
+        cursor: 'pointer',
+        galleryActiveClass: 'active',
+        imageCrossfade: true,
+        zoomWindowFadeIn: 500,
+        zoomWindowFadeOut: 500,
+        lensFadeIn: 500,
+        lensFadeOut: 500,
+        tint: true,
+        tintColour: '#a7a7a7',
+        tintOpacity:0.6,
+        //loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+    });
+
+    //pass the images to Fancybox
+    $("#zoom_03").bind("click", function (e) {
+        var ez = $('#zoom_03').data('elevateZoom');
+        $.fancybox(ez.getGalleryList());
+        return false;
+    });
+
+
     $('#mainContainer').slideDown();
 }]);
 
