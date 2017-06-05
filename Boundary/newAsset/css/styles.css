@@ -382,6 +382,10 @@ button {
     background-color: #eaf4f3;
 }
 
+.acceptGreenBack {
+    background-color: #32cc68;
+}
+
 .lightGreenColor {
     color: #77e2ae;
 }
@@ -564,6 +568,10 @@ button {
 
 .standardButDoubleVerticalPadding {
     padding: 0 2.5rem 1rem 2.5rem;
+}
+
+.standardButtonPadding {
+    padding: 1rem 2rem;
 }
 
 .standardVerticalMargin {
@@ -972,7 +980,98 @@ button {
 /*-------------------- personal elements ------------------*/
 
 .minHeight_1 {
-    min-height: 600px;
+    min-height: 700px;
+}
+
+.minHeight_2 {
+    min-height: 500px;
+}
+
+.stepsOnCorner {
+    height: 100%;
+    position: absolute;
+    width: 90px;
+    box-shadow: -4px 0 5px rgba(244, 244, 244, 0.25);
+}
+
+.activeStep {
+    background-color: #009688 !important;
+}
+
+.activeStep .grayBack {
+    background-color: #009688 !important;
+}
+
+.activeStep .grayColor {
+    color: #009688;
+}
+
+.activeStep .icon.grayColor {
+    color: #ffffff;
+}
+
+.inProgressStep {
+    background-color: #009688 !important;
+}
+
+.inProgressStep .counterCircle {
+    border: solid #009688 2px;
+    background-color: #fff !important;
+}
+
+.inProgressStep .grayColor {
+    color: #009688;
+}
+
+.inProgressStep .icon.grayColor {
+    color: #ffffff;
+}
+    
+.lineCap {
+    height: 95%;
+    position: absolute;
+    width: 1px;
+}
+
+.sideOfCounter {
+    padding-right: 90px;
+}
+
+.oneFourLine {
+    height: 25%;
+    width: 2px;
+}
+
+.lineCap.objectInMiddle {
+    left: unset;
+    right: 25px;
+}
+
+.stepLable.objectInMiddle {
+    left: unset;
+    right: 0px;
+}
+
+.stepLable {
+    width: 37px;
+}
+
+.topQuatreMargin {
+    margin-right: 25%;
+}
+
+.topTwoQuatreMargin {
+    margin-right: 50%;
+}
+
+.topThreeQuatreMargin {
+    margin-right: 75%;
+}
+
+
+.counterCircle {
+    width: 25px;
+    height: 25px;
 }
 
 .socialCover {
@@ -1768,6 +1867,10 @@ button {
 
 .lightGray {
     color: #b9b9b9;
+}
+
+.grayColor {
+    color: #e1e1e1;
 }
 
 .standardSelectBox.boxElement {
