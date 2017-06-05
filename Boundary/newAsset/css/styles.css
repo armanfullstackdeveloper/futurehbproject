@@ -784,6 +784,18 @@ button {
     float: right;
 }
 
+.oneFourColumn {   
+    width: 23%;
+    float: right;
+    margin-left: 2%;
+}
+
+.threeFourColumn {
+    width: 73%;
+    float: right;
+    margin-left: 2%;
+}
+
 .threeFourFullColumn {
     width: 75%;
     float: right;
@@ -812,6 +824,12 @@ button {
 
 .oneThreeColumn {
     width: 31.33333333333334%;
+    float: right;
+    margin-left: 2%;
+}
+
+.twoThreeColumn {
+    width: 64.66666666666667%;
     float: right;
     margin-left: 2%;
 }
@@ -983,6 +1001,10 @@ button {
 }
 
 /*-------------------- personal elements ------------------*/
+
+.maxHeight_1 {
+    max-height: 75px;
+}
 
 .height_2 {
     height: 131px;
@@ -1550,6 +1572,14 @@ button {
     height: 100%;
 }
 
+.gallery .defaultArrow {
+    background-color:transparent ;
+}
+
+.gallery .leftArrowShadow {
+    box-shadow: none;
+}
+
 .defaultArrow {
     color: #c9c9c9;
     height: 100%;
@@ -1559,6 +1589,11 @@ button {
     z-index: 1;
     background-color:#fbfbfb ;
     min-width: 38px;
+}
+
+.relatedImage .owl-item {
+    padding: 0;
+    border-left: none;
 }
 
 .noBack .defaultArrow {
@@ -1684,6 +1719,31 @@ button {
     overflow: hidden;
 }
 
+.zoomWrapper {
+    width: 100% !important;
+    float: right;
+    position: relative;
+}
+
+.thumbsSection a {
+    display: inline-block;
+    width: 20%;
+    padding-bottom: 20%;
+    overflow: hidden;
+    margin-left: -4.5px;
+    position: relative;
+}
+
+.thumbsSection a img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 .flatRadiusBox {
     border-radius: 15px;
     box-shadow: 0 0 22px #e2e2e2;
@@ -1760,13 +1820,14 @@ button {
     border-radius: 50%;
 }
 
-.productDetails .oneThreeFullColumn {
-    width: 35%;
+.productDetails .oneThreeColumn {    
+    width: 35.333%;
     float: right;
+    margin-left: 2%;
 }
 
-.productInfo .twoThreeFullColumn {
-    width: 65%;
+.productInfo .twoThreeColumn {
+    width: 60%;
     float: right;
 }
 

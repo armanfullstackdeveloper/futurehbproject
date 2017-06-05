@@ -13,57 +13,68 @@
 
 <div class="container" ng-controller="getProductCtrl" style="display:none" id="mainContainer">
     <div class="sizeManager productDetails">
-        <div class="threeFourFullColumn standardPadding">
-            <div class="organizer productInfo">
-                <div class="oneThreeFullColumn">
-                    <!-- gallery in tu gharar migire -->
-                    <div class="gallery">
-
-                        <img id="zoom_03" src="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg" />
-                        <div id="gallery_01">
-                            <a href="#" data-image="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg">
-                                <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image1.jpg" />
-                            </a>
-                            <a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
-                                <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
-                            </a>
-                            <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
-                                <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
-                            </a>
-                            <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
-                                <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
-                            </a>
-                        </div>
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-                <div class="twoThreeFullColumn goLeft">
-                    <div class="allInfo twelveFontSize">
-                        <div class="organizer commonInfo">
-                            <div class="oneThreeFullColumn">
-                                <div class="organizer standardVerticalMargin"><span class="eightyFontsize thickFont">نام محصول:</span> <span class="" ng-bind="Data.Product.Name"></span></div>
-                                <div class="organizer" ng-show="Data.Product.Brand"><span class="eightyFontsize thickFont">برند:</span> <span class="" ng-bind="Data.Product.Brand"> </span></div>
-                                <div class="organizer standardVerticalMargin" ng-show="Data.Colors.length!=0">
-                                    <div class="colorBox">
-                                        <span class="eightyFontsize thickFont">رنگ ها:</span>
-                                        <div class="colorInner textInCenter" ng-repeat="color in Data.Colors">
-                                            <div class="boxElement radiusBox textInCenter relativeMatter">
-                                                <span class="colorCircle objectInMiddle" style="background-color: {{color.ColorHex}};"></span>
-                                            </div>
-                                            <div class="colorCheckBox standardHalfVerticalMargin">
-                                                <input type="radio" id="c11" name="cc" />
-                                                <label for="c11"><span class="noPadding"></span> </label>
-                                            </div>
+        <div class="fullWidth">
+            <div class="threeFourColumn">
+                <div class="fullWidth productInfo">
+                    <div class="oneThreeColumn">
+                        <!-- gallery in tu gharar migire -->
+                        <div class="gallery organizer itemContainer boxElement radiusBox">
+                            <div class="organizer relativeMatter">
+                                <div class="arrows owl-nav1">
+                                    <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
+                                        <div class="circleAroundArrow objectInMiddle">
+                                            <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
                                         </div>
-                                        @*<div class="colorInner textInCenter">
+                                    </div>
+                                    <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
+                                        <div class="circleAroundArrow objectInMiddle">
+                                            <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img id="zoom_03" class="" src="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg" />
+                            </div>
+                            <div class="thumbsSection organizer maxHeight_1" id="gallery_01">
+                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg"><img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image1.jpg" /></a><a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
+                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
+                                </a>
+                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
+                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
+                                </a>
+                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
+                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
+                                </a>
+                            </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="twoThreeColumn goLeft">
+                        <div class="allInfo twelveFontSize">
+                            <div class="organizer commonInfo">
+                                <div class="oneThreeFullColumn">
+                                    <div class="organizer standardVerticalMargin"><span class="eightyFontsize thickFont">نام محصول:</span> <span class="" ng-bind="Data.Product.Name"></span></div>
+                                    <div class="organizer" ng-show="Data.Product.Brand"><span class="eightyFontsize thickFont">برند:</span> <span class="" ng-bind="Data.Product.Brand"> </span></div>
+                                    <div class="organizer standardVerticalMargin" ng-show="Data.Colors.length!=0">
+                                        <div class="colorBox">
+                                            <span class="eightyFontsize thickFont">رنگ ها:</span>
+                                            <div class="colorInner textInCenter" ng-repeat="color in Data.Colors">
+                                                <div class="boxElement radiusBox textInCenter relativeMatter">
+                                                    <span class="colorCircle objectInMiddle" style="background-color: {{color.ColorHex}};"></span>
+                                                </div>
+                                                <div class="colorCheckBox standardHalfVerticalMargin">
+                                                    <input type="radio" id="c11" name="cc" />
+                                                    <label for="c11"><span class="noPadding"></span> </label>
+                                                </div>
+                                            </div>
+                                            @*<div class="colorInner textInCenter">
                                                 <div class="boxElement radiusBox textInCenter relativeMatter">
                                                     <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
                                                 </div>
@@ -72,178 +83,179 @@
                                                     <label for="c12"><span class="noPadding"></span> </label>
                                                 </div>
                                             </div>*@
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="twoThreeFullColumn">
-                                <div class="organizer">
-
-
-                                    <div ng-show="Data.Product.CanSend" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-truck"></span> قابل ارسال
-                                    </div>
-                                    <div ng-show="Data.Product.CanGiveBack" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-redo"></span> قابل پس دادن
-                                    </div>
-                                    <div ng-show="Data.Product.Changeability" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-loop"></span> قابل تعویض
-                                    </div>
-                                    <div ng-show="Data.Product.IsExist" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-checkmark"></span> موجود
-                                    </div>
-                                </div>
-                                <div ng-show="Data.Product.Detailes" class="organizer standardDoubleVerticalMargin textJustified aLittleFromBottom">
-                                    <span class="eightyFontsize thickFont">توضیحات محصول:</span>
-                                    <div class="organizer" ng-bind="Data.Product.Detailes">
-                                        توضیحات محصول
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="organizer priceRange">
-                            <div class="boxElement radiusBox organizer standardPadding elementTopVerticalMargin">
-                                <div class="twoPartButton outlineButton greenBorder goLeft textInCenter" ng-click="AddToBasket()">
-                                    <div class="iconPart greenBack standardDoublePadding"><span class="icon icon-cart whiteColor"></span> </div>
-                                    <div class="fieldPart greenColor thirteenFontSize thickFont">اضافه به سبد خرید</div>
-                                </div>
-                                <div class="priceNotice goRight">
-                                    <span class="eightyFontsize thickFont">قیمت: </span> <span class="soffPrice lightGray crossOver standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="Data.Product.Price">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin" ng-bind="Data.Product.DiscountedPrice?Data.Product.DiscountedPrice:Data.Product.Price">290,000</span> <span class="offValue smallPadding pinkBack outlineButton whiteColor standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="percentDiscount">5 درصد تخفیف</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="organizer features standardVerticalMargin"ng-show="Data.ProductAttrbiutesViewModels" >
-                            <div class="tableShape boxElement radiusBox thickFont">
-                                <div class="tRow organizer borderBottom relativeMatter" >
-                                    <div ng-repeat="item in Data.ProductAttrbiutesViewModels">
-                                        <div class="twoFullColumn" ng-show="$index %2 == 0">
-                                            <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
-                                            <div class="tValue goLeft standardPadding">
-                                                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
-                                                @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
-                                            </div>
-                                        </div>
-                                        <div class="twoFullColumn" ng-show="$index %2 != 0">
-                                            <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
-                                            <div class="tValue goLeft standardPadding">
-                                                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
-                                                @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
-                                            </div>
                                         </div>
                                     </div>
-                                  
-                                 </div>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="organizer newProducts standardVerticalMargin"  ng-show="owl1Data">
-                <div class="boxElement radiusBox">
-                    <div class="titleBar organizer eightyFontsize thickFont loginPadding">
-                        <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مشابه </div>
-                    </div>
-                    <div class="innerBox carouselContainer organizer thickFont relativeMatter">
-                        <div class="arrows owl-nav1">
-                            <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
-                                <div class="circleAroundArrow objectInMiddle">
-                                    <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
                                 </div>
-                            </div>
-                            <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
-                                <div class="circleAroundArrow objectInMiddle">
-                                    <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carouselInner">
-                            <div class="owl-carousel owl-theme owlSlider1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                <div class="twoThreeFullColumn">
+                                    <div class="organizer">
 
-    </div>
-    <div class="oneFourFullColumn">
-        <div class="boxElement textInCenter organizer radiusBox relativeMatter">
-            <div class="organizer sellerLogo standardHalfVerticalMargin">
-                <div class="circleImageContainer">
-                    <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
-                </div>
-            </div>
-            <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
-            @*<div class="organizer">
-                <div class="mapHolder relativeMatter">
-                    <div id="MiniMapHolder"></div>
-                    <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
-                </div>
-            </div>*@
-            <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.Place">
-                <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
-                <div class="organizer" ng-bind="Data.StoreSummery.Place">
-                </div>
-            </div>
-            <div class="organizer standardPadding borderBottom" ng-show="!Data.StoreSummery.Place">
-                <div class="organizer standardHalfVerticalMargin thickFont">فروشگاه مجازی</div>
-                 
-            </div>
-            <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.PhoneNumber">
-                <div class="organizer standardHalfVerticalMargin thickFont">شماره تلفن</div>
-                <div class="organizer"><span ng-bind="Data.StoreSummery.PhoneNumber"></span></div>
-            </div>
-            <div class="organizer standardPadding borderBottom" ng-show="owl2Data">
-                <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
-                <div class="fullWidth relativeMatter noBack">
-                    <div class="arrows owl-nav1">
-                        <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev2 pointer">
-                            <div class="circleAroundArrow objectInMiddle">
-                                <span class="icon icon-arrow-right2 objectInMiddle"></span>
+
+                                        <div ng-show="Data.Product.CanSend" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
+                                            <span class="icon icon-truck"></span> قابل ارسال
+                                        </div>
+                                        <div ng-show="Data.Product.CanGiveBack" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
+                                            <span class="icon icon-redo"></span> قابل پس دادن
+                                        </div>
+                                        <div ng-show="Data.Product.Changeability" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
+                                            <span class="icon icon-loop"></span> قابل تعویض
+                                        </div>
+                                        <div ng-show="Data.Product.IsExist" class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
+                                            <span class="icon icon-checkmark"></span> موجود
+                                        </div>
+                                    </div>
+                                    <div ng-show="Data.Product.Detailes" class="organizer standardDoubleVerticalMargin textJustified aLittleFromBottom">
+                                        <span class="eightyFontsize thickFont">توضیحات محصول:</span>
+                                        <div class="organizer" ng-bind="Data.Product.Detailes">
+                                            توضیحات محصول
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="leftArrow leftArrowShadow defaultArrow owl-next next2 pointer">
-                            <div class="circleAroundArrow objectInMiddle">
-                                <span class="icon icon-arrow-left2 objectInMiddle"></span>
+                            <div class="organizer priceRange">
+                                <div class="boxElement radiusBox organizer standardPadding elementTopVerticalMargin">
+                                    <div class="twoPartButton outlineButton greenBorder goLeft textInCenter" ng-click="AddToBasket()">
+                                        <div class="iconPart greenBack standardDoublePadding"><span class="icon icon-cart whiteColor"></span> </div>
+                                        <div class="fieldPart greenColor thirteenFontSize thickFont">اضافه به سبد خرید</div>
+                                    </div>
+                                    <div class="priceNotice goRight">
+                                        <span class="eightyFontsize thickFont">قیمت: </span> <span class="soffPrice lightGray crossOver standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="Data.Product.Price">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin" ng-bind="Data.Product.DiscountedPrice?Data.Product.DiscountedPrice:Data.Product.Price">290,000</span> <span class="offValue smallPadding pinkBack outlineButton whiteColor standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="percentDiscount">5 درصد تخفیف</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="organizer features standardVerticalMargin" ng-show="Data.ProductAttrbiutesViewModels">
+                                <div class="tableShape boxElement radiusBox thickFont">
+                                    <div class="tRow organizer borderBottom relativeMatter">
+                                        <div ng-repeat="item in Data.ProductAttrbiutesViewModels">
+                                            <div class="twoFullColumn" ng-show="$index %2 == 0">
+                                                <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
+                                                <div class="tValue goLeft standardPadding">
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+                                                    @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                </div>
+                                            </div>
+                                            <div class="twoFullColumn" ng-show="$index %2 != 0">
+                                                <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
+                                                <div class="tValue goLeft standardPadding">
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+                                                    @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="carouselInner">
-                        <div class="owl-carousel owl-theme owlSlider2">
+                </div>
+                <div class="organizer newProducts standardVerticalMargin" ng-show="owl1Data">
+                    <div class="boxElement radiusBox">
+                        <div class="titleBar organizer eightyFontsize thickFont loginPadding">
+                            <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مشابه </div>
+                        </div>
+                        <div class="innerBox carouselContainer organizer thickFont relativeMatter">
+                            <div class="arrows owl-nav1">
+                                <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
+                                    <div class="circleAroundArrow objectInMiddle">
+                                        <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
+                                    </div>
+                                </div>
+                                <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
+                                    <div class="circleAroundArrow objectInMiddle">
+                                        <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carouselInner">
+                                <div class="owl-carousel owl-theme owlSlider1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="oneFourColumn">
+                <div class="boxElement textInCenter organizer radiusBox relativeMatter">
+                    <div class="organizer sellerLogo standardHalfVerticalMargin">
+                        <div class="circleImageContainer">
+                            <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
+                        </div>
+                    </div>
+                    <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
+                    @*<div class="organizer">
+                        <div class="mapHolder relativeMatter">
+                            <div id="MiniMapHolder"></div>
+                            <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
+                        </div>
+                    </div>*@
+                    <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.Place">
+                        <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
+                        <div class="organizer" ng-bind="Data.StoreSummery.Place">
+                        </div>
+                    </div>
+                    <div class="organizer standardPadding borderBottom" ng-show="!Data.StoreSummery.Place">
+                        <div class="organizer standardHalfVerticalMargin thickFont">فروشگاه مجازی</div>
+
+                    </div>
+                    <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.PhoneNumber">
+                        <div class="organizer standardHalfVerticalMargin thickFont">شماره تلفن</div>
+                        <div class="organizer"><span ng-bind="Data.StoreSummery.PhoneNumber"></span></div>
+                    </div>
+                    <div class="organizer standardPadding borderBottom" ng-show="owl2Data">
+                        <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
+                        <div class="fullWidth relativeMatter noBack">
+                            <div class="arrows owl-nav1">
+                                <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev2 pointer">
+                                    <div class="circleAroundArrow objectInMiddle">
+                                        <span class="icon icon-arrow-right2 objectInMiddle"></span>
+                                    </div>
+                                </div>
+                                <div class="leftArrow leftArrowShadow defaultArrow owl-next next2 pointer">
+                                    <div class="circleAroundArrow objectInMiddle">
+                                        <span class="icon icon-arrow-left2 objectInMiddle"></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="minorWidth elementInMiddle">
-                                <div class="minorOrganizer">
-                                    <div class="fourFullColumns">
-                                        <div class="squareItem relativeMatter">
-                                            <img src="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    @*<div class="fourFullColumns">
-                                        <div class="squareItem relativeMatter">
-                                            <img src="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="fourFullColumns ">
-                                        <div class="squareItem relativeMatter">
-                                            <img src="" class="imageInMiddle">
-                                        </div>
-                                    </div>
-                                    <div class="fourFullColumns">
-                                        <div class="squareItem relativeMatter">
-                                            <img src="" class="imageInMiddle">
-                                        </div>
-                                    </div>*@
+                                <div class="carouselInner relatedImage">
+                                    <div class="owl-carousel owl-theme owlSlider2">
+                                        <div class="minorWidth elementInMiddle">
+                                            <div class="minorOrganizer">
+                                                <div class="fourFullColumns">
+                                                    <div class="squareItem relativeMatter">
+                                                        <img src="" class="imageInMiddle">
+                                                    </div>
+                                                </div>
+                                                @*<div class="fourFullColumns">
+                                <div class="squareItem relativeMatter">
+                                    <img src="" class="imageInMiddle">
                                 </div>
-                            </div> 
+                            </div>
+                            <div class="fourFullColumns ">
+                                <div class="squareItem relativeMatter">
+                                    <img src="" class="imageInMiddle">
+                                </div>
+                            </div>
+                            <div class="fourFullColumns">
+                                <div class="squareItem relativeMatter">
+                                    <img src="" class="imageInMiddle">
+                                </div>
+                            </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
-
-
-                  
+                    <div class="organizer standardPadding borderBottom">
+                        <div class="tagInner outlineButton fillButton standardPadding whiteColor pinkBack thickFont"><a href="~/shop/code/{{Data.StoreSummery.Id}}">سایر محصولات فروشگاه</a></div>
+                    </div>
                 </div>
-            </div>
-            <div class="organizer standardPadding borderBottom">
-                <div class="tagInner outlineButton fillButton standardPadding whiteColor pinkBack thickFont"><a href="~/shop/code/{{Data.StoreSummery.Id}}">سایر محصولات فروشگاه</a></div>
             </div>
         </div>
     </div>
