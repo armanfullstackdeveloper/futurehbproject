@@ -535,7 +535,7 @@ button {
 }
 
 .standardPadding {
-    padding: 0.5em 1rem;
+    padding: 0.5em 1rem !important;
 }
 
 .standardBottomVerticalPadding {
@@ -769,6 +769,11 @@ button {
     float: right;
 }
 
+.mainOneThreeFullColumn {
+    width: 33.33333333333333%;
+    float: right;
+}
+
 .twoThreeFullColumn {
     width: 60%;
     float: right;
@@ -978,6 +983,23 @@ button {
 }
 
 /*-------------------- personal elements ------------------*/
+
+.height_2 {
+    height: 131px;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 131px;
+    min-height: 131px;
+}
+
+.height_3 {
+    height: 95.7333px;
+}
+
+.actionsCircle {
+    width: 38px;
+    height: 38px;
+}
 
 .minHeight_1 {
     min-height: 700px;
@@ -1380,7 +1402,7 @@ button {
 }
 
 .radiusBox {
-    border-radius: 10px;
+    border-radius: 10px !important;
     overflow: hidden;
 }
 
@@ -1865,6 +1887,14 @@ button {
     overflow: hidden;
 }
 
+.lighterGrayBack {
+    background-color: #f7f7f7;
+}
+
+.lighterGrayColor {
+    color: #f7f7f7;
+}
+
 .lightGray {
     color: #b9b9b9;
 }
@@ -1951,9 +1981,25 @@ button {
     border-left: solid #f3f3f3 1px;
 }
 
+.bottomBorder {
+    border-bottom: solid #f3f3f3 1px;
+}
+
+.darkerLeftBorder {
+    border-left: solid #f1f1f1 1px;
+}
+
+.darkerBottomBorder {
+    border-bottom: solid #f1f1f1 1px;
+}
+
 .minorTop {
     position: relative;
     top: 5px;
+}
+
+.height_1 {
+    height: 193.5333px;
 }
 
 .pagination span {
