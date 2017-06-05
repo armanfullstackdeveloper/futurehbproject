@@ -338,8 +338,8 @@
         }
         else if (type == 'OtherShopProduct') {
 
-            html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class="fourFullColumns item">'
-              + ' <div class="squareItem relativeMatte">'
+            html = '<a href="/product/' + value.Id + '/نام_فروشگاه=' + value.StoreName.replace(/:/g, '_').replace(/ /g, '_') + '/نام_محصول=' + value.Name.replace(/:/g, '_').replace(/ /g, '_') + '/قیمت=' + PriceTemp + 'تومان" > <div class=" item">'
+              + ' <div class="squareItem relativeMatter">'
                + " <img src='" + root + value.ImgAddress + "?w=143&h=143&mode=carve' alt='نام_فروشگاه=" + value.StoreName + '/نام_محصول=' + value.Name + "/قیمت=" + PriceTemp + "تومان' class='imageInMiddle'>"
               + ' </div>'
               + ' </div></a>';

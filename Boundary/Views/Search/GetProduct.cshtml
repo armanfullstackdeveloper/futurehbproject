@@ -13,10 +13,10 @@
 
 <div class="container" ng-controller="getProductCtrl" style="display:none" id="mainContainer">
     <div class="sizeManager productDetails">
-        <div class="fullWidth">
-            <div class="threeFourColumn">
-                <div class="fullWidth productInfo">
-                    <div class="oneThreeColumn">
+        <div class="fullWidth organizerInPhone">
+            <div class="threeFourColumn organizerInPhone">
+                <div class="fullWidth organizerInPhone productInfo">
+                    <div class="oneThreeColumn organizerInPhone">
                         <!-- gallery in tu gharar migire -->
                         <div class="gallery organizer itemContainer boxElement radiusBox">
                             <div class="organizer relativeMatter">
@@ -56,16 +56,16 @@
 
                         </div>
                     </div>
-                    <div class="twoThreeColumn goLeft">
+                    <div class="twoThreeColumn goLeft organizerInPhone noMarginInPhone">
                         <div class="allInfo twelveFontSize">
-                            <div class="organizer commonInfo">
-                                <div class="oneThreeFullColumn">
-                                    <div class="organizer standardVerticalMargin"><span class="eightyFontsize thickFont">نام محصول:</span> <span class="" ng-bind="Data.Product.Name"></span></div>
-                                    <div class="organizer" ng-show="Data.Product.Brand"><span class="eightyFontsize thickFont">برند:</span> <span class="" ng-bind="Data.Product.Brand"> </span></div>
+                            <div class="organizer commonInfo standardPaddingInPhone">
+                                <div class="oneThreeFullColumn organizerInPhone">
+                                    <div class="organizer standardVerticalMargin sixteenFontSize"><span class=" thickFont">نام محصول:</span> <span class="" ng-bind="Data.Product.Name"></span></div>
+                                    <div class="organizer sixteenFontSize" ng-show="Data.Product.Brand"><span class=" thickFont">برند:</span> <span class="" ng-bind="Data.Product.Brand"> </span></div>
                                     <div class="organizer standardVerticalMargin" ng-show="Data.Colors.length!=0">
                                         <div class="colorBox">
-                                            <span class="eightyFontsize thickFont">رنگ ها:</span>
-                                            <div class="colorInner textInCenter" ng-repeat="color in Data.Colors">
+                                            <span class="sixteenFontSize thickFont">رنگ ها:</span>
+                                            <div class="colorInner textInCenter standardHorizontalLeftMargin" ng-repeat="color in Data.Colors">
                                                 <div class="boxElement radiusBox textInCenter relativeMatter">
                                                     <span class="colorCircle objectInMiddle" style="background-color: {{color.ColorHex}};"></span>
                                                 </div>
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="twoThreeFullColumn">
+                                <div class="twoThreeFullColumn organizerInPhone">
                                     <div class="organizer">
 
 
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="organizer priceRange">
+                            <div class="organizer priceRange hiddenInPhone">
                                 <div class="boxElement radiusBox organizer standardPadding elementTopVerticalMargin">
                                     <div class="twoPartButton outlineButton greenBorder goLeft textInCenter" ng-click="AddToBasket()">
                                         <div class="iconPart greenBack standardDoublePadding"><span class="icon icon-cart whiteColor"></span> </div>
@@ -120,24 +120,43 @@
                                     <div class="priceNotice goRight">
                                         <span class="eightyFontsize thickFont">قیمت: </span> <span class="soffPrice lightGray crossOver standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="Data.Product.Price">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin" ng-bind="Data.Product.DiscountedPrice?Data.Product.DiscountedPrice:Data.Product.Price">290,000</span> <span class="offValue smallPadding pinkBack outlineButton whiteColor standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="percentDiscount">5 درصد تخفیف</span>
                                     </div>
+
                                 </div>
                             </div>
+
+                            <div class="priceTagInPhone hiddenInDesktop prefer"  ng-click="AddToBasket()">
+                                <div class="oneFourFullColumn loginPadding relativeMatter darkerAcceptGreenBack height_4">
+                                    <span class="icon icon-cart darkerGreenColor objectInMiddle"></span>
+                                </div>
+                                <div class="threeFourFullColumn loginPadding relativeMatter acceptGreenBack height_4">
+                                    <span class="objectInMiddle standardPadding organizer">
+                                        <span class="eightyFontsize darkerGreenColor thickFont">قیمت: </span> <span class="soffPrice darkerGreenColor crossOver standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="Data.Product.Price">390,000</span> <span class="mainPrice darkerGreenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin" ng-bind="Data.Product.DiscountedPrice?Data.Product.DiscountedPrice:Data.Product.Price">290,000</span> <span class="offValue smallPadding pinkBack outlineButton whiteColor standardHorizontalLeftMargin" ng-show="Data.Product.DiscountedPrice" ng-bind="percentDiscount">5 درصد تخفیف</span>
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="organizer features standardVerticalMargin" ng-show="Data.ProductAttrbiutesViewModels">
                                 <div class="tableShape boxElement radiusBox thickFont">
                                     <div class="tRow organizer borderBottom relativeMatter">
-                                        <div ng-repeat="item in Data.ProductAttrbiutesViewModels">
-                                            <div class="twoFullColumn" ng-show="$index %2 == 0">
-                                                <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
-                                                <div class="tValue goLeft standardPadding">
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+
+                                        <div class="sequencedBorder" ng-repeat="item in Data.ProductAttrbiutesViewModels">
+                                            <div class="twoFullColumn organizerInPhone relativeMatter" ng-show="$index %2 == 0">
+                                                <div class="tTitle goRight standardPadding bottomGrayBorder">
+                                                    <span ng-bind="item.AttributeName" class="objectInMiddle textEllipsis standardPadding organizer">ویژگی</span>
+                                                </div>
+                                                <div class="tValue goLeft standardPadding bottomGrayBorder">
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
                                             </div>
-                                            <div class="twoFullColumn" ng-show="$index %2 != 0">
-                                                <div class="tTitle goRight standardPadding" ng-bind="item.AttributeName">ویژگی</div>
-                                                <div class="tValue goLeft standardPadding">
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder" ng-bind="item.Value">مقدار</div>
+                                            <div class="twoFullColumn organizerInPhone relativeMatter" ng-show="$index %2 != 0">
+                                                <div class="tTitle goRight standardPadding bottomGrayBorder">
+                                                    <span ng-bind="item.AttributeName" class="objectInMiddle textEllipsis standardPadding organizer">ویژگی</span>
+
+                                                </div>
+                                                <div class="tValue goLeft standardPadding bottomGrayBorder">
+                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
@@ -150,9 +169,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="organizer newProducts standardVerticalMargin" ng-show="owl1Data">
+                <div class="organizer newProducts standardVerticalMargin resetIndex relativeMatter" ng-show="owl1Data">
                     <div class="boxElement radiusBox">
-                        <div class="titleBar organizer eightyFontsize thickFont loginPadding">
+                        <div class="titleBar organizer eightyFontsize thickFont loginPadding relativeMatter prefer">
                             <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مشابه </div>
                         </div>
                         <div class="innerBox carouselContainer organizer thickFont relativeMatter">
@@ -176,11 +195,11 @@
                     </div>
                 </div>
             </div>
-            <div class="oneFourColumn">
+            <div class="oneFourColumn organizerInPhone">
                 <div class="boxElement textInCenter organizer radiusBox relativeMatter">
                     <div class="organizer sellerLogo standardHalfVerticalMargin">
                         <div class="circleImageContainer">
-                            <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
+                            <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogohiddenfAddress:noStorePic}}" />
                         </div>
                     </div>
                     <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>

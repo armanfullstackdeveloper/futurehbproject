@@ -78,6 +78,10 @@ li {
     float: right;
 }
 
+.maxFullWidth {
+    max-width: 100%;
+}
+
 .minorOrganizer {
     width: 98%;
     float: right;
@@ -168,6 +172,10 @@ li {
 
 .prefer {
     z-index: 1;
+}
+
+.fiveIndex {
+    z-index: 5;
 }
 
 .doublePrefer {
@@ -382,8 +390,17 @@ button {
     background-color: #eaf4f3;
 }
 
+.darkerGreenColor {
+    
+    color: #127936;
+}
+
 .acceptGreenBack {
     background-color: #32cc68;
+}
+
+.darkerAcceptGreenBack {
+    background-color: #16b84f;
 }
 
 .lightGreenColor {
@@ -1018,6 +1035,10 @@ button {
     height: 95.7333px;
 }
 
+.height_4 {
+    height: 65px;
+}
+
 .actionsCircle {
     width: 38px;
     height: 38px;
@@ -1182,7 +1203,6 @@ button {
     background: #f3f3f3;
     color: #818181;
     border-bottom: solid #f1f1f1 1px;
-    z-index: 4;
 }
 
 .openUpSearch .titleBar {
@@ -1333,10 +1353,8 @@ button {
 }
 
 .tagInner {
-    width: auto;
     display: inline-block;
     margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .goLeft.tagInner {
@@ -1851,15 +1869,32 @@ button {
     float: left;
 }
 
+.zoomWindow {
+    border-radius: 10px !important;
+    width: 532px !important;
+    height: 532px !important;
+    border: none !important;
+    box-shadow: 0px 0px 10px rgb(210, 210, 210) !important;
+    top: 0 !important;
+}
+
 .tTitle {
     background-color: #efefef;
-    width: 16%;
+    width: 30%;
     position: absolute;
     height: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+
+.sequencedBorder:nth-last-child(1) .bottomGrayBorder {
+    border-bottom: none;
+}
+.sequencedBorder:nth-last-child(2) .bottomGrayBorder {
+    border-bottom: none;
+}
+
 
 .tValue {
     width: 70%;
@@ -1913,7 +1948,7 @@ button {
     padding-bottom: 100%;
 }
 
-.mapHolder img {
+.mapHolder img { 
     width: 100%;
     height: 104px;
 }
@@ -1924,6 +1959,10 @@ button {
 
 .productDetails .eightyFontsize {
     font-size: 16px;
+}
+
+.sixteenFontSize {
+   font-size: 16px;
 }
 
 .aLittleFromBottom {
@@ -2491,6 +2530,25 @@ button {
 }
 
 /*------ personals -------*/
+
+.maxHeight_1 {
+    max-height: 61px;
+}
+
+.zopim {
+    z-index: auto !important;
+}
+
+.priceTagInPhone {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.noMarginInPhone {
+    margin: 0;
+}
 
 .activeSearch {
     background-color: #e1e1e1;
