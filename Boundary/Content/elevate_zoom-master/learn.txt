@@ -1,0 +1,2 @@
+  "docs" : "http://www.elevateweb.co.uk/image-zoom/examples",
+
