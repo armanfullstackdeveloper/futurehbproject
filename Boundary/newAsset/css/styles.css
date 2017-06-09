@@ -78,9 +78,22 @@ li {
     float: right;
 }
 
+.maxFullWidth {
+    max-width: 100%;
+}
+
+.minorOrganizer {
+    width: 98%;
+    float: right;
+}
+
 .fullWidth {
     width: 102%;
     float: right;
+}
+
+.minorWidth {
+    width: 80%;
 }
 
 .separateLine {
@@ -159,6 +172,10 @@ li {
 
 .prefer {
     z-index: 1;
+}
+
+.fiveIndex {
+    z-index: 5;
 }
 
 .doublePrefer {
@@ -373,6 +390,19 @@ button {
     background-color: #eaf4f3;
 }
 
+.darkerGreenColor {
+    
+    color: #127936;
+}
+
+.acceptGreenBack {
+    background-color: #32cc68;
+}
+
+.darkerAcceptGreenBack {
+    background-color: #16b84f;
+}
+
 .lightGreenColor {
     color: #77e2ae;
 }
@@ -477,10 +507,6 @@ button {
     background-color: #d5d5d5;
 }
 
-.darkGray {
-    background-color: #868686;
-}
-
 .darkGrayColor {
     color: #868686;
 }
@@ -526,7 +552,7 @@ button {
 }
 
 .standardPadding {
-    padding: 0.5em 1rem;
+    padding: 0.5em 1rem !important;
 }
 
 .standardBottomVerticalPadding {
@@ -559,6 +585,10 @@ button {
 
 .standardButDoubleVerticalPadding {
     padding: 0 2.5rem 1rem 2.5rem;
+}
+
+.standardButtonPadding {
+    padding: 1rem 2rem;
 }
 
 .standardVerticalMargin {
@@ -756,6 +786,11 @@ button {
     float: right;
 }
 
+.mainOneThreeFullColumn {
+    width: 33.33333333333333%;
+    float: right;
+}
+
 .twoThreeFullColumn {
     width: 60%;
     float: right;
@@ -764,6 +799,18 @@ button {
 .oneFourFullColumn {
     width: 25%;
     float: right;
+}
+
+.oneFourColumn {   
+    width: 23%;
+    float: right;
+    margin-left: 2%;
+}
+
+.threeFourColumn {
+    width: 73%;
+    float: right;
+    margin-left: 2%;
 }
 
 .threeFourFullColumn {
@@ -794,6 +841,12 @@ button {
 
 .oneThreeColumn {
     width: 31.33333333333334%;
+    float: right;
+    margin-left: 2%;
+}
+
+.twoThreeColumn {
+    width: 64.66666666666667%;
     float: right;
     margin-left: 2%;
 }
@@ -966,6 +1019,126 @@ button {
 
 /*-------------------- personal elements ------------------*/
 
+.maxHeight_1 {
+    max-height: 75px;
+}
+
+.height_2 {
+    height: 131px;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 131px;
+    min-height: 131px;
+}
+
+.height_3 {
+    height: 95.7333px;
+}
+
+.height_4 {
+    height: 65px;
+}
+
+.actionsCircle {
+    width: 38px;
+    height: 38px;
+}
+
+.minHeight_1 {
+    min-height: 700px;
+}
+
+.minHeight_2 {
+    min-height: 500px;
+}
+
+.stepsOnCorner {
+    height: 100%;
+    position: absolute;
+    width: 90px;
+    box-shadow: -4px 0 5px rgba(244, 244, 244, 0.25);
+}
+
+.activeStep {
+    background-color: #009688 !important;
+}
+
+.activeStep .grayBack {
+    background-color: #009688 !important;
+}
+
+.activeStep .grayColor {
+    color: #009688;
+}
+
+.activeStep .icon.grayColor {
+    color: #ffffff;
+}
+
+.inProgressStep {
+    background-color: #009688 !important;
+}
+
+.inProgressStep .counterCircle {
+    border: solid #009688 2px;
+    background-color: #fff !important;
+}
+
+.inProgressStep .grayColor {
+    color: #009688;
+}
+
+.inProgressStep .icon.grayColor {
+    color: #ffffff;
+}
+    
+.lineCap {
+    height: 95%;
+    position: absolute;
+    width: 1px;
+}
+
+.sideOfCounter {
+    padding-right: 90px;
+}
+
+.oneFourLine {
+    height: 25%;
+    width: 2px;
+}
+
+.lineCap.objectInMiddle {
+    left: unset;
+    right: 25px;
+}
+
+.stepLable.objectInMiddle {
+    left: unset;
+    right: 0px;
+}
+
+.stepLable {
+    width: 37px;
+}
+
+.topQuatreMargin {
+    margin-right: 25%;
+}
+
+.topTwoQuatreMargin {
+    margin-right: 50%;
+}
+
+.topThreeQuatreMargin {
+    margin-right: 75%;
+}
+
+
+.counterCircle {
+    width: 25px;
+    height: 25px;
+}
+
 .socialCover {
     height: 250px;
     background: url('/newAsset/images/telegram.jpg') no-repeat center;
@@ -1030,7 +1203,6 @@ button {
     background: #f3f3f3;
     color: #818181;
     border-bottom: solid #f1f1f1 1px;
-    z-index: 4;
 }
 
 .openUpSearch .titleBar {
@@ -1181,10 +1353,8 @@ button {
 }
 
 .tagInner {
-    width: auto;
     display: inline-block;
     margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .goLeft.tagInner {
@@ -1272,7 +1442,7 @@ button {
 }
 
 .radiusBox {
-    border-radius: 10px;
+    border-radius: 10px !important;
     overflow: hidden;
 }
 
@@ -1420,6 +1590,14 @@ button {
     height: 100%;
 }
 
+.gallery .defaultArrow {
+    background-color:transparent ;
+}
+
+.gallery .leftArrowShadow {
+    box-shadow: none;
+}
+
 .defaultArrow {
     color: #c9c9c9;
     height: 100%;
@@ -1429,6 +1607,22 @@ button {
     z-index: 1;
     background-color:#fbfbfb ;
     min-width: 38px;
+}
+
+.relatedImage .owl-item {
+    padding: 0;
+    border-left: none;
+}
+
+.noBack .defaultArrow {
+    color: #c9c9c9;
+    height: 100%;
+    width: 3%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    background-color:transparent ;
+    min-width: 18px;
 }
 
 .slider .defaultArrow {
@@ -1445,6 +1639,10 @@ button {
 
 .leftArrowShadow {
     box-shadow: 4px 0 28px #cdcdcd;
+}
+
+.noBack .leftArrowShadow {
+    box-shadow: none;
 }
 
 .slider .rightArrowShadow {
@@ -1470,6 +1668,11 @@ button {
     border-radius: 50%;
     width: 35px;
     height: 35px;
+}
+
+.noBack .circleAroundArrow {
+    background-color: transparent;
+    color: #474747;
 }
 
 .noProductFound {
@@ -1532,6 +1735,31 @@ button {
 
 .itemContainer {
     overflow: hidden;
+}
+
+.zoomWrapper {
+    width: 100% !important;
+    float: right;
+    position: relative;
+}
+
+.thumbsSection a {
+    display: inline-block;
+    width: 20%;
+    padding-bottom: 20%;
+    overflow: hidden;
+    margin-left: -4.5px;
+    position: relative;
+}
+
+.thumbsSection a img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .flatRadiusBox {
@@ -1610,13 +1838,14 @@ button {
     border-radius: 50%;
 }
 
-.productDetails .oneThreeFullColumn {
-    width: 35%;
+.productDetails .oneThreeColumn {    
+    width: 35.333%;
     float: right;
+    margin-left: 2%;
 }
 
-.productInfo .twoThreeFullColumn {
-    width: 65%;
+.productInfo .twoThreeColumn {
+    width: 60%;
     float: right;
 }
 
@@ -1640,15 +1869,32 @@ button {
     float: left;
 }
 
+.zoomWindow {
+    border-radius: 10px !important;
+    width: 532px !important;
+    height: 532px !important;
+    border: none !important;
+    box-shadow: 0px 0px 10px rgb(210, 210, 210) !important;
+    top: 0 !important;
+}
+
 .tTitle {
     background-color: #efefef;
-    width: 16%;
+    width: 30%;
     position: absolute;
     height: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+
+.sequencedBorder:nth-last-child(1) .bottomGrayBorder {
+    border-bottom: none;
+}
+.sequencedBorder:nth-last-child(2) .bottomGrayBorder {
+    border-bottom: none;
+}
+
 
 .tValue {
     width: 70%;
@@ -1702,7 +1948,7 @@ button {
     padding-bottom: 100%;
 }
 
-.mapHolder img {
+.mapHolder img { 
     width: 100%;
     height: 104px;
 }
@@ -1713,6 +1959,10 @@ button {
 
 .productDetails .eightyFontsize {
     font-size: 16px;
+}
+
+.sixteenFontSize {
+   font-size: 16px;
 }
 
 .aLittleFromBottom {
@@ -1737,8 +1987,20 @@ button {
     overflow: hidden;
 }
 
+.lighterGrayBack {
+    background-color: #f7f7f7;
+}
+
+.lighterGrayColor {
+    color: #f7f7f7;
+}
+
 .lightGray {
     color: #b9b9b9;
+}
+
+.grayColor {
+    color: #e1e1e1;
 }
 
 .standardSelectBox.boxElement {
@@ -1819,9 +2081,25 @@ button {
     border-left: solid #f3f3f3 1px;
 }
 
+.bottomBorder {
+    border-bottom: solid #f3f3f3 1px;
+}
+
+.darkerLeftBorder {
+    border-left: solid #f1f1f1 1px;
+}
+
+.darkerBottomBorder {
+    border-bottom: solid #f1f1f1 1px;
+}
+
 .minorTop {
     position: relative;
     top: 5px;
+}
+
+.height_1 {
+    height: 193.5333px;
 }
 
 .pagination span {
@@ -2252,6 +2530,25 @@ button {
 }
 
 /*------ personals -------*/
+
+.maxHeight_1 {
+    max-height: 61px;
+}
+
+.zopim {
+    z-index: auto !important;
+}
+
+.priceTagInPhone {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.noMarginInPhone {
+    margin: 0;
+}
 
 .activeSearch {
     background-color: #e1e1e1;

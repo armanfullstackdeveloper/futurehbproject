@@ -1,7 +1,7 @@
-﻿@*@model DataModel.Models.ViewModel.CompleteProductForOne*@
+﻿@model DataModel.Models.ViewModel.CompleteProductForOne 
 
 @{
-    //ViewBag.Title = "نام محصول : " + Model.Product.Name + " , قیمت: " + Model.Product.Price + " , نام فروشگاه : " + Model.StoreSummery.Name;
+    ViewBag.Title = "نام محصول : " + Model.Product.Name + " , قیمت: " + Model.Product.Price + " , نام فروشگاه : " + Model.StoreSummery.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 } 
 
@@ -254,7 +254,7 @@
 @section Script{
  
     <script>
-      var data = @Html.Raw(Json.Encode(Model));
+      var Data = @Html.Raw(Json.Encode(Model));
     </script> 
     <script src="~/newAsset/js/getProduct.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
