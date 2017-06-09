@@ -18,7 +18,7 @@
                 <div class="fullWidth organizerInPhone productInfo">
                     <div class="oneThreeColumn organizerInPhone">
                         <!-- gallery in tu gharar migire -->
-                        <div class="gallery organizer itemContainer boxElement radiusBox">
+                        <div class="gallery organizer itemContainer boxElement radiusBox" ng-show="Data.Product.ImgAddress">
                             <div class="organizer relativeMatter">
                                 <div class="arrows owl-nav1">
                                     <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
@@ -32,10 +32,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <img id="zoom_03" class="" src="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg" />
+                                <img id="zoom_03" class="" ng-src="http://hoojibooji.com/{{Data.Product.ImgAddress}}" data-zoom-image="http://hoojibooji.com/{{Data.Product.ImgAddress}}" />
                             </div>
-                            <div class="thumbsSection organizer maxHeight_1" id="gallery_01">
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg"><img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image1.jpg" /></a><a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
+                            <div class="thumbsSection organizer maxHeight_1" id="gallery_01" ng-show="Data.Product.OtherImagesAddress.length>0">
+                              
+                                <a href="#" ng-repeat="image in Data.Product.OtherImagesAddress" data-image="http://hoojibooji.com/{{image.ImgAddress}}" data-zoom-image="http://hoojibooji.com/{{image.ImgAddress}}">
+                                       <img id="img_01" src="http://hoojibooji.com/{{image.ImgAddress}}" />@*thumb*@
+                                </a>
+                                
+                                @*<a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
                                     <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
                                 </a>
                                 <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
@@ -43,7 +48,7 @@
                                 </a>
                                 <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
                                     <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
-                                </a>
+                                </a>*@
                             </div>
 
 
@@ -70,8 +75,8 @@
                                                     <span class="colorCircle objectInMiddle" style="background-color: {{color.ColorHex}};"></span>
                                                 </div>
                                                 <div class="colorCheckBox standardHalfVerticalMargin">
-                                                    <input type="radio" id="c11" name="cc" />
-                                                    <label for="c11"><span class="noPadding"></span> </label>
+                                                    <input type="radio" id="{{color.Id}}" name="color" />
+                                                    <label for="{{color.Id}}"><span class="noPadding"></span> </label>
                                                 </div>
                                             </div>
                                             @*<div class="colorInner textInCenter">
@@ -199,7 +204,7 @@
                 <div class="boxElement textInCenter organizer radiusBox relativeMatter">
                     <div class="organizer sellerLogo standardHalfVerticalMargin">
                         <div class="circleImageContainer">
-                            <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogohiddenfAddress:noStorePic}}" />
+                            <img class="imageInMiddle" ng-src="http://hoojibooji.com/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
                         </div>
                     </div>
                     <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>

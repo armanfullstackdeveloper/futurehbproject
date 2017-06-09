@@ -13,6 +13,10 @@
 
     console.log($scope.Data)
 
+
+     if ($scope.Data.Product.Price && $scope.Data.Product.DiscountedPrice && ($scope.Data.Product.DiscountedPrice == $scope.Data.Product.Price)) {
+         delete $scope.Data.Product.DiscountedPrice;
+    }
     if ($scope.Data && $scope.Data.Product && $scope.Data.Product.ImgAddress && $scope.Data.Product.ImgAddress != null) {
         var temp = $scope.Data.Product.ImgAddress + '';
         $scope.Data.Product.ImgAddress = temp.replace(/\\/g, '/');
@@ -34,15 +38,12 @@
     }
 
     if ($scope.Data && $scope.Data.Product && $scope.Data.Product.DiscountedPrice) {
-        var DiscountedPriceValue = ($scope.Data.Product.DiscountedPrice) * 1;
-        var temp = $scope.Data.Product.DiscountedPrice + '';
-        $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-
-        var DiscountAndPriceTemp = PriceValue - DiscountedPriceValue;
-        $scope.percentDiscount = ((DiscountAndPriceTemp * 100) / PriceValue).toFixed(1) + ' درصد تخفیف ';
-        console.log($scope.percentDiscount)
-
-    }
+             var DiscountedPriceValue = ($scope.Data.Product.DiscountedPrice) * 1;
+            var temp = $scope.Data.Product.DiscountedPrice + '';
+            $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+            var DiscountAndPriceTemp = PriceValue - DiscountedPriceValue;
+            $scope.percentDiscount = ((DiscountAndPriceTemp * 100) / PriceValue).toFixed(1) + ' درصد تخفیف ';
+     }
 
     if ($scope.Data && $scope.Data.ProductAttrbiutesViewModels && $scope.Data.ProductAttrbiutesViewModels != '') {
         $.each($scope.Data.ProductAttrbiutesViewModels, function (index, value) {
@@ -160,7 +161,7 @@
 
 
                     if (type == 'RelatedProduct') {
-                        $scope.owl1Data=result;
+                        $scope.owl1Data = result;
 
                         $('.owlSlider1').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
@@ -169,7 +170,7 @@
                         initOwl(type, owl1);
                     }
                     else if (type == 'OtherShopProduct') {
-                        $scope.owl2Data=result;
+                        $scope.owl2Data = result;
 
                         $('.owlSlider2').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
@@ -188,7 +189,7 @@
     }
 
     function initOwl(type, owl) {
-         if (type == 'RelatedProduct') {
+        if (type == 'RelatedProduct') {
             owl = $('.owlSlider1').owlCarousel({
                 rtl: true,
                 loop: false,
@@ -212,7 +213,7 @@
 
         }
         else if (type == 'OtherShopProduct') {
-            owl = $('.owlSlider2' ).owlCarousel({
+            owl = $('.owlSlider2').owlCarousel({
                 rtl: true,
                 loop: false,
                 margin: 10,
@@ -349,35 +350,42 @@
     }
 
 
-    //initiate the plugin and pass the id of the div containing gallery images
-    $("#zoom_03").elevateZoom({
-        gallery: 'gallery_01',
-        zoomWindowPosition: 10,
-        easing: true,
-        zoomWindowOffety:100,
-        zoomWindowOffetx: -20,
-        zoomWindowWidth:500,
-        zoomWindowHeight:500,
-        cursor: 'pointer',
-        galleryActiveClass: 'active',
-        imageCrossfade: true,
-        zoomWindowFadeIn: 500,
-        zoomWindowFadeOut: 500,
-        lensFadeIn: 500,
-        lensFadeOut: 500,
-        tint: true,
-        tintColour: '#a7a7a7',
-        tintOpacity:0.6,
-        //loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
-    });
+    function initImageGallery() {
+         //initiate the plugin and pass the id of the div containing gallery images
+        $("#zoom_03").elevateZoom({
+            gallery: 'gallery_01',
+            zoomWindowPosition: 10,
+            easing: true,
+            zoomWindowOffety: 100,
+            zoomWindowOffetx: -20,
+            zoomWindowWidth: 200,
+            zoomWindowHeight: 200,
+            cursor: 'pointer',
+            galleryActiveClass: 'active',
+            imageCrossfade: true,
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 500,
+            lensFadeIn: 500,
+            lensFadeOut: 500,
+            responsive: true,
+            tint: false,
+            tintColour: '#a7a7a7',
+            tintOpacity: 0.6,
+            //loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+        });
 
-    //pass the images to Fancybox
-    $("#zoom_03").bind("click", function (e) {
-        var ez = $('#zoom_03').data('elevateZoom');
-        $.fancybox(ez.getGalleryList());
-        return false;
-    });
+        //pass the images to Fancybox
+        $("#zoom_03").bind("click", function (e) {
+            var ez = $('#zoom_03').data('elevateZoom');
+            $.fancybox(ez.getGalleryList());
+            return false;
+        });
+    }
 
+
+    setTimeout(function () {
+        initImageGallery();
+    }, 100)
 
     $('#mainContainer').slideDown();
 }]);
