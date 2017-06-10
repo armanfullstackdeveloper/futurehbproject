@@ -483,6 +483,7 @@
     <Content Include="Img\Catalog1.jpg" />
     <Content Include="Img\Catalog2.jpg" />
     <Content Include="Img\contactUs.jpg" />
+    <Content Include="Img\loader.gif" />
     <Content Include="Img\MainPage\ad_Big_1.jpg" />
     <Content Include="Img\MainPage\ad_Big_2.jpg" />
     <Content Include="Img\MainPage\AppDownloadAppStore.png" />

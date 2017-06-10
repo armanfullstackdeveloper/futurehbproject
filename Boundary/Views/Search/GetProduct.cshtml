@@ -9,46 +9,55 @@
 
 @section Style{
     <link href="~/newAsset/css/owl.carousel.min.css" rel="stylesheet" />
+    <style>
+        .sticky {
+            position: fixed;
+            top: 0;
+        }
+    </style>
 }
 
 <div class="container" ng-controller="getProductCtrl" style="display:none" id="mainContainer">
     <div class="sizeManager productDetails">
-        <div class="fullWidth organizerInPhone">
+        <div class="fullWidth organizerInPhone" id="storeDetailesContainer">
             <div class="threeFourColumn organizerInPhone">
                 <div class="fullWidth organizerInPhone productInfo">
                     <div class="oneThreeColumn organizerInPhone">
                         <!-- gallery in tu gharar migire -->
                         <div class="gallery organizer itemContainer boxElement radiusBox" ng-show="Data.Product.ImgAddress">
                             <div class="organizer relativeMatter">
-                                <div class="arrows owl-nav1">
-                                    <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
-                                        <div class="circleAroundArrow objectInMiddle">
+                                <div class="arrows owl-nav1" ng-show="Data.Product.OtherImagesAddress.length>0">
+                                    <div class="rightArrow rightArrowShadow defaultArrow owl-prev pointer">
+                                        <div class="circleAroundArrow objectInMiddle" id="prevGalleryPic">
                                             <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
                                         </div>
                                     </div>
-                                    <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
-                                        <div class="circleAroundArrow objectInMiddle">
+                                    <div class="leftArrow leftArrowShadow defaultArrow owl-next pointer">
+                                        <div class="circleAroundArrow objectInMiddle" id="nextGalleryPic">
                                             <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="zoom_03" class="" ng-src="http://hoojibooji.com/{{Data.Product.ImgAddress}}" data-zoom-image="http://hoojibooji.com/{{Data.Product.ImgAddress}}" />
+                                <img id="zoom_03" class="" ng-src="/{{Data.Product.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{Data.Product.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both" />
                             </div>
                             <div class="thumbsSection organizer maxHeight_1" id="gallery_01" ng-show="Data.Product.OtherImagesAddress.length>0">
-                              
-                                <a href="#" ng-repeat="image in Data.Product.OtherImagesAddress" data-image="http://hoojibooji.com/{{image.ImgAddress}}" data-zoom-image="http://hoojibooji.com/{{image.ImgAddress}}">
-                                       <img id="img_01" src="http://hoojibooji.com/{{image.ImgAddress}}" />@*thumb*@
+
+                                <a href="#" data-image="/{{Data.Product.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{Data.Product.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both">
+                                    <img id="img_01" src="/{{Data.Product.ImgAddress}}?w=69&h=69&mode=stretch" />@*thumb*@
                                 </a>
-                                
+                                <a href="#" ng-repeat="image in Data.Product.OtherImagesAddress" data-image="/{{image.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{image.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both">
+                                    <img id="img_01" src="/{{image.ImgAddress}}?w=69&h=69&mode=stretch " />@*thumb*@
+                                </a>
+
                                 @*<a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
-                                </a>
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
-                                </a>
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
-                                </a>*@
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
+                                    </a>
+                                    <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
+                                    </a>
+                                    <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
+                                    </a>*@
                             </div>
 
 
@@ -80,14 +89,14 @@
                                                 </div>
                                             </div>
                                             @*<div class="colorInner textInCenter">
-                                                <div class="boxElement radiusBox textInCenter relativeMatter">
-                                                    <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
-                                                </div>
-                                                <div class="colorCheckBox standardHalfVerticalMargin">
-                                                    <input type="radio" id="c12" name="cc" />
-                                                    <label for="c12"><span class="noPadding"></span> </label>
-                                                </div>
-                                            </div>*@
+                                                    <div class="boxElement radiusBox textInCenter relativeMatter">
+                                                        <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
+                                                    </div>
+                                                    <div class="colorCheckBox standardHalfVerticalMargin">
+                                                        <input type="radio" id="c12" name="cc" />
+                                                        <label for="c12"><span class="noPadding"></span> </label>
+                                                    </div>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +138,7 @@
                                 </div>
                             </div>
 
-                            <div class="priceTagInPhone hiddenInDesktop prefer"  ng-click="AddToBasket()">
+                            <div class="priceTagInPhone hiddenInDesktop prefer" ng-click="AddToBasket()">
                                 <div class="oneFourFullColumn loginPadding relativeMatter darkerAcceptGreenBack height_4">
                                     <span class="icon icon-cart darkerGreenColor objectInMiddle"></span>
                                 </div>
@@ -152,7 +161,7 @@
                                                 <div class="tValue goLeft standardPadding bottomGrayBorder">
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                        <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
                                             </div>
                                             <div class="twoFullColumn organizerInPhone relativeMatter" ng-show="$index %2 != 0">
@@ -163,7 +172,7 @@
                                                 <div class="tValue goLeft standardPadding bottomGrayBorder">
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                        <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -193,27 +202,27 @@
                                 </div>
                             </div>
                             <div class="carouselInner">
-                                <div class="owl-carousel owl-theme owlSlider1">
+                                <div class="owl-carousel owl-theme owlSlider1" id="owlSlider1">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="oneFourColumn organizerInPhone">
+            <div class="oneFourColumn organizerInPhone" id="storeDetailes">
                 <div class="boxElement textInCenter organizer radiusBox relativeMatter">
                     <div class="organizer sellerLogo standardHalfVerticalMargin">
                         <div class="circleImageContainer">
-                            <img class="imageInMiddle" ng-src="http://hoojibooji.com/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
+                            <img class="imageInMiddle" ng-src="/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
                         </div>
                     </div>
                     <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
                     @*<div class="organizer">
-                        <div class="mapHolder relativeMatter">
-                            <div id="MiniMapHolder"></div>
-                            <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
-                        </div>
-                    </div>*@
+                            <div class="mapHolder relativeMatter">
+                                <div id="MiniMapHolder"></div>
+                                <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
+                            </div>
+                        </div>*@
                     <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.Place">
                         <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
                         <div class="organizer" ng-bind="Data.StoreSummery.Place">
@@ -244,31 +253,7 @@
                             </div>
                             <div class="minorWidth elementInMiddle">
                                 <div class="carouselInner relatedImage">
-                                    <div class="owl-carousel owl-theme owlSlider2">
-                                        <div class="minorWidth elementInMiddle">
-                                            <div class="minorOrganizer">
-                                                <div class="fourFullColumns">
-                                                    <div class="squareItem relativeMatter">
-                                                        <img src="" class="imageInMiddle">
-                                                    </div>
-                                                </div>
-                                                @*<div class="fourFullColumns">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>
-                            <div class="fourFullColumns ">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>
-                            <div class="fourFullColumns">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>*@
-                                            </div>
-                                        </div>
+                                    <div class="owl-carousel owl-theme owlSlider2" id="owlSlider2">
                                     </div>
                                 </div>
 
@@ -464,21 +449,21 @@
                         <div class="images">
                             <div ng-if="Data.Product.OtherImagesAddress" ng-repeat="item in Data.Product.OtherImagesAddress">
                                 <div ng-show="item.ImgAddres" ng-if="item.ImgAddress" class="image active">
-                                    <div ng-if="$index==0 &&item.ImgAddress"  data-image="http://hoojibooji.com/{{item.ImgAddress}}.jpeg" data-image-zoom="http://hoojibooji.com/{{item.ImgAddress}}.jpeg"
-                                         data-size="150" class="content magnifier" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+                                    <div ng-if="$index==0 &&item.ImgAddress"  data-image="/{{item.ImgAddress}}.jpeg" data-image-zoom="/{{item.ImgAddress}}.jpeg"
+                                         data-size="150" class="content magnifier" style="background-image:url(/{{item.ImgAddress}}.jpeg)"></div>
 
-                                    <div ng-if="$index!=0 && $index<4 && item.ImgAddress" class="content" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+                                    <div ng-if="$index!=0 && $index<4 && item.ImgAddress" class="content" style="background-image:url(/{{item.ImgAddress}}.jpeg)"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="thumbs">
                             <div ng-repeat="Data.Product.OtherImagesAddress">
-                                <div ng-show="item.ImgAddres" ng-if="item.ImgAddress && $index<4" class="thumb active" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
+                                <div ng-show="item.ImgAddres" ng-if="item.ImgAddress && $index<4" class="thumb active" style="background-image:url(/{{item.ImgAddress}}.jpeg)"></div>
                             </div>
                         </div>
                     </div>
                     <div ng-if=" Data.Product.ImgAddress">
-                        <img ng-src="http://hoojibooji.com/{{Data.Product.ImgAddress}}" />
+                        <img ng-src="/{{Data.Product.ImgAddress}}" />
                     </div>
             </div>
             <div id="InfoHolder">
