@@ -418,8 +418,7 @@
             var y = $(this).scrollTop()
 
             if (y > startPosition) {
-                // navWrap.addClass('sticky');
-                navWrap.css({                      // scroll to that element or below it
+                 navWrap.css({                    
                     position: 'fixed',
                     top: '10px',
                     left: '35px',
@@ -436,8 +435,7 @@
                     });
                 }
             } else {
-                //navWrap.removeClass('sticky');
-                navWrap.css({
+                 navWrap.css({
                     position: 'static'
                 });
             }
@@ -462,8 +460,8 @@
             } else {
                 galleryImageCounter--;
             }
-            smallImage = galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
-            largeImage = galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
+            smallImage ='/'+ galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
+            largeImage = '/' + galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
             var ez = $('#zoom_03').data('elevateZoom');
             ez.swaptheimage(smallImage, largeImage);
         })
@@ -474,8 +472,8 @@
             } else {
                 galleryImageCounter++;
             }
-            smallImage = galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
-            largeImage = galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
+            smallImage = '/' + galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
+            largeImage = '/' + galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
             var ez = $('#zoom_03').data('elevateZoom');
             ez.swaptheimage(smallImage, largeImage);
         })
