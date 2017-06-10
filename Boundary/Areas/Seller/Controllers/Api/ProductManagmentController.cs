@@ -859,10 +859,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
         [Route("uploadimage")]
         public IHttpActionResult PostFile(long productId, bool isMainImg, int? top = 0, int? left = 0, int? bottom = 0, int? right = 0)
         {
-            top = top >= 0 ? top : 0;
-            left = left >= 0 ? left : 0;
-            bottom = bottom >= 0 ? bottom : 0;
-            right = right >= 0 ? right : 0;
+            top = top != null && top >= 0 ? top : 0;
+            left = left != null && left >= 0 ? left : 0;
+            bottom = bottom != null && bottom >= 0 ? bottom : 0;
+            right = right != null && right >= 0 ? right : 0;
             if (productId <= 0)
                 return Json(JsonResultHelper.FailedResultWithMessage());
 
@@ -914,8 +914,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                         string filePath = HttpContext.Current.Server.MapPath("~/Content/Images/Saller/"
                                                                                        + path + "/" + store.StoreCode +
                                                                                        "/Products/" + productId);
+
                         WebImage image = new WebImage(recivedFile.InputStream);
-                        image = image.Crop((int)top, (int)left, (int)bottom, (int)right);
+                        if (top > 0 || bottom > 0 || left > 0 || right > 0)
+                            image = image.Crop((int)top, (int)left, (int)bottom, (int)right);
 
                         if (Directory.Exists(filePath) == false)
                         {
