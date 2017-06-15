@@ -13,37 +13,45 @@
 
 <div class="container" ng-controller="getProductCtrl" style="display:none" id="mainContainer">
     <div class="sizeManager productDetails">
-        <div class="fullWidth organizerInPhone">
+        <div class="fullWidth organizerInPhone" id="storeDetailesContainer">
             <div class="threeFourColumn organizerInPhone">
                 <div class="fullWidth organizerInPhone productInfo">
                     <div class="oneThreeColumn organizerInPhone">
                         <!-- gallery in tu gharar migire -->
-                        <div class="gallery organizer itemContainer boxElement radiusBox">
+                        <div class="gallery organizer itemContainer boxElement radiusBox" ng-show="Data.Product.ImgAddress">
                             <div class="organizer relativeMatter">
-                                <div class="arrows owl-nav1">
-                                    <div class="rightArrow rightArrowShadow defaultArrow owl-prev prev1 pointer">
-                                        <div class="circleAroundArrow objectInMiddle">
+                                <div class="arrows owl-nav1" ng-show="Data.Product.OtherImagesAddress.length>0">
+                                    <div class="rightArrow rightArrowShadow defaultArrow owl-prev pointer">
+                                        <div class="circleAroundArrow objectInMiddle" id="prevGalleryPic">
                                             <span class="icon icon-arrow-right2 objectInMiddle  whiteColor"></span>
                                         </div>
                                     </div>
-                                    <div class="leftArrow leftArrowShadow defaultArrow owl-next next1 pointer">
-                                        <div class="circleAroundArrow objectInMiddle">
+                                    <div class="leftArrow leftArrowShadow defaultArrow owl-next pointer">
+                                        <div class="circleAroundArrow objectInMiddle" id="nextGalleryPic">
                                             <span class="icon icon-arrow-left2 objectInMiddle  whiteColor"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="zoom_03" class="" src="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg" />
+                                <img id="zoom_03" class="" ng-src="/{{Data.Product.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{Data.Product.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both" />
                             </div>
-                            <div class="thumbsSection organizer maxHeight_1" id="gallery_01">
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image1.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image1.jpg"><img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image1.jpg" /></a><a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
+                            <div class="thumbsSection organizer maxHeight_1" id="gallery_01" ng-show="Data.Product.OtherImagesAddress.length>0">
+
+                                <a href="#" data-image="/{{Data.Product.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{Data.Product.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both">
+                                    <img id="img_01" src="/{{Data.Product.ImgAddress}}?w=69&h=69&mode=stretch" />@*thumb*@
                                 </a>
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
+                                <a href="#" ng-repeat="image in Data.Product.OtherImagesAddress" data-image="/{{image.ImgAddress}}?w=375&mode=max&scale=both" data-zoom-image="/{{image.ImgAddress}}?w=1280&h=1280&mode=stretch&scale=both">
+                                    <img id="img_01" src="/{{image.ImgAddress}}?w=69&h=69&mode=stretch " />@*thumb*@
                                 </a>
-                                <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
-                                    <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
-                                </a>
+
+                                @*<a href="#" data-image="/Content/elevate_zoom-master/images/small/image2.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image2.jpg">
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image2.jpg" />
+                                    </a>
+                                    <a href="#" data-image="/Content/elevate_zoom-master/images/small/image3.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image3.jpg">
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image3.jpg" />
+                                    </a>
+                                    <a href="#" data-image="/Content/elevate_zoom-master/images/small/image4.png" data-zoom-image="/Content/elevate_zoom-master/images/large/image4.jpg">
+                                        <img id="img_01" src="/Content/elevate_zoom-master/images/thumb/image4.jpg" />
+                                    </a>*@
                             </div>
 
 
@@ -70,19 +78,19 @@
                                                     <span class="colorCircle objectInMiddle" style="background-color: {{color.ColorHex}};"></span>
                                                 </div>
                                                 <div class="colorCheckBox standardHalfVerticalMargin">
-                                                    <input type="radio" id="c11" name="cc" />
-                                                    <label for="c11"><span class="noPadding"></span> </label>
+                                                    <input type="radio" id="{{color.Id}}" name="color" />
+                                                    <label for="{{color.Id}}"><span class="noPadding"></span> </label>
                                                 </div>
                                             </div>
                                             @*<div class="colorInner textInCenter">
-                                                <div class="boxElement radiusBox textInCenter relativeMatter">
-                                                    <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
-                                                </div>
-                                                <div class="colorCheckBox standardHalfVerticalMargin">
-                                                    <input type="radio" id="c12" name="cc" />
-                                                    <label for="c12"><span class="noPadding"></span> </label>
-                                                </div>
-                                            </div>*@
+                                                    <div class="boxElement radiusBox textInCenter relativeMatter">
+                                                        <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
+                                                    </div>
+                                                    <div class="colorCheckBox standardHalfVerticalMargin">
+                                                        <input type="radio" id="c12" name="cc" />
+                                                        <label for="c12"><span class="noPadding"></span> </label>
+                                                    </div>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +132,7 @@
                                 </div>
                             </div>
 
-                            <div class="priceTagInPhone hiddenInDesktop prefer"  ng-click="AddToBasket()">
+                            <div class="priceTagInPhone hiddenInDesktop prefer" ng-click="AddToBasket()">
                                 <div class="oneFourFullColumn loginPadding relativeMatter darkerAcceptGreenBack height_4">
                                     <span class="icon icon-cart darkerGreenColor objectInMiddle"></span>
                                 </div>
@@ -147,7 +155,7 @@
                                                 <div class="tValue goLeft standardPadding bottomGrayBorder">
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                        <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
                                             </div>
                                             <div class="twoFullColumn organizerInPhone relativeMatter" ng-show="$index %2 != 0">
@@ -158,7 +166,7 @@
                                                 <div class="tValue goLeft standardPadding bottomGrayBorder">
                                                     <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder maxFullWidth textEllipsis" ng-bind="item.Value">مقدار</div>
                                                     @*<div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                                    <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
+                                                        <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -188,27 +196,27 @@
                                 </div>
                             </div>
                             <div class="carouselInner">
-                                <div class="owl-carousel owl-theme owlSlider1">
+                                <div class="owl-carousel owl-theme owlSlider1" id="owlSlider1">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="oneFourColumn organizerInPhone">
+            <div class="oneFourColumn organizerInPhone" id="storeDetailes">
                 <div class="boxElement textInCenter organizer radiusBox relativeMatter">
                     <div class="organizer sellerLogo standardHalfVerticalMargin">
                         <div class="circleImageContainer">
-                            <img class="imageInMiddle" ng-src="~/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogohiddenfAddress:noStorePic}}" />
+                            <img class="imageInMiddle" ng-src="/{{Data.StoreSummery.LogoAddress?Data.StoreSummery.LogoAddress:noStorePic}}" />
                         </div>
                     </div>
                     <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin" ng-show="Data.StoreSummery.Name" ng-bind="Data.StoreSummery.Name">نام فروشگاه</div>
                     @*<div class="organizer">
-                        <div class="mapHolder relativeMatter">
-                            <div id="MiniMapHolder"></div>
-                            <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
-                        </div>
-                    </div>*@
+                            <div class="mapHolder relativeMatter">
+                                <div id="MiniMapHolder"></div>
+                                <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
+                            </div>
+                        </div>*@
                     <div class="organizer standardPadding borderBottom" ng-show="Data.StoreSummery.Place">
                         <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
                         <div class="organizer" ng-bind="Data.StoreSummery.Place">
@@ -239,31 +247,7 @@
                             </div>
                             <div class="minorWidth elementInMiddle">
                                 <div class="carouselInner relatedImage">
-                                    <div class="owl-carousel owl-theme owlSlider2">
-                                        <div class="minorWidth elementInMiddle">
-                                            <div class="minorOrganizer">
-                                                <div class="fourFullColumns">
-                                                    <div class="squareItem relativeMatter">
-                                                        <img src="" class="imageInMiddle">
-                                                    </div>
-                                                </div>
-                                                @*<div class="fourFullColumns">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>
-                            <div class="fourFullColumns ">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>
-                            <div class="fourFullColumns">
-                                <div class="squareItem relativeMatter">
-                                    <img src="" class="imageInMiddle">
-                                </div>
-                            </div>*@
-                                            </div>
-                                        </div>
+                                    <div class="owl-carousel owl-theme owlSlider2" id="owlSlider2">
                                     </div>
                                 </div>
 
@@ -294,426 +278,4 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
 
 }
-
-
-
-@*<div id="Middle" >
-        <div id="GalleryAndInfes">
-            <div id="GalleryHolder">
-                <div class="gallery">
-                    <div class="images">
-                        <img ng-src="~/{{Data.Product.ImgAddress}}" />
-                    </div>
-                </div>
-
-            </div>
-            <div id="InfoHolder">
-                <div id="MapAndSellerInfoes">
-                    <div id="MiniMapHolder" ng-show="Data.StoreSummery.Latitude!=null"></div>
-                    <div id="SellerInfoHolder">
-                        <div id="addToBascketButton" style="text-align:center">
-                            <a class="btn btn-switch" style="background-color: #b9b9b9;padding: 5px;" href="~/shop/code/{{Data.StoreSummery.Id}}"> سایر محصولات فروشنده </a>
-                        </div>
-                     </div>
-                </div>
-                <div id="ProductAndPriceInfoes">
-                    <div id="ProductName">
-                        <div id="NameOfTheProductHolder">
-
-                            <div id="NameOfTheProduct" ng-bind="Data.Product.Name"></div>
-                        </div>
-                        <div id="PriceOfTheProduct">
-
-                            <div ng-show="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OriginalPrice" ng-bind="Data.Product.Price+' تومان '"></div>
-                                <div id="OffPrice2" ng-bind="Data.Product.DiscountedPrice+' تومان '"></div>
-                            </div>
-                            <div ng-hide="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OffPrice2" ng-bind="Data.Product.Price +' تومان '"></div>
-                            </div>
-
-                        </div>
-
-                        <div ng-show="Data.Colors.length!=0" id="ColorsOfTheProducts">
-                            <div id="ColorSubject" style="width: 71px;">رنگ ها :</div>
-                            <div ng-repeat="color in Data.Colors" class="ColoSeperator" style="background-color:{{color.ColorHex}} "></div>
-                        </div>
-                    </div>
-                    <div class="Outer" ng-show="Data.Product.MadeIn">
-                        <div class="InnerSubject">کشور سازنده :</div>
-                        <div class="InnerInformation" ng-bind="Data.Product.MadeIn"></div>
-                    </div>
-
-                    <div id="AddressTags">
-                        <div ng-show="Data.StoreSummery.CityName && Data.StoreSummery.CityName!='-'" id="CityAndStateTags">
-                            <div ng-bind="Data.StoreSummery.CityName" class="Tag"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Name" class="Outer">
-                            <div class="InnerSubject">نام فروشگاه :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Name"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Place" class="Outer">
-                            <div class="InnerSubject">آدرس :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Place"></div>
-                        </div>
-
-                        <div ng-show="Data.StoreSummery.PhoneNumber" class="Outer">
-                            <div class="InnerSubject">تلفن تماس :</div>
-                            <div ng-bind="Data.StoreSummery.PhoneNumber" class="InnerInformation"></div>
-                        </div>
-
-                    </div>
-                    <div id="SellerInfoHolder">
-                        <div id="OtherProducts" ng-show="Data.Product.CanSend && Data.Product.CanSend" style="width: 90%;background-color: rgba(109, 216, 23, 0.55);font-size: 17px;"><a ng-click="AddToBasket()">افزودن به سبد خرید</a></div>
-
-                     </div>
-
-                </div>
-                <div id="SpecialAbilities">
-                    <div ng-show="Data.Product.CanGiveBack" class="giveBack" ripple="ripple" ripple-color="#FFF">قابل پس دادن</div>
-                    <div ng-show="Data.Product.CanSend" class="Send" ripple="ripple" ripple-color="#FFF">قابل ارسال</div>
-                    <div ng-show="Data.Product.Changeability" class="Switch" ripple="ripple" ripple-color="#FFF">قابل تعویض</div>
-                    <div ng-show="Data.Product.IsExist" class="SpecialProduct" ripple="ripple" ripple-color="#FFF">موجود</div>
-                </div>
-            </div>
-            <div id="DetailTabs" ng-show="Data.ProductAttrbiutesViewModels!=nul">
-
-                <div class="tabs">
-                    <div class="tabs-header">
-                        <div class="border"></div>
-                        <ul style="margin-top:0;">
-                            <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات محصول</a></li>
-                           </ul>
-                        <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
-                    </div>
-                    <div class="tabs-content">
-                        <div tab-id="1" id="TabOneDetailes" class="tab active">
-
-                            <div ng-show="Data.ProductAttrbiutesViewModels" ng-repeat="item in Data.ProductAttrbiutesViewModels">
-                                <div ng-if="$index %2 == 0">
-                                    <div class="rightSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div ng-if="$index %2 !=0">
-                                    <div class="LeftSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*@model DataModel.Models.ViewModel.CompleteProductForOne
-
-    @{
-        ViewBag.Title = "نام محصول : "+ Model.Product.Name + " , قیمت: " + Model.Product.Price+ " , نام فروشگاه : " + Model.StoreSummery.Name;
-        Layout = "~/Views/Shared/_LayoutNew.cshtml";
-    }
-
-    @section Style{
-
-        <link href="~/Css/ProductDetails/ProductDetails.css" rel="stylesheet" />
-        <link href="~/Content/ImageGallery/gallery.css" rel="stylesheet" />
-        <link href="~/Content/ImageMagnifier/jQuery.MagnifierRentgen.min.css" rel="stylesheet" />
-        <link href="~/Content/MterialDesign/Material_Tab.css" rel="stylesheet" />
-    }
-
-    <div id="Middle" ng-app="ShopApp" ng-controller="ShowProductController">
-        <div id="GalleryAndInfes">
-            <div id="GalleryHolder">
-                <div class="gallery">
-                    <div class="images">
-                        <img ng-src="~/{{Data.Product.ImgAddress}}" />
-                    </div>
-                </div>
-
-                 <div class="gallery" ng-if="Data.Product.OtherImagesAddress">
-                        <div class="images">
-                            <div ng-if="Data.Product.OtherImagesAddress" ng-repeat="item in Data.Product.OtherImagesAddress">
-                                <div ng-show="item.ImgAddres" ng-if="item.ImgAddress" class="image active">
-                                    <div ng-if="$index==0 &&item.ImgAddress"  data-image="http://hoojibooji.com/{{item.ImgAddress}}.jpeg" data-image-zoom="http://hoojibooji.com/{{item.ImgAddress}}.jpeg"
-                                         data-size="150" class="content magnifier" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
-
-                                    <div ng-if="$index!=0 && $index<4 && item.ImgAddress" class="content" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thumbs">
-                            <div ng-repeat="Data.Product.OtherImagesAddress">
-                                <div ng-show="item.ImgAddres" ng-if="item.ImgAddress && $index<4" class="thumb active" style="background-image:url(http://hoojibooji.com/{{item.ImgAddress}}.jpeg)"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-if=" Data.Product.ImgAddress">
-                        <img ng-src="http://hoojibooji.com/{{Data.Product.ImgAddress}}" />
-                    </div>
-            </div>
-            <div id="InfoHolder">
-                <div id="MapAndSellerInfoes">
-                    <div id="MiniMapHolder" ng-show="Data.StoreSummery.Latitude!=null"></div>
-                    <div id="SellerInfoHolder">
-                        <div id="addToBascketButton" style="text-align:center">
-                            <a class="btn btn-switch" style="background-color: #b9b9b9;padding: 5px;" href="~/shop/code/{{Data.StoreSummery.Id}}"> سایر محصولات فروشنده </a>
-                        </div>
-                         <div id="SellerDetails"><a href="shop/code/{{Data.StoreSummery.Id}}">مشاهده مشخصات فروشنده</a></div>
-                    </div>
-                </div>
-                <div id="ProductAndPriceInfoes">
-                    <div id="ProductName">
-                        <div id="NameOfTheProductHolder">
-                          <div id="BrandHolder"><img src="../Img/ProductDetails/BrandImages/Brand_1.png" alt="" /></div>
-
-                            <div id="NameOfTheProduct" ng-bind="Data.Product.Name"></div>
-                        </div>
-                        <div id="PriceOfTheProduct">
-
-                            <div ng-show="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OriginalPrice" ng-bind="Data.Product.Price+' تومان '"></div>
-                                <div id="OffPrice2" ng-bind="Data.Product.DiscountedPrice+' تومان '"></div>
-                            </div>
-                            <div ng-hide="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OffPrice2" ng-bind="Data.Product.Price +' تومان '"></div>
-                            </div>
-
-                        </div>
-
-                        <div ng-show="Data.Colors.length!=0" id="ColorsOfTheProducts">
-                            <div id="ColorSubject" style="width: 71px;">رنگ ها :</div>
-                            <div ng-repeat="color in Data.Colors" class="ColoSeperator" style="background-color:{{color.ColorHex}} "></div>
-                        </div>
-                    </div>
-                    <div class="Outer" ng-show="Data.Product.MadeIn">
-                        <div class="InnerSubject">کشور سازنده :</div>
-                        <div class="InnerInformation" ng-bind="Data.Product.MadeIn"></div>
-                    </div>
-
-                    <div id="AddressTags">
-                        <div ng-show="Data.StoreSummery.CityName && Data.StoreSummery.CityName!='-'" id="CityAndStateTags">
-                            <div ng-bind="Data.StoreSummery.CityName" class="Tag"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Name" class="Outer">
-                            <div class="InnerSubject">نام فروشگاه :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Name"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Place" class="Outer">
-                            <div class="InnerSubject">آدرس :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Place"></div>
-                        </div>
-
-                        <div ng-show="Data.StoreSummery.PhoneNumber" class="Outer">
-                            <div class="InnerSubject">تلفن تماس :</div>
-                            <div ng-bind="Data.StoreSummery.PhoneNumber" class="InnerInformation"></div>
-                        </div>
-
-                    </div>
-                  <div id="addToBascketButton" ng-show="Data.Product.CanSend">
-                            <button ng-click="AddToBasket()">افزودن به سبد خرید </button>
-                        </div>
-                    <div id="SellerInfoHolder">
-                        <div id="OtherProducts" ng-show="Data.Product.CanSend && Data.Product.CanSend" style="width: 90%;background-color: rgba(109, 216, 23, 0.55);font-size: 17px;"><a ng-click="AddToBasket()">افزودن به سبد خرید</a></div>
-
-                         <div id="SellerDetails"><a href="shop/code/{{Data.StoreSummery.Id}}">مشاهده مشخصات فروشنده</a></div>
-                    </div>
-
-                </div>
-                <div id="SpecialAbilities">
-                    <div ng-show="Data.Product.CanGiveBack" class="giveBack" ripple="ripple" ripple-color="#FFF">قابل پس دادن</div>
-                    <div ng-show="Data.Product.CanSend" class="Send" ripple="ripple" ripple-color="#FFF">قابل ارسال</div>
-                    <div ng-show="Data.Product.Changeability" class="Switch" ripple="ripple" ripple-color="#FFF">قابل تعویض</div>
-                    <div ng-show="Data.Product.IsExist" class="SpecialProduct" ripple="ripple" ripple-color="#FFF">موجود</div>
-                </div>
-            </div>
-            <div id="DetailTabs" ng-show="Data.ProductAttrbiutesViewModels!=nul">
-
-                <div class="tabs">
-                    <div class="tabs-header">
-                        <div class="border"></div>
-                        <ul style="margin-top:0;">
-                            <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات محصول</a></li>
-
-                        </ul>
-                        <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
-                    </div>
-                    <div class="tabs-content">
-                        <div tab-id="1" id="TabOneDetailes" class="tab active">
-
-                            <div ng-show="Data.ProductAttrbiutesViewModels" ng-repeat="item in Data.ProductAttrbiutesViewModels">
-                                <div ng-if="$index %2 == 0">
-                                    <div class="rightSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div ng-if="$index %2 !=0">
-                                    <div class="LeftSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    @section Script{
-
-        <script src="~/Scripts/angular.min.js"></script>
-        <script src="~/Content/MterialDesign/Material_Tab.js"></script>
-
-        <script>
-            angular.module('ShopApp', [])
-            .controller('ShowProductController', ['$scope', function ($scope) {
-
-                $scope.Data = @Html.Raw(Json.Encode(Model));
-                console.log($scope.Data)
-
-                if ($scope.Data && $scope.Data.Product && $scope.Data.Product.ImgAddress && $scope.Data.Product.ImgAddress!=null) {
-                    var temp = $scope.Data.Product.ImgAddress + '';
-                    $scope.Data.Product.ImgAddress = temp.replace(/\\/g, '/');
-                }else{
-                    $scope.Data.Product.ImgAddress = "Img/MainPage/NoProductPic.png"
-                }
-
-                if ($scope.Data && $scope.Data.Product && $scope.Data.Product.OtherImagesAddress) {
-                    $.each($scope.Data.Product.OtherImagesAddress , function(index,value){
-                        var temp = $scope.Data.Product.OtherImagesAddress[index].ImgAddress + '';
-                        $scope.Data.Product.OtherImagesAddress[index].ImgAddress = temp.replace(/\\/g, '/');
-                    })
-                }
-
-                if ($scope.Data && $scope.Data.Product && $scope.Data.Product.DiscountedPrice) {
-                    var temp = $scope.Data.Product.DiscountedPrice + '';
-                    $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                }
-
-                if ($scope.Data && $scope.Data.Product && $scope.Data.Product.Price) {
-                    var temp = $scope.Data.Product.Price + '';
-                    $scope.Data.Product.Price = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-                }
-
-                if($scope.Data&&$scope.Data.ProductAttrbiutesViewModels&&$scope.Data.ProductAttrbiutesViewModels!='')
-                {
-                    $.each($scope.Data.ProductAttrbiutesViewModels, function (index, value) {
-                        if (value) {
-                            value.Value = '';
-                            $.each(value.AttributeValues, function (index2, value2) {
-                                if (value2) {
-                                    if (value.Value) {
-                                        value.Value += ' , ' + value2;
-                                    } else {
-                                        value.Value += value2;
-                                    }
-                                }
-                            })
-                        }
-                    })
-                }
-
-
-                $scope.AddToBasket=function(){
-
-                    var realPrice='';
-                    if($scope.Data.Product && $scope.Data.Product.DiscountedPrice && $scope.Data.Product.DiscountedPrice!=0){
-                        realPrice=$scope.Data.Product.DiscountedPrice;
-                    }
-                    else if($scope.Data.Product && $scope.Data.Product.Price && $scope.Data.Product.Price!=0){
-                        realPrice=$scope.Data.Product.Price;
-                    }
-                    else{
-                        realPrice=0;
-                    }
-
-                    if(realPrice && realPrice!=0){
-                        realPrice= realPrice.replace(/,/g,'');
-                    }
-
-                    var ProductToShoppingBagDataModel ={
-                        ProductCode:$scope.Data.Product.Id,
-                        ProductName:$scope.Data.Product.Name,
-                        RealPrice:realPrice,
-                        StoreName:$scope.Data.StoreSummery.Name,
-                        ImgAddress:$scope.Data.Product.ImgAddress,
-                        PostalCostInCountry:$scope.Data.Product.PostalCostInCountry,
-                        PostalCostInTown:$scope.Data.Product.PostalCostInTown
-                };
-
-                    console.log(ProductToShoppingBagDataModel)
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/order/AddToBag/",
-                        data: ProductToShoppingBagDataModel,
-                        success: function (result) {
-                           window.location.href='/order' ;
-                        },
-                        error: function () {
-                            console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                        }
-                    });
-                };
-
-                var lat = $scope.Data.StoreSummery.Latitude;
-                var longi = $scope.Data.StoreSummery.Longitude;
-
-                //Google map Api
-                $(function () {
-                    var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(longi));
-                    var options = {
-                        zoom: 13,
-                        center: latlng,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
-
-                    var map = new google.maps.Map(document.getElementById("MiniMapHolder"), options);
-                    new google.maps.Marker({
-                        position: latlng,
-                        map: map
-                    });
-
-                });
-
-
-            }]);
-
-        </script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js? sensor=false"></script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
-    }*@
+ 

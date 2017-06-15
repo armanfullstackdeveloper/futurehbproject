@@ -6,12 +6,14 @@
     $scope.owl1Data;
     $scope.owl2Data;
     var root = "http://hoojibooji.com/";
-    var lat = $scope.Data.StoreSummery.Latitude;
-    var longi = $scope.Data.StoreSummery.Longitude;
+    // var lat = $scope.Data.StoreSummery.Latitude;
+    // var longi = $scope.Data.StoreSummery.Longitude;
     var owl1, owl2;
+    var RelatedProductTotalCount, OtherShopProductTotalCount
 
-
-    console.log($scope.Data)
+    if ($scope.Data.Product.Price && $scope.Data.Product.DiscountedPrice && ($scope.Data.Product.DiscountedPrice == $scope.Data.Product.Price)) {
+        delete $scope.Data.Product.DiscountedPrice;
+    }
 
     if ($scope.Data && $scope.Data.Product && $scope.Data.Product.ImgAddress && $scope.Data.Product.ImgAddress != null) {
         var temp = $scope.Data.Product.ImgAddress + '';
@@ -37,11 +39,8 @@
         var DiscountedPriceValue = ($scope.Data.Product.DiscountedPrice) * 1;
         var temp = $scope.Data.Product.DiscountedPrice + '';
         $scope.Data.Product.DiscountedPrice = temp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-
         var DiscountAndPriceTemp = PriceValue - DiscountedPriceValue;
         $scope.percentDiscount = ((DiscountAndPriceTemp * 100) / PriceValue).toFixed(1) + ' درصد تخفیف ';
-        console.log($scope.percentDiscount)
-
     }
 
     if ($scope.Data && $scope.Data.ProductAttrbiutesViewModels && $scope.Data.ProductAttrbiutesViewModels != '') {
@@ -88,7 +87,6 @@
             PostalCostInTown: $scope.Data.Product.PostalCostInTown
         };
 
-        console.log(ProductToShoppingBagDataModel)
 
         $.ajax({
             type: "GET",
@@ -104,21 +102,19 @@
     };
 
     //Google map Api
-    $(function () {
-        var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(longi));
-        var options = {
-            zoom: 13,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(document.getElementById("MiniMapHolder"), options);
-        new google.maps.Marker({
-            position: latlng,
-            map: map
-        });
-
-    });
+    //$(function () {
+    //    var latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(longi));
+    //    var options = {
+    //        zoom: 13,
+    //        center: latlng,
+    //        mapTypeId: google.maps.MapTypeId.ROADMAP
+    //    };
+    //    var map = new google.maps.Map(document.getElementById("MiniMapHolder"), options);
+    //    new google.maps.Marker({
+    //        position: latlng,
+    //        map: map
+    //    });
+    //});
 
 
     loadInitProduct('RelatedProduct');
@@ -158,9 +154,9 @@
                 }
                 if (result.Response.ProductsSummery.length > 0) {
 
-
                     if (type == 'RelatedProduct') {
-                        $scope.owl1Data=result;
+                        $scope.owl1Data = result;
+                        RelatedProductTotalCount = result.Response.ProductsCount;
 
                         $('.owlSlider1').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
@@ -169,7 +165,8 @@
                         initOwl(type, owl1);
                     }
                     else if (type == 'OtherShopProduct') {
-                        $scope.owl2Data=result;
+                        $scope.owl2Data = result;
+                        OtherShopProductTotalCount = result.Response.ProductsCount;
 
                         $('.owlSlider2').html('');
                         $.each(result.Response.ProductsSummery, function (index, value) {
@@ -188,7 +185,7 @@
     }
 
     function initOwl(type, owl) {
-         if (type == 'RelatedProduct') {
+        if (type == 'RelatedProduct') {
             owl = $('.owlSlider1').owlCarousel({
                 rtl: true,
                 loop: false,
@@ -212,7 +209,7 @@
 
         }
         else if (type == 'OtherShopProduct') {
-            owl = $('.owlSlider2' ).owlCarousel({
+            owl = $('.owlSlider2').owlCarousel({
                 rtl: true,
                 loop: false,
                 margin: 10,
@@ -253,8 +250,12 @@
         }
 
         owl.on('changed.owl.carousel', function (event) {
-            if (!event.item || (event.item.index + event.page.size + 4 >= event.item.count)) {
+
+            //  var RelatedProductTotalCount,OtherShopProductTotalCount     
+
+            if (!event.item || (event.item.index + event.page.size + 4 == event.item.count) && ((event.currentTarget.id == "owlSlider1" && RelatedProductTotalCount > event.item.count) || (event.currentTarget.id == "owlSlider2" && OtherShopProductTotalCount > event.item.count))) {
                 if ($scope.loading) return;
+
                 $scope.loading = true;
                 loadNewProduct(event, type);
 
@@ -268,6 +269,14 @@
         if (event && event.item) {
             count = event.item.count;
             PageNumber = parseInt((count * 1) / 10) + 1;
+        }
+
+
+        if (type == 'RelatedProduct') {
+            if (RelatedProductTotalCount <= (PageNumber - 1) * 10) return;
+        }
+        else if (type == 'OtherShopProduct') {
+            if (OtherShopProductTotalCount <= (PageNumber - 1) * 10) return;
         }
 
 
@@ -312,6 +321,14 @@
                     }
                 }, 100)
 
+
+                if (type == 'RelatedProduct') {
+                    RelatedProductTotalCount = result.Response.ProductsCount;
+                }
+                else if (type == 'OtherShopProduct') {
+                    OtherShopProductTotalCount = result.Response.ProductsCount;
+                }
+
             },
             error: function () {
                 $scope.loading = false;
@@ -348,37 +365,120 @@
 
     }
 
+    function initImageGallery() {
+        //initiate the plugin and pass the id of the div containing gallery images
+        $("#zoom_03").elevateZoom({
+            gallery: 'gallery_01',
+            zoomWindowPosition: 10,
+            easing: true,
+            zoomWindowOffety: 100,
+            zoomWindowOffetx: -20,
+            zoomWindowWidth: 500,
+            zoomWindowHeight: 500,
+            cursor: 'pointer',
+            galleryActiveClass: 'active',
+            imageCrossfade: true,
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 500,
+            lensFadeIn: 500,
+            lensFadeOut: 500,
+            responsive: true,
+            tint: false,
+            tintColour: '#a7a7a7',
+            tintOpacity: 0.6,
+            loadingIcon: '/Img/ProductDetails/loader.gif'
+        });
 
-    //initiate the plugin and pass the id of the div containing gallery images
-    $("#zoom_03").elevateZoom({
-        gallery: 'gallery_01',
-        zoomWindowPosition: 10,
-        easing: true,
-        zoomWindowOffety:100,
-        zoomWindowOffetx: -20,
-        zoomWindowWidth:500,
-        zoomWindowHeight:500,
-        cursor: 'pointer',
-        galleryActiveClass: 'active',
-        imageCrossfade: true,
-        zoomWindowFadeIn: 500,
-        zoomWindowFadeOut: 500,
-        lensFadeIn: 500,
-        lensFadeOut: 500,
-        tint: true,
-        tintColour: '#a7a7a7',
-        tintOpacity:0.6,
-        //loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
-    });
+        //pass the images to Fancybox
+        $("#zoom_03").bind("click", function (e) {
+            var ez = $('#zoom_03').data('elevateZoom');
+            // $.fancybox(ez.getGalleryList());
+            return false;
+        });
+    }
 
-    //pass the images to Fancybox
-    $("#zoom_03").bind("click", function (e) {
-        var ez = $('#zoom_03').data('elevateZoom');
-        $.fancybox(ez.getGalleryList());
-        return false;
-    });
 
+    setTimeout(function () {
+        initImageGallery();
+    }, 100)
 
     $('#mainContainer').slideDown();
+
+
+
+    //fixed store detailes
+    setTimeout(function () {
+        var navWrap = $('#storeDetailes'),
+         startPosition = navWrap.offset().top,
+         stopPosition = $('#footerLine').offset().top - navWrap.outerHeight();
+        // leftPosition = ($('#storeDetailes').offset().left) * 1 - $('#storeDetailes').css('marginLeft').replace('px', '') * 1;
+
+        $(document).scroll(function () {
+            //stick nav to top of page
+            var y = $(this).scrollTop()
+
+            if (y > startPosition) {
+                 navWrap.css({                    
+                    position: 'fixed',
+                    top: '10px',
+                    left: '35px',
+                });
+                if (y > stopPosition - 49) {
+                    navWrap.css({
+                        'top': stopPosition - y - 43,
+                        left: '35px',
+                    });
+                } else {
+                    navWrap.css({
+                        'top': 10,
+                        left: '35px',
+                    });
+                }
+            } else {
+                 navWrap.css({
+                    position: 'static'
+                });
+            }
+        });
+
+    }, 1500)
+
+    galleryChangeImage()
+
+    function galleryChangeImage() {
+        var galleryImageCounter = 0;
+        var galleryAllImages = [];
+        galleryAllImages.push($scope.Data.Product.ImgAddress);
+        $.each($scope.Data.Product.OtherImagesAddress, function (index, value) {
+            galleryAllImages.push(value.ImgAddress);
+        })
+        var smallImage, largeImage;
+
+        $('#prevGalleryPic').on('click', function () {
+            if (galleryImageCounter == 0) {
+                galleryImageCounter = galleryAllImages.length - 1;
+            } else {
+                galleryImageCounter--;
+            }
+            smallImage ='/'+ galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
+            largeImage = '/' + galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
+            var ez = $('#zoom_03').data('elevateZoom');
+            ez.swaptheimage(smallImage, largeImage);
+        })
+
+        $('#nextGalleryPic').on('click', function () {
+            if (galleryImageCounter == galleryAllImages.length - 1) {
+                galleryImageCounter = 0;
+            } else {
+                galleryImageCounter++;
+            }
+            smallImage = '/' + galleryAllImages[galleryImageCounter] + '?w=375&mode=max&scale=both';
+            largeImage = '/' + galleryAllImages[galleryImageCounter] + '?w=1280&h=1280&mode=stretch&scale=both';
+            var ez = $('#zoom_03').data('elevateZoom');
+            ez.swaptheimage(smallImage, largeImage);
+        })
+    }
+
+
 }]);
 
