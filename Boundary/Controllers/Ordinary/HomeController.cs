@@ -32,6 +32,11 @@ namespace Boundary.Controllers.Ordinary
             });
         }
 
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+
         /// <summary>
         /// download android app
         /// "~/Content/AndroidAPK/1.1.apk"

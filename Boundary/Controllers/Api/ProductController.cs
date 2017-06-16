@@ -158,6 +158,8 @@ namespace Boundary.Controllers.Api
                     case SearchPlace.SearchPage:
                         break;
                     case SearchPlace.ProductDetails:
+                        if (filters.ProductCode.HasValue)
+                            result.ProductsSummery.RemoveAll(r => r.Id == filters.ProductCode.Value);
                         break;
                     case SearchPlace.StoreHomePage:
                         break;

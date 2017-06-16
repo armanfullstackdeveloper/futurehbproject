@@ -36,11 +36,11 @@ namespace Boundary.Controllers.Ordinary
             try
             {
                 if (id <= 0)
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("NotFound", "Home");
 
                 CompleteProductForOne completeProduct = new ProductBL().GetOneProduct(id);
                 if (completeProduct.Product == null || completeProduct.Product.Id == 0)
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("NotFound", "Home");
 
                 switch (completeProduct.Product.Status)
                 {
