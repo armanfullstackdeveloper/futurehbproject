@@ -66,6 +66,8 @@ namespace BusinessLogic.BussinesLogics.RelatedToStoreBL
                 parameters.Add("@IsMale", storeRegister.IsMale);
                 parameters.Add("@Type", storeRegister.StoreTypeCode);
                 parameters.Add("@Website", storeRegister.Website);
+                parameters.Add("@homepage", storeRegister.StoreName.Trim().Replace(" ", "_"));
+
                 parameters.Add("@CatsCode", storeRegister.ListCategoryCode.AsTableValuedParameter("dbo.IdTable"));
                 parameters.Add("@PhoneNumber", string.IsNullOrEmpty(storeRegister.PhoneNumber) ? null : storeRegister.PhoneNumber);
                 parameters.Add("@storeStatus", (byte)EStoreStatus.Active);

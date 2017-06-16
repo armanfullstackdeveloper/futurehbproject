@@ -6,7 +6,7 @@
 
 
 
-<div ng-app="ShopApp" id="AddDiscount" ng-controller="ShowOrderController" style=" width: 75%; text-align: right;direction: rtl;padding: 0 2.5%;font-family: 'iransfm'; float: left;">
+<div ng-app="ShopApp" id="AddDiscount" ng-controller="ShowOrderController" style="width:75%; text-align:right;direction:rtl;padding:0 2.5%;font-family :'iransfm' ; float:left;">
 
 
     <div ng-hide="loadingHide">
@@ -56,7 +56,7 @@
                 <td ng-bind="item.OverallIncome"> </td>
                 <td ng-bind="item.OrderTypeName"> </td>
                 <td ng-bind="item.StatusName"> </td>
-                <td><div ng-click="item.editSendingOptions=false;item.showDetailes=!item.showDetailes;item.changeStaus=false" class="btn btn-warning">جزییات</div></td>
+                <td><div ng-click="item.editSendingOptions=false;item.showDetailes=!item.showDetailes;item.changeStaus=false;getCity(item.CustomerInfo.CityCode)" class="btn btn-warning">جزییات</div></td>
                 <td><div ng-click="item.editSendingOptions=false;item.changeStaus=!item.changeStaus;item.showDetailes=false" class="btn btn-success">تغییر وضعیت</div></td>
                 <td><div ng-click="item.editSendingOptions=!item.editSendingOptions;item.changeStaus=false;item.showDetailes=false" class="btn btn-info">ویرایش</div></td>
             </tr>
@@ -90,6 +90,20 @@
                         <div class="col-md-3">
                             کد رهگیری:{{item.TrackingCode}}
                         </div>
+                        <br />
+                        <div class="col-md-12">
+                            آدرس: <span id="CityName"> </span> - {{item.CustomerInfo.Place}} - کد پستی ({{item.CustomerInfo.PostalCode}})
+                        </div>
+
+                        <div class="col-md-3">
+                            شماره تلفن: {{item.CustomerInfo.MobileNumber}}
+                        </div>
+                        <div class="col-md-3">
+                            شماره تماس: {{item.CustomerInfo.PhoneNumber}}
+                        </div>
+                        <div class="col-md-6">
+                            توضیحات: {{item.CustomerInfo.Comments}}
+                        </div>
                     </div>
                     <div ng-show="item.changeStaus && item.EditableStatus!=null">
                         <div class="col-sx-12 col-md-6" style="padding: 0;">
@@ -119,10 +133,10 @@
                             <input ng-model="item.selectedTrackingCode" placeholder="کد رهگیری" type="text" />
                         </div>
 
-                        <div class="col-sx-6 col-md-1"style="padding: 0;">
+                        <div class="col-sx-6 col-md-1" style="padding: 0;">
                             <button ng-click="saveSendingDetailes(item.selectedSendingTypes,item.OrderCode,item.selectedTrackingCode);item.editSendingOptions=''">ثبت </button>
                         </div>
- 
+
                     </div>
                 </td>
             </tr>
@@ -190,6 +204,7 @@
                     url: "/api/Seller/OrderManagement/GetSendingTypes",
                     success: function (result) {
                         $scope.sendingTypes = result.Response;
+                        $scope.loadCityList();
                     },
                     error: function () {
                         console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
@@ -197,7 +212,45 @@
                 });
             }
 
-            $scope.saveSendingDetailes=function(selectedSendingTypes, OrderCode, selectedTrackingCode){
+
+            $scope.loadCityList = function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/Account/GetStates",
+                    success: function (result) {
+                         $scope.State = result.Response;
+
+                    },
+                    error: function () {
+                        console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
+                    }
+                });
+            }
+
+
+            $scope.getCity = function (cityId) {
+                 if (cityId && $scope.State){
+                    $.each($scope.State, function (index, value) {
+                    if (value) {
+                        $.each(value.Cities, function (index2, value2) {
+                            if (value2) {
+                                if (value2.Id == cityId) {
+                                    console.log('mmjh')
+                                    var output = "استان " + value.Name + "- شهرستان" + value2.Name
+                                    console.log(output)
+                                     $("#CityName").html(output + "");
+
+                                 }
+                            }
+                        })
+                    }
+
+                })
+                }
+            }
+
+
+            $scope.saveSendingDetailes = function (selectedSendingTypes, OrderCode, selectedTrackingCode) {
                 $.ajax({
                     type: "POST",
                     url: "/api/Seller/OrderManagement/UpdateSendingDetailes?orderCode=" + OrderCode + "&type=" + selectedSendingTypes + "&trackingCode=" + selectedTrackingCode,

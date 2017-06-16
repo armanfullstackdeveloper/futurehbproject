@@ -112,6 +112,8 @@ namespace DataModel.Models.DataModel
             set { _city = value; }
         }
 
+        public long? ProductCode { get; set; } 
+
 
         public List<long> Brands { get; set; }
         public List<long> Colors { get; set; }

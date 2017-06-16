@@ -22,5 +22,6 @@
         public virtual decimal? PhoneNumber { get; set; }
         public virtual string LogoAddress { get; set; }
         public virtual string StoreType { get; set; }
+        public string HomePage { get; set; } 
     }
 }

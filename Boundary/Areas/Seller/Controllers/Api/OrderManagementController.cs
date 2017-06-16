@@ -212,7 +212,10 @@ namespace Boundary.Areas.Seller.Controllers.Api
                 order.TrackingCode = trackingCode;
 
                 if (new OrderBL().Update(order))
+                {
+                    //send sms
                     return Json(JsonResultHelper.SuccessResult());
+                }
                 return Json(JsonResultHelper.FailedResultWithMessage());
             }
             catch (MyExceptionHandler exp1)

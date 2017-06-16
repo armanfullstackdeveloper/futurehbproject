@@ -282,7 +282,7 @@ namespace Boundary.Controllers.Api
                             MobileNumber = member.MobileNumber,
                             Name = member.Name,
                             Place = member.Place,
-                            PostalCode = member.Place,
+                            PostalCode = member.PostalCode,
                         }, session);
                     }
                 }
@@ -374,7 +374,7 @@ namespace Boundary.Controllers.Api
                                 MobileNumber = member.MobileNumber,
                                 Name = member.Name,
                                 Place = member.Place,
-                                PostalCode = member.Place,
+                                PostalCode = member.PostalCode,
                             }, session);
 
                             #region بروز رسانی موجودی قبلی
@@ -546,7 +546,7 @@ namespace Boundary.Controllers.Api
                                 MobileNumber = member.MobileNumber,
                                 Name = member.Name,
                                 Place = member.Place,
-                                PostalCode = member.Place,
+                                PostalCode = member.PostalCode,
                             }, session);
                         }
                     }
