@@ -20,13 +20,13 @@
          $('.loginBox').fadeIn();
      }
 
-     $scope.closeBox = function () {
+     $('.closeBox').on('click', function () {
          $('.popUpMadule').fadeOut();
          $('.loginBox').fadeOut();
          $('.signUpBox').fadeOut();
-
-     }
-
+     });
+     
+    
      $('.navigation').on('click', function () {
          if (navCounter == 0) {
              navCounter = 1;
@@ -283,8 +283,11 @@
          }
          $('#Alert_UserName_Wait').css("display", "block");
          send = 1;
-
+          
          if (verifyLevel == 0) {
+
+             $('.VerifyBox').slideDown();
+
              $.ajax({
                  type: "GET",
                  url: "/Api/sms/register",
@@ -297,8 +300,8 @@
                      }
                      else {
                          $('#Alert_UserName_Wait').css("display", "none");
-                         $('#Alert_Verify_Send').slideToggle();
-                         $('.VerifyBox').slideToggle();
+                         $('#Alert_Verify_Send').slideDown();
+
                          verifyLevel = 1;
                      }
                  },

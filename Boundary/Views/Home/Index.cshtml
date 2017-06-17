@@ -10,65 +10,6 @@
 }
    
 <div ng-controller="indexCtrl">
-    <div style="display: none" class="popUpMadule">
-        <div class="closeTheMadule" ng-click="closeBox();"></div>
-        <!-- box login -->
-        <div class="loginBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
-            <form id="loginFrm">
-                <div class="closeTheBox pointercircleDefaultArrows pinkBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize pointer"></span> </div>
-                <div class="organizer borderBottom standardHalfVerticalPadding">
-                    <img src="~/newAsset/images/carryBox.svg" style="width: 80px;">
-                </div>
-                <div class="organizer borderBottom standardPaddingForlogin">
-                    <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
-                    <div class="organizer"><input type="text" id="UserName" class="standardInput textInCenter"></div>
-                </div>
-                <div class="organizer borderBottom standardPaddingForlogin">
-                    <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                    <div class="organizer"><input type="password" id="Password" class="standardInput textInCenter"></div>
-                </div>
-                <div id="loginMessage">
-                </div>
-
-                <div class="organizer loginPadding">
-                    <div id="EnterBtn" class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin pointer">ورود</div>
-                    <div class="organizer twelveFontSize" ng-click="closeBox();showRegisterBox();">  <span class="pointer">ثبت نام</span>|<span class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
-                </div>
-            </form>
-        </div>
-        <!-- box signup -->
-        <div class="signUpBox objectInMiddle boxElement radiusBox textInCenter thickFont thirteenFontSize standardHalfVerticalPaddingForlogin twelveFontSize">
-            <div class="closeTheBox pointercircleDefaultArrows greenBack relativeMatter" ng-click="closeBox();"><span class="icon icon-cross objectInMiddle whiteColor thirteenFontSize pointer"></span> </div>
-            <div class="organizer borderBottom standardHalfVerticalPadding">
-                <img src="~/newAsset/images/signUp.svg" style="width: 105px;">
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin">
-                <div class="organizer standardHalfVerticalMarginForlogin">تلفن همراه</div>
-                <div class="organizer"><input type="text" id="UserNameTxt" class="standardInput textInCenter"></div>
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin">
-                <div class="organizer standardHalfVerticalMarginForlogin">رمز عبور</div>
-                <div class="organizer"><input type="password" id="PasswordTxt" class="standardInput textInCenter"></div>
-            </div>
-            <div class="organizer borderBottom standardPaddingForlogin">
-                <div class="organizer standardHalfVerticalMarginForlogin">تکرار رمز عبور</div>
-                <div class="organizer"><input type="password" id="ConfirmPasswordTxt" class="standardInput textInCenter"></div>
-            </div>
-            <div class="VerifyBox organizer borderBottom standardPaddingForlogin" style="display:none;">
-                <div class="organizer standardHalfVerticalMarginForlogin">کد فعالسازی</div>
-                <div class="organizer"><input type="text" id="VerifyTxt" class="standardInput textInCenter"></div>
-            </div>
-            <div class="organizer standardPaddingForlogin">
-                <div style="color:red; text-align:center" id="registerStatus"></div>
-                <div style="display:none;color:red; text-align:center" id="Alert_UserName_Wait">لطفا کمی صبر کنید</div>
-                <div style="display:none; color:#10de03;text-align:center" id="Alert_Verify_Send">کد فعالسازی به شماره تلفن شما ارسال شد</div>
-            </div>
-            <div class="organizer loginPadding">
-                <div id="register" class="outlineButton whiteColor greenBack standardPaddingForlogin loginAction standardVerticalBottomMargin">ثبت نام</div>
-                <div class="organizer twelveFontSize pointer" ng-click="closeBox();showLoginBox();">ورود</div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="sizeManager">
             <div class="eightyColumn organizerInPhone">
