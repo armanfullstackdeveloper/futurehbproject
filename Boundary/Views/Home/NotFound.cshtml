@@ -1,18 +1,32 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewBag.title = "صفحه مورد نظر موجود نیست  ";
+    ViewBag.keywords = "صفحه مورد نظر موجود نیست 404";
+    ViewBag.description = "صفحه ای که به دنبال آن هستید ، موجود نمی باشد ، لطفا صفحه دیگری را امتحان نمایید ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>NotFound</title>
-</head>
-<body>
-<div>
-    Nothing Found ):
+<div class="container">
+    <div class="lightGreenFullScreen"></div>
+    <div class="sizeManager">
+        <div class="organizer standardTopElementalVerticalMargin HalfHorizontalPaddingInPhone">
+            <div class="maxWidth_1 elementInMiddle">
+                <div class="twoColumn organizerInPhone">
+                    <div class="storeHolder"></div>
+                </div>
+                <div class="twoColumn organizerInPhone">
+                    <div class="words"></div>
+                    <div class="organizer twentyTwoFontsize whiteColor textInCenterInPhone">
+                        صفحه ای که به دنبالش هستید وجود ندارد
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="organizer elementTopDoubleVerticalMargin standardVerticalMarginInPhone">
+            <div class="buttons elementInMiddle textInCenter">
+                <a href="/">  <button class="outlineButton whiteBack whiteBorder twentyTwoFontsize thickFont standardPadding lightGreenColor normalFontSizeInPhone">بازگشت به خانه</button></a>
+                <a href="~/Store/AddStore"> <button class="outlineButton pinkBorder pinkBack twentyTwoFontsize thickFont whiteColor standardPadding standardHorizontalLeftMargin normalFontSizeInPhone">افزودن فروشگاه</button></a>
+            </div>
+        </div>
+    </div>
 </div>
-</body>
-</html>

@@ -408,38 +408,38 @@
 
     //fixed store detailes
     setTimeout(function () {
-        var navWrap = $('#storeDetailes'),
-         startPosition = navWrap.offset().top,
-         stopPosition = $('#footerLine').offset().top - navWrap.outerHeight();
-        // leftPosition = ($('#storeDetailes').offset().left) * 1 - $('#storeDetailes').css('marginLeft').replace('px', '') * 1;
+        //var navWrap = $('#storeDetailes'),
+        // startPosition = navWrap.offset().top,
+        // stopPosition = $('#footerLine').offset().top - navWrap.outerHeight();
+        //// leftPosition = ($('#storeDetailes').offset().left) * 1 - $('#storeDetailes').css('marginLeft').replace('px', '') * 1;
 
-        $(document).scroll(function () {
-            //stick nav to top of page
-            var y = $(this).scrollTop()
+        //$(document).scroll(function () {
+        //    //stick nav to top of page
+        //    var y = $(this).scrollTop()
 
-            if (y > startPosition) {
-                 navWrap.css({                    
-                    position: 'fixed',
-                    top: '10px',
-                    left: '35px',
-                });
-                if (y > stopPosition - 49) {
-                    navWrap.css({
-                        'top': stopPosition - y - 43,
-                        left: '35px',
-                    });
-                } else {
-                    navWrap.css({
-                        'top': 10,
-                        left: '35px',
-                    });
-                }
-            } else {
-                 navWrap.css({
-                    position: 'static'
-                });
-            }
-        });
+        //    if (y > startPosition) {
+        //         navWrap.css({                    
+        //            position: 'fixed',
+        //            top: '10px',
+        //            left: '35px',
+        //        });
+        //        if (y > stopPosition - 49) {
+        //            navWrap.css({
+        //                'top': stopPosition - y - 43,
+        //                left: '35px',
+        //            });
+        //        } else {
+        //            navWrap.css({
+        //                'top': 10,
+        //                left: '35px',
+        //            });
+        //        }
+        //    } else {
+        //         navWrap.css({
+        //            position: 'static'
+        //        });
+        //    }
+        //});
 
     }, 1500)
 

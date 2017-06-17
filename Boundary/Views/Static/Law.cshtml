@@ -1,383 +1,170 @@
-﻿@model DataModel.Models.ViewModel.CompleteProductForOne 
-
+﻿
 @{
-    ViewBag.Title = "نام محصول : " + Model.Product.Name + " , قیمت: " + Model.Product.Price + " , نام فروشگاه : " + Model.StoreSummery.Name;
+    ViewBag.Title = "قوانین سایت";
     Layout = "~/Views/Shared/_Layout.cshtml";
-} 
-
-<div class="container" ng-controller="getProductCtrl">
-    <div class="sizeManager productDetails">
-        <div class="threeFourFullColumn standardPadding">
-            <div class="organizer productInfo">
-                <div class="oneThreeFullColumn">
-                    <!-- gallery in tu gharar migire -->
-                    <div class="gallery"></div>
-                </div>
-                <div class="twoThreeFullColumn goLeft">
-                    <div class="allInfo twelveFontSize">
-                        <div class="organizer commonInfo">
-                            <div class="oneThreeFullColumn">
-                                <div class="organizer"><span class="eightyFontsize thickFont">برند:</span> <span class="darkGray">محل مشخص کردن برند</span></div>
-                                <div class="organizer standardDoubleVerticalMargin"><span class="eightyFontsize thickFont">نام محصول:</span> <span class="darkGray">نام محصول مورد نظر در اینجا</span></div>
-                                <div class="organizer">
-                                    <div class="colorBox">
-                                        <span class="eightyFontsize thickFont">رنگ ها:</span>
-                                        <div class="colorInner textInCenter">
-                                            <div class="boxElement radiusBox textInCenter relativeMatter">
-                                                <span class="colorCircle objectInMiddle" style="background-color: #f00;"></span>
-                                            </div>
-                                            <div class="colorCheckBox standardHalfVerticalMargin">
-                                                <input type="radio" id="c11" name="cc" />
-                                                <label for="c11"><span class="noPadding"></span> </label>
-                                            </div>
-                                        </div>
-                                        <div class="colorInner textInCenter">
-                                            <div class="boxElement radiusBox textInCenter relativeMatter">
-                                                <span class="colorCircle objectInMiddle" style="background-color: #0f0;"></span>
-                                            </div>
-                                            <div class="colorCheckBox standardHalfVerticalMargin">
-                                                <input type="radio" id="c12" name="cc" />
-                                                <label for="c12"><span class="noPadding"></span> </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="twoThreeFullColumn">
-                                <div class="organizer">
-
-
-                                    <div class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-truck"></span> قابل ارسال
-                                    </div>
-                                    <div class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-redo"></span> قابل پس دادن
-                                    </div>
-                                    <div class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-loop"></span> قابل تعویض
-                                    </div>
-                                    <div class="tagInner goLeft outlineButton fillButton smallPadding whiteColor greenBorder greenColor thickFont twelveFontSize">
-                                        <span class="icon icon-checkmark"></span> موجود
-                                    </div>
-                                </div>
-                                <div class="organizer standardDoubleVerticalMargin textJustified aLittleFromBottom">
-                                    <span class="eightyFontsize thickFont">توضیحات محصول:</span>
-                                    <div class="organizer">
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="organizer priceRange">
-                            <div class="boxElement radiusBox organizer standardPadding elementTopVerticalMargin">
-                                <div class="twoPartButton outlineButton greenBorder goLeft textInCenter">
-                                    <div class="iconPart greenBack standardDoublePadding"><span class="icon icon-cart whiteColor"></span> </div>
-                                    <div class="fieldPart greenColor thirteenFontSize thickFont">اضافه به سبد خرید</div>
-                                </div>
-                                <div class="priceNotice goRight">
-                                    <span class="eightyFontsize thickFont">قیمت: </span> <span class="soffPrice lightGray crossOver standardHorizontalLeftMargin">390,000</span> <span class="mainPrice greenColor twentyTwoFontsize thickFont standardHorizontalLeftMargin">290,000</span> <span class="offValue smallPadding pinkBack outlineButton whiteColor standardHorizontalLeftMargin">5 درصد تخفیف</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="organizer features standardVerticalMargin">
-                            <div class="tableShape boxElement radiusBox thickFont">
-                                <div class="tRow organizer borderBottom relativeMatter">
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">رزولوشن تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                        </div>
-                                    </div>
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">اندازه تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">15 inch</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tRow organizer borderBottom relativeMatter">
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">رزولوشن تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">1920 * 1080</div>
-                                        </div>
-                                    </div>
-                                    <div class="twoFullColumn">
-                                        <div class="tTitle goRight standardPadding">اندازه تصویر</div>
-                                        <div class="tValue goLeft standardPadding">
-                                            <div class="tagInner outlineButton fillButton smallPadding greenColor greenBorder">15 inch</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="organizer newProducts">
-                <div class="boxElement radiusBox">
-                    <div class="titleBar organizer eightyFontsize thickFont loginPadding">
-                        <div class="goRight"><span class="icon icon-price-tags"></span> محصولات مرتبط </div>
-                    </div>
-                    <div class="innerBox carouselContainer organizer thickFont relativeMatter">
-                        <!-- be ezaye har mahsool y dune az in six column ha repeat mishe -->
-                        <div class="arrows">
-                            <div class="rightArrow defaultArrow">
-                                <span class="icon icon-arrow-right2 objectInMiddle"></span>
-                            </div>
-                            <div class="leftArrow defaultArrow">
-                                <span class="icon icon-arrow-left2 objectInMiddle"></span>
-                            </div>
-                        </div>
-                        <div class="carouselInner">
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                            <div class="sixColumn borderRight">
-                                <div class="organizer standardVerticalMargin">
-                                    <div class="circleImageContainer">
-                                        <img src="" alt="" class="imageInMiddle">
-                                    </div>
-                                </div>
-                                <div class="organizer pinkColor">نام محصول</div>
-                                <div class="organizer smallExplain">توضیحی مختصر در مورد این محصول</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="oneFourFullColumn">
-            <div class="boxElement textInCenter organizer radiusBox relativeMatter">
-                <div class="organizer sellerLogo standardHalfVerticalMargin">
-                    <div class="circleImageContainer"></div>
-                </div>
-                <div class="organizer eightyFontsize pinkColor thickFont standardVerticalBottomMargin">نام فروشگاه یا فروشنده</div>
-                <div class="organizer">
-                    <div class="mapHolder relativeMatter">
-                        <img src="images/minimap.jpg">
-                        <div class="locationMark"><span class="icon icon-location2 pinkColor eightyFontsize objectInMiddle"></span> </div>
-                    </div>
-                </div>
-                <div class="organizer standardPadding borderBottom">
-                    <div class="organizer standardHalfVerticalMargin thickFont">آدرس</div>
-                    <div class="organizer">
-                        تهران، خیابان ولیعصر، بالاتر از میدان فاطمی، تقاطع
-                        مطهری، پله اول، پلاک 3، واحد 2
-                    </div>
-                </div>
-                <div class="organizer standardPadding borderBottom">
-                    <div class="organizer standardHalfVerticalMargin thickFont">شماره تلفن</div>
-                    <div class="organizer"><span>09118546483</span> - <span>09116857803</span></div>
-                </div>
-                <div class="organizer standardPadding borderBottom">
-                    <div class="organizer standardHalfVerticalMargin thickFont">نمونه محصولات</div>
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                    <div class="fourFullColumns ">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                    <div class="fourFullColumns">
-                        <div class="squareItem relativeMatter">
-                            <img src="" class="imageInMiddle">
-                        </div>
-                    </div>
-                </div>
-                <div class="organizer standardPadding borderBottom">
-                    <div class="tagInner outlineButton fillButton standardPadding whiteColor pinkBack thickFont">سایر محصولات فروشگاه</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
- 
-
-@section Script{
- 
-    <script>
-      var Data = @Html.Raw(Json.Encode(Model));
-    </script> 
-    <script src="~/newAsset/js/getProduct.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcRl8YOh6SJZ3dHqzY6ImgqEM9WNd-aE0"></script>
-
 }
- 
 
+<link href="~/Css/MainPage/MainPage.css" rel="stylesheet" />
+<div class="boxesForFields" style="direction:rtl; font-size:16px;">
 
-@*<div id="Middle" >
-        <div id="GalleryAndInfes">
-            <div id="GalleryHolder">
-                <div class="gallery">
-                    <div class="images">
-                        <img ng-src="~/{{Data.Product.ImgAddress}}" />
-                    </div>
-                </div>
+    <h2>قوانین سایت هوجی بوجی </h2>
 
-            </div>
-            <div id="InfoHolder">
-                <div id="MapAndSellerInfoes">
-                    <div id="MiniMapHolder" ng-show="Data.StoreSummery.Latitude!=null"></div>
-                    <div id="SellerInfoHolder">
-                        <div id="addToBascketButton" style="text-align:center">
-                            <a class="btn btn-switch" style="background-color: #b9b9b9;padding: 5px;" href="~/shop/code/{{Data.StoreSummery.Id}}"> سایر محصولات فروشنده </a>
-                        </div>
-                     </div>
-                </div>
-                <div id="ProductAndPriceInfoes">
-                    <div id="ProductName">
-                        <div id="NameOfTheProductHolder">
+    <br>
+    فروشندگان ابتدا باید از مطابقت داشتن فعالیت ها، مبادلات و فروش کالای خود با قوانین سایت اطمینان حاصل نمایند. در صورت منطبق نبودن آنها با قوانین سایت، از انجام هر یک از این امور جلوگیری شده و همچنین ممکن است تغییرات دیگری نظیر ایجاد محدودیت در تسهیلات خرید و فروش و حتی بسته شدن حساب کاربر خاطی اعمال شود. این قوانین یا به دلیل مغایرت این کالاها و فعالیت ها با قوانین کشوری می باشد و یا اینکه با خط مشی و قوانین هوجی بوجی مطابقت ندارد.
+    <br>
+    اقلام مندرج در این لیست تحت هیچ شرایطی نمی توانند مورد خرید و فروش قرار گیرند.
+    <br>
+    <br>
+    <br>
+    <span class="styleBlackB">لیست فعالیت های ممنوعه</span>
+    <br>
+    كاربران می‏بایست هنگام داد و ستد از طریق سایت، از ارتکاب موارد زیر خودداری نمایند:
+    <br>
+    <ol>
+        <li>
+            تخلف ازهریک از بخش های توافق نامه کاربری،حفظ حریم شخصی و دستورالعمل حل اختلاف  با هوجی بوجی مجاز نمی باشد.
+        </li>
+        <li>
+            تخطی از قوانین و مقررات جمهوری اسلامی ایران اعم از قوانین جزایی، مدنی، مالی، تجاری، بانکی، مالیاتی، گمرکی، اداری و به طور خاص قانون تجارت الکترونیک، قانون جرائم رایانه‌ای و قانون مبارزه با پول‌شویی.
+        </li>
+        <li>
+            نقض حقوق مولفین ، مصنفین و هنرمندان و یا حقوق مندرج در قانون ثبت اختراعات، طرح‌های صنعتی و علایم تجاری، حقوق منبعث از قانون حمایت از حقوق پدیدآورندگان نرم‌افزارهای رایانه‌ای، حقوق مذکور در قانون ترجمه و تکثیر کتب و نشریات و آثار صوتی
+        </li>
+        <li>
+            ارایه اطلاعات مخدوش نادرست و غیر موثق.
+        </li>
+        <li>
+            فروش و عرضه اجناس تقلبی
+        </li>
+        <li>
+            ارتکاب عملی که کلاهبرداری و یا در حکم آن به شمار بیاید.
+        </li>
+        <li>
+            عدم همکاری در تحقیقات و یا عدم تأیید اطلاعاتی که به سایت داده‌ شده است.
+        </li>
+        <li>
+            استفاده از پروکسی ناشناس
+        </li>
+        <li>
+            استفاده از حساب کاربری هوجی بوجی که سابقا با این موارد ممنوعه مرتبط باشد.
+        </li>
+        <li>
+            انجام مبادله یا استفاده از خدمات به نحوی که منجر به طرح شکایت یا اخذ جریمه‌ از هوجی بوجی یا هر یك از کاربران شود.
+        </li>
+        <li>
+            سوءاستفاده یا تخلف از قوانین جرائم رایانه ایی
+        </li>
+        <li>
+            افشا یا انتشار اطلاعات کاربران دیگر و یا استفاده از آن اطلاعات برای اهداف تجاری .
+        </li>
+        <li>
+            ارسال پیام‌های الکترونیکی ناخواسته و هرزنامه‌ها به سایر کاربران یا سوء استفاده از خدمات برای کسب منفعت مالی.
+        </li>
+        <li>
+            تلاش برای مداخله و اخلال در سایت یا خدمات ایسام.
+        </li>
+        <li>
+            هرگونه کپی‌برداری جزئی یا کلی از سایت بدون اخذ اجازه قبلی از شرکت ایسام.
+        </li>
+        <li>
+            استفاده از نرم‌افزارهای اخلال‌گر مانند ویروس‌ها و تروجان‌ها و کرم‌های اینترنتی که موجب اخلال در کار رایانه‌های شرکت یا سرقت اطلاعات شود.
+        </li>
+        <li>
+            انجام امور مرتبط با خیریه و جمع آوری کمک های مالی.
+        </li>
+        <li>
+            انجام معامله خارج از سایت هوجی بوجی به هر شکلی مجاز نمی باشد. تبادل هرگونه اطلاعات تماس و یا دادن پیشنهاد جهت انجام معامله خارج از سایت هوجی بوجی ممنوع است.
+        </li>
+        <li>
+            انجام فعالیت های ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a>
+        </li>
+    </ol>
+    <br>
+    <br>
+    <span class="styleBlackB">لیست مبادلات ممنوعه</span>
+    <br>
+    انجام مبادلات زیر در هوجی بوجی ممنوع بوده و از خدمات سایت محروم‌ خواهند بود:
+    <br>
+    <ol>
+        <li>
+            مبادلات مرتبط با ارایه خدمات
+        </li>
+        <li>
+            مبادلات مربوط به فروش اجناسی که متعلق به فروشنده نیستند یا فروشنده مجاز به فروش آن‌ها نیست
+        </li>
+        <li>
+            مبادلاتی که منجر به نقض حقوق مالکیت فکری کالاهایی که دارای چنین حقوقی هستند گردد
+        </li>
+        <li>مبادلات مرتبط با اموال تاريخی، فرهنگی به دست آمده از حفاری غیرمجاز</li>
+        <li>
+            مبادلاتی که اطلاعات شخصی افراد دیگر را به طور غیرقانونی فاش می‌کند
+        </li>
+        <li>
+            مبادلات مربوط به شرکت‌های هرمی، برنامه‌های شبکه‌ای و برنامه‌های بازاریابی چندسطحی
+        </li>
+        <li>
+            قمار و شرط‌ بندی و سایر فعالیت‌هایی که با دریافت مبلغی برای شرکت در مسابقه جایزه می‌دهند
+        </li>
+        <li>
+            مبادلاتی که افراد مختلف بدان وسیله به نمایندگی از طرف فروشندگان وجوه را دریافت و جمع‌آوری می‌کنند
+        </li>
+        <li>مبادلاتی که طبق قوانین جمهوری اسلامی مجاز شمرده نمی شود</li>
 
-                            <div id="NameOfTheProduct" ng-bind="Data.Product.Name"></div>
-                        </div>
-                        <div id="PriceOfTheProduct">
-
-                            <div ng-show="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OriginalPrice" ng-bind="Data.Product.Price+' تومان '"></div>
-                                <div id="OffPrice2" ng-bind="Data.Product.DiscountedPrice+' تومان '"></div>
-                            </div>
-                            <div ng-hide="Data.Product.DiscountedPrice">
-                                <div id="PriceSubject">قیمت :</div>
-                                <div id="OffPrice2" ng-bind="Data.Product.Price +' تومان '"></div>
-                            </div>
-
-                        </div>
-
-                        <div ng-show="Data.Colors.length!=0" id="ColorsOfTheProducts">
-                            <div id="ColorSubject" style="width: 71px;">رنگ ها :</div>
-                            <div ng-repeat="color in Data.Colors" class="ColoSeperator" style="background-color:{{color.ColorHex}} "></div>
-                        </div>
-                    </div>
-                    <div class="Outer" ng-show="Data.Product.MadeIn">
-                        <div class="InnerSubject">کشور سازنده :</div>
-                        <div class="InnerInformation" ng-bind="Data.Product.MadeIn"></div>
-                    </div>
-
-                    <div id="AddressTags">
-                        <div ng-show="Data.StoreSummery.CityName && Data.StoreSummery.CityName!='-'" id="CityAndStateTags">
-                            <div ng-bind="Data.StoreSummery.CityName" class="Tag"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Name" class="Outer">
-                            <div class="InnerSubject">نام فروشگاه :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Name"></div>
-                        </div>
-                        <div ng-show="Data.StoreSummery.Place" class="Outer">
-                            <div class="InnerSubject">آدرس :</div>
-                            <div class="InnerInformation" ng-bind="Data.StoreSummery.Place"></div>
-                        </div>
-
-                        <div ng-show="Data.StoreSummery.PhoneNumber" class="Outer">
-                            <div class="InnerSubject">تلفن تماس :</div>
-                            <div ng-bind="Data.StoreSummery.PhoneNumber" class="InnerInformation"></div>
-                        </div>
-
-                    </div>
-                    <div id="SellerInfoHolder">
-                        <div id="OtherProducts" ng-show="Data.Product.CanSend && Data.Product.CanSend" style="width: 90%;background-color: rgba(109, 216, 23, 0.55);font-size: 17px;"><a ng-click="AddToBasket()">افزودن به سبد خرید</a></div>
-
-                     </div>
-
-                </div>
-                <div id="SpecialAbilities">
-                    <div ng-show="Data.Product.CanGiveBack" class="giveBack" ripple="ripple" ripple-color="#FFF">قابل پس دادن</div>
-                    <div ng-show="Data.Product.CanSend" class="Send" ripple="ripple" ripple-color="#FFF">قابل ارسال</div>
-                    <div ng-show="Data.Product.Changeability" class="Switch" ripple="ripple" ripple-color="#FFF">قابل تعویض</div>
-                    <div ng-show="Data.Product.IsExist" class="SpecialProduct" ripple="ripple" ripple-color="#FFF">موجود</div>
-                </div>
-            </div>
-            <div id="DetailTabs" ng-show="Data.ProductAttrbiutesViewModels!=nul">
-
-                <div class="tabs">
-                    <div class="tabs-header">
-                        <div class="border"></div>
-                        <ul style="margin-top:0;">
-                            <li class="active"><a href="#tab-1" tab-id="1" ripple="ripple" ripple-color="#FFF">مشخصات محصول</a></li>
-                           </ul>
-                        <nav class="tabs-nav"><i id="prev" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE314;</i><i id="next" ripple="ripple" ripple-color="#FFF" class="material-icons">&#xE315;</i></nav>
-                    </div>
-                    <div class="tabs-content">
-                        <div tab-id="1" id="TabOneDetailes" class="tab active">
-
-                            <div ng-show="Data.ProductAttrbiutesViewModels" ng-repeat="item in Data.ProductAttrbiutesViewModels">
-                                <div ng-if="$index %2 == 0">
-                                    <div class="rightSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div ng-if="$index %2 !=0">
-                                    <div class="LeftSide" style="height:30px;">
-                                        <div class="TabHolder">
-                                            <div class="HeaderTabInner" ng-bind="item.AttributeName"> </div>
-                                            <div class="ContentTabInner" ng-bind="item.Value"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
+    </ol>
+    <br>
+    <br>
+    <span class="styleBlackB">لیست فعالیت های ممنوع مرتبط با ثبت کالا</span>
+    <br>
+    <ol>
+        <li>ثبت کالای بدون عکس </li>
+        <li>ثبت کالا با تصویر نامرتبط </li>
+        <li>ثبت کالای نامشخص و کلی </li>
+        <li>ثبت کالاهای تبلیغاتی </li>
+        <li>ثبت کالاهای خدماتی </li>
+        <li>ثبت اعضای بدن </li>
+        <li>ثبت اموال غیرمنقول </li>
+        <li>ثبت کالاهای قاچاق و دولتی </li>
+        <li>ثبت کالا با عناوین تبلیغاتی</li>
+        <li>ثبت کالا با هزینه پستی نامتعارف </li>
+        <li>ثبت هزینه پستی برای کالای مجازی </li>
+        <li>ثبت چندین کالای نامرتبط در یک کالا </li>
+        <li>ثبت کالای دست دوم با تصویر اینترنتی </li>
+        <li>ثبت کالا با مشخصات و توضیحات نامرتبط </li>
+        <li>ثبت کالاهای منتسب به رژیم اشغال گر قدس</li>
+        <li>ثبت عنوان و توضیحات کالا با حروف انگلیسی</li>
+        <li>ثبت کالا با قیمت بیشتر از بیست میلیون تومان </li>
+        <li>ثبت کالا به صورت غیر اختصاصی برای کاربر خاص </li>
+        <li>ثبت کالاهایی که مبادله آنها طبق قانون ممنوع است </li>
+        <li>ثبت اموال سرقتی و کالاهای با شماره سریال پاک شده </li>
+        <li>ثبت کالاهایی که برای مصرف‌کننده خطر جدی در پی دارد </li>
+        <li>ثبت کالاهایی که مبادله آنها دارای مقررات و نظامات خاص است </li>
+        <li>ثبت کالاهای به‌دست‌آمده از ارتکاب جرم یا نقض مقررات كشوری </li>
+        <li>ثبت مواد مخدر و روان گردانها ، عناصر سازنده و متعلقات مربوط به آنها </li>
+        <li>ثبت کالاهای خلاف شئون و یا دارای عناوین و تصاویر خلاف شئون </li>
+        <li>ثبت کالاهای مرتبط با بخت‌آزمایی، قمار و شرط‌ بندی</li>
+        <li>ثبت کالای مرتبط با بازاریابی شبکه ای، چندمرحله ای، هرمی، ماتریسی و غیره </li>
+        <li>
+            ثبت کالاهای تکراری (توجه: ثبت دو کالای یکسان با دو شماره سریال متفاوت نیز کالای
+            تکراری محسوب می شود.)
+        </li>
+        <li>
+            ثبت آگهی خرید (کاربران به جای ثبت آگهی خرید، می توانند به گروه کالای مورد نظر مراجعه و آن کالا را خریداری کنند)
+        </li>
+        <li>
+            ثبت تاکسی درمی تمام گونه های حیوانات (نظیر حرام گوشت، حلال گوشت، اهلی، وحشی و حتی
+            با مجوز تاکسی درمی و شکار)
+        </li>
+        <li>ثبت کالاهایی که نیاز به خدمات پیش و پس از فروش دارند </li>
+        <li>
+            ثبت كالاهایی كه در توضيح آنها از مفاهيم انتزاعی در حوزه دين و اعتقادات مردمی استفاده شده است.
+        </li>
+        <li>
+            ثبت کالاهای دارای خواص معنوی و یا ارزش معنوی (متبرک)، حرز، دعا، طلسم، سحر، جادو و جنبل، بخت، شانس، اقبال، یمن، گشایش امور، رزق و روزی
+        </li>
+        <li>ثبت کالاهای متعلق به میراث فرهنگی کشور</li>
+        <li>ثبت کالاهای ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a> </li>
+        <li>ثبت کلیه کالاهایی که طبق قوانین جمهوری اسلامی غیرمجاز می باشند </li>
+    </ol>
+    <br>
+    <br>
+</div>
