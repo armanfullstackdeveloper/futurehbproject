@@ -659,6 +659,10 @@ button {
     margin: 0 0 0 1rem;
 }
 
+.standardHorizontalRightMargin {
+    margin: 0 1rem 0 0 ;
+}
+
 .standardHorizontalPadding {
     padding: 0 1rem;
 }

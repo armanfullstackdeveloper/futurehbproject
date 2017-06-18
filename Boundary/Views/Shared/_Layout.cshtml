@@ -126,7 +126,7 @@
                                 </div>
 
                                 <a href="~//Seller/StoreManagment/SellerPanel" class="pinkColor">
-                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>پنل مدیریت </div>
+                                    <div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>پنل مدیریت </div>
                                 </a>
                                 <a href="~/Seller/ProductManagment/AddProduct">
                                     <div class="thickFont siteGuideline standardPadding goRight pinkBorder outlineButton pinkColor"><span class="icon icon-box-add standardHorizontalLeftMargin twentyTwoFontsize"></span>افزودن محصول جدید</div>
@@ -138,13 +138,13 @@
                         if (User.IsInRole(StaticString.Role_Admin) || User.IsInRole(StaticString.Role_SuperAdmin))
                         {
                             <div class="normalUser primaryOptions pinkColor solidLineHeight thickFont goRight">
-                                <a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)">
-                                    <span class="goRight"><span class="icon icon-user-tie"></span> صفحه مدیریت </span>
-                                </a>
+                                
+                                    <div class="goRight"><a href="@Url.Action("Index", "Panel", new { area = "Admin" }, null)"><span class="icon icon-user-tie"></span> صفحه مدیریت </a></div>
+                                
                                 <span class="veryLightColor goRight standardHorizontalMargin">|</span>
-                                <a href="~/Account/LogOff">
-                                    <span class="goRight"><span class="icon icon-exit"></span> خروج</span>
-                                </a>
+                                
+                                    <div class="goRight"><a href="~/Account/LogOff"><span class="icon icon-exit"></span> خروج</a></div>
+                                
                                 <a href="~/Static/UserGuid" class="pinkColor"><div class="thickFont siteGuideline standardPadding goRight greenBorder outlineButton greenColor standardHorizontalMargin"><span class="icon icon-compass2 movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>راهنمای سایت </div></a>
                             </div>
 
@@ -222,7 +222,7 @@
                                 </div>
                             
                                 <div class="thickFont siteGuideline standardPadding goLeft greenBorder outlineButton greenColor">
-                                    <a href="~/Store/AddStore" class="pinkColor">
+                                    <a href="~/Store/AddStore" class="greenColor">
                                         <span class="icon icon-file-text movingCompass standardHorizontalLeftMargin twentyTwoFontsize"></span>ثبت فروشگاه
                                     </a>
                                 </div>
