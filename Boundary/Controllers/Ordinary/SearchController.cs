@@ -36,11 +36,11 @@ namespace Boundary.Controllers.Ordinary
             try
             {
                 if (id <= 0)
-                    return RedirectToAction("NotFound", "Home");
+                    return RedirectToAction("NotFound", "Static");
 
                 CompleteProductForOne completeProduct = new ProductBL().GetOneProduct(id);
                 if (completeProduct.Product == null || completeProduct.Product.Id == 0)
-                    return RedirectToAction("NotFound", "Home");
+                    return RedirectToAction("NotFound", "Static");
 
                 switch (completeProduct.Product.Status)
                 {
