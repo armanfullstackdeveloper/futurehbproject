@@ -22,11 +22,11 @@ namespace Boundary.Controllers.Ordinary
         {
             long? storeCode = id ?? new StoreBL().GetStoreCodeByHomePage(shopname);
             if (storeCode == null || storeCode <= 0)
-                return RedirectToAction("NotFound", "Home");
+                return RedirectToAction("NotFound", "Static");
             StoreDetailsViewModel storeDetails = new StoreBL().GetOneStoreDetails(storeCode.Value);
             //اگه فروشگاه وجود نداشت و یا غیر فعال بود، نمایش داده نمیشه
             if (storeDetails == null || storeDetails.StoreStatus == EStoreStatus.Inactive)
-                return RedirectToAction("NotFound", "Home");
+                return RedirectToAction("NotFound", "Static");
 
             List<EProductStatus> lstStatus = new List<EProductStatus>() { EProductStatus.Active };
             #region getting store Id
