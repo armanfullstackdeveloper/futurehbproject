@@ -20,7 +20,7 @@
  استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
 سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید</div>
             </div>
-            <div class="buttonPart"><a href="/"><button>ورود</button></a></div>
+            <div class="buttonPart"><a href="/"><button>از محصولات دیدن نمایید</button></a></div>
         </div>
     </div>
     <table class="firstHide table  table-borderd table-hover table-stariped" style="float:right;direction: rtl; margin:30px auto;" ng-show="Data.length>0" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
@@ -68,14 +68,14 @@
         {
             //if (User.IsInRole(StaticString.Role_Member))
             //{
-                    <a class="btn btn-success" href="~/Order/MemberInfo">تکمیل خرید</a>
+                    <a class="btn btn-success" style="float: left;" href="~/Order/MemberInfo">مرحله دوم (تکمیل آدرس)</a>
                 //}
         }
         else
         {
-            <a class="btn btn-success" href="~/Order/MemberLogin">تکمیل خرید</a>
+            <a class="btn btn-success" style="float: left;" href="~/Order/MemberInfo">مرحله دوم (تکمیل آدرس)</a>
         }
-        <a class="btn btn-info" href="/">بازگشت به صفحه اول</a>
+        <a class="btn btn-default" href="/">بازگشت به صفحه اول</a>
     </div>
    
 </div>
