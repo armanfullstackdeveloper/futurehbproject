@@ -16,51 +16,53 @@
             <div class="imagePart"><img src="~/Img/emptyBascket.jpg" class="imageInMiddle" /></div>
             <div class="textFieldPart">
                 <div class="headerPart">سبد خرید شما خالی است</div>
-                <div class="contentPart">برای خرید انواع البسه و سایر لوازم مورد نیاز خود ابتدا وارد شوید و از امکانات کامل ما
- استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
-سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید</div>
+                <div class="contentPart">
+                    برای خرید انواع البسه و سایر لوازم مورد نیاز خود ابتدا وارد شوید و از امکانات کامل ما
+                    استفاده نمایید. شما میتوانید با استفاده از دکمه سبد خرید محصول مورد نظرتان را به
+                    سبدتان اضافه نمایید و از همینجا اقدام به خرید نمایید
+                </div>
             </div>
             <div class="buttonPart"><a href="/"><button>از محصولات دیدن نمایید</button></a></div>
         </div>
     </div>
     <table class="firstHide table  table-borderd table-hover table-stariped" style="float:right;direction: rtl; margin:30px auto;" ng-show="Data.length>0" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
         <tr>
-            <th style=" text-align: center;"></th>
-            <th style=" text-align: center;">نام محصول</th>
-            <th style=" text-align: center;">نام فروشگاه</th>
-            <th style=" text-align: center;">تعداد</th>
+            <th style=" text-align center;"></th>
+            <th style=" text-align center;">نام محصول</th>
+            <th style=" text-align center;">نام فروشگاه</th>
+            <th style=" text-align center;">تعداد</th>
             @*<th style=" text-align: center;">هزینه پستی</th>*@
-            <th style=" text-align: center;">قیمت واحد</th>
-            <th style=" text-align: center;">قیمت کل</th>
-         </tr>
-        <tr ng-repeat=" item in Data" >
-            <td style=" text-align: center;"><div class="tablePicHandler"><img width="60" ng-src="~/{{item.ImgAddress}}" /></div></td>
-            <td style=" text-align: center;" ng-bind="item.ProductName"></td>
-            <td style=" text-align: center;" ng-bind="item.StoreName"></td>
-            <td style=" text-align: center; font-size: 17px;">
+            <th style=" text-align center;">قیمت واحد</th>
+            <th style=" text-align center;">قیمت کل</th>
+        </tr>
+        <tr ng-repeat=" item in Data">
+            <td style=" text-align center;"><div class="tablePicHandler"><img width="60" ng-src="~/{{item.ImgAddress}}" /></div></td>
+            <td style=" text-align center;" ng-bind="item.ProductName"></td>
+            <td style=" text-align center;" ng-bind="item.StoreName"></td>
+            <td style=" text-align center; font-size 17px;">
                 <i class="glyphicon glyphicon-plus" style="cursor:pointer" ng-click="CountPlus(item.ProductCode )"></i>
                 <p ng-bind="item.Count"></p>
-                <i class="glyphicon glyphicon-minus"  style="cursor:pointer" ng-click="CountMinus(item.ProductCode)"></i>
+                <i class="glyphicon glyphicon-minus" style="cursor:pointer" ng-click="CountMinus(item.ProductCode)"></i>
             </td>
             @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
-            <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
-            <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
-            <td style=" text-align: center;">
-                <div class="removeItem"  ng-click="RemoveProduct(item.ProductCode)"></div>
+            <td style=" text-align center;" ng-bind="item.RealPrice"></td>
+            <td style=" text-align center;" ng-bind="item.TotalPrice"></td>
+            <td style=" text-align center;">
+                <div class="removeItem" ng-click="RemoveProduct(item.ProductCode)"></div>
             </td>
         </tr>
-        <tr >
+        <tr>
             <td></td>
             <td></td>
             <td></td>
-             <td></td>
-            <td style=" text-align: center;">مجموع خرید</td>
-            <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
+            <td></td>
+            <td style=" text-align center;">مجموع خرید</td>
+            <td style=" text-align center;" ng-bind="AllTotalPrice"></td>
         </tr>
 
     </table>
 
-    <div ng-show="Data.length>0"  class="firstHide">
+    <div ng-show="Data.length>0" class="firstHide">
         @using Boundary.Helper.StaticValue
         @using Microsoft.AspNet.Identity
 
@@ -68,8 +70,8 @@
         {
             //if (User.IsInRole(StaticString.Role_Member))
             //{
-                    <a class="btn btn-success" style="float: left;" href="~/Order/MemberInfo">مرحله دوم (تکمیل آدرس)</a>
-                //}
+            <a class="btn btn-success" style="float: left;" href="~/Order/MemberInfo">مرحله دوم (تکمیل آدرس)</a>
+            //}
         }
         else
         {
@@ -77,12 +79,12 @@
         }
         <a class="btn btn-default" href="/">بازگشت به صفحه اول</a>
     </div>
-   
+
 </div>
 
 <style>
-    .firstHide{
-        display:none;
+    .firstHide {
+        display: none;
     }
 </style>
 
@@ -108,11 +110,11 @@
           })
           $scope.AllTotalPrice=($scope.AllTotalPrice+'').replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
 
-        
+
           $scope.CountMinus = function (id) {
               var deletedIndex = -1;
-              $.each($scope.Data, function (index, value) { 
-                  if (value && (value.ProductCode == id)) { 
+              $.each($scope.Data, function (index, value) {
+                  if (value && (value.ProductCode == id)) {
                       if (value.Count == 1   ) {
                           deletedIndex = index;
                       }
@@ -122,18 +124,18 @@
                   }
               })
 
- 
+
               if (deletedIndex != -1) {
                   $scope.Data.splice(deletedIndex,1);
               }
- 
+
 
               $.ajax({
                   type: "GET",
                   url: "/order/MinusProductCount?productCode="+id,
                   success: function (result) {
                       //  window.location.reload();
-                  } 
+                  }
               });
           }
           $scope.CountPlus = function (id) {
@@ -147,9 +149,9 @@
                   url: "/order/AddProductCount?productCode="+id,
                   success: function (result) {
                       // window.location.reload();
-                  } 
+                  }
               });
-          } 
+          }
           $scope.RemoveProduct = function (id) {
               var deletedIndex = -1;
               $.each($scope.Data, function (index, value) {
@@ -164,8 +166,8 @@
                   type: "GET",
                   url: "/order/RemoveFromBag?productCode="+id,
                   success: function (result) {
-                      //window.location.reload(); 
-                  } 
+                      //window.location.reload();
+                  }
               });
           }
 
