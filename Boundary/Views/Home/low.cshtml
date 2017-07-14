@@ -1,518 +1,639 @@
-﻿                    @{
-    ViewBag.Title = "هوجی بوجی";
+﻿@{
+    ViewBag.title = "قوانین سایت";
+    ViewBag.keywords = "قوانین سایت ، قوانین سایت هوجی بوجی ، قوانین فروشندگان ، قوانین خریداران ";
+    ViewBag.description = "قوانین خریداران و فروشندگان سایت هوجی بوجی";
     Layout = "~/Views/Shared/_Layout.cshtml";
-                    }
+}
 
-<div id="Middle">
-    <div id="RightSideOfMiddle">
-        @*<div id="News">
-                <div id="NewsSubjectHolder">تازه ترین اخبار</div>
-                <div id="ShortNews">
-                    <div id="NewsFirst">
-                        <div class="NewsText">
-                            <div class="SubNewsText">سامسونگ تبلت گلکسی ویو را رسما معرفی کرد</div>
-                            <div class="DateOfNews">یکشنبه - 8 آبان 1394</div>
-                                        </div>
-                        <div class="NewsThumNail"><img src="~/Img/MainPage/NewsThumbs/NewsThumb_1.jpg"></div>
-                                        </div>
-                    <div id="NewsSeconde">
-                        <div class="NewsText">
-                            <div class="SubNewsText">نقد و بررسی تبلت Zentab 8.0</div>
-                            <div class="DateOfNews">یکشنبه - 8 آبان 1394</div>
-                                    </div>
-                        <div class="NewsThumNail"><img src="~/Img/MainPage/NewsThumbs/NewsThumb_2.jpg"></div>
-                                </div>
-                    <div id="NewsThird">
-                        <div class="NewsText">
-                            <div class="SubNewsText">بازی های سونی مشتری دارند ، گوشی هایش نه</div>
-                            <div class="DateOfNews">یکشنبه - 8 آبان 1394</div>
+<div class="container">
+    <div class="organizer staticCover textInCenter">
+        <img src="~/newAsset/images/timeMoney.svg" height="100%" />
+    </div>
+    <div class="organizer">
+        <div class="sizeManager">
+            <div class="staticSubject standardDoubleVerticalMargin organzier greenColor twentyTwoFontsize thickFont"><span class="icon icon-hammer2 twentyTwoFontsize standardHalfHorizontalLeftMargin"></span> قوانین سایت</div>
+            <div class="organizer standardBottomVerticalMargin">
+                فروشندگان ابتدا باید از مطابقت داشتن فعالیت ها، مبادلات و فروش کالای خود با قوانین سایت اطمینان حاصل نمایند. در صورت منطبق نبودن آنها با قوانین سایت، از انجام هر یک از این امور جلوگیری شده و همچنین
+                ممکن است تغییرات دیگری نظیر ایجاد محدودیت در تسهیلات خرید و فروش و حتی بسته شدن حساب کاربر خاطی اعمال شود. این قوانین یا به دلیل مغایرت این کالاها و فعالیت ها با قوانین کشوری می باشد و یا اینکه
+                با خط مشی و قوانین هوجی بوجی مطابقت ندارد.
+                <p>اقلام مندرج در این لیست تحت هیچ شرایطی نمی توانند مورد خرید و فروش قرار گیرند</p>
+            </div>
+            <div class="organizer standardTopVerticalMargin">
+                <div class="mainTimeline organizer rightGreenBorder">
+                    <div class="mainTitleInner organizer">
+
+                        <div class="mainTitleSubject organizer moveFromBottom">
+                            <span class="mediumCircle goRight greenBack compeletRadius inlineList"></span>
+                            <div class="goRight inlineList smallSub">
+                                <span class="greenColor eightyFontsize organizer thickFont">لیست فعالیت های ممنوعه</span>
+                                <span class="almostGrayColor organizer">کاربران می‌بایست هنگام داد و ستد از طریق سایت، از ارتکاب موارد زیر خودداری نمایند</span>
                             </div>
-                        <div class="NewsThumNail"><img src="~/Img/MainPage/NewsThumbs/NewsThumb_3.jpg"></div>
-                            </div>
-                    <div id="NewsForth">
-                        <div class="NewsText">
-                            <div class="SubNewsText">بهترین مقاله‌های دانش در هفته‌ای که گذشت</div>
-                            <div class="DateOfNews">یکشنبه - 8 آبان 1394</div>
-                                                        </div>
-                        <div class="NewsThumNail"><img src="~/Img/MainPage/NewsThumbs/NewsThumb_4.jpg"></div>
-                                                    </div>
-                                                            </div>
-                <div id="SeeMoreNews">برای دیدن اخبار بیشتر کلیک کنید</div>
-            </div>*@
-        <div id="AdPlace">
-            @*<img src="~/Img/Ad/golBano1.jpg" />
-                <img src="~/Img/Ad/golBano2.jpg" />
-                <img src="~/Img/Ad/katoniLand.jpg" />
-                <img src="~/Img/Ad/torkShop.jpg" />*@
-            <div class="BigAd" style="width:100%;"><a href="/shop/code/110"><img src="~/Img/Ad/nikoMezon.jpg" alt="" /></a></div>
-            <div class="BigAd" style="width:100%;"><a href="/shop/code/119"><img src="~/Img/Ad/royaMezon.jpg" alt="" /></a></div>
-            <div class="BigAd" style="width:100%;"><a href="/shop/code/51"><img src="~/Img/Ad/rajabi.jpg" alt="" /></a></div>
-            <div class="BigAd" style="width:100%;"><a href="/shop/code/42"><img src="~/Img/Ad/torkShop.jpg" alt="" /></a></div>
-
-            @*<div class="BigAd" style="width:100%;"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>
-                <div class="BigAd" style="width:100%;"><img src="~/Img/MainPage/ad_Big_2.jpg" alt="" /></div>
-                <div class="BigAd" style="width:100%;"><img src="~/Img/MainPage/ad_Big_1.jpg" alt="" /></div>*@
-            <div class="BigAd" style="width: 100%;text-align: center;">
-                @*<img id='rgvldrftxlapwmcsxlap' style='width: 72%;cursor:pointer' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=51383&p=yncrnbpdfuixaqgwfuix", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=51383&p=fujylznbvjymukaqvjym' />*@
-                                                        </div>
-            @*<div class="BigAd" style="width: 100%;text-align: center;">
-                    <img id='fukzesgtnbqesizpjxlz' style='width: 58%;cursor:pointer' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=60291&p=gvkaobpduiwkpfvlrfth", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=60291&p=wlbqlymaodrfbsiynbpd' />
-                </div>*@
-
-            @*<div class="NormalAd" style="width:100%;"></div>
-                <div class="NormalDoubleAd" style="width:100%; ">
-                    <div class="InnerNormalDouble" style="width:48%;"></div>
-                    <div class="InnerNormalDoubleSeconde" style="width:48%;"></div>
-                                                        </div>
-                <div class="NormalThripleAd" style="width:100%;">
-                    <div class="InnerNormalThriple" style="width:31.5%;"></div>
-                    <div class="InnerNormalThriple" style="width:31.5%;"></div>
-                    <div class="InnerNormalThriple" style="width:31.5%;"></div>
-                </div>*@
-                                                    </div>
-                                                            </div>
-    <div id="LeftSideOfMiddle">
-
-        <div id="Slider">
-            <div class="slider-container" id="slider-container">
-                <div class="slider">
-                    <div class="slide"><a target="_blank" href="http://hoojibooji.com/Search/#!/categoryCode-79/state-0/pageNumber-1">  <img src="~/Img/MainPage/Slides/slide_4.jpg" alt=""></a> </div>
-                    <div class="slide"><a target="_blank" href="http://hoojibooji.com/Search/#!/categoryCode-103/state-0/pageNumber-1">  <img src="~/Img/MainPage/Slides/slide_3.jpg" alt=""> </a></div>
-                    <div class="slide"><a target="_blank" href="http://hoojibooji.com/Search/#!/categoryCode-69/state-0/pageNumber-1">  <img src="~/Img/MainPage/Slides/slide_2.jpg" alt=""></a> </div>
-                    <div class="slide"><a target="_blank" href="http://hoojibooji.com/Search/#!/categoryCode-52/state-0/pageNumber-1">  <img src="~/Img/MainPage/Slides/slide_1.jpg" alt=""></a> </div>
-                    <div class="slide"><a target="_blank" href="http://hoojibooji.com/Search/#!/categoryCode-84/state-0/pageNumber-1">  <img src="~/Img/MainPage/Slides/slide_5.jpg" alt=""></a> </div>
-                                                        </div>
-                <div class="switch AnimatePerv" id="prevv"><span></span></div>
-                <div class="switch AnimateNext" id="nextt"><span></span></div>
-                                                    </div>
-                                                </div>
-
-        @*<div id="Specials">
-                <div id="SpecialInner_a"><img src="~/Img/MainPage/Specials/Special_1.jpg" alt="" /></div>
-                <div id="SpecialInner_b"><img src="~/Img/MainPage/Specials/Special_2.jpg" alt="" /></div>
-                <div id="SpecialInner_c"><img src="~/Img/MainPage/Specials/Special_3.jpg" alt="" /></div>
-                <div id="SpecialInner_d"><img src="~/Img/MainPage/Specials/Special_4.jpg" alt="" /></div>
-            </div>*@
-        <div id="Specials">
-            <div class="SpecialInner">
-                <a href="~/product/73">
-                    <div class="SpecialThumb"><img src="~/Img/Ad/torkShop2.jpg" alt="" /></div>
-                    <div class="SpecialExp lightGreen">
-                        <div class="SpecialName">
-                            مانتو ورسا ژاکارد
-                                </div>
-                        <div class="SpecialDetailFirst" style="background:none">خوش دوخت  </div>
-                        <div class="SpecialDetailSeconde" style="background:none">در انواع سایز مختلف</div>
-                        <div>  سایز ها : 36 , 38 , 40 , 42 , 44 , 46</div>
-                        <div class="SpecialPrice">
-                            <div class="SpecialPriceMount lightGreenColor">تومان</div>
-                            <div class="SpecialPriceAfter lightGreen">70,000</div>
-
-                            <div class="SpecialPriceBefore lightGreenColor"> </div>
-                            </div>
-                                </div>
-                    <div class="Rec lightGreen"></div>
-                            </a>
                         </div>
-            <div class="SpecialInner">
-                <a href="~/product/782">
-                    <div class="SpecialThumb"><img src="~/Img/Ad/khanePoshakBanovan.jpg" /></div>
-                    <div class="SpecialExp lightRed">
-                        <div class="SpecialName">مانتو  مجلسی ترک</div>
-                        <div class="SpecialDetailFirst" style="background:none">جنس : کرپ</div>
-                        <div class="SpecialDetailSeconde" style="background:none">در سایز های مختلف</div>
-                        <div class="SpecialPrice">
-                            <div class="SpecialPriceMount lightRedColor">تومان</div>
 
-                            <div class="SpecialPriceAfter lightRed">86,000</div>
-                            <div class="SpecialPriceBefore lightRedColor"> </div>
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    تخلف ازهریک از بخش های توافق نامه کاربری،حفظ حریم شخصی و دستورالعمل حل اختلاف با هوجی بوجی مجاز نمی باشد
+                                </div>
+                            </div>
+                        </div>
 
-                                    </div>
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    تخطی از قوانین و مقررات جمهوری اسلامی ایران اعم از قوانین جزایی، مدنی، مالی، تجاری، بانکی، مالیاتی، گمرکی، اداری و به طور خاص قانون تجارت الکترونیک، قانون جرائم رایانه‌ای و قانون مبارزه با پول‌شویی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    نقض حقوق مولفین ، مصنفین و هنرمندان و یا حقوق مندرج در قانون ثبت اختراعات، طرح‌های صنعتی و علایم تجاری، حقوق منبعث از قانون حمایت از حقوق پدیدآورندگان نرم‌افزارهای رایانه‌ای، حقوق مذکور در قانون ترجمه و تکثیر کتب و نشریات و آثار صوتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ارایه اطلاعات مخدوش نادرست و غیر موثق
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    فروش و عرضه اجناس تقلبی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ارتکاب عملی که کلاهبرداری و یا در حکم آن به شمار بیاید
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    عدم همکاری در تحقیقات و یا عدم تأیید اطلاعاتی که به سایت داده‌ شده است
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    استفاده از پروکسی ناشناس
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    استفاده از حساب کاربری هوجی بوجی که سابقا با این موارد ممنوعه مرتبط باشد
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    انجام مبادله یا استفاده از خدمات به نحوی که منجر به طرح شکایت یا اخذ جریمه‌ از هوجی بوجی یا هر یك از کاربران شود
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    سوءاستفاده یا تخلف از قوانین جرائم رایانه ایی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    افشا یا انتشار اطلاعات کاربران دیگر و یا استفاده از آن اطلاعات برای اهداف تجاری
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ارسال پیام‌های الکترونیکی ناخواسته و هرزنامه‌ها به سایر کاربران یا سوء استفاده از خدمات برای کسب منفعت مالی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    تلاش برای مداخله و اخلال در سایت یا خدمات ایسام
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    هرگونه کپی‌برداری جزئی یا کلی از سایت بدون اخذ اجازه قبلی از شرکت ایسام
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    استفاده از نرم‌افزارهای اخلال‌گر مانند ویروس‌ها و تروجان‌ها و کرم‌های اینترنتی که موجب اخلال در کار رایانه‌های شرکت یا سرقت اطلاعات شود
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    انجام امور مرتبط با خیریه و جمع آوری کمک های مالی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    انجام معامله خارج از سایت هوجی بوجی به هر شکلی مجاز نمی باشد. تبادل هرگونه اطلاعات تماس و یا دادن پیشنهاد جهت انجام معامله خارج از سایت هوجی بوجی ممنوع است
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    انجام فعالیت های ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="Rec lightRed"></div>
-                                </a>
+
+                    <div class="mainTitleInner standardTopDoubleVerticalMargin organizer">
+
+                        <div class="mainTitleSubject organizer moveFromBottom">
+                            <span class="mediumCircle goRight greenBack compeletRadius inlineList"></span>
+                            <div class="goRight inlineList smallSub">
+                                <span class="greenColor eightyFontsize organizer thickFont">لیست مبادلات ممنوعه</span>
+                                <span class="almostGrayColor organizer">انجام مبادلات زیر در هوجی بوجی ممنوع بوده و از خدمات سایت محروم‌ خواهند بود</span>
                             </div>
                         </div>
-        @*<div id="GuideAnimation"></div>
-            <div id="GuideAnimation_a"></div>
-            <div id="GuideAnimation_b"></div>
-            <div id="GuideAnimation_c"></div>
-            <div id="SpecialGuide"></div>*@
 
-
-        <div id="OffSell" class="Purple">
-            <div id="SubjectOff">
-                <div id="ThumbnailBest"> </div>
-                <div id="SubjectTextOff">پر بازدید ترین کالاها</div>
-                                 </div>
-            <div class="span12">
-                <a id="Prev" class="btn prev"></a>
-                <div id="owl-demo" class="owl-carousel">
-
-
-                                                    </div>
-                <a id="Next" class="btn next"></a>
-                                                </div>
-                                                        </div>
-
-
-
-
-
-        <div id="BestSell" class="lightRed">
-            <div id="SubjectBest">
-                <div id="ThumbnailOff"> </div>
-                <div id="SubjectTextBest">جدید ترین کالاها</div>
-                                        </div>
-            <div class="span12">
-                <a id="Prev_b" class="btn prev_b"></a>
-                <div id="owl-demo_b" class="owl-carousel">
-
-                                    </div>
-                <a id="Next_b" class="btn next_b"></a>
-                                                    </div>
-                                                </div>
-        <div id="MostSell" class="lightBlue">
-            <div id="SubjectMost">
-                <div id="ThumbnailMost"></div>
-                <div id="SubjectTextMost"> جدید ترین فروشگاه ها</div>
-                                                        </div>
-            <div class="span12">
-                <a id="Prev_c" class="btn prev_c"></a>
-                <div id="owl-demo_c" class="owl-carousel">
-
-                                                    </div>
-                <a id="Next_c" class="btn next_c"></a>
-                                                </div>
-                                            </div>
-                                    </div>
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلات مرتبط با ارایه خدمات
                                 </div>
-
-
-
-
-@section Script{
-
-    <link href="~/Css/MainPage/MainPage.css" rel="stylesheet" />
-    <link href="~/Css/MainPage/slider.css" rel="stylesheet" />
-    <link href="~/Css/MainPage/owl.carousel.css" rel="stylesheet" />
-    <link href="~/Css/MainPage/owl.theme.css" rel="stylesheet" />
-    <style>
-        #owl-demo .item {
-            margin: 10px;
-            color: #FFF;
-            height: auto;
-            -webkit-border-radius: 7px;
-            -moz-border-radius: 7px;
-            border-radius: 7px;
-            text-align: center;
-            min-height: 260px;
-        }
-
-        #owl-demo_b .item {
-            margin: 10px;
-            color: #FFF;
-            height: auto;
-            -webkit-border-radius: 7px;
-            -moz-border-radius: 7px;
-            border-radius: 7px;
-            text-align: center;
-            min-height: 260px;
-        }
-
-        #owl-demo_c .item {
-            margin: 10px;
-            color: #FFF;
-            height: auto;
-            -webkit-border-radius: 7px;
-            -moz-border-radius: 7px;
-            border-radius: 7px;
-            text-align: center;
-            min-height: 260px;
-        }
-
-        .customNavigation {
-            text-align: center;
-        }
-
-            .customNavigation a {
-                -webkit-user-select: none;
-                -khtml-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            }
-    </style>
-
-
-    <script src="~/Js/FirstPage.js"></script>
-
-
-    <script>
-        var noProductPic = "Img/MainPage/NoProductPic.png",
-           noStorePic = "Img/MainPage/NoStorePic.png",
-           //root = "@Url.Content("~/")";
-           root = "http://hoojibooji.com/";
-
-
-
+                            </div>
                         </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلات مربوط به فروش اجناسی که متعلق به فروشنده نیستند یا فروشنده مجاز به فروش آن‌ها نیست
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلاتی که منجر به نقض حقوق مالکیت فکری کالاهایی که دارای چنین حقوقی هستند گردد
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلات مرتبط با اموال تاريخی، فرهنگی به دست آمده از حفاری غیرمجاز
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلاتی که اطلاعات شخصی افراد دیگر را به طور غیرقانونی فاش می‌کند
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلات مربوط به شرکت‌های هرمی، برنامه‌های شبکه‌ای و برنامه‌های بازاریابی چندسطحی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    قمار و شرط‌ بندی و سایر فعالیت‌هایی که با دریافت مبلغی برای شرکت در مسابقه جایزه می‌دهند
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلاتی که افراد مختلف بدان وسیله به نمایندگی از طرف فروشندگان وجوه را دریافت و جمع‌آوری می‌کنند
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    مبادلاتی که طبق قوانین جمهوری اسلامی مجاز شمرده نمی شود
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mainTitleInner standardTopDoubleVerticalMargin organizer">
+
+                        <div class="mainTitleSubject organizer moveFromBottom">
+                            <span class="mediumCircle goRight greenBack compeletRadius inlineList"></span>
+                            <div class="goRight inlineList smallSub">
+                                <span class="greenColor eightyFontsize organizer thickFont">لیست فعالیت های ممنوع مرتبط با ثبت کالا</span>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالای بدون عکس
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا با تصویر نامرتبط
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالای نامشخص و کلی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای تبلیغاتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای خدماتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت اعضای بدن
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت اموال غیرمنقول
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای قاچاق و دولتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا با عناوین تبلیغاتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا با هزینه پستی نامتعارف
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت هزینه پستی برای کالای مجازی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت چندین کالای نامرتبط در یک کالا
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالای دست دوم با تصویر اینترنتی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا با مشخصات و توضیحات نامرتبط
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای منتسب به رژیم اشغال گر قدس
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت عنوان و توضیحات کالا با حروف انگلیسی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا با قیمت بیشتر از بیست میلیون تومان
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالا به صورت غیر اختصاصی برای کاربر خاص
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهایی که مبادله آنها طبق قانون ممنوع است
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت اموال سرقتی و کالاهای با شماره سریال پاک شده
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهایی که برای مصرف‌کننده خطر جدی در پی دارد
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهایی که مبادله آنها دارای مقررات و نظامات خاص است
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای به‌دست‌آمده از ارتکاب جرم یا نقض مقررات كشوری
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت مواد مخدر و روان گردانها ، عناصر سازنده و متعلقات مربوط به آنها
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای خلاف شئون و یا دارای عناوین و تصاویر خلاف شئون
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای مرتبط با بخت‌آزمایی، قمار و شرط‌ بندی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالای مرتبط با بازاریابی شبکه ای، چندمرحله ای، هرمی، ماتریسی و غیره
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای تکراری (توجه: ثبت دو کالای یکسان با دو شماره سریال متفاوت نیز کالای
+                                    تکراری محسوب می شود.)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت آگهی خرید (کاربران به جای ثبت آگهی خرید، می توانند به گروه کالای مورد نظر مراجعه و آن کالا را خریداری کنند)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت تاکسی درمی تمام گونه های حیوانات (نظیر حرام گوشت، حلال گوشت، اهلی، وحشی و حتی
+                                    با مجوز تاکسی درمی و شکار)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهایی که نیاز به خدمات پیش و پس از فروش دارند
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت كالاهایی كه در توضيح آنها از مفاهيم انتزاعی در حوزه دين و اعتقادات مردمی استفاده شده است
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای دارای خواص معنوی و یا ارزش معنوی (متبرک)، حرز، دعا، طلسم، سحر، جادو و جنبل، بخت، شانس، اقبال، یمن، گشایش امور، رزق و روزی
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای متعلق به میراث فرهنگی کشور
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کالاهای ممنوع ذکر شده در سایت کارگروه تعیین مصادیق محتوای مجرمانه <a href="http://internet.ir" target="_blank" style="font-weight: bold">http://internet.ir</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="organizer standardRightDoubleVerticalMargin rightGrayBorder standardHalfVerticalPadding">
+                            <div class="smallSub organizer moveFromBottom">
+                                <span class="smallCircle goRight darkGray compeletRadius inlineList"></span>
+                                <div class="goRight darkGrayColor">
+                                    ثبت کلیه کالاهایی که طبق قوانین جمهوری اسلامی غیرمجاز می باشند
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin">
-            <nav class="boxElement relativeMatter">
-                <ul class="sizeManager">
-                    <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
-
-            $("body, html").animate({
-                scrollTop: $("#Specials").offset().top
-            }, "slow");
-        });
-
-
-
-        $.ajax({
-            type: "POST",
-            url: "/api/product/search",
-            data: {
-                sortBy: 3
-            },
-
-            success: function (result) {
-
-
-                if (result.Success != true) {
-                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                    return;
-                }
-
-                var text = '';
-                $.each(result.Response.ProductsSummery, function (index, value) {
-
-                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
-                    var PriceTemp = value.Price + '';
-                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-
-                    text += "" +
-                        "<a href='/product/" + value.Id + "' ><div class='item'>" +
-                        //"      <div class='MostItemIcon DarkRed'>" +
-                        //"     300" +
-                        //"        <p>نفر</p>" +
-                        //" </div>" +
-                        "   <div class='MostItemPic'><img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /></div>" +
-                        "   <div class='MostItemSub'>" + value.Name + "</div>" +
-                        "   <div class='MostItemExp'>" +
-                        "  <p dir='rtl'>" + PriceTemp + " تومان</p>" +
-                        " </div>" +
-                        " </div></a>";
-                });
-
-
-                $("#owl-demo").append(text);
-
-
-                var owl1 = $("#owl-demo");
-
-                owl1.owlCarousel({
-                    rtl: true,
-                    items: 5, //10 items above 1000px browser width
-                    itemsDesktop: [1100, 5], //5 items between 1000px and 901px
-                    itemsDesktopSmall: [900, 5], // 3 items betweem 900px and 601px
-                    itemsTablet: [600, 5], //2 items between 600 and 0;
-                    itemsMobile: [400, 5] // itemsMobile disabled - inherit from itemsTablet option
-
-                });
-
-                // Custom Navigation Events
-                $(".next").click(function () {
-                    owl1.trigger('owl.next');
-                })
-                $(".prev").click(function () {
-                    owl1.trigger('owl.prev');
-                })
-                $(".play").click(function () {
-                    owl1.trigger('owl.play', 1000);
-                })
-                $(".stop").click(function () {
-                    owl1.trigger('owl.stop');
-                })
-
-                //owl1.trigger('owl.prev');
-
-
-            },
-            error: function () {
-                console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-            }
-        });
-
-
-        $.ajax({
-            type: "POST",
-            url: "/api/product/search",
-            data: {
-                sortBy: 1
-            },
-
-            success: function (result) {
-
-                if (result.Success != true) {
-                    console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-                    return;
-                }
-
-                var text = '';
-                $.each(result.Response.ProductsSummery, function (index, value) {
-                    if (value.ImgAddress == null) value.ImgAddress = noProductPic;
-                    var PriceTemp = value.Price + '';
-                    PriceTemp = PriceTemp.replace(/,/g, '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-
-                    text += "" +
-                        "<a href='/product/" + value.Id + "'  ><div class='item'>" +
-                        //"      <div class='MostItemIcon DarkRed'>" +
-                        //"     300" +
-                        //"        <p>نفر</p>" +
-                        //" </div>" +
-                        "   <div class='MostItemPic'><img src='" + root + value.ImgAddress + "' alt='" + value.Name + "' /></div>" +
-                        "   <div class='MostItemSub'>" + value.Name + "</div>" +
-                        "   <div class='MostItemExp'>" +
-                        "  <p dir='rtl'>" + PriceTemp + " تومان</p>" +
-                        " </div>" +
-                        " </div></a>";
-
-                });
-
-                $("#owl-demo_b").append(text);
-
-                var owl2 = $("#owl-demo_b");
-
-                owl2.owlCarousel({
-                    rtl: false,
-                    items: 5, //10 items above 1000px browser width
-                    itemsDesktop: [1100, 5], //5 items between 1000px and 901px
-                    itemsDesktopSmall: [900, 5], // 3 items betweem 900px and 601px
-                    itemsTablet: [600, 5], //2 items between 600 and 0;
-                    itemsMobile: [400, 5] // itemsMobile disabled - inherit from itemsTablet option
-
-                });
-
-                // Custom Navigation Events
-                $(".next_b").click(function () {
-                    owl2.trigger('owl.next');
-                })
-                $(".prev_b").click(function () {
-                    owl2.trigger('owl.prev');
-                })
-                $(".play").click(function () {
-                    owl2.trigger('owl.play', 1000);
-                })
-                $(".stop").click(function () {
-                    owl2.trigger('owl.stop');
-                })
-
-                //owl2.trigger('owl.prev');
-
-
-            },
-            error: function () {
-                console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-            }
-        });
-
-
-
-
-        $.ajax({
-            type: "GET",
-            url: "/api/firstPage/GetNewestStore",
-
-
-            success: function (result) {
-
-                if (result.Success != true) {
-                    console.log(" .ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید ، کد خطا : " + result.TrackingCode);
-                    return;
-                }
-
-                var text = '';
-
-                $.each(result.Response, function (index, value) {
-
-                    if (value.LogoAddress == null) value.LogoAddress = noStorePic;
-
-                    text += "" +
-                        "<a href='/shop/code/" + value.Id + "' > <div class='item'>" +
-                        //"      <div class='MostItemIcon DarkRed'>" +
-                        //"     300" +
-                        //"        <p>نفر</p>" +
-                        //" </div>" +
-                        "   <div class='MostItemPic'><img src='" + root + value.LogoAddress + "' alt='" + value.Name + "' /></div>" +
-                        "   <div class='MostItemSub'>" + value.Name + "</div>" +
-                        "   <div class='MostItemExp'>";
-                    if (value.CityName == '-') {
-                        text += "  <p dir='rtl'> فروشگاه مجازی</p>";
-                    } else {
-                        text += "  <p dir='rtl'> شهر :  " + value.CityName + "</p>";
-        }
-                    text += " </div>" +
-                  " </div></a>";
-
-                });
-
-                $("#owl-demo_c").append(text);
-
-
-                var owl3 = $("#owl-demo_c");
-
-                owl3.owlCarousel({
-                    rtl: true,
-                    items: 5, //10 items above 1000px browser width
-                    itemsDesktop: [1100, 5], //5 items between 1000px and 901px
-                    itemsDesktopSmall: [900, 5], // 3 items betweem 900px and 601px
-                    itemsTablet: [600, 5], //2 items between 600 and 0;
-                    itemsMobile: [400, 5] // itemsMobile disabled - inherit from itemsTablet option
-
-                });
-
-                // Custom Navigation Events
-                $(".next_c").click(function () {
-                    owl3.trigger('owl.next');
-                })
-                $(".prev_c").click(function () {
-                    owl3.trigger('owl.prev');
-                })
-                $(".play").click(function () {
-                    owl3.trigger('owl.play', 1000);
-                })
-                $(".stop").click(function () {
-                    owl3.trigger('owl.stop');
-                })
-
-
-                // owl3.trigger('owl.prev');
-
-
-
-            },
-            error: function () {
-                console.log("ارتباط با سرور برقرار نشد ، لطفا مدتی بعد دوباره امتحان نمایید");
-            }
-        });
-
-
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-90647252-1', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-
-}
+    </div>
+</div>
