@@ -52,19 +52,19 @@
 	font-family: 'iransfm';
 	margin: 0 auto;
 	position: relative;
-	top: 18px;
+	top: 0px;
 }
 #TagsAndResearch {
-	width: 90%;
+	width: 100%;
 	float: left;
 	background-color: #f1f1f1;
-	padding: 0 5% 15px 5%;
+	padding: 1px 5px 0 0;
 }
 .TagInside {
 	width: 100%;
 	float: left;
 	text-align: center;
-	margin-top: 15px;
+	margin-top: 7px;
 }
 .TagInside select {
 	width:96% !important ;
@@ -98,7 +98,7 @@
 	margin-left: 2%;
 	margin-bottom: 18px;
 	display: none;
-	height:270px;
+	height:290px;
 	overflow:hidden;
 }
 #colorHolder {
@@ -110,7 +110,7 @@
 	margin-left: 2%;
 	margin-bottom: 18px;
 	display: none;
-	height:270px;
+	height:290px;
 	overflow:hidden;
 }
 #PriceRangeHolder {
@@ -135,12 +135,13 @@
 	margin-bottom:18px;
 }
 #DetailAndAdvance {
-	width: 95%;
-	float: right;
-	background: none;
-	height: auto;
-	margin-right: 2.5%;
-	margin-top: 20px;
+	width: 94%;
+    float: right;
+    background: none;
+    height: auto;
+    margin-right: 21px;
+    margin-top: 9px;
+    font-size: 12px;
 }
 #FirstColumn {
 	width: 100%;
@@ -181,6 +182,7 @@ select {
 	background: #999;
 	color: #353535;
     min-height:29px;
+    padding-right: 11px;
 }
 option {
 	text-align: center;
@@ -736,11 +738,11 @@ option {
 	display: none;
 }
 #TagsAndResearch {
-	width: 95%;
+	width: 100%;
 	float: left;
 	background-color: #f1f1f1;
-	padding-right: 2.5%;
-	padding-left: 2.5%;
+	padding-right: 0.5%;
+	padding-left: 0.5%;
 }
 .TagInside {
 	width: 50%;
@@ -756,7 +758,7 @@ option {
 	border-radius: 5px;
 }
 #DetailAndAdvance {
-	width: 95%;
+	width: 94%;
 	float: right;
 	background: none;
 	height: auto;
@@ -1085,15 +1087,15 @@ option {
 	background: #deb7b7;
 }
 #TagsAndResearch {
-	width: 95%;
+	width: 100%;
 	float: left;
 	background-color: #f1f1f1;
-	padding-right: 2.5%;
-	padding-left: 2.5%;
+	padding-right: 0.5%;
+	padding-left: 0.5%;
 }
 .TagInside {
 	width: 15.6%;
-	margin-left: 1%;
+	margin-left: 2px;
 	float: right;
 	text-align: center;
 }
@@ -1132,7 +1134,7 @@ option {
 	margin-left: 1.5%;
 }
 #DetailAndAdvance {
-	width: 95%;
+	width: 94%;
 	float: right;
 	background: none;
 	height: auto;
