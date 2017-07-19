@@ -59,6 +59,7 @@
 	float: left;
 	background-color: #f1f1f1;
 	padding: 1px 5px 0 0;
+    font-size: 12px;
 }
 .TagInside {
 	width: 100%;
@@ -140,7 +141,7 @@
     background: none;
     height: auto;
     margin-right: 21px;
-    margin-top: 9px;
+    margin-top: 3px;
     font-size: 12px;
 }
 #FirstColumn {
@@ -743,6 +744,7 @@ option {
 	background-color: #f1f1f1;
 	padding-right: 0.5%;
 	padding-left: 0.5%;
+    font-size: 12px;
 }
 .TagInside {
 	width: 50%;
@@ -763,7 +765,8 @@ option {
 	background: none;
 	height: auto;
 	margin-right: 2.5%;
-	margin-top: 20px;
+    margin-top: 3px;
+    font-size: 12px;
 }
 #FirstColumn {
 	width: 100%;
@@ -1092,6 +1095,7 @@ option {
 	background-color: #f1f1f1;
 	padding-right: 0.5%;
 	padding-left: 0.5%;
+    font-size: 12px;
 }
 .TagInside {
 	width: 15.6%;
@@ -1139,7 +1143,8 @@ option {
 	background: none;
 	height: auto;
 	margin-right: 2.5%;
-	margin-top: 20px;
+    margin-top: 3px;
+    font-size: 12px;
 }
 .instoreInside #DetailAndAdvance {
     width:83.5%;
@@ -1329,7 +1334,7 @@ option {
 	top: 0;
 }
 #Pager_Bottom {
-	width: 430px;
+	width: 446px;
 	height: auto;
 	clear: none;
 	float: left;
