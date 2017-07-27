@@ -16,6 +16,9 @@
 .hiddenMenuInFirst {
     display: none;
 }
+.menuMinHeight {
+    min-height: 60px;
+}
 
 .submenu{
     display:none;

@@ -44,7 +44,7 @@
 
                 <div class="organizer loginPadding">
                     <div id="EnterBtn" class="outlineButton whiteColor pinkBack standardPaddingForlogin loginAction standardVerticalBottomMargin pointer">ورود</div>
-                    <div class="organizer twelveFontSize closeBox" ng-click="showRegisterBox();">  <span class="pointer">ثبت نام</span>|<span class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
+                    <div class="organizer twelveFontSize closeBox" id="registerBtn" ng-click="showRegisterBox();">  <span class="pointer">ثبت نام</span>|<span class="pointer" ng-click="">فراموشی رمز عبور</span>   </div>
                 </div>
             </form>
         </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="organizer loginPadding">
                 <div id="register" class="outlineButton whiteColor greenBack standardPaddingForlogin loginAction standardVerticalBottomMargin">ثبت نام</div>
-                <div class="organizer twelveFontSize pointer closeBox" ng-click="showLoginBox();">ورود</div>
+                <div class="organizer twelveFontSize pointer closeBox" id="loginBtn" ng-click="showLoginBox();">ورود</div>
             </div>
         </div>
     </div>
@@ -502,7 +502,7 @@
             </div>
         </div>
         <div class="organizer categories textInCenter eightyFontsize thickFont standardHalfVerticalMargin hiddenInPhone">
-            <nav class="boxElement relativeMatter hiddenMenuInFirst">
+            <nav class="boxElement relativeMatter hiddenMenuInFirst menuMinHeight" >
                 <ul class="sizeManager">
                     <li class="standardVerticalPadding standardHorizontalMargin inlineList firstHandedList" ng-repeat="menu in allMenu">
 

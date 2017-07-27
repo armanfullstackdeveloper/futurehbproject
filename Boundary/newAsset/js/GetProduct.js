@@ -403,44 +403,49 @@
     }, 100)
 
     $('#mainContainer').slideDown();
+     
 
+    $.fn.followTo = function (from, bumper) {
+        var $this = this,
+             $from = $(from),
+            $bumper = $(bumper),
+            $startPos = $from.offset().top + $from.height(),
+            bumperPos = $bumper.offset().top,
+            thisHeight = $this.outerHeight(),
+            setPosition = function () { 
+                if ($(window).scrollTop() < $startPos  ) {
+                    $this.css({
+                        position: 'absolute',
+                        top: $startPos + 20,
+                        width: 'inherit'
+                    });
+                } else if ($(window).scrollTop() > (bumperPos - thisHeight)-30) {
+                    $this.css({
+                        position: 'absolute',
+                        top: (bumperPos - thisHeight) - 30,
+                        width: 'inherit'
+                    });
+                } else {
+                    $this.css({
+                        position: 'fixed',
+                        top: '20px',
+                        width: 'inherit'
+                    });
+                }
+            };
+        $(window).resize(function () {
+            bumperPos = $bumper.offset().top;
+            thisHeight = $this.outerHeight();
+            setPosition();
+        });
+        $(window).scroll(setPosition);
+        setPosition();
+    };
 
 
     //fixed store detailes
     setTimeout(function () {
-        //var navWrap = $('#storeDetailes'),
-        // startPosition = navWrap.offset().top,
-        // stopPosition = $('#footerLine').offset().top - navWrap.outerHeight();
-        //// leftPosition = ($('#storeDetailes').offset().left) * 1 - $('#storeDetailes').css('marginLeft').replace('px', '') * 1;
-
-        //$(document).scroll(function () {
-        //    //stick nav to top of page
-        //    var y = $(this).scrollTop()
-
-        //    if (y > startPosition) {
-        //         navWrap.css({                    
-        //            position: 'fixed',
-        //            top: '10px',
-        //            left: '35px',
-        //        });
-        //        if (y > stopPosition - 49) {
-        //            navWrap.css({
-        //                'top': stopPosition - y - 43,
-        //                left: '35px',
-        //            });
-        //        } else {
-        //            navWrap.css({
-        //                'top': 10,
-        //                left: '35px',
-        //            });
-        //        }
-        //    } else {
-        //         navWrap.css({
-        //            position: 'static'
-        //        });
-        //    }
-        //});
-
+        $('#storeDetailes').followTo('header', '#footerLine');         
     }, 1500)
 
     galleryChangeImage()

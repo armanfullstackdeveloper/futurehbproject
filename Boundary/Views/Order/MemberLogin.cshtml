@@ -1,114 +1,120 @@
-﻿
-@{
-    ViewBag.Title = "ورود به سایت";
+﻿@{
+    ViewBag.title = "مرحله اول ورود به اکانت";
+    ViewBag.keywords = "ورودبه  فروشگاه ، ثبت نام در فروشگاه آنلاین ، ورود یا ثبت نام ،ثبت نام یا ورود در هوجی بوجی";
+    ViewBag.description = "برای تکمیل خرید ابتدا وارد اکانت خود شوید و یا ثبت نام نمایید ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="minHeight_1 organizer relativeMatter">
+        <div class="stepsOnCorner">
+            <div class="lineCap grayBack objectInMiddle">
 
+                <!-- class activeStep baraye vaghtie ke marhale takmil shode bashe-->
+                <div class="oneFourLine relativeMatter activeStep">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">ورود</div>
+                </div>
 
-<h1>مرحله 1 : ورود به سایت</h1>
-<div style=" width:316px;height:287px; margin:30px auto; background: #d74a68;padding: 5%;border-radius: 15px; ">
-    <div id="SubjectAndClose">
+                <!-- class inProgressStep baraye vaghtie ke marhale dar hale anjam bashe-->
+                <div class="oneFourLine relativeMatter topQuatreMargin inProgressStep">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">آدرس</div>
+                </div>
 
-        <div id="SubjectOnly">
-            ورود
-            <p>برای خرید محصول ابتدا باید وارد سایت شوید</p>
+                <!-- in do taye paeiniam bara halate adie-->
+                <div class="oneFourLine relativeMatter topTwoQuatreMargin">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">بازبینی</div>
+                </div>
+                <div class="oneFourLine relativeMatter topThreeQuatreMargin">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">پرداخت</div>
+                </div>
+
+            </div>
         </div>
-
-    </div>
-    <div id="UserNameLogIn">
-        <input id="UserName2" type="text"  tabindex="1"  placeholder="نام کاربری">
-    </div>
-    <div id="PasswordLogIn">
-        <input id="Password2" type="password"  tabindex="2"   placeholder="رمز عبور">
-    </div>
-    @*<div id="EnterLogIn" style=" margin-top: 26px;">
-            <input id="RegisterBtn" type="button" value="عضویت">
-        </div>*@
-    <div id="MemmoryLogIn">
-        <input type="checkbox" id="c2" name="cc" />
-        <label for="c3"><span></span>رمز عبور را بخاطر بسپار</label>
-    </div>
- 
-    <div id="EnterLogIn">
-        <input id="EntrBtn2" onclick="login()" type="button" tabindex="3" value="ورود">
-    </div>
-
-
-    <div id="SubjectOnly" style="margin:auto">
-
-        <p>
-            اگر هنوز عضو سایت نشده اید ، <a href="~/Account/RegisterMember">ثبت نام</a> کنید
-        </p>
-        <a href="~/Account/RegisterMember">ثبت نام</a>
-
+        <div class="organizer sideOfCounter">
+            <div class="organizer">
+                <div class="sizeManager">
+                    <div class="organizer standardVerticalPadding">
+                        <div class="organizer standardBottomVerticalPadding">
+                            <span class="thickFont eightyFontsize greenColor">مرحله اول</span>
+                            <span class="eightyFontsize greenColor">ورود به اکانت</span>
+                            <span class="grayColor">(برای تکمیل خرید ابتدا وارد اکانت خود شوید و یا ثبت نام نمایید)</span>
+                        </div>
+                    </div>
+                    <div class="fullWidth">
+                        <div class="twoColumn">
+                            <div class="organizer boxElement radiusBox greenCart textInCenter standardPadding relativeMatter minHeight_2">
+                                <div class="organizer objectInMiddle">
+                                    <div class="organizer standardTopVerticalMargin">
+                                        <img src="/newAsset/images/carryBox.svg" width="150" />
+                                    </div>
+                                    <div class="organizer greenColor standardVerticalMargin">
+                                        <p class="thickFont eightyFontsize">اگر در هوجی بوجی عضو هستید</p>
+                                        <p class="darkGrayColor">برای تکمیل فرآیند خرید لطفا وارد حساب کاربری خود شوید</p>
+                                    </div>
+                                    <div class="organizer">
+                                        <div onclick="login();" class="inlineList outlineButton greenBorder greenColor standardButtonPadding thickFont">ورود به هوجی بوجی</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twoColumn">
+                            <div class="organizer boxElement radiusBox pinkCart textInCenter standardPadding relativeMatter minHeight_2">
+                                <div class="organizer objectInMiddle">
+                                    <div class="organizer standardTopVerticalMargin">
+                                        <img src="/newAsset/images/completeShop.svg" width="315" />
+                                    </div>
+                                    <div class="organizer pinkColor standardVerticalMargin">
+                                        <p class="thickFont eightyFontsize">اگر هنوز عضو هوجی بوجی نشده اید</p>
+                                        <p class="darkGrayColor">
+                                            با ثبت نام در هوجی بوجی تجربه ای متفاوت از خرید
+                                            داشته باشید
+                                        </p>
+                                    </div>
+                                    <div class="organizer">
+                                        <div onclick="register();" class="inlineList outlineButton pinkBorder pinkColor standardButtonPadding thickFont">ثبت نام در هوجی بوجی</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="organizer standardTopVerticalMargin">
+                        <a href="/order">
+                            <div class="acceptGreenBack outlineButton goLeft standardButtonPadding whiteColor thickFont">سبد خرید <span class="icon icon-arrow-left2"></span></div>
+                        </a>
+                        <a href="/">
+                            <div class="grayBack outlineButton goRight standardButtonPadding darkGrayColor thickFont"><span class="icon icon-arrow-right2"></span> بازگشت به صفحه اصلی </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
-<div id="LogInFaild2"></div>
-<div id="LogInSucseed2"></div>
-
 @section Script{
-
     <script>
-    
 
-        function login() {
-            $('#EntrBtn2').addClass('GoLogIn');
-           $('#EntrBtn2').prop('disabled', true);
-            // $('#RegisterBtn').prop('disabled', true);
+    function login() {
+        $('.signUpBox').hide();
+        $('.popUpMadule').fadeIn();
+        $('.loginBox').fadeIn();
+    }
+    function register() {
+        $('.loginBox').hide();
 
-            var form = $('#__AjaxAntiForgeryForm');
-            var token = $('input[name="__RequestVerificationToken"]', form).val();
-            var remember = "";
-            if ($('#c2').val() == "on") remember = "true";
-            else remember = "false";
-
-            $.ajax({
-                url: '/Account/Login',
-                type: 'POST',
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: token,
-                    UserName: $('#UserName2').val(),
-                    Password: $.md5($('#Password2').val()),
-                    RememberMe: remember
-                },
-                success: function (result) {
-
-                    if (result.Success == true) {
-
-                        $('#LogInSucseed2').fadeIn(1000).fadeTo(100, 1.0, function () {
-
-                            if (returnUrl == "") {
-                                //return to root
-                                window.location = "/Order/MemberInfo";
-
-                            } else {
-                                //return to returnUrl
-                                window.location = returnUrl;
-                            }
-                        });
-
-                    } else {
-                        $('#LogInFaild2').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
-                        $('#EntrBtn2').removeClass('GoLogIn');
-                        $('#EntrBtn2').prop('disabled', false);
-                        // $('#RegisterBtn').prop('disabled', false);
-
-                    }
-                },
-                error: function () {
-                    $('#LogInFaild2').fadeIn(1000).fadeTo(1700, 1.0).fadeOut(1000);
-                    $('#EntrBtn2').removeClass('GoLogIn');
-                    $('#EntrBtn2').prop('disabled', false);
-                    // $('#RegisterBtn').prop('disabled', false);
-
-                }
-
-            });
-
-
-        };
+        $('.popUpMadule').fadeIn();
+        $('.signUpBox').fadeIn();
+    }
     </script>
 }

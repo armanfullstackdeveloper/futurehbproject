@@ -1,9 +1,9 @@
-﻿
-@{
-    ViewBag.Title = "بازبینی سفارش";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.title = "مرحله سوم بازبینی سفارش";
+    ViewBag.keywords = "بازبینی اطلاعات سفارش ،بازبینی سفارش،بازبینی سفارش برای ارسال ،بازبینی سفارش پستی";
+    ViewBag.description = "سفارشات خود را برای ارسال ، بازبینی نمایید";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
 
 @section Style{
     <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
@@ -12,33 +12,30 @@
 <div class="container insideFormBascket">
     <h1>مرحله ۳ : بازبینی سفارش</h1>
 
-    <div ng-app="ShopApp" ng-controller="ShowOrderController">
+    <div ng-app="app" ng-controller="ShowOrderController">
 
         <div class="container" ng-init="getBalance()">
             <div ng-if="Product.length!=0" class="Row">
-                <p style="float: right;direction: rtl;font-size: 23px; margin: 19px;">
-                    مشخصات محصولات:
-                </p>
-
+            
                 <table style="float:right;direction: rtl; margin:30px auto;" class="table table-bordered table-hover table-hover table-condensed table-responsive table-striped">
                     <tr>
-                        <th style=" text-align: center;"></th>
-                        <th style=" text-align: center;">نام محصول</th>
-                        <th style=" text-align: center;">نام فروشگاه</th>
-                        <th style=" text-align: center;">تعداد</th>
+                        <th style="text-align :center;"></th>
+                        <th style="text-align :center;">نام محصول</th>
+                        <th style="text-align :center;">نام فروشگاه</th>
+                        <th style="text-align :center;">تعداد</th>
                         @*<th style=" text-align: center;">هزینه پستی</th>*@
-                        <th style=" text-align: center;">قیمت واحد</th>
-                        <th style=" text-align: center;">قیمت کل</th>
+                        <th style="text-align :center;">قیمت واحد</th>
+                        <th style="text-align :center;">قیمت کل</th>
                     </tr>
-                    <tr ng-repeat=" item in Product">
-                        <td style=" text-align: center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
-                        <td style=" text-align: center;" ng-bind="item.ProductName"></td>
-                        <td style=" text-align: center;" ng-bind="item.StoreName"></td>
-                        <td style=" text-align: center;" ng-bind="item.Count"></td>
+                    <tr ng-repeat="item in Product">
+                        <td style="text-align :center;"><img width="60" ng-src="~/{{item.ImgAddress}}" /></td>
+                        <td style="text-align :center;" ng-bind="item.ProductName"></td>
+                        <td style="text-align :center;" ng-bind="item.StoreName"></td>
+                        <td style="text-align :center;" ng-bind="item.Count"></td>
                         @*<td style=" text-align: center;" ng-bind="item.PostalCost"></td>*@
-                        <td style=" text-align: center;" ng-bind="item.RealPrice"></td>
-                        <td style=" text-align: center;" ng-bind="item.TotalPrice"></td>
-                        <td style=" text-align: center;">
+                        <td style="text-align :center;" ng-bind="item.RealPrice"></td>
+                        <td style="text-align :center;" ng-bind="item.TotalPrice"></td>
+                        <td style="text-align :center;">
                             <i style="cursor:pointer" ng-click="RemoveProduct(item.ProductCode)">X</i>
                         </td>
                     </tr>
@@ -47,41 +44,43 @@
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مجموع خرید</td>
-                        <td style=" text-align: center;" ng-bind="AllTotalPrice"></td>
+                        <td style=" text-align center;">مجموع خرید</td>
+                        <td style=" text-align center;" ng-bind="AllTotalPrice"></td>
                     </tr>
                     <tr>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مجموع هزینه پستی</td>
-                        <td style=" text-align: center;" ng-bind="AllPostalCost"></td>
+                        <td style=" text-align center;">مجموع هزینه پستی</td>
+                        <td style=" text-align center;" ng-bind="AllPostalCost"></td>
                     </tr>
+                    @*<tr>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style="visibility:hidden"></td>
+                        <td style=" text-align center;">موجودی قبلی حساب شما </td>
+                        <td style=" text-align center;" ng-bind="Balance"></td>
+                    </tr>*@
                     <tr>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
                         <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">موجودی قبلی حساب شما </td>
-                        <td style=" text-align: center;" ng-bind="Balance"></td>
-                    </tr>
-                    <tr>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style="visibility:hidden"></td>
-                        <td style=" text-align: center;">مبلغ قابل پرداخت  </td>
-                        <td style=" text-align: center;" ng-bind="PayPrice"></td>
+                        <td style=" text-align center;">مبلغ قابل پرداخت  </td>
+                        <td style=" text-align center;" ng-bind="PayPrice"></td>
                     </tr>
 
                 </table>
+
+                
 
             </div>
 
         </div>
 
-        <div class="container">
+        @*<div class="container">
             <div class="Row">
                 <h3 style="margin-bottom:1em;">
                     مشخصات تحویل گیرنده:
@@ -121,9 +120,9 @@
 
             </div>
 
-        </div>
+        </div>*@
 
-        <div class="container">
+        @*<div class="container">
             <div class="row">
                 <div class="orgenizer" style="font-size:1.3em; margin-bottom:1em; border-top:solid #e1e1e1 1px; margin-top:1em; padding-top:1em;">
                     اگر کد تخفیف دارید ، وارد و سپس دکمه  تایید را بفشارید
@@ -137,10 +136,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="container">
-            <div class="row">
+            <div class="row"  style="margin-top: -133px;">
                 <div class="orgenizer FromTop">
                     <div class="forLable" style="margin-top:5px;">نوع پرداخت</div>
 
@@ -150,25 +149,26 @@
                             <option value="2">پرداخت آزاد</option>
                         </select>
                     </div>
+
+                    <input class="btn btn-success inputRight" style="margin-right: 5px;" type="button" ng-click="Payment()" value="پرداخت" />
+
                 </div>
 
                 <div class="orgenizer FromTop">
                     <span>پرداخت آزاد : </span>
-                    مبلق واریزی بلافاصله پس از پرداخت  به حساب فروشنده واریز می شود.
+                    مبلغ واریزی بلافاصله پس از پرداخت  به حساب فروشنده واریز می شود.
                 </div>
                 <div class="orgenizer FromTop">
                     <span>پرداخت امن : </span>
                     در این روش، بعد از پرداخت  ، وجه به امانت نزد هوجی بوجی می ماند. و بعد از تحویل کالا به شما ، انتقال وجه انجام می شود.
                 </div>
 
-
-
-                <input class="fromTop btn btn-default inputRight" type="button" ng-click="Payment()" value="پرداخت" />
+                 
                 <div ng-show="showLoading" class="orgenizer FromTop">
                     لطفا کمی صبر کنید
                 </div>
                 <div id="error" class="orgenizer FromTop">
-                 </div>
+                </div>
 
             </div>
         </div>
@@ -178,10 +178,10 @@
 
 
 @section Script{
-    <script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
 
     <script>
-        angular.module('ShopApp', [])
+        angular.module('app',[])
       .controller('ShowOrderController', ['$scope', function ($scope) {
 
 
@@ -293,7 +293,7 @@
                   success: function (result) {
                       console.log(result)
                       if(result.Success==true)
-                      { 
+                      {
                           window.location.href = "/Paymentrequest/pay?Paymentrequestcode="+ result.Response;
                       }
                       else{
@@ -311,6 +311,30 @@
       }]);
     </script>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

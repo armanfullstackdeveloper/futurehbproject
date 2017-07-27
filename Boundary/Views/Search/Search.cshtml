@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "جستجو پیشرفته";
-    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -55,7 +55,7 @@
                             <div id="CloseNear"></div>
                             <div id="MapNear">
 
-                                <div class="mapLoading TextLoad" style="color:white" >لطفا صبر کنید</div>
+                                @*<div class="mapLoading TextLoad" style="color:white" >لطفا صبر کنید</div>*@
 
                             </div>
 
@@ -120,9 +120,12 @@
                     <div class="LoadinIconSeconde"></div>
                     <div class="LoadinIconThird"></div>
                 </div>
-                <div class="LogoLoading"></div>
-                <div class="TextLoad">لطفا صبر کنید</div>
-            </div>
+                 <center style="margin: 89px 0 0 0;">
+                    @*<div class="LogoLoading"></div>*@
+                    <img src="~/Img/MainPage/Logo.png" />
+                    <div class="TextLoad">لطفا صبر کنید</div>
+                </center>
+             </div>
         </div>
         <div id="BlockView">
             <div id="ProductShelfs">

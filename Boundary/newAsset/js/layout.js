@@ -214,12 +214,17 @@
 
      };
 
+     loginRequest = false;
      //Login
      $('#EnterBtn').on("click", function () {
 
+         if (loginRequest) return;
+         loginRequest = true;
+         $('#loginMessage').html("لطفا کمی صبر کنید");
+
          var form = $('#__AjaxAntiForgeryForm');
          var token = $('input[name="__RequestVerificationToken"]', form).val();
-         $('#loginMessage').html('');
+
          $.ajax({
              url: '/Account/Login',
              type: 'POST',
@@ -230,16 +235,22 @@
                  Password: $.md5($('#Password').val())
              },
              success: function (result) {
+                 loginRequest = false;
 
                  if (result.Success == true) {
 
-                     $scope.closeBox();
+                     $('.popUpMadule').fadeOut();
+                     $('.loginBox').fadeOut();
+                     $('.signUpBox').fadeOut();
                      $('#loginMessage').html("شما با موفقیت وارد شدید");
 
+                     var returnUrl = getParameterByName('ReturnUrl')
+                     
+
                      //success
-                     if (returnUrl == "") {
+                     if (returnUrl == "" || returnUrl == null || returnUrl == "null") {
                          //return to root
-                         window.location = "/";
+                           window.location = "/";
 
                      } else {
                          //return to returnUrl
@@ -261,7 +272,7 @@
 
      //register
      $('#register').on("click", function () {
-         $('#registerStatus').html('');
+         $('#registerStatus').html('لطفا کمی صبر کنید');
          if (send != '') return;
 
 
@@ -402,6 +413,15 @@
       
      }
 
+     function getParameterByName(name, url) {
+         if (!url) url = window.location.href;
+         name = name.replace(/[\[\]]/g, "\\$&");
+         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+             results = regex.exec(url);
+         if (!results) return null;
+         if (!results[2]) return '';
+         return decodeURIComponent(results[2].replace(/\+/g, " "));
+     }
 
  }]);
 

@@ -1,121 +1,189 @@
-﻿
-@{
-    ViewBag.Title = "اطلاعات ارسال سفارش";
+﻿@{
+    ViewBag.title = "مرحله دوم اطلاعات ارسال سفارش";
+    ViewBag.keywords = "اطلاعات ارسال سفارش ،ارسال از فروشگاه آنلاین ،اطلاعات ارسال ،ارسال سفارش پستی";
+    ViewBag.description = "آدرس خود را وارد و یا آدرس موجود را تایید نمایید ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
-
-<div class="container">
-    <h1>مرحله ۲ : اطلاعات ارسال سفارش</h1>
-
-    <div ng-app="ShopApp" ng-controller="ShoppingInfoController">
-
-        <h3 style="margin-bottom:1em;">
-            مشخصات شما :
-        </h3>
-
-        <div id="showInfo" ng-hide="EditBox">
-            <div class="form-group orgenizer">
-                <label>نام و نام خانوادگی : </label>
-                <span ng-bind="Data.Name"></span>
-            </div>
-
-            <div class="form-group orgenizer">
-                <label>تلفن ثابت : </label>
-                <span ng-bind="Data.PhoneNumber"></span>
-            </div>
-
-            <div class="form-group orgenizer">
-                <label>تلفن همراه : </label>
-                <span ng-bind="Data.MobileNumber"></span>
-            </div>
-
-            <div class="form-group orgenizer">
-                <label>کد پستی : </label>
-                <span ng-bind="Data.PostalCode"></span>
-            </div>
-
-            <div class="form-group orgenizer">
-                <label>شهر : </label>
-                <span ng-bind="Data.City"></span>
-            </div>
 
 
-            <div class="form-group orgenizer">
-                <label>آدرس : </label>
-                <span ng-bind="Data.Place"></span>
-            </div>
-        </div>
-        <div id="editInfo" ng-show="EditBox ">
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>نام و نام خانوادگی </label></div>
-                <div class="forInput"><input type="text" ng-model="Data.Name" /></div>
-            </div>
 
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>تلفن ثابت</label></div>
-                <div class="forInput"><input type="text" ng-model="Data.PhoneNumber" /></div>
-            </div>
+<div class="container" ng-controller="ShoppingInfoController">
+    <div class="minHeight_1 organizer relativeMatter">
+        <div class="stepsOnCorner">
+            <div class="lineCap grayBack objectInMiddle">
 
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>تلفن همراه</label></div>
-                <div class="forInput"><input type="text" ng-model="Data.MobileNumber" /></div>
-            </div>
+                <!-- class activeStep baraye vaghtie ke marhale takmil shode bashe-->
+                <div class="oneFourLine relativeMatter activeStep">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">ورود</div>
+                </div>
 
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>کد پستی</label></div>
-                <div class="forInput"><input type="text" ng-model="Data.PostalCode" /></div>
-            </div>
+                <!-- class inProgressStep baraye vaghtie ke marhale dar hale anjam bashe-->
+                <div class="oneFourLine relativeMatter topQuatreMargin inProgressStep">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">آدرس</div>
+                </div>
 
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>استان</label></div>
-                <div class="forInput"><select ng-model="StateId" ng-change="AllCities=item.Cities" ng-options="item.Id as item.Name for item in State"></select></div>
-            </div>
-
-
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>شهر</label></div>
-                <div class="forInput" ng-repeat="item in State ">
-                    <select id="cityId" ng-if="item.Id==StateId" ng-change="changeCity()" ng-model="Data.CityCode" ng-options="item2.Id as item2.Name for item2 in item.Cities"></select>
+                <!-- in do taye paeiniam bara halate adie-->
+                <div class="oneFourLine relativeMatter topTwoQuatreMargin">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius ">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">بازبینی</div>
+                </div>
+                <div class="oneFourLine relativeMatter topThreeQuatreMargin">
+                    <div class="counterCircle objectInMiddle grayBack compeletRadius">
+                        <span class="icon icon-checkmark objectInMiddle grayColor twelveFontSize"></span>
+                    </div>
+                    <div class="stepLable objectInMiddle tenFontSize grayColor">پرداخت</div>
                 </div>
 
             </div>
-
-
-
-
-            <div class="form-group orgenizer">
-                <div class="forlable"><label>آدرس</label></div>
-                <div class="forInput"><input type="text" ng-model="Data.Place" /></div>
-            </div>
-            <input type="button" class="btn btn-default inputRight" ng-click="EditBox=false;sava()" value="ذخیره">
         </div>
+        <div class="organizer sideOfCounter darkGrayColor">
+            <div class="organizer">
+                <div class="sizeManager">
 
+                    <div class="organizer standardVerticalPadding">
+                        <div class="organizer standardBottomVerticalPadding">
+                            <span class="thickFont eightyFontsize greenColor">مرحله دوم</span>
+                            <span class="eightyFontsize greenColor">تکمیل آدرس</span>
+                            <span class="grayColor">(آدرس خود را وارد یا انتخاب و بازبینی کنید)</span>
+                        </div>
+                    </div>
+                    <div class="organizer standardBottomVerticalMargin"  ng-hide="EditBox">
+                        <span class="goRight boxElement lighterGrayBack totalRadius thickFont standardPadding" ng-show="Data.Name" ng-bind="Data.Name">نام و نام خانوادگی</span>
+                        <span class="goLeft actionsCircle redBack relativeMatter compeletRadius pointer" ng-click="EditBox=true">
+                            <span class="icon icon-pencil whiteColor objectInMiddle"></span>
+                        </span>
+                        <span class="goLeft  relativeMatter compeletRadius standardHalfHorizontalLeftMargin pointer"  ng-click="EditBox=true" >
+                            ویرایش
+                        </span>
+                    </div>
 
+                    <div ng-hide="EditBox">
 
-        <input type="button" value="تغییر مشخصات" ng-click="EditBox=true" ng-hide="EditBox" class="btn btn-default" />
-        <a class="btn btn-success" href="/Order/BagReview"> تکمیل خرید</a>
+                        <div class="organizer boxElement lighterGrayBack radiusBox textInCenter">
+                            <div class="organizer darkerBottomBorder">
+                                <div class="oneFiveFullColumn loginPadding darkerLeftBorder">
+                                    <span>استان: </span>
+                                    <span ng-bind="StateName">استان</span>
+                                </div>
+                                <div class="oneFiveFullColumn loginPadding darkerLeftBorder">
+                                    <span>شهر: </span>
+                                    <span ng-bind="Data.City">شهر</span>
+                                </div>
+                                <div class="oneFiveFullColumn loginPadding darkerLeftBorder">
+                                    <span>کد پستی: </span>
+                                    <span ng-bind="Data.PostalCode">کد پستی</span>
+                                </div>
+                                <div  class="oneFiveFullColumn loginPadding darkerLeftBorder">
+                                    <span>شماره تلفن همراه : </span>
+                                    <span ng-bind="Data.MobileNumber">شماره تلفن</span>
+                                </div>
+                                <div class="oneFiveFullColumn loginPadding">
+                                    <span>شماره تماس ثابت: </span>
+                                    <span ng-bind="Data.PhoneNumber">شماره تماس</span>
+                                </div>
+                            </div>
+                            <div class="organizer loginPadding" ng-bind="Data.Place">آدرس مورد نظر</div>
+                        </div>
+                    </div>
+                    <div ng-show="EditBox">
 
+                        <div class="organizer boxElement lighterGrayBack radiusBox textInCenter standardTopDoubleVerticalMargin">
+                            <div class="mainOneThreeFullColumn darkerLeftBorder">
+                                <div class="organizer darkerBottomBorder loginPadding">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">نام و نام خانوادگی تحویل گیرنده</div>
+                                    <div class="organizer"><input id="UserName" ng-model="Data.Name" class="standardInput standardPadding textInCenter" type="text"></div>
+                                </div>
+                                <div class="organizer loginPadding">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">شماره تلفن ثابت</div>
+                                    <div class="organizer"><input id="UserName" ng-model="Data.PhoneNumber" class="standardInput standardPadding textInCenter" type="text"></div>
+                                </div>
+                            </div>
 
+                            <div class="mainOneThreeFullColumn darkerLeftBorder">
+                                <div class="organizer darkerBottomBorder loginPadding">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">استان و شهرستان تحویل گیرنده</div>
+                                    <div class="fullWidth">
+                                        <div class="twoColumn"><select ng-model="StateId" ng-change="AllCities=item.Cities" ng-options="item.Id as item.Name for item in State"  class="standardInput standardPadding textInCenter" ></select></div>
+                                        <div class="twoColumn">
+                                            <div ng-repeat="item in State ">
+                                                <select id="cityId" ng-if="item.Id==StateId" ng-change="changeCity()" ng-model="Data.CityCode" ng-options="item2.Id as item2.Name for item2 in item.Cities"  class="standardInput standardPadding textInCenter" ></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="organizer loginPadding">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">شماره تلفن همراه</div>
+                                    <div class="organizer"><input id="UserName" ng-model="Data.MobileNumber" class="standardInput standardPadding textInCenter" type="text"></div>
+                                </div>
+                                <div class="organizer loginPadding relativeMatter height_3" ng-bind="profileMessage" style="color:red;">
+                                </div>
+                            </div>
 
+                            <div class="mainOneThreeFullColumn darkerLeftBorder">
+                                <div class="organizer darkerBottomBorder loginPadding ">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">کد پستی</div>
+                                    <div class="organizer"><input id="UserName" ng-model="Data.PostalCode" class="standardInput standardPadding textInCenter" type="text"></div>
+                              </div>
+                                <div class="organizer loginPadding">
+                                    <div class="organizer standardHalfVerticalMarginForlogin">آدرس کامل</div>
+                                    <div class="organizer"><input id="UserName" ng-model="Data.Place" class="standardInput standardPadding textInCenter" type="text"></div>
+                                </div>
+                                <div class="organizer loginPadding relativeMatter height_3">
+
+                                    <div class="inlineList outlineButton acceptGreenBack standardButtonPadding thickFont whiteColor objectInMiddle" ng-click="sava()">ثبت آدرس</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="organizer standardTopVerticalMargin">
+                        <a href="/Order/BagReview"><div ng-hide="EditBox" class="acceptGreenBack outlineButton goLeft standardButtonPadding whiteColor thickFont">مرحله بعدی (بازبینی سفارش) <span class="icon icon-arrow-left2"></span></div></a>
+                        <a href="/Order"><div class="grayBack outlineButton goRight standardButtonPadding darkGrayColor thickFont"><span class="icon icon-arrow-right2"></span> بازگشت به سبد خرید </div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
-
+ 
 
 @section Script{
 
-    <script src="~/Scripts/angular.min.js"></script>
 
     <script>
-        angular.module('ShopApp', [])
+        angular.module('app')
         .controller('ShoppingInfoController', ['$scope', function ($scope) {
             $scope.Data = @Html.Raw(Json.Encode(Model));
             $scope.State = @Html.Raw(Json.Encode(ViewBag.States));
+             
+
+            if($scope.Data.Name&&$scope.Data.CityCode&&$scope.Data.Place&&$scope.Data.Place&&$scope.Data.MobileNumber){
+                $scope.EditBox=false;
+            }else{
+                $scope.EditBox=true;
+            }
+ 
+            if($scope.Data.CityCode){
+                 $.each($scope.State , function(index , value){
+                     $.each(value.Cities ,function(index2 , value2){
+                          if(value2.Id==$scope.Data.CityCode){
+                             $scope.StateName=value.Name
+                             return;
+                        }
+
+                    })
+
+                })
+            }
 
             $scope.StateId=false;
             $.each($scope.State , function(index , value){
@@ -131,29 +199,36 @@
                 })
 
             })
- 
 
-            $scope.changeCity=function(){ 
-                 $scope.Data.City= $("#cityId option:selected").text();
-                 
+
+            $scope.changeCity=function(){
+                $scope.Data.City= $("#cityId option:selected").text();
+
             }
+
             $scope.sava=function(){
-                console.log($scope.Data)
-                $.ajax({
-                    url: '/Member/panel/UpdateProfile',
-                    type: 'POST',
-                    dataType: "json",
-                    data:$scope.Data,
-                    success: function (result) {
-                        $scope.data = result;
-                    },
-                    error: function () {
-                        console.log('عملیات با خطا مواجه شد ')
-                    }
+                if($scope.Data.Name!=''&&$scope.Data.CityCode!=''&&$scope.Data.Place!=''&&$scope.Data.Place!=''&&$scope.Data.MobileNumber!=''){
+                    $scope.profileMessage='';
+                    $scope.EditBox=false;
+                     $.ajax({
+                        url: '/Member/panel/UpdateProfile',
+                        type: 'POST',
+                        dataType: "json",
+                        data:$scope.Data,
+                        success: function (result) {
+                            $scope.data = result;
+                        },
+                        error: function () {
+                            console.log('عملیات با خطا مواجه شد ')
+                        }
 
-                });
+                    });
+                }else{
+                    $scope.profileMessage='لطفا تمامی فیلد ها را به درستی کامل نمایید';
+                }
+
             }
-
+             
 
         }]);
 
