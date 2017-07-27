@@ -275,6 +275,8 @@
     <Compile Include="Controllers\Api\SmsController.cs" />
     <Compile Include="Controllers\Ordinary\OrderController.cs" />
     <Compile Include="Controllers\Ordinary\PaymentRequestController.cs" />
+    <Compile Include="Controllers\Ordinary\SigninController.cs" />
+    <Compile Include="Controllers\Ordinary\SignupController.cs" />
     <Compile Include="Controllers\Ordinary\StaticController.cs" />
     <Compile Include="Helper\AttributeFilters\ExceptionHandler.cs" />
     <Compile Include="Helper\ExtensionMethod.cs" />
@@ -918,6 +920,8 @@
     <Content Include="Views\Shared\_LayoutNew.cshtml" />
     <Content Include="Views\Order\Index - Copy.cshtml" />
     <Content Include="Views\Static\NotFound.cshtml" />
+    <Content Include="Views\Signin\Telegram.cshtml" />
+    <Content Include="Views\Signup\Telegram.cshtml" />
     <None Include="Web References\com.arianpal.merchant\WebService.disco" />
     <Content Include="Web References\mellipayamak\MessagesBL.datasource">
       <DependentUpon>Reference.map</DependentUpon>

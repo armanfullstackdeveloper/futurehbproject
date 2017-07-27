@@ -18,5 +18,7 @@
         public string ImgAddress { get; set; }
         public int? PostalCostInCountry { get; set; }
         public int? PostalCostInTown { get; set; }
+        public string Color { get; set; }
+        public string Size { get; set; }
     }
 }

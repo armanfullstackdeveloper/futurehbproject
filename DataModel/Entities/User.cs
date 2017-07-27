@@ -1,4 +1,5 @@
-﻿using DataModel.Enums;
+﻿using System;
+using DataModel.Enums;
 
 namespace DataModel.Entities
 {
@@ -10,6 +11,10 @@ namespace DataModel.Entities
         public ERole RoleCode { get; set; } 
         public bool IsActive { get; set; }
         public string Email { get; set; }
+        public string TelegramId { get; set; }
+        public ERegisterBy? RegisterBy { get; set; }
+        public int? RegisterDate { get; set; }
+        public string HashCode { get; set; }
 
         public Role Role { get; set; }
     }

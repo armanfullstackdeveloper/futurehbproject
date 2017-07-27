@@ -17,5 +17,11 @@
     <property name="CurrentPrice">
       <column name="CurrentPrice" sql-type="int" not-null="true" />
     </property>
+    <property name="Color">
+      <column name="Color" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Size">
+      <column name="Size" sql-type="nvarchar" not-null="false" />
+    </property>
   </class>
 </hibernate-mapping>

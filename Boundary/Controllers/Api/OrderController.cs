@@ -123,7 +123,9 @@ namespace Boundary.Controllers.Api
                         PostalCostInTown = product.PostalCostInTown ?? 0,
                         RealPrice = realPrice,
                         ProductCostConsideringDiscountCodeAndCount =
-                            (meghdareTakhfif > 0) ? (realPrice - meghdareTakhfif) * model.Count : realPrice * model.Count
+                            (meghdareTakhfif > 0) ? (realPrice - meghdareTakhfif) * model.Count : realPrice * model.Count,
+                        Color = model.Color,
+                        Size = model.Size
                     };
                     lstStoreShopingBag.Single(s => s.Store.Id == product.StoreCode).Products.Add(productInShopingBag);
 
@@ -248,7 +250,9 @@ namespace Boundary.Controllers.Api
                                 OrderCode = orderCode,
                                 Count = product.Count,
                                 CurrentPrice = product.RealPrice,
-                                ProductCode = product.ProductCode
+                                ProductCode = product.ProductCode,
+                                Color = product.Color,
+                                Size = product.Size
 
                             }, session) == false)
                             {
@@ -340,7 +344,9 @@ namespace Boundary.Controllers.Api
                                     OrderCode = orderCode,
                                     Count = product.Count,
                                     CurrentPrice = product.RealPrice,
-                                    ProductCode = product.ProductCode
+                                    ProductCode = product.ProductCode,
+                                    Color = product.Color,
+                                    Size = product.Size
 
                                 }, session) == false)
                                 {
@@ -512,7 +518,9 @@ namespace Boundary.Controllers.Api
                                     OrderCode = orderCode,
                                     Count = product.Count,
                                     CurrentPrice = product.RealPrice,
-                                    ProductCode = product.ProductCode
+                                    ProductCode = product.ProductCode,
+                                    Color = product.Color,
+                                    Size = product.Size
 
                                 }, session) == false)
                                 {

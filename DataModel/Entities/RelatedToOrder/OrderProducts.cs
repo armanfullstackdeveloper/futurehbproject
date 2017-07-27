@@ -6,6 +6,8 @@ namespace DataModel.Entities.RelatedToOrder {
         public virtual long ProductCode { get; set; }
         public virtual short Count { get; set; }
         public int CurrentPrice { get; set; }
+        public string Color { get; set; }
+        public string Size { get; set; } 
         #region NHibernate Composite Key Requirements
         public override bool Equals(object obj) {
 			if (obj == null) return false;

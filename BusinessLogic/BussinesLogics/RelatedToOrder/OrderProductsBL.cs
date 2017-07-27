@@ -21,14 +21,16 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
            ([OrderCode]
            ,[ProductCode]
            ,[Count]
-           ,[CurrentPrice])
-            VALUES ( :orderCode , :productCode , :count , :currentPrice)");
+           ,[CurrentPrice]
+           ,[Color]
+           ,[Size])
+            VALUES ( :orderCode , :productCode , :count , :currentPrice , :color , :size )");
                 query.SetParameter("orderCode", orderProduct.OrderCode);
                 query.SetParameter("productCode", orderProduct.ProductCode);
                 query.SetParameter("count", orderProduct.Count);
                 query.SetParameter("currentPrice", orderProduct.CurrentPrice);
-
-
+                query.SetParameter("color", orderProduct.Color);
+                query.SetParameter("size", orderProduct.Size);
 
                 long result = query.ExecuteUpdate();
                 return result > 0;
@@ -66,7 +68,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
             }
         }
 
-        public bool CheckHaveOrderWithThisProduct(long productCode) 
+        public bool CheckHaveOrderWithThisProduct(long productCode)
         {
             try
             {
@@ -75,7 +77,7 @@ namespace BusinessLogic.BussinesLogics.RelatedToOrder
                 parameters.Add("@productCode", productCode);
                 long order = db.Query<long>("SELECT top 1 OrderCode FROM [OrderProducts] where [ProductCode]=@productCode", parameters).SingleOrDefault();
                 EnsureCloseConnection(db);
-                return (order!=0);
+                return (order != 0);
             }
             catch (Exception ex)
             {

@@ -128,7 +128,7 @@ namespace Boundary.Controllers.Ordinary
             }
         }
 
-        [System.Web.Mvc.Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
+        [Authorize(Roles = StaticString.Role_Member + "," + StaticString.Role_Seller)]
         public ActionResult BagReview()
         {
             try
@@ -229,7 +229,9 @@ namespace Boundary.Controllers.Ordinary
                             ImgAddress = item.ImgAddress,
                             PostalCostInCountry = item.PostalCostInCountry,
                             PostalCostInTown = item.PostalCostInTown,
-                            Count = 1
+                            Count = 1,
+                            Color = item.Color,
+                            Size = item.Size
                         }
                     };
             }
@@ -254,7 +256,9 @@ namespace Boundary.Controllers.Ordinary
                         ImgAddress = item.ImgAddress,
                         PostalCostInCountry = item.PostalCostInCountry,
                         PostalCostInTown = item.PostalCostInTown,
-                        Count = 1
+                        Count = 1,
+                        Color = item.Color,
+                        Size = item.Size
                     });
                 }
                 Session[StaticString.Session_ShoppingBag] = cuurentList;

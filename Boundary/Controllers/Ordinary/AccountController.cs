@@ -104,11 +104,8 @@ namespace Boundary.Controllers.Ordinary
 
                     return Json(JsonResultHelper.SuccessResult(member.Id), JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    new UserBL().DeleteById(user.Id);
-                    return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
-                }
+                new UserBL().DeleteById(user.Id);
+                return Json(JsonResultHelper.FailedResultWithMessage(), JsonRequestBehavior.AllowGet);
             }
             catch (MyExceptionHandler exp1)
             {

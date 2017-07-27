@@ -108,6 +108,7 @@
     <Compile Include="Enums\EPaymentRequestResultValues.cs" />
     <Compile Include="Enums\EPaymentResponseStatus.cs" />
     <Compile Include="Enums\EPaymentResponseResultValues.cs" />
+    <Compile Include="Enums\ERegisterBy.cs" />
     <Compile Include="Enums\ERole.cs" />
     <Compile Include="Enums\EProductStatus.cs" />
     <Compile Include="Enums\ESendSmsResponseStatus.cs" />

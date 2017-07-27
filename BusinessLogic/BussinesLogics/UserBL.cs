@@ -31,6 +31,10 @@ namespace BusinessLogic.BussinesLogics
                     parameters.Add("@Password", obj.Password);
                     parameters.Add("@RoleCode", obj.RoleCode);
                     parameters.Add("@Email", obj.Email);
+                    parameters.Add("@RegisterDate", PersianDateTime.Now.Date.ToInt());
+                    parameters.Add("@RegisterBy", obj.RegisterBy);
+                    parameters.Add("@HashCode", obj.HashCode);
+                    parameters.Add("@TelegramId", obj.TelegramId);
                     parameters.Add("@ProcResult", dbType: DbType.Int32, direction: ParameterDirection.InputOutput);
                     _db.Execute("User_Save", parameters, commandType: CommandType.StoredProcedure);
                     obj.Id = parameters.Get<string>("@Id");
@@ -109,7 +113,7 @@ namespace BusinessLogic.BussinesLogics
             }
         }
 
-        public List<User> GetAll(string usernameOrId,bool? active=null, int? pageNumer = 1)
+        public List<User> GetAll(string usernameOrId, bool? active = null, int? pageNumer = 1)
         {
             try
             {
@@ -180,6 +184,39 @@ namespace BusinessLogic.BussinesLogics
                 throw new MyExceptionHandler(ex.ToString(), ex, username);
             }
         }
+
+        public User GetByTelegramId(string chatId)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@chatId", chatId);
+                User user = _db.Query<User>("User_SelectByTelegramId", parameters, commandType: CommandType.StoredProcedure).SingleOrDefault();
+                EnsureCloseConnection(_db);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new MyExceptionHandler(ex.ToString(), ex, chatId);
+            }
+        }
+
+        public User GetByHashCode(string hashCode)
+        {
+            try
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@hashCode", hashCode);
+                User user = _db.Query<User>("User_SelectByHashCode", parameters, commandType: CommandType.StoredProcedure).SingleOrDefault();
+                EnsureCloseConnection(_db);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new MyExceptionHandler(ex.ToString(), ex, hashCode);
+            }
+        }
+
 
         public List<User> GetByEmail(string email)
         {
